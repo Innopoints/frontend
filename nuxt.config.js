@@ -12,11 +12,11 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/favicon.png' }
+      { rel: 'icon', type: 'image/png', href: 'images/favicon.png' }
     ]
   },
 
-  css: ['@/assets/css/tailwind.css'],
+  css: ['@/static/css/tailwind.css'],
   modules: ['nuxt-purgecss'],
   purgeCSS: {},
 
