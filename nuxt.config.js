@@ -4,6 +4,10 @@ const path = require('path');
 
 module.exports = {
 
+  server: {
+    port: process.env.PORT || 3000
+  },
+
   head: {
     titleTemplate: '%s',
     htmlAttrs: { lang: 'en' },
