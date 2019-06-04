@@ -1,13 +1,25 @@
 <template>
-  <div>
-    <h1 class="title">Innopoints website</h1>
-  </div>
+  <section class="container">
+    <h2 class="subtitle">
+      Innopoints IU project
+    </h2>
+  </section>
 </template>
 
-<script>
-  export default {
-    head: {
-      title: 'Home | InnoPoints',
-    }
-  };
-</script>
+<style>
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+</style>
+
