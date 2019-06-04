@@ -1,13 +1,13 @@
 /* eslint-env node */
 
-const path = require('path');
-
 module.exports = {
 
+  // Server configuration
   server: {
     port: process.env.PORT || 3000
   },
 
+  // Headers of the page
   head: {
     titleTemplate: '%s',
     htmlAttrs: { lang: 'en' },
@@ -16,36 +16,21 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: 'images/favicon.png' }
+      { rel: 'icon', type: 'image/png', href: '/images/favicon.png' }
     ]
   },
 
-  css: ['@/static/css/tailwind.css'],
-  modules: ['nuxt-purgecss'],
-  purgeCSS: {},
+  // Customize the progress bar color
+  loading: { color: '#3B8070' },
+
+  css: [
+    '~static/css/normalize.css',
+    '~static/css/main.css'
+  ],
 
   build: {
-    postcss: {
-      plugins: {
-        'postcss-url': {},
-        tailwindcss: path.resolve(__dirname, './tailwind.config.js'),
-        cssnano: {
-          preset: 'default',
-          discardComments: { removeAll: true },
-          zIndex: false
-        }
-      },
-      preset: {
-        stage: 0,
-        autoprefixer: {
-          cascade: false,
-          grid: true
-        }
-      }
-    },
-    extractCSS: true,
 
-    /* ESLint */
+    // Run ESLint on save
     extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -61,3 +46,4 @@ module.exports = {
     }
   }
 };
+
