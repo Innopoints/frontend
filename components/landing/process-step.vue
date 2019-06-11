@@ -4,6 +4,7 @@
     <div class="description">
       <h3 class="title">{{ props.title }}</h3>
       <p class="subtitle">{{ props.subtitle }}</p>
+      <!-- eslint-disable-next-line vue/require-component-is -->
       <component 
         v-if="props.buttonLink"
         :is="props.external ? 'a' : 'nuxt-link'"
