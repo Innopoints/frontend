@@ -19,12 +19,13 @@ export default [
     img: 'images/landing/leader.png',
     buttonLink: 'https://campuslife.innopolis.ru/clubs',
     buttonText: 'See the clubs',
+    external: true,
   },
   {
     title: 'Student representative',
     subtitle: 'Student clubs are not the only place to shine! Become the BDFL that your groupmates need!',
     img: 'images/landing/representatives.png',
-    buttonLink: '#',
-    buttonText: 'Apply',
+    buttonLink: '',
+    buttonText: 'you\'ll need to handle this on your own :)',
   },
 ];

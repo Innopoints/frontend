@@ -4,7 +4,15 @@
     <div class="description">
       <h3 class="title">{{ props.title }}</h3>
       <p class="subtitle">{{ props.subtitle }}</p>
-      <nuxt-link :to="props.buttonLink" class="btn filled green shadow-1">{{ props.buttonText }}</nuxt-link>
+      <nuxt-link
+        v-if="props.buttonLink"
+        :to="props.buttonLink"
+        class="btn filled green shadow-1"
+      >
+        {{ props.buttonText }}
+        <img v-if="props.external" src="images/landing/external-link.svg" class="ml-1" />
+      </nuxt-link>
+      <strong v-else>{{ props.buttonText }}</strong>
     </div>
   </div>
 </template>
@@ -20,6 +28,11 @@
         default: '#',
       },
       buttonText: String,
+      external: {
+        type: Boolean,
+        required: false,
+        default: false,
+      },
     },
   };
 </script>
