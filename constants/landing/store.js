@@ -4,7 +4,6 @@ export default [
     title: 'Write clean code',
     subtitle: 'Sweatshirt',
     color: '#A52222',
-    backgroundColor: '#FFF0F0',
     buttonURL: '#',
   },
   {
@@ -12,7 +11,6 @@ export default [
     title: 'ASCII Whale',
     subtitle: 'T-Shirt',
     color: '#217E93',
-    backgroundColor: '#F5FDFF',
     buttonURL: '#',
   },
   {
@@ -20,7 +18,6 @@ export default [
     title: 'IU Umbrella',
     subtitle: '',
     color: '#7A7A7A',
-    backgroundColor: '#F6F6F6',
     buttonURL: '#',
   },
 ];
