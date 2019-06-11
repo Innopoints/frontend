@@ -1,36 +1,40 @@
 <template>
   <div>
-    <header class="container">
-      <img src="/images/landing/innou-logo-text.png" class="logo" />
-      <nuxt-link to="/" class="btn outline green mdc-button">sign in</nuxt-link>
-    </header>
+    <LandingHeader />
+    <LandingTagline />
 
-    <section class="container narrow tagline">
-      <img src="/images/landing/voxel-city-tablet.png" />
-      <div>
-        <h1>Innopoints.</h1>
-        <span>Motivating the great beginnings</span>
-        <nav>
-          <nuxt-link to="/" class="btn filled green shadow-1">get innopoints</nuxt-link>
-          <nuxt-link to="/" class="btn outline green">see the InnoStore</nuxt-link>
-        </nav>
-      </div>
-    </section>
+    <!--  Place for the Features container  -->
+
+    <!--  Place for the Process container  -->
+
+    <!--  Place for the Store container  -->
+
+    <LandingContacts />
+    <LandingFooter />
   </div>
 </template>
 
 <script>
+  import LandingHeader from '../components/landing/header';
+  import LandingTagline from '../components/landing/tagline';
+  import LandingContacts from '../components/landing/contacts';
+  import LandingFooter from '../components/landing/footer';
+
   export default {
-    head () {
-      return {
-        title: 'Home',
-        meta: [
-          { hid: 'description', name: 'description', content: `Innopolis Unniversity's innopoints project` }
-        ],
-        link: [
-          { rel: 'stylesheet', href: '/css/landing.css'}
-        ]
-      };
+    head: {
+      title: 'Home',
+      meta: [
+        { hid: 'description', name: 'description', content: `Innopolis Unniversity's innopoints project` }
+      ],
+      link: [
+        { rel: 'stylesheet', href: '/css/landing.css'}
+      ]
+    },
+    components: {
+      LandingHeader,
+      LandingTagline,
+      LandingContacts,
+      LandingFooter
     }
   };
 </script>
