@@ -13,8 +13,8 @@
 
 <script>
   import Vue from 'vue';
-  import Step from './process-step';
-  import steps from '../../constants/process';
+  import Step from '../components/landing/process-step';
+  import steps from '../constants/process';
 
   export default Vue.extend({
     components: {
