@@ -4,14 +4,17 @@
     <div class="description">
       <h3 class="title">{{ props.title }}</h3>
       <p class="subtitle">{{ props.subtitle }}</p>
-      <nuxt-link
+      <component 
         v-if="props.buttonLink"
+        :is="props.external ? 'a' : 'nuxt-link'"
+        :href="props.buttonLink"
+        :target="props.external ? '_blank': '_self'"
         :to="props.buttonLink"
         class="btn filled green shadow-1"
       >
         {{ props.buttonText }}
         <img v-if="props.external" src="images/landing/external-link.svg" class="ml-1" />
-      </nuxt-link>
+      </component>
       <strong v-else>{{ props.buttonText }}</strong>
     </div>
   </div>
