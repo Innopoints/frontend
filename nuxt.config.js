@@ -9,14 +9,15 @@ module.exports = {
 
   // Headers of the page
   head: {
-    titleTemplate: '%s',
+    titleTemplate: '%s | innopoints',
     htmlAttrs: { lang: 'en' },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/images/favicon.png' }
+      { rel: 'icon', type: 'image/png', href: '/images/favicon.png' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&display=swap&subset=cyrillic' }
     ]
   },
 

@@ -1,0 +1,136 @@
+.tagline {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 1rem;
+  color: #387800;
+  margin-bottom: 6rem;
+}
+
+.tagline > img {
+  max-height: 15rem;
+  margin-bottom: 3rem;
+}
+
+.tagline h1 {
+  font-size: 2.3em;
+  font-weight: 500;
+  margin-bottom: .5rem;
+  text-align: center;
+}
+
+.tagline span {
+  font-size: 1.2em;
+  font-weight: 400;
+  text-align: center;
+  display: block;
+}
+
+.tagline nav {
+  margin-top: 1.5rem;
+  display: flex;
+}
+
+.tagline .btn {
+  padding: .7rem .894rem;
+}
+
+.tagline .btn:first-child {
+  margin-right: .5rem;
+}
+
+@media only screen and (min-width: 386px) {
+  .tagline {
+    padding: 0 2rem;
+  }
+
+  .tagline span {
+    font-size: 1.3em;
+  }
+
+  .tagline .btn:first-child {
+    margin-right: 1rem;
+  }
+}
+
+@media only screen and (min-width: 426px) {
+  .tagline nav {
+    margin-top: 2.5rem;
+  }
+
+  .tagline .btn {
+    padding: 1rem 1.6rem;
+  }
+}
+
+@media only screen and (min-width: 641px) {
+  .tagline {
+    padding: 0 6rem;
+  }
+
+  .tagline > img {
+    max-height: 25rem;
+  }
+
+  .tagline h1 {
+    font-size: 3em;
+  }
+
+  .tagline span {
+    font-size: 1.7em;
+  }
+
+  .tagline nav {
+    margin-top: 2.5rem;
+  }
+
+  .tagline .btn {
+    padding: 1rem 1.6rem;
+  }
+
+  .tagline .btn:first-child {
+    margin-right: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .tagline {
+    flex-direction: row-reverse;
+  }
+
+  .tagline > img {
+    max-width: 40%;
+    margin-bottom: 0;
+    margin-right: 2rem;
+  }
+
+  .tagline h1 {
+    text-align: left;
+  }
+
+  .tagline span {
+    text-align: left;
+    display: inline;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .tagline > img {
+    max-width: 45%;
+    margin-right: 3rem;
+  }
+
+  .tagline h1 {
+    font-size: 3.5em;
+  }
+
+  .tagline span {
+    font-size: 2.1em;
+  }
+
+  .tagline .btn {
+    padding: 1rem 1.9rem;
+  }
+}

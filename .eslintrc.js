@@ -44,6 +44,9 @@ module.exports = {
     "vue/require-v-for-key": ["error"],
     "vue/singleline-html-element-content-newline": "off",
     "indent": "off",
+    "vue/html-self-closing": ["warn", {
+      "html": { "void": "always" }
+    }],
     "no-console": ["warn"]
   }
 }

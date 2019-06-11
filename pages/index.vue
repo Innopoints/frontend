@@ -1,25 +1,37 @@
 <template>
-  <section class="container">
-    <h2 class="subtitle">
-      Innopoints IU project
-    </h2>
-  </section>
+  <div>
+    <header class="container">
+      <img src="/images/landing/innou-logo-text.png" class="logo" />
+      <nuxt-link to="/" class="btn outline green mdc-button">sign in</nuxt-link>
+    </header>
+
+    <section class="container narrow tagline">
+      <img src="/images/landing/voxel-city-tablet.png" />
+      <div>
+        <h1>Innopoints.</h1>
+        <span>Motivating the great beginnings</span>
+        <nav>
+          <nuxt-link to="/" class="btn filled green shadow-1">get innopoints</nuxt-link>
+          <nuxt-link to="/" class="btn outline green">see the InnoStore</nuxt-link>
+        </nav>
+      </div>
+    </section>
+  </div>
 </template>
 
-<style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-</style>
+<script>
+  export default {
+    head () {
+      return {
+        title: 'Home',
+        meta: [
+          { hid: 'description', name: 'description', content: `Innopolis Unniversity's innopoints project` }
+        ],
+        link: [
+          { rel: 'stylesheet', href: '/css/landing.css'}
+        ]
+      };
+    }
+  };
+</script>
 

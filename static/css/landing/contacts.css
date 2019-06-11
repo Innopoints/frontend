@@ -1,0 +1,160 @@
+.contacts {
+  margin-top: 2.5rem;
+  padding-top: 3rem;
+  height: 25rem;
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  background: url('../images/full-cover.svg') no-repeat;
+  background-size: cover;
+}
+
+.contacts .center {
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts h2 {
+  color: #387800;
+  text-align: center;
+  font-weight: 500;
+
+  margin-bottom: 1rem;
+}
+
+.contacts .container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.contacts .subtitle {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 300;
+  background: #effad7;
+}
+
+.contacts .card {
+  flex-direction: row;
+  padding: .8rem 1.6rem;
+  margin: 1rem 0;
+}
+
+.contacts .icon {
+  margin: 0 .7rem;
+  height: 4rem;
+}
+
+.contacts .card p {
+  padding: .5rem 1.5rem 0;
+  font-weight: 300;
+  font-size: 1em;
+  text-align: center;
+}
+
+.contacts .card .btn {
+  padding: .5rem 1.5rem;
+  font-size: 1em;
+}
+
+.contacts .card img {
+  width: 50px;
+  height: 50px;
+}
+
+.contacts > .btn {
+  transform: translateY(50%);
+  padding: .5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contacts > .btn > img {
+  margin-right: .5rem;
+  width: 25px;
+}
+
+@media only screen and (min-width: 385px) {
+  .contacts .subtitle {
+    font-size: 1.2em;
+  }
+
+  .contacts .card p {
+    font-size: 1.2em;
+  }
+
+  .contacts .card .btn {
+    font-size: 1.2em;
+  }
+
+  .contacts .card img {
+    width: unset;
+    height: unset;
+  }
+
+  .contacts > .btn > img {
+    width: 30px;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .contacts > .btn > img {
+    width: unset;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .contacts .subtitle {
+    font-size: 1.2em;
+  }
+
+  .contacts .card p {
+    font-size: 1.2em;
+  }
+
+  .contacts .card .btn {
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 805px) {
+  .contacts {
+    height: 24rem;
+  }
+
+  .contacts .center {
+    flex-direction: row;
+  }
+
+  .contacts .card {
+    margin: 0 1rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .contacts h2 {
+    font-size: 3em;
+  }
+
+  .contacts .subtitle {
+    font-size: 1.5em;
+  }
+
+  .contacts .card {
+    padding: 1rem 2rem;
+    margin: 0 3rem;
+  }
+
+  .contacts .card p {
+    font-size: 1.3em;
+  }
+
+  .contacts .card .btn {
+    font-size: 1.3em;
+  }
+}

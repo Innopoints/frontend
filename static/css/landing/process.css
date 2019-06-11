@@ -1,0 +1,171 @@
+.process {
+  margin-top: 80px;
+  margin-bottom: 70px;
+}
+
+.process h2 {
+  color: #387800;
+  text-align: center;
+  font-weight: 500;
+
+  margin-bottom: 1.5rem;
+}
+
+.process .step:nth-child(2) {
+  background: linear-gradient(180deg, #F5FFE0 0%, #EDFFC7 100%);
+}
+.process .step:nth-child(3) {
+  background: linear-gradient(180deg, #FFF7E0 0%, #FFF0C7 100%);
+}
+.process .step:nth-child(4) {
+  background: linear-gradient(180deg, #E4E7FF 0%, #CFD3FF 100%);
+}
+.process .step:nth-child(5) {
+  background: linear-gradient(180deg, #FFE0F2 0%, #FFC7E8 100%);
+}
+
+.process .title {
+  font-weight: 500;
+  font-size: 1.6em;
+  margin-bottom: .6rem;
+}
+
+.process .subtitle {
+  font-weight: 300;
+  font-size: 1.1em;
+  line-height: 1.3em;
+  margin-bottom: 1.5rem;
+}
+
+.process .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  padding: 2rem 1rem;
+}
+
+.process .description {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  align-items: flex-start;
+  margin: 0 1rem;
+}
+
+.process > .step > .container > img {
+  width: 12rem;
+  margin-bottom: 1rem;
+}
+
+.process .btn {
+  padding: .7rem 1rem;
+  font-size: 1em;  
+  align-items: center;
+}
+
+.process strong {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+@media only screen and (min-width: 385px) {
+  .process .container {
+    padding: 2rem 2rem;
+  }
+
+  .process h2 {
+    margin-bottom: 3rem;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .process {
+    margin-bottom: 100px;
+  }
+
+  .process .description {
+    margin: 0 3rem;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .process {
+    margin-top: 130px;
+    margin-bottom: 100px;
+  }
+
+  .process .title {
+    font-size: 2em;
+    margin-bottom: 1rem;
+  }
+
+  .process .subtitle {
+    font-size: 1.2em;
+  }
+
+  .process .step {
+    height: 18rem;
+  }
+
+  .process .container {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .process .description {
+    margin: 0;
+  }
+
+  .process > .step > .container > img {
+    width: 13rem;
+    margin-bottom: 0;
+  }
+
+  .process .btn {
+    padding: .9rem 1.3rem;
+    font-size: 1.1em;
+  }
+}
+
+@media only screen and (min-width: 805px) {
+  .process .subtitle {
+    font-size: 1.3em;
+  }
+
+  .process .description {
+    flex-basis: 38%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .process {
+    margin-top: 100px;
+  }
+
+  .process h2 {
+    font-size: 3em;
+    margin-bottom: 4rem;
+  }
+
+  .process .title {
+    font-size: 2.4em;
+  }
+
+  .process .subtitle {
+    font-size: 1.6em;
+  }
+
+  .process .step {
+    height: 22rem;
+  }
+
+  .process .btn {
+    padding: 1rem 2rem;
+  }
+
+  .process strong {
+    font-size: 1.2em;
+  }
+}

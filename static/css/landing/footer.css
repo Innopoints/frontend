@@ -1,0 +1,178 @@
+footer {
+  background: #5C5C5C;
+  padding: 2rem 1rem 0;
+}
+
+footer .left {
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+footer .logo {
+  width: 4rem;
+}
+
+footer > .container {
+  flex-direction: column;
+}
+
+footer .title {
+  font-weight: 500;
+  color: #fff;
+  font-size: 1.7em;
+  margin-left: .5rem;
+}
+
+footer .title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .socials {
+  padding: 0 10%;
+  margin-top: 1rem;
+}
+
+footer .credits {
+  font-weight: 300;
+  font-size: 1.1em;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+footer .right {
+  display: flex;
+  justify-content: center;
+}
+
+footer .right > img {
+  display: none;
+}
+
+footer .search {
+  min-width: 13rem;
+  color: #585858;
+  font-weight: 300;
+  font-size: 1.1em;
+  flex-direction: row;
+  padding: .7rem 1.3rem;
+  margin-top: 1rem;
+}
+
+footer ul {
+  list-style: none;
+  font-size: 1.1em;
+  font-weight: 300;
+  padding-left: 1rem;
+}
+
+footer ul li {
+  line-height: 2.5rem;
+}
+
+footer ul > li:before {
+  content: "‣";
+  padding-right: 5px;
+  color: #fff;
+}
+
+@media only screen and (min-width: 385px) {
+  footer {
+    padding: 2rem 3rem 0;
+  }
+
+  footer .search {
+    min-width: 16rem;
+    font-size: 1.3em;
+  }
+}
+
+@media only screen and (min-width: 425px) {
+  footer .title {
+    font-size: 2em;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  footer ul {
+    font-size: 1.3em;
+  }
+}
+
+@media only screen and (max-width: 749px) {
+  .hide-phone {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  footer > .container {
+    flex-direction: row;
+  }
+
+  footer .left {
+    margin-bottom: 4rem;
+  }
+
+  footer .title-container {
+    justify-content: flex-start;
+  }
+
+  footer .socials {
+    padding: 0 1rem;
+    margin-top: 0;
+  }
+
+  footer .credits {
+    text-align: left;
+    margin-top: 0;
+  }
+
+  footer .right {
+    justify-content: flex-start;
+  }
+
+  footer .right > img {
+    display: block;
+    margin-right: .5rem;
+    max-width: 35%;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  footer .credits {
+    font-size: 1.3em;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  footer {
+    padding: 2rem 4rem 0;
+  }
+
+  footer .logo {
+    width: 6rem;
+  }
+
+  footer .title {
+    font-size: 2.5em;
+  }
+
+  footer .socials {
+    padding: 0 2rem;
+  }
+
+  footer .search {
+    min-width: 18rem;
+    padding: .9rem 1.5rem;
+  }
+
+  footer ul {
+    font-size: 1.5em;
+  }
+
+  footer ul li {
+    line-height: 3rem;
+  }
+}
