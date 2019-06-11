@@ -19,7 +19,7 @@
   import LandingTagline from '../components/landing/tagline';
   import LandingContacts from '../components/landing/contacts';
   import LandingFooter from '../components/landing/footer';
-  import Process from '../components/landing/process';
+  import Process from '../containers/process';
 
   export default {
     head: {
