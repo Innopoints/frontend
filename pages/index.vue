@@ -3,7 +3,7 @@
     <LandingHeader />
     <LandingTagline />
 
-    <Features/>
+    <Feature />
 
     <!--  Place for the Process container  -->
 
@@ -19,7 +19,7 @@
   import LandingTagline from '../components/landing/tagline';
   import LandingContacts from '../components/landing/contacts';
   import LandingFooter from '../components/landing/footer';
-  import Features from '../containers/Features';
+  import Feature from '../containers/feature';
 
   export default {
     head: {
@@ -36,7 +36,7 @@
       LandingTagline,
       LandingContacts,
       LandingFooter,
-      Features
+      Feature
     }
   };
 </script>

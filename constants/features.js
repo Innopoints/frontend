@@ -1,6 +1,6 @@
 export default [
     {
-      title: 'Be procative',
+      title: 'Be proactive',
       subtitle: 'Participate in event organization, lead student clubs, do other cool things',
       img: 'images/landing/zap.svg',
     },
