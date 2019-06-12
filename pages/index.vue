@@ -5,7 +5,7 @@
 
     <!--  Place for the Features container  -->
 
-    <!--  Place for the Process container  -->
+    <Process />
 
     <Store />
 
@@ -20,6 +20,7 @@
   import LandingContacts from '../components/landing/contacts';
   import LandingFooter from '../components/landing/footer';
   import Store from '../containers/store';
+  import Process from '../containers/process';
 
   export default {
     head: {
@@ -37,6 +38,7 @@
       LandingContacts,
       LandingFooter,
       Store,
+      Process,
     }
   };
 </script>

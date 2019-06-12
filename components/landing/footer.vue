@@ -16,7 +16,7 @@
           </div>
         </div>
         <span class="credits white">
-          with credits to <br/>
+          with credits to <br />
           <a class="credit-link white" href="https://www.isometriclove.com/" target="_blank">Isometriclove</a>
           and <a class="credit-link white" href="https://www.humaaans.com/" target="_blank">Humaaans</a>
         </span>
