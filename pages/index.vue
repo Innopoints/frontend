@@ -36,7 +36,7 @@
       LandingTagline,
       LandingContacts,
       LandingFooter,
-      Feature
+      Feature,
     }
   };
 </script>
