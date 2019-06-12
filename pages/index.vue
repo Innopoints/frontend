@@ -7,7 +7,7 @@
 
     <Process />
 
-    <!--  Place for the Store container  -->
+    <Store />
 
     <LandingContacts />
     <LandingFooter />
@@ -19,6 +19,7 @@
   import LandingTagline from '../components/landing/tagline';
   import LandingContacts from '../components/landing/contacts';
   import LandingFooter from '../components/landing/footer';
+  import Store from '../containers/store';
   import Process from '../containers/process';
 
   export default {
@@ -36,6 +37,7 @@
       LandingTagline,
       LandingContacts,
       LandingFooter,
+      Store,
       Process,
     }
   };
