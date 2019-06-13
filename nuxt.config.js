@@ -26,7 +26,6 @@ module.exports = {
 
   css: [
     '~static/css/normalize.css',
-    '~static/css/main.css'
   ],
 
   build: {
