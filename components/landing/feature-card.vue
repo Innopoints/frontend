@@ -1,8 +1,8 @@
-<template functional>
+<template>
   <div class="card shadow-2">
-    <img :src="props.img" />
-    <span class="title">{{ props.title }}</span>
-    <span class="subtitle">{{ props.subtitle }}</span>
+    <img :src="img" />
+    <span class="title">{{ title }}</span>
+    <span class="subtitle">{{ subtitle }}</span>
   </div>
 </template>
 
@@ -12,6 +12,6 @@
       img: String,
       title: String,
       subtitle: String,
-    },
+    }
   };
 </script>

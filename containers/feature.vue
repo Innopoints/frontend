@@ -3,10 +3,7 @@
     <h2>How does it work?</h2>
     <div class="container">
       <template v-for="(feature, i) in features">
-        <FeatureCard
-          v-bind="feature"
-          :key="i"
-        />
+        <FeatureCard v-bind="feature" :key="i" />
         <img
           :key="i"
           :src="'images/landing/arrow.svg'"
@@ -21,6 +18,7 @@
 <script>
   import FeatureCard from '../components/landing/feature-card';
   import features from '../constants/features';
+
   export default ({
     components: {
       FeatureCard,
