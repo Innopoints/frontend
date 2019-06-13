@@ -16,8 +16,8 @@
 </template>
 
 <script>
-  import FeatureCard from '../components/landing/feature-card';
-  import features from '../constants/features';
+  import FeatureCard from '../../components/landing/feature-card';
+  import features from '../../constants/landing/features';
 
   export default ({
     components: {
