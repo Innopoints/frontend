@@ -1,6 +1,6 @@
 <template>
   <section class="process">
-    <h2>How to get Innopoints</h2>
+    <h2>How to get innopoints?</h2>
     <div
       v-for="(step, i) in steps"
       :key="i"
