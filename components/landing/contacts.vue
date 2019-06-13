@@ -25,7 +25,7 @@
         </p>
       </div>
     </div>
-    <a @click="scrollToTop" class="btn filled green shadow-2 link">
+    <a v-ripple @click="scrollToTop" class="btn filled green shadow-2 link">
       <img src="/images/landing//arrow-up.svg" />
       back to top
     </a>
