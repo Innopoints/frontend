@@ -25,7 +25,7 @@
         </p>
       </div>
     </div>
-    <a @click="scrollToTop" class="btn filled green shadow-2">
+    <a @click="scrollToTop" class="btn filled green shadow-2 link">
       <img src="/images/landing//arrow-up.svg" />
       back to top
     </a>
@@ -47,5 +47,8 @@
   .contacts {
     background: url('/images/landing/full-cover.svg') no-repeat;
     background-size: cover;
+  }
+  .link {
+    cursor: pointer;
   }
 </style>
