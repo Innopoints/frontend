@@ -14,6 +14,7 @@
       <a
         :style="{'color': color}"
         :href="buttonURL"
+        v-ripple="'rgba(50, 50, 50, 0.25)'"
         class="btn filled white shadow-2"
       >view</a>
     </div>
@@ -35,7 +36,7 @@
     computed: {
       background() {
         return {
-          '#A52222': '#FFF0F0', 
+          '#A52222': '#FFF0F0',
           '#217E93': '#F5FDFF',
           '#7A7A7A': '#F6F6F6',
         }[this.color];

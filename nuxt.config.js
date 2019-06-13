@@ -25,8 +25,13 @@ module.exports = {
   loading: { color: '#3B8070' },
 
   css: [
-    '~static/css/normalize.css',
+    '~static/css/main.css',
   ],
+
+  plugins: [{
+    src: '~plugins/ripple.js',
+    mode: 'client'
+  }],
 
   build: {
 

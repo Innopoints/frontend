@@ -27,6 +27,11 @@ body {
   border-style: solid;
 }
 
+.outline:hover {
+  background-color: #387800;
+  color: #fff;
+}
+
 .btn {
   display: flex;
   border-radius: 50px;
