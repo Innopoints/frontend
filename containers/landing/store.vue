@@ -19,8 +19,8 @@
 </template>
 
 <script>
-  import Card from '../components/landing/store-card';
-  import items from '../constants/landing/store';
+  import Card from '../../components/landing/store-card';
+  import items from '../../constants/landing/store';
   export default {
     components: {
       Card,
