@@ -1,0 +1,44 @@
+header {
+  padding: 0 1.3rem;
+  height: 4rem;
+  border-bottom: 1px solid #387800;
+  margin: 0 auto;
+}
+
+header > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+header .logo > img {
+  height: 75%;
+}
+
+@media only screen and (min-width: 501px) {
+  header .btn {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  header {
+    padding: 0 3rem;
+  }
+
+  header .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  header span {
+    font-size: 1.4em;
+    font-weight: 500;
+    color: #387800;
+  }
+
+  header .logo > img {
+    margin-right: 1rem;
+  }
+}

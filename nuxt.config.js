@@ -24,10 +24,6 @@ module.exports = {
   // Customize the progress bar color
   loading: { color: '#3B8070' },
 
-  css: [
-    '~static/css/main.css',
-  ],
-
   plugins: [{
     src: '~plugins/ripple.js',
     mode: 'client'

@@ -1,23 +1,20 @@
 <template>
   <div>
-    <Header />
-    <nuxt />
+    <nuxt/>
     <Footer />
   </div>
 </template>
 
 <script>
   import Footer from '../components/footer';
-  import Header from '../components/header';
 
   export default {
     head: {
       link: [
-        { rel: 'stylesheet', href: '/css/default.css'}
+        { rel: 'stylesheet', href: '/css/landing.css'}
       ]
     },
     components: {
-      Header,
       Footer
     }
   };
