@@ -25,21 +25,12 @@
         </p>
       </div>
     </div>
-    <a v-ripple @click="scrollToTop" class="btn filled green shadow-2 link">
-      <img src="/images/landing//arrow-up.svg" />
-      back to top
-    </a>
   </section>
 </template>
 
 <script>
   export default {
-    name: "LandingContacts",
-    methods: {
-      scrollToTop: () => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-      }
-    }
+    name: "LandingContacts"
   };
 </script>
 
@@ -47,8 +38,5 @@
   .contacts {
     background: url('/images/landing/full-cover.svg') no-repeat;
     background-size: cover;
-  }
-  .link {
-    cursor: pointer;
   }
 </style>

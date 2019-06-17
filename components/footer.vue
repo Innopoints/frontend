@@ -1,5 +1,11 @@
 <template>
   <footer>
+    <div class="to-top link">
+      <a v-ripple @click="scrollToTop" class="btn filled green shadow-2">
+        <img src="images/landing/arrow-up.svg" />
+        back to top
+      </a>
+    </div>
     <div class="container space-between">
       <div class="left space-between">
         <div>
@@ -45,6 +51,17 @@
 
 <script>
   export default {
-    name: "LandingFooter"
+    name: "Footer",
+    methods: {
+      scrollToTop: () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }
+    }
   };
 </script>
+
+<style scoped>
+  .link {
+    cursor: pointer;
+  }
+</style>

@@ -10,7 +10,7 @@
     <Store />
 
     <LandingContacts />
-    <LandingFooter />
+    <Footer />
   </div>
 </template>
 
@@ -18,7 +18,7 @@
   import LandingHeader from '../components/landing/header';
   import LandingTagline from '../components/landing/tagline';
   import LandingContacts from '../components/landing/contacts';
-  import LandingFooter from '../components/landing/footer';
+  import Footer from '../components/footer';
   import Feature from '../containers/landing/feature';
   import Store from '../containers/landing/store';
   import Process from '../containers/landing/process';
@@ -37,7 +37,7 @@
       LandingHeader,
       LandingTagline,
       LandingContacts,
-      LandingFooter,
+      Footer,
       Feature,
       Store,
       Process,
