@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="default">
     <div class="container">
       <div @click="resolution" class="logo">
         <img src="/images/browser/innou-icon-green.svg" />

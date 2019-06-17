@@ -9,11 +9,6 @@
   import Footer from '../components/footer';
 
   export default {
-    head: {
-      link: [
-        { rel: 'stylesheet', href: '/css/landing.css'}
-      ]
-    },
     components: {
       Footer
     }

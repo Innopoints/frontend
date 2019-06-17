@@ -1,5 +1,5 @@
 <template>
-  <section class="container narrow tagline">
+  <section class="container narrow ltagline">
     <img src="/images/landing/voxel-city-tablet.png" />
     <div>
       <h1>Innopoints</h1>

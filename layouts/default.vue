@@ -11,11 +11,6 @@
   import Header from '../components/header';
 
   export default {
-    head: {
-      link: [
-        { rel: 'stylesheet', href: '/css/default.css'}
-      ]
-    },
     components: {
       Header,
       Footer
