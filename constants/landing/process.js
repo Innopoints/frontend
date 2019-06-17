@@ -3,7 +3,7 @@ export default [
     title: 'Volunteering',
     subtitle: 'Innopolis University needs heroes like you to organize world-class events!',
     img: 'images/landing/volunteering.png',
-    buttonLink: '#',
+    buttonLink: '/events',
     buttonText: 'see the events',
   },
   {

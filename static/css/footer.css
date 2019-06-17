@@ -1,6 +1,28 @@
 footer {
   background: #5C5C5C;
-  padding: 2rem 1rem 0;
+  padding: 0 1rem 0;
+}
+
+footer > .to-top {
+  transform: translateY(-50%);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
+footer > .to-top > .btn {
+  padding: .7rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer > .to-top > .btn > img {
+  margin-right: .5rem;
+  width: 25px;
 }
 
 footer .left {
@@ -79,7 +101,7 @@ footer ul > li:before {
 
 @media only screen and (min-width: 385px) {
   footer {
-    padding: 2rem 3rem 0;
+    padding: 0 3rem 0;
   }
 
   footer .search {
@@ -148,7 +170,7 @@ footer ul > li:before {
 
 @media only screen and (min-width: 1024px) {
   footer {
-    padding: 2rem 4rem 0;
+    padding: 0 4rem 0;
   }
 
   footer .logo {
