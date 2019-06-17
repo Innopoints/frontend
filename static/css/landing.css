@@ -4,4 +4,5 @@
 @import 'landing/store.css';
 @import 'landing/contacts.css';
 @import 'landing/header.css';
-@import 'footer.css';
+@import 'default/footer.css';
+@import 'main.css';
