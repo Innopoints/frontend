@@ -2,7 +2,7 @@
   <footer>
     <div class="to-top link">
       <a v-ripple @click="scrollToTop" class="btn filled green shadow-2">
-        <img src="images/landing/arrow-up.svg" />
+        <img src="/images/landing/arrow-up.svg" />
         back to top
       </a>
     </div>
@@ -37,7 +37,7 @@
           </div>
           <ul>
             <li>
-              <nuxt-link to="/" class="white">browse the events</nuxt-link>
+              <nuxt-link to="/events" class="white">browse the events</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/" class="white">see the InnoStore</nuxt-link>
