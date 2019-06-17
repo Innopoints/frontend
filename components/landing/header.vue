@@ -1,5 +1,5 @@
 <template>
-  <header class="container">
+  <header class="container landing">
     <img @click="resolution" src="/images/landing/innou-logo-text.png" class="logo" />
     <nuxt-link v-ripple to="/" class="btn outline green mdc-button">sign in</nuxt-link>
   </header>
