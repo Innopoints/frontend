@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container">
-      <div class="logo">
+      <div @click="resolution" class="logo">
         <img src="/images/browser/innou-icon-green.svg" />
         <span class="hide-mb">Innopoints</span>
       </div>
@@ -12,6 +12,12 @@
 
 <script>
   export default {
-    name: "Header"
+    name: "Header",
+    methods: {
+      resolution: () => {
+        alert(`You current browser screen resolution.
+        Width: ${window.innerWidth}px, height: ${window.innerHeight}px`);
+      }
+    }
   };
 </script>
