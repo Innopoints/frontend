@@ -3,6 +3,15 @@
     <img :src="img" />
     <h2>{{ title }}</h2>
     <div class="content">
+      <div class="compact" v-if="$store.state.auth.isAuth">
+        <div class="detail">
+          <img src="/images/events/flag.svg" class="icon" />
+          <div class="text">
+            <h3>Status</h3>
+            <p>{{ status }}</p>
+          </div>
+        </div>
+      </div>
       <div class="compact">
         <div class="detail">
           <img src="/images/events/calendar.svg" class="icon" />
@@ -33,7 +42,7 @@
           </ul>
         </div>
       </div>
-      <a :href="url" class="btn filled green shadow-1">see details</a>
+      <a :href="url" class="btn filled green shadow-1">{{ $store.state.auth.isAuth ? 'review' : 'see details' }}</a>
     </div>
   </div>
 </template>
@@ -48,6 +57,10 @@
       organizer: String,
       activities: Array,
       url: String,
+      status: {
+        type: String,
+        required: false,
+      },
     },
   });
 </script>
