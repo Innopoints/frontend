@@ -1,0 +1,195 @@
+.events {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.events > h1 {
+  margin: 0 1.5rem;
+  font-size: 1.3em;
+  font-weight: 500;
+  color: #387800;
+}
+
+.events .cards {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: .7rem;
+}
+
+.events .card {
+  align-items: stretch;
+  margin-bottom: 1rem;
+}
+
+.events .card > img {
+  width: 100%;
+  max-height: 350px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.events .card > .content {
+  margin: 0 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.events .card .compact {
+  display: flex;
+  flex-direction: column;
+}
+
+.events .card h2 {
+  font-weight: 500;
+  font-size: 1.2em;
+  margin: 1.2rem 1.2rem 1rem;
+}
+
+.events .card .detail {
+  min-width: 45%;
+  flex-grow: 1;
+  display: flex;
+}
+
+.events .card .compact .detail {
+  margin-bottom: 1rem;
+}
+
+.events .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 6px;
+  margin-top: 10px;
+}
+
+.events .detail h3 {
+  font-weight: 500;
+  font-size: .7em;
+  color: #387800;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.events .detail ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.events .detail li {
+  margin-bottom: .5rem;
+}
+
+.events .detail li.extra {
+  color: #387800;
+  font-size: .9em;
+}
+
+.events .card .btn {
+  align-self: flex-end;
+}
+
+@media only screen and (min-width: 380px) {
+  .events .cards {
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .events > h1 {
+    text-align: center;
+    font-size: 1.5em;
+  }
+
+  .events .card .compact {
+    flex-flow: row wrap;
+  }
+
+  .events .card h2 {
+    font-size: 1.3em;
+  }
+
+  .events .btn {
+    padding: .9rem 1.3rem;
+  }
+}
+
+@media only screen and (min-width: 580px) {
+  .events .cards {
+    justify-content: flex-start;
+  }
+
+  .events .card {
+    width: calc(50% - 1rem);
+    margin: .5rem;
+  }
+
+  .events .card .btn {
+    font-size: 1em;
+    padding: .7rem 1rem;
+  }
+
+  .events .card .compact > .detail:first-child {
+    margin-right: .5rem;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .events .cards {
+    padding: 1rem 5%;
+  }
+
+  .events .card .content {
+    position: relative;
+  }
+
+  .events .card .btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .events .card .content {
+    margin: 0 1.5rem 1.2rem;
+  }
+
+  .events .card > h2 {
+    margin: 1.5rem 1.5rem 1rem;
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 1260px) {
+  .events .cards {
+    padding: 1rem 10%;
+  }
+
+  .events .card {
+    width: calc(50% - 2rem);
+    margin: 1rem;
+  }
+
+  .events .card .compact .detail {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .events .card {
+    width: calc(33.333333% - 2rem);
+    margin: 1rem;
+  }
+}
+
+@media only screen and (min-width: 2400px) {
+  .events .card {
+    width: calc(25% - 2rem);
+    margin: 1rem;
+  }
+}

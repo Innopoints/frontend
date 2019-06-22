@@ -26,7 +26,8 @@ module.exports = {
 
   css: [
     '~static/css/default.css',
-    '~static/css/landing.css'
+    '~static/css/landing.css',
+    '~static/css/events.css',
   ],
 
   plugins: [{
