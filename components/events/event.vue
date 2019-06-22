@@ -3,7 +3,7 @@
     <img :src="img" />
     <h2>{{ title }}</h2>
     <div class="content">
-      <div class="compact" v-if="$store.state.auth.isAuth">
+      <div v-if="$store.state.auth.isAuth" class="compact">
         <div class="detail">
           <img src="/images/events/flag.svg" class="icon" />
           <div class="text">
