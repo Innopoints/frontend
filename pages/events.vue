@@ -1,13 +1,18 @@
 <template>
   <div>
     <EventsTagline />
+    <Events />
   </div>
 </template>
 
 <script>
   import EventsTagline from '../components/events/tagline';
+  import Events from '../containers/events/events';
   export default {
-    components: { EventsTagline },
+    components: { 
+      EventsTagline,
+      Events,
+    },
     head: {
       title: 'Event Browser',
       meta: [
