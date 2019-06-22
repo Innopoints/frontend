@@ -5,7 +5,7 @@
     <div class="content">
       <div class="compact">
         <div class="detail">
-          <img src="/images/browser/calendar.svg" class="icon" />
+          <img src="/images/events/calendar.svg" class="icon" />
           <div class="text">
             <h3>When</h3>
             <p>{{ date }}</p>
@@ -13,7 +13,7 @@
         </div>
 
         <div class="detail">
-          <img src="/images/browser/user.svg" class="icon" />
+          <img src="/images/events/user.svg" class="icon" />
           <div class="text">
             <h3>Organizer</h3>
             <p>{{ organizer }}</p>
@@ -22,7 +22,7 @@
       </div>
 
       <div class="detail">
-        <img src="/images/browser/list.svg" class="icon" />
+        <img src="/images/events/list.svg" class="icon" />
         <div class="text">
           <h3>Activities</h3>
           <ul>

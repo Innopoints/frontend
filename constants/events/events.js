@@ -1,6 +1,6 @@
 export default [
   {
-    img: '/images/browser/chess-club.png',
+    img: '/images/events/chess-club.png',
     title: 'Chess Tournament',
     date: 'Jan 21 – Feb 24, 2019',
     organizer: '319',
@@ -14,7 +14,7 @@ export default [
     url: '#',
   },
   {
-    img: '/images/browser/image.png',
+    img: '/images/events/image.png',
     title: 'All-Russian Robotics Olympiad',
     date: 'Jan 21 – Feb 24, 2019',
     organizer: 'Olympiads dept.',
@@ -25,7 +25,7 @@ export default [
     url: '#',
   },
   {
-    img: '/images/browser/chess-club.png',
+    img: '/images/events/chess-club.png',
     title: 'Chess Tournament',
     date: 'Jan 21 – Feb 24, 2019',
     organizer: '319',
