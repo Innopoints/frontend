@@ -12,6 +12,7 @@ export default [
       'Preparation',
     ],
     url: '#',
+    status: 'Unpublished, awaiting review',
   },
   {
     img: '/images/events/image.png',
@@ -23,6 +24,7 @@ export default [
       'Catering',
     ],
     url: '#',
+    status: 'Modified, awaiting review',
   },
   {
     img: '/images/events/chess-club.png',
@@ -37,5 +39,6 @@ export default [
       'Preparation',
     ],
     url: '#',
+    status: 'Finished, awaiting activity review',
   },
 ];
