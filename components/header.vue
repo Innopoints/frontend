@@ -2,7 +2,7 @@
   <header class="default">
     <div class="container">
       <div @click="resolution" class="logo">
-        <img src="/images/browser/innou-icon-green.svg" />
+        <img src="/images/events/innou-icon-green.svg" />
         <span class="hide-mb">Innopoints</span>
       </div>
       <span

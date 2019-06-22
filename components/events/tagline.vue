@@ -1,6 +1,6 @@
 <template>
   <section class="container tight tagline">
-    <img src="/images/browser/voxel-volunteering.png" class="hide-mb" />
+    <img src="/images/events/voxel-volunteering.png" class="hide-mb" />
     <div>
       <div class="title">Become a volunteer</div>
       <span class="subtitle">
