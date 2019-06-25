@@ -13,10 +13,9 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import Event from '../../components/events/event';
   import events from '../../constants/events/events';
-  export default Vue.extend({
+  export default {
     components: {
       Event,
     },
@@ -25,5 +24,5 @@
         events,
       };
     },
-  });
+  };
 </script>

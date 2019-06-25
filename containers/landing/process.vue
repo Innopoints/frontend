@@ -12,11 +12,10 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import Step from '../../components/landing/process-step';
   import steps from '../../constants/landing/process';
 
-  export default Vue.extend({
+  export default {
     components: {
       Step,
     },
@@ -25,5 +24,5 @@
         steps,
       };
     },
-  });
+  };
 </script>
