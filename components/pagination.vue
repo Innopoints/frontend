@@ -150,6 +150,7 @@
   display: inline-block;
   text-align: center;
   margin: 10px 0;
+  padding: 0;
 }
 .page-item {
   display: inline-block;
@@ -174,4 +175,21 @@
 .page-link-item:hover {
   background-color: rgba(56, 120, 0, 0.1);
 } 
+@media screen and (max-width: 768px) {
+  .pages {
+    --box-size: 32px;
+  }
+  .page-link-item {
+    font-size: 19px;
+  }
+}
+@media screen and (max-width: 380px) {
+  .pages {
+    --box-size: 26px;
+  }
+  .page-link-item {
+    font-size: 16px;
+    margin: 0 5px;
+  }
+}
 </style>
