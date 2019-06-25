@@ -2,7 +2,22 @@
 <template>
   <ul :class="containerClass">
     <li v-for="page in pages" :class="[pageClass, page.selected ? activeClass : '', page.disabled ? disabledClass : '']" :key="page.index">
-      <a v-if="page.breakView" :class="pageLinkClass" tabindex="0">...</a>
+      <template v-if="page.breakView">
+        <input 
+          v-if="editing === page.index"
+          :class="pageLinkClass"
+          @keyup.enter.prevent="handlePageSelected(parseInt($event.target.value, 10));"
+          :max="pageCount"
+          min="1"
+          type="number"
+        />
+        <a
+          v-else
+          :class="pageLinkClass"
+          @click="editing = page.index;"
+          tabindex="0"
+        >...</a>
+      </template>
       <a v-else-if="page.disabled" :class="pageLinkClass" tabindex="0">{{ page.content }}</a>
       <a
         v-else
@@ -51,6 +66,7 @@
         containerClass: 'pages',
         pageClass: 'page-item',
         pageLinkClass: 'page-link-item',
+        editing: -1,
       };
     },
     computed: {
@@ -77,6 +93,7 @@
             disabled: true,
             breakView: true,
             content: '...',
+            index: index,
           };
           items[index] = breakView;
         };
@@ -134,11 +151,12 @@
     
     methods: {
       handlePageSelected(selected) {
-        if (this.selected === selected) return;
+        if (this.selected === selected || isNaN(selected)) return;
 
         this.innerValue = selected;
         this.$emit('input', selected);
         this.clickHandler(selected);
+        this.editing = -1;
       },
     },
   };
@@ -155,7 +173,7 @@
 .page-item {
   display: inline-block;
 }
-.page-item.active > .page-link-item {
+.page-item.active > .page-link-item, input.page-link-item {
   background-color: rgba(56, 120, 0, 0.1);;
   border: 1px solid #387800;
   color: #387800;
@@ -171,6 +189,10 @@
   font-size: 25px;
   text-align: center;
   border-radius: 50%;
+}
+input.page-link-item {
+  border-radius: 5% 5% 0% 0%;
+  border-width: 0px 0px 2px 0px;
 }
 .page-link-item:hover {
   background-color: rgba(56, 120, 0, 0.1);
