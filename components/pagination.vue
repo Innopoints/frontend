@@ -6,7 +6,7 @@
         <input 
           v-if="editing === page.index"
           :class="pageLinkClass"
-          @keyup.enter.prevent="handlePageSelected(parseInt($event.target.value, 10));"
+          @keyup.enter.prevent="handlePageSelected(parseInt($event.target.value, 10))"
           :max="pageCount"
           min="1"
           type="number"
@@ -14,7 +14,7 @@
         <a
           v-else
           :class="pageLinkClass"
-          @click="editing = page.index;"
+          @click="editing = page.index"
           tabindex="0"
         >...</a>
       </template>
