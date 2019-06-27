@@ -141,12 +141,6 @@
         }
         return items;
       },
-      firstPageSelected() {
-        return this.selected === 1;
-      },
-      lastPageSelected() {
-        return (this.selected === this.pageCount) || (this.pageCount === 0);
-      },
     },
     
     methods: {
