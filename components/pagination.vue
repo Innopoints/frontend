@@ -185,7 +185,7 @@
   border-radius: 50%;
 }
 input.page-link-item {
-  border-radius: 5% 5% 0% 0%;
+  border-radius: 5px 5px 0px 0px;
   border-width: 0px 0px 2px 0px;
 }
 .page-link-item:hover {
