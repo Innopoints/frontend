@@ -30,7 +30,7 @@
   background: rgba(56, 120, 0, 0.15);
 }
 
-.pagination > input {
+.pagination > .page > input {
   width: 2rem;
   height: 2rem;
   border-radius: 5px 5px 0 0;
@@ -49,20 +49,20 @@
 }
 
 @media only screen and (max-width: 539px) {
-  .pagination > input[type=number]::-webkit-outer-spin-button,
-  .pagination > input[type=number]::-webkit-inner-spin-button {
+  .pagination > .page > input[type=number]::-webkit-outer-spin-button,
+  .pagination > .page > input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  .pagination > input[type=number] {
+  .pagination > .page > input[type=number] {
     -moz-appearance: textfield;
   }
 }
 
 @media only screen and (min-width: 380px) {
   .pagination > .page,
-  .pagination > input {
+  .pagination > .page > input {
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1.1em;
@@ -81,30 +81,30 @@
     font-size: 1.2em;
   }
 
-  .pagination > input {
+  .pagination > .page > input {
     width: 2.7rem;
     font-size: 1.2em;
     border-radius: 8px 8px 0 0;
   }
 
-  .pagination > input:focus {
+  .pagination > .page > input:focus {
     padding-right: 3px;
   }
 
-  .pagination > input[type=number]:not(:focus)::-webkit-outer-spin-button,
-  .pagination > input[type=number]:not(:focus)::-webkit-inner-spin-button {
+  .pagination > .page > input[type=number]:not(:focus)::-webkit-outer-spin-button,
+  .pagination > .page > input[type=number]:not(:focus)::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  .pagination > input[type=number]:not(:focus) {
+  .pagination > .page > input[type=number]:not(:focus) {
     -moz-appearance: textfield;
   }
 }
 
 @media only screen and (min-width: 1024px) {
   .pagination > .page,
-  .pagination > input {
+  .pagination > .page > input {
     font-size: 1.3em;
   }
 }
