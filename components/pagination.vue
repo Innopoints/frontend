@@ -53,7 +53,7 @@
       },
       activeClass: {
         type: String,
-        default: 'active',
+        default: 'current',
       },
       disabledClass: {
         type: String,
@@ -63,8 +63,8 @@
     data() {
       return {
         innerValue: 1,
-        containerClass: 'pages',
-        pageClass: 'page-item',
+        containerClass: 'pagination',
+        pageClass: 'page',
         pageLinkClass: 'page-link-item',
         editing: -1,
       };
@@ -156,56 +156,4 @@
   };
 </script>
 
-<style lang="css" scoped>
-.pages {
-  --box-size: 45px;
-  display: inline-block;
-  text-align: center;
-  margin: 10px 0;
-  padding: 0;
-}
-.page-item {
-  display: inline-block;
-}
-.page-item.active > .page-link-item, input.page-link-item {
-  background-color: rgba(56, 120, 0, 0.1);;
-  border: 1px solid #387800;
-  color: #387800;
-}
-.page-link-item {
-  display: inline-block;
-  cursor: pointer;
-  width: var(--box-size);
-  height: var(--box-size);
-  margin: 0 10px;
-  line-height: var(--box-size);
-  font-weight: 500;
-  font-size: 25px;
-  text-align: center;
-  border-radius: 50%;
-}
-input.page-link-item {
-  border-radius: 5px 5px 0px 0px;
-  border-width: 0px 0px 2px 0px;
-}
-.page-link-item:hover {
-  background-color: rgba(56, 120, 0, 0.1);
-} 
-@media screen and (max-width: 768px) {
-  .pages {
-    --box-size: 32px;
-  }
-  .page-link-item {
-    font-size: 19px;
-  }
-}
-@media screen and (max-width: 380px) {
-  .pages {
-    --box-size: 26px;
-  }
-  .page-link-item {
-    font-size: 16px;
-    margin: 0 5px;
-  }
-}
-</style>
+<style src="../static/css/default/pagination.css" scoped></style>
