@@ -20,6 +20,12 @@
   font-weight: 500;
 }
 
+.pagination > .page > .page-link-item {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
 .pagination > .page.current {
   border: 1px solid #387800;
   color: #387800;
