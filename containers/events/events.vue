@@ -25,7 +25,7 @@
     },
     data() {
       return {
-        eventsPerPage: 4,
+        eventsPerPage: 8,
         currentPage: 1,
         allEvents,
       };
