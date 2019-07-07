@@ -8,6 +8,7 @@
 .pagination > .page {
   width: 2rem;
   height: 2rem;
+  line-height: 2rem;
   border-radius: 50%;
   margin: 0 .3rem;
 
@@ -16,7 +17,7 @@
   justify-content: space-around;
   cursor: pointer;
 
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -32,7 +33,7 @@
   background: rgba(56, 120, 0, 0.1);
 }
 
-.pagination > .page:hover {
+.pagination > .page:hover:not(.disabled) {
   background: rgba(56, 120, 0, 0.15);
 }
 
@@ -49,7 +50,7 @@
   border-bottom-width: 2px;
   transform: translateY(1px);
 
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   text-align: center;
 }
@@ -71,7 +72,8 @@
   .pagination > .page > input {
     width: 2.5rem;
     height: 2.5rem;
-    font-size: 1.1em;
+    font-size: 1.1rem;
+    line-height: 2.5rem;
   }
 }
 
@@ -84,12 +86,13 @@
   .pagination > .page {
     width: 3rem;
     height: 3rem;
-    font-size: 1.2em;
+    font-size: 1.2rem;
+    line-height: 3rem;
   }
 
   .pagination > .page > input {
     width: 2.7rem;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     border-radius: 8px 8px 0 0;
   }
 
@@ -111,6 +114,6 @@
 @media only screen and (min-width: 1024px) {
   .pagination > .page,
   .pagination > .page > input {
-    font-size: 1.3em;
+    font-size: 1.3rem;
   }
 }

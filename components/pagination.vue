@@ -3,7 +3,7 @@
   <ul :class="containerClass">
     <li v-for="page in pages" :class="[pageClass, page.selected ? activeClass : '', page.disabled ? disabledClass : '']" :key="page.index">
       <template v-if="page.breakView">
-        <input 
+        <input
           v-if="editing === page.index"
           :class="pageLinkClass"
           @keyup.enter.prevent="handlePageSelected(parseInt($event.target.value, 10))"
