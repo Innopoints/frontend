@@ -1,6 +1,6 @@
 <template>
   <section class="events">
-    <h1>Ongoing events</h1>
+    <h1 id="events-top">Ongoing events</h1>
     <!-- Filters here -->
     <div class="cards">
       <Event
@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        eventsPerPage: 8,
+        eventsPerPage: 1,
         currentPage: 1,
         allEvents,
       };

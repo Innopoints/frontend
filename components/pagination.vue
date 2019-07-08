@@ -72,7 +72,7 @@
           };
         };
 
-        if (this.pageCount <= this.pageRange || this.pageCount <= 5) {
+        if (this.pageCount <= this.pageRange || this.pageCount <= 6) {
           for (let index = 0; index < this.pageCount; index++) {
             setPageItem(index);
           }
@@ -116,18 +116,23 @@
         return items;
       },
     },
-
+    updated() {
+      let el = document.querySelector('.pagination input');
+      if(el) el.focus();
+    },
     methods: {
       changePage(selected) {
         if(selected >= 1 && selected <= this.pageCount) {
-          if (this.selected === selected || isNaN(selected)) return;
+          // Scroll to the top of events block
+          document.getElementById('events-top').scrollIntoView();
 
+          if (this.selected === selected || isNaN(selected)) return;
           this.innerValue = selected;
           this.$emit('input', selected);
           this.editing = -1;
         }
       }
-    },
+    }
   };
 </script>
 
