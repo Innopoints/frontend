@@ -2,13 +2,12 @@
   margin: 3rem 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
-.pagination > .page {
+.pagination .page {
   width: 2rem;
   height: 2rem;
-  line-height: 2rem;
   border-radius: 50%;
   margin: 0 .3rem;
 
@@ -17,27 +16,21 @@
   justify-content: space-around;
   cursor: pointer;
 
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 500;
 }
 
-.pagination > .page > .page-link-item {
-  height: 100%;
-  width: 100%;
-  text-align: center;
-}
-
-.pagination > .page.current {
+.pagination .page.current {
   border: 1px solid #387800;
   color: #387800;
   background: rgba(56, 120, 0, 0.1);
 }
 
-.pagination > .page:hover:not(.disabled) {
+.pagination .page:not(.page-to-item):hover {
   background: rgba(56, 120, 0, 0.15);
 }
 
-.pagination > .page > input {
+.pagination input {
   width: 2rem;
   height: 2rem;
   border-radius: 5px 5px 0 0;
@@ -50,30 +43,29 @@
   border-bottom-width: 2px;
   transform: translateY(1px);
 
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 500;
   text-align: center;
 }
 
 @media only screen and (max-width: 539px) {
-  .pagination > .page > input[type=number]::-webkit-outer-spin-button,
-  .pagination > .page > input[type=number]::-webkit-inner-spin-button {
+  .pagination input[type=number]::-webkit-outer-spin-button,
+  .pagination input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  .pagination > .page > input[type=number] {
+  .pagination input[type=number] {
     -moz-appearance: textfield;
   }
 }
 
 @media only screen and (min-width: 380px) {
-  .pagination > .page,
-  .pagination > .page > input {
+  .pagination .page,
+  .pagination input {
     width: 2.5rem;
     height: 2.5rem;
-    font-size: 1.1rem;
-    line-height: 2.5rem;
+    font-size: 1.1em;
   }
 }
 
@@ -83,37 +75,36 @@
     align-self: center;
   }
 
-  .pagination > .page {
+  .pagination .page {
     width: 3rem;
     height: 3rem;
-    font-size: 1.2rem;
-    line-height: 3rem;
+    font-size: 1.2em;
   }
 
-  .pagination > .page > input {
+  .pagination input {
     width: 2.7rem;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     border-radius: 8px 8px 0 0;
   }
 
-  .pagination > .page > input:focus {
+  .pagination input:focus {
     padding-right: 3px;
   }
 
-  .pagination > .page > input[type=number]:not(:focus)::-webkit-outer-spin-button,
-  .pagination > .page > input[type=number]:not(:focus)::-webkit-inner-spin-button {
+  .pagination input[type=number]:not(:focus)::-webkit-outer-spin-button,
+  .pagination input[type=number]:not(:focus)::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  .pagination > .page > input[type=number]:not(:focus) {
+  .pagination input[type=number]:not(:focus) {
     -moz-appearance: textfield;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .pagination > .page,
-  .pagination > .page > input {
-    font-size: 1.3rem;
+  .pagination .page,
+  .pagination input {
+    font-size: 1.3em;
   }
 }

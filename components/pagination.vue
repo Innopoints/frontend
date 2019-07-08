@@ -1,32 +1,34 @@
 <!-- Adapted from https://github.com/lokyoung/vuejs-paginate -->
 <template>
-  <ul :class="containerClass">
-    <li v-for="page in pages" :class="[pageClass, page.selected ? activeClass : '', page.disabled ? disabledClass : '']" :key="page.index">
+  <nav class="pagination">
+    <template v-for="page in pages">
       <template v-if="page.breakView">
         <input
           v-if="editing === page.index"
-          :class="pageLinkClass"
-          @keyup.enter.prevent="handlePageSelected(parseInt($event.target.value, 10))"
+          @keyup.enter.prevent="changePage(parseInt($event.target.value, 10))"
           :max="pageCount"
           min="1"
           type="number"
         />
-        <a
+        <div
           v-else
-          :class="pageLinkClass"
+          :key="page.index"
           @click="editing = page.index"
-          tabindex="0"
-        >...</a>
+          class="page"
+        >
+          ...
+        </div>
       </template>
-      <a v-else-if="page.disabled" :class="pageLinkClass" tabindex="0">{{ page.content }}</a>
-      <a
+      <div
         v-else
-        @click="handlePageSelected(page.index + 1)"
-        :class="pageLinkClass"
-        tabindex="0"
-      >{{ page.content }}</a>
-    </li>
-  </ul>
+        :key="page.index"
+        :class="['page', page.selected ? activeClass : '']"
+        @click="changePage(page.index + 1)"
+      >
+        {{ page.content }}
+      </div>
+    </template>
+  </nav>
 </template>
 
 <script>
@@ -39,33 +41,13 @@
         type: Number,
         required: true,
       },
-      clickHandler: {
-        type: Function,
-        default: () => { },
-      },
-      pageRange: {
-        type: Number,
-        default: 3,
-      },
-      marginPages: {
-        type: Number,
-        default: 1,
-      },
-      activeClass: {
-        type: String,
-        default: 'current',
-      },
-      disabledClass: {
-        type: String,
-        default: 'disabled',
-      },
     },
     data() {
       return {
+        pageRange: 3,
         innerValue: 1,
-        containerClass: 'pagination',
-        pageClass: 'page',
-        pageLinkClass: 'page-link-item',
+        marginPages: 1,
+        activeClass: 'current',
         editing: -1,
       };
     },
@@ -89,13 +71,10 @@
         };
 
         let setBreakView = index => {
-          let breakView = {
-            disabled: true,
+          items[index] = {
             breakView: true,
-            content: '...',
             index: index,
           };
-          items[index] = breakView;
         };
 
         if (this.pageCount <= this.pageRange) {
@@ -104,7 +83,7 @@
           }
         } else {
           const halfPageRange = Math.floor(this.pageRange / 2);
-          
+
           for (let i = 0; i < this.marginPages; i++) {
             setPageItem(i);
           }
@@ -142,16 +121,17 @@
         return items;
       },
     },
-    
-    methods: {
-      handlePageSelected(selected) {
-        if (this.selected === selected || isNaN(selected)) return;
 
-        this.innerValue = selected;
-        this.$emit('input', selected);
-        this.clickHandler(selected);
-        this.editing = -1;
-      },
+    methods: {
+      changePage(selected) {
+        if(selected >= 1 && selected <= this.pageCount) {
+          if (this.selected === selected || isNaN(selected)) return;
+
+          this.innerValue = selected;
+          this.$emit('input', selected);
+          this.editing = -1;
+        }
+      }
     },
   };
 </script>
