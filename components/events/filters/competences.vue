@@ -15,10 +15,10 @@
         />
       </div>
       <fieldset>
-        <label v-for="competency in competences" :key="competency.name">
-          <input @change="changeCompetency(competency)" :checked="competency.checked" type="checkbox" />
+        <label v-for="competence in competences" :key="competence.name">
+          <input @change="changeCompetence(competence)" :checked="competence.checked" type="checkbox" />
           <div class="styled-checkbox" />
-          {{ competency.name }}
+          {{ competence.name }}
         </label>
       </fieldset>
     </div>
@@ -42,7 +42,7 @@
     },
     methods: {
       ...mapActions({
-        changeCompetency: 'events/changeCompetency',
+        changeCompetence: 'events/changeCompetence',
         clearCompetences: 'events/clearCompetences'
       }),
       toggleDropdown() {

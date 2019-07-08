@@ -23,7 +23,7 @@ export default {
     changeSpots({commit}, value) {
       commit('changeFilter', {type: 'spots', value: value});
     },
-    changeCompetency({commit, state}, value) {
+    changeCompetence({commit, state}, value) {
       commit('changeFilter', {type: 'competences', value: state.competences.map(x => {
           if(x.name === value.name) return {name: x.name, checked: !value.checked};
           return x;
