@@ -1,6 +1,6 @@
 <template>
-  <div class="dropdown-shell no-border">
-    <div class="filter date-range">
+  <div :class="open && 'open'" class="dropdown-shell no-border">
+    <div @click="toggleDropdown" class="filter date-range">
       <img
         src="/images/events/calendar.svg"
         srcset="/images/events/calendar-mobile.svg 18w, /images/events/calendar.svg 24w"
@@ -14,6 +14,7 @@
       <span>start date</span>
       <span>end date</span>
       <img
+        @click="toggleDropdown"
         src="/images/events/x.svg"
         sizes="(min-width: 640px) 24px, 18px"
         class="drop-close"
@@ -23,7 +24,25 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
+
   export default {
-    name: 'DateRange'
+    name: 'DateRange',
+    data() {
+      return {
+        open: false
+      };
+    },
+    computed: {
+      ...mapState({
+        startDate: state => state.events.startDate,
+        endDate: state => state.events.endDate,
+      })
+    },
+    methods: {
+      toggleDropdown() {
+        this.open = !this.open;
+      }
+    }
   };
 </script>
