@@ -7,7 +7,9 @@
         sizes="(min-width: 640px) 22px, 18px"
         class="drop-text-open"
       />
-      <span class="hide-mb">select date range</span>
+      <!--<span class="hide-mb">select date range</span>-->
+
+      <RangePicker />
       <img src="/images/events/chevron-down.svg" class="hide-mb dropdown-chevron" />
     </div>
     <div class="dropdown shadow-2 right-edge">
@@ -28,9 +30,16 @@
 
   export default {
     name: 'DateRange',
+    components: {
+      RangePicker: () => import('./range-picker')
+    },
     data() {
       return {
-        open: false
+        open: false,
+        range: {
+          start: new Date(2018, 0, 16),
+          end: new Date(2018, 0, 19)
+        }
       };
     },
     computed: {
@@ -42,7 +51,10 @@
     methods: {
       toggleDropdown() {
         this.open = !this.open;
-      }
+      },
+      onDateSelected: function (daterange) {
+        console.log(daterange);
+      },
     }
   };
 </script>
