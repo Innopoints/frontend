@@ -1,23 +1,23 @@
-<template functional>
+<template>
   <div class="container">
-    <img :src="props.img" />
+    <img :src="img" />
     <div class="description">
-      <h3 class="title">{{ props.title }}</h3>
-      <p class="subtitle">{{ props.subtitle }}</p>
+      <h3 class="title">{{ title }}</h3>
+      <p class="subtitle">{{ subtitle }}</p>
       <!-- eslint-disable-next-line vue/require-component-is -->
       <component
-        v-if="props.buttonLink"
-        :is="props.external ? 'a' : 'nuxt-link'"
-        :href="props.buttonLink"
-        :target="props.external ? '_blank': '_self'"
-        :to="props.buttonLink"
+        v-if="buttonLink"
+        :is="external ? 'a' : 'nuxt-link'"
+        :href="buttonLink"
+        :target="external ? '_blank': '_self'"
+        :to="buttonLink"
         v-ripple
         class="btn filled green shadow-1"
       >
-        {{ props.buttonText }}
-        <img v-if="props.external" src="images/landing/external-link.svg" class="ml-1" />
+        {{ buttonText }}
+        <img v-if="external" src="/images/landing/external-link.svg" class="ml-1" />
       </component>
-      <strong v-else>{{ props.buttonText }}</strong>
+      <strong v-else>{{ buttonText }}</strong>
     </div>
   </div>
 </template>
