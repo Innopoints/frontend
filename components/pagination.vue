@@ -6,6 +6,7 @@
         <input
           v-if="editing === page.index"
           @keyup.enter.prevent="changePage(parseInt($event.target.value, 10))"
+          @blur="editing = -1"
           :max="pageCount"
           min="1"
           type="number"
