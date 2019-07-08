@@ -3,7 +3,7 @@
     <EventsTagline />
 
     <section class="events">
-      <h1>Ongoing events</h1>
+      <h1 id="events-top">Ongoing events</h1>
 
       <Filters />
 
@@ -14,14 +14,17 @@
           v-bind="event"
         />
       </div>
+
+      <Pagination v-if="pageCount > 1" :page-count="pageCount" v-model="currentPage" />
     </section>
   </div>
 </template>
 
 <script>
-  import EventsTagline from '../components/events/tagline';
-  import events from '../constants/events/events';
+  import allEvents from '../constants/events/events';
   import Filters from '../containers/events/filters';
+  import EventsTagline from '../components/events/tagline';
+  import Pagination from '../components/pagination';
 
   export default {
     head: {
@@ -32,15 +35,29 @@
       ]
     },
     components: {
+      Pagination,
       Filters,
       EventsTagline,
       Event: () => import('../components/events/event'),
     },
     data() {
       return {
-        events,
+        eventsPerPage: 8,
+        currentPage: 1,
+        allEvents,
       };
     },
+    computed: {
+      pageCount() {
+        return Math.ceil(this.allEvents.length / this.eventsPerPage);
+      },
+      events() {
+        const page = this.currentPage - 1;
+        const start = this.eventsPerPage * page;
+        const end = start + this.eventsPerPage;
+        return this.allEvents.slice(start, end);
+      },
+    }
   };
 </script>
 

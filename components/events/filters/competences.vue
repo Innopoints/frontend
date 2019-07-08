@@ -51,3 +51,9 @@
     }
   };
 </script>
+
+<style scoped>
+  label {
+    cursor: pointer;
+  }
+</style>
