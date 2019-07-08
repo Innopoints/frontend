@@ -10,7 +10,7 @@
       />
     </div>
 
-    <Pagination :page-count="pageCount" v-model="currentPage" />
+    <Pagination v-if="pageCount > 1" :page-count="pageCount" v-model="currentPage" />
   </section>
 </template>
 
@@ -18,6 +18,7 @@
   import Event from '../../components/events/event';
   import Pagination from '../../components/pagination';
   import allEvents from '../../constants/events/events';
+
   export default {
     components: {
       Event,

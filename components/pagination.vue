@@ -52,13 +52,8 @@
       };
     },
     computed: {
-      selected: {
-        get() {
-          return this.value || this.innerValue;
-        },
-        set(newValue) {
-          this.innerValue = newValue;
-        },
+      selected() {
+        return this.value || this.innerValue;
       },
       pages() {
         let items = {};
@@ -77,7 +72,7 @@
           };
         };
 
-        if (this.pageCount <= this.pageRange) {
+        if (this.pageCount <= this.pageRange || this.pageCount <= 5) {
           for (let index = 0; index < this.pageCount; index++) {
             setPageItem(index);
           }
