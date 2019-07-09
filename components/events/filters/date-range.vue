@@ -14,7 +14,7 @@
     </div>
     <div class="dropdown shadow-2 right-edge">
       <div class="drop-header">
-        <span :class="isFirstChoice && 'active'">start date</span>
+        <span @click="isFirstChoice= true" :class="isFirstChoice && 'active'">start date</span>
         <span :class="!isFirstChoice && 'active'">end date</span>
         <img
           @click="toggleDropdown"
@@ -39,7 +39,7 @@
           <li
             v-for="day in numOfDays"
             :key="day"
-            :class="[getCellClass(week, day, startMonthDay, endMonthDate)]"
+            :class="getCellClass(week, day, startMonthDay, endMonthDate)"
             v-html="getDayCell(week, day, startMonthDay, endMonthDate)"
             @click="selectFirstItem(week, day)"
           />
@@ -169,7 +169,7 @@
       },
       isDateInRange (week, day, startMonthDay, endMonthDate) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
-        if (result < 2 || result > endMonthDate) return false;
+        if (result < 1 || result > endMonthDate) return false;
         let currDate = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result));
 
         return (this.dateRange.start && this.dateRange.start.getTime() < currDate.getTime()) &&
