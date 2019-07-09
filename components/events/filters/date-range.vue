@@ -14,8 +14,10 @@
     </div>
     <div class="dropdown shadow-2 right-edge">
       <div class="drop-header">
-        <span @click="isFirstChoice= true" :class="isFirstChoice && 'active'">start date</span>
-        <span :class="!isFirstChoice && 'active'">end date</span>
+        <div>
+          <span @click="isFirstChoice= true" :class="isFirstChoice && 'active'">start date</span>
+          <span :class="!isFirstChoice && 'active'">end date</span>
+        </div>
         <img
           @click="toggleDropdown"
           src="/images/events/x.svg"
@@ -24,26 +26,27 @@
         />
       </div>
 
-      <div class="calendar_month_left calendar-left-mobile">
-        <div class="months-text">
-          <i @click="goPrevMonth" class="left" />
-          <i @click="goNextMonth" class="right" />
+      <div class="calendar">
+        <div class="month-header">
+          <button @click="goPrevMonth" class="left" />
           {{ monthsLocale[activeMonthStart] + ' ' + activeYearStart }}
+          <button @click="goNextMonth" class="right" />
         </div>
-        <ul class="calendar_weeks">
-          <li v-for="item in shortDaysLocale" :key="item">{{ item }}</li>
-        </ul>
-        <ul v-for="week in 6" :key="week" class="calendar_days">
-          <!-- Next <li> element may have one of the classes:
+        <div class="weekdays">
+          <div v-for="item in shortDaysLocale" :key="item">{{ item }}</div>
+        </div>
+        <div v-for="week in 6" :key="week" class="days">
+          <!-- Next <div> element may have one of the classes:
           day-in-range, day-selected and day-disabled (if not in this month) -->
-          <li
+          <div
             v-for="day in numOfDays"
             :key="day"
-            :class="getCellClass(week, day, startMonthDay, endMonthDate)"
-            v-html="getDayCell(week, day, startMonthDay, endMonthDate)"
+            :class="[getCellClass(week, day, startMonthDay, endMonthDate), 'day']"
             @click="selectFirstItem(week, day)"
-          />
-        </ul>
+          >
+            <button v-html="getDayCell(week, day, startMonthDay, endMonthDate)" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -125,7 +128,7 @@
       },
       getDayCell (week, day, startMonthDay, endMonthDate) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
-        return result > 0 && result <= endMonthDate ? result : '&nbsp;';
+        return result > 0 && result <= endMonthDate ? result : '31';
       },
       getNewDateRange (result, activeMonth, activeYear) {
         const newData = {};
@@ -199,102 +202,163 @@
 <style scoped>
   .dropdown {
     flex-direction: column;
+    width: 290px;
+  }
+
+  .drop-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5em 1em;
+  }
+
+
+  .drop-header > div {
+    margin-left: 24px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .drop-header span {
+    padding: .8em .8em;
+    border-radius: 25px;
+  }
+
+  .drop-header span {
+    color: #888;
   }
 
   .drop-header span.active {
-    background-color: rgba(0, 200, 0, .6);
+    background-color: rgba(56, 120, 0, .12);
+    color: #387800;
   }
 
-  .months-text {
-    text-align: center;
-    font-weight: bold;
+  .month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1em;
+    border: 0 solid #ccc;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    padding: .5em 0;
+    color: #387800;
+    font-weight: 500;
   }
 
-  .months-text .left {
-    float: left;
+  .month-header button {
+    background: none;
+    border: none;
     cursor: pointer;
-    width: 16px;
-    height: 16px;
-    background-image: url("data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxLjQ5NCAzMS40OTQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMxLjQ5NCAzMS40OTQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPHBhdGggZD0iTTEwLjI3Myw1LjAwOWMwLjQ0NC0wLjQ0NCwxLjE0My0wLjQ0NCwxLjU4NywwYzAuNDI5LDAuNDI5LDAuNDI5LDEuMTQzLDAsMS41NzFsLTguMDQ3LDguMDQ3aDI2LjU1NCAgYzAuNjE5LDAsMS4xMjcsMC40OTIsMS4xMjcsMS4xMTFjMCwwLjYxOS0wLjUwOCwxLjEyNy0xLjEyNywxLjEyN0gzLjgxM2w4LjA0Nyw4LjAzMmMwLjQyOSwwLjQ0NCwwLjQyOSwxLjE1OSwwLDEuNTg3ICBjLTAuNDQ0LDAuNDQ0LTEuMTQzLDAuNDQ0LTEuNTg3LDBsLTkuOTUyLTkuOTUyYy0wLjQyOS0wLjQyOS0wLjQyOS0xLjE0MywwLTEuNTcxTDEwLjI3Myw1LjAwOXoiIGZpbGw9IiMwMDZERjAiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==");
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    margin: 0 2em;
   }
 
-  .months-text .right {
-    float: right;
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    background-image: url("data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMS4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxLjQ5IDMxLjQ5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzMS40OSAzMS40OTsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiPgo8cGF0aCBkPSJNMjEuMjA1LDUuMDA3Yy0wLjQyOS0wLjQ0NC0xLjE0My0wLjQ0NC0xLjU4NywwYy0wLjQyOSwwLjQyOS0wLjQyOSwxLjE0MywwLDEuNTcxbDguMDQ3LDguMDQ3SDEuMTExICBDMC40OTIsMTQuNjI2LDAsMTUuMTE4LDAsMTUuNzM3YzAsMC42MTksMC40OTIsMS4xMjcsMS4xMTEsMS4xMjdoMjYuNTU0bC04LjA0Nyw4LjAzMmMtMC40MjksMC40NDQtMC40MjksMS4xNTksMCwxLjU4NyAgYzAuNDQ0LDAuNDQ0LDEuMTU5LDAuNDQ0LDEuNTg3LDBsOS45NTItOS45NTJjMC40NDQtMC40MjksMC40NDQtMS4xNDMsMC0xLjU3MUwyMS4yMDUsNS4wMDd6IiBmaWxsPSIjMDA2REYwIi8+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=");
+  .month-header .left {
+    background-image: url("../../../static/images/events/chevron-left.svg");
   }
 
-  .calendar-head h2 {
-    padding: 20px 0 0 20px;
-    margin: 0;
+  .month-header .right {
+    background-image: url("../../../static/images/events/chevron-right.svg");
   }
 
-  .calendar ul {
-    list-style-type: none;
+  .calendar {
+    margin-bottom: 1em;
   }
 
-  .calendar-left-mobile {
-    width: 100% !important;
+  .weekdays {
+    margin: 1em 1em .5em;
+    display: flex;
   }
 
-  .calendar_month_left {
-    float: left;
-    width: 43%;
-    padding: 10px;
-    margin: 5px;
-  }
-
-  .calendar_weeks {
-    margin: 0;
-    padding: 10px 0;
-    width: auto;
-  }
-
-  .calendar_weeks li {
-    display: inline-block;
-    width: 13.6%;
-    color: #999;
+  .weekdays > div {
+    color: #888;
+    font-size: .8rem;
+    width: 14.285714285714286%;  /* 100% / 7 */
     text-align: center;
   }
 
-  .calendar_days {
-    margin: 0;
-    padding: 0;
+  .days {
+    display: flex;
   }
 
-  .calendar_days li {
-    display: inline-block;
-    width: 13.6%;
-    color: #333;
-    text-align: center;
-    cursor: pointer;
-    line-height: 2em;
+  .days > .day {
+    font-size: 1rem;
+    width: 14.285714285714286%;  /* 100% / 7 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
 
-  .calendar_preset li {
-    line-height: 2.6em;
-    width: auto;
-    display: block;
+  .day > button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    z-index: 2;
   }
 
-  .calendar_days li:hover {
-    background: #eee;
-    color: #000;
-  }
-  li.day-disabled {
-    pointer-events: none;
+  .day:hover > button {
+    background-color: rgba(56, 120, 0, .08);
   }
 
-  li.day-selected {
-    background: #005a82;
+  .day.in-range.start > button,
+  .day.in-range.end > button {
+    background-color: #70a565;
     color: #fff;
   }
 
-  li.day-in-range {
-    background: #0096d9;
+  .day.outside > button {
+    color: #bbb;
+  }
+
+  .day.outside.in-range > button {
     color: #fff;
+  }
+
+  .day.in-range::before {
+    background-color: rgba(56, 120, 0, .25);
+    content: "";
+    height: 30px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  .day:last-child {
+    padding-right: 1em;
+  }
+
+  .day:first-child {
+    padding-left: 1em;
+  }
+
+  .day.start::before {
+    left: 15px;
+  }
+
+  .day.start:first-child::before {
+    left: calc(1em + 15px);
+  }
+
+  .day.end::before {
+    right: 15px;
+  }
+
+  .day.end:last-child::before {
+    right: calc(1em + 15px);
   }
 </style>
-
