@@ -22,7 +22,7 @@
     name: 'Search',
     computed: {
       ...mapState({
-        search: state => state.events.search,
+        search: state => state.events.filters.search,
         mobileCollapsed: state => state.events.mobileCollapsed
       })
     },

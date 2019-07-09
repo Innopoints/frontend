@@ -17,7 +17,7 @@
           <img src="/images/events/calendar.svg" class="icon" />
           <div class="text">
             <h3>When</h3>
-            <p>{{ date }}</p>
+            <p>{{ eventDate }}</p>
           </div>
         </div>
 
@@ -48,11 +48,13 @@
 </template>
 
 <script>
+  import printDate from '../../utils/eventDate';
+
   export default {
     props: {
       img: String,
       title: String,
-      date: String,
+      date: Object,
       organizer: String,
       activities: Array,
       url: String,
@@ -61,5 +63,10 @@
         required: false,
       },
     },
+    computed: {
+      eventDate() {
+        return printDate(this.date);
+      }
+    }
   };
 </script>

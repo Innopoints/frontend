@@ -37,7 +37,7 @@
     },
     computed: {
       ...mapState({
-        competences: state => state.events.competences
+        competences: state => state.events.filters.competences
       })
     },
     methods: {
