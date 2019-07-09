@@ -1,12 +1,12 @@
 <template>
   <div class="container filters">
-    <div class="ellipse filters-collapsed">
+    <div :class="mobileCollapsed && 'filters-collapsed'" class="ellipse">
       <Search />
       <Spots />
       <Competences />
       <DateRange />
 
-      <div class="show-filters no-border">
+      <div @click="toggleMobileCollapsed" class="show-filters no-border">
         <img
           src="/images/events/filter.svg"
           srcset="/images/events/filter-mobile.svg 18w, /images/events/filter.svg 24w"
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+  import {mapState, mapActions} from 'vuex';
   import Competences from '../../components/events/filters/competences';
   import DateRange from '../../components/events/filters/date-range';
   import Ordering from '../../components/events/filters/ordering';
@@ -35,6 +36,16 @@
       DateRange,
       Competences,
       Spots
+    },
+    computed: {
+      ...mapState({
+        mobileCollapsed: state => state.events.mobileCollapsed
+      })
+    },
+    methods: {
+      ...mapActions({
+        toggleMobileCollapsed: 'events/toggleMobileCollapsed'
+      })
     }
   };
 </script>

@@ -8,7 +8,8 @@ export default {
       spots: 1,
       competences,
       startDate: null,
-      endDate: null
+      endDate: null,
+      mobileCollapsed: true
     };
   },
   mutations: {
@@ -31,6 +32,9 @@ export default {
     },
     clearCompetences({commit, state}) {
       commit('changeFilter', {type: 'competences', value: state.competences.map(x => ({name: x.name, checked: false})) });
+    },
+    toggleMobileCollapsed({commit, state}) {
+      commit('changeFilter', {type: 'mobileCollapsed', value: !state.mobileCollapsed});
     }
   }
 };

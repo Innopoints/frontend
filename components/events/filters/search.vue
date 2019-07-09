@@ -1,5 +1,5 @@
 <template>
-  <div id="search-toggle" class="search">
+  <div id="search-toggle" @click="changeMobileCollapsed" class="search">
     <img
       src="/images/events/search.svg"
       srcset="/images/events/search-mobile.svg 18w, /images/events/search.svg 24w"
@@ -22,13 +22,20 @@
     name: 'Search',
     computed: {
       ...mapState({
-        search: state => state.events.search
+        search: state => state.events.search,
+        mobileCollapsed: state => state.events.mobileCollapsed
       })
     },
     methods: {
       ...mapActions({
-        changeSearch: 'events/changeSearch'
-      })
+        changeSearch: 'events/changeSearch',
+        toggleMobileCollapsed: 'events/toggleMobileCollapsed'
+      }),
+      changeMobileCollapsed() {
+        if(!this.mobileCollapsed) {
+          this.toggleMobileCollapsed();
+        }
+      }
     }
   };
 </script>
