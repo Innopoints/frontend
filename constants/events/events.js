@@ -14,6 +14,8 @@ export default [
       'Judging',
       'Preparation',
     ],
+    spots: 3,
+    competences: ['creativity', 'critical thinking', 'leadership', 'conflict aversion', 'communication', 'some other skill'],
     url: '#',
     status: 'Unpublished, awaiting review',
   },
@@ -30,6 +32,8 @@ export default [
       'Catering',
     ],
     url: '#',
+    spots: 5,
+    competences: ['conflict aversion', 'communication'],
     status: 'Modified, awaiting review',
   },
 ];

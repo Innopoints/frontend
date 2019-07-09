@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import allEvents from '../constants/events/events';
+  import {mapGetters} from 'vuex';
   import Filters from '../containers/events/filters';
   import EventsTagline from '../components/events/tagline';
   import Pagination from '../components/pagination';
@@ -44,10 +44,12 @@
       return {
         eventsPerPage: 8,
         currentPage: 1,
-        allEvents,
       };
     },
     computed: {
+      ...mapGetters({
+        allEvents: 'events/events'
+      }),
       pageCount() {
         return Math.ceil(this.allEvents.length / this.eventsPerPage);
       },
@@ -57,7 +59,7 @@
         const end = start + this.eventsPerPage;
         return this.allEvents.slice(start, end);
       },
-    }
+    },
   };
 </script>
 
