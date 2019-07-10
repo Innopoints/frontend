@@ -285,6 +285,10 @@
     display: flex;
   }
 
+  .day.today > button {
+    color: #387800;
+  }
+
   .days > .day {
     font-size: 1rem;
     width: 14.285714285714286%;  /* 100% / 7 */
