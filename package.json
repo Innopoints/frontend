@@ -16,6 +16,7 @@
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^5.2.2",
+    "fecha": "^3.0.3",
     "nuxt": "^2.8.0",
     "vue-eslint-parser": "^6.0.4",
     "vue-ripple-directive": "^2.0.1"
