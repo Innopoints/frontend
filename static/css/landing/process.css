@@ -7,21 +7,23 @@
   color: #387800;
   text-align: center;
   font-weight: 500;
-
   margin-bottom: 1.5rem;
 }
 
 .process .step:nth-child(2) {
-  background: linear-gradient(180deg, #F5FFE0 0%, #EDFFC7 100%);
+  background: linear-gradient(0deg, #f0fff2 0%, #f5fff6 100%);
 }
+
 .process .step:nth-child(3) {
-  background: linear-gradient(180deg, #FFF7E0 0%, #FFF0C7 100%);
+  background: linear-gradient(0deg, #f0ffff 0%, #f5ffff 100%);
 }
+
 .process .step:nth-child(4) {
-  background: linear-gradient(180deg, #E4E7FF 0%, #CFD3FF 100%);
+  background: linear-gradient(0deg, #f0f2ff 0%, #f5f7ff 100%);
 }
+
 .process .step:nth-child(5) {
-  background: linear-gradient(180deg, #FFE0F2 0%, #FFC7E8 100%);
+  background: linear-gradient(0deg, #faf0ff 0%, #fcf5ff 100%);
 }
 
 .process .title {
@@ -41,9 +43,15 @@
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-direction: column;
   padding: 2rem 1rem;
+}
+
+@supports (color-adjust: exact) {
+  .process .container {
+    justify-content: space-evenly;
+  }
 }
 
 .process .description {
@@ -61,7 +69,7 @@
 
 .process .btn {
   padding: .7rem 1rem;
-  font-size: 1em;  
+  font-size: 1em;
   align-items: center;
 }
 
@@ -130,12 +138,18 @@
 }
 
 @media only screen and (min-width: 805px) {
-  .process .subtitle {
-    font-size: 1.3em;
+  .process .step {
+    border-radius: 25px;
+    margin: 0 5% 3rem;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .24);
   }
 
   .process .description {
-    flex-basis: 38%;
+    flex-basis: 50%;
+  }
+
+  .process .step {
+    height: 20rem;
   }
 }
 
@@ -144,17 +158,21 @@
     margin-top: 100px;
   }
 
+  .process .step {
+    margin: 0 10% 3rem;
+  }
+
   .process h2 {
     font-size: 3em;
     margin-bottom: 4rem;
   }
 
   .process .title {
-    font-size: 2.4em;
+    font-size: 2.2em;
   }
 
   .process .subtitle {
-    font-size: 1.6em;
+    font-size: 1.3em;
   }
 
   .process .step {
@@ -167,5 +185,12 @@
 
   .process strong {
     font-size: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .process .step {
+    width: 1000px;
+    margin: 0 auto 3rem;
   }
 }
