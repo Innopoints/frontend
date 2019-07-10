@@ -1,15 +1,18 @@
 <template>
   <div class="body-wrap">
     <ButtonsShowcase />
+    <CheckboxesShowcase />
   </div>
 </template>
 
 <script>
   import ButtonsShowcase from '../containers/ui/buttons';
+  import CheckboxesShowcase from '../containers/ui/checkboxes';
 
   export default {
     components: {
-      ButtonsShowcase
+      ButtonsShowcase,
+      CheckboxesShowcase
     },
     head: {
       title: 'UI kit',
