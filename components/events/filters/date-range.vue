@@ -15,8 +15,8 @@
     <div class="dropdown shadow-2 right-edge">
       <div class="drop-header">
         <div>
-          <span @click="isFirstChoice= true" :class="isFirstChoice && 'active'">start date</span>
-          <span :class="!isFirstChoice && 'active'">end date</span>
+          <span @click="goToStart" :class="isFirstChoice && 'active'">start date</span>
+          <span @click="goToEnd" :class="!isFirstChoice && 'active'">end date</span>
         </div>
         <img
           @click="toggleDropdown"
@@ -65,7 +65,6 @@
         numOfDays: 7,
         format: 'DD.MM.YY',
         isFirstChoice: true,
-        selected: null,
         activeMonthStart: new Date().getMonth(),
         activeYearStart: new Date().getFullYear(),
         activeYearEnd: new Date().getFullYear()
@@ -79,8 +78,13 @@
 
       calendarHeader() {
         if(this.getDateString(this.dateRange.start)) {
-          return this.getDateString(this.dateRange.start) + ' - ' +
-            (this.getDateString(this.dateRange.end) ? this.getDateString(this.dateRange.end) : '...');
+          let start = this.getDateString(this.dateRange.start);
+          let end = '...';
+          if(this.dateRange.end) {
+            end = this.getDateString(this.dateRange.end);
+            if(start === end) return start;
+          }
+          return  start + ' – ' + end;
         } else {
           return 'select date range';
         }
@@ -92,6 +96,9 @@
       },
       shortDaysLocale() {
         return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      },
+      today() {
+        return fecha.format(new Date(), 'YYYY-MM-DD');
       },
       startMonthDay() {
         return new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, 0)).getDay();
@@ -165,7 +172,6 @@
 
         this.isFirstChoice = !this.isFirstChoice;
         newDate[key] = resultDate;
-        this.selected = resultDate;
 
         return newDate;
       },
@@ -195,6 +201,9 @@
         let currDate = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result));
 
         if(this.dateRange.start && !this.dateRange.end && this.compareDates(this.dateRange.start, currDate) === 0) return ['selected'];
+        else if(this.dateRange.start && this.dateRange.end &&
+          this.compareDates(this.dateRange.start, this.dateRange.end) === 0 &&
+          this.compareDates(this.dateRange.start, currDate) === 0) return ['in-range', 'start', 'end'];
         else if(this.dateRange.start && this.compareDates(this.dateRange.start, currDate) === 0) return ['in-range', 'start'];
         else if (this.dateRange.end && this.compareDates(this.dateRange.end, currDate) === 0) return ['in-range', 'end'];
         else return [''];
@@ -213,9 +222,8 @@
       isToday(week, day, startMonthDay) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
         let currDate = fecha.format(new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result)), 'YYYY-MM-DD');
-        let today = fecha.format(new Date(), 'YYYY-MM-DD');
 
-        return today === currDate;
+        return this.today === currDate;
       },
 
       goPrevMonth() {
@@ -229,6 +237,16 @@
         this.activeMonthStart = nextMonth.getMonth();
         this.activeYearStart = nextMonth.getFullYear();
         this.activeYearEnd = nextMonth.getFullYear();
+      },
+
+      goToEnd() {
+        this.dateRange.start = new Date(this.today);
+        console.log(this.dateRange.start);
+        this.dateRange.end = null;
+        this.isFirstChoice = false;
+      },
+      goToStart() {
+        this.isFirstChoice = true;
       },
     }
   };
