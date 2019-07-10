@@ -65,6 +65,7 @@
         numOfDays: 7,
         format: 'DD.MM.YY',
         isFirstChoice: true,
+        selected: null,
         activeMonthStart: new Date().getMonth(),
         activeYearStart: new Date().getFullYear(),
         activeYearEnd: new Date().getFullYear()
@@ -118,6 +119,13 @@
         this.open = !this.open;
       },
 
+      compareDates(date1, date2) {
+        let d1 = fecha.format(new Date(date1), 'YYYY-MM-DD');
+        let d2 = fecha.format(new Date(date2), 'YYYY-MM-DD');
+
+        if(d1 === d2) return 0;
+        return d1 > d2 ? 1 : -1;
+      },
       getDateString(date, format = this.format) {
         if (!date) {
           return null;
@@ -142,12 +150,12 @@
         }
       },
       getNewDateRange(result, activeMonth, activeYear) {
-        const newData = {};
+        const newDate = {};
         let key = 'start';
         if (!this.isFirstChoice) {
           key = 'end';
         } else {
-          newData['end'] = null;
+          newDate['end'] = null;
         }
         const resultDate = new Date(Date.UTC(activeYear, activeMonth, result));
         if (!this.isFirstChoice && resultDate < this.dateRange.start) {
@@ -156,8 +164,10 @@
         }
 
         this.isFirstChoice = !this.isFirstChoice;
-        newData[key] = resultDate;
-        return newData;
+        newDate[key] = resultDate;
+        this.selected = resultDate;
+
+        return newDate;
       },
       selectFirstItem(week, day) {
         const result = this.getDayIndexInMonth(week, day, this.startMonthDay);
@@ -176,7 +186,7 @@
           arr.push('today');
         }
 
-        arr.push(this.isDateSelected(week, day, startMonthDay, endMonthDate));
+        arr.push(...this.isDateSelected(week, day, startMonthDay, endMonthDate));
 
         return arr;
       },
@@ -184,16 +194,17 @@
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
         let currDate = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result));
 
-        if(this.dateRange.start && this.dateRange.start.getTime() === currDate.getTime()) return 'start';
-        else if (this.dateRange.end && this.dateRange.end.getTime() === currDate.getTime()) return 'end';
-        else return '';
+        if(this.dateRange.start && !this.dateRange.end && this.compareDates(this.dateRange.start, currDate) === 0) return ['selected'];
+        else if(this.dateRange.start && this.compareDates(this.dateRange.start, currDate) === 0) return ['in-range', 'start'];
+        else if (this.dateRange.end && this.compareDates(this.dateRange.end, currDate) === 0) return ['in-range', 'end'];
+        else return [''];
       },
       isDateInRange(week, day, startMonthDay) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
         let currDate = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result));
 
-        return (this.dateRange.start && this.dateRange.start.getTime() <= currDate.getTime()) &&
-          (this.dateRange.end && this.dateRange.end.getTime() >= currDate.getTime());
+        return (this.dateRange.start && this.dateRange.start.getTime() < currDate.getTime()) &&
+          (this.dateRange.end && this.dateRange.end.getTime() > currDate.getTime());
       },
       isDateDisabled(week, day, startMonthDay, endMonthDate) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
@@ -338,6 +349,11 @@
 
   .day:hover > button {
     background-color: rgba(56, 120, 0, .08);
+  }
+
+  .day.selected > button {
+    background-color: #BABABA;
+    color: #222;
   }
 
   .day.in-range.start > button,
