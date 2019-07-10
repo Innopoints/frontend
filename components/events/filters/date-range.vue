@@ -379,7 +379,8 @@
   }
 
   .day.in-range.start > button,
-  .day.in-range.end > button {
+  .day.in-range.end > button,
+  .day.selected > button {
     background-color: #70a565;
     color: #fff;
   }

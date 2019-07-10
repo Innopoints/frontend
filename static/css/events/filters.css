@@ -390,10 +390,6 @@
     padding: 0 1rem;
   }
 
-  .filters span {
-    font-size: 1.15em;
-  }
-
   .filters .search > input {
     margin-left: .5rem;
     font-size: 1.3em;
