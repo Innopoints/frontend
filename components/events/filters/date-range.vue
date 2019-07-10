@@ -162,6 +162,7 @@
         let key = 'start';
         if (!this.isFirstChoice) {
           key = 'end';
+          setTimeout(() => this.toggleDropdown(), 500);
         } else {
           newDate['end'] = null;
         }
@@ -241,7 +242,7 @@
       },
 
       goToEnd() {
-        this.dateRange.start = new Date(this.today);
+        if(!this.dateRange.start) this.dateRange.start = new Date(this.today);
         this.dateRange.end = null;
         this.isFirstChoice = false;
       },
