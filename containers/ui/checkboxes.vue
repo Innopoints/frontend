@@ -1,41 +1,44 @@
 <template>
-  <card>
-    <h1>Single checkbox</h1>
-    <checkbox
-      :checked="check1"
-      :click="handleCheckbox"
-      name="check1"
-    /> <br />
-    <checkbox
-      :checked="check2"
-      :click="handleCheckbox"
-      name="check2"
-      label="with label"
-    />
-    <hr />
-
-    <h1>Group of checkboxes</h1>
+  <card class="checkboxes">
+    <h1>Checkboxes group</h1>
+    <div class="showcase">
+      <checkbox-group :items="items" :click="handleCheckboxChange" />
+    </div>
   </card>
 </template>
 
 <script>
   import Card from '../../components/ui/card';
-  import Checkbox from '../../components/ui/checkbox';
+  import CheckboxGroup from '../../components/ui/checkbox-group';
+
+  const items = [
+    {
+      checked: true,
+      label: 'checkbox #1'
+    },
+    {
+      checked: false,
+      label: 'checkbox #2'
+    },
+    {
+      checked: true,
+      label: 'checkbox #3'
+    },
+  ];
 
   export default {
     components: {
-      Checkbox,
+      CheckboxGroup,
       Card
     },
     data() {
       return {
-        check1: true,
-        check2: false,
+        items
       };
     },
     methods: {
-      handleCheckbox(e) {
-        this[e.target.name] = !this[e.target.name];
+      handleCheckboxChange(newItems) {
+        this.items = newItems;
       }
     }
   };

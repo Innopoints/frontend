@@ -32,6 +32,15 @@
   flex-wrap: wrap;
 }
 
+.card.checkboxes .showcase > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.card.checkboxes .showcase > div label {
+  margin-bottom: .5em;
+}
+
 .showcase.vertical {
   flex-direction: column;
 }
