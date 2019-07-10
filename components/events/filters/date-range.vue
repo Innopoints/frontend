@@ -41,7 +41,7 @@
           <div
             v-for="day in numOfDays"
             :key="day"
-            :class="[getCellClass(week, day, startMonthDay, endMonthDate), 'day']"
+            :class="[...getCellClass(week, day, startMonthDay, endMonthDate), 'day']"
             @click="selectFirstItem(week, day)"
           >
             <button v-html="getDayCell(week, day, startMonthDay, endMonthDate)" />
@@ -90,10 +90,10 @@
                 'October', 'November', 'December'];
       },
       shortDaysLocale: function () {
-        return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
       },
       startMonthDay: function () {
-        return new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, 1)).getDay();
+        return new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, 0)).getDay();
       },
       endMonthDate: function () {
         return new Date(Date.UTC(this.activeYearEnd, this.startNextActiveMonth, 0)).getDate();
@@ -115,22 +115,30 @@
         this.open = !this.open;
       },
 
-      getDateString: function (date, format = this.format) {
+      getDateString(date, format = this.format) {
         if (!date) {
           return null;
         }
         const dateparse = new Date(Date.parse(date));
         return fecha.format(new Date(Date.UTC(dateparse.getFullYear(), dateparse.getMonth(), dateparse.getDate())), format);
       },
-      getDayIndexInMonth: function (week, day, startMonthDay) {
+      getDayIndexInMonth(week, day, startMonthDay) {
         const date = (this.numOfDays * (week - 1)) + day;
         return date - startMonthDay;
       },
       getDayCell (week, day, startMonthDay, endMonthDate) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
-        return result > 0 && result <= endMonthDate ? result : '31';
+
+        if(result < 1) {
+          let end = new Date(Date.UTC(this.activeYearEnd, this.startNextActiveMonth - 1, 0)).getDate();
+          return result + end;
+        } else if(result > endMonthDate) {
+          return result - endMonthDate;
+        } else {
+          return result;
+        }
       },
-      getNewDateRange (result, activeMonth, activeYear) {
+      getNewDateRange(result, activeMonth, activeYear) {
         const newData = {};
         let key = 'start';
         if (!this.isFirstChoice) {
@@ -148,48 +156,63 @@
         newData[key] = resultDate;
         return newData;
       },
-      selectFirstItem (week, day) {
+      selectFirstItem(week, day) {
         const result = this.getDayIndexInMonth(week, day, this.startMonthDay);
         this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart, this.activeYearStart));
       },
 
-      getCellClass (week, day, startMonthDay, endMonthDate) {
+      getCellClass(week, day, startMonthDay, endMonthDate) {
+        let arr = [];
         if(this.isDateInRange(week, day, startMonthDay, endMonthDate)) {
-          return 'day-in-range';
-        } else if(this.isDateDisabled(week, day, startMonthDay, endMonthDate)) {
-          return 'day-disabled';
-        } else if(this.isDateSelected(week, day, startMonthDay, endMonthDate)) {
-          return 'day-selected';
+          arr.push('in-range');
         }
+        if(this.isDateDisabled(week, day, startMonthDay, endMonthDate)) {
+          arr.push('outside');
+        }
+        if(this.isToday(week, day, startMonthDay, endMonthDate)) {
+          arr.push('today');
+        }
+
+        arr.push(this.isDateSelected(week, day, startMonthDay, endMonthDate));
+
+        return arr;
       },
-      isDateSelected (week, day, startMonthDay, endMonthDate) {
+      isDateSelected(week, day, startMonthDay, endMonthDate) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
         if (result < 1 || result > endMonthDate) return false;
         let currDate = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result));
 
-        return (this.dateRange.start && this.dateRange.start.getTime() === currDate.getTime()) ||
-          (this.dateRange.end && this.dateRange.end.getTime() === currDate.getTime());
+        if(this.dateRange.start && this.dateRange.start.getTime() === currDate.getTime()) return 'start';
+        else if (this.dateRange.end && this.dateRange.end.getTime() === currDate.getTime()) return 'end';
+        else return '';
       },
-      isDateInRange (week, day, startMonthDay, endMonthDate) {
+      isDateInRange(week, day, startMonthDay, endMonthDate) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
         if (result < 1 || result > endMonthDate) return false;
         let currDate = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result));
 
-        return (this.dateRange.start && this.dateRange.start.getTime() < currDate.getTime()) &&
-          (this.dateRange.end && this.dateRange.end.getTime() > currDate.getTime());
+        return (this.dateRange.start && this.dateRange.start.getTime() <= currDate.getTime()) &&
+          (this.dateRange.end && this.dateRange.end.getTime() >= currDate.getTime());
       },
-      isDateDisabled (week, day, startMonthDay, endMonthDate) {
+      isDateDisabled(week, day, startMonthDay, endMonthDate) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
         return !(result > 0 && result <= endMonthDate);
       },
+      isToday(week, day, startMonthDay) {
+        const result = this.getDayIndexInMonth(week, day, startMonthDay);
+        let currDate = fecha.format(new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result)), 'YYYY-MM-DD');
+        let today = fecha.format(new Date(), 'YYYY-MM-DD');
 
-      goPrevMonth () {
+        return today === currDate;
+      },
+
+      goPrevMonth() {
         const prevMonth = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, 0));
         this.activeMonthStart = prevMonth.getMonth();
         this.activeYearStart = prevMonth.getFullYear();
         this.activeYearEnd = prevMonth.getFullYear();
       },
-      goNextMonth () {
+      goNextMonth() {
         const nextMonth = new Date(Date.UTC(this.activeYearEnd, this.startNextActiveMonth, 1));
         this.activeMonthStart = nextMonth.getMonth();
         this.activeYearStart = nextMonth.getFullYear();
