@@ -4,12 +4,31 @@
     <div class="showcase">
       <checkbox-group :items="items" :click="handleCheckboxChange" />
     </div>
+
+    <hr />
+
+    <h1>Single switch</h1>
+    <div class="showcase vertical">
+      <Toggle
+        :checked="switch1"
+        :click="handleSwitch"
+        name="switch1"
+        label="Some switch"
+      />
+      <Toggle
+        :checked="switch2"
+        :click="handleSwitch"
+        name="switch2"
+        label="Some another switch"
+      />
+    </div>
   </card>
 </template>
 
 <script>
   import Card from '../../components/ui/card';
   import CheckboxGroup from '../../components/ui/checkbox-group';
+  import Toggle from '../../components/ui/toggle';
 
   const items = [
     {
@@ -28,17 +47,23 @@
 
   export default {
     components: {
+      Toggle,
       CheckboxGroup,
       Card
     },
     data() {
       return {
-        items
+        items,
+        switch1: false,
+        switch2: true,
       };
     },
     methods: {
       handleCheckboxChange(newItems) {
         this.items = newItems;
+      },
+      handleSwitch(e) {
+        this[e.target.name] = !this[e.target.name];
       }
     }
   };
