@@ -38,6 +38,13 @@
           outline
           danger
         />
+
+        <Button
+          :click="alert"
+          label="outline disable"
+          outline
+          disabled
+        />
       </div>
       <hr />
 
@@ -45,13 +52,14 @@
       <div class="showcase">
         <Button
           link
-          href="#"
+          href="/"
           label="simple"
         />
 
         <Button
           link
-          href="#"
+          away
+          href="http://example.com"
           label="danger"
           danger
         />
@@ -91,17 +99,7 @@
       <h1>With icons</h1>
       <div class="showcase">
         <Button
-          img="/images/events/calendar.svg"
-        />
-
-        <Button
           round
-          img="/images/events/calendar.svg"
-        />
-
-        <Button
-          round
-          badge
           img="/images/events/calendar.svg"
         />
 
@@ -113,33 +111,12 @@
 
         <Button
           round
-          normal
           badge
           img="/images/events/calendar.svg"
         />
 
         <Button
           round
-          danger
-          outline
-          img="/images/events/calendar.svg"
-        />
-
-        <Button
-          round
-          danger
-          filled
-          badge
-          img="/images/events/calendar.svg"
-        />
-
-        <Button
-          outline
-          img="/images/events/calendar.svg"
-        />
-
-        <Button
-          round
           outline
           img="/images/events/calendar.svg"
         />
@@ -147,14 +124,6 @@
         <Button
           round
           filled
-          img="/images/events/calendar.svg"
-        />
-
-        <Button
-          round
-          outline
-          normal
-          badge
           img="/images/events/calendar.svg"
         />
 
@@ -174,20 +143,6 @@
         <Button
           round
           outline
-          label="with label"
-          img="/images/events/calendar.svg"
-        />
-
-        <Button
-          outline
-          danger
-          label="with label"
-          img="/images/events/calendar.svg"
-        />
-
-        <Button
-          filled
-          danger
           label="with label"
           img="/images/events/calendar.svg"
         />
@@ -203,7 +158,7 @@
   export default {
     components: {
       Button,
-      Card
+      Card,
     },
     head: {
       title: 'UI kit',
