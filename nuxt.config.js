@@ -28,6 +28,7 @@ module.exports = {
     '~static/css/default.css',
     '~static/css/landing.css',
     '~static/css/events.css',
+    '~static/css/ui.css',
   ],
 
   plugins: [{
@@ -37,9 +38,10 @@ module.exports = {
 
   build: {
 
-    // Run ESLint on save
     extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
+
+        // Run ESLint on save
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -50,6 +52,17 @@ module.exports = {
           }
         });
       }
+
+      // Load svg files as components
+      config.module.rules
+        .filter(r => r.test.toString().includes("svg"))
+        .forEach(r => {
+          r.test = /\.(png|jpe?g|gif)$/;
+        });
+      config.module.rules.push({
+        test: /\.svg$/,
+        loader: "vue-svg-loader"
+      });
     }
   }
 };

@@ -1,24 +1,26 @@
 <template>
   <!--eslint-disable-next-line-->
   <component
-    :is="link ? 'a' : 'button'"
+    v-bind:is="link ? 'a' : 'button'"
     :class="['btn', filled && 'filled', outline && 'outline', danger && 'danger', round && 'round', normal && 'normal']"
-    v-if="link"
-    :href="href"
-    v-else
-    :disabled="disabled"
+    :href="link && href"
+    :disabled="!link && disabled"
+    v-ripple="ripple"
+    @click="handleClick"
   >
     <template v-if="badge">
       <div class="badge">
-        <img :src="img" class="mr" alt="" />
+        <!--eslint-disable-next-line-->
+        <component v-if="img" :is="svg" :class="[label && 'mr']" />
       </div>
     </template>
 
-    <template v-else>
-      <img :src="img" class="mr" alt="" />
+    <template v-else-if="img">
+      <!--eslint-disable-next-line-->
+      <component v-if="img" :is="svg" :class="[label && 'mr']" />
     </template>
 
-    <slot />
+    {{ label }}
   </component>
 </template>
 
@@ -26,6 +28,10 @@
   export default {
     name: 'Button',
     props: {
+      label: {
+        type: String,
+        default: ''
+      },
       link: {
         type: Boolean,
         default: false
@@ -36,8 +42,9 @@
       },
       img: {
         type: String,
-        default: null
+        default: ''
       },
+      click: Function,
       filled: {
         type: Boolean,
         default: false
@@ -66,6 +73,26 @@
         type: Boolean,
         default: false
       },
+    },
+    computed: {
+      svg() {
+        if(this.img) return () => import('../../static' + this.img);
+        return '';
+      },
+      ripple() {
+        if(this.filled) {
+          return 'rgba(255, 255, 255, .35)';
+        } else if(this.danger) {
+          return 'rgba(186, 3, 3, .25)';
+        } else {
+          return 'rgba(56, 120, 0, .25)';
+        }
+      }
+    },
+    methods: {
+      handleClick() {
+        if(!this.link && this.click) this.click();
+      }
     }
   };
 </script>

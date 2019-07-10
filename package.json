@@ -19,6 +19,7 @@
     "fecha": "^3.0.3",
     "nuxt": "^2.8.0",
     "vue-eslint-parser": "^6.0.4",
-    "vue-ripple-directive": "^2.0.1"
+    "vue-ripple-directive": "^2.0.1",
+    "vue-svg-loader": "^0.12.0"
   }
 }
