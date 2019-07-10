@@ -242,7 +242,6 @@
 
       goToEnd() {
         this.dateRange.start = new Date(this.today);
-        console.log(this.dateRange.start);
         this.dateRange.end = null;
         this.isFirstChoice = false;
       },
