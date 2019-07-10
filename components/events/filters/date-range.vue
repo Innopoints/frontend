@@ -35,7 +35,7 @@
         <div class="weekdays">
           <div v-for="item in shortDaysLocale" :key="item">{{ item }}</div>
         </div>
-        <div v-for="week in 6" :key="week" class="days">
+        <div v-for="week in maxWeeks" :key="week" class="days">
           <!-- Next <div> element may have one of the classes:
           day-in-range, day-selected and day-disabled (if not in this month) -->
           <div
@@ -76,7 +76,7 @@
         endDate: state => state.events.endDate,
       }),
 
-      calendarHeader: function() {
+      calendarHeader() {
         if(this.getDateString(this.dateRange.start)) {
           return this.getDateString(this.dateRange.start) + ' - ' +
             (this.getDateString(this.dateRange.end) ? this.getDateString(this.dateRange.end) : '...');
@@ -84,19 +84,22 @@
           return 'select date range';
         }
       },
-      monthsLocale: function () {
+      monthsLocale() {
         return ['January', 'February', 'March', 'April',
                 'May', 'June', 'July', 'August', 'September',
                 'October', 'November', 'December'];
       },
-      shortDaysLocale: function () {
+      shortDaysLocale() {
         return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
       },
-      startMonthDay: function () {
+      startMonthDay() {
         return new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, 0)).getDay();
       },
-      endMonthDate: function () {
+      endMonthDate() {
         return new Date(Date.UTC(this.activeYearEnd, this.startNextActiveMonth, 0)).getDate();
+      },
+      maxWeeks() {
+        return Math.ceil((this.startMonthDay + this.endMonthDate) / 7);
       },
       startNextActiveMonth: function () {
         return this.activeMonthStart >= 11 ? 0 : this.activeMonthStart + 1;
