@@ -177,18 +177,16 @@
 
         return arr;
       },
-      isDateSelected(week, day, startMonthDay, endMonthDate) {
+      isDateSelected(week, day, startMonthDay) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
-        if (result < 1 || result > endMonthDate) return false;
         let currDate = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result));
 
         if(this.dateRange.start && this.dateRange.start.getTime() === currDate.getTime()) return 'start';
         else if (this.dateRange.end && this.dateRange.end.getTime() === currDate.getTime()) return 'end';
         else return '';
       },
-      isDateInRange(week, day, startMonthDay, endMonthDate) {
+      isDateInRange(week, day, startMonthDay) {
         const result = this.getDayIndexInMonth(week, day, startMonthDay);
-        if (result < 1 || result > endMonthDate) return false;
         let currDate = new Date(Date.UTC(this.activeYearStart, this.activeMonthStart, result));
 
         return (this.dateRange.start && this.dateRange.start.getTime() <= currDate.getTime()) &&
