@@ -18,6 +18,7 @@
           <span @click="goToStart" :class="isFirstChoice && 'active'">start date</span>
           <span @click="goToEnd" :class="!isFirstChoice && 'active'">end date</span>
         </div>
+        <div @click="clear" style="color:red; font-weight: 700;">clear</div>
         <img
           @click="toggleDropdown"
           src="/images/events/x.svg"
@@ -248,6 +249,10 @@
       goToStart() {
         this.isFirstChoice = true;
       },
+      clear() {
+        this.isFirstChoice = true;
+        this.dateRange = [null, null];
+      }
     }
   };
 </script>
