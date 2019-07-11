@@ -27,15 +27,42 @@
         label="Text"
       />
     </div>
+    <hr />
+
+    <div class="showcase">
+      <FormField
+        title="name"
+        subtitle="This is a subtitle for some title"
+      >
+        <TextField
+          placeholder="Some placeholder"
+        />
+      </FormField>
+    </div>
+    <div class="showcase">
+      <FormField
+        required
+        title="name"
+        subtitle="This is a subtitle for some title"
+      >
+        <TextField
+          id="input2"
+          outline
+          label="Text"
+        />
+      </FormField>
+    </div>
   </Card>
 </template>
 
 <script>
   import Card from '../../components/ui/card';
   import TextField from '../../components/ui/text-field';
+  import FormField from '../../components/ui/form-field';
 
   export default {
     components: {
+      FormField,
       TextField,
       Card
 
