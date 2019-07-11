@@ -1,14 +1,18 @@
 <template>
-  <div :class="['text-field', item ? right ? 'with-item right' : 'with-item left' : '']">
+  <div :class="classes">
     <input
       :type="type"
       :placeholder="placeholder"
       :name="name"
       :value="value"
+      :id="id"
+      :pattern="pattern"
       @focus="handleFocus"
       @blur="handleBlur"
       @input="handleInput"
     />
+
+    <label v-if="outline" :for="id" class="label">{{ label }}</label>
 
     <template v-if="item">
       <span
@@ -25,6 +29,8 @@
         alt=""
       />
     </template>
+
+    <span v-if="pattern" class="error"> {{ error }}</span>
   </div>
 </template>
 
@@ -40,8 +46,7 @@
       // Wrapper props
       item: {
         type: String,
-        required: false,
-        default: 'text'
+        default: ''
       },
       right: {
         type: Boolean,
@@ -49,6 +54,14 @@
       },
       src: String,
       text: String,
+
+      // Outline component requires label and id props
+      outline: {
+        type: Boolean,
+        default: false
+      },
+      label: String,
+      id: String,
 
       // Input props
       type: {
@@ -60,14 +73,41 @@
         default: false
       },
       value: [String, Number],
-      id: String,
       placeholder: String,
+      pattern: String,
+      error: String,
       name: String,
       min: Number,
       max: Number,
-      handleFocus: Function,
-      handleInput: Function,
-      handleBlur: Function
+      focus: Function,
+      input: Function,
+      blur: Function
+    },
+    computed: {
+      classes() {
+        let arr = ['text-field'];
+        if(this.item) {
+          if(this.right) {
+            arr.push('with-item', 'right');
+          } else {
+            arr.push('with-item', 'left');
+          }
+        }
+        if(this.outline) arr.push('outline');
+
+        return arr;
+      }
+    },
+    methods: {
+      handleFocus() {
+        if(this.focus) this.focus();
+      },
+      handleBlur() {
+        if(this.blur) this.blur();
+      },
+      handleInput() {
+        if(this.input) this.input();
+      }
     }
   };
 </script>

@@ -37,6 +37,11 @@
   flex-direction: column;
 }
 
+.card.card .showcase > div {
+  margin-bottom: 1em;
+  margin-right: 1em;
+}
+
 .card.checkboxes .showcase > div label {
   margin-bottom: .5em;
 }

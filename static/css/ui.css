@@ -307,20 +307,19 @@ button.btn {
 }
 
 .btn > svg {
-  stroke: #387800;
-  stroke-width: 1.75px;
+  fill: #387800;
 }
 
 .btn.danger > svg {
-  stroke: #ba0303;
+  fill: #ba0303;
 }
 
 .btn.normal > svg {
-  stroke: #000;
+  fill: #000;
 }
 
 .btn.filled > svg {
-  stroke: #fff;
+  fill: #fff;
 }
 
 /* Text Fields -------------------------------------- */
@@ -342,11 +341,6 @@ input {
   height: 100%;
   width: 100%;
   height: 2.8em;
-}
-
-.text-field {
-  display: flex;
-  flex-direction: column;
 }
 
 .text-field input:hover {
@@ -374,7 +368,7 @@ input[type="text"]:focus, input[type="number"]:focus {
 }
 
 .text-field.with-item.left input {
-  padding-left: 3em;
+  padding-left: 3rem;
 }
 
 .text-field.with-item input[type="number"] {
@@ -405,12 +399,100 @@ input[type="text"]:focus, input[type="number"]:focus {
   font-weight: 500;
 }
 
-.text-field.with-item.left > input:focus + .item {
+.text-field.with-item.left > input:focus + .item,
+.text-field.outline.with-item.left > input:focus + label + .item {
   color: #387800;
 }
 
 .text-field.with-item.right > input:focus + .item svg {
+  fill: #387800;
+}
+
+.text-field.outline {
+  position: relative;
+}
+
+.text-field.outline label {
+  background-color: #fff;
+  color: rgba(0, 0, 0, .42);
+  padding: 0 4px;
+  position: absolute;
+  top: 0;
+  left: 1.4rem;
+  transform: translate(-4px, -55%);
+  border-radius: 5px;
+}
+
+.text-field.outline.with-item.left input {
+  padding-left: 2.2rem;
+}
+
+.text-field.outline.with-item.left label {
+  left: 2.2rem;
+}
+
+.text-field.outline.with-item.left svg {
+  stroke: rgba(0, 0, 0, .42);
+}
+
+.text-field.outline input {
+  border-radius: 25px;
+  border: 1px solid rgba(0, 0, 0, .42);
+  background-color: transparent;
+  padding: 0 1.4rem;
+}
+
+.text-field.outline input:hover {
+  border-color: rgba(0, 0, 0, .7);
+}
+
+.text-field.outline input:hover + label {
+  color: rgba(0, 0, 0, .7);
+}
+
+.text-field.outline input:focus {
+  border-color: #387800;
+}
+
+.text-field.outline input:focus + label {
+  color: #387800;
+}
+
+.text-field.outline input:focus + label + .item svg {
   stroke: #387800;
+}
+
+:invalid {
+  box-shadow: none;
+}
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+.text-field.outline input:invalid {
+  border-color: rgba(186, 3, 3, .7);
+}
+
+.text-field.outline input:invalid + label {
+  color: rgba(186, 3, 3, .7);
+}
+
+.text-field.outline input:invalid + label + .item svg {
+  stroke: rgba(186, 3, 3, .7);
+}
+
+.text-field > .error {
+  display: none;
+  font-size: .8rem;
+  color: rgba(186, 3, 3, .7);
+  font-weight: 500;
+  position: absolute;
+  bottom: -1.5rem;
+}
+
+.text-field.outline > input:invalid + label + .item + .error {
+  display: inline;
 }
 
 .form-field {
@@ -433,14 +515,23 @@ input[type="text"]:focus, input[type="number"]:focus {
   color: #387800;
 }
 
-.text-field .required {
-  margin: 5px 0 0 10px;
+.text-field + .required {
+  margin: 5px 0 0 0;
   font-size: .8rem;
 }
 
 .form-field .desc {
   font-weight: 300;
   font-size: .9rem;
+}
+
+.form-field .text-field-wrapper .text-field {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.form-field .text-field-wrapper .text-field:only-child {
+  margin-bottom: 20px;
 }
 
 /* Radio Buttons -------------------------------------- */
@@ -585,6 +676,10 @@ label:hover .checkbox > input:focus:checked + .icon::after {
   cursor: pointer;
   user-select: none;
   -webkit-touch-callout: none;
+}
+
+.with-labels .checkbox {
+  margin-right: 12px;
 }
 
 /* Switches -------------------------------------- */
@@ -834,11 +929,11 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dialog svg {
-  stroke: #387800;
+  fill: #387800;
 }
 
 .dialog.danger svg {
-  stroke: #ba0303;
+  fill: #ba0303;
 }
 
 .dialog.notice {
@@ -940,7 +1035,7 @@ input[type="checkbox"]:checked + .chip::before {
 
 .carousel .prev-slide svg,
 .carousel .next-slide svg {
-  stroke: #fff;
+  fill: #fff;
 }
 
 /* Labeled Elements -------------------------------------- */
@@ -970,7 +1065,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .labeled > .icon svg {
-  stroke: #387800;
+  fill: #387800;
 }
 
 /* Dropdowns -------------------------------------- */
@@ -1058,7 +1153,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .timeline .more svg {
-  stroke: #387800;
+  fill: #387800;
 }
 
 .timeline .more::-moz-focus-inner {
@@ -1105,7 +1200,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .timeline .entry > .icon svg {
-  stroke: #387800;
+  fill: #387800;
 }
 
 .timeline .more > .icon {
@@ -1126,7 +1221,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .timeline .entry.important > .icon svg {
-  stroke: #f2994a;
+  fill: #f2994a;
 }
 
 .timeline .entry > .icon > img,
