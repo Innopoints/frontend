@@ -3,6 +3,7 @@
     <ButtonsShowcase />
     <CheckboxesShowcase />
     <InputsShowcase />
+    <TimelineShowcase />
   </div>
 </template>
 
@@ -10,15 +11,17 @@
   import ButtonsShowcase from '../containers/ui/buttons';
   import CheckboxesShowcase from '../containers/ui/checkboxes';
   import InputsShowcase from '../containers/ui/inputs';
+  import TimelineShowcase from '../containers/ui/timelines';
 
   export default {
     components: {
       ButtonsShowcase,
       CheckboxesShowcase,
-      InputsShowcase
+      InputsShowcase,
+      TimelineShowcase
     },
     head: {
-      title: 'UI kit',
+      title: 'UI Kit',
       meta: [
         { hid: 'description', name: 'description', content: `UI kit for innopoints project` }
       ]
