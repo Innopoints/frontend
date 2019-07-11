@@ -1,5 +1,5 @@
 <template>
-  <card>
+  <Card>
     <h1>Buttons</h1>
     <div class="showcase">
       <Button
@@ -146,7 +146,7 @@
         img="/images/events/calendar.svg"
       />
     </div>
-  </card>
+  </Card>
 </template>
 
 <script>

@@ -1,8 +1,8 @@
 <template>
-  <card class="checkboxes">
+  <Card class="checkboxes">
     <h1>Checkboxes group</h1>
     <div class="showcase">
-      <checkbox-group :items="items" :click="handleCheckboxChange" />
+      <CheckboxGroup :items="items" :click="handleCheckboxChange" />
     </div>
 
     <hr />
@@ -22,7 +22,7 @@
         label="Some another switch"
       />
     </div>
-  </card>
+  </Card>
 </template>
 
 <script>
