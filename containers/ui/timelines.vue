@@ -6,10 +6,22 @@
 
     <div class="showcase vertical">
       <Timeline
-        :items="items"
         :handle-load="handleLoad"
         load
-      />
+      >
+        <TimelineEntry>
+          Here are we
+        </TimelineEntry>
+        <TimelineEntry important>
+          Here are we again
+        </TimelineEntry>
+        <TimelineEntry icon="/images/events/x.svg">
+          And again
+        </TimelineEntry>
+        <TimelineEntry important icon="/images/events/plus-circle.svg">
+          Till the end
+        </TimelineEntry>
+      </Timeline>
     </div>
   </Card>
 </template>
@@ -17,36 +29,14 @@
 <script>
   import Card from '../../components/ui/card';
   import Timeline from '../../components/ui/timeline';
+  import TimelineEntry from '../../components/ui/timeline-entry';
 
-  const items = [
-    {},
-    {
-      content: 'Some content here. This is just a long story'
-    },
-    {
-      important: true,
-      content: 'Important! Listen to my story about the innopoints project. Long-long time ago...'
-    },
-    {
-      content: 'Simple new icon',
-      icon: '/images/events/x.svg'
-    },
-    {
-      important: true,
-      content: 'Full timeline object',
-      icon: '/images/events/plus-circle.svg'
-    }
-  ];
 
   export default {
     components: {
       Timeline,
+      TimelineEntry,
       Card
-    },
-    data() {
-      return {
-        items
-      };
     },
     methods: {
       handleLoad() {
