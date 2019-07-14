@@ -5,6 +5,7 @@
     <InputsShowcase />
     <ChipsShowcase />
     <TimelineShowcase />
+    <CarouselsShowcase />
   </div>
 </template>
 
@@ -14,6 +15,7 @@
   import InputsShowcase from '../containers/ui/inputs';
   import TimelineShowcase from '../containers/ui/timelines';
   import ChipsShowcase from '../containers/ui/chips';
+  import CarouselsShowcase from '../containers/ui/Carousels';
 
   export default {
     components: {
@@ -22,6 +24,7 @@
       InputsShowcase,
       TimelineShowcase,
       ChipsShowcase,
+      CarouselsShowcase,
     },
     head: {
       title: 'UI Kit',
