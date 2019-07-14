@@ -3,6 +3,7 @@
     <ButtonsShowcase />
     <CheckboxesShowcase />
     <InputsShowcase />
+    <ChipsShowcase />
     <TimelineShowcase />
   </div>
 </template>
@@ -12,13 +13,15 @@
   import CheckboxesShowcase from '../containers/ui/checkboxes';
   import InputsShowcase from '../containers/ui/inputs';
   import TimelineShowcase from '../containers/ui/timelines';
+  import ChipsShowcase from '../containers/ui/chips';
 
   export default {
     components: {
       ButtonsShowcase,
       CheckboxesShowcase,
       InputsShowcase,
-      TimelineShowcase
+      TimelineShowcase,
+      ChipsShowcase,
     },
     head: {
       title: 'UI Kit',
