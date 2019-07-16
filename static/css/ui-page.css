@@ -7,6 +7,11 @@
   align-items: center;
 }
 
+.ui-navigation {
+  display: flex;
+  justify-content: space-around;
+}
+
 .card {
   max-width: 90%;
   margin-bottom: 1em;
