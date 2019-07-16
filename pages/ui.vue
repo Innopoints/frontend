@@ -8,6 +8,7 @@
       <Button link href="#carousels" label="Carousels" />
       <Button link href="#labeled" label="Labeled" />
       <Button link href="#dropdowns" label="Dropdowns" />
+      <Button link href="#typography" label="Typography" />
     </nav>
 
     <ButtonsShowcase id="buttons" />
@@ -18,6 +19,7 @@
     <CarouselsShowcase id="carousels" />
     <LabeledShowcase id="labeled" />
     <DropdownsShowcase id="dropdowns" />
+    <TypographyShowcase id="typography" />
   </div>
 </template>
 
@@ -30,6 +32,7 @@
   import CarouselsShowcase from '../containers/ui/carousels';
   import LabeledShowcase from '../containers/ui/labeled';
   import DropdownsShowcase from '../containers/ui/dropdowns';
+  import TypographyShowcase from '../containers/ui/typography';
   import Button from '../components/ui/button';
 
   export default {
@@ -42,7 +45,8 @@
       ChipsShowcase,
       CarouselsShowcase,
       LabeledShowcase,
-      DropdownsShowcase
+      DropdownsShowcase,
+      TypographyShowcase
     },
     head: {
       title: 'UI Kit',
