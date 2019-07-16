@@ -87,7 +87,7 @@
         return '';
       },
       component() {
-        return this.link ? this.away ? 'a' : 'nuxt-link' : 'button';
+        return (this.link && this.href) ? (this.away || this.href.match(/#.+/i)) ? 'a' : 'nuxt-link' : 'button';
       },
       ripple() {
         if(this.filled) {
@@ -99,7 +99,9 @@
         }
       },
       linkTo() {
-        if(this.link) return this.href;
+        if(this.link && this.href) {
+          return this.href;
+        }
         return null;
       },
       target() {
