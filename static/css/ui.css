@@ -105,6 +105,10 @@ p {
   font-size: .8rem;
 }
 
+.label.small {
+  font-size: .7rem;
+}
+
 a {
   color: #387800;
 }
@@ -243,19 +247,19 @@ button.btn {
 }
 
 .btn:hover:not(:disabled), .btn.outline:hover:not(:disabled) {
-  background: rgba(56, 120, 0, .05);
+  background-color: rgba(56, 120, 0, .05);
 }
 
 .btn.normal:hover:not(:disabled), .btn.outline.normal:hover:not(:disabled) {
-  background: rgba(0, 0, 0, .05);
+  background-color: rgba(0, 0, 0, .05);
 }
 
 .btn.outline:focus:not(:disabled), .btn:focus:not(:disabled) {
-  background: rgba(56, 120, 0, .12);
+  background-color: rgba(56, 120, 0, .12);
 }
 
 .btn.outline.normal:focus:not(:disabled), .btn.normal:focus:not(:disabled) {
-  background: rgba(0, 0, 0, .12);
+  background-color: rgba(0, 0, 0, .12);
 }
 
 .btn:disabled {
@@ -299,11 +303,11 @@ button.btn {
 }
 
 .btn.danger:hover:not(:disabled), .btn.outline.danger:hover:not(:disabled) {
-  background: rgba(186, 3, 3, .05);
+  background-color: rgba(186, 3, 3, .05);
 }
 
 .btn.outline.danger:focus:not(:disabled), .btn.danger:focus:not(:disabled) {
-  background: rgba(186, 3, 3, .12);
+  background-color: rgba(186, 3, 3, .12);
 }
 
 .btn > svg {
@@ -400,7 +404,7 @@ input[type="text"]:focus, input[type="number"]:focus {
 }
 
 .text-field.with-item.left > input:focus + .item,
-.text-field.outline.with-item.left > input:focus + label + .item {
+.text-field.outline.with-item.left > input:focus ~ .item {
   color: #387800;
 }
 
@@ -458,7 +462,7 @@ input[type="text"]:focus, input[type="number"]:focus {
   color: #387800;
 }
 
-.text-field.outline input:focus + label + .item svg {
+.text-field.outline input:focus ~ .item svg {
   stroke: #387800;
 }
 
@@ -478,7 +482,7 @@ input[type="text"]:focus, input[type="number"]:focus {
   color: rgba(186, 3, 3, .7);
 }
 
-.text-field.outline input:invalid + label + .item svg {
+.text-field.outline input:invalid ~ .item svg {
   stroke: rgba(186, 3, 3, .7);
 }
 
@@ -491,7 +495,7 @@ input[type="text"]:focus, input[type="number"]:focus {
   bottom: -1.5rem;
 }
 
-.text-field.outline > input:invalid + label + .item + .error {
+.text-field.outline > input:invalid ~ .error {
   display: inline;
 }
 
@@ -630,8 +634,8 @@ input[type="text"]:focus, input[type="number"]:focus {
 }
 
 .checkbox > input:checked + .icon::before {
-  width: 5px;
-  height: 9px;
+  width: 9px;
+  height: 6px;
   border: 0 solid #fff;
   border-bottom-width: 2px;
   border-right-width: 2px;
@@ -639,7 +643,8 @@ input[type="text"]:focus, input[type="number"]:focus {
   left: 50%;
   position: absolute;
   top: 45%;
-  transform: translate(-50%, -50%) rotate(42deg) skew(8deg);
+  transform: translate(-50%, -50%) rotate(-57deg) skew(-11deg);
+  border-bottom-left-radius: 2px;
 }
 
 .checkbox > .icon::after {
@@ -693,7 +698,11 @@ label:hover .checkbox > input:focus:checked + .icon::after {
   cursor: pointer;
 }
 
-input.switch-ctl[type="checkbox"] {
+.switch.two-state {
+  border-color: #387800;
+}
+
+input.switch-ctl {
   clip: rect(0, 0, 0, 0);
   width: 1px;
   height: 1px;
@@ -714,11 +723,15 @@ input.switch-ctl[type="checkbox"] {
   transition: transform 100ms;
 }
 
-input:checked + .switch {
+.switch.two-state > .knob {
+  background-color: #387800;
+}
+
+input:checked ~ .switch {
   border-color: #387800;
 }
 
-input:checked + .switch > .knob {
+input:checked ~ .switch > .knob {
   background-color: #387800;
   transform: translateY(-50%) translateX(100%);
 }
@@ -739,18 +752,43 @@ label:hover .switch::before {
   background-color: rgba(0, 0, 0, .05);
 }
 
-input:checked + .switch:hover::before,
-label:hover input:checked + .switch::before {
+input:checked ~ .switch:hover::before,
+label:hover input:checked ~ .switch::before,
+.switch.two-state:hover::before,
+label:hover .switch.two-state::before {
   background-color: rgba(56, 120, 0, .05);
 }
 
-input:focus + .switch::before {
+input:focus ~ .switch::before {
   background-color: rgba(0, 0, 0, .1);
 }
 
-input:focus:checked + .switch::before,
-label:hover input:focus:checked + .switch::before {
+input:focus:checked ~ .switch::before,
+label:hover input:focus:checked ~ .switch::before,
+input:focus ~ .switch.two-state::before,
+label:hover input:focus ~ .switch.two-state::before {
   background-color: rgba(56, 120, 0, .1);
+}
+
+.switch-wrapper .state {
+  color: #999;
+  font-weight: 500;
+}
+
+.switch-wrapper .state.first {
+  margin-right: .8em;
+}
+
+.switch-wrapper .state.second {
+  margin-left: .8em;
+}
+
+.switch-wrapper input:not(:checked) ~ .first {
+  color: #387800;
+}
+
+.switch-wrapper input:checked ~ .second {
+  color: #387800;
 }
 
 /* Cards -------------------------------------- */
@@ -760,7 +798,7 @@ label:hover input:focus:checked + .switch::before {
     0 3px 1px -2px rgba(0, 0, 0, .2),
     0 2px 2px 0    rgba(0, 0, 0, .14),
     0 1px 5px 0    rgba(0, 0, 0, .12);
-  background: #fff;
+  background-color: #fff;
   border-radius: 20px;
   padding: 1.5em;
 }
@@ -1010,19 +1048,19 @@ input[type="checkbox"]:checked + .chip::before {
 .carousel .next-slide {
   position: absolute;
   top: 50%;
-  background: rgba(0, 0, 0, .25);
+  background-color: rgba(0, 0, 0, .25);
   transform: translateY(-50%);
   padding: .4em;
 }
 
 .carousel .prev-slide:hover,
 .carousel .next-slide:hover {
-  background: rgba(0, 0, 0, .32);
+  background-color: rgba(0, 0, 0, .32);
 }
 
 .carousel .prev-slide:focus,
 .carousel .next-slide:focus {
-  background: rgba(0, 0, 0, .4);
+  background-color: rgba(0, 0, 0, .4);
 }
 
 .carousel .prev-slide {
@@ -1086,7 +1124,7 @@ input[type="checkbox"]:checked + .chip::before {
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   position: absolute;
-  background: white;
+  background-color: white;
   box-shadow:
     0 3px 1px -2px rgba(0, 0, 0, .2),
     0 2px 2px 0    rgba(0, 0, 0, .14),
@@ -1185,7 +1223,7 @@ input[type="checkbox"]:checked + .chip::before {
   top: 50px;
   left: 24px;
   width: 2px;
-  background: #ddd;
+  background-color: #ddd;
 }
 
 .timeline .entry > .icon {

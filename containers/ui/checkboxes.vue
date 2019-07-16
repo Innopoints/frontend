@@ -7,19 +7,27 @@
 
     <hr />
 
-    <h1>Single switch</h1>
+    <h1>Toggles</h1>
     <div class="showcase vertical">
       <Toggle
         :checked="switch1"
         :click="handleSwitch"
         name="switch1"
-        label="Some switch"
+        label="Some toggle"
       />
       <Toggle
         :checked="switch2"
         :click="handleSwitch"
         name="switch2"
-        label="Some another switch"
+        label="Some another toggle"
+      />
+      <Toggle
+        :checked="switch3"
+        :click="handleSwitch"
+        name="switch3"
+        two-state
+        first="state one"
+        second="state two"
       />
     </div>
   </Card>
@@ -56,6 +64,7 @@
         items,
         switch1: false,
         switch2: true,
+        switch3: false,
       };
     },
     methods: {

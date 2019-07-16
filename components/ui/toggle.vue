@@ -1,18 +1,21 @@
 <template>
-  <label class="clickable">
-    {{ label }}
+  <label class="clickable switch-wrapper">
+    {{ !twoState ? label : '' }}
 
     <input
       :checked="checked"
       :name="name"
       @change="click"
+      :class="twoState && 'first'"
       class="switch-ctl"
       type="checkbox"
     />
 
-    <div class="switch">
+    <span v-if="twoState" class="state first">{{ first }}</span>
+    <div :class="twoState && 'two-state'" class="switch">
       <div class="knob" />
     </div>
+    <span v-if="twoState" class="state second">{{ second }}</span>
   </label>
 </template>
 
@@ -36,6 +39,12 @@
         type: String,
         default: ''
       },
+      twoState: {
+        type: Boolean,
+        default: false
+      },
+      first: String,
+      second: String
     }
   };
 </script>
