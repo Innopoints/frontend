@@ -21,8 +21,9 @@ badge | `false` | Red circle with the svg image - notification
 
 ### Examples
 
-Outline button with text, icon and click-handler
-```
+**Outline button with text, icon and click-handler**
+
+```html
 <Button
   :click="handle"
   round
@@ -40,8 +41,9 @@ methods: {
 }
 ```
 
-Danger button-link with external href:
-```
+**Danger button-link with external href**
+
+```html
 <Button
   link
   away

@@ -9,6 +9,7 @@
     :disabled="disable"
     v-ripple="ripple"
     @click="handleClick"
+    type="button"
   >
     <template v-if="badge">
       <div class="badge">
