@@ -1,36 +1,50 @@
 <template>
   <div :class="classes">
-    <input
-      :type="type"
-      :placeholder="placeholder"
-      :name="name"
-      :value="value"
-      :id="id"
-      :pattern="pattern"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      @input="handleInput"
-    />
-
-    <label v-if="outline" :for="id" class="label">{{ label }}</label>
-
-    <template v-if="item">
-      <span
-        v-if="item === 'text'"
-        class="item"
-      >
-        {{ text }}
-      </span>
-
-      <img
-        v-else-if="item === 'img'"
-        :src="src"
-        class="item"
-        alt=""
+    <template v-if="multiline">
+      <textarea
+        :id="id"
+        :placeholder="placeholder"
+        :name="name"
+        :value="value"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @input="handleInput"
+        cols="5"
       />
     </template>
+    <template v-else>
+      <input
+        :type="type"
+        :placeholder="placeholder"
+        :name="name"
+        :value="value"
+        :id="id"
+        :pattern="pattern"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @input="handleInput"
+      />
 
-    <span v-if="pattern" class="error"> {{ error }}</span>
+      <label v-if="outline" :for="id" class="label">{{ label }}</label>
+
+      <template v-if="item">
+        <span
+          v-if="item === 'text'"
+          class="item"
+        >
+          {{ text }}
+        </span>
+
+        <img
+          v-else-if="item === 'img'"
+          :src="src"
+          class="item"
+          alt=""
+        />
+      </template>
+
+      <span v-if="pattern" class="error"> {{ error }}</span>
+    </template>
   </div>
 </template>
 
@@ -69,6 +83,10 @@
         default: 'text'
       },
       disabled: {
+        type: Boolean,
+        default: false
+      },
+      multiline: {
         type: Boolean,
         default: false
       },

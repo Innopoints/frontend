@@ -26,6 +26,12 @@
         outline
         label="Text"
       />
+
+      <TextField
+        id="input2"
+        multiline
+        placeholder="Let's talk about your problems"
+      />
     </div>
     <hr />
 

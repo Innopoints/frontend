@@ -1,25 +1,3 @@
-/* Normalization -------------------------------------- */
-
-legend {
-  padding: 0;
-  display: table;
-}
-
-fieldset {
-  border: 0;
-  padding: .01em 0 0 0;
-  margin: 0;
-  min-width: 0;
-}
-
-body:not(:-moz-handler-blocked) fieldset {
-  display: table-cell;
-}
-
-* {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 /* Utility -------------------------------------- */
 
 .shadow-1 {
@@ -36,8 +14,38 @@ body:not(:-moz-handler-blocked) fieldset {
     0 1px 10px 0   rgba(0, 0, 0, .12);
 }
 
+.ml {
+  margin-left: .4em;
+}
+
 .mr {
   margin-right: .4em;
+}
+
+.mt {
+  margin-top: .4em;
+}
+
+.mb {
+  margin-bottom: .4em;
+}
+
+.ml-2 {
+  margin-left: 1em;
+}
+
+.mr-2 {
+  margin-right: 1em;
+}
+
+.hide-tb {
+  display: none;
+}
+
+@media only screen and (min-width: 640px) {
+  .hide-tb {
+    display: block;
+  }
 }
 
 .badge {
@@ -63,7 +71,7 @@ body:not(:-moz-handler-blocked) fieldset {
 
 .headline {
   color: #387800;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: .2em;
 }
@@ -71,7 +79,7 @@ body:not(:-moz-handler-blocked) fieldset {
 .subhead {
   font-weight: 300;
   font-size: .95rem;
-  line-height: 1.15rem;
+  line-height: 1.2rem;
 }
 
 h1 {
@@ -328,30 +336,39 @@ button.btn {
 
 /* Text Fields -------------------------------------- */
 
-input {
+input, textarea {
   outline: none;
 }
 
-.text-field input {
+.text-field input,
+.text-field textarea {
   padding: 0 10px 1px;
   font-family: "Ubuntu";
   font-size: 1rem;
+  font-weight: 300;
   box-sizing: border-box;
   border: 0 solid rgba(0, 0, 0, .42);
   border-bottom-width: 1px;
   background-color: #f5f5f5;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  height: 100%;
   width: 100%;
   height: 2.8em;
 }
 
-.text-field input:hover {
+.text-field textarea {
+  padding: 12px 10px 1px;
+  height: 6em;
+}
+
+.text-field input:hover,
+.text-field textarea:hover {
   background-color: #ededed;
 }
 
-input[type="text"]:focus, input[type="number"]:focus {
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
   background-color: #e1e1e1;
   border-bottom-width: 2px;
   border-color: #3d8200;
@@ -366,12 +383,18 @@ input[type="text"]:focus, input[type="number"]:focus {
   flex-direction: row-reverse;
 }
 
-.text-field.with-item.right input {
+.text-field.with-item.right input,
+.text-field.with-item.right textarea {
   padding-right: 30px;
   text-align: right;
 }
 
-.text-field.with-item.left input {
+.text-field.right-align input {
+  text-align: right;
+}
+
+.text-field.with-item.left input,
+.text-field.with-item.left textarea {
   padding-left: 3rem;
 }
 
@@ -519,6 +542,10 @@ input[type="text"]:focus, input[type="number"]:focus {
   color: #387800;
 }
 
+.form-field .text-field + .required {
+  padding-left: 10px;
+}
+
 .text-field + .required {
   margin: 5px 0 0 0;
   font-size: .8rem;
@@ -638,7 +665,7 @@ input[type="text"]:focus, input[type="number"]:focus {
   height: 6px;
   border: 0 solid #fff;
   border-bottom-width: 2px;
-  border-right-width: 2px;
+  border-left-width: 2px;
   content: "";
   left: 50%;
   position: absolute;
