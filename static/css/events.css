@@ -1,2 +1,4 @@
-@import './main.css';
 @import './events/events.css';
+@import './events/filters.css';
+@import './events/ordering.css';
+@import './events/pagination.css';

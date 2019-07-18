@@ -14,10 +14,17 @@
 
 .events .cards {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-wrap: wrap;
   padding: .7rem;
 }
+
+@supports (color-adjust: exact) {
+  .events .cards {
+    justify-content: space-evenly;
+  }
+}
+
 
 .events .card {
   align-items: stretch;

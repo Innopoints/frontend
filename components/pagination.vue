@@ -136,5 +136,3 @@
     }
   };
 </script>
-
-<style src="../static/css/default/pagination.css" scoped></style>

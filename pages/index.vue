@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="material">
     <LandingHeader />
     <LandingTagline />
 
-    <Feature />
+    <!--<Feature />
 
     <Process />
 
-    <Store />
+    <Store />-->
 
     <LandingContacts />
   </div>

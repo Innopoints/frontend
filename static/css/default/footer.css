@@ -1,6 +1,42 @@
+body {
+  background-color: #5c5c5c;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.space-between.center {
+  align-items: center;
+}
+
+.container {
+  max-width: 1648px;
+  margin: auto;
+}
+
+.material {
+  background-color: #fff;
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, .2),
+    0 4px 5px 0    rgba(0, 0, 0, .14),
+    0 1px 10px 0   rgba(0, 0, 0, .12);
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 20px),
+      calc(100% - 20px) 100%,
+      0 100%
+    );
+}
+
 footer {
-  background: #5C5C5C;
-  padding: 0 1rem 0;
+  background-color: #5c5c5c;
+  padding: 0 1em 0;
+  color: #fff;
 }
 
 footer > .to-top {
@@ -12,55 +48,52 @@ footer > .to-top {
   width: 100%;
 }
 
-
-footer > .to-top > .btn {
-  padding: .7rem 1.75rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-footer > .to-top > .btn > img {
-  margin-right: .5rem;
-  width: 25px;
+footer > .container {
+  flex-direction: column;
 }
 
 footer .left {
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin-bottom: 2em;
 }
 
 footer .logo {
-  width: 4rem;
-}
-
-footer > .container {
-  flex-direction: column;
+  width: 4em;
+  height: 4em;
 }
 
 footer .title {
   font-weight: 500;
   color: #fff;
-  font-size: 1.7em;
-  margin-left: .5rem;
+  font-size: 1.7rem;
+  margin: 0 .5em;
 }
 
 footer .title-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
 footer .socials {
   padding: 0 10%;
-  margin-top: 1rem;
+  margin-top: .8em;
+}
+
+footer a {
+  color: #fff;
+}
+
+footer a:visited {
+  color: #effad7;
 }
 
 footer .credits {
   font-weight: 300;
-  font-size: 1.1em;
+  font-size: 1rem;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 2em;
 }
 
 footer .right {
@@ -72,59 +105,56 @@ footer .right > img {
   display: none;
 }
 
+footer .right > nav {
+  width: 90%;
+}
+
 footer .search {
-  min-width: 13rem;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
   color: #585858;
   font-weight: 300;
-  font-size: 1.1em;
-  flex-direction: row;
-  padding: .7rem 1.3rem;
-  margin-top: 1rem;
+  padding: .7em 1.3em;
+  margin-top: 1em;
 }
 
 footer ul {
-  list-style: none;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-weight: 300;
-  padding-left: 1rem;
+  padding-left: 1em;
+  margin: 1em 0;
 }
 
 footer ul li {
-  line-height: 2.5rem;
+  line-height: 2rem;
 }
 
-footer ul > li:before {
+footer ul > li::before {
   content: "‣";
-  padding-right: 5px;
+  padding-right: .5em;
   color: #fff;
 }
 
 @media only screen and (min-width: 385px) {
   footer {
-    padding: 0 3rem 0;
+    padding: 0 3em 0;
   }
 
-  footer .search {
-    min-width: 16rem;
-    font-size: 1.3em;
-  }
-}
-
-@media only screen and (min-width: 425px) {
-  footer .title {
-    font-size: 2em;
+  footer .right > nav {
+    width: 95%;
   }
 }
 
 @media only screen and (min-width: 640px) {
   footer ul {
-    font-size: 1.3em;
+    font-size: 1.2rem;
   }
-}
 
-@media only screen and (max-width: 749px) {
-  .hide-phone {
-    display: none;
+  footer .credits {
+    font-size: 1.1rem;
   }
 }
 
@@ -142,7 +172,7 @@ footer ul > li:before {
   }
 
   footer .socials {
-    padding: 0 1rem;
+    padding: 0;
     margin-top: 0;
   }
 
@@ -155,46 +185,46 @@ footer ul > li:before {
     justify-content: flex-start;
   }
 
-  footer .right > img {
+  footer .right > .pointer {
     display: block;
     margin-right: .5rem;
     max-width: 35%;
   }
+
+  footer .search {
+    font-size: 1.1rem;
+  }
 }
 
-@media only screen and (min-width: 850px) {
-  footer .credits {
-    font-size: 1.3em;
+@media only screen and (min-width: 900px) {
+  footer .search {
+    width: 16em;
+  }
+
+  footer .right > .pointer {
+    width: 9em;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  footer {
-    padding: 0 4rem 0;
-  }
-
-  footer .logo {
-    width: 6rem;
-  }
-
   footer .title {
-    font-size: 2.5em;
-  }
-
-  footer .socials {
-    padding: 0 2rem;
+    font-size: 2rem;
   }
 
   footer .search {
-    min-width: 18rem;
-    padding: .9rem 1.5rem;
+    font-size: 1.2rem;
+    width: 14em;
   }
+}
 
-  footer ul {
-    font-size: 1.5em;
+@media only screen and (min-width: 1200px) {
+  footer {
+    padding: 0 10%;
   }
+}
 
-  footer ul li {
-    line-height: 3rem;
+@media only screen and (min-width: 1600px) {
+  footer .search {
+    width: 18em;
   }
 }

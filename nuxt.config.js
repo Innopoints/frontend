@@ -25,10 +25,7 @@ module.exports = {
   loading: { color: '#3B8070' },
 
   css: [
-    '~static/css/default.css',
-    '~static/css/landing.css',
-    '~static/css/events.css',
-    '~static/css/ui.css',
+    '~static/css/default.css'
   ],
 
   plugins: [{

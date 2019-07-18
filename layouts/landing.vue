@@ -14,3 +14,5 @@
     }
   };
 </script>
+
+<style src="../static/css/landing.css" />

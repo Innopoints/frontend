@@ -1,190 +1,91 @@
-.store h2 {
-  color: #387800;
-  text-align: center;
-  font-weight: 500;
-
-  margin-bottom: .8rem;
+.store {
+  margin-bottom: 4em;
 }
 
-.store > .subtitle {
+.store h2 {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.store > .subtitle,
+.store > .own-designs {
   text-align: center;
   font-weight: 300;
-  font-size: 1.1em;
-  margin: 0 2rem 1.2rem;
+  font-size: 1rem;
+  line-height: 1.3rem;
 }
 
 .store .cards {
   display: flex;
-  margin: 0 2rem 2rem;
-  justify-content: space-between;
+  margin: 1.2em 2em 2em;
   flex-direction: column;
   align-items: center;
 }
 
-.store .card {
-  overflow: hidden;
-  align-items: stretch;
-  margin: 1rem 0;
-}
-
-.store .card .title {
-  color: white;
-  font-size: 1.4em;
-  margin-bottom: .1rem;
-}
-
-.store .card .subtitle {
-  color: white;
-  font-size: 1em;
-  font-weight: 300;
-}
-
-.store .card img {
-  width: 100%;
-}
-
-.store .text-block {
-  padding: 1.1rem;
-  flex-grow: 1;
-}
-
-.store .btn {
-  float: right;
-  font-size: 1em;
-  padding: 0.5rem 1rem;
-  margin-top: .7rem;
-}
-
-.store .own-designs {
-  text-align: center;
-  font-weight: 300;
-  font-size: 1.1em;
-  margin: 0 3rem;
-}
-
-@media only screen and (min-width: 350px) {
-  .store .card .subtitle {
-    font-size: 1.1em;
-  }
+.store > .own-designs {
+  margin: 0 3em;
 }
 
 @media only screen and (min-width: 425px) {
   .store .cards {
-    margin: 0 15% 2rem;
+    margin: 0 15% 2em;
   }
 }
 
 @media only screen and (min-width: 500px) {
   .store > .subtitle {
-    margin: 0 1rem 1.2rem;
+    margin: 0 1em 1.2em;
   }
 }
 
 @media only screen and (min-width: 640px) {
-  .store .card .subtitle {
-    font-size: .9em;
-  }
-
-  .store > .subtitle {
-    font-size: 1.3em;
-    margin: 0 0 1.2rem;
+  .store > .subtitle,
+  .store > .own-designs {
+    font-size: 1.1rem;
   }
 
   .store .cards {
-    margin: 0 1rem 2rem;
+    margin: 0 1em 2em;
     flex-direction: row;
     align-items: stretch;
-  }
-
-  .store .card {
-    width: 32%;
-    margin: 0;
-  }
-
-  .store .card .title {
-    font-size: 1.1em;
-  }
-
-  .store .card .subtitle {
-    font-size: .9em;
-  }
-
-  .store .own-designs {
-    font-size: 1.2em;
-    margin: 0;
   }
 }
 
 @media only screen and (min-width: 805px) {
   .store .cards {
-    justify-content: space-evenly;
-    margin: 0 3rem 2rem;
+    justify-content: space-around;
+    margin: 0 3em 2em;
   }
 
-  .store .card {
-    width: 30%;
-  }
-
-  .store .btn {
-    padding: .7rem 1.3rem;
-    margin-top: .5rem;
+  @supports (color-adjust: exact) {
+    .store .cards {
+      justify-content: space-evenly;
+    }
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .store h2 {
-    font-size: 3em;
-    margin-bottom: 1rem;
-  }
-
   .store > .subtitle {
-    font-size: 1.5em;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    margin-bottom: 1em;
   }
 
   .store .cards {
-    margin: 0 4rem 2rem 4rem;
-  }
-
-  .store .card {
-    width: 17rem;
-  }
-
-  .store .card .subtitle {
-    font-size: unset;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .store .card {
-    width: 20rem;
+    margin: 0 4em 2em 4em;
   }
 }
 
 @media only screen and (min-width: 1648px) {
   .store .cards {
     display: flex;
-    justify-content: space-evenly;
-    margin: 3rem 4rem 4rem 4rem;
+    justify-content: space-around;
+    margin: 3em 4em 4em 4em;
   }
 
-  .store .card {
-    width: 26rem;
-  }
-
-  .store .card .title {
-    font-size: 1.7em;
-  }
-
-  .store .card .subtitle {
-    font-size: 1.2em;
-  }
-
-  .store .text-block {
-    padding: 1.5rem;
-  }
-
-  .store .own-designs {
-    font-size: 1.5em;
+  @supports (color-adjust: exact) {
+    .events .cards {
+      justify-content: space-evenly;
+    }
   }
 }

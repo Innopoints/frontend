@@ -254,7 +254,7 @@
 }
 
 .filters .competences + .dropdown .styled-checkbox {
-  background-image: url('../../images/events/checkbox-off.svg');
+  background-image: url(../../images/events/checkbox-off.svg);
   background-size: cover;
   width: 18px;
   height: 18px;
@@ -262,7 +262,7 @@
 }
 
 .filters .competences + .dropdown input:checked + .styled-checkbox {
-  background-image: url('../../images/events/checkbox-on.svg');
+  background-image: url(../../images/events/checkbox-on.svg);
 }
 
 @media only screen and (min-width: 370px) {
@@ -388,6 +388,10 @@
 @media only screen and (min-width: 1200px) {
   .filters > .ellipse > div {
     padding: 0 1rem;
+  }
+
+  .filters span {
+    font-size: 1.15em;
   }
 
   .filters .search > input {

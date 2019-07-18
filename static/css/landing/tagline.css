@@ -1,136 +1,130 @@
-.ltagline {
+.tagline {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-
-  padding: 0 1rem;
+  padding: 0 .3em;
   color: #387800;
-  margin-bottom: 6rem;
+  margin-bottom: 6em;
 }
 
-.ltagline > img {
-  max-height: 15rem;
-  margin-bottom: 3rem;
+.tagline > .picture {
+  max-height: 15em;
+  margin-bottom: 3em;
 }
 
-.ltagline h1 {
-  font-size: 2.3em;
+.tagline h1 {
+  font-size: 2.3rem;
   font-weight: 500;
-  margin-bottom: .5rem;
+  margin-bottom: 5px;
   text-align: center;
 }
 
-.ltagline span {
-  font-size: 1.2em;
-  font-weight: 400;
+.tagline .motto {
+  font-size: 1.2rem;
   text-align: center;
-  display: block;
 }
 
-.ltagline nav {
+.tagline nav {
   margin-top: 1.5rem;
   display: flex;
 }
 
-.ltagline .btn {
-  padding: .7rem .894rem;
+.tagline .btn:first-child {
+  margin-right: .2em;
 }
 
-.ltagline .btn:first-child {
-  margin-right: .5rem;
+@media only screen and (min-width: 340px) {
+  .tagline {
+    padding: 0 .5em;
+  }
+
+  .tagline .btn:first-child {
+    margin-right: .5em;
+  }
 }
 
 @media only screen and (min-width: 386px) {
-  .ltagline {
-    padding: 0 2rem;
+  .tagline {
+    padding: 0 2em;
   }
 
-  .ltagline span {
-    font-size: 1.3em;
+  .tagline .motto {
+    font-size: 1.3rem;
   }
 
-  .ltagline .btn:first-child {
-    margin-right: 1rem;
+  .tagline .btn:first-child {
+    margin-right: 1em;
   }
 }
 
 @media only screen and (min-width: 426px) {
-  .ltagline nav {
-    margin-top: 2.5rem;
-  }
-
-  .ltagline .btn {
-    padding: 1rem 1.6rem;
+  .tagline nav {
+    margin-top: 2em;
   }
 }
 
-@media only screen and (min-width: 641px) {
-  .ltagline {
-    padding: 0 6rem;
+@media only screen and (min-width: 640px) {
+  .tagline {
+    padding: 0 10%;
   }
 
-  .ltagline > img {
-    max-height: 25rem;
+  .tagline > .picture {
+    max-height: 25em;
   }
 
-  .ltagline h1 {
-    font-size: 3em;
+  .tagline h1 {
+    font-size: 2.6rem;
   }
 
-  .ltagline span {
-    font-size: 1.7em;
+  .tagline .motto {
+    font-size: 1.5rem;
   }
 
-  .ltagline nav {
-    margin-top: 2.5rem;
+  .tagline .btn {
+    font-size: 1.15rem;
   }
 
-  .ltagline .btn {
-    padding: 1rem 1.6rem;
-  }
-
-  .ltagline .btn:first-child {
-    margin-right: 1rem;
+  .tagline .btn:first-child {
+    margin-right: 1em;
   }
 }
 
-@media only screen and (min-width: 1025px) {
-  .ltagline {
+@media only screen and (min-width: 1024px) {
+  .tagline {
     flex-direction: row-reverse;
+    justify-content: space-between;
   }
 
-  .ltagline > img {
+  .tagline > .picture {
     max-width: 40%;
     margin-bottom: 0;
-    margin-right: 2rem;
+    margin-right: 2em;
   }
 
-  .ltagline h1 {
+  .tagline h1,
+  .tagline .motto {
     text-align: left;
-  }
-
-  .ltagline span {
-    text-align: left;
-    display: inline;
   }
 }
 
-@media only screen and (min-width: 1201px) {
-  .ltagline > img {
-    max-width: 45%;
-    margin-right: 3rem;
+@media only screen and (min-width: 1200px) {
+  .tagline > .picture {
+    margin-right: 2.5em;
   }
 
-  .ltagline h1 {
-    font-size: 3.5em;
+  .tagline h1 {
+    font-size: 2.8rem;
   }
 
-  .ltagline span {
-    font-size: 2.1em;
+  .tagline .motto {
+    font-size: 1.6rem;
   }
 
-  .ltagline .btn {
-    padding: 1rem 1.9rem;
+  .tagline nav {
+    margin-top: 1.5em;
+  }
+
+  .tagline .btn {
+    padding: .8em 1.3em;
   }
 }

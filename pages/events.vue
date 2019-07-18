@@ -62,6 +62,3 @@
     },
   };
 </script>
-
-<style src="../static/css/events/filters.css" />
-<style src="../static/css/events/ordering.css" />

@@ -1,43 +1,41 @@
-header.container.landing {
-  margin: 1rem auto 2rem;
+header {
+  margin: 0 auto 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding: 0 2rem;
+  padding: 1em 2em;
 }
 
-header.landing > .logo {
-  max-width: 115px;
+header > .logo {
+  max-width: 7rem;
 }
 
 @media only screen and (min-width: 386px) {
-  header.container.landing {
-    margin: 2rem auto 3rem;
-  }
-
-  header.landing > .logo {
-    max-width: 140px;
-  }
-}
-
-@media only screen and (min-width: 641px) {
-  header.container.landing {
-    margin: 3rem auto;
-    padding: 0 6rem;
+  header {
+    padding: 1.5em 2em;
   }
 
   header > .logo {
-    max-width: 160px;
+    max-width: 8rem;
   }
 }
 
-@media only screen and (min-width: 1025px) {
-  header.landing > .logo {
-    max-width: 200px;
+@media only screen and (min-width: 640px) {
+  header {
+    padding: 2em 4em 1.5em;
   }
 
-  header.container.landing {
-    margin: 3rem auto 1rem;
+  header > .logo {
+    max-width: 9rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  header > .logo {
+    max-width: 10rem;
+  }
+
+  header.container {
+    padding: 2em 10% 1em;
   }
 }

@@ -1,6 +1,3 @@
-@import './normalize.css';
+@import './default/normalize.css';
+@import './default/ui.css';
 @import './default/footer.css';
-@import './default/header.css';
-@import './default/tagline.css';
-@import './default/pagination.css';
-@import './main.css';
