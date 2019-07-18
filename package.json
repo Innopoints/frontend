@@ -20,5 +20,6 @@
     "nuxt": "^2.8.0",
     "vue-eslint-parser": "^6.0.4",
     "vue-ripple-directive": "^2.0.1"
-  }
+  },
+  "browserslist": "> 0.5%, last 3 versions, Firefox ESR, not dead, last 5 iOS major versions"
 }
