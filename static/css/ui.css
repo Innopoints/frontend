@@ -38,6 +38,10 @@
   margin-right: 1em;
 }
 
+.mt-2 {
+  margin-top: 1em;
+}
+
 .hide-tb {
   display: none;
 }
@@ -84,7 +88,7 @@
 
 h1 {
   color: #387800;
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   font-weight: 500;
   margin: 0 0 .5em 0;
 }
@@ -319,19 +323,19 @@ button.btn {
 }
 
 .btn > svg {
-  fill: #387800;
+  stroke: #387800;
 }
 
 .btn.danger > svg {
-  fill: #ba0303;
+  stroke: #ba0303;
 }
 
 .btn.normal > svg {
-  fill: #000;
+  stroke: #000;
 }
 
 .btn.filled > svg {
-  fill: #fff;
+  stroke: #fff;
 }
 
 /* Text Fields -------------------------------------- */
@@ -432,7 +436,7 @@ textarea:focus {
 }
 
 .text-field.with-item.right > input:focus + .item svg {
-  fill: #387800;
+  stroke: #387800;
 }
 
 .text-field.outline {
@@ -585,6 +589,7 @@ textarea:focus {
   width: 20px;
   height: 20px;
   cursor: pointer;
+  border: 2px solid #ddd;
 }
 
 .radio > input:checked + .icon {
@@ -619,7 +624,7 @@ textarea:focus {
   background-color: rgba(0, 0, 0, .05);
 }
 
-.radio:hover > input:checked + .icon::after {
+.radio:not(.normal):hover > input:checked + .icon::after {
   background-color: rgba(56, 120, 0, .05);
 }
 
@@ -627,7 +632,7 @@ textarea:focus {
   background-color: rgba(0, 0, 0, .125);
 }
 
-.radio > input:focus:checked + .icon::after {
+.radio:not(.normal) > input:focus:checked + .icon::after {
   background-color: rgba(56, 120, 0, .125);
 }
 
@@ -828,6 +833,28 @@ label:hover input:focus ~ .switch.two-state::before {
   background-color: #fff;
   border-radius: 20px;
   padding: 1.5em;
+  overflow: hidden;
+}
+
+.card.with-image {
+  padding: 0;
+}
+
+.card.with-image > .image {
+  width: 100%;
+}
+
+.card.with-image > .content {
+  padding: 1em 1.5em;
+}
+
+.card.with-image .title {
+  font-size: 1.25rem;
+}
+
+.card.with-image .subtitle {
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 /* Chips -------------------------------------- */
@@ -950,6 +977,7 @@ input[type="checkbox"]:checked + .chip::before {
     0 1px 5px 0    rgba(0, 0, 0, .12);
   padding: 1.6em 2em 1em;
   position: relative;
+  background-color: #fff;
 }
 
 .dialog .title {
@@ -994,11 +1022,11 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dialog svg {
-  fill: #387800;
+  stroke: #387800;
 }
 
 .dialog.danger svg {
-  fill: #ba0303;
+  stroke: #ba0303;
 }
 
 .dialog.notice {
@@ -1100,7 +1128,7 @@ input[type="checkbox"]:checked + .chip::before {
 
 .carousel .prev-slide svg,
 .carousel .next-slide svg {
-  fill: #fff;
+  stroke: #fff;
 }
 
 /* Labeled Elements -------------------------------------- */
@@ -1130,7 +1158,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .labeled > .icon svg {
-  fill: #387800;
+  stroke: #387800;
 }
 
 /* Dropdowns -------------------------------------- */
@@ -1218,7 +1246,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .timeline .more svg {
-  fill: #387800;
+  stroke: #387800;
 }
 
 .timeline .more::-moz-focus-inner {
@@ -1265,7 +1293,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .timeline .entry > .icon svg {
-  fill: #387800;
+  stroke: #387800;
 }
 
 .timeline .more > .icon {
@@ -1286,7 +1314,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .timeline .entry.important > .icon svg {
-  fill: #f2994a;
+  stroke: #f2994a;
 }
 
 .timeline .entry > .icon > img,
