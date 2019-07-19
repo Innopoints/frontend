@@ -61,4 +61,5 @@
   };
 </script>
 
+<style src="../static/css/header.css" />
 <style src="../static/css/ui-page.css" />

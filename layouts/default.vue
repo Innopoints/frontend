@@ -1,7 +1,9 @@
 <template>
   <div>
-    <Header />
-    <nuxt />
+    <div class="material">
+      <Header />
+      <nuxt />
+    </div>
     <Footer />
   </div>
 </template>
@@ -17,6 +19,3 @@
     }
   };
 </script>
-
-<style src="../static/css/header.css" />
-<style src="../static/css/events.css" />

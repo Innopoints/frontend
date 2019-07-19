@@ -35,6 +35,8 @@ module.exports = {
 
   build: {
 
+    extractCSS: true,
+
     extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
 

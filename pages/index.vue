@@ -1,5 +1,5 @@
 <template>
-  <div class="material">
+  <div class="material landing">
     <LandingHeader />
     <LandingTagline />
 
@@ -40,3 +40,4 @@
   };
 </script>
 
+<style src="../static/css/landing.css" />
