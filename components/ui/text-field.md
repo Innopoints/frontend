@@ -6,7 +6,7 @@ Text/Number simple/outlined inputs with items and error checking
 
 Property | Default | Description
 --- | --- | ---
-item | `''` | Is item used in the text-field. If `true` - `text/src` fields are required
+item | `''` | Is item used in the text-field. Accepts Strings `text` or `img`. If specified - `text/src` fields are required
 right | `false` | Show item in the right or the left
 text | `''` | Text to show
 src | `''` | Image to show
