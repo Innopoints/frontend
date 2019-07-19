@@ -1,4 +1,4 @@
-.material.landing header {
+.material header {
   margin: 0 auto 1em;
   display: flex;
   justify-content: space-between;
@@ -6,36 +6,36 @@
   padding: 1em 2em;
 }
 
-.material.landing header > .logo {
+.material header > .logo {
   max-width: 7rem;
 }
 
 @media only screen and (min-width: 386px) {
-  .material.landing header {
+  .material header {
     padding: 1.5em 2em;
   }
 
-  .material.landing header > .logo {
+  .material header > .logo {
     max-width: 8rem;
   }
 }
 
 @media only screen and (min-width: 640px) {
-  .material.landing header {
+  .material header {
     padding: 2em 4em 1.5em;
   }
 
-  .material.landing header > .logo {
+  .material header > .logo {
     max-width: 9rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .material.landing header > .logo {
+  .material header > .logo {
     max-width: 10rem;
   }
 
-  .material.landing header.container {
+  .material header.container {
     padding: 2em 10% 1em;
   }
 }

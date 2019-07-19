@@ -63,5 +63,4 @@
   };
 </script>
 
-<style src="../static/css/header.css" />
-<style src="../static/css/events.css" />
+<style lang="scss" src="../static/css/events/index.scss" />

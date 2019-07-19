@@ -2,13 +2,13 @@
   <section class="preview">
     <h2>preview</h2>
     <Card img="/images/create-product/placeholder.svg">
-      <span class="name placeholder"></span>
+      <span class="name placeholder" />
       <div class="card-row">
         <div class="labeled text">
           <span class="label">Price</span>
           <span class="content">
-            <span class="price placeholder"></span>
-            <img src="/images/create-product/innopoint.svg" class="ml">
+            <span class="price placeholder" />
+            <img src="/images/create-product/innopoint.svg" class="ml" />
           </span>
         </div>
         <div class="purchase">

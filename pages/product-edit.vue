@@ -28,8 +28,4 @@
   };
 </script>
 
-
-<style src="../static/css/header.css" />
-<style src="../static/css/product-edit/main.css" />
-<style src="../static/css/product-edit/modal-dialog.css" />
-<style src="../static/css/product-edit/preview-card.css" />
+<style src="../static/css/product-edit/index.css" />
