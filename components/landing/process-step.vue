@@ -2,28 +2,27 @@
   <div class="container">
     <img :src="img" />
     <div class="description">
-      <h3 class="title">{{ title }}</h3>
-      <p class="subtitle">{{ subtitle }}</p>
-      <!-- eslint-disable-next-line vue/require-component-is -->
-      <component
+      <span class="title">{{ title }}</span>
+      <span class="subtitle">{{ subtitle }}</span>
+      <Button
         v-if="buttonLink"
-        :is="external ? 'a' : 'nuxt-link'"
+        :label="buttonText"
+        :away="external"
         :href="buttonLink"
-        :target="external ? '_blank': '_self'"
-        :to="buttonLink"
-        v-ripple
-        class="btn filled green shadow-1"
-      >
-        {{ buttonText }}
-        <img v-if="external" src="/images/landing/external-link.svg" class="ml-1" />
-      </component>
+        :img="external ? '/images/landing/external-link.svg' : ''"
+        link
+        filled
+      />
       <strong v-else>{{ buttonText }}</strong>
     </div>
   </div>
 </template>
 
 <script>
+  import Button from '../ui/button';
+
   export default {
+    components: { Button },
     props: {
       img: String,
       title: String,

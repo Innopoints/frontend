@@ -1,13 +1,16 @@
 <template>
-  <div class="card shadow-2">
+  <Card>
     <img :src="img" />
     <span class="title">{{ title }}</span>
     <span class="subtitle">{{ subtitle }}</span>
-  </div>
+  </Card>
 </template>
 
 <script>
+  import Card from '../ui/card';
+
   export default {
+    components: { Card },
     props: {
       img: String,
       title: String,

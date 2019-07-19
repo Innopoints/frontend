@@ -5,7 +5,10 @@
       The following items are the most popular among students.<br />
       Grab ‘em while they’re hot!
     </div>
-    <div class="cards">
+    <div class="subtitle">
+      &lt;!-- Some popular items --&gt;
+    </div>
+    <!--<div class="cards">
       <Card
         v-for="(item, i) in items"
         :key="i"
@@ -14,16 +17,16 @@
     </div>
     <div class="own-designs">
       You can even propose your own merch designs! <a class="green" href="#">Learn more</a>
-    </div>
+    </div>-->
   </section>
 </template>
 
 <script>
-  import Card from '../../components/landing/store-card';
+  // import Card from '../../components/landing/store-card';
   import items from '../../constants/landing/store';
   export default {
     components: {
-      Card,
+      // Card,
     },
     data() {
       return {

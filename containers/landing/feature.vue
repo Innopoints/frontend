@@ -1,12 +1,12 @@
 <template>
-  <section class="features">
+  <section class="how-to">
     <h2>How does it work?</h2>
     <div class="container">
       <template v-for="(feature, i) in features">
         <FeatureCard v-bind="feature" :key="i" />
         <img
           :key="i"
-          :src="'images/landing/arrow.svg'"
+          :src="'/images/landing/arrow.svg'"
           v-if="i !== 2"
           class="arrow"
         />

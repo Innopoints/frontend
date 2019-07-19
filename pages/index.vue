@@ -3,11 +3,11 @@
     <LandingHeader />
     <LandingTagline />
 
-    <!--<Feature />
+    <Feature />
 
     <Process />
 
-    <Store />-->
+    <Store />
 
     <LandingContacts />
   </div>
