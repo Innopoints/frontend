@@ -1,7 +1,22 @@
 <template>
   <section class="preview">
     <h2>preview</h2>
-    <Card></Card>
+    <Card img="/images/create-product/placeholder.svg">
+      <span class="name placeholder"></span>
+      <div class="card-row">
+        <div class="labeled text">
+          <span class="label">Price</span>
+          <span class="content">
+            <span class="price placeholder"></span>
+            <img src="/images/create-product/innopoint.svg" class="ml">
+          </span>
+        </div>
+        <div class="purchase">
+          <span>1337 purchases</span>
+          <button class="btn outline">purchase</button>
+        </div>
+      </div>
+    </Card>
     <div class="actions">
       <Button danger label="clear fields" />
       <Button filled label="create product" />

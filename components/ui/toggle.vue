@@ -12,7 +12,7 @@
     />
 
     <span v-if="twoState" class="state first">{{ first }}</span>
-    <div :class="twoState && 'two-state'" class="switch">
+    <div :class="twoState ? 'two-state' : 'ml-2'" class="switch">
       <div class="knob" />
     </div>
     <span v-if="twoState" class="state second">{{ second }}</span>

@@ -1,6 +1,6 @@
 <template>
   <div :class="img ? 'with-image' : ''" class="card">
-    <img v-if="img" src="img" />
+    <img v-if="img" :src="img" class="image" />
     <div v-if="img" class="content">
       <slot />
     </div>

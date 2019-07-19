@@ -21,7 +21,12 @@
       <TextField multiline placeholder="High quality bulletproof fabric" />
     </FormField>
 
-    <FormField id="price" title="Price" required>
+    <FormField
+      id="price"
+      title="Price"
+      class="horizontal"
+      required
+    >
       <TextField
         id="price"
         item="img"
@@ -29,18 +34,39 @@
         src="/images/create-product/innopoint.svg"
       />
     </FormField>
+
+    <header class="varieties">
+      <h2>varieties</h2>
+      <Toggle
+        :checked="inSizes"
+        :click="toggleSizes"
+        label="the product comes in sizes"
+      />
+    </header>
   </form>
 </template>
 
 <script>
   import FormField from '../../components/ui/form-field';
   import TextField from '../../components/ui/text-field';
+  import Toggle from '../../components/ui/toggle';
 
   export default {
     name: 'ProductEditForm',
     components: {
+      Toggle,
       TextField,
       FormField
+    },
+    data() {
+      return {
+        inSizes: false
+      };
+    },
+    methods: {
+      toggleSizes() {
+        this.inSizes = !this.inSizes;
+      }
     }
   };
 </script>
