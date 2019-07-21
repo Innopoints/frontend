@@ -1,6 +1,6 @@
 <template>
   <section class="preview">
-    <h2>preview</h2>
+    <h2>Preview</h2>
     <Card img="/images/create-product/placeholder.svg">
       <span class="name placeholder" />
       <div class="card-row">

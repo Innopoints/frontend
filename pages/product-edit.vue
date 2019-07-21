@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>
-      Create a product
+    <h1 class="padded">
+      Create a Product
     </h1>
-    <main>
+    <main class="padded">
       <ProductEditForm />
       <ProductEditPreview />
     </main>

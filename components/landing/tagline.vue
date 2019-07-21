@@ -3,7 +3,7 @@
     <img src="/images/landing/voxel-city-tablet.png" class="picture" />
     <div>
       <h1>Innopoints</h1>
-      <div class="moto">Motivating the great beginnings</div>
+      <div class="motto">Motivating the great beginnings</div>
       <nav>
         <Button
           link
