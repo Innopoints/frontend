@@ -28,4 +28,4 @@
   };
 </script>
 
-<style src="../static/css/product-edit/index.css" />
+<style lang="scss" src="../static/css/product-edit/index.scss" />

@@ -1,6 +1,6 @@
 /* Styles that are common to the whole page */
 
-.material h2 {
+h2 {
   text-align: center;
   font-weight: 500;
   font-size: 1.7rem;
@@ -8,7 +8,7 @@
 }
 
 @media only screen and (min-width: 640px) {
-  .material h2 {
+  h2 {
     font-size: 2rem;
   }
 }

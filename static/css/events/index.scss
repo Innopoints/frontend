@@ -1,6 +1,6 @@
 #default {
-  @import './events.css';
-  @import './filters.css';
-  @import './ordering.css';
-  @import './pagination.css';
+  @import '../default/header';
+  @import './events';
+  @import './filters';
+  @import './pagination';
 }

@@ -1,4 +1,4 @@
-.material header {
+header {
   margin: 0 auto 1em;
   display: flex;
   justify-content: space-between;
@@ -6,36 +6,36 @@
   padding: 1em 2em;
 }
 
-.material header > .logo {
+header > .logo {
   max-width: 7rem;
 }
 
 @media only screen and (min-width: 386px) {
-  .material header {
+  header {
     padding: 1.5em 2em;
   }
 
-  .material header > .logo {
+  header > .logo {
     max-width: 8rem;
   }
 }
 
 @media only screen and (min-width: 640px) {
-  .material header {
+  header {
     padding: 2em 4em 1.5em;
   }
 
-  .material header > .logo {
+  header > .logo {
     max-width: 9rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .material header > .logo {
+  header > .logo {
     max-width: 10rem;
   }
 
-  .material header.container {
+  header.container {
     padding: 2em 10% 1em;
   }
 }

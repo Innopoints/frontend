@@ -1,7 +1,4 @@
 @import './normalize.css';
+@import './common.css';
 @import './ui.css';
 @import './footer.css';
-
-#default {
-  @import './_header.scss';
-}

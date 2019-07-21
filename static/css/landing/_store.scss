@@ -17,18 +17,36 @@
 
 .store .cards {
   display: flex;
-  margin: 1.2em 2em 2em;
   flex-direction: column;
   align-items: center;
+  padding: 0 1em;
+  margin-bottom: 1.5em;
+}
+
+.store .card {
+  margin: 1em 0;
+}
+
+.store .card > .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.store .card .btn {
+  align-self: flex-end;
+}
+
+.store .card .title + .btn {
+  margin-top: 1em;
 }
 
 .store > .own-designs {
   margin: 0 3em;
 }
 
-@media only screen and (min-width: 425px) {
-  .store .cards {
-    margin: 0 15% 2em;
+@media only screen and (min-width: 380px) {
+  .store .card {
+    max-width: 20em;
   }
 }
 
@@ -43,24 +61,22 @@
   .store > .own-designs {
     font-size: 1.1rem;
   }
+}
 
+@media only screen and (min-width: 840px) {
   .store .cards {
-    margin: 0 1em 2em;
     flex-direction: row;
-    align-items: stretch;
+    justify-content: center;
+  }
+
+  .store .card:not(:last-child) {
+    margin-right: 1em;
   }
 }
 
-@media only screen and (min-width: 805px) {
+@media only screen and (min-width: 900px) {
   .store .cards {
-    justify-content: space-around;
-    margin: 0 3em 2em;
-  }
-
-  @supports (color-adjust: exact) {
-    .store .cards {
-      justify-content: space-evenly;
-    }
+    padding: 0 2.5em;
   }
 }
 
@@ -70,22 +86,14 @@
     line-height: 1.5rem;
     margin-bottom: 1em;
   }
-
-  .store .cards {
-    margin: 0 4em 2em 4em;
-  }
 }
 
-@media only screen and (min-width: 1648px) {
+@media only screen and (min-width: 1200px) {
   .store .cards {
-    display: flex;
-    justify-content: space-around;
-    margin: 3em 4em 4em 4em;
+    padding: 0 10%;
   }
 
-  @supports (color-adjust: exact) {
-    .events .cards {
-      justify-content: space-evenly;
-    }
+  .store .card:not(:last-child) {
+    margin-right: 2em;
   }
 }

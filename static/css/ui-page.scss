@@ -1,208 +1,210 @@
-.body-wrap {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.ui-navigation {
-  display: flex;
-  justify-content: space-around;
-}
-
-.card {
-  max-width: 90%;
-  margin-bottom: 1em;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-@media only screen and (min-width: 1024px) {
-  .card {
-    max-width: 60%;
+#default {
+  .body-wrap {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
-  .btn {
+  .ui-navigation {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .card {
+    max-width: 90%;
+    margin-bottom: 1em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .card {
+      max-width: 60%;
+    }
+
+    .btn {
+      margin-bottom: 1em;
+      margin-right: 1em;
+    }
+  }
+
+  .card .showcase {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .card.checkboxes .showcase > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card.card .showcase > div {
     margin-bottom: 1em;
     margin-right: 1em;
   }
-}
 
-.card .showcase {
-  display: flex;
-  flex-wrap: wrap;
-}
+  .card.checkboxes .showcase > div label {
+    margin-bottom: .5em;
+  }
 
-.card.checkboxes .showcase > div {
-  display: flex;
-  flex-direction: column;
-}
+  .showcase.vertical {
+    flex-direction: column;
+  }
 
-.card.card .showcase > div {
-  margin-bottom: 1em;
-  margin-right: 1em;
-}
+  .card > h1 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0 0 1em 0;
+  }
 
-.card.checkboxes .showcase > div label {
-  margin-bottom: .5em;
-}
+  #buttons {
+    width: 25rem;
+  }
 
-.showcase.vertical {
-  flex-direction: column;
-}
+  #buttons .btn {
+    margin: 5px;
+  }
 
-.card > h1 {
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin: 0 0 1em 0;
-}
+  #buttons .btn img {
+    width: 24px;
+    height: 24px;
+  }
 
-#buttons {
-  width: 25rem;
-}
+  #buttons .badge {
+    height: 24px;
+  }
 
-#buttons .btn {
-  margin: 5px;
-}
+  #txts {
+    width: 25rem;
+  }
 
-#buttons .btn img {
-  width: 24px;
-  height: 24px;
-}
+  #txts .text-field {
+    width: 100%;
+    margin: 5px 0;
+  }
 
-#buttons .badge {
-  height: 24px;
-}
+  #txts .form-field .text-field,
+  #txts .form-field label {
+    width: 45%;
+  }
 
-#txts {
-  width: 25rem;
-}
+  #txts .half {
+    justify-content: space-between;
+  }
 
-#txts .text-field {
-  width: 100%;
-  margin: 5px 0;
-}
+  #txts .half .text-field {
+    width: 48%;
+  }
 
-#txts .form-field .text-field,
-#txts .form-field label {
-  width: 45%;
-}
+  #radios div[role="group"] {
+    width: 100%;
+    display: flex;
+  }
 
-#txts .half {
-  justify-content: space-between;
-}
+  #radios .radio {
+    margin: 8px;
+  }
 
-#txts .half .text-field {
-  width: 48%;
-}
+  #radios input + .icon {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  }
 
-#radios div[role="group"] {
-  width: 100%;
-  display: flex;
-}
+  #radios #red > input + .icon {
+    background: rgba(255, 0, 0, 1);
+  }
 
-#radios .radio {
-  margin: 8px;
-}
+  #radios #red > input:checked + .icon {
+    background: rgba(255, 0, 0, 1);
+  }
 
-#radios input + .icon {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-}
+  #radios #white > input + .icon {
+    background: rgba(255, 255, 255, 1);
+  }
 
-#radios #red > input + .icon {
-  background: rgba(255, 0, 0, 1);
-}
+  #radios #white > input:checked + .icon {
+    background: rgba(255, 255, 255, 1);
+  }
 
-#radios #red > input:checked + .icon {
-  background: rgba(255, 0, 0, 1);
-}
+  #radios #green > input + .icon {
+    background: rgba(0, 255, 0, 1);
+  }
 
-#radios #white > input + .icon {
-  background: rgba(255, 255, 255, 1);
-}
+  #radios #green > input:checked + .icon {
+    background: rgba(0, 255, 0, 1);
+  }
 
-#radios #white > input:checked + .icon {
-  background: rgba(255, 255, 255, 1);
-}
+  #radios #blue > input + .icon {
+    background: rgba(0, 0, 255, 1);
+  }
 
-#radios #green > input + .icon {
-  background: rgba(0, 255, 0, 1);
-}
+  #radios #blue > input:checked + .icon {
+    background: rgba(0, 0, 255, 1);
+  }
 
-#radios #green > input:checked + .icon {
-  background: rgba(0, 255, 0, 1);
-}
+  #checkboxes div[role="group"] {
+    width: 100%;
+    display: flex;
+  }
 
-#radios #blue > input + .icon {
-  background: rgba(0, 0, 255, 1);
-}
+  #checkboxes .checkbox {
+    margin: 8px;
+  }
 
-#radios #blue > input:checked + .icon {
-  background: rgba(0, 0, 255, 1);
-}
+  #checkboxes .with-labels {
+    flex-direction: column;
+  }
 
-#checkboxes div[role="group"] {
-  width: 100%;
-  display: flex;
-}
+  #checkboxes .with-labels label {
+    display: flex;
+    align-items: center;
+  }
 
-#checkboxes .checkbox {
-  margin: 8px;
-}
+  #checkboxes .with-labels .checkbox {
+    margin-right: 12px;
+  }
 
-#checkboxes .with-labels {
-  flex-direction: column;
-}
+  #switches label {
+    margin: 4px;
+    display: flex;
+    align-items: center;
+  }
 
-#checkboxes .with-labels label {
-  display: flex;
-  align-items: center;
-}
+  #switches #with-prefix .switch {
+    margin-left: 1em;
+  }
 
-#checkboxes .with-labels .checkbox {
-  margin-right: 12px;
-}
+  #chips {
+    width: 18rem;
+  }
 
-#switches label {
-  margin: 4px;
-  display: flex;
-  align-items: center;
-}
+  #chips .chip {
+    margin: 5px;
+  }
 
-#switches #with-prefix .switch {
-  margin-left: 1em;
-}
+  hr {
+    width: 100%;
+  }
 
-#chips {
-  width: 18rem;
-}
+  #dialogs .dialog {
+    width: 20em;
+  }
 
-#chips .chip {
-  margin: 5px;
-}
+  #carousels .carousel {
+    width: 25em;
+  }
 
-hr {
-  width: 100%;
-}
+  #carousels .slides {
+    --r: 186;
+    --g: 3;
+    --b: 3;
+  }
 
-#dialogs .dialog {
-  width: 20em;
-}
-
-#carousels .carousel {
-  width: 25em;
-}
-
-#carousels .slides {
-  --r: 186;
-  --g: 3;
-  --b: 3;
-}
-
-#carousels .curr-slide {
-  background: #fff1f1;
+  #carousels .curr-slide {
+    background: #fff1f1;
+  }
 }

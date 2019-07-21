@@ -1,8 +1,3 @@
-.material > h1,
-.material > main {
-  padding: 0 1rem;
-}
-
 .material > h1 {
   margin: 1.2em 0 .8em;
 }
@@ -201,7 +196,7 @@
 .preview .actions {
   margin-top: 1em;
   display: flex;
-  align-self: flex-end;
+  align-self: center;
 }
 
 @media only screen and (min-width: 430px) {
@@ -266,11 +261,6 @@
 }
 
 @media only screen and (min-width: 750px) {
-  .material > h1,
-  .material > main {
-    padding: 0 2.5rem;
-  }
-
   .sizes-wrapper {
     display: flex;
     align-items: baseline;
@@ -305,11 +295,8 @@
     width: 25em;
     margin-left: 2em;
   }
-}
 
-@media only screen and (min-width: 1280px) {
-  .material > main,
-  .material > h1 {
-    padding: 0 8%;
+  .preview .actions {
+    align-self: flex-end;
   }
 }

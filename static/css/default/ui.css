@@ -526,6 +526,12 @@ textarea:focus {
   display: inline;
 }
 
+.text-field.no-spinner > input[type="number"]::-webkit-inner-spin-button,
+.text-field.no-spinner > input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .form-field {
   display: flex;
   justify-content: space-between;
@@ -850,6 +856,7 @@ label:hover input:focus ~ .switch.two-state::before {
 
 .card.with-image .title {
   font-size: 1.25rem;
+  font-weight: 400;
 }
 
 .card.with-image .subtitle {
@@ -1167,7 +1174,7 @@ input[type="checkbox"]:checked + .chip::before {
   position: relative;
 }
 
-.dropdown-shell .chevron {
+.dropdown-shell > .handle > .chevron {
   margin-left: .5em;
   margin-bottom: -2px;
 }
@@ -1199,15 +1206,15 @@ input[type="checkbox"]:checked + .chip::before {
   right: 0;
 }
 
-.dropdown-shell.open .handle {
+.dropdown-shell.open > .handle {
   background-color: rgba(56, 120, 0, .12);
 }
 
-.dropdown-shell .chevron {
+.dropdown-shell > .handle > .chevron {
   transition: transform 100ms;
 }
 
-.dropdown-shell.open .chevron {
+.dropdown-shell.open > .handle > .chevron {
   transform: rotate(180deg);
 }
 
@@ -1353,4 +1360,59 @@ input[type="checkbox"]:checked + .chip::before {
   .timeline .entry.important > .icon {
     padding: 14px;
   }
+}
+
+/* Accordions -------------------------------------- */
+
+.accordion > section {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.accordion > .panel.open + section {
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+}
+
+.accordion > .panel .chevron {
+  transition: transform 100ms;
+  margin-bottom: -2px;
+}
+
+.accordion > .panel.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Dots -------------------------------------- */
+
+.dot {
+  width: .75em;
+  height: .75em;
+  border-radius: 50%;
+  margin-left: .8em;
+}
+
+.dot.small {
+  width: .6em;
+  height: .6em;
+}
+
+.dot.new {
+  background-color: #86d3ff;
+}
+
+.dot.attention {
+  background-color: #ffb359;
+}
+
+.dot.active {
+  background-color: rgba(56, 120, 0, .7);
 }

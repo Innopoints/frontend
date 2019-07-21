@@ -1,22 +1,3 @@
-body {
-  background-color: #5c5c5c;
-}
-
-.space-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-}
-
-.space-between.center {
-  align-items: center;
-}
-
-.container {
-  max-width: 1648px;
-  margin: auto;
-}
-
 .material {
   background-color: #fff;
   box-shadow:
@@ -35,12 +16,13 @@ body {
 
 footer {
   background-color: #5c5c5c;
-  padding: 0 1em 0;
+  padding: 20px 1em 0;
   color: #fff;
+  margin-top: -20px;
 }
 
 footer > .to-top {
-  transform: translateY(-50%);
+  transform: translateY(calc(-50% + 20px));
   position: relative;
   display: flex;
   justify-content: center;
