@@ -1,44 +1,30 @@
-.material header {
-  padding: 0 1.3rem;
-  height: 4rem;
-  border-bottom: 1px solid #387800;
+.material > header {
+  height: 3.5em;
+  border-bottom: 1px solid rgba(56, 120, 0, .24);
   margin: 0 auto;
-}
-
-.material header > div {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 100%;
+  justify-content: space-between;
 }
 
-.material header .logo > img {
-  height: 75%;
+.material > header .logo {
+  color: #387800;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.3rem;
 }
 
-@media only screen and (min-width: 501px) {
-  .material header .btn {
-    font-size: 1em;
-  }
+.material > header .actions {
+  display: flex;
 }
 
 @media only screen and (min-width: 640px) {
-  .material header {
-    padding: 0 3rem;
+  .material > header .hide-tb {
+    margin-left: .6em;
   }
 
-  .material header .logo {
+  .material > header .logo {
     display: flex;
     align-items: center;
-  }
-
-  .material header span {
-    font-size: 1.4em;
-    font-weight: 500;
-    color: #387800;
-  }
-
-  .material header .logo > img {
-    margin-right: 1rem;
   }
 }

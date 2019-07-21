@@ -1,6 +1,6 @@
 <template>
   <div class="ordering">
-    <span>Order:</span>
+    <!--<span>Order:</span>
     <div id="collapse-toggle">
       <img src="/images/events/order.svg" />
       <span>collapse ordering options</span>
@@ -10,7 +10,7 @@
       <span class="order active">most recent first</span>
       <span class="order">least valuable first</span>
       <span class="order">least recent first</span>
-    </div>
+    </div>-->
   </div>
 </template>
 

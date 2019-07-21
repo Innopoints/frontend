@@ -2,10 +2,11 @@
   <div>
     <EventsTagline />
 
-    <section class="events">
-      <h1 id="events-top">Ongoing events</h1>
+    <section class="events padded">
+      <h1>Ongoing events</h1>
 
       <Filters />
+      <Ordering />
 
       <div class="cards">
         <Event
@@ -14,9 +15,17 @@
           v-bind="event"
         />
       </div>
-
-      <Pagination v-if="pageCount > 1" :page-count="pageCount" v-model="currentPage" />
     </section>
+
+    <div class="center">
+      <Button img="/images/events/history.svg" label="see past events" />
+    </div>
+
+    <!--<Pagination v-if="pageCount > 1" :page-count="pageCount" v-model="currentPage" />-->
+
+    <p class="link-bottom padded">
+      What’s so cool about being a volunteer? The <nuxt-link to="/shop">InnoStore</nuxt-link> has your answers!
+    </p>
   </div>
 </template>
 
@@ -24,7 +33,9 @@
   import {mapGetters} from 'vuex';
   import Filters from '../containers/events/filters';
   import EventsTagline from '../components/events/tagline';
-  import Pagination from '../components/pagination';
+  import Ordering from '../components/events/filters/ordering';
+  import Button from '../components/ui/button';
+  // import Pagination from '../components/pagination';
 
   export default {
     head: {
@@ -35,7 +46,9 @@
       ]
     },
     components: {
-      Pagination,
+      Button,
+      // Pagination,
+      Ordering,
       Filters,
       EventsTagline,
       Event: () => import('../components/events/event'),

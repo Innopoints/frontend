@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="padded">
     <span @click="resolution" class="logo">
       <img src="/images/events/innou-icon-green.svg" alt="Go to the home page" />
       <span class="hide-tb">Innopoints</span>
