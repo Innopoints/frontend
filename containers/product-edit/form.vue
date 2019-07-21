@@ -115,6 +115,20 @@
           </div>
         </div>
 
+        <Dropzone
+          id="dropzone"
+          :options="options"
+          :destroyDropzone="false"
+          :useCustomSlot="true"
+          class="image-platform"
+        >
+          <img class="icon mr" src="/images/create-product/image.svg" />
+          <label class="title" for="file-input1">
+            drag &amp; drop here or click to upload photos
+          </label>
+          <small>Make sure the ratio is 1:1 (square)</small>
+        </Dropzone>
+
         <div class="image-platform">
           <input
             id="file-input1"
@@ -138,6 +152,7 @@
   import TextField from '../../components/ui/text-field';
   import Toggle from '../../components/ui/toggle';
   import Dropdown from '../../components/ui/dropdown';
+  import Dropzone from 'nuxt-dropzone';
 
   export default {
     name: 'ProductEditForm',
@@ -145,11 +160,15 @@
       Dropdown,
       Toggle,
       TextField,
-      FormField
+      FormField,
+      Dropzone
     },
     data() {
       return {
-        inSizes: false
+        inSizes: false,
+        options: {
+          url: "http://httpbin.org/anything"
+        }
       };
     },
     methods: {
