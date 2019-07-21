@@ -22,12 +22,23 @@
       <a href="/nowhere">Link</a>
       <a href="#">Visited</a>
     </div>
+
+    <hr />
+
+    <h1>Text with a dot</h1>
+    <div class="showcase vertical">
+      <p>Simple dot<Dot /></p>
+      <p>Simple green dot<Dot active /></p>
+      <p>Attention small dot<Dot attention small /></p>
+    </div>
   </Card>
 </template>
+
 <script>
   import Card from '../../components/ui/card';
+  import Dot from '../../components/ui/dot';
 
   export default {
-    components: { Card }
+    components: { Dot, Card }
   };
 </script>

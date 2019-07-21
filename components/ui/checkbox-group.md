@@ -1,8 +1,5 @@
 ## CHECKBOX–GROUP
 
-Checkbox is only for one-time usage. For the group
-of checkboxes use `CheckboxGroup`
-
 Property | Required | Description
 --- | --- | ---
 items | `yes` | *Array* of objects ```{ checked: true/false, label: 'some text'}```
