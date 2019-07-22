@@ -7,6 +7,20 @@
 
     <hr />
 
+    <h1>Radio group</h1>
+
+    <div class="showcase">
+      <RadioGroup
+        :items="items"
+        :click="handleCheckboxChange"
+        with-labels
+        with-colors
+        name="radio2"
+      />
+    </div>
+
+    <hr />
+
     <h1>Toggles</h1>
     <div class="showcase vertical">
       <Toggle
@@ -37,24 +51,29 @@
   import Card from '../../components/ui/card';
   import CheckboxGroup from '../../components/ui/checkbox-group';
   import Toggle from '../../components/ui/toggle';
+  import RadioGroup from '../../components/ui/radio-group';
 
   const items = [
     {
       checked: true,
-      label: 'checkbox #1'
+      label: 'checkbox #1',
+      color: 'orange'
     },
     {
       checked: false,
-      label: 'checkbox #2'
+      label: 'checkbox #2',
+      color: 'pink'
     },
     {
       checked: true,
-      label: 'checkbox #3'
+      label: 'checkbox #3',
+      color: 'violet'
     },
   ];
 
   export default {
     components: {
+      RadioGroup,
       Toggle,
       CheckboxGroup,
       Card
