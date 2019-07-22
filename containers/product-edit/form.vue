@@ -128,20 +128,6 @@
           </label>
           <small>Make sure the ratio is 1:1 (square)</small>
         </Dropzone>
-
-        <div class="image-platform">
-          <input
-            id="file-input1"
-            type="file"
-            multiple
-            accept="image/*"
-          />
-          <img class="icon mr" src="/images/create-product/image.svg" />
-          <label class="title" for="file-input1">
-            drag &amp; drop here or click to upload photos
-          </label>
-          <small>Make sure the ratio is 1:1 (square)</small>
-        </div>
       </li>
     </ul>
   </form>
