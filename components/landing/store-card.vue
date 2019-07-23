@@ -1,28 +1,26 @@
 <template>
-  <div class="card shadow-2">
-    <img :src="img" :style="{'background-color': background}" />
-    <div
-      :style="{'background-color': color}"
-      class="text-block"
-    >
-      <div class="title">
-        {{ title }}
-      </div>
-      <span class="subtitle">
-        {{ subtitle }}
-      </span>
-      <a
-        :style="{'color': color}"
-        :href="buttonURL"
-        v-ripple="'rgba(50, 50, 50, 0.25)'"
-        class="btn filled white shadow-2"
-      >view</a>
+  <Card :img="img" :color="color">
+    <div class="title">
+      {{ title }}
     </div>
-  </div>
+    <span class="subtitle">
+      {{ subtitle }}
+    </span>
+    <Button
+      :href="buttonURL"
+      link
+      label="view"
+      outline
+    />
+  </Card>
 </template>
 
 <script>
+  import Card from '../ui/card';
+  import Button from '../ui/button';
+
   export default {
+    components: { Button, Card },
     props: {
       img: String,
       title: String,

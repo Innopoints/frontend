@@ -1,5 +1,5 @@
 <template>
-  <section class="process">
+  <section class="options">
     <h2>How to get innopoints?</h2>
     <div
       v-for="(step, i) in steps"

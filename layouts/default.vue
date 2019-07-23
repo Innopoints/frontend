@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :id="$route.name">
     <Header />
     <nuxt />
     <Footer />

@@ -1,0 +1,48 @@
+.tagline > div {
+  margin: 2.5em 0 1.5em;
+}
+
+@media only screen and (min-width: 400px) and (max-width: 639px) {
+  .tagline > div > .subhead {
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .tagline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3em;
+  }
+
+  .tagline > .picture {
+    height: 15rem;
+  }
+
+  .tagline > div {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .tagline {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .tagline .picture {
+    height: 18em;
+  }
+
+  .tagline > div {
+    margin: 0;
+    width: 45%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .tagline > div {
+    width: 32em;
+  }
+}

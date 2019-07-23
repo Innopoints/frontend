@@ -1,56 +1,49 @@
 <template>
-  <div class="card shadow-2">
-    <img :src="img" />
-    <h2>{{ title }}</h2>
-    <div class="content">
-      <div v-if="$store.state.auth.isAuth" class="compact">
-        <div class="detail">
-          <img src="/images/events/flag.svg" class="icon" />
-          <div class="text">
-            <h3>Status</h3>
-            <p>{{ status }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="compact">
-        <div class="detail">
-          <img src="/images/events/calendar.svg" class="icon" />
-          <div class="text">
-            <h3>When</h3>
-            <p>{{ eventDate }}</p>
-          </div>
-        </div>
+  <Card :img="img">
+    <h2 class="title">{{ title }}</h2>
 
-        <div class="detail">
-          <img src="/images/events/user.svg" class="icon" />
-          <div class="text">
-            <h3>Organizer</h3>
-            <p>{{ organizer }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="detail">
-        <img src="/images/events/list.svg" class="icon" />
-        <div class="text">
-          <h3>Activities</h3>
-          <ul>
-            <li v-for="activity in activities.slice(0, 3)" :key="activity">
-              {{ activity }}
-            </li>
-            <li v-if="activities.length > 3" class="extra">+ {{ activities.length - 3 }} more</li>
-          </ul>
-        </div>
-      </div>
-      <a :href="url" class="btn filled green shadow-1">{{ $store.state.auth.isAuth ? 'review' : 'see details' }}</a>
+    <div v-if="isAuth" class="compact">
+      <Labeled icon="/images/events/flag.svg" label="Status">
+        {{ status }}
+      </Labeled>
     </div>
-  </div>
+
+    <div class="compact">
+      <Labeled icon="/images/events/calendar.svg" label="When">
+        {{ eventDate }}
+      </Labeled>
+      <Labeled icon="/images/events/user.svg" label="Organizer">
+        {{ organizer }}
+      </Labeled>
+    </div>
+
+    <Labeled icon="/images/events/list.svg" label="Activities">
+      <ul>
+        <li v-for="activity in activities.slice(0, 3)" :key="activity">
+          {{ activity }}
+        </li>
+        <li v-if="activities.length > 3" class="extra">+ {{ activities.length - 3 }} more</li>
+      </ul>
+    </Labeled>
+
+    <Button
+      :label="isAuth ? 'review' : 'see details'"
+      :href="url"
+      link
+      filled
+    />
+  </Card>
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   import printDate from '../../utils/eventDate';
+  import Labeled from '../ui/labeled';
+  import Button from '../ui/button';
+  import Card from '../ui/card';
 
   export default {
+    components: { Button, Labeled, Card },
     props: {
       img: String,
       title: String,
@@ -64,6 +57,9 @@
       },
     },
     computed: {
+      ...mapState({
+        isAuth: state => state.auth.isAuth
+      }),
       eventDate() {
         return printDate(this.date);
       }

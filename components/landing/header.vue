@@ -1,21 +1,21 @@
 <template>
-  <header class="container landing">
+  <header class="container">
     <img @click="resolution" src="/images/landing/innou-logo-text.png" class="logo" />
-    <span
-      @click="toggleAuth"
-      v-ripple
-      class="btn outline green mdc-button"
-    >
-      sign {{ isAuth ? 'out' : 'in' }}
-    </span>
+    <Button
+      :label="'sign ' + (isAuth ? 'out' : 'in')"
+      :click="toggleAuth"
+      outline
+    />
   </header>
 </template>
 
 <script>
   import {mapState, mapActions} from 'vuex';
+  import Button from '../ui/button';
 
   export default {
     name: "LandingHeader",
+    components: { Button },
     computed: mapState({
       isAuth: state => state.auth.isAuth
     }),

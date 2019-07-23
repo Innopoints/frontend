@@ -25,9 +25,7 @@ module.exports = {
   loading: { color: '#3B8070' },
 
   css: [
-    '~static/css/default.css',
-    '~static/css/landing.css',
-    '~static/css/events.css',
+    { src: '~static/css/default/index.scss', lang: 'scss' },
   ],
 
   plugins: [{
@@ -37,9 +35,12 @@ module.exports = {
 
   build: {
 
-    // Run ESLint on save
+    extractCSS: true,
+
     extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
+
+        // Run ESLint on save
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -50,6 +51,17 @@ module.exports = {
           }
         });
       }
+
+      // Load svg files as components
+      config.module.rules
+        .filter(r => r.test.toString().includes("svg"))
+        .forEach(r => {
+          r.test = /\.(png|jpe?g|gif)$/;
+        });
+      config.module.rules.push({
+        test: /\.svg$/,
+        loader: "vue-svg-loader"
+      });
     }
   }
 };

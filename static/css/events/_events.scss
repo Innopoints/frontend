@@ -1,0 +1,120 @@
+.events {
+  padding: 0 1em;
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.events h1 {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.text-field.with-item.left input {
+  padding-left: 2.3em;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin-top: 1em;
+}
+
+.labeled {
+  margin-top: 1em;
+}
+
+.labeled > .icon {
+  margin-top: .7rem;
+}
+
+.card .title {
+  margin-bottom: 0;
+}
+
+.card .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card .compact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card .compact .labeled:first-child {
+  margin-right: 1em;
+}
+
+.card li {
+  margin-bottom: .5em;
+  margin-top: 1px;
+}
+
+.card li.extra {
+  font-size: .9rem;
+  color: #387800;
+}
+
+.card .btn {
+  align-self: flex-end;
+}
+
+.material > .center {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+@media only screen and (min-width: 500px) {
+  .card {
+    width: 29em;
+    margin: 1em 1em;
+  }
+
+  .events {
+    padding: 0 1.5em;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .events {
+    padding: 0 2.5em;
+  }
+
+  .events h1 {
+    font-size: 1.4rem;
+  }
+
+  @supports (display: grid) {
+    .card > .content {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto auto;
+    }
+
+    .card .title, .card .compact {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .events {
+    padding: 0 8%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .events h1 {
+    font-size: 1.6rem;
+  }
+}

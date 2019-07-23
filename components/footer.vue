@@ -1,37 +1,49 @@
 <template>
   <footer>
-    <div class="to-top link">
-      <a v-ripple @click="scrollToTop" class="btn filled green shadow-2">
-        <img src="/images/landing/arrow-up.svg" />
-        back to top
-      </a>
+    <div class="to-top">
+      <Button
+        :click="scrollToTop"
+        img="/images/landing/arrow-up.svg"
+        label="back to top"
+        filled
+      />
     </div>
     <div class="container space-between">
       <div class="left space-between">
         <div>
-          <div class="title-container">
-            <img src="/images/landing/innou-logo.png" class="logo" />
+          <nuxt-link to="/" class="title-container">
+            <img src="/images/landing/innou-icon-white.svg" class="logo" />
             <span class="title">Innopoints</span>
-          </div>
+          </nuxt-link>
           <div class="socials space-between">
-            <a class="social" href="#"><img src="/images/landing/vk.svg" /></a>
-            <a class="social" href="#"><img src="/images/landing/facebook.svg" /></a>
-            <a class="social" href="#"><img src="/images/landing/twitter.svg" /></a>
-            <a class="social" href="#"><img src="/images/landing/instagram.svg" /></a>
-            <a class="social" href="#"><img src="/images/landing/youtube.svg" /></a>
+            <a href="https://vk.com/innopolisu" target="_blank">
+              <img src="/images/landing/vk.svg" />
+            </a>
+            <a href="https://www.facebook.com/InnopolisU" target="_blank">
+              <img src="/images/landing/facebook.svg" />
+            </a>
+            <a href="https://twitter.com/@InnopolisU" target="_blank">
+              <img src="/images/landing/twitter.svg" />
+            </a>
+            <a href="https://www.instagram.com/innopolisu/" target="_blank">
+              <img src="/images/landing/instagram.svg" />
+            </a>
+            <a href="https://www.youtube.com/user/InnopolisU" target="_blank">
+              <img src="/images/landing/youtube.svg" />
+            </a>
           </div>
         </div>
         <span class="credits white">
           with credits to <br />
-          <a class="credit-link white" href="https://www.isometriclove.com/" target="_blank">Isometriclove</a>
-          and <a class="credit-link white" href="https://www.humaaans.com/" target="_blank">Humaaans</a>
+          <a href="https://isometriclove.com" target="_blank">Isometriclove</a>
+          and <a href="https://humaaans.com" target="_blank">Humaaans</a>
         </span>
       </div>
 
       <div class="right">
-        <img src="/images/landing/pointer.png" />
+        <img src="/images/landing/pointer.png" class="pointer" />
         <nav>
-          <div class="card search space-between shadow-2">
+          <div class="search shadow-1">
             search
             <img src="/images/landing/search.svg" />
           </div>
@@ -40,7 +52,7 @@
               <nuxt-link to="/events" class="white">browse the events</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/" class="white">see the InnoStore</nuxt-link>
+              <nuxt-link to="/shop" class="white">see the InnoStore</nuxt-link>
             </li>
           </ul>
         </nav>
@@ -50,8 +62,11 @@
 </template>
 
 <script>
+  import Button from './ui/button';
+
   export default {
     name: "Footer",
+    components: { Button },
     methods: {
       scrollToTop: () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
@@ -59,9 +74,3 @@
     }
   };
 </script>
-
-<style scoped>
-  .link {
-    cursor: pointer;
-  }
-</style>
