@@ -1,8 +1,13 @@
 <template>
   <div :class="isOpen && 'open'" class="dropdown-shell">
-    <button @click="toggle" class="btn handle">
-      {{ label }}
-      <img src="/images/events/chevron-down.svg" class="chevron" />
+    <button
+      @click="toggle"
+      v-ripple="'rgba(56, 120, 0, .25)'"
+      type="button"
+      class="btn handle"
+    >
+      <slot name="opener" />
+      <img v-if="chevron" src="/images/events/chevron-down.svg" class="chevron" />
     </button>
     <div :class="right && 'right-edge'" class="dropdown">
       <slot />
@@ -22,9 +27,9 @@
         type: Boolean,
         default: false
       },
-      label: {
-        type: String,
-        default: ''
+      chevron: {
+        type: Boolean,
+        default: true
       }
     },
     data() {

@@ -1,11 +1,32 @@
 <template>
-  <div class="card">
-    <slot />
+  <div :class="img ? 'with-image' : ''" class="card">
+    <img
+      v-if="img"
+      :src="img"
+      :style="'background: ' + color"
+      class="image"
+    />
+    <div v-if="img" class="content">
+      <slot />
+    </div>
+    <template v-else>
+      <slot />
+    </template>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Card'
+    name: 'Card',
+    props: {
+      img: {
+        type: String,
+        default: ''
+      },
+      color: {
+        type: String,
+        default: '#FFF'
+      }
+    }
   };
 </script>

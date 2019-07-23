@@ -1,20 +1,33 @@
 <template>
-  <section class="container narrow ltagline">
-    <img src="/images/landing/voxel-city-tablet.png" />
+  <section class="container tagline">
+    <img src="/images/landing/voxel-city-tablet.png" class="picture" />
     <div>
       <h1>Innopoints</h1>
-      <span>Motivating the great beginnings</span>
+      <div class="motto">Motivating the great beginnings</div>
       <nav>
-        <nuxt-link v-ripple to="/events" class="btn filled green shadow-1">get innopoints</nuxt-link>
+        <Button
+          link
+          href="/events"
+          label="get innopoints"
+          filled
+        />
 
-        <nuxt-link v-ripple to="/" class="btn outline green">see the InnoStore</nuxt-link>
+        <Button
+          link
+          href="/"
+          label="see the InnoStore"
+          outline
+        />
       </nav>
     </div>
   </section>
 </template>
 
 <script>
+  import Button from '../ui/button';
+
   export default {
     name: "LandingTagline",
+    components: { Button },
   };
 </script>

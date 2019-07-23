@@ -1,0 +1,16 @@
+.modal-overlay {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, .25);
+}
+
+.modal-open .modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

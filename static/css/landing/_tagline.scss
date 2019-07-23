@@ -1,0 +1,130 @@
+.tagline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 .3em;
+  color: #387800;
+  margin-bottom: 6em;
+}
+
+.tagline > .picture {
+  max-height: 15em;
+  margin-bottom: 3em;
+}
+
+.tagline h1 {
+  font-size: 2.3rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.tagline .motto {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.tagline nav {
+  margin-top: 1.5rem;
+  display: flex;
+}
+
+.tagline .btn:first-child {
+  margin-right: .2em;
+}
+
+@media only screen and (min-width: 340px) {
+  .tagline {
+    padding: 0 .5em;
+  }
+
+  .tagline .btn:first-child {
+    margin-right: .5em;
+  }
+}
+
+@media only screen and (min-width: 386px) {
+  .tagline {
+    padding: 0 2em;
+  }
+
+  .tagline .motto {
+    font-size: 1.3rem;
+  }
+
+  .tagline .btn:first-child {
+    margin-right: 1em;
+  }
+}
+
+@media only screen and (min-width: 426px) {
+  .tagline nav {
+    margin-top: 2em;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .tagline {
+    padding: 0 10%;
+  }
+
+  .tagline > .picture {
+    max-height: 25em;
+  }
+
+  .tagline h1 {
+    font-size: 2.6rem;
+  }
+
+  .tagline .motto {
+    font-size: 1.5rem;
+  }
+
+  .tagline .btn {
+    font-size: 1.15rem;
+  }
+
+  .tagline .btn:first-child {
+    margin-right: 1em;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .tagline {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .tagline > .picture {
+    max-width: 40%;
+    margin-bottom: 0;
+    margin-right: 2em;
+  }
+
+  .tagline h1,
+  .tagline .motto {
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .tagline > .picture {
+    margin-right: 2.5em;
+  }
+
+  .tagline h1 {
+    font-size: 2.8rem;
+  }
+
+  .tagline .motto {
+    font-size: 1.6rem;
+  }
+
+  .tagline nav {
+    margin-top: 1.5em;
+  }
+
+  .tagline .btn {
+    padding: .8em 1.3em;
+  }
+}

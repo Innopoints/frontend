@@ -25,10 +25,7 @@ module.exports = {
   loading: { color: '#3B8070' },
 
   css: [
-    '~static/css/default.css',
-    '~static/css/landing.css',
-    '~static/css/events.css',
-    '~static/css/ui.css',
+    { src: '~static/css/default/index.scss', lang: 'scss' },
   ],
 
   plugins: [{
@@ -37,6 +34,8 @@ module.exports = {
   }],
 
   build: {
+
+    extractCSS: true,
 
     extend(config, {isDev, isClient}) {
       if (isDev && isClient) {

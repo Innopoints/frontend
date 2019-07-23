@@ -17,7 +17,10 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^5.2.2",
     "fecha": "^3.0.3",
+    "node-sass": "^4.12.0",
     "nuxt": "^2.8.0",
+    "nuxt-dropzone": "^1.0.2",
+    "sass-loader": "^7.1.0",
     "vue-eslint-parser": "^6.0.4",
     "vue-ripple-directive": "^2.0.1",
     "vue-svg-loader": "^0.12.0"
