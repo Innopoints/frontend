@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="material">
     <EventsTagline />
 
     <section class="events padded">

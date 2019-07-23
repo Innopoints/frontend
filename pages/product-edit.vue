@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="material">
     <h1 class="padded">
       Create a Product
     </h1>

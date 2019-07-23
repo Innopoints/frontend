@@ -1,8 +1,8 @@
-.material > div > h1 {
+.material h1 {
   margin: 1.2em 0 .8em;
 }
 
-.material > div > main {
+.material main {
   display: flex;
   flex-direction: column;
 }
@@ -281,7 +281,7 @@
 }
 
 @media only screen and (min-width: 1200px) {
-  .material > div > main {
+  .material main {
     flex-direction: row;
     justify-content: space-between;
   }

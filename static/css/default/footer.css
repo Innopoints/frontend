@@ -1,9 +1,5 @@
 .material {
   background-color: #fff;
-  box-shadow:
-    0 2px 4px -1px rgba(0, 0, 0, .2),
-    0 4px 5px 0    rgba(0, 0, 0, .14),
-    0 1px 10px 0   rgba(0, 0, 0, .12);
   clip-path:
     polygon(
       0 0,
@@ -22,7 +18,7 @@ footer {
 }
 
 footer > .to-top {
-  transform: translateY(calc(-50% + 20px));
+  transform: translateY(-50%);
   position: relative;
   display: flex;
   justify-content: center;
@@ -122,7 +118,7 @@ footer ul > li::before {
 
 @media only screen and (min-width: 385px) {
   footer {
-    padding: 0 3em 0;
+    padding: 20px 3em 0;
   }
 
   footer .right > nav {
@@ -201,7 +197,7 @@ footer ul > li::before {
 
 @media only screen and (min-width: 1200px) {
   footer {
-    padding: 0 10%;
+    padding: 20px 10% 0;
   }
 }
 

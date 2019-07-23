@@ -1,9 +1,7 @@
 <template>
   <div :id="$route.name">
-    <div class="material">
-      <Header />
-      <nuxt />
-    </div>
+    <Header />
+    <nuxt />
     <Footer />
   </div>
 </template>

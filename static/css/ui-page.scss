@@ -1,4 +1,6 @@
-#default {
+#ui {
+  @import './components/header';
+
   .body-wrap {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -27,7 +29,7 @@
       max-width: 60%;
     }
 
-    .btn {
+    .material .btn {
       margin-bottom: 1em;
       margin-right: 1em;
     }

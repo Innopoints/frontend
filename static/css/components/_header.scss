@@ -1,4 +1,4 @@
-.material > header {
+header.top-level {
   height: 3.5em;
   border-bottom: 1px solid rgba(56, 120, 0, .24);
   margin: 0 auto;
@@ -7,23 +7,23 @@
   justify-content: space-between;
 }
 
-.material > header .logo {
+header.top-level .logo {
   color: #387800;
   text-decoration: none;
   font-weight: 500;
   font-size: 1.3rem;
 }
 
-.material > header .actions {
+header.top-level .actions {
   display: flex;
 }
 
 @media only screen and (min-width: 640px) {
-  .material > header .hide-tb {
+  header.top-level .hide-tb {
     margin-left: .6em;
   }
 
-  .material > header .logo {
+  header.top-level .logo {
     display: flex;
     align-items: center;
   }

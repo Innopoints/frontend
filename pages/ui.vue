@@ -1,27 +1,29 @@
 <template>
-  <div class="body-wrap">
-    <nav class="ui-navigation">
-      <Button link href="#buttons" label="Buttons" />
-      <Button link href="#checkboxes" label="Checkboxes" />
-      <Button link href="#inputs" label="Inputs" />
-      <Button link href="#timeline" label="Timeline" />
-      <Button link href="#carousels" label="Carousels" />
-      <Button link href="#labeled" label="Labeled" />
-      <Button link href="#dropdowns" label="Dropdowns" />
-      <Button link href="#typography" label="Typography" />
-      <Button link href="#dialogs" label="Dialogs" />
-    </nav>
+  <div class="material">
+    <div class="body-wrap">
+      <nav class="ui-navigation">
+        <Button link href="#buttons" label="Buttons" />
+        <Button link href="#checkboxes" label="Checkboxes" />
+        <Button link href="#inputs" label="Inputs" />
+        <Button link href="#timeline" label="Timeline" />
+        <Button link href="#carousels" label="Carousels" />
+        <Button link href="#labeled" label="Labeled" />
+        <Button link href="#dropdowns" label="Dropdowns" />
+        <Button link href="#typography" label="Typography" />
+        <Button link href="#dialogs" label="Dialogs" />
+      </nav>
 
-    <ButtonsShowcase id="buttons" />
-    <CheckboxesShowcase id="checkboxes" />
-    <InputsShowcase id="inputs" />
-    <ChipsShowcase id="chips" />
-    <TimelineShowcase id="timeline" />
-    <CarouselsShowcase id="carousels" />
-    <LabeledShowcase id="labeled" />
-    <DropdownsShowcase id="dropdowns" />
-    <TypographyShowcase id="typography" />
-    <DialogsShowcase id="dialogs" />
+      <ButtonsShowcase id="buttons" />
+      <CheckboxesShowcase id="checkboxes" />
+      <InputsShowcase id="inputs" />
+      <ChipsShowcase id="chips" />
+      <TimelineShowcase id="timeline" />
+      <CarouselsShowcase id="carousels" />
+      <LabeledShowcase id="labeled" />
+      <DropdownsShowcase id="dropdowns" />
+      <TypographyShowcase id="typography" />
+      <DialogsShowcase id="dialogs" />
+    </div>
   </div>
 </template>
 

@@ -1,7 +1,8 @@
 #events {
-  @import '../default/header';
-  @import './tagline';
   @import './events';
-  @import './filters';
-  @import './pagination';
+  @import './filters-spec';
+  @import '../components/header';
+  @import '../components/tagline';
+  @import '../components/filters';
+  @import '../components/pagination';
 }
