@@ -25,7 +25,7 @@ module.exports = {
   loading: { color: '#3B8070' },
 
   css: [
-    '~static/css/default/index.css'
+    { src: '~static/css/default/index.scss', lang: 'scss' },
   ],
 
   plugins: [{
