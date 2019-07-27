@@ -42,8 +42,8 @@
       title: 'Event Browser',
       meta: [
         { hid: 'description', name: 'description',
-          content: `Search for volunteering opportunities with event browser page` }
-      ]
+          content: `Search for volunteering opportunities with event browser page` },
+      ],
     },
     components: {
       Button,
@@ -61,7 +61,7 @@
     },
     computed: {
       ...mapGetters({
-        allEvents: 'events/events'
+        allEvents: 'events/events',
       }),
       pageCount() {
         return Math.ceil(this.allEvents.length / this.eventsPerPage);

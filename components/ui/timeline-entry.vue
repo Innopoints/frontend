@@ -16,17 +16,17 @@
     props: {
       icon: {
         type: String,
-        default: '/images/events/calendar.svg'
+        default: '/images/events/calendar.svg',
       },
       important: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
     computed: {
       svg() {
         return () => import('../../static' + this.icon);
-      }
-    }
+      },
+    },
   };
 </script>

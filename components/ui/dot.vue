@@ -8,7 +8,7 @@
     props: {
       small: Boolean,
       attention: Boolean,
-      active: Boolean
+      active: Boolean,
     },
     computed: {
       classes() {
@@ -22,8 +22,8 @@
           arr.push('new');
         }
         return arr;
-      }
-    }
+      },
+    },
   };
 </script>
 

@@ -23,19 +23,19 @@
     computed: {
       ...mapState({
         search: state => state.events.filters.search,
-        mobileCollapsed: state => state.events.mobileCollapsed
-      })
+        mobileCollapsed: state => state.events.mobileCollapsed,
+      }),
     },
     methods: {
       ...mapActions({
         changeSearch: 'events/changeSearch',
-        toggleMobileCollapsed: 'events/toggleMobileCollapsed'
+        toggleMobileCollapsed: 'events/toggleMobileCollapsed',
       }),
       changeMobileCollapsed() {
         if(!this.mobileCollapsed) {
           this.toggleMobileCollapsed();
         }
-      }
-    }
+      },
+    },
   };
 </script>

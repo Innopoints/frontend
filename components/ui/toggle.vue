@@ -25,26 +25,26 @@
     props: {
       checked: {
         type: Boolean,
-        required: true
+        required: true,
       },
       click: {
         type: Function,
-        required: true
+        required: true,
       },
       label: {
         type: String,
-        default: ''
+        default: '',
       },
       name: {
         type: String,
-        default: ''
+        default: '',
       },
       twoState: {
         type: Boolean,
-        default: false
+        default: false,
       },
       first: String,
-      second: String
-    }
+      second: String,
+    },
   };
 </script>

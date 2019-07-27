@@ -99,18 +99,18 @@
       Button,
       Dropdown,
       TextField,
-      Dropzone
+      Dropzone,
     },
     props: {
       inSizes: Boolean,
-      removable: Boolean
+      removable: Boolean,
     },
     data() {
       return {
         options: {
-          url: "http://example.com"
+          url: "http://example.com",
         },
-        vars: 2
+        vars: 2,
       };
     },
   };

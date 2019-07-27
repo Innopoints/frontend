@@ -57,17 +57,17 @@
     {
       checked: true,
       label: 'checkbox #1',
-      color: 'orange'
+      color: 'orange',
     },
     {
       checked: false,
       label: 'checkbox #2',
-      color: 'pink'
+      color: 'pink',
     },
     {
       checked: true,
       label: 'checkbox #3',
-      color: 'violet'
+      color: 'violet',
     },
   ];
 
@@ -76,7 +76,7 @@
       RadioGroup,
       Toggle,
       CheckboxGroup,
-      Card
+      Card,
     },
     data() {
       return {
@@ -92,7 +92,7 @@
       },
       handleSwitch(e) {
         this[e.target.name] = !this[e.target.name];
-      }
-    }
+      },
+    },
   };
 </script>

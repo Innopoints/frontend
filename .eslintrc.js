@@ -47,6 +47,7 @@ module.exports = {
     "vue/html-self-closing": ["warn", {
       "html": { "void": "always" }
     }],
-    "no-console": ["warn"]
+    "no-console": ["warn"],
+    "comma-dangle": ["warn", "always-multiline"]
   }
 }

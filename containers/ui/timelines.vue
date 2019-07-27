@@ -36,12 +36,12 @@
     components: {
       Timeline,
       TimelineEntry,
-      Card
+      Card,
     },
     methods: {
       handleLoad() {
         alert('load more');
-      }
-    }
+      },
+    },
   };
 </script>

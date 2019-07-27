@@ -4,7 +4,7 @@ export default [
     title: 'Chess Tournament',
     date: {
       start: new Date('2019-07-05T00:00:00'),
-      end: new Date('2019-07-05T00:00:00')
+      end: new Date('2019-07-05T00:00:00'),
     },
     organizer: '319',
     activities: [
@@ -24,7 +24,7 @@ export default [
     title: 'All-Russian Robotics Olympiad',
     date: {
       start: new Date('2019-07-05T00:00:00'),
-      end: new Date('2019-07-08T00:00:00')
+      end: new Date('2019-07-08T00:00:00'),
     },
     organizer: 'Olympiads dept.',
     activities: [

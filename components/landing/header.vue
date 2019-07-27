@@ -17,7 +17,7 @@
     name: "LandingHeader",
     components: { Button },
     computed: mapState({
-      isAuth: state => state.auth.isAuth
+      isAuth: state => state.auth.isAuth,
     }),
     methods: {
       resolution: () => {
@@ -25,6 +25,6 @@
         Width: ${window.innerWidth}px, height: ${window.innerHeight}px`);
       },
       ...mapActions({toggleAuth: 'auth/toggleAuth'}),
-    }
+    },
   };
 </script>

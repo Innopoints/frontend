@@ -17,14 +17,14 @@
     props: {
       load: {
         type: Boolean,
-        default: false
+        default: false,
       },
-      handleLoad: Function
+      handleLoad: Function,
     },
     methods: {
       handleLoadClick() {
         if(this.handleLoad) this.handleLoad();
-      }
-    }
+      },
+    },
   };
 </script>

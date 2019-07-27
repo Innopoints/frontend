@@ -13,6 +13,6 @@
 
 <script>
   export default {
-    name: "EventsTagline"
+    name: "EventsTagline",
   };
 </script>

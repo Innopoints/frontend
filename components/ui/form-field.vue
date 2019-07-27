@@ -23,16 +23,16 @@
       id: String,
       title: {
         type: String,
-        required: true
+        required: true,
       },
       subtitle: {
         type: String,
-        default: ''
+        default: '',
       },
       required: {
         type: Boolean,
-        default: false
-      }
-    }
+        default: false,
+      },
+    },
   };
 </script>

@@ -4,7 +4,7 @@ module.exports = {
 
   // Server configuration
   server: {
-    port: process.env.PORT || 3000
+    port: process.env.PORT || 3000,
   },
 
   // Headers of the page
@@ -17,8 +17,8 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/images/favicon.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&display=swap&subset=cyrillic' }
-    ]
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&display=swap&subset=cyrillic' },
+    ],
   },
 
   // Customize the progress bar color
@@ -30,7 +30,7 @@ module.exports = {
 
   plugins: [{
     src: '~plugins/ripple.js',
-    mode: 'client'
+    mode: 'client',
   }],
 
   build: {
@@ -47,8 +47,8 @@ module.exports = {
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
           options: {
-            emitWarning: true
-          }
+            emitWarning: true,
+          },
         });
       }
 
@@ -60,9 +60,9 @@ module.exports = {
         });
       config.module.rules.push({
         test: /\.svg$/,
-        loader: "vue-svg-loader"
+        loader: "vue-svg-loader",
       });
-    }
-  }
+    },
+  },
 };
 

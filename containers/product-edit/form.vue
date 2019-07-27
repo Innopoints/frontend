@@ -78,13 +78,13 @@
     data() {
       return {
         inSizes: false,
-        vars: 2
+        vars: 2,
       };
     },
     methods: {
       toggleSizes() {
         this.inSizes = !this.inSizes;
-      }
-    }
+      },
+    },
   };
 </script>

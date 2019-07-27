@@ -26,28 +26,28 @@
     props: {
       name: {
         type: String,
-        required: true
+        required: true,
       },
       items: {
         type: Array,
-        required: true
+        required: true,
       },
       click: {
         type: Function,
-        required: true
+        required: true,
       },
       withLabels: {
         type: Boolean,
-        default: false
+        default: false,
       },
       withColors: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
     data() {
       return {
-        data: this.items
+        data: this.items,
       };
     },
     methods: {
@@ -63,7 +63,7 @@
         `;
         }
         return '';
-      }
-    }
+      },
+    },
   };
 </script>

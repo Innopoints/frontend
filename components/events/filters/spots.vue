@@ -31,17 +31,17 @@
     name: 'Spots',
     data() {
       return {
-        open: false
+        open: false,
       };
     },
     computed: {
       ...mapState({
-        spots: state => state.events.filters.spots
-      })
+        spots: state => state.events.filters.spots,
+      }),
     },
     methods: {
       ...mapActions({
-        changeSpots: 'events/changeSpots'
+        changeSpots: 'events/changeSpots',
       }),
       editSpots(isInc) {
         let changed = isInc ? this.spots + 1 : this.spots - 1;
@@ -49,7 +49,7 @@
       },
       toggleDropdown() {
         this.open = !this.open;
-      }
-    }
+      },
+    },
   };
 </script>
