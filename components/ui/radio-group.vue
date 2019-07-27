@@ -1,15 +1,15 @@
 <template>
-  <div :class="withLabels && 'with-labels'" role="group">
+  <div :class="{'with-labels': withLabels, horizontal}" class="radio-group" role="group">
     <label
-      v-for="(item, index) in data"
+      v-for="(item, index) in items"
       :key="index"
-      :class="withLabels && 'clickable'"
+      :class="{clickable: withLabels}"
       class="radio"
     >
       <div class="radio">
         <input
-          :checked="item.checked"
-          @change="changeItems(index)"
+          :checked="selected === item"
+          @change="select(item)"
           :name="name"
           type="radio"
         />
@@ -32,38 +32,59 @@
         type: Array,
         required: true,
       },
-      click: {
-        type: Function,
-        required: true,
-      },
       withLabels: {
         type: Boolean,
         default: false,
       },
-      withColors: {
+      value: {
+        type: Object,
+      },
+      horizontal: {
         type: Boolean,
         default: false,
       },
     },
     data() {
       return {
-        data: this.items,
+        selected: null,
       };
     },
+    watch: {
+      value: {
+        immediate: true,
+        handler(value) {
+          this.selected = value;
+        },
+      },
+    },
     methods: {
-      changeItems(index) {
-        this.data[index] = !this.data[index];
-        this.click(this.data);
+      select(item) {
+        this.selected = item;
+        this.$emit('input', item);
       },
       style(item) {
-        if(this.withColors) {
-          return `
+        if(!item.color) {
+          return '';
+        }
+        return `
           background-color: ${item.color};
           border-color: ${item.color};
         `;
-        }
-        return '';
       },
     },
+    
   };
 </script>
+
+<style lang="scss" scoped>
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  &.horizontal {
+    flex-direction: row;
+  }
+  >.radio {
+    padding: 0 2px;
+  }
+}
+</style>
