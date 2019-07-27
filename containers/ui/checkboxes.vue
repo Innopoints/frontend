@@ -12,9 +12,7 @@
     <div class="showcase">
       <RadioGroup
         :items="items"
-        :click="handleCheckboxChange"
         with-labels
-        with-colors
         name="radio2"
       />
     </div>
@@ -55,17 +53,14 @@
 
   const items = [
     {
-      checked: true,
       label: 'checkbox #1',
       color: 'orange',
     },
     {
-      checked: false,
       label: 'checkbox #2',
       color: 'pink',
     },
     {
-      checked: true,
       label: 'checkbox #3',
       color: 'violet',
     },
