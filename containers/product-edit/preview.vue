@@ -30,6 +30,6 @@
 
   export default {
     name: 'ProductEditPreview',
-    components: { Button, Card }
+    components: { Button, Card },
   };
 </script>

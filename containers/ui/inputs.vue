@@ -70,13 +70,13 @@
     components: {
       FormField,
       TextField,
-      Card
+      Card,
 
     },
     data() {
       return {
 
       };
-    }
+    },
   };
 </script>

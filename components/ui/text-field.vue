@@ -53,18 +53,18 @@
     name: 'TextField',
     model: {
       prop: 'value',
-      event: 'change'
+      event: 'change',
     },
     props: {
 
       // Wrapper props
       item: {
         type: String,
-        default: ''
+        default: '',
       },
       right: {
         type: Boolean,
-        default: false
+        default: false,
       },
       src: String,
       text: String,
@@ -72,7 +72,7 @@
       // Outline component requires label and id props
       outline: {
         type: Boolean,
-        default: false
+        default: false,
       },
       label: String,
       id: String,
@@ -80,15 +80,15 @@
       // Input props
       type: {
         type: String,
-        default: 'text'
+        default: 'text',
       },
       disabled: {
         type: Boolean,
-        default: false
+        default: false,
       },
       multiline: {
         type: Boolean,
-        default: false
+        default: false,
       },
       value: [String, Number],
       placeholder: String,
@@ -99,7 +99,7 @@
       max: Number,
       focus: Function,
       input: Function,
-      blur: Function
+      blur: Function,
     },
     computed: {
       classes() {
@@ -114,7 +114,7 @@
         if(this.outline) arr.push('outline');
 
         return arr;
-      }
+      },
     },
     methods: {
       handleFocus() {
@@ -125,7 +125,7 @@
       },
       handleInput() {
         if(this.input) this.input();
-      }
-    }
+      },
+    },
   };
 </script>

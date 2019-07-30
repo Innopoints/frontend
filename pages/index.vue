@@ -26,8 +26,8 @@
     head: {
       title: 'Home',
       meta: [
-        { hid: 'description', name: 'description', content: `Innopolis Unniversity's innopoints project` }
-      ]
+        { hid: 'description', name: 'description', content: `Innopolis Unniversity's innopoints project` },
+      ],
     },
     components: {
       LandingHeader,
@@ -36,7 +36,7 @@
       Feature,
       Store,
       Process,
-    }
+    },
   };
 </script>
 

@@ -21,26 +21,26 @@
     props: {
       open: {
         type: Boolean,
-        default: false
+        default: false,
       },
       right: {
         type: Boolean,
-        default: false
+        default: false,
       },
       chevron: {
         type: Boolean,
-        default: true
-      }
+        default: true,
+      },
     },
     data() {
       return {
-        isOpen: this.open
+        isOpen: this.open,
       };
     },
     methods: {
       toggle() {
         this.isOpen = !this.isOpen;
-      }
-    }
+      },
+    },
   };
 </script>

@@ -68,7 +68,7 @@
         isFirstChoice: true,
         activeMonthStart: new Date().getMonth(),
         activeYearStart: new Date().getFullYear(),
-        activeYearEnd: new Date().getFullYear()
+        activeYearEnd: new Date().getFullYear(),
       };
     },
     computed: {
@@ -117,7 +117,7 @@
     watch: {
       startNextActiveMonth: function (value) {
         if (value === 0) this.activeYearEnd = this.activeYearStart + 1;
-      }
+      },
     },
     created () {
       if (this.activeMonthStart === 11) this.activeYearEnd = this.activeYearStart + 1;
@@ -252,8 +252,8 @@
       clear() {
         this.isFirstChoice = true;
         this.dateRange = [null, null];
-      }
-    }
+      },
+    },
   };
 </script>
 

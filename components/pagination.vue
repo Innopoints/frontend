@@ -132,7 +132,7 @@
           this.$emit('input', selected);
           this.editing = -1;
         }
-      }
-    }
+      },
+    },
   };
 </script>

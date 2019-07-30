@@ -13,7 +13,7 @@ export default {
         endDate: null,
       },
       events: events,
-      mobileCollapsed: true
+      mobileCollapsed: true,
     };
   },
   mutations: {
@@ -22,7 +22,7 @@ export default {
     },
     changeField(state, value) {
       state[value.type] = value.value;
-    }
+    },
   },
   actions: {
     toggleMobileCollapsed({commit, state}) {
@@ -42,7 +42,7 @@ export default {
     },
     clearCompetences({commit, state}) {
       commit('changeFilter', {type: 'competences', value: state.filters.competences.map(x => ({name: x.name, checked: false})) });
-    }
+    },
   },
   getters: {
     events: state => {
@@ -50,6 +50,6 @@ export default {
         if(state.filters.spots > event.spots) return false;
         return true;
       });
-    }
-  }
+    },
+  },
 };

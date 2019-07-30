@@ -58,11 +58,11 @@
     },
     computed: {
       ...mapState({
-        isAuth: state => state.auth.isAuth
+        isAuth: state => state.auth.isAuth,
       }),
       eventDate() {
         return printDate(this.date);
-      }
-    }
+      },
+    },
   };
 </script>

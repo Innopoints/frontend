@@ -22,7 +22,7 @@
     name: "Header",
     components: { Button },
     computed: mapState({
-      isAuth: state => state.auth.isAuth
+      isAuth: state => state.auth.isAuth,
     }),
     methods: {
       resolution: (e) => {
@@ -31,6 +31,6 @@
         Width: ${window.innerWidth}px, height: ${window.innerHeight}px`);
       },
       ...mapActions({toggleAuth: 'auth/toggleAuth'}),
-    }
+    },
   };
 </script>

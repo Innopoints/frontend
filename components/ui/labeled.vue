@@ -26,18 +26,18 @@
     props: {
       icon: {
         type: String,
-        default: null
+        default: null,
       },
       label: {
         type: String,
-        required: true
-      }
+        required: true,
+      },
     },
     computed: {
       svg() {
         if(this.icon) return () => import('../../static' + this.icon);
         return '';
-      }
-    }
+      },
+    },
   };
 </script>

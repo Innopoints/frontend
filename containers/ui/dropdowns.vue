@@ -24,7 +24,7 @@
     components: {
       Button,
       Dropdown,
-      Card
-    }
+      Card,
+    },
   };
 </script>

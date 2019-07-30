@@ -155,12 +155,12 @@
   export default {
     components: {
       Button,
-      Card
+      Card,
     },
     methods: {
       alert() {
         alert('Some text for the show');
-      }
-    }
+      },
+    },
   };
 </script>

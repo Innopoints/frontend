@@ -1,62 +1,55 @@
 ## RADIO–GROUP
 
-Property | Required | Default | Description
---- | --- | --- | ---
-name | `yes` | | *String* name for the radio-group
-items | `yes` | | *Array* of item objects
-click | `yes` | | *Function* that receives new array of `items` and changes the state.
-with-labels | `no` | `false` | *Boolean*: print labels or not
-with-colors | `no` | `false` | *Boolean*: make radio buttons colorful
+### Props
 
-***Item object*** — one of the items
+Property | Required | Type | Default | Description
+--- | --- | --- | --- | ---
+name | yes | String | | name for the radio-group
+items | yes | Array | | item objects
+with-labels | no | Boolean | `false` | display the labels or not
+value | no | Object | `null` | the currently selected item
 
-Property | Description
---- | --- 
-checked | *Boolean*: initial checked state (only 1 can be true)
-label | *String* that prints only if `with-labels: true`
-color | *String* color (HEX, RGBA, doesn't matter) that applies if `with-colors: true`
+***Item object*** (each of the objects in the `items` array must conform to the following structure)
+
+Property | Type | Description
+--- | --- | ---
+label | String | only displayed if `with-labels=true`
+color | String | radio button color (must be CSS-compatible). Transparent if not provided
+
+### Events:
+
+- `input`: fired when the selected option changes
+  - payload: the object representing the selected item 
 
 ### Examples
 
 ```html
-<checkbox-group
+<radio-group
   :items="items"
-  :click="handleCheckboxChange"
-  with-labels
-  with-colors
+  v-model="selected"
   name="radio2"
+  with-labels
 />
 ```
 
 ```js
-const items = [
-  {
-    checked: true,
-    label: 'radio #1',
-    color: 'pink'
-  },
-  {
-    checked: false,
-    label: 'radio #2',
-    color: 'purple'
-  },
-  {
-    checked: true,
-    label: 'radio #3',
-    color: 'violet'
-  },
-]
-```
-
-```
 data() {
   return {
-    items
+    items: [
+      {
+        label: 'radio #1',
+        color: 'pink',
+      },
+      {
+        label: 'radio #2',
+        color: 'purple',
+      },
+      {
+        label: 'radio #3',
+        color: 'violet',
+      },
+    ],
+    selected: null,
   };
-},
-methods: {
-  handleCheckboxChange(newItems) {
-    this.items = newItems;
-  }
 }
 ```

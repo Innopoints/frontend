@@ -20,23 +20,23 @@
     props: {
       items: {
         type: Array,
-        required: true
+        required: true,
       },
       click: {
         type: Function,
-        required: true
-      }
+        required: true,
+      },
     },
     data() {
       return {
-        data: this.items
+        data: this.items,
       };
     },
     methods: {
       changeItems(index) {
         this.data[index] = !this.data[index];
         this.click(this.data);
-      }
-    }
+      },
+    },
   };
 </script>

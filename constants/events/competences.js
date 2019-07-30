@@ -1,26 +1,26 @@
 export default [
   {
     name: 'creativity',
-    checked: true
+    checked: true,
   },
   {
     name: 'critical thinking',
-    checked: true
+    checked: true,
   },
   {
     name: 'leadership',
-    checked: true
+    checked: true,
   },
   {
     name: 'conflict aversion',
-    checked: true
+    checked: true,
   },
   {
     name: 'communication',
-    checked: true
+    checked: true,
   },
   {
     name: 'some other skill',
-    checked: true
-  }
+    checked: true,
+  },
 ];
