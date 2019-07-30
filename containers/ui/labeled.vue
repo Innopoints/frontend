@@ -14,7 +14,7 @@
   export default {
     components: {
       Card,
-      Labeled
-    }
+      Labeled,
+    },
   };
 </script>

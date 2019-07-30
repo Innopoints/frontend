@@ -32,23 +32,23 @@
     name: 'Competences',
     data() {
       return {
-        open: false
+        open: false,
       };
     },
     computed: {
       ...mapState({
-        competences: state => state.events.filters.competences
-      })
+        competences: state => state.events.filters.competences,
+      }),
     },
     methods: {
       ...mapActions({
         changeCompetence: 'events/changeCompetence',
-        clearCompetences: 'events/clearCompetences'
+        clearCompetences: 'events/clearCompetences',
       }),
       toggleDropdown() {
         this.open = !this.open;
-      }
-    }
+      },
+    },
   };
 </script>
 

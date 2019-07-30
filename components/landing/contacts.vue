@@ -32,6 +32,6 @@
 
   export default {
     name: "LandingContacts",
-    components: { Card }
+    components: { Card },
   };
 </script>

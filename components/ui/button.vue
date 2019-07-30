@@ -34,52 +34,52 @@
     props: {
       label: {
         type: String,
-        default: ''
+        default: '',
       },
       link: {
         type: Boolean,
-        default: false
+        default: false,
       },
       away: {
         type: Boolean,
-        default: false
+        default: false,
       },
       href: {
         type: String,
-        default: '#'
+        default: '#',
       },
       img: {
         type: String,
-        default: ''
+        default: '',
       },
       click: Function,
       filled: {
         type: Boolean,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
-        default: false
+        default: false,
       },
       outline: {
         type: Boolean,
-        default: false
+        default: false,
       },
       danger: {
         type: Boolean,
-        default: false
+        default: false,
       },
       badge: {
         type: Boolean,
-        default: false
+        default: false,
       },
       round: {
         type: Boolean,
-        default: false
+        default: false,
       },
       normal: {
         type: Boolean,
-        default: false
+        default: false,
       },
     },
     computed: {
@@ -122,12 +122,12 @@
       disable() {
         if(!this.link && this.disabled) return true;
         return null;
-      }
+      },
     },
     methods: {
       handleClick() {
         if(!this.link && this.click) this.click();
-      }
-    }
+      },
+    },
   };
 </script>

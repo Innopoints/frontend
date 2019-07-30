@@ -17,13 +17,13 @@
   export default {
     components: {
       ProductEditPreview,
-      ProductEditForm
+      ProductEditForm,
     },
     head: {
       title: 'Product Edit',
       meta: [
-        { hid: 'description', name: 'description', content: `Create or edit the product from InnoStore` }
-      ]
+        { hid: 'description', name: 'description', content: `Create or edit the product from InnoStore` },
+      ],
     },
   };
 </script>

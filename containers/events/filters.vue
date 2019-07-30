@@ -35,13 +35,13 @@
     },
     computed: {
       ...mapState({
-        mobileCollapsed: state => state.events.mobileCollapsed
-      })
+        mobileCollapsed: state => state.events.mobileCollapsed,
+      }),
     },
     methods: {
       ...mapActions({
-        toggleMobileCollapsed: 'events/toggleMobileCollapsed'
-      })
-    }
+        toggleMobileCollapsed: 'events/toggleMobileCollapsed',
+      }),
+    },
   };
 </script>

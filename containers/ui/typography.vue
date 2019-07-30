@@ -39,6 +39,6 @@
   import Dot from '../../components/ui/dot';
 
   export default {
-    components: { Dot, Card }
+    components: { Dot, Card },
   };
 </script>

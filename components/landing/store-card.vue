@@ -28,7 +28,7 @@
       color: String,
       buttonURL: {
         type: String,
-        default: '#'
+        default: '#',
       },
     },
     computed: {
@@ -38,7 +38,7 @@
           '#217E93': '#F5FDFF',
           '#7A7A7A': '#F6F6F6',
         }[this.color];
-      }
-    }
+      },
+    },
   };
 </script>

@@ -56,7 +56,7 @@
       interval: {
         type: Number,
         required: false,
-      }
+      },
     },
     data() {
       return {
@@ -74,8 +74,8 @@
           if(!time)
             return;
           this.timerId = setInterval(this.next, time);
-        }
-      }
+        },
+      },
     },
     methods: {
       next() {

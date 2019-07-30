@@ -21,12 +21,12 @@
     props: {
       img: {
         type: String,
-        default: ''
+        default: '',
       },
       color: {
         type: String,
-        default: '#FFF'
-      }
-    }
+        default: '#FFF',
+      },
+    },
   };
 </script>

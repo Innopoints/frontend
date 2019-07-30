@@ -57,8 +57,8 @@
     head: {
       title: 'UI Kit',
       meta: [
-        { hid: 'description', name: 'description', content: `UI kit for innopoints project` }
-      ]
+        { hid: 'description', name: 'description', content: `UI kit for innopoints project` },
+      ],
     },
   };
 </script>

@@ -15,6 +15,6 @@
       img: String,
       title: String,
       subtitle: String,
-    }
+    },
   };
 </script>
