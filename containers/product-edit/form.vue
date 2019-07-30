@@ -49,6 +49,7 @@
         v-for="i in vars"
         :colors="['red', 'green', '#123456']"
         :key="i"
+        :name="i.toString()"
         :removable="i !== 1"
         :in-sizes="inSizes"
       />

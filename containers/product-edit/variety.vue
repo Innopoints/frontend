@@ -69,8 +69,8 @@
     </div>
 
     <Dropzone
-      id="dropzone"
       ref="dropzone"
+      :id="'dropzone-'+name"
       :options="dropzoneOptions"
       :destroyDropzone="false"
       :useCustomSlot="true"
@@ -87,6 +87,13 @@
         </label>
         <small>Make sure the ratio is 1:1 (square)</small>
       </template>
+      <Draggable
+        :list="dropzoneObject && dropzoneObject.files || []"
+        :class="'dragzone-' + name"
+        :group="name"
+        handle="[data-move]"
+        class="images"
+      />
     </Dropzone>
 
     <Button v-if="removable" label="remove variety" danger />
@@ -98,6 +105,7 @@
   import RadioGroup from '../../components/ui/radio-group';
   import Dropzone from 'nuxt-dropzone';
   import Button from '../../components/ui/button';
+  import Draggable from 'vuedraggable';
 
   export default {
     name: 'ProductFormVariety',
@@ -106,6 +114,7 @@
       RadioGroup,
       TextField,
       Dropzone,
+      Draggable,
     },
     props: {
       inSizes: Boolean,
@@ -117,6 +126,10 @@
             return false;
           return value.every(item => typeof item === 'string');
         },
+      },
+      name: {
+        type: String,
+        required: true,
       },
     },
     data() {
@@ -136,6 +149,7 @@
                 </button>
               </div>
             </div>`,
+          previewsContainer: `.dragzone-${this.name}`,
         },
         dropzoneObject: null,
       };
@@ -154,7 +168,14 @@
     },
     mounted() {
       this.dropzoneObject = this.$refs.dropzone.dropzone;
-      this.$watch('dropzoneObject.files', () => {});
+      this.$watch('dropzoneObject.files', (arr) => {
+        if(arr.length == 0) {
+          this.dropzoneObject.enable();
+        }
+        else {
+          this.dropzoneObject.disable();
+        }
+      });
     },
     methods: {
       addFile(file) {
@@ -171,11 +192,10 @@
 
         const deleteButton = wrapper.querySelector('.actions button[data-remove]');
         deleteButton.onclick = () => {
-          this.dropzoneObject.files.splice(file.index, 1);
+          const index = this.dropzoneObject.files.findIndex(item => item == file);
+          this.dropzoneObject.files.splice(index, 1);
           wrapper.remove();
         };
-
-        const moveButton = wrapper.querySelector('.actions button[data-move]');
       },
     },
   };
@@ -191,12 +211,8 @@
   align-items: center;
 }
 
-.dropzone {
-  &:hover {
-    background-color: #F6F6F6;
-  }
-  &.dz-clickable {
-    cursor: pointer;
-  }
+.image-platform:not(.has-content) {
+  background-color: #F6F6F6;
+  cursor: pointer;
 }
 </style>
