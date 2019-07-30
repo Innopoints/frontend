@@ -27,7 +27,5 @@
   };
 </script>
 
-<style lang="scss" src="../static/css/shop/index.scss">
-
-</style>
+<style lang="scss" src="../static/css/shop/index.scss" />
 

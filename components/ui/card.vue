@@ -9,7 +9,7 @@
       />
       <div
         role="group"
-        class="color-optioins"
+        class="color-options"
       >
         <label
           v-for="variation in variations"
