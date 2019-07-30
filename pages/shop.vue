@@ -12,7 +12,7 @@
       </div>
     </section>
     <p class="link-bottom padded">
-      What’s so cool about being a volunteer? The <nuxt-link to="/shop">InnoStore</nuxt-link> has your answers!
+      Lacking innopoints? <nuxt-link to="/events">Volunteer on events</nuxt-link> to fill in the shortage!
     </p>
   </div>
 </template>
