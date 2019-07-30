@@ -1,15 +1,14 @@
 <template>
   <li class="variety">
     <div class="settings">
-      <Dropdown :chevron="false">
-        <template v-slot:opener>
-          choose color
-          <div class="selected-color" style="background-color: blueviolet" />
-        </template>
-        <template>
-          kill me
-        </template>
-      </Dropdown>
+      <div class="color-picker">
+        choose color:&nbsp;
+        <RadioGroup
+          :items="colorOptions"
+          name="group"
+          horizontal
+        />
+      </div>
 
       <div v-if="!inSizes" class="quantity">
         <label for="quantity">Quantity</label>
@@ -89,7 +88,7 @@
 
 <script>
   import TextField from '../../components/ui/text-field';
-  import Dropdown from '../../components/ui/dropdown';
+  import RadioGroup from '../../components/ui/radio-group';
   import Dropzone from 'nuxt-dropzone';
   import Button from '../../components/ui/button';
 
@@ -97,13 +96,21 @@
     name: 'ProductFormVariety',
     components: {
       Button,
-      Dropdown,
+      RadioGroup,
       TextField,
       Dropzone,
     },
     props: {
       inSizes: Boolean,
       removable: Boolean,
+      colors: {
+        type: Array,
+        validator(value) {
+          if(!Array.isArray(value))
+            return false;
+          return value.every(item => typeof item === 'string');
+    },
+      },
     },
     data() {
       return {
