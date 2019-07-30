@@ -6,7 +6,22 @@
     <span class="subtitle">
       {{ subtitle }}
     </span>
+    <div v-if="withPrice===true" class="card-row">
+      <div class="labeled text">
+        <span class="label">Price</span>
+        <span class="content">
+          <span class="price">{{ price }}</span>
+          <img src="/images/create-product/innopoint.svg" class="ml" />
+        </span>
+      </div>
+      <Button
+        :href="buttonURL"
+        label="view"
+        outline
+      />
+    </div>
     <Button
+      v-else
       :href="buttonURL"
       link
       label="view"
@@ -26,10 +41,15 @@
       title: String,
       subtitle: String,
       color: String,
+      price: Number,
       buttonURL: {
         type: String,
         default: '#'
       },
+      withPrice: {
+        type: Boolean,
+        default: false
+      }
     },
     computed: {
       background() {

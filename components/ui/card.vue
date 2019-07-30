@@ -1,11 +1,25 @@
 <template>
   <div :class="img ? 'with-image' : ''" class="card">
-    <img
+<!--     <img
       v-if="img"
       :src="img"
       :style="'background: ' + color"
       class="image"
-    />
+    /> -->
+    <div class="image">
+      <img
+        v-if="img"
+        :src="img"
+        :style="'background: ' + color"
+        class="image"
+      />
+      <div role="group" class="color-optioins">
+        <label class="radio colored" id="red">
+          <input type="radio" name="colors" checked="checked" />
+          <div class="icon" />
+        </label>
+      </div>
+    </div>
     <div v-if="img" class="content">
       <slot />
     </div>
