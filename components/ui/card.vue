@@ -1,25 +1,33 @@
 <template>
   <div :class="img ? 'with-image' : ''" class="card">
-<!--     <img
-      v-if="img"
-      :src="img"
-      :style="'background: ' + color"
-      class="image"
-    /> -->
-    <div class="image">
+    <div v-if="variations" class="image">
       <img
         v-if="img"
         :src="img"
         :style="'background: ' + color"
         class="image"
       />
-      <div role="group" class="color-optioins">
-        <label class="radio colored" id="red">
+      <div
+        role="group"
+        class="color-optioins"
+      >
+        <label
+          v-for="variation in variations"
+          :key="variation"
+          :id="variation"
+          class="radio colored"
+        >
           <input type="radio" name="colors" checked="checked" />
           <div class="icon" />
         </label>
       </div>
     </div>
+    <img
+      v-else-if="img"
+      :src="img"
+      :style="'background: ' + color"
+      class="image"
+    />
     <div v-if="img" class="content">
       <slot />
     </div>
@@ -40,6 +48,9 @@
       color: {
         type: String,
         default: '#FFF'
+      },
+      variations: {
+        type: Array
       }
     }
   };

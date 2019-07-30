@@ -1,12 +1,16 @@
 <template>
-  <Card :img="img" :color="color">
+  <Card
+    :img="img"
+    :color="color"
+    :variations="variations"
+  >
     <div class="title">
       {{ title }}
     </div>
     <span class="subtitle">
       {{ subtitle }}
     </span>
-    <div v-if="withPrice===true" class="card-row">
+    <div v-if="priced===true" class="card-row">
       <div class="labeled text">
         <span class="label">Price</span>
         <span class="content">
@@ -42,11 +46,12 @@
       subtitle: String,
       color: String,
       price: Number,
+      variations: Array,
       buttonURL: {
         type: String,
         default: '#'
       },
-      withPrice: {
+      priced: {
         type: Boolean,
         default: false
       }
