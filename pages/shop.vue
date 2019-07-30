@@ -3,7 +3,7 @@
     <ShopTagline />
     <section class="shop padded">
       <div class="cards">
-        <Card
+        <StoreCard
           v-for="(item, i) in items"
           :key="i"
           v-bind="item"
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-  import Card from '../components/landing/store-card';
+  import StoreCard from '../components/landing/store-card';
   import ShopTagline from '../components/shop/tagline';
   import items from '../constants/shop/store';
 
   export default {
     components: {
-      Card,
+      StoreCard,
       ShopTagline,
     },
     data() {

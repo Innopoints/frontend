@@ -39,6 +39,7 @@
   import Button from '../ui/button';
 
   export default {
+    name: 'StoreCard',
     components: { Button, Card },
     props: {
       img: String,
