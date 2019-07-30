@@ -5,7 +5,7 @@
         v-for="(item, i) in items"
         :key="i"
         v-bind="item"
-        withPrice
+        priced
       />
     </div>
   </section>
@@ -13,7 +13,7 @@
 
 <script>
   import Card from '../components/landing/store-card';
-  import items from '../constants/landing/store';
+  import items from '../constants/shop/store';
 
   export default {
     components: {
