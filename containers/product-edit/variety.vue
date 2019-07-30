@@ -70,16 +70,23 @@
 
     <Dropzone
       id="dropzone"
-      :options="options"
+      ref="dropzone"
+      :options="dropzoneOptions"
       :destroyDropzone="false"
       :useCustomSlot="true"
+      :include-styling="false"
+      @vdropzone-file-added="addFile"
+      @vdropzone-thumbnail="thumbnail"
+      :class="{'has-content': hasFiles}"
       class="image-platform"
     >
-      <img class="icon mr" src="/images/create-product/image.svg" />
-      <label class="title" for="file-input1">
-        drag &amp; drop here or click to upload photos
-      </label>
-      <small>Make sure the ratio is 1:1 (square)</small>
+      <template v-if="!hasFiles">
+        <img class="icon mr" src="/images/create-product/image.svg" />
+        <label class="title" for="file-input1">
+          drag &amp; drop here or click to upload photos
+        </label>
+        <small>Make sure the ratio is 1:1 (square)</small>
+      </template>
     </Dropzone>
 
     <Button v-if="removable" label="remove variety" danger />
@@ -109,16 +116,87 @@
           if(!Array.isArray(value))
             return false;
           return value.every(item => typeof item === 'string');
-    },
+        },
       },
     },
     data() {
       return {
-        options: {
-          url: "http://example.com",
+        dropzoneOptions: {
+          url: '#',
+          acceptedFiles: 'image/*',
+          previewTemplate: `
+            <div class="image card with-image">
+              <img data-img />
+              <div class="actions">
+                <button type="button" class="btn danger round" data-remove title="Remove image">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+                <button type="button" class="btn normal round" data-move title="Move image">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"></polyline><polyline points="9 5 12 2 15 5"></polyline><polyline points="15 19 12 22 9 19"></polyline><polyline points="19 9 22 12 19 15"></polyline><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg>
+                </button>
+              </div>
+            </div>`,
         },
-        vars: 2,
+        dropzoneObject: null,
       };
+    },
+    computed: {
+      colorOptions() {
+        return this.colors.map(color => ({
+          color,
+        }) );
+      },
+      hasFiles() {
+        if(this.dropzoneObject == null)
+          return false;
+        return this.dropzoneObject.files.length > 0;
+      },
+    },
+    mounted() {
+      this.dropzoneObject = this.$refs.dropzone.dropzone;
+      this.$watch('dropzoneObject.files', () => {});
+    },
+    methods: {
+      addFile(file) {
+        const index = this.dropzoneObject.files.findIndex(item => item == file);
+        file.index = index;
+      },
+      thumbnail(file, dataUrl) {
+        const wrapper = file.previewElement;
+        if(!wrapper)
+          return;
+        const thumbnailElement = wrapper.querySelector("[data-img]");
+        thumbnailElement.alt = file.name;
+        thumbnailElement.src = dataUrl;
+
+        const deleteButton = wrapper.querySelector('.actions button[data-remove]');
+        deleteButton.onclick = () => {
+          this.dropzoneObject.files.splice(file.index, 1);
+          wrapper.remove();
+        };
+
+        const moveButton = wrapper.querySelector('.actions button[data-move]');
+      },
     },
   };
 </script>
+
+<style lang="scss" scoped>
+.settings {
+  justify-content: space-between;
+}
+
+.color-picker {
+  display: flex;
+  align-items: center;
+}
+
+.dropzone {
+  &:hover {
+    background-color: #F6F6F6;
+  }
+  &.dz-clickable {
+    cursor: pointer;
+  }
+}
+</style>
