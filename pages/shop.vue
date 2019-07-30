@@ -23,6 +23,9 @@
   import items from '../constants/shop/store';
 
   export default {
+    head: {
+      title: "InnoStore",
+    },
     components: {
       StoreCard,
       ShopTagline,
