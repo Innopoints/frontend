@@ -25,7 +25,7 @@
   export default {
     components: {
       Card,
-      ShopTagline
+      ShopTagline,
     },
     data() {
       return {

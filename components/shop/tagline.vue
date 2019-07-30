@@ -12,7 +12,7 @@
 
 <script>
   export default {
-    name: "ShopTagline"
+    name: "ShopTagline",
   };
 </script>
 

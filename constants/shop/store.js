@@ -6,7 +6,7 @@ export default [
     color: '#fff0f0',
     buttonURL: '#',
     price: 1337,
-    variations: ['red', 'green']
+    variations: ['red', 'green'],
   },
   {
     img: '/images/landing/tshirt.png',
@@ -14,7 +14,7 @@ export default [
     subtitle: 'T-Shirt',
     color: '#f5fdff',
     buttonURL: '#',
-    price: 1337
+    price: 1337,
   },
   {
     img: '/images/landing/umbrella.png',
@@ -22,7 +22,7 @@ export default [
     subtitle: '',
     color: '#f6f6f6',
     buttonURL: '#',
-    price: 1337
+    price: 1337,
   },
   {
     img: '/images/landing/sweatshirt.png',
@@ -31,7 +31,7 @@ export default [
     color: '#fff0f0',
     buttonURL: '#',
     price: 1337,
-    variations: ['red', 'green']
+    variations: ['red', 'green'],
   },
   {
     img: '/images/landing/tshirt.png',
@@ -39,7 +39,7 @@ export default [
     subtitle: 'T-Shirt',
     color: '#f5fdff',
     buttonURL: '#',
-    price: 1337
+    price: 1337,
   },
   {
     img: '/images/landing/umbrella.png',
@@ -47,6 +47,6 @@ export default [
     subtitle: '',
     color: '#f6f6f6',
     buttonURL: '#',
-    price: 1337
+    price: 1337,
   },
 ];

@@ -47,11 +47,11 @@
       },
       color: {
         type: String,
-        default: '#FFF'
+        default: '#FFF',
       },
       variations: {
-        type: Array
-      }
-    }
+        type: Array,
+      },
+    },
   };
 </script>

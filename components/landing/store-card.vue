@@ -53,8 +53,8 @@
       },
       priced: {
         type: Boolean,
-        default: false
-      }
+        default: false,
+      },
     },
     computed: {
       background() {
