@@ -4,6 +4,36 @@
     :color="color"
     :variations="variations"
   >
+    <template v-slot:radio>
+      <div v-if="variations" class="image">
+        <img
+          v-if="img"
+          :src="img"
+          :style="'background: ' + color"
+          class="image"
+        />
+        <div
+          role="group"
+          class="color-options"
+        >
+          <label
+            v-for="variation in variations"
+            :key="variation"
+            :id="variation"
+            class="radio colored"
+          >
+            <input type="radio" name="colors" checked="checked" />
+            <div class="icon" />
+          </label>
+        </div>
+      </div>
+      <img
+        v-else
+        :src="img"
+        :style="'background: ' + color"
+        class="image"
+      />
+    </template>
     <div class="title">
       {{ title }}
     </div>
