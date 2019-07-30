@@ -6,7 +6,10 @@ export default [
     color: '#fff0f0',
     buttonURL: '#',
     price: 1337,
-    variations: ['red', 'green'],
+    variations: [
+      {color: 'red'},
+      {color: 'green'},
+    ],
   },
   {
     img: '/images/landing/tshirt.png',
@@ -31,7 +34,10 @@ export default [
     color: '#fff0f0',
     buttonURL: '#',
     price: 1337,
-    variations: ['red', 'green'],
+    variations: [
+      {color: 'red'},
+      {color: 'green'},
+    ],
   },
   {
     img: '/images/landing/tshirt.png',

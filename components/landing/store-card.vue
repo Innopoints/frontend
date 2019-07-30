@@ -12,20 +12,7 @@
           :style="'background: ' + color"
           class="image"
         />
-        <div
-          role="group"
-          class="color-options"
-        >
-          <label
-            v-for="variation in variations"
-            :key="variation"
-            :id="variation"
-            class="radio colored"
-          >
-            <input type="radio" name="colors" checked="checked" />
-            <div class="icon" />
-          </label>
-        </div>
+        <RadioGroup :items="variations" name="title" class="color-options" />
       </div>
       <img
         v-else
@@ -67,10 +54,11 @@
 <script>
   import Card from '../ui/card';
   import Button from '../ui/button';
+  import RadioGroup from '../ui/radio-group';
 
   export default {
     name: 'StoreCard',
-    components: { Button, Card },
+    components: { Button, Card, RadioGroup },
     props: {
       img: String,
       title: String,
