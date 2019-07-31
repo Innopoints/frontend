@@ -88,12 +88,37 @@
         <small>Make sure the ratio is 1:1 (square)</small>
       </template>
       <Draggable
-        :list="dropzoneObject && dropzoneObject.files || []"
+        :list="hasFiles ? dropzoneObject.files : []"
         :class="'dragzone-' + name"
         :group="name"
         handle="[data-move]"
         class="images"
-      />
+      >
+        <template v-if="hasFiles">
+          <div v-for="(file, index) in dropzoneObject.files" :key="file.upload.uuid" class="image card with-image">
+            <img :src="file.dataURL" :alt="file.name" />
+            <div class="actions">
+              <button
+                @click="remove(index)"
+                type="button"
+                class="btn danger round"
+                title="Remove image"
+              >
+                <img src="/images/product-edit/x.svg" />
+              </button>
+              {{ index }}
+              <button
+                type="button"
+                class="btn normal round"
+                title="Move image"
+                data-move
+              >
+                <img src="/images/product-edit/move.svg" />
+              </button>
+            </div>
+          </div>
+        </template>
+      </Draggable>
     </Dropzone>
 
     <Button v-if="removable" label="remove variety" danger />
@@ -137,19 +162,8 @@
         dropzoneOptions: {
           url: '#',
           acceptedFiles: 'image/*',
-          previewTemplate: `
-            <div class="image card with-image">
-              <img data-img />
-              <div class="actions">
-                <button type="button" class="btn danger round" data-remove title="Remove image">
-                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-                <button type="button" class="btn normal round" data-move title="Move image">
-                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"></polyline><polyline points="9 5 12 2 15 5"></polyline><polyline points="15 19 12 22 9 19"></polyline><polyline points="19 9 22 12 19 15"></polyline><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg>
-                </button>
-              </div>
-            </div>`,
-          previewsContainer: `.dragzone-${this.name}`,
+          previewTemplate: '<template></template>', // dummy element
+          // previewsContainer: `.dragzone-${this.name}`,
         },
         dropzoneObject: null,
       };
@@ -178,24 +192,14 @@
       });
     },
     methods: {
-      addFile(file) {
-        const index = this.dropzoneObject.files.findIndex(item => item == file);
-        file.index = index;
+      addFile(/* file */) {
+        this.$watch(`dropzoneObject.files`, () => {});  // simply to add an observer
       },
-      thumbnail(file, dataUrl) {
-        const wrapper = file.previewElement;
-        if(!wrapper)
-          return;
-        const thumbnailElement = wrapper.querySelector("[data-img]");
-        thumbnailElement.alt = file.name;
-        thumbnailElement.src = dataUrl;
-
-        const deleteButton = wrapper.querySelector('.actions button[data-remove]');
-        deleteButton.onclick = () => {
-          const index = this.dropzoneObject.files.findIndex(item => item == file);
-          this.dropzoneObject.files.splice(index, 1);
-          wrapper.remove();
-        };
+      remove(index) {
+        this.dropzoneObject.files.splice(index, 1);
+      },
+      thumbnail(/* file, dataURL */) {
+        this.dropzoneObject.files.__ob__.dep.notify();
       },
     },
   };
