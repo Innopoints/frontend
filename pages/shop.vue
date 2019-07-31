@@ -4,10 +4,9 @@
     <section class="shop padded">
       <div class="cards">
         <StoreCard
-          v-for="(item, i) in items"
-          :key="i"
+          v-for="item in items"
+          :key="item.id"
           v-bind="item"
-          priced
         />
       </div>
     </section>
@@ -20,11 +19,11 @@
 <script>
   import StoreCard from '../components/shop/card';
   import ShopTagline from '../components/shop/tagline';
-  import items from '../constants/shop/store';
+  import items from '../constants/store';
 
   export default {
     head: {
-      title: "InnoStore",
+      title: 'InnoStore',
     },
     components: {
       StoreCard,

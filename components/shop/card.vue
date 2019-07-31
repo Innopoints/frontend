@@ -1,29 +1,20 @@
 <template>
-  <Card :img="img">
-    <template v-slot:radio>
-      <div v-if="variations" class="image">
-        <img
-          v-if="img"
-          :src="img"
-          :style="'background: ' + color"
-          class="image"
-        />
-        <RadioGroup :items="variations" name="title" class="color-options" />
-      </div>
-      <img
-        v-else
-        :src="img"
-        :style="'background: ' + color"
-        class="image"
+  <Card :img="selected.images[0]" :color="selected.background">
+    <template v-if="varieties.length > 1" v-slot:radio>
+      <RadioGroup
+        :items="varieties"
+        :name="'color-' + id"
+        v-model="selected"
+        class="color-options"
       />
     </template>
     <div class="title">
-      {{ title }}
+      {{ name }}
     </div>
     <span class="subtitle">
-      {{ subtitle }}
+      {{ type }}
     </span>
-    <div v-if="priced===true" class="card-row">
+    <div class="card-row">
       <div class="labeled text">
         <span class="label">Price</span>
         <span class="content">
@@ -32,18 +23,12 @@
         </span>
       </div>
       <Button
-        :href="buttonURL"
+        :href="'/shop/' + id"
         label="view"
+        link
         outline
       />
     </div>
-    <Button
-      v-else
-      :href="buttonURL"
-      link
-      label="view"
-      outline
-    />
   </Card>
 </template>
 
@@ -56,20 +41,16 @@
     name: 'StoreCard',
     components: { Button, Card, RadioGroup },
     props: {
-      img: String,
-      title: String,
-      subtitle: String,
-      color: String,
+      id: Number,
+      name: String,
+      type: String,
       price: Number,
-      variations: Array,
-      buttonURL: {
-        type: String,
-        default: '#',
-      },
-      priced: {
-        type: Boolean,
-        default: false,
-      },
+      varieties: Array,
+    },
+    data() {
+      return {
+        selected: this.varieties[0],
+      };
     },
     computed: {
       background() {

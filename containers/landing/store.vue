@@ -9,8 +9,8 @@
 
     <div class="cards">
       <StoreCard
-        v-for="(item, i) in items"
-        :key="i"
+        v-for="item in items.slice(0, 3)"
+        :key="item.id"
         v-bind="item"
       />
     </div>
@@ -23,7 +23,7 @@
 
 <script>
   import StoreCard from '../../components/shop/card';
-  import items from '../../constants/landing/store';
+  import items from '../../constants/store';
 
   export default {
     components: {
