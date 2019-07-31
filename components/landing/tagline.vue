@@ -14,7 +14,7 @@
 
         <Button
           link
-          href="/"
+          href="/shop"
           label="see the InnoStore"
           outline
         />
