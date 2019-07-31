@@ -8,10 +8,11 @@
     </div>
 
     <div class="cards">
-      <Card
-        v-for="(item, i) in items"
-        :key="i"
+      <StoreCard
+        v-for="item in topItems"
+        :key="item.id"
         v-bind="item"
+        is-short
       />
     </div>
 
@@ -22,16 +23,16 @@
 </template>
 
 <script>
-  import Card from '../../components/landing/store-card';
-  import items from '../../constants/landing/store';
+  import StoreCard from '../../components/shop/card';
+  import items from '../../constants/shop';
 
   export default {
     components: {
-      Card,
+      StoreCard,
     },
     data() {
       return {
-        items,
+        topItems: items.slice(0,3),
       };
     },
   };

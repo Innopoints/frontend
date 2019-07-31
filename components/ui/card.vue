@@ -1,11 +1,14 @@
 <template>
   <div :class="img ? 'with-image' : ''" class="card">
-    <img
-      v-if="img"
-      :src="img"
-      :style="'background: ' + color"
-      class="image"
-    />
+    <div class="image">
+      <img
+        v-if="img"
+        :src="img"
+        :style="'background: ' + color"
+        class="image"
+      />
+      <slot name="radio" />
+    </div>
     <div v-if="img" class="content">
       <slot />
     </div>
