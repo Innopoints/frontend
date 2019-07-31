@@ -9,7 +9,7 @@
 
     <div class="cards">
       <StoreCard
-        v-for="item in items.slice(0, 3)"
+        v-for="item in topItems"
         :key="item.id"
         v-bind="item"
         is-short
@@ -32,7 +32,7 @@
     },
     data() {
       return {
-        items,
+        topItems: items.slice(0,3),
       };
     },
   };
