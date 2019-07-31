@@ -106,7 +106,6 @@
               >
                 <img src="/images/product-edit/x.svg" />
               </button>
-              {{ index }}
               <button
                 type="button"
                 class="btn normal round"
