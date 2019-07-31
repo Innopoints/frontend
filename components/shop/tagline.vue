@@ -15,5 +15,3 @@
     name: "ShopTagline",
   };
 </script>
-
-
