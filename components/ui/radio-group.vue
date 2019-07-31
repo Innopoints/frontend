@@ -67,7 +67,7 @@
 
         // Parse HEX colors
         let outline = '';
-        let match = item.color.match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
+        let match = item.color.toUpperCase().match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
         if(match) {
           outline = `
             --r: ${parseInt(match[1], 16)};

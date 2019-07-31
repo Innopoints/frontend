@@ -19,11 +19,11 @@
 <script>
   import StoreCard from '../components/shop/card';
   import ShopTagline from '../components/shop/tagline';
-  import items from '../constants/store';
+  import items from '../constants/shop';
 
   export default {
     head: {
-      title: 'InnoStore',
+      title: 'Shop',
     },
     components: {
       StoreCard,

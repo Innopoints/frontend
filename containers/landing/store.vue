@@ -24,7 +24,7 @@
 
 <script>
   import StoreCard from '../../components/shop/card';
-  import items from '../../constants/store';
+  import items from '../../constants/shop';
 
   export default {
     components: {
