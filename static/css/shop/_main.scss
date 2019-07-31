@@ -1,0 +1,66 @@
+.shop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-self: stretch;
+}
+
+.card {
+  max-width: 18em;
+  margin-top: 1em;
+}
+
+.card > .image {
+  position: relative;
+}
+
+.card > .image > img {
+  width: 100%;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: .5rem;
+}
+
+.title + .card-row {
+  margin-top: 1.5rem;
+}
+
+.color-options {
+  display: flex;
+  flex-direction: column-reverse;
+  position: absolute;
+  bottom: .5em;
+  right: 1em;
+}
+
+.color-options > label {
+  margin-bottom: .5em;
+}
+
+.card-row .price {
+  font-size: 1.2rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .card {
+    margin: .5em;
+  }
+
+  @supports (display: grid) {
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 18em);
+      grid-gap: 1rem;
+    }
+  }
+}
