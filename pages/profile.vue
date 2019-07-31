@@ -9,7 +9,7 @@
 
 <script>
   import user from '../constants/profile/user';
-  import ProfileInfo from '../containers/profile/Info';
+  import ProfileInfo from '../containers/profile/info';
   import ProfileTimeline from '../containers/profile/timeline';
   import ProfileStatistics from '../containers/profile/statistics';
   import ProfileNotifications from '../containers/profile/notifications';

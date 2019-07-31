@@ -5,7 +5,7 @@
       You will still see notifications on the website even if you leave them off.
       <div class="dialog notice">
         <div class="message">
-          <img src="/images/ui-kit/alert-triangle-green.svg" class="icon">
+          <img src="/images/ui-kit/alert-triangle-green.svg" class="icon" />
           <p>Push notifications require permission before they can be used</p>
         </div>
         <div class="actions">

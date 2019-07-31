@@ -1,11 +1,12 @@
 <template>
-  <Timeline :class="{'collapsed': !expand}" load class="padded">
+  <Timeline :class="{'collapsed': collapsed}" load class="padded">
     <header>
       <h2>Timeline<Dot attention small /></h2>
-      <button id="collapse-timeline" @click="expand = !expand" class="btn">
-        <img src="/images/profile/chevron-down.svg" class="icon mr chevron" />
-        <span>{{ expand ? 'collapse' : 'expand' }}</span>
-      </button>
+      <Button
+        :label="collapsed ? 'expand' : 'collapse'"
+        :click="collapse"
+        chevron
+      />
     </header>
 
     <TimelineEntry icon="/images/profile/document.svg">
@@ -25,18 +26,25 @@
   import Dot from '../../components/ui/dot';
   import Timeline from '../../components/ui/timeline';
   import TimelineEntry from '../../components/ui/timeline-entry';
+  import Button from '../../components/ui/button';
 
   export default {
     name: 'ProfileTimeline',
     components: {
+      Button,
       TimelineEntry,
       Timeline,
       Dot,
     },
     data() {
       return {
-        expand: true,
+        collapsed: false,
       };
+    },
+    methods: {
+      collapse() {
+        this.collapsed = !this.collapsed;
+      },
     },
   };
 </script>

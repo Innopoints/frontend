@@ -10,6 +10,7 @@ away | `false` | If it is a button-link - then *away* prop makes it `<a target="
 href | `'#'` | Where button-link should navigate
 label | `''` | Text in the button
 img | `''` | SVG (!) image to show
+chevron | `false` | Shows the rotating chevron right from the text
 click | `null` | Function that handles the click on the button.
 disabled | `false` | Is button disabled
 outline | `false` | Border without the fill

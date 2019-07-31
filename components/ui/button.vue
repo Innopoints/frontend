@@ -9,7 +9,7 @@
     :disabled="disable"
     v-ripple="ripple"
     @click="handleClick"
-    type="button"
+    :type="!link ? 'button' : ''"
   >
     <template v-if="badge">
       <div class="badge">
@@ -24,6 +24,10 @@
     </template>
 
     {{ label }}
+
+    <template v-if="chevron">
+      <img src="/images/profile/chevron-down.svg" class="icon ml chevron">
+    </template>
   </component>
 </template>
 
@@ -52,6 +56,7 @@
         type: String,
         default: '',
       },
+      chevron: Boolean,
       click: Function,
       filled: {
         type: Boolean,
