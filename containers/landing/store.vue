@@ -12,6 +12,7 @@
         v-for="item in items.slice(0, 3)"
         :key="item.id"
         v-bind="item"
+        is-short
       />
     </div>
 

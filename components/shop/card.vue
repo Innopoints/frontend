@@ -1,6 +1,6 @@
 <template>
   <Card :img="selected.images[0]" :color="selected.background">
-    <template v-if="varieties.length > 1" v-slot:radio>
+    <template v-if="varieties.length > 1 && !isShort" v-slot:radio>
       <RadioGroup
         :items="varieties"
         :name="'color-' + id"
@@ -14,7 +14,7 @@
     <span class="subtitle">
       {{ type }}
     </span>
-    <div class="card-row">
+    <div v-if="!isShort" class="card-row">
       <div class="labeled text">
         <span class="label">Price</span>
         <span class="content">
@@ -29,6 +29,13 @@
         outline
       />
     </div>
+    <Button
+      v-else
+      :href="'/shop/' + id"
+      label="view"
+      link
+      outline
+    />
   </Card>
 </template>
 
@@ -46,6 +53,7 @@
       type: String,
       price: Number,
       varieties: Array,
+      isShort: Boolean,
     },
     data() {
       return {
