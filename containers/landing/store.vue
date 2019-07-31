@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import StoreCard from '../../components/landing/store-card';
+  import StoreCard from '../../components/shop/card';
   import items from '../../constants/landing/store';
 
   export default {

@@ -1,9 +1,5 @@
 <template>
-  <Card
-    :img="img"
-    :color="color"
-    :variations="variations"
-  >
+  <Card :img="img">
     <template v-slot:radio>
       <div v-if="variations" class="image">
         <img
