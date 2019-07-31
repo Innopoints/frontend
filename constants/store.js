@@ -8,13 +8,13 @@ export default [
     purchases: 0,
     varieties: [
       {
-        color: 'red',
+        color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
         images: ['/images/landing/sweatshirt.png'],
         sizes: {},
       },
       {
-        color: 'green',
+        color: '#00FF00',
         background: 'rgba(0, 255, 0, .2)',
         images: ['/images/landing/sweatshirt.png'],
         sizes: {},
@@ -30,25 +30,25 @@ export default [
     purchases: 0,
     varieties: [
       {
-        color: 'blue',
+        color: '#0000FF',
         background: 'rgba(0, 0, 255, .2)',
         images: ['/images/landing/tshirt.png'],
         sizes: {},
       },
       {
-        color: 'black',
+        color: '#000000',
         background: 'rgba(0, 0, 0, .2)',
         images: ['/images/landing/tshirt.png'],
         sizes: {},
       },
       {
-        color: 'white',
+        color: '#FFFFFF',
         background: 'rgba(255, 255, 255, .2)',
         images: ['/images/landing/tshirt.png'],
         sizes: {},
       },
       {
-        color: 'violet',
+        color: '#CC00CC',
         background: 'rgba(155, 0, 155, .2)',
         images: ['/images/landing/tshirt.png'],
         sizes: {},
@@ -64,7 +64,7 @@ export default [
     purchases: 0,
     varieties: [
       {
-        color: 'red',
+        color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
         images: ['/images/landing/umbrella.png'],
         sizes: {},
@@ -80,12 +80,12 @@ export default [
     purchases: 0,
     varieties: [
       {
-        color: 'green', background: 'rgba(0, 255, 0, .2)',
+        color: '#00FF00', background: 'rgba(0, 255, 0, .2)',
         images: ['/images/landing/sweatshirt.png'],
         sizes: {},
       },
       {
-        color: 'red', background: 'rgba(255, 0, 0, .2)',
+        color: '#FF0000', background: 'rgba(255, 0, 0, .2)',
         images: ['/images/landing/sweatshirt.png'],
         sizes: {},
       },
@@ -100,7 +100,7 @@ export default [
     purchases: 0,
     varieties: [
       {
-        color: 'red',
+        color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
         images: ['/images/landing/tshirt.png'],
         sizes: {},
@@ -116,7 +116,7 @@ export default [
     purchases: 0,
     varieties: [
       {
-        color: 'red',
+        color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
         images: ['/images/landing/umbrella.png'],
         sizes: {},
