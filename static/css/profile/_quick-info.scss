@@ -1,0 +1,88 @@
+.quick-info {
+  margin-top: 1.5em;
+}
+
+.balance > p {
+  font-size: 1.2rem;
+}
+
+.balance > nav {
+  margin-top: 1em;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.horizontal {
+  display: none;
+}
+
+.personal {
+  margin-top: 1.5em;
+}
+
+.personal .btn > .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.personal .telegram {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.personal .telegram > .btn {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.personal .telegram > .btn:first-child {
+  margin-right: .2em;
+}
+
+.info-bubble {
+  padding: 1em 3.5em 1em 1em;
+  font-size: .95rem;
+}
+
+.personal .info-bubble {
+  min-width: 14em;
+}
+
+@media only screen and (min-width: 380px) {
+  .personal {
+    padding: 0 .2rem;
+  }
+
+  .personal .telegram > .btn:first-child {
+    margin-right: .5em;
+  }
+
+  .personal .info-bubble {
+    right: -3em;
+    font-size: 1rem;
+    min-width: 17em;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .vertical {
+    display: none;
+  }
+
+  .horizontal {
+    display: block;
+  }
+
+  .personal {
+    padding: 0;
+    margin: 0;
+  }
+
+  .quick-info {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin-top: 4em;
+  }
+}

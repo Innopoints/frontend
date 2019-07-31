@@ -1,0 +1,112 @@
+.timeline {
+  margin-top: 3.5em;
+}
+
+.timeline > header {
+  position: relative;
+  margin-bottom: 1.5em;
+}
+
+.timeline h2 {
+  display: flex;
+  align-items: center;
+}
+
+.timeline header .dot {
+  margin-left: .5em;
+}
+
+#collapse-timeline {
+  position: absolute;
+  top: -.7em;
+  right: 0;
+}
+
+.timeline .content {
+  font-size: .95rem;
+  flex: 1;
+  position: relative;
+}
+
+.timeline .status,
+.timeline time {
+  font-size: .9rem;
+  color: #777;
+  margin-top: .5em;
+  display: block;
+}
+
+.timeline .status.good {
+  color: #387800;
+}
+
+.timeline .status.bad {
+  color: #ba0707;
+}
+
+.timeline .status > .ipt {
+  height: .8rem;
+  margin-right: 3px;
+}
+
+.timeline .content > .ipt {
+  height: .9rem;
+  margin-right: 3px;
+}
+
+.timeline.collapsed .entry:not(:first-of-type),
+.timeline.collapsed .more,
+.timeline.collapsed .entry:first-of-type::before {
+  display: none;
+}
+
+.timeline .chevron {
+  transition: transform 100ms;
+  margin-bottom: -2px;
+  transform: rotate(180deg);
+}
+
+.timeline.collapsed .chevron {
+  transform: rotate(0);
+}
+
+@media only screen and (min-width: 640px) {
+  .timeline > header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+  }
+
+  .timeline .content {
+    padding-right: 10em;
+  }
+
+  .timeline time {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  #collapse-timeline {
+    right: 15%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #collapse-timeline {
+    right: 24%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  #collapse-timeline {
+    right: 30%;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .timeline {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}
