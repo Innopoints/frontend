@@ -3,6 +3,7 @@
     <ProfileInfo :user="user" />
     <ProfileTimeline />
     <ProfileStatistics />
+    <ProfileNotifications />
   </div>
 </template>
 
@@ -11,9 +12,10 @@
   import ProfileInfo from '../containers/profile/Info';
   import ProfileTimeline from '../containers/profile/timeline';
   import ProfileStatistics from '../containers/profile/statistics';
+  import ProfileNotifications from '../containers/profile/notifications';
 
   export default {
-    components: { ProfileStatistics, ProfileTimeline, ProfileInfo },
+    components: { ProfileNotifications, ProfileStatistics, ProfileTimeline, ProfileInfo },
     head: {
       title: 'Profile',
       meta: [
