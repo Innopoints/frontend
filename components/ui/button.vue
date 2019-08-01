@@ -22,8 +22,9 @@
       <!--eslint-disable-next-line-->
       <component v-if="img" :is="svg" :class="[label && 'mr']" />
     </template>
-
-    {{ label }}
+    <slot>
+      {{ label }}
+    </slot>
   </component>
 </template>
 
