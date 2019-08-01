@@ -26,7 +26,7 @@
     {{ label }}
 
     <template v-if="chevron">
-      <img src="/images/profile/chevron-down.svg" class="icon ml chevron">
+      <img src="/images/profile/chevron-down.svg" class="icon ml chevron" />
     </template>
   </component>
 </template>
