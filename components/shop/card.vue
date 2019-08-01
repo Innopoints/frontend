@@ -23,23 +23,22 @@
         </span>
       </div>
       <Button
-        :href="'/shop/' + id"
+        @click="openModal(id)"
         label="view"
-        link
         outline
       />
     </div>
     <Button
       v-else
-      :href="'/shop/' + id"
+      @click="openModal(id)"
       label="view"
-      link
       outline
     />
   </Card>
 </template>
 
 <script>
+  import {mapActions} from 'vuex';
   import Card from '../ui/card';
   import Button from '../ui/button';
   import RadioGroup from '../ui/radio-group';
@@ -59,6 +58,16 @@
       return {
         selected: this.varieties[0],
       };
+    },
+    methods: {
+      ...mapActions({
+        toggleOpen: 'product/toggleOpen',
+        load: 'product/load',
+      }),
+      openModal(id) {
+        this.load(id);
+        this.toggleOpen();
+      },
     },
   };
 </script>

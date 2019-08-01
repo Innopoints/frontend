@@ -1,6 +1,7 @@
 <template>
   <div class="card product with-image">
     <Button
+      @click="closeModal"
       normal
       round
       class="close"
@@ -45,6 +46,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex';
   import Carousel from "../../components/ui/carousel";
   import Sizes from "../../components/shop/sizes";
   import RadioGroup from "../../components/ui/radio-group";
@@ -75,6 +77,15 @@
       return {
         activeVariety: this.varieties[0],
       };
+    },
+
+    methods: {
+      ...mapActions({
+        toggleOpen: 'product/toggleOpen',
+      }),
+      closeModal() {
+        this.toggleOpen();
+      },
     },
   };
 </script>

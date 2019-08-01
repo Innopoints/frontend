@@ -14,10 +14,13 @@
       Lacking innopoints?
       <nuxt-link to="/events">Volunteer on events</nuxt-link> to fill in the shortage!
     </p>
+
+    <ProductModal v-if="open" />
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   import StoreCard from "../../components/shop/card";
   import ShopTagline from "../../components/shop/tagline";
   import items from "../../constants/shop";
@@ -29,11 +32,17 @@
     components: {
       StoreCard,
       ShopTagline,
+      ProductModal: () => import('../../containers/shop/product-modal'),
     },
     data() {
       return {
         items,
       };
+    },
+    computed: {
+      ...mapState({
+        open: state => state.product.open
+      }),
     },
   };
 </script>

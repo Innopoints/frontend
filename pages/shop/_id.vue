@@ -8,11 +8,7 @@
         label="see all products in the InnoStore"
       />
 
-      <div class="balance-tooltip">
-        You have 1337&nbsp;
-        <img src="/images/innopoint.svg" class="ml" />
-      </div>
-
+      <BalanceTooltip />
       <ProductCard v-bind="product" />
 
       <p class="link-bottom padded">
@@ -27,12 +23,14 @@
   import items from '../../constants/shop';
   import ProductCard from '../../containers/shop/product-card';
   import Button from '../../components/ui/button';
+  import BalanceTooltip from '../../containers/shop/balance';
 
   export default {
     head: {
       title: 'Product',
     },
     components: {
+      BalanceTooltip,
       Button,
       ProductCard,
     },
