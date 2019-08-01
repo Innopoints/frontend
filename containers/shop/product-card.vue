@@ -78,12 +78,12 @@
         activeVariety: this.varieties[0],
       };
     },
-
     methods: {
       ...mapActions({
         toggleOpen: 'product/toggleOpen',
       }),
       closeModal() {
+        this.$router.push({name: 'shop', query: {}});
         this.toggleOpen();
       },
     },

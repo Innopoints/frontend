@@ -44,6 +44,9 @@
         open: state => state.product.open
       }),
     },
+    asyncData ({ query, redirect }) {
+      if(query.id) redirect('/shop/' + query.id);
+    },
   };
 </script>
 

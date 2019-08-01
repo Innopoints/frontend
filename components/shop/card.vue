@@ -66,6 +66,7 @@
       }),
       openModal(id) {
         this.load(id);
+        this.$router.push({name: 'shop', query: {id: id}});
         this.toggleOpen();
       },
     },
