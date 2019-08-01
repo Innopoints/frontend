@@ -6,7 +6,7 @@
       class="close"
       img="/images/x.svg"
     />
-    <Carousel :images="varieties[activeVariety].images" />
+    <Carousel :images="activeVariety.images" />
     <div class="content">
       <div class="title">{{ name }}</div>
       <div class="subtitle">{{ type }}</div>
@@ -17,7 +17,12 @@
 
       <div class="card-row">
         <Labeled class="text" label="Colors">
-          <RadioGroup :items="varieties" :name="'color-' + id" class="radio-options" />
+          <RadioGroup
+            :items="varieties"
+            :name="'color-' + id"
+            v-model="activeVariety"
+            class="radio-options"
+          />
         </Labeled>
         <Sizes />
       </div>
@@ -68,10 +73,8 @@
     },
     data() {
       return {
-        activeVariety: 0,
+        activeVariety: this.varieties[0],
       };
-    },
-    methods: {
     },
   };
 </script>

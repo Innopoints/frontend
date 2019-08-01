@@ -7,11 +7,14 @@
         img="/images/shop/arrow-left.svg"
         label="see all products in the InnoStore"
       />
+
       <div class="balance-tooltip">
         You have 1337&nbsp;
         <img src="/images/innopoint.svg" class="ml" />
       </div>
+
       <ProductCard v-bind="product" />
+
       <p class="link-bottom padded">
         Lacking innopoints?
         <nuxt-link to="/events">Volunteer on events</nuxt-link> to fill in the shortage!
