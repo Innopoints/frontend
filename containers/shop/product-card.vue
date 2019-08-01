@@ -1,5 +1,5 @@
 <template>
-  <div id="view-product" class="modal-overlay column modal-open">
+  <div>
     <div class="balance-tooltip">
       You have 1337&nbsp;
       <img src="images/innopoint.svg" class="ml" />

@@ -12,7 +12,10 @@
         <nuxt-link to="/events">Volunteer on events</nuxt-link> to fill in the shortage!
       </p>
     </div>
-    <ProductCard class="radio-group" />
+    <ProductCard
+      id="view-product"
+      class="modal-overlay column modal-open radio-group"
+    />
   </div>
 </template>
 
