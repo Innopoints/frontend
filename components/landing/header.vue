@@ -3,7 +3,7 @@
     <img @click="resolution" src="/images/landing/innou-logo-text.png" class="logo" />
     <Button
       :label="'sign ' + (isAuth ? 'out' : 'in')"
-      :click="toggleAuth"
+      @click="toggleAuth"
       outline
     />
   </header>

@@ -41,7 +41,7 @@
     },
     computed: {
       ...mapState({
-        open: state => state.product.open
+        open: state => state.product.open,
       }),
     },
     asyncData ({ query, redirect }) {

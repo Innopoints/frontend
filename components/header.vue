@@ -7,7 +7,7 @@
     <div class="actions">
       <Button
         :label="'sign ' + (isAuth ? 'out' : 'in')"
-        :click="toggleAuth"
+        @click="toggleAuth"
         outline
       />
     </div>

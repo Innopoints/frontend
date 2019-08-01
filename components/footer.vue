@@ -2,7 +2,7 @@
   <footer>
     <div class="to-top">
       <Button
-        :click="scrollToTop"
+        @click="scrollToTop"
         img="/images/landing/arrow-up.svg"
         label="back to top"
         filled
