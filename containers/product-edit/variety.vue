@@ -4,11 +4,11 @@
       <Dropdown :items="colorOptions" v-model="selectedColor" return-object>
         <template v-slot:label>
           choose a color
-          <div class="selected-color" :style="`background-color: ${selectedColor.value}`" />
+          <div :style="`background-color: ${selectedColor.value}`" class="selected-color" />
         </template>
         <template v-slot:item="{ item }">
           <div style="display:flex; align-content:center;">
-            <div class="selected-color" :style="`background-color:${item.value}; margin-left:0; margin-right:1em;`" />
+            <div :style="`background-color:${item.value}; margin-left:0; margin-right:1em;`" class="selected-color" />
             <span>{{ item.text }}</span>
           </div>
         </template>
