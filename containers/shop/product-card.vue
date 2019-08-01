@@ -1,44 +1,40 @@
 <template>
-  <div>
-    <div class="balance-tooltip">
-      You have 1337&nbsp;
-      <img src="/images/innopoint.svg" class="ml" />
-    </div>
+  <div class="card product with-image">
+    <Button
+      normal
+      round
+      class="close"
+      img="/images/x.svg"
+    />
+    <Carousel :images="varieties[activeVariety].images" />
+    <div class="content">
+      <div class="title">{{ name }}</div>
+      <div class="subtitle">{{ type }}</div>
 
-    <div class="card product with-image">
-      <button id="close-modal" class="btn normal round close">
-        <img src="/images/x.svg" />
-      </button>
-      <Carousel :images="getImages()" />
-      <div class="content">
-        <div class="title">{{ item.name }}</div>
-        <div class="subtitle">{{ item.type }}</div>
+      <div class="labeled text card-row">
+        <span class="label">Description</span>
+        <span>{{ description }}</span>
+      </div>
 
-        <div class="labeled text card-row">
-          <span class="label">Description</span>
-          <span>{{ item.description }}</span>
+      <div class="card-row">
+        <div class="labeled text">
+          <span class="label">Colors</span>
+          <RadioGroup :items="varieties" :name="'color-' + id" class="radio-options" />
         </div>
+        <Sizes />
+      </div>
 
-        <div class="card-row">
-          <div class="labeled text">
-            <span class="label">Colors</span>
-            <RadioGroup :items="item.varieties" :name="'color-' + item.id" class="radio-options" />
-          </div>
-          <Sizes />
+      <div class="card-row">
+        <div class="labeled text">
+          <span class="label">Price</span>
+          <span class="price">
+            {{ price }}
+            <img src="/images/innopoint.svg" />
+          </span>
         </div>
-
-        <div class="card-row">
-          <div class="labeled text">
-            <span class="label">Price</span>
-            <span class="price">
-              {{ item.price }}
-              <img src="/images/innopoint.svg" />
-            </span>
-          </div>
-          <div class="purchase">
-            <div class="purchases">1488 purchases</div>
-            <a class="btn filled" href="#">purchase</a>
-          </div>
+        <div class="purchase">
+          <div class="purchases">{{ purchases }} purchases</div>
+          <Button filled label="purchase" />
         </div>
       </div>
     </div>
@@ -49,28 +45,37 @@
   import Carousel from "../../components/ui/carousel";
   import Sizes from "../../components/shop/sizes";
   import RadioGroup from "../../components/ui/radio-group";
-  import items from "../../constants/shop";
+  import Button from '../../components/ui/button';
 
   export default {
     name: "ProductCard",
     components: {
+      Button,
       Carousel,
       Sizes,
       RadioGroup,
     },
+    props: {
+      id: Number,
+      name: String,
+      type: String,
+      description: String,
+      price: Number,
+      purchases: Number,
+      varieties: Array,
+    },
     data() {
       return {
-        item: items[0],
+        activeVariety: 0,
       };
     },
     methods: {
-      getImages() {
-        let images = [];
-        this.item.varieties.filter(i => {
-          images = images.concat(i.images);
-        });
-        return images;
-      },
     },
   };
 </script>
+
+<style scoped>
+  .close {
+    position: absolute !important;
+  }
+</style>

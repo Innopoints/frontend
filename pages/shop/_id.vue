@@ -1,11 +1,17 @@
 <template>
   <div class="material">
     <div class="align-center column">
-      <nuxt-link to="/shop" class="btn">
-        <img src="/images/shop/arrow-left.svg" class="mr" />
-        see all products in the InnoStore
-      </nuxt-link>
-      <ProductCard />
+      <Button
+        link
+        href="/shop"
+        img="/images/shop/arrow-left.svg"
+        label="see all products in the InnoStore"
+      />
+      <div class="balance-tooltip">
+        You have 1337&nbsp;
+        <img src="/images/innopoint.svg" class="ml" />
+      </div>
+      <ProductCard v-bind="product" />
       <p class="link-bottom padded">
         Lacking innopoints?
         <nuxt-link to="/events">Volunteer on events</nuxt-link> to fill in the shortage!
@@ -17,17 +23,19 @@
 <script>
   import items from '../../constants/shop';
   import ProductCard from '../../containers/shop/product-card';
+  import Button from '../../components/ui/button';
 
   export default {
     head: {
       title: 'Product',
     },
     components: {
+      Button,
       ProductCard,
     },
-    data() {
+    asyncData ({ params }) {
       return {
-        item: items[1],
+        product: items.find(x => x.id === parseInt(params.id)),
       };
     },
   };

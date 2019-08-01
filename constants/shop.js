@@ -32,7 +32,7 @@ export default [
       {
         color: '#0000FF',
         background: 'rgba(0, 0, 255, .2)',
-        images: ['/images/landing/tshirt.png'],
+        images: ['/images/landing/tshirt.png', '/images/landing/sweatshirt.png'],
         sizes: {},
       },
       {
@@ -50,7 +50,7 @@ export default [
       {
         color: '#CC00CC',
         background: 'rgba(155, 0, 155, .2)',
-        images: ['/images/landing/tshirt.png'],
+        images: ['/images/landing/sweatshirt.png', '/images/landing/tshirt.png'],
         sizes: {},
       },
     ],
