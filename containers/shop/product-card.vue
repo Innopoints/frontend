@@ -1,6 +1,7 @@
 <template>
   <div class="card product with-image">
     <Button
+      v-if="closable"
       @click="closeModal"
       normal
       round
@@ -25,7 +26,23 @@
             class="radio-options"
           />
         </Labeled>
-        <Sizes />
+
+        <div class="labeled text">
+          <span class="label">Sizes</span>
+          <div role="group" class="radio-options">
+            <Chip
+              v-for="(val, key) in activeVariety.sizes"
+              :disabled="val === 0"
+              :value="key === chosenSize"
+              :key="key"
+              @click="chooseSize(key)"
+              name="sizes"
+              small
+            >
+              {{ key }}
+            </Chip>
+          </div>
+        </div>
       </div>
 
       <div class="card-row">
@@ -48,19 +65,19 @@
 <script>
   import {mapActions} from 'vuex';
   import Carousel from "../../components/ui/carousel";
-  import Sizes from "../../components/shop/sizes";
   import RadioGroup from "../../components/ui/radio-group";
   import Button from '../../components/ui/button';
   import Labeled from '../../components/ui/labeled';
   import Innopoint from '../../static/images/innopoint.svg';
+  import Chip from '../../components/ui/chip';
 
   export default {
     name: "ProductCard",
     components: {
+      Chip,
       Labeled,
       Button,
       Carousel,
-      Sizes,
       RadioGroup,
       Innopoint,
     },
@@ -72,10 +89,12 @@
       price: Number,
       purchases: Number,
       varieties: Array,
+      closable: Boolean,
     },
     data() {
       return {
         activeVariety: this.varieties[0],
+        chosenSize: null,
       };
     },
     methods: {
@@ -85,6 +104,9 @@
       closeModal() {
         this.$router.push({name: 'shop', query: {}});
         this.toggleOpen();
+      },
+      chooseSize(size) {
+        this.chosenSize = size;
       },
     },
   };

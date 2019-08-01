@@ -1,7 +1,7 @@
 <template>
   <div :class="{'modal-open': open}" class="modal-overlay column">
     <BalanceTooltip />
-    <ProductCard v-bind="product" />
+    <ProductCard v-bind="product" closable />
   </div>
 </template>
 
