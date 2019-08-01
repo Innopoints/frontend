@@ -1,14 +1,18 @@
 <template>
   <li class="variety">
     <div class="settings">
-      <div class="color-picker">
-        choose color:&nbsp;
-        <RadioGroup
-          :items="colorOptions"
-          name="group"
-          horizontal
-        />
-      </div>
+      <Dropdown :items="colorOptions" v-model="selectedColor" return-object>
+        <template v-slot:label>
+          choose a color
+          <div class="selected-color" :style="`background-color: ${selectedColor.value}`" />
+        </template>
+        <template v-slot:item="{ item }">
+          <div style="display:flex; align-content:center;">
+            <div class="selected-color" :style="`background-color:${item.value}; margin-left:0; margin-right:1em;`" />
+            <span>{{ item.text }}</span>
+          </div>
+        </template>
+      </Dropdown>
 
       <div v-if="!inSizes" class="quantity">
         <label for="quantity">Quantity</label>
@@ -126,7 +130,7 @@
 
 <script>
   import TextField from '../../components/ui/text-field';
-  import RadioGroup from '../../components/ui/radio-group';
+  import Dropdown from '../../components/ui/dropdown';
   import Dropzone from 'nuxt-dropzone';
   import Button from '../../components/ui/button';
   import Draggable from 'vuedraggable';
@@ -135,7 +139,7 @@
     name: 'ProductFormVariety',
     components: {
       Button,
-      RadioGroup,
+      Dropdown,
       TextField,
       Dropzone,
       Draggable,
@@ -165,12 +169,14 @@
           // previewsContainer: `.dragzone-${this.name}`,
         },
         dropzoneObject: null,
+        selectedColor: {text: 'black',  value: '#000000'},
       };
     },
     computed: {
       colorOptions() {
         return this.colors.map(color => ({
-          color,
+          text: color,
+          value: color,
         }) );
       },
       hasFiles() {
@@ -207,11 +213,6 @@
 <style lang="scss" scoped>
 .settings {
   justify-content: space-between;
-}
-
-.color-picker {
-  display: flex;
-  align-items: center;
 }
 
 .image-platform:not(.has-content) {
