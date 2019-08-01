@@ -6,7 +6,8 @@
         <StoreCard
           v-for="item in items"
           :key="item.id"
-          v-bind="item" />
+          v-bind="item"
+        />
       </div>
     </section>
     <p class="link-bottom padded">
@@ -17,9 +18,9 @@
 </template>
 
 <script>
-  import StoreCard from "../components/shop/card";
-  import ShopTagline from "../components/shop/tagline";
-  import items from "../constants/store";
+  import StoreCard from "../../components/shop/card";
+  import ShopTagline from "../../components/shop/tagline";
+  import items from "../../constants/shop";
 
   export default {
     head: {
@@ -37,5 +38,5 @@
   };
 </script>
 
-<style lang="scss" src="../static/css/shop/index.scss" />
+<style lang="scss" src="../../static/css/shop/index.scss" />
 

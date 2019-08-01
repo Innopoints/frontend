@@ -2,12 +2,12 @@
   <div>
     <div class="balance-tooltip">
       You have 1337&nbsp;
-      <img src="images/innopoint.svg" class="ml" />
+      <img src="/images/innopoint.svg" class="ml" />
     </div>
 
     <div class="card product with-image">
       <button id="close-modal" class="btn normal round close">
-        <img src="images/x.svg" />
+        <img src="/images/x.svg" />
       </button>
       <Carousel :images="getImages()" />
       <div class="content">
@@ -32,7 +32,7 @@
             <span class="label">Price</span>
             <span class="price">
               {{ item.price }}
-              <img src="images/innopoint.svg" />
+              <img src="/images/innopoint.svg" />
             </span>
           </div>
           <div class="purchase">
@@ -49,7 +49,7 @@
   import Carousel from "../../components/ui/carousel";
   import Sizes from "../../components/shop/sizes";
   import RadioGroup from "../../components/ui/radio-group";
-  import items from "../../constants/store";
+  import items from "../../constants/shop";
 
   export default {
     name: "ProductCard",
