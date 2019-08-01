@@ -11,27 +11,25 @@
       <div class="title">{{ name }}</div>
       <div class="subtitle">{{ type }}</div>
 
-      <div class="labeled text card-row">
-        <span class="label">Description</span>
-        <span>{{ description }}</span>
-      </div>
+      <Labeled class="text card-row" label="Description">
+        {{ description }}
+      </Labeled>
 
       <div class="card-row">
-        <div class="labeled text">
-          <span class="label">Colors</span>
+        <Labeled class="text" label="Colors">
           <RadioGroup :items="varieties" :name="'color-' + id" class="radio-options" />
-        </div>
+        </Labeled>
         <Sizes />
       </div>
 
       <div class="card-row">
-        <div class="labeled text">
-          <span class="label">Price</span>
+        <Labeled label="Price">
           <span class="price">
             {{ price }}
-            <img src="/images/innopoint.svg" />
+            <Innopoint />
           </span>
-        </div>
+        </Labeled>
+
         <div class="purchase">
           <div class="purchases">{{ purchases }} purchases</div>
           <Button filled label="purchase" />
@@ -46,14 +44,18 @@
   import Sizes from "../../components/shop/sizes";
   import RadioGroup from "../../components/ui/radio-group";
   import Button from '../../components/ui/button';
+  import Labeled from '../../components/ui/labeled';
+  import Innopoint from '../../static/images/innopoint.svg';
 
   export default {
     name: "ProductCard",
     components: {
+      Labeled,
       Button,
       Carousel,
       Sizes,
       RadioGroup,
+      Innopoint,
     },
     props: {
       id: Number,
