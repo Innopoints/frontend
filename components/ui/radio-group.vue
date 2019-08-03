@@ -91,6 +91,7 @@
 .radio-group {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   &.horizontal {
     flex-direction: row;
   }
