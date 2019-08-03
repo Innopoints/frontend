@@ -3,18 +3,16 @@
     <label
       v-for="(item, index) in items"
       :key="index"
-      :class="{clickable: withLabels}"
+      :class="{clickable: withLabels, colored: !!item.color}"
       class="radio"
     >
-      <div class="radio">
-        <input
-          :checked="selected === item"
-          @change="select(item)"
-          :name="name"
-          type="radio"
-        />
-        <div :style="style(item)" class="icon" />
-      </div>
+      <input
+        :checked="selected === item"
+        @change="select(item)"
+        :name="name"
+        type="radio"
+      />
+      <div :style="style(item)" class="icon" />
       {{ (withLabels && item.label) ? item.label : '' }}
     </label>
   </div>
