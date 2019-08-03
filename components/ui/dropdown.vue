@@ -13,7 +13,7 @@
     </button>
     <div :class="{'right-edge': right}" class="dropdown">
       <div class="relative-wrapper">
-        <button @click="isOpen = false" class="btn normal round close">
+        <button @click="isOpen = false" class="btn normal round close" style="margin-right:0;">
           <img src="/images/ui-kit/x.svg" />
         </button>
         <div
