@@ -1,7 +1,12 @@
 <template>
   <li class="variety">
     <div class="settings">
-      <Dropdown :items="colorOptions" v-model="selectedColor" return-object>
+      <Dropdown
+        :items="colorOptions"
+        :chevron="false"
+        v-model="selectedColor"
+        return-object
+      >
         <template v-slot:label>
           choose a color
           <div :style="`background-color: ${selectedColor.value}`" class="selected-color" />
