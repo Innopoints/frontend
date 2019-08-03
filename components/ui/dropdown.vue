@@ -107,7 +107,8 @@
 <style lang="scss" scoped>
 .dropdown > .relative-wrapper {
   padding: 1em;
-  min-width: 10em;
+  padding-right: 3.5em;
+  min-width: 11em;
 }
 .option {
   cursor: pointer;
