@@ -2,21 +2,18 @@
   <li class="variety">
     <div class="settings">
       <Dropdown
-        :items="colorOptions"
         :chevron="false"
-        v-model="selectedColor"
-        return-object
       >
         <template v-slot:label>
           choose a color
-          <div :style="`background-color: ${selectedColor.value}`" class="selected-color" />
+          <div v-if="selectedColor" :style="`background-color: ${selectedColor.color}`" class="selected-color" />
         </template>
-        <template v-slot:item="{ item }">
-          <div style="display:flex; align-content:center;">
-            <div :style="`background-color:${item.value}; margin-left:0; margin-right:1em;`" class="selected-color" />
-            <span>{{ item.text }}</span>
-          </div>
-        </template>
+        <RadioGroup
+          :name="name"
+          :items="colorOptions"
+          v-model="selectedColor"
+          horizontal
+        />
       </Dropdown>
 
       <div v-if="!inSizes" class="quantity">
@@ -136,6 +133,7 @@
 <script>
   import TextField from '../../components/ui/text-field';
   import Dropdown from '../../components/ui/dropdown';
+  import RadioGroup from '../../components/ui/radio-group';
   import Dropzone from 'nuxt-dropzone';
   import Button from '../../components/ui/button';
   import Draggable from 'vuedraggable';
@@ -145,6 +143,7 @@
     components: {
       Button,
       Dropdown,
+      RadioGroup,
       TextField,
       Dropzone,
       Draggable,
@@ -180,8 +179,7 @@
     computed: {
       colorOptions() {
         return this.colors.map(color => ({
-          text: color,
-          value: color,
+          color,
         }) );
       },
       hasFiles() {
