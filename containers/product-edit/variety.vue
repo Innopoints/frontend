@@ -222,4 +222,8 @@
   background-color: #F6F6F6;
   cursor: pointer;
 }
+
+.selected-color {
+  flex-shrink: 0;
+}
 </style>
