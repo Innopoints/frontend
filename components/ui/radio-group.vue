@@ -95,7 +95,7 @@
     flex-direction: row;
   }
   >.radio {
-    padding: 0 2px;
+    padding: 5px;
   }
 }
 </style>
