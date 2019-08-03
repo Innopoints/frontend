@@ -21,17 +21,19 @@
         >
           <img src="/images/ui-kit/x.svg" />
         </button>
-        <div
-          v-for="(option, i) in options"
-          :key="option.value"
-          @click="select(option)"
-          :class="{selected: option.value === valObj.value}"
-          class="option"
-        >
-          <slot :index="i" :item="option" name="item">
-            <p>{{ option.text }}</p>
-          </slot>
-        </div>
+        <slot>
+          <div
+            v-for="(option, i) in options"
+            :key="option.value"
+            @click="select(option)"
+            :class="{selected: option.value === valObj.value}"
+            class="option"
+          >
+            <slot :index="i" :item="option" name="item">
+              <p>{{ option.text }}</p>
+            </slot>
+          </div>
+        </slot>
       </div>
     </div>
   </div>

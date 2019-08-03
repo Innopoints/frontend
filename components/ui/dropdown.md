@@ -23,6 +23,7 @@ If the item is in object format, it must have at least the following 2 propertie
 
 ## Slots
 
+- **default**: The entire dropdown content. If used, the _item_ slot, _items_, _value_, _return-object_ props, and the _input_ event become useless.
 - **label**: The content of the dropdown's label. Overrules the `label` prop
 - **item**: Defines custom item appearance
   - scope props: 
