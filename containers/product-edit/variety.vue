@@ -173,7 +173,7 @@
           // previewsContainer: `.dragzone-${this.name}`,
         },
         dropzoneObject: null,
-        selectedColor: {text: 'black',  value: '#000000'},
+        selectedColor: null,
       };
     },
     computed: {
