@@ -1,16 +1,23 @@
 <template>
   <div class="balance-tooltip">
-    You have 1337
+    You have {{ balance }}
     <Innopoint class="ml" />
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   import Innopoint from '../../static/images/innopoint.svg';
+
   export default {
     name: 'BalanceTooltip',
     components: {
       Innopoint,
+    },
+    computed: {
+      ...mapState({
+        balance: state => state.user.balance,
+      }),
     },
   };
 </script>

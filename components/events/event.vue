@@ -58,7 +58,7 @@
     },
     computed: {
       ...mapState({
-        isAuth: state => state.auth.isAuth,
+        isAuth: state => state.user.isAuth,
       }),
       eventDate() {
         return printDate(this.date);
