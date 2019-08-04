@@ -63,7 +63,6 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
   import Carousel from "../../components/ui/carousel";
   import RadioGroup from "../../components/ui/radio-group";
   import Button from '../../components/ui/button';
@@ -90,6 +89,7 @@
       purchases: Number,
       varieties: Array,
       closable: Boolean,
+      toggleModal: Function,
     },
     data() {
       return {
@@ -103,12 +103,9 @@
       },
     },
     methods: {
-      ...mapActions({
-        toggleOpen: 'product/toggleOpen',
-      }),
       closeModal() {
         this.$router.push({name: 'shop', query: {}});
-        this.toggleOpen();
+        if(this.toggleModal) this.toggleModal();
       },
       chooseSize(size) {
         this.chosenSize = size;

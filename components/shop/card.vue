@@ -38,7 +38,6 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
   import Card from '../ui/card';
   import Button from '../ui/button';
   import RadioGroup from '../ui/radio-group';
@@ -53,6 +52,7 @@
       price: Number,
       varieties: Array,
       isShort: Boolean,
+      toggleModal: Function,
     },
     data() {
       return {
@@ -60,14 +60,9 @@
       };
     },
     methods: {
-      ...mapActions({
-        toggleOpen: 'product/toggleOpen',
-        load: 'product/load',
-      }),
       openModal(id) {
-        this.load(id);
         this.$router.push({name: 'shop', query: {id: id}});
-        this.toggleOpen();
+        this.toggleModal();
       },
     },
   };

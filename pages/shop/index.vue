@@ -7,6 +7,7 @@
           v-for="item in items"
           :key="item.id"
           v-bind="item"
+          :toggle-modal="toggleModal"
         />
       </div>
     </section>
@@ -15,12 +16,16 @@
       <nuxt-link to="/events">Volunteer on events</nuxt-link> to fill in the shortage!
     </p>
 
-    <ProductModal v-if="open" />
+    <ProductModal
+      v-if="open"
+      :open="open"
+      :toggle-modal="toggleModal"
+      :product="product"
+    />
   </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex';
   import StoreCard from "../../components/shop/card";
   import ShopTagline from "../../components/shop/tagline";
   import items from "../../constants/shop";
@@ -37,15 +42,22 @@
     data() {
       return {
         items,
+        open: false,
+        product: null,
       };
     },
-    computed: {
-      ...mapState({
-        open: state => state.product.open,
-      }),
+    watch: {
+      $route() {
+        if(this.$route.query.id) this.product = items.find(x => x.id === parseInt(this.$route.query.id));
+      },
     },
     asyncData ({ query, redirect }) {
       if(query.id) redirect('/shop/' + query.id);
+    },
+    methods: {
+      toggleModal() {
+        this.open = !this.open;
+      },
     },
   };
 </script>

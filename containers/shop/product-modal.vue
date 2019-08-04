@@ -1,12 +1,11 @@
 <template>
   <div :class="{'modal-open': open}" class="modal-overlay column">
     <BalanceTooltip />
-    <ProductCard v-bind="product" closable />
+    <ProductCard v-bind="product" :toggleModal="toggleModal" closable />
   </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex';
   import BalanceTooltip from './balance';
   import ProductCard from './product-card';
 
@@ -18,12 +17,9 @@
     },
     props: {
       id: Number,
-    },
-    computed: {
-      ...mapState({
-        open: state => state.product.open,
-        product: state => state.product.product,
-      }),
+      product: Object,
+      open: Boolean,
+      toggleModal: Function,
     },
   };
 </script>
