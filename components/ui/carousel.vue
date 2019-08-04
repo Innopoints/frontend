@@ -76,6 +76,9 @@
           this.timerId = setInterval(this.next, time);
         },
       },
+      images() {
+        this.current = 0;
+      },
     },
     methods: {
       next() {
