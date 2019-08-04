@@ -35,7 +35,7 @@
               :disabled="val === 0"
               :value="key === chosenSize"
               :key="key"
-              @click="chooseSize(key)"
+              @input="chooseSize(key)"
               name="sizes"
               small
             >
@@ -96,6 +96,11 @@
         activeVariety: this.varieties[0],
         chosenSize: null,
       };
+    },
+    watch: {
+      activeVariety() {
+        this.chosenSize = null;
+      },
     },
     methods: {
       ...mapActions({
