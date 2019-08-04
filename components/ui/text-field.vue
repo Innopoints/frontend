@@ -20,6 +20,8 @@
         :value="value"
         :id="id"
         :pattern="pattern"
+        :min="min"
+        :max="max"
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
@@ -51,10 +53,6 @@
 <script>
   export default {
     name: 'TextField',
-    model: {
-      prop: 'value',
-      event: 'change',
-    },
     props: {
 
       // Wrapper props
@@ -122,9 +120,11 @@
       },
       handleBlur() {
         if(this.blur) this.blur();
+        this.$emit('change', event.target.value);
       },
-      handleInput() {
+      handleInput(event) {
         if(this.input) this.input();
+        this.$emit('input', event.target.value);
       },
     },
   };
