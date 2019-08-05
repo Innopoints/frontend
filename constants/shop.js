@@ -11,13 +11,27 @@ export default [
         color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
         images: ['/images/landing/sweatshirt.png'],
-        sizes: {},
+        sizes: {
+          'XS': 1,
+          'S': 0,
+          'M': 4,
+          'L': 1,
+          'XL': 1,
+          'XXL': 2,
+        },
       },
       {
         color: '#00FF00',
         background: 'rgba(0, 255, 0, .2)',
         images: ['/images/landing/sweatshirt.png'],
-        sizes: {},
+        sizes: {
+          'XS': 11,
+          'S': 0,
+          'M': 2,
+          'L': 0,
+          'XL': 123,
+          'XXL': 2,
+        },
       },
     ],
   },
@@ -32,7 +46,7 @@ export default [
       {
         color: '#0000FF',
         background: 'rgba(0, 0, 255, .2)',
-        images: ['/images/landing/tshirt.png'],
+        images: ['/images/landing/tshirt.png', '/images/landing/sweatshirt.png'],
         sizes: {},
       },
       {
@@ -50,7 +64,7 @@ export default [
       {
         color: '#CC00CC',
         background: 'rgba(155, 0, 155, .2)',
-        images: ['/images/landing/tshirt.png'],
+        images: ['/images/landing/sweatshirt.png', '/images/landing/tshirt.png'],
         sizes: {},
       },
     ],
