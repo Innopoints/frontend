@@ -3,14 +3,11 @@
     <header>
       <h2 class="btn-align">Statistics</h2>
       <Dropdown class="btn-shift">
-        <template v-slot:opener>
+        <template v-slot:label>
           over the past 3 months
         </template>
         <template>
-          great now close me<br />
-          great now close me<br />
-          great now close me<br />
-          great now close me
+          When you see it, run!
         </template>
       </Dropdown>
     </header>

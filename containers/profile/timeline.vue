@@ -4,7 +4,7 @@
       <h2>Timeline<Dot attention small /></h2>
       <Button
         :label="collapsed ? 'expand' : 'collapse'"
-        :click="collapse"
+        @click="collapse"
         chevron
       />
     </header>

@@ -14,7 +14,7 @@
         <Button
           v-if="collapsible"
           :label="collapsed ? 'expand' : 'collapse'"
-          :click="collapse"
+          @click="collapse"
           chevron
           class="handle section-ctl"
         />

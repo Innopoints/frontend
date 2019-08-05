@@ -15,7 +15,12 @@
   import ProfileNotifications from '../containers/profile/notifications';
 
   export default {
-    components: { ProfileNotifications, ProfileStatistics, ProfileTimeline, ProfileInfo },
+    components: {
+      ProfileNotifications,
+      ProfileStatistics,
+      ProfileTimeline,
+      ProfileInfo,
+    },
     head: {
       title: 'Profile',
       meta: [
