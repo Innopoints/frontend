@@ -1,5 +1,5 @@
 <template>
-  <Timeline :class="{'collapsed': collapsed}" load class="padded">
+  <Timeline :class="{collapsed}" load class="padded">
     <header>
       <h2>Timeline<Dot attention small /></h2>
       <Button

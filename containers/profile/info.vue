@@ -38,16 +38,14 @@
           <template v-slot:opener>
             <img src="/images/profile/help-circle.svg" class="icon" />
           </template>
-          <template>
-            <Button
-              img="/images/x.svg"
-              round
-              normal
-              class="close"
-            />
-            Some event organizers prefer to collect those to ease communication. Adding one here will save you the typing for those
-            occasions (you will still be able to control what you send).
-          </template>
+          <Button
+            img="/images/x.svg"
+            round
+            normal
+            class="close"
+          />
+          Some event organizers prefer to collect those to ease communication. Adding one here will save you the typing for those
+          occasions (you will still be able to control what you send).
         </Dropdown>
       </div>
     </div>
