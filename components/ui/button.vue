@@ -23,7 +23,9 @@
       <component v-if="img" :is="svg" :class="[label && 'mr']" />
     </template>
 
-    {{ label }}
+    <slot>
+      {{ label }}
+    </slot>
 
     <template v-if="chevron">
       <img src="/images/profile/chevron-down.svg" class="icon ml chevron" />
@@ -32,7 +34,6 @@
 </template>
 
 <script>
-
   export default {
     name: 'Button',
     props: {
@@ -131,7 +132,7 @@
     },
     methods: {
       handleClick() {
-        if(!this.link && this.click) this.click();
+        this.$emit('click');
       },
     },
   };

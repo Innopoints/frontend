@@ -3,7 +3,7 @@
     <img @click="resolution" src="/images/landing/innou-logo-text.png" class="logo" />
     <Button
       :label="'sign ' + (isAuth ? 'out' : 'in')"
-      :click="toggleAuth"
+      @click="toggleAuth"
       outline
     />
   </header>
@@ -17,14 +17,14 @@
     name: "LandingHeader",
     components: { Button },
     computed: mapState({
-      isAuth: state => state.auth.isAuth,
+      isAuth: state => state.user.isAuth,
     }),
     methods: {
       resolution: () => {
         alert(`You current browser screen resolution.
         Width: ${window.innerWidth}px, height: ${window.innerHeight}px`);
       },
-      ...mapActions({toggleAuth: 'auth/toggleAuth'}),
+      ...mapActions({toggleAuth: 'user/toggleAuth'}),
     },
   };
 </script>
