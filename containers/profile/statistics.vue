@@ -17,7 +17,7 @@
         <Card class="volunteering">
           <header>
             <Clock />
-            325 volunteering hours
+            {{ hours }} volunteering hours
           </header>
           <div class="details">15 volunteering positions handled</div>
           <div class="actions">
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   import Dropdown from '../../components/ui/dropdown';
   import Card from '../../components/ui/card';
   import Clock from '../../static/images/profile/clock.svg';
@@ -78,6 +79,11 @@
       Rating,
       Star,
       Stats,
+    },
+    computed: {
+      ...mapState({
+        hours: state => state.user.volunteeringHours,
+      }),
     },
   };
 </script>

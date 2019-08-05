@@ -1,9 +1,9 @@
 <template>
   <section class="quick-info padded">
-    <h1 class="btn-align vertical">{{ user.name }} {{ user.surname }}</h1>
+    <h1 class="btn-align vertical">{{ name }} {{ surname }}</h1>
     <div class="balance">
       <p class="btn-align">
-        <span>{{ user.innopoints }}</span>
+        <span>{{ balance }}</span>
         <img src="/images/innopoint.svg" />
         available
       </p>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="personal">
-      <h1 class="horizontal">{{ user.name }} {{ user.surname }}</h1>
+      <h1 class="horizontal">{{ name }} {{ surname }}</h1>
       <div class="telegram">
         <Button
           outline
@@ -53,14 +53,19 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   import Button from '../../components/ui/button';
   import Dropdown from '../../components/ui/dropdown';
 
   export default {
     name: 'ProfileInfo',
     components: { Dropdown, Button },
-    props: {
-      user: Object,
+    computed: {
+      ...mapState({
+        balance: state => state.user.balance,
+        name: state => state.user.name,
+        surname: state => state.user.surname,
+      }),
     },
   };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="material">
-    <ProfileInfo :user="user" />
+    <ProfileInfo />
     <ProfileTimeline />
     <ProfileStatistics />
     <ProfileNotifications />
@@ -8,7 +8,6 @@
 </template>
 
 <script>
-  import user from '../constants/profile/user';
   import ProfileInfo from '../containers/profile/info';
   import ProfileTimeline from '../containers/profile/timeline';
   import ProfileStatistics from '../containers/profile/statistics';
@@ -26,11 +25,6 @@
       meta: [
         { hid: 'description', name: 'description', content: `Your innopoints profile` },
       ],
-    },
-    data() {
-      return {
-        user,
-      };
     },
   };
 </script>
