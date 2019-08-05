@@ -21,10 +21,10 @@
       </label>
     </div>
     <template v-if="images.length > 1 && !hideControls">
-      <button @click="prev" class="btn round prev-slide">
+      <button @click="prev" v-ripple class="btn round prev-slide">
         <img src="/images/ui-kit/chevron-left-white.svg" />
       </button>
-      <button @click="next" class="btn round next-slide">
+      <button @click="next" v-ripple class="btn round next-slide">
         <img src="/images/ui-kit/chevron-right-white.svg" />
       </button>
     </template>
@@ -76,6 +76,9 @@
           this.timerId = setInterval(this.next, time);
         },
       },
+      images() {
+        this.current = 0;
+      },
     },
     methods: {
       next() {
@@ -91,3 +94,9 @@
     },
   };
 </script>
+
+<style scoped>
+  .btn.prev-slide, .btn.next-slide {
+    position: absolute !important;
+  }
+</style>

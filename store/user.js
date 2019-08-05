@@ -1,7 +1,10 @@
+const balance = 1488;
+
 export default {
   state() {
     return {
       isAuth: false,
+      balance: balance,
     };
   },
   mutations: {

@@ -23,17 +23,15 @@
         </span>
       </div>
       <Button
-        :href="'/shop/' + id"
+        @click="openModal(id)"
         label="view"
-        link
         outline
       />
     </div>
     <Button
       v-else
-      :href="'/shop/' + id"
+      @click="openModal(id)"
       label="view"
-      link
       outline
     />
   </Card>
@@ -54,11 +52,18 @@
       price: Number,
       varieties: Array,
       isShort: Boolean,
+      toggleModal: Function,
     },
     data() {
       return {
         selected: this.varieties[0],
       };
+    },
+    methods: {
+      openModal(id) {
+        this.$router.push({name: 'shop', query: {id: id}});
+        this.toggleModal();
+      },
     },
   };
 </script>

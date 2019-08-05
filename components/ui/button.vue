@@ -126,9 +126,8 @@
       },
     },
     methods: {
-      handleClick(event) {
-        if(!this.link && this.click) this.click();
-        this.$emit('click', event);
+      handleClick() {
+        this.$emit('click');
       },
     },
   };

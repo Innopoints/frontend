@@ -6,11 +6,11 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  align-items: center;
+  justify-content: center;
   background-color: rgba(0, 0, 0, .25);
 }
 
-.modal-open .modal-overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.modal-overlay.modal-open {
+  display: flex !important;
 }

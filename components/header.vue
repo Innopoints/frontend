@@ -7,7 +7,7 @@
     <div class="actions">
       <Button
         :label="'sign ' + (isAuth ? 'out' : 'in')"
-        :click="toggleAuth"
+        @click="toggleAuth"
         outline
       />
     </div>
@@ -22,7 +22,7 @@
     name: "Header",
     components: { Button },
     computed: mapState({
-      isAuth: state => state.auth.isAuth,
+      isAuth: state => state.user.isAuth,
     }),
     methods: {
       resolution: (e) => {
@@ -30,7 +30,7 @@
         alert(`You current browser screen resolution.
         Width: ${window.innerWidth}px, height: ${window.innerHeight}px`);
       },
-      ...mapActions({toggleAuth: 'auth/toggleAuth'}),
+      ...mapActions({toggleAuth: 'user/toggleAuth'}),
     },
   };
 </script>
