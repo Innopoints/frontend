@@ -6,7 +6,12 @@
       subtitle="If the product has a print, make that the name. Short names work best."
       required
     >
-      <TextField id="name" placeholder="I <3 Innopolis" />
+      <TextField
+        id="name"
+        :value="$store.state.newProduct.name"
+        @change="$store.commit('newProduct/setName', $event)"
+        placeholder="I <3 Innopolis"
+      />
     </FormField>
 
     <FormField
@@ -14,11 +19,21 @@
       title="Type of product"
       subtitle="If the print takes the name, use this field for the type. Leave blank otherwise."
     >
-      <TextField id="type" placeholder="sweatshirt" />
+      <TextField
+        id="type"
+        :value="$store.state.newProduct.type"
+        @change="$store.commit('newProduct/setType', $event)"
+        placeholder="sweatshirt"
+      />
     </FormField>
 
     <FormField id="description" title="Description">
-      <TextField multiline placeholder="High quality bulletproof fabric" />
+      <TextField
+        :value="$store.state.newProduct.description"
+        @change="$store.commit('newProduct/setDescription', $event)"
+        multiline
+        placeholder="High quality bulletproof fabric"
+      />
     </FormField>
 
     <FormField
@@ -29,6 +44,10 @@
     >
       <TextField
         id="price"
+        :min="0"
+        :value="$store.state.newProduct.price"
+        @change="$store.commit('newProduct/setPrice', $event)"
+        type="number"
         item="img"
         right
         src="/images/create-product/innopoint.svg"
@@ -38,24 +57,29 @@
     <header class="varieties">
       <h2>Varieties</h2>
       <Toggle
-        :checked="inSizes"
-        :click="toggleSizes"
+        :checked="$store.state.newProduct.inSizes"
+        @click="$store.commit('newProduct/toggleSizes')"
         label="the product comes in sizes"
       />
     </header>
 
     <ul>
       <ProductFormVariety
-        v-for="i in vars"
-        :colors="['red', 'green', '#123456']"
+        v-for="i in $store.state.newProduct.varietiesCount"
+        :colors="['#FF0000', '#00FF00', '#123456']"
         :key="i"
+        :index="i-1"
         :name="i.toString()"
         :removable="i !== 1"
-        :in-sizes="inSizes"
+        :in-sizes="$store.state.newProduct.inSizes"
       />
 
       <li class="more">
-        <Button img="/images/create-product/plus.svg" label="add another variety" />
+        <Button
+          @click="$store.commit('newProduct/addVariety')"
+          img="/images/create-product/plus.svg"
+          label="add another variety"
+        />
       </li>
     </ul>
   </form>
@@ -79,8 +103,6 @@
     },
     data() {
       return {
-        inSizes: false,
-        vars: 2,
       };
     },
     methods: {
