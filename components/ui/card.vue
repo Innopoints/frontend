@@ -1,12 +1,14 @@
 <template>
-  <div :class="img ? 'with-image' : ''" class="card">
+  <div :class="{'with-image' : img}" class="card">
     <div class="image">
-      <img
-        v-if="img"
-        :src="img"
-        :style="'background: ' + color"
-        class="image"
-      />
+      <slot name="image">
+        <img
+          v-if="img"
+          :src="img"
+          :style="'background: ' + color"
+          class="image"
+        />
+      </slot>
       <slot name="radio" />
     </div>
     <div v-if="img" class="content">
@@ -23,7 +25,7 @@
     name: 'Card',
     props: {
       img: {
-        type: String,
+        type: [String, Boolean],
         default: '',
       },
       color: {
