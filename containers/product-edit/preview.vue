@@ -1,10 +1,17 @@
 <template>
   <section class="preview">
     <h2>Preview</h2>
-    <Card img="/images/create-product/placeholder.svg">
+    <Card :img="true">
+      <template v-slot:image>
+        <Carousel
+          :images="images"
+          :interval="5000"
+          v-slot:image
+        />
+      </template>
       <span :class="name ? 'title' : 'placeholder'" class="name">{{ name }}</span>
       <span v-show="type" class="type subtitle">{{ type }}</span>
-      <Labelled v-show="description" label="Description">
+      <Labelled v-show="description" label="Description" class="mt-2">
         {{ description }}
       </Labelled>
       <div v-show="varietiesWithColor.length > 0" class="card-row top">
@@ -28,7 +35,7 @@
           />
         </Labelled>
       </div>
-      <div class="card-row">
+      <div class="card-row mt-2">
         <div class="labeled text">
           <span class="label">Price</span>
           <span class="content">
@@ -56,6 +63,7 @@
   import Labelled from '../../components/ui/labeled';
   import RadioGroup from '../../components/ui/radio-group';
   import Chip from '../../components/ui/chip';
+  import Carousel from '../../components/ui/carousel';
 
   export default {
     name: 'ProductEditPreview',
@@ -65,6 +73,7 @@
       Labelled,
       RadioGroup,
       Chip,
+      Carousel,
     },
     data() {
       return {
@@ -81,6 +90,11 @@
       ]),
       varietiesWithColor() {
         return this.varieties.filter(v => v.color);
+      },
+      images() {
+        if(this.selectedVariety == null || this.selectedVariety.images.length === 0)
+          return ['/images/create-product/placeholder.svg'];
+        return this.selectedVariety.images;
       },
     },
     

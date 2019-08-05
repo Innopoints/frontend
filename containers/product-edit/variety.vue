@@ -74,6 +74,7 @@
         :list="hasFiles ? dropzoneObject.files : []"
         :class="'dragzone-' + name"
         :group="name"
+        @change="notifyVuex"
         handle="[data-move]"
         class="images"
       >
@@ -188,9 +189,17 @@
       },
       remove(index) {
         this.dropzoneObject.files.splice(index, 1);
+        this.notifyVuex();
+      },
+      notifyVuex() {
+        this.$store.commit('newProduct/setVarFiles', {
+          index: this.index,
+          files: this.dropzoneObject.files.map(file => file.dataURL),
+        });
       },
       thumbnail(/* file, dataURL */) {
         this.dropzoneObject.files.__ob__.dep.notify();
+        this.notifyVuex();
       },
     },
   };

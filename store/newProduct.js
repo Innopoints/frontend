@@ -10,6 +10,7 @@ function newVariety() {
       XXL: 0,
     },
     quantity: 0,
+    images: [],
   };
 }
 
@@ -37,6 +38,7 @@ export default {
       state.price = 0;
       state.inSizes = initialSizes;
       if(initialSizes) state.quantity = 0;
+      state.varieties.forEach(v => v.images.splice(0, v.images.length));  // to clear the old references
       state.varieties = [newVariety()];
       state.varietiesCount = 1;
     },
@@ -71,6 +73,9 @@ export default {
     },
     setVarSizeQuantity(state, {index, size, quantity}) {
       state.varieties[index].sizes[size] = parseInt(quantity, 10);
+    },
+    setVarFiles(state, {index, files}) {
+      state.varieties[index].images = files;
     },
   },
 };
