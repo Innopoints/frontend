@@ -9,7 +9,7 @@
     :disabled="disable"
     v-ripple="ripple"
     @click="handleClick"
-    type="button"
+    :type="!link ? 'button' : ''"
   >
     <template v-if="badge">
       <div class="badge">
@@ -22,14 +22,18 @@
       <!--eslint-disable-next-line-->
       <component v-if="img" :is="svg" :class="[label && 'mr']" />
     </template>
+
     <slot>
       {{ label }}
     </slot>
+
+    <template v-if="chevron">
+      <img src="/images/profile/chevron-down.svg" class="icon ml chevron" />
+    </template>
   </component>
 </template>
 
 <script>
-
   export default {
     name: 'Button',
     props: {
@@ -53,6 +57,7 @@
         type: String,
         default: '',
       },
+      chevron: Boolean,
       click: Function,
       filled: {
         type: Boolean,
