@@ -15,6 +15,7 @@
   import ProductEditPreview from '../containers/product-edit/preview';
 
   export default {
+    layout: 'auth',
     components: {
       ProductEditPreview,
       ProductEditForm,

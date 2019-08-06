@@ -14,6 +14,7 @@
   import ProfileNotifications from '../containers/profile/notifications';
 
   export default {
+    layout: 'auth',
     components: {
       ProfileNotifications,
       ProfileStatistics,
