@@ -5,7 +5,6 @@
       <template v-slot:image>
         <Carousel
           :images="images"
-          :interval="5000"
           v-slot:image
         />
       </template>
