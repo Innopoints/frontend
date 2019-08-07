@@ -120,11 +120,17 @@
       },
       handleBlur() {
         if(this.blur) this.blur();
-        this.$emit('change', event.target.value);
+        this.$emit('change', this.checkNumber(event.target.value));
       },
       handleInput(event) {
         if(this.input) this.input();
-        this.$emit('input', event.target.value);
+        this.$emit('input', this.checkNumber(event.target.value));
+      },
+      checkNumber(value) {
+        if(this.type == 'number') {
+          return window.parseInt(value, 10);
+        }
+        return value;
       },
     },
   };

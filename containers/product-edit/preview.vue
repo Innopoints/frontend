@@ -38,7 +38,7 @@
         <div class="labeled text">
           <span class="label">Price</span>
           <span class="content">
-            <span :class="{placeholder: price <= 0}" class="price">{{ price > 0 ? price : '' }}</span>
+            <span :class="{placeholder: price <= 0}" class="price">{{ price > 0 ? price.toLocaleString('ru') : '' }}</span>
             <img src="/images/create-product/innopoint.svg" class="ml" />
           </span>
         </div>
