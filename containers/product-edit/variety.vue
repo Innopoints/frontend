@@ -195,7 +195,7 @@
         this.$store.commit('newProduct/setVarField', {
           index: this.index,
           key: 'images',
-          value: this.dropzoneObject.files.map(file => file.dataURL),
+          value: this.dropzoneObject.files.map(file => file.dataURL || ''),
         });
       },
       thumbnail(/* file, dataURL */) {
