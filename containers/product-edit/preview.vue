@@ -97,6 +97,15 @@
         return this.selectedVariety.images;
       },
     },
-    
+    watch: {
+      varietiesWithColor(value) {
+        if(value.length === 1) {
+          this.selectedVariety = value[0];
+        }
+        else if(!value.includes(this.selectedVariety)) { // Array changed somehow and the object is no longer there
+          this.selectedVariety = null;
+        }
+      },
+    },
   };
 </script>
