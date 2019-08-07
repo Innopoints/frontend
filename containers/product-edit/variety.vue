@@ -177,6 +177,12 @@
         return this.$store.state.newProduct.varieties[this.index];
       },
     },
+    watch: {
+      '$store.state.newProduct.varieties'(arr) {
+        if(this.index in arr && arr[this.index].images.length == 0)
+          this.dropzoneObject.files = [];
+      },
+    },
     mounted() {
       this.dropzoneObject = this.$refs.dropzone.dropzone;
       this.$watch('dropzoneObject.files', (arr) => {
