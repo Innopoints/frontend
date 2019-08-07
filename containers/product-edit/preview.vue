@@ -106,6 +106,9 @@
         else if(!value.includes(this.selectedVariety)) { // Array changed somehow and the object is no longer there
           this.selectedVariety = null;
         }
+        if(this.selectedVariety == null && value.length > 0) {
+          this.selectedVariety = value[0];
+        }
       },
     },
   };

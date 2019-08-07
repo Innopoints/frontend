@@ -104,7 +104,12 @@
       </Draggable>
     </Dropzone>
 
-    <Button v-if="removable" label="remove variety" danger />
+    <Button
+      v-if="removable"
+      @click="$store.commit('newProduct/removeVariety', index)"
+      label="remove variety"
+      danger
+    />
   </li>
 </template>
 
