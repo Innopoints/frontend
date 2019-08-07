@@ -23,7 +23,7 @@
             horizontal
           />
         </Labelled>
-        <Labelled v-if="selectedVariety" label="Sizes">
+        <Labelled v-if="selectedVariety && inSizes" label="Sizes">
           <Chip
             v-for="(amount, size) in selectedVariety.sizes"
             :key="size"
@@ -87,6 +87,7 @@
         'description',
         'type',
         'varieties',
+        'inSizes',
       ]),
       varietiesWithColor() {
         return this.varieties.filter(v => v.color);
