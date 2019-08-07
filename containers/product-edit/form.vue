@@ -9,7 +9,7 @@
       <TextField
         id="name"
         :value="$store.state.newProduct.name"
-        @change="$store.commit('newProduct/setName', $event)"
+        @change="$store.commit('newProduct/setField', {key: 'name', value: $event})"
         placeholder="I <3 Innopolis"
       />
     </FormField>
@@ -22,7 +22,7 @@
       <TextField
         id="type"
         :value="$store.state.newProduct.type"
-        @change="$store.commit('newProduct/setType', $event)"
+        @change="$store.commit('newProduct/setField', {key: 'type', value: $event})"
         placeholder="sweatshirt"
       />
     </FormField>
@@ -30,7 +30,7 @@
     <FormField id="description" title="Description">
       <TextField
         :value="$store.state.newProduct.description"
-        @change="$store.commit('newProduct/setDescription', $event)"
+        @change="$store.commit('newProduct/setField', {key: 'description', value: $event})"
         multiline
         placeholder="High quality bulletproof fabric"
       />
@@ -46,7 +46,7 @@
         id="price"
         :min="0"
         :value="$store.state.newProduct.price"
-        @change="$store.commit('newProduct/setPrice', $event)"
+        @change="$store.commit('newProduct/setField', {key:'price', value: $event})"
         type="number"
         item="img"
         right

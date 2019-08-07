@@ -42,17 +42,8 @@ export default {
       state.varieties = [newVariety()];
       state.varietiesCount = 1;
     },
-    setName(state, payload) {
-      state.name = payload;
-    },
-    setType(state, payload) {
-      state.type = payload;
-    },
-    setDescription(state, payload) {
-      state.description = payload;
-    },
-    setPrice(state, payload) {
-      state.price = parseInt(payload, 10);
+    setField(state, {key, value}) {
+      state[key] = value;
     },
     toggleSizes(state) {
       state.inSizes = !state.inSizes;
@@ -65,17 +56,11 @@ export default {
       state.varieties.splice(payload, 1);
       state.varietiesCount--;
     },
-    setVarColor(state, {index, color}) {
-      state.varieties[index].color = color;
-    },
-    setVarQuantity(state, {index, quantity}) {
-      state.varieties[index].quantity = parseInt(quantity, 10);
+    setVarField(state, {index, key, value}) {
+      state.varieties[index][key] = value;
     },
     setVarSizeQuantity(state, {index, size, quantity}) {
       state.varieties[index].sizes[size] = parseInt(quantity, 10);
-    },
-    setVarFiles(state, {index, files}) {
-      state.varieties[index].images = files;
     },
   },
 };

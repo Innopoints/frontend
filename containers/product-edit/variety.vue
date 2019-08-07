@@ -16,7 +16,7 @@
           :name="name"
           :items="colorOptions"
           :value="variety"
-          @input="$store.commit('newProduct/setVarColor', {index, color: $event.color})"
+          @input="$store.commit('newProduct/setVarField', {index, key:'color', value: $event.color})"
           horizontal
         />
       </Dropdown>
@@ -27,7 +27,7 @@
           id="quantity"
           :min="0"
           :value="variety.quantity"
-          @change="$store.commit('newProduct/setVarQuantity', {index, quantity: $event})"
+          @change="$store.commit('newProduct/setVarField', {index, key: 'quantity', value: $event})"
           type="number"
         />
       </div>
@@ -192,9 +192,10 @@
         this.notifyVuex();
       },
       notifyVuex() {
-        this.$store.commit('newProduct/setVarFiles', {
+        this.$store.commit('newProduct/setVarField', {
           index: this.index,
-          files: this.dropzoneObject.files.map(file => file.dataURL),
+          key: 'images',
+          value: this.dropzoneObject.files.map(file => file.dataURL),
         });
       },
       thumbnail(/* file, dataURL */) {
