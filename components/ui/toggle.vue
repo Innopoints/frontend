@@ -5,7 +5,7 @@
     <input
       :checked="checked"
       :name="name"
-      @change="click"
+      @change="$emit('click', $event)"
       :class="twoState && 'first'"
       class="switch-ctl"
       type="checkbox"
@@ -25,10 +25,6 @@
     props: {
       checked: {
         type: Boolean,
-        required: true,
-      },
-      click: {
-        type: Function,
         required: true,
       },
       label: {

@@ -6,67 +6,44 @@
       >
         <template v-slot:label>
           choose a color
-          <div v-if="selectedColor" :style="`background-color: ${selectedColor.color}`" class="selected-color" />
+          <div
+            v-if="variety.color"
+            :style="`background-color: ${variety.color}`"
+            class="selected-color"
+          />
         </template>
         <RadioGroup
           :name="name"
           :items="colorOptions"
-          v-model="selectedColor"
+          :value="variety"
+          @input="$store.commit('newProduct/setVarField', {index, key:'color', value: $event.color})"
           horizontal
         />
       </Dropdown>
 
-      <div v-if="!inSizes" class="quantity">
+      <div v-if="!$store.state.newProduct.inSizes" class="quantity">
         <label for="quantity">Quantity</label>
         <TextField
           id="quantity"
+          :min="0"
+          :value="variety.quantity"
+          @change="$store.commit('newProduct/setVarField', {index, key: 'quantity', value: $event})"
           type="number"
         />
       </div>
     </div>
 
 
-    <div v-if="inSizes" class="sizes-wrapper">
+    <div v-if="$store.state.newProduct.inSizes" class="sizes-wrapper">
       <label class="label">Sizes</label>
       <div class="sizes">
-        <TextField
+        <TextField 
+          v-for="size in sizes"
+          :key="size"
+          :text="size"
+          :value="variety.sizes[size]"
+          @change="$store.commit('newProduct/setVarSizeQuantity', {index, size, quantity: $event})"
           item="text"
-          text="XS"
-          type="number"
-          class="right-align"
-          placeholder="0"
-        />
-        <TextField
-          item="text"
-          text="S"
-          type="number"
-          class="right-align"
-          placeholder="0"
-        />
-        <TextField
-          item="text"
-          text="M"
-          type="number"
-          class="right-align"
-          placeholder="0"
-        />
-        <TextField
-          item="text"
-          text="L"
-          type="number"
-          class="right-align"
-          placeholder="0"
-        />
-        <TextField
-          item="text"
-          text="XL"
-          type="number"
-          class="right-align"
-          placeholder="0"
-        />
-        <TextField
-          item="text"
-          text="XXL"
           type="number"
           class="right-align"
           placeholder="0"
@@ -97,15 +74,16 @@
         :list="hasFiles ? dropzoneObject.files : []"
         :class="'dragzone-' + name"
         :group="name"
+        @change="notifyVuex"
         handle="[data-move]"
         class="images"
       >
         <template v-if="hasFiles">
-          <div v-for="(file, index) in dropzoneObject.files" :key="file.upload.uuid" class="image card with-image">
+          <div v-for="(file, i) in dropzoneObject.files" :key="file.upload.uuid" class="image card with-image">
             <img :src="file.dataURL" :alt="file.name" />
             <div class="actions">
               <button
-                @click="remove(index)"
+                @click="remove(i)"
                 type="button"
                 class="btn danger round"
                 title="Remove image"
@@ -126,7 +104,12 @@
       </Draggable>
     </Dropzone>
 
-    <Button v-if="removable" label="remove variety" danger />
+    <Button
+      v-if="removable"
+      @click="$store.commit('newProduct/removeVariety', index)"
+      label="remove variety"
+      danger
+    />
   </li>
 </template>
 
@@ -149,7 +132,6 @@
       Draggable,
     },
     props: {
-      inSizes: Boolean,
       removable: Boolean,
       colors: {
         type: Array,
@@ -163,6 +145,10 @@
         type: String,
         required: true,
       },
+      index: {
+        type: Number,
+        required: true,
+      },
     },
     data() {
       return {
@@ -173,7 +159,7 @@
           // previewsContainer: `.dragzone-${this.name}`,
         },
         dropzoneObject: null,
-        selectedColor: null,
+        sizes: ['XS', 'S', 'M', 'L' , 'XL', 'XXL'],
       };
     },
     computed: {
@@ -186,6 +172,15 @@
         if(this.dropzoneObject == null)
           return false;
         return this.dropzoneObject.files.length > 0;
+      },
+      variety() {
+        return this.$store.state.newProduct.varieties[this.index];
+      },
+    },
+    watch: {
+      '$store.state.newProduct.varieties'(arr) {
+        if(this.index in arr && arr[this.index].images.length == 0)
+          this.dropzoneObject.files = [];
       },
     },
     mounted() {
@@ -205,9 +200,18 @@
       },
       remove(index) {
         this.dropzoneObject.files.splice(index, 1);
+        this.notifyVuex();
+      },
+      notifyVuex() {
+        this.$store.commit('newProduct/setVarField', {
+          index: this.index,
+          key: 'images',
+          value: this.dropzoneObject.files.map(file => file.dataURL || ''),
+        });
       },
       thumbnail(/* file, dataURL */) {
         this.dropzoneObject.files.__ob__.dep.notify();
+        this.notifyVuex();
       },
     },
   };
