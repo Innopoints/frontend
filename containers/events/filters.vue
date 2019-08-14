@@ -1,47 +1,70 @@
 <template>
   <div class="filters">
-    <!--<div :class="mobileCollapsed && 'filters-collapsed'" class="ellipse">
-      <Search />
-      <Spots />
-      <Competences />
-      <DateRange />
+    <TextField
+      v-model="search"
+      placeholder="Type to search"
+      item="img"
+      src="/images/events/search.svg"
+    />
 
-      <div @click="toggleMobileCollapsed" class="show-filters no-border">
+    <Dropdown
+      :chevron="false"
+      right
+    >
+      <template v-slot:label>
         <img
           src="/images/events/filter.svg"
           srcset="/images/events/filter-mobile.svg 18w, /images/events/filter.svg 24w"
           sizes="(min-width: 640px) 24px, 20px"
         />
-        <span>filters</span>
-      </div>
-    </div>-->
+        filters
+        <span class="dot active small" />
+      </template>
+      <Button danger>clear filters</Button>
+      <ul class="accordion">
+        <Spots />
+        <!-- <Competences /> -->
+        <!-- <DateRange /> -->
+      </ul>
+    </Dropdown>
   </div>
 </template>
 
 <script>
   import {mapState, mapActions} from 'vuex';
-  // import Competences from '../../components/events/filters/competences';
+  import Competences from '../../components/events/filters/competences';
   // import DateRange from '../../components/events/filters/date-range';
-  // import Search from '../../components/events/filters/search';
-  // import Spots from '../../components/events/filters/spots';
+  import Spots from '../../components/events/filters/spots';
+  import TextField from '../../components/ui/text-field';
+  import Dropdown from '../../components/ui/dropdown';
+  import Button from '../../components/ui/button';
 
   export default {
     name: 'Filters',
     components: {
-      // Search,
       // DateRange,
-      // Competences,
-      // Spots
+      Competences,
+      Spots,
+      TextField,
+      Dropdown,
+      Button,
+    },
+    data() {
+      return {
+      };
     },
     computed: {
-      ...mapState({
-        mobileCollapsed: state => state.events.mobileCollapsed,
-      }),
+      ...mapState('events', ['filters']),
+      search: {
+        get() {
+          return this.filters.search;
+        },
+        set(value) {
+          return this.$store.commit('events/changeFilter', {type: 'search', value});
+        },
+      },
     },
     methods: {
-      ...mapActions({
-        toggleMobileCollapsed: 'events/toggleMobileCollapsed',
-      }),
     },
   };
 </script>
