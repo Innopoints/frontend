@@ -1,54 +1,45 @@
 <template>
-  <div :class="open && 'open'" class="dropdown-shell off-tb">
-    <div @click="toggleDropdown" class="filter spots">
-      <span>vacant spots</span>
-      <div class="counter hide-mb">
-        <button id="spots-dec" @click="editSpots(false)" />
-        <span id="spots-count">{{ spots }}</span>
-        <button id="spots-inc" @click="editSpots(true)" />
-      </div>
+  <li class="filter spots">
+    <div class="align-center">
+      <img src="/images/events/users.svg" />
+      <span class="name">vacant spots</span>
     </div>
-    <div class="dropdown shadow-2">
-      <div class="counter">
-        <button id="spots-drop-dec" @click="editSpots(false)" />
-        <span id="spots-drop-count">{{ spots }}</span>
-        <button id="spots-drop-inc" @click="editSpots(true)" />
-      </div>
-      <img
-        @click="toggleDropdown"
-        src="/images/events/x.svg"
-        sizes="(min-width: 640px) 24px, 18px"
-        class="drop-close"
+
+    <div class="align-center">
+      <Button @click="spots--" round>
+        <img src="/images/events/minus.svg" />
+      </Button>
+      <TextField
+        type="number"
+        class="no-spinner"
+        :min="0"
+        v-model="spots"
       />
+      <Button @click="spots++" round>
+        <img src="/images/events/plus.svg" />
+      </Button>
     </div>
-  </div>
+  </li>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import TextField from '../../../components/ui/text-field';
+  import Button from '../../../components/ui/button';
 
   export default {
     name: 'Spots',
-    data() {
-      return {
-        open: false,
-      };
+    components: {
+      TextField,
+      Button,
     },
     computed: {
-      ...mapState({
-        spots: state => state.events.filters.spots,
-      }),
-    },
-    methods: {
-      ...mapActions({
-        changeSpots: 'events/changeSpots',
-      }),
-      editSpots(isInc) {
-        let changed = isInc ? this.spots + 1 : this.spots - 1;
-        if(changed > 0) this.changeSpots(changed);
-      },
-      toggleDropdown() {
-        this.open = !this.open;
+      spots: {
+        get() {
+          return this.$store.state.events.filters.spots;
+        },
+        set(value) {
+          this.$store.commit('events/changeFilter', {type: 'spots', value});
+        },
       },
     },
   };

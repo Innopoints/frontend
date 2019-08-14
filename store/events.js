@@ -13,7 +13,6 @@ export default {
         endDate: null,
       },
       events: events,
-      mobileCollapsed: true,
     };
   },
   mutations: {
@@ -25,9 +24,6 @@ export default {
     },
   },
   actions: {
-    toggleMobileCollapsed({commit, state}) {
-      commit('changeField', {type: 'mobileCollapsed', value: !state.mobileCollapsed});
-    },
     changeSearch({commit}, value) {
       commit('changeFilter', {type: 'search', value: value});
     },
@@ -46,10 +42,7 @@ export default {
   },
   getters: {
     events: state => {
-      return state.events.filter(event => {
-        if(state.filters.spots > event.spots) return false;
-        return true;
-      });
+      return state.events.filter(event => state.filters.spots <= event.spots);
     },
   },
 };
