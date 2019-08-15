@@ -1,6 +1,6 @@
 <template>
   <section class="container tagline">
-    <img src="/images/landing/voxel-city-tablet.png" class="picture" />
+    <img src="/images/home/voxel-city.png" class="picture" />
     <div>
       <h1>Innopoints</h1>
       <div class="motto">Motivating the great beginnings</div>

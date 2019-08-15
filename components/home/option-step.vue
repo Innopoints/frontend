@@ -9,7 +9,7 @@
         :label="buttonText"
         :away="external"
         :href="buttonLink"
-        :img="external ? '/images/landing/external-link.svg' : ''"
+        :img="external ? '/images/icons/external-link.svg' : ''"
         link
         filled
       />

@@ -7,7 +7,7 @@
     <div>
       <Card>
         <a href="mailto:319@innopolis.ru" class="mr-2">
-          <img src="/images/landing/mail-us.svg" />
+          <img src="/images/home/mail-us.svg" />
         </a>
         <div>
           <p style="padding-top: 1em;">319@innopolis.ru</p>
@@ -16,7 +16,7 @@
       </Card>
       <Card>
         <a href="tel:+7 (843) 203-92-53">
-          <img src="/images/landing/call-us.svg" />
+          <img src="/images/home/call-us.svg" />
         </a>
         <p style="padding: 0 1em;">
           +7 (843) 203-92-53 <br />

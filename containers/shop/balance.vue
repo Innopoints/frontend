@@ -7,7 +7,7 @@
 
 <script>
   import {mapState} from 'vuex';
-  import Innopoint from '../../static/images/innopoint.svg';
+  import Innopoint from '../../static/images/innopoint-sharp.svg';
 
   export default {
     name: 'BalanceTooltip',

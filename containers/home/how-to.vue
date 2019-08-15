@@ -2,11 +2,12 @@
   <section class="how-to">
     <h2>How does it work?</h2>
     <div class="container">
-      <template v-for="(feature, i) in features">
-        <FeatureCard v-bind="feature" :key="i" />
+      <template v-for="(howTo, i) in howTos">
+        <HowToCard v-bind="howTo" :key="i" />
+        <!-- TODO: arrow svg icon -->
         <img
           :key="i"
-          :src="'/images/landing/arrow.svg'"
+          :src="'/images/icons/arrow-down.svg'"
           v-if="i !== 2"
           class="arrow"
         />
@@ -16,16 +17,16 @@
 </template>
 
 <script>
-  import FeatureCard from '../../components/landing/feature-card';
-  import features from '../../constants/landing/features';
+  import HowToCard from '../../components/home/how-to-card';
+  import howTos from '../../constants/home/how-tos';
 
   export default ({
     components: {
-      FeatureCard,
+      HowToCard,
     },
     data() {
       return {
-        features,
+        howTos,
       };
     },
   });

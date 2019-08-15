@@ -12,6 +12,7 @@
   export default {
     components: { Card },
     props: {
+      // TODO: transform img to svg
       img: String,
       title: String,
       subtitle: String,

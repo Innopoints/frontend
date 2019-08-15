@@ -6,7 +6,7 @@
       normal
       round
       class="close"
-      img="/images/x.svg"
+      img="/images/icons/x.svg"
     />
     <Carousel :images="activeVariety.images" />
     <div class="content">
@@ -67,7 +67,7 @@
   import RadioGroup from "../../components/ui/radio-group";
   import Button from '../../components/ui/button';
   import Labeled from '../../components/ui/labeled';
-  import Innopoint from '../../static/images/innopoint.svg';
+  import Innopoint from '../../static/images/innopoint-sharp.svg';
   import Chip from '../../components/ui/chip';
 
   export default {
