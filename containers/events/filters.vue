@@ -32,12 +32,12 @@
 
 <script>
   import {mapState, mapActions} from 'vuex';
-  import Competences from '../../components/events/filters/competences';
-  // import DateRange from '../../components/events/filters/date-range';
-  import Spots from '../../components/events/filters/spots';
-  import TextField from '../../components/ui/text-field';
-  import Dropdown from '../../components/ui/dropdown';
-  import Button from '../../components/ui/button';
+  import Competences from '@/components/events/filters/competences';
+  // import DateRange from '@/components/events/filters/date-range';
+  import Spots from '@/components/events/filters/spots';
+  import TextField from '@/components/ui/text-field';
+  import Dropdown from '@/components/ui/dropdown';
+  import Button from '@/components/ui/button';
 
   export default {
     name: 'Filters',

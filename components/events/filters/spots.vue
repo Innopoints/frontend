@@ -11,9 +11,9 @@
       </Button>
       <TextField
         type="number"
-        class="no-spinner"
         :min="0"
         v-model="spots"
+        class="no-spinner"
       />
       <Button @click="spots++" round>
         <img src="/images/events/plus.svg" />
@@ -23,8 +23,8 @@
 </template>
 
 <script>
-  import TextField from '../../../components/ui/text-field';
-  import Button from '../../../components/ui/button';
+  import TextField from '@/components/ui/text-field';
+  import Button from '@/components/ui/button';
 
   export default {
     name: 'Spots',
