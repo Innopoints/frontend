@@ -23,17 +23,17 @@
       <Button danger>clear filters</Button>
       <ul class="accordion">
         <Spots />
-        <!-- <Competences /> -->
-        <!-- <DateRange /> -->
+        <Competences />
+        <DateRange />
       </ul>
     </Dropdown>
   </div>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState } from 'vuex';
   import Competences from '@/components/events/filters/competences';
-  // import DateRange from '@/components/events/filters/date-range';
+  import DateRange from '@/components/events/filters/date-range';
   import Spots from '@/components/events/filters/spots';
   import TextField from '@/components/ui/text-field';
   import Dropdown from '@/components/ui/dropdown';
@@ -42,7 +42,7 @@
   export default {
     name: 'Filters',
     components: {
-      // DateRange,
+      DateRange,
       Competences,
       Spots,
       TextField,
