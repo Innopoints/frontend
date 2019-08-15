@@ -73,8 +73,8 @@
     },
     computed: {
       ...mapState({
-        startDate: state => state.events.startDate,
-        endDate: state => state.events.endDate,
+        startDate: state => state.projects.startDate,
+        endDate: state => state.projects.endDate,
       }),
 
       calendarHeader() {

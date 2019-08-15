@@ -36,7 +36,7 @@
     },
     computed: {
       ...mapState({
-        spots: state => state.events.filters.spots,
+        spots: state => state.projects.filters.spots,
       }),
     },
     methods: {

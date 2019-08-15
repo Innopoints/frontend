@@ -43,16 +43,13 @@
   padding: 0 1em;
 }
 
-.filter .center {
-  display: flex;
-  align-items: center;
-}
-
 .filter .name {
   padding: 0 .5em 0 1em;
   flex-shrink: 0;
-  font-weight: 500;
-  color: #387800;
+}
+
+.filter .icon {
+  stroke: #387800;
 }
 
 .order-options .with-labels {
@@ -86,14 +83,14 @@
 
 @media only screen and (min-width: 380px) {
   .filter > .icon,
-  .filter > .center > .icon {
+  .filter > .align-center > .icon {
     margin-left: .8em;
   }
 }
 
 @media only screen and (min-width: 640px) {
   .filters {
-    width: 38em;
+    width: 36em;
     align-self: center;
   }
 
@@ -106,10 +103,11 @@
 @media only screen and (min-width: 700px) {
   .filters {
     display: flex;
+    width: 38em;
     align-items: center;
   }
 
-  .text-field {
+  .filters .text-field {
     flex: 1;
   }
 

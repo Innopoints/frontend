@@ -46,7 +46,7 @@ export default {
   },
   getters: {
     events: state => {
-      return state.events.filter(event => {
+      return state.projects.filter(event => {
         if(state.filters.spots > event.spots) return false;
         return true;
       });

@@ -35,7 +35,7 @@
     },
     computed: {
       ...mapState({
-        mobileCollapsed: state => state.events.mobileCollapsed,
+        mobileCollapsed: state => state.projects.mobileCollapsed,
       }),
     },
     methods: {
