@@ -10,9 +10,9 @@
         <img src="/images/events/minus.svg" />
       </Button>
       <TextField
-        type="number"
         :min="0"
         v-model="spots"
+        type="number"
         class="no-spinner"
       />
       <Button @click="spots++" round>
