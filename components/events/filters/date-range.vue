@@ -55,7 +55,6 @@
     },
     data() {
       return {
-        open: false,
         dateRange: {},
         numOfDays: 7,
         format: 'DD.MM.YY',
@@ -117,10 +116,6 @@
       if (this.activeMonthStart === 11) this.activeYearEnd = this.activeYearStart + 1;
     },
     methods: {
-      toggleDropdown() {
-        this.open = !this.open;
-      },
-
       compareDates(date1, date2) {
         let d1 = fecha.format(new Date(date1), 'YYYY-MM-DD');
         let d2 = fecha.format(new Date(date2), 'YYYY-MM-DD');
@@ -174,6 +169,8 @@
       selectFirstItem(week, day) {
         const result = this.getDayIndexInMonth(week, day, this.startMonthDay);
         this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart, this.activeYearStart));
+        this.$store.commit('events/changeFilter', {type: 'startDate', value: this.dateRange.start});
+        this.$store.commit('events/changeFilter', {type: 'endDate', value: this.dateRange.end});
       },
 
       getCellClass(week, day, startMonthDay, endMonthDate) {
