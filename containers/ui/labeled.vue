@@ -3,7 +3,7 @@
     <h1>Labeled element</h1>
     <div class="showcase vertical">
       <Labeled label="Label">Some text</Labeled>
-      <Labeled label="Another label" icon="/images/events/plus-circle.svg">Some another text</Labeled>
+      <Labeled label="Another label" icon="/images/icons/plus.svg">Some another text</Labeled>
     </div>
   </Card>
 </template>

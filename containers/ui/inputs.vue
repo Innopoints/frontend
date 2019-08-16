@@ -18,7 +18,7 @@
         error="error in the text"
         label="Text"
         item="img"
-        src="/images/events/calendar.svg"
+        src="/images/icons/calendar.svg"
       />
 
       <TextField
@@ -71,12 +71,6 @@
       FormField,
       TextField,
       Card,
-
-    },
-    data() {
-      return {
-
-      };
     },
   };
 </script>

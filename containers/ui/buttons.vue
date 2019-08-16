@@ -99,51 +99,51 @@
     <div class="showcase">
       <Button
         round
-        img="/images/events/calendar.svg"
+        img="/images/icons/calendar.svg"
       />
 
       <Button
         round
         normal
-        img="/images/events/calendar.svg"
+        img="/images/icons/calendar.svg"
       />
 
       <Button
         round
         badge
-        img="/images/events/calendar.svg"
+        img="/images/icons/calendar.svg"
       />
 
       <Button
         round
         outline
-        img="/images/events/calendar.svg"
+        img="/images/icons/calendar.svg"
       />
 
       <Button
         round
         filled
-        img="/images/events/calendar.svg"
+        img="/images/icons/calendar.svg"
       />
 
       <Button
         round
         label="with label"
-        img="/images/events/calendar.svg"
+        img="/images/icons/calendar.svg"
       />
 
       <Button
         round
         filled
         label="with label"
-        img="/images/events/calendar.svg"
+        img="/images/icons/calendar.svg"
       />
 
       <Button
         round
         outline
         label="with label"
-        img="/images/events/calendar.svg"
+        img="/images/icons/calendar.svg"
       />
     </div>
   </Card>
