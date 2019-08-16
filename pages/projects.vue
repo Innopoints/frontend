@@ -3,16 +3,16 @@
     <EventsTagline />
 
     <section class="projects padded">
-      <h1>Ongoing projects</h1>
+      <h1>Ongoing events</h1>
 
-      <!--<Filters />
-      <Ordering />-->
+      <Filters />
+      <Ordering />
 
       <div class="cards">
-        <Project
-          v-for="(project, i) in projects"
+        <Event
+          v-for="(event, i) in events"
           :key="i"
-          v-bind="project"
+          v-bind="event"
         />
       </div>
     </section>
@@ -31,15 +31,15 @@
 
 <script>
   import {mapGetters} from 'vuex';
+  import Filters from '../containers/projects/filters';
   import EventsTagline from '../components/projects/tagline';
+  import Ordering from '../components/projects/filters/ordering';
   import Button from '../components/ui/button';
-  // import Filters from '../containers/projects/filters';
-  // import Ordering from '../components/projects/filters/ordering';
   // import Pagination from '../components/pagination';
 
   export default {
     head: {
-      title: 'Project Browser',
+      title: 'Event Browser',
       meta: [
         { hid: 'description', name: 'description',
           content: `Search for volunteering opportunities with event browser page` },
@@ -48,10 +48,10 @@
     components: {
       Button,
       // Pagination,
-      // Ordering,
-      // Filters,
+      Ordering,
+      Filters,
       EventsTagline,
-      Project: () => import('../components/projects/project'),
+      Event: () => import('../components/projects/project'),
     },
     data() {
       return {
@@ -66,7 +66,7 @@
       pageCount() {
         return Math.ceil(this.allProjects.length / this.projectsPerPage);
       },
-      projects() {
+      events() {
         const page = this.currentPage - 1;
         const start = this.projectsPerPage * page;
         const end = start + this.projectsPerPage;

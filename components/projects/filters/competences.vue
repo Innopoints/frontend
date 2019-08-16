@@ -1,6 +1,6 @@
 <template>
   <li class="filter competences panel">
-    <img src="/images/events/label.svg" />
+    <img src="/images/icons/label.svg" />
     <Accordion label="select competencies">
       <Button @click="clearCompetences">clear all</Button>
       <CheckboxGroup
@@ -31,11 +31,11 @@
     },
     computed: {
       ...mapState({
-        competences: state => state.events.filters.competences.map(c => ({...c, label: c.name})),
+        competences: state => state.projects.filters.competences.map(c => ({...c, label: c.name})),
       }),
     },
     methods: {
-      ...mapActions('events', [
+      ...mapActions('projects', [
         'changeCompetence',
         'clearCompetences',
       ]),

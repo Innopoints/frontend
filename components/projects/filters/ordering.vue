@@ -33,7 +33,7 @@
     methods: {
       select(option) {
         this.selected = option;
-        this.$store.commit('events/changeField', {type: 'orderBy', value: option});
+        this.$store.commit('projects/changeField', {type: 'orderBy', value: option});
       },
     },
   };

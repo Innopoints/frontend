@@ -1,8 +1,8 @@
 <template>
   <li class="filter date-range panel">
     <img
-      src="/images/events/calendar.svg"
-      srcset="/images/events/calendar-mobile.svg 18w, /images/events/calendar.svg 24w"
+      src="/images/icons/calendar.svg"
+      srcset="/images/icons/calendar-mobile.svg 18w, /images/icons/calendar.svg 24w"
       sizes="(min-width: 640px) 22px, 18px"
       class="drop-text-open"
     />
@@ -168,8 +168,8 @@
       selectFirstItem(week, day) {
         const result = this.getDayIndexInMonth(week, day, this.startMonthDay);
         this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart, this.activeYearStart));
-        this.$store.commit('events/changeFilter', {type: 'startDate', value: this.dateRange.start});
-        this.$store.commit('events/changeFilter', {type: 'endDate', value: this.dateRange.end});
+        this.$store.commit('projects/changeFilter', {type: 'startDate', value: this.dateRange.start});
+        this.$store.commit('projects/changeFilter', {type: 'endDate', value: this.dateRange.end});
       },
 
       getCellClass(week, day, startMonthDay, endMonthDate) {
@@ -306,11 +306,11 @@
   }
 
   .month-header .left {
-    background-image: url("../../../static/images/events/chevron-left.svg");
+    background-image: url("../../../static/images/icons/chevron-left.svg");
   }
 
   .month-header .right {
-    background-image: url("../../../static/images/events/chevron-right.svg");
+    background-image: url("../../../static/images/icons/chevron-right.svg");
   }
 
   .calendar {

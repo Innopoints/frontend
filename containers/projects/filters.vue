@@ -4,7 +4,7 @@
       v-model="search"
       placeholder="Type to search"
       item="img"
-      src="/images/events/search.svg"
+      src="/images/icons/search.svg"
     />
 
     <Dropdown
@@ -13,8 +13,8 @@
     >
       <template v-slot:label>
         <img
-          src="/images/events/filter.svg"
-          srcset="/images/events/filter-mobile.svg 18w, /images/events/filter.svg 24w"
+          src="/images/projects/filter.svg"
+          srcset="/images/projects/filter-mobile.svg 18w, /images/projects/filter.svg 24w"
           sizes="(min-width: 640px) 24px, 20px"
         />
         filters
@@ -32,9 +32,9 @@
 
 <script>
   import { mapState } from 'vuex';
-  import Competences from '@/components/events/filters/competences';
-  import DateRange from '@/components/events/filters/date-range';
-  import Spots from '@/components/events/filters/spots';
+  import Competences from '@/components/projects/filters/competences';
+  import DateRange from '@/components/projects/filters/date-range';
+  import Spots from '@/components/projects/filters/spots';
   import TextField from '@/components/ui/text-field';
   import Dropdown from '@/components/ui/dropdown';
   import Button from '@/components/ui/button';
@@ -54,13 +54,13 @@
       };
     },
     computed: {
-      ...mapState('events', ['filters']),
+      ...mapState('projects', ['filters']),
       search: {
         get() {
           return this.filters.search;
         },
         set(value) {
-          return this.$store.commit('events/changeFilter', {type: 'search', value});
+          return this.$store.commit('projects/changeFilter', {type: 'search', value});
         },
       },
     },

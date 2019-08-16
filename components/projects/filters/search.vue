@@ -1,8 +1,7 @@
 <template>
   <div id="search-toggle" @click="changeMobileCollapsed" class="search">
     <img
-      src="/images/events/search.svg"
-      srcset="/images/events/search-mobile.svg 18w, /images/events/search.svg 24w"
+      src="/images/icons/search.svg"
       sizes="(min-width: 640px) 24px, 18px"
     />
     <input

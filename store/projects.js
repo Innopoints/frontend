@@ -45,24 +45,24 @@ export default {
     },
   },
   getters: {
-    events: state => {
+    projects: state => {
       const filters = state.filters;
       const excludedCompetences = filters.competences
           .filter(comp => comp.checked === false)
           .map(comp => comp.name);
-      let events = state.events
-          .filter(event => event.title.toLocaleLowerCase().includes(filters.search))
-          .filter(event => filters.spots <= event.spots)
-          .filter(event => !event.competences.every(c => excludedCompetences.includes(c)));
+      let projects = state.projects
+          .filter(project => project.title.toLocaleLowerCase().includes(filters.search))
+          .filter(project => filters.spots <= project.spots)
+          .filter(project => !project.competences.every(c => excludedCompetences.includes(c)));
 
       if(filters.startDate) {
-        events = events.filter(event => event.date.start >= filters.startDate);
+        projects = projects.filter(project => project.date.start >= filters.startDate);
       }
       if(filters.endDate) {
-        events = events.filter(event => event.date.end <= filters.endDate);
+        projects = projects.filter(project => project.date.end <= filters.endDate);
       }
       if(state.orderBy) {
-        events.sort((event1, event2) => {
+        projects.sort((event1, event2) => {
           switch(state.orderBy) {
             case 'most recent':
               return event2.date.start - event1.date.start;
@@ -78,7 +78,7 @@ export default {
         });
       }
 
-      return events;
+      return projects;
     },
   },
 };
