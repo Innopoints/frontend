@@ -1,35 +1,29 @@
 <template>
-  <div :class="open && 'open'" class="dropdown-shell">
-    <div @click="toggleDropdown" class="filter competences">
-      <span class="competences-title drop-text-open">competences</span>
-      <img src="/images/events/chevron-down.svg" class="dropdown-chevron" />
-    </div>
-    <div class="dropdown shadow-2 right-edge">
-      <div class="space-between center">
-        <button @click="clearCompetences">clear all</button>
-        <img
-          @click="toggleDropdown"
-          src="/images/events/x.svg"
-          sizes="(min-width: 640px) 24px, 18px"
-          class="drop-close"
-        />
-      </div>
-      <fieldset>
-        <label v-for="competence in competences" :key="competence.name">
-          <input @change="changeCompetence(competence)" :checked="competence.checked" type="checkbox" />
-          <div class="styled-checkbox" />
-          {{ competence.name }}
-        </label>
-      </fieldset>
-    </div>
-  </div>
+  <li class="filter competences panel">
+    <img src="/images/events/label.svg" />
+    <Accordion label="select competencies">
+      <Button @click="clearCompetences">clear all</Button>
+      <CheckboxGroup
+        :items="competences"
+        @change="changeCompetence"
+      />
+    </Accordion>
+  </li>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState, mapActions } from 'vuex';
+  import Accordion from '@/components/ui/accordion';
+  import Button from '@/components/ui/button';
+  import CheckboxGroup from '@/components/ui/checkbox-group';
 
   export default {
     name: 'Competences',
+    components: {
+      Accordion,
+      Button,
+      CheckboxGroup,
+    },
     data() {
       return {
         open: false,
@@ -37,17 +31,14 @@
     },
     computed: {
       ...mapState({
-        competences: state => state.events.filters.competences,
+        competences: state => state.events.filters.competences.map(c => ({...c, label: c.name})),
       }),
     },
     methods: {
-      ...mapActions({
-        changeCompetence: 'events/changeCompetence',
-        clearCompetences: 'events/clearCompetences',
-      }),
-      toggleDropdown() {
-        this.open = !this.open;
-      },
+      ...mapActions('events', [
+        'changeCompetence',
+        'clearCompetences',
+      ]),
     },
   };
 </script>

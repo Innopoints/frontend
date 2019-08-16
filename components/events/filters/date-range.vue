@@ -1,30 +1,18 @@
 <template>
-  <div :class="open && 'open'" class="dropdown-shell no-border">
-    <div @click="toggleDropdown" class="filter date-range">
-      <img
-        src="/images/events/calendar.svg"
-        srcset="/images/events/calendar-mobile.svg 18w, /images/events/calendar.svg 24w"
-        sizes="(min-width: 640px) 22px, 18px"
-        class="drop-text-open"
-      />
-
-      <span class="hide-mb">{{ calendarHeader }}</span>
-
-      <img src="/images/events/chevron-down.svg" class="hide-mb dropdown-chevron" />
-    </div>
-    <div class="dropdown shadow-2 right-edge">
+  <li class="filter date-range panel">
+    <img
+      src="/images/events/calendar.svg"
+      srcset="/images/events/calendar-mobile.svg 18w, /images/events/calendar.svg 24w"
+      sizes="(min-width: 640px) 22px, 18px"
+      class="drop-text-open"
+    />
+    <Accordion label="select date range">
       <div class="drop-header">
         <div>
-          <span @click="goToStart" :class="isFirstChoice && 'active'">start date</span>
-          <span @click="goToEnd" :class="!isFirstChoice && 'active'">end date</span>
+          <Button @click="goToStart" :class="isFirstChoice && 'active'">start date</Button>
+          <Button @click="goToEnd" :class="!isFirstChoice && 'active'">end date</Button>
         </div>
-        <div @click="clear" style="color:red; font-weight: 700;">clear</div>
-        <img
-          @click="toggleDropdown"
-          src="/images/events/x.svg"
-          sizes="(min-width: 640px) 24px, 18px"
-          class="drop-close"
-        />
+        <Button @click="clear" style="color:red; font-weight: 700;">clear</Button>
       </div>
 
       <div class="calendar">
@@ -49,19 +37,24 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </Accordion>
+  </li>
 </template>
 
 <script>
   import {mapState} from 'vuex';
   import fecha from 'fecha';
+  import Accordion from '@/components/ui/accordion';
+  import Button from '@/components/ui/button';
 
   export default {
     name: 'DateRange',
+    components: {
+      Accordion,
+      Button,
+    },
     data() {
       return {
-        open: false,
         dateRange: {},
         numOfDays: 7,
         format: 'DD.MM.YY',
@@ -123,10 +116,6 @@
       if (this.activeMonthStart === 11) this.activeYearEnd = this.activeYearStart + 1;
     },
     methods: {
-      toggleDropdown() {
-        this.open = !this.open;
-      },
-
       compareDates(date1, date2) {
         let d1 = fecha.format(new Date(date1), 'YYYY-MM-DD');
         let d2 = fecha.format(new Date(date2), 'YYYY-MM-DD');
@@ -162,7 +151,6 @@
         let key = 'start';
         if (!this.isFirstChoice) {
           key = 'end';
-          setTimeout(() => this.toggleDropdown(), 500);
         } else {
           newDate['end'] = null;
         }
@@ -180,6 +168,8 @@
       selectFirstItem(week, day) {
         const result = this.getDayIndexInMonth(week, day, this.startMonthDay);
         this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart, this.activeYearStart));
+        this.$store.commit('events/changeFilter', {type: 'startDate', value: this.dateRange.start});
+        this.$store.commit('events/changeFilter', {type: 'endDate', value: this.dateRange.end});
       },
 
       getCellClass(week, day, startMonthDay, endMonthDate) {

@@ -4,7 +4,7 @@
       <div class="checkbox">
         <input
           :checked="item.checked"
-          @change="changeItems(index)"
+          @change="$emit('change', item)"
           type="checkbox"
         />
         <div class="icon" />
@@ -24,7 +24,7 @@
       },
       click: {
         type: Function,
-        required: true,
+        // required: true,
       },
     },
     data() {
