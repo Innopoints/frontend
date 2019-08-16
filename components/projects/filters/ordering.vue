@@ -1,21 +1,40 @@
 <template>
-  <div class="ordering">
-    <!--<span>Order:</span>
-    <div id="collapse-toggle">
-      <img src="/images/projects/order.svg" />
-      <span>collapse ordering options</span>
-    </div>
-    <div class="order-grid">
-      <span class="order">most valuable first</span>
-      <span class="order active">most recent first</span>
-      <span class="order">least valuable first</span>
-      <span class="order">least recent first</span>
-    </div>-->
+  <div class="ordering hide-mb">
+    <Chip
+      v-for="(option, i) in options"
+      :key="i"
+      :text="option"
+      :value="selected === option"
+      @input="select(option)"
+      name="ordering"
+    />
   </div>
 </template>
 
 <script>
+  import Chip from '@/components/ui/chip';
+
   export default {
     name: 'Ordering',
+    components: {
+      Chip,
+    },
+    data() {
+      return {
+        options: [
+          'most recent',
+          'least recent',
+          'most valuable',
+          'least valuable',
+        ],
+        selected: '',
+      };
+    },
+    methods: {
+      select(option) {
+        this.selected = option;
+        this.$store.commit('events/changeField', {type: 'orderBy', value: option});
+      },
+    },
   };
 </script>

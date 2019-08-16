@@ -12,8 +12,9 @@ export default {
         startDate: null,
         endDate: null,
       },
-      projects: projects,
+      projects,
       mobileCollapsed: true,
+      orderBy: '',
     };
   },
   mutations: {
@@ -23,11 +24,11 @@ export default {
     changeField(state, value) {
       state[value.type] = value.value;
     },
+    changeCompetence(state, payload) {
+      state.filters.competences[payload.index].checked = payload.checked;
+    },
   },
   actions: {
-    toggleMobileCollapsed({commit, state}) {
-      commit('changeField', {type: 'mobileCollapsed', value: !state.mobileCollapsed});
-    },
     changeSearch({commit}, value) {
       commit('changeFilter', {type: 'search', value: value});
     },
@@ -35,20 +36,49 @@ export default {
       commit('changeFilter', {type: 'spots', value: value});
     },
     changeCompetence({commit, state}, value) {
-      commit('changeFilter', {type: 'competences', value: state.filters.competences.map(x => {
-          if(x.name === value.name) return {name: x.name, checked: !value.checked};
-          return x;
-        })});
+      const index = state.filters.competences.findIndex(c => c.name == value.name);
+      if(index === -1) return;
+      commit('changeCompetence', {index, checked: value.checked});
     },
     clearCompetences({commit, state}) {
-      commit('changeFilter', {type: 'competences', value: state.filters.competences.map(x => ({name: x.name, checked: false})) });
+      state.filters.competences.forEach((c, index) => commit('changeCompetence', {index, checked: false}));
     },
   },
   getters: {
-    projects: state => {
-      return state.projects.filter(event => {
-        return state.filters.spots <= event.spots;
-      });
+    events: state => {
+      const filters = state.filters;
+      const excludedCompetences = filters.competences
+          .filter(comp => comp.checked === false)
+          .map(comp => comp.name);
+      let events = state.events
+          .filter(event => event.title.toLocaleLowerCase().includes(filters.search))
+          .filter(event => filters.spots <= event.spots)
+          .filter(event => !event.competences.every(c => excludedCompetences.includes(c)));
+
+      if(filters.startDate) {
+        events = events.filter(event => event.date.start >= filters.startDate);
+      }
+      if(filters.endDate) {
+        events = events.filter(event => event.date.end <= filters.endDate);
+      }
+      if(state.orderBy) {
+        events.sort((event1, event2) => {
+          switch(state.orderBy) {
+            case 'most recent':
+              return event2.date.start - event1.date.start;
+            case 'least recent':
+              return event1.date.start - event2.date.start;
+            case 'most valuable':
+              return event2.points - event1.points;   // TODO: confirm property name
+            case 'least valuable':
+              return event1.points - event2.points;   // TODO: same ^^
+            default:
+              return 0;
+          }
+        });
+      }
+
+      return events;
     },
   },
 };
