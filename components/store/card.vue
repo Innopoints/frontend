@@ -19,7 +19,7 @@
         <span class="label">Price</span>
         <span class="content">
           <span class="price">{{ price }}</span>
-          <img src="/images/create-product/innopoint.svg" class="ml" />
+          <Innopoint class="ml" />
         </span>
       </div>
       <Button
@@ -41,10 +41,11 @@
   import Card from '../ui/card';
   import Button from '../ui/button';
   import RadioGroup from '../ui/radio-group';
+  import Innopoint from '../../static/images/innopoint-sharp.svg';
 
   export default {
     name: 'StoreCard',
-    components: { Button, Card, RadioGroup },
+    components: { Button, Card, RadioGroup, Innopoint },
     props: {
       id: Number,
       name: String,
@@ -61,7 +62,7 @@
     },
     methods: {
       openModal(id) {
-        this.$router.push({name: 'shop', query: {id: id}});
+        this.$router.push({name: 'store', query: {id: id}});
         this.toggleModal();
       },
     },

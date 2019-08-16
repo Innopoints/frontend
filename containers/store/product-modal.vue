@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'modal-open': open}" class="modal-overlay column">
+  <div class="modal-overlay column">
     <BalanceTooltip />
     <ProductCard v-bind="product" :toggleModal="toggleModal" closable />
   </div>
@@ -18,7 +18,6 @@
     props: {
       id: Number,
       product: Object,
-      open: Boolean,
       toggleModal: Function,
     },
   };

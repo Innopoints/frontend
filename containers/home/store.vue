@@ -23,8 +23,8 @@
 </template>
 
 <script>
-  import StoreCard from '../../components/shop/card';
-  import items from '../../constants/shop';
+  import StoreCard from '../../components/store/card';
+  import items from '../../constants/store';
 
   export default {
     components: {

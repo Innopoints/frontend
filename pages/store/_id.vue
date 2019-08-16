@@ -3,8 +3,8 @@
     <div class="align-center column">
       <Button
         link
-        href="/shop"
-        img="/images/shop/arrow-left.svg"
+        href="/store"
+        img="/images/icons/arrow-left.svg"
         label="see all products in the InnoStore"
       />
 
@@ -13,17 +13,17 @@
 
       <p class="link-bottom padded">
         Lacking innopoints?
-        <nuxt-link to="/events">Volunteer on events</nuxt-link> to fill in the shortage!
+        <nuxt-link to="/projects">Volunteer on events</nuxt-link> to fill in the shortage!
       </p>
     </div>
   </div>
 </template>
 
 <script>
-  import items from '../../constants/shop';
-  import ProductCard from '../../containers/shop/product-card';
+  import items from '../../constants/store';
+  import ProductCard from '../../containers/store/product-card';
   import Button from '../../components/ui/button';
-  import BalanceTooltip from '../../containers/shop/balance';
+  import BalanceTooltip from '../../containers/store/balance';
 
   export default {
     head: {

@@ -1,6 +1,6 @@
 <template>
   <section class="tagline padded">
-    <img src="/images/shop/voxel-trolley.png" class="hide-tb picture" />
+    <img src="/images/store/voxel-trolley.png" class="hide-tb picture" />
     <div>
       <div class="headline">InnoStore</div>
       <div class="subhead">
@@ -12,6 +12,6 @@
 
 <script>
   export default {
-    name: "ShopTagline",
+    name: "StoreTagline",
   };
 </script>

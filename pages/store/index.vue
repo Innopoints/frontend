@@ -1,24 +1,24 @@
 <template>
-  <div class="material">
-    <ShopTagline />
-    <section class="shop padded">
-      <div class="cards">
-        <StoreCard
-          v-for="item in items"
-          :key="item.id"
-          v-bind="item"
-          :toggle-modal="toggleModal"
-        />
-      </div>
-    </section>
-    <p class="link-bottom padded">
-      Lacking innopoints?
-      <nuxt-link to="/events">Volunteer on events</nuxt-link> to fill in the shortage!
-    </p>
-
+  <div :class="{'modal-open': open}">
+    <div class="material">
+      <StoreTagline />
+      <section class="shop padded">
+        <div class="cards">
+          <StoreCard
+            v-for="item in items"
+            :key="item.id"
+            v-bind="item"
+            :toggle-modal="toggleModal"
+          />
+        </div>
+      </section>
+      <p class="link-bottom padded">
+        Lacking innopoints?
+        <nuxt-link to="/projects">Volunteer on events</nuxt-link> to fill in the shortage!
+      </p>
+    </div>
     <ProductModal
       v-if="open"
-      :open="open"
       :toggle-modal="toggleModal"
       :product="product"
     />
@@ -26,18 +26,18 @@
 </template>
 
 <script>
-  import StoreCard from "../../components/shop/card";
-  import ShopTagline from "../../components/shop/tagline";
-  import items from "../../constants/shop";
+  import StoreCard from "../../components/store/card";
+  import StoreTagline from "../../components/store/tagline";
+  import items from "../../constants/store";
 
   export default {
     head: {
-      title: 'Shop',
+      title: 'InnoStore',
     },
     components: {
       StoreCard,
-      ShopTagline,
-      ProductModal: () => import('../../containers/shop/product-modal'),
+      StoreTagline,
+      ProductModal: () => import('../../containers/store/product-modal'),
     },
     data() {
       return {
@@ -52,7 +52,7 @@
       },
     },
     asyncData ({ query, redirect }) {
-      if(query.id) redirect('/shop/' + query.id);
+      if(query.id) redirect('/store/' + query.id);
     },
     methods: {
       toggleModal() {
