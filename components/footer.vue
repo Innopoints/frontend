@@ -12,8 +12,7 @@
       <div class="left space-between">
         <div>
           <nuxt-link to="/" class="title-container">
-            <!--TODO: change this too-->
-            <img src="/images/icons/innou-icon.svg" class="logo" />
+            <Logo />
             <span class="title">Innopoints</span>
           </nuxt-link>
           <div class="socials space-between">
@@ -42,19 +41,18 @@
       </div>
 
       <div class="right">
-        <img src="/images/footer/pointer.png" class="pointer" />
+        <img src="/images/footer/pointer.svg" class="pointer" />
         <nav>
           <div class="search shadow-1">
             search
-            <!--TODO: change to icon-->
-            <img src="/images/icons/search.svg" />
+            <Search />
           </div>
           <ul>
             <li>
-              <nuxt-link to="/events" class="white">browse the events</nuxt-link>
+              <nuxt-link to="/projects" class="white">browse the projects</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/shop" class="white">see the InnoStore</nuxt-link>
+              <nuxt-link to="/store" class="white">see the InnoStore</nuxt-link>
             </li>
           </ul>
         </nav>
@@ -65,10 +63,16 @@
 
 <script>
   import Button from './ui/button';
+  import Logo from '../static/images/innou-icon.svg';
+  import Search from '../static/images/icons/search.svg';
 
   export default {
     name: "Footer",
-    components: { Button },
+    components: {
+      Button,
+      Logo,
+      Search,
+    },
     methods: {
       scrollToTop: () => {
         window.scrollTo({top: 0, behavior: 'smooth'});

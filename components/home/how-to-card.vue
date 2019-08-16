@@ -1,6 +1,7 @@
 <template>
   <Card>
-    <img :src="img" />
+    <!--eslint-disable-next-line-->
+    <component :is="svg" />
     <span class="title">{{ title }}</span>
     <span class="subtitle">{{ subtitle }}</span>
   </Card>
@@ -12,10 +13,15 @@
   export default {
     components: { Card },
     props: {
-      // TODO: transform img to svg
       img: String,
       title: String,
       subtitle: String,
+    },
+    computed: {
+      svg() {
+        if(this.img) return () => import('../../static' + this.img);
+        return '';
+      },
     },
   };
 </script>

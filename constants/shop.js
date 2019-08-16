@@ -10,7 +10,7 @@ export default [
       {
         color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
-        images: ['/images/home/sweatshirt.png'],
+        images: ['/images/store/sweatshirt.png'],
         sizes: {
           'XS': 1,
           'S': 0,
@@ -23,7 +23,7 @@ export default [
       {
         color: '#00FF00',
         background: 'rgba(0, 255, 0, .2)',
-        images: ['/images/home/sweatshirt.png'],
+        images: ['/images/store/sweatshirt.png'],
         sizes: {
           'XS': 11,
           'S': 0,
@@ -46,25 +46,25 @@ export default [
       {
         color: '#0000FF',
         background: 'rgba(0, 0, 255, .2)',
-        images: ['/images/home/tshirt.png', '/images/home/sweatshirt.png'],
+        images: ['/images/store/tshirt.png', '/images/home/sweatshirt.png'],
         sizes: {},
       },
       {
         color: '#000000',
         background: 'rgba(0, 0, 0, .2)',
-        images: ['/images/home/tshirt.png'],
+        images: ['/images/store/tshirt.png'],
         sizes: {},
       },
       {
         color: '#FFFFFF',
         background: 'rgba(255, 255, 255, .2)',
-        images: ['/images/home/tshirt.png'],
+        images: ['/images/store/tshirt.png'],
         sizes: {},
       },
       {
         color: '#CC00CC',
         background: 'rgba(155, 0, 155, .2)',
-        images: ['/images/home/sweatshirt.png', '/images/home/tshirt.png'],
+        images: ['/images/store/sweatshirt.png', '/images/store/tshirt.png'],
         sizes: {},
       },
     ],
@@ -80,7 +80,7 @@ export default [
       {
         color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
-        images: ['/images/home/umbrella.png'],
+        images: ['/images/store/umbrella.png'],
         sizes: {},
       },
     ],
@@ -95,12 +95,12 @@ export default [
     varieties: [
       {
         color: '#00FF00', background: 'rgba(0, 255, 0, .2)',
-        images: ['/images/home/sweatshirt.png'],
+        images: ['/images/store/sweatshirt.png'],
         sizes: {},
       },
       {
         color: '#FF0000', background: 'rgba(255, 0, 0, .2)',
-        images: ['/images/home/sweatshirt.png'],
+        images: ['/images/store/sweatshirt.png'],
         sizes: {},
       },
     ],
@@ -116,7 +116,7 @@ export default [
       {
         color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
-        images: ['/images/home/tshirt.png'],
+        images: ['/images/store/tshirt.png'],
         sizes: {},
       },
     ],
@@ -132,7 +132,7 @@ export default [
       {
         color: '#FF0000',
         background: 'rgba(255, 0, 0, .2)',
-        images: ['/images/home/umbrella.png'],
+        images: ['/images/store/umbrella.png'],
         sizes: {},
       },
     ],

@@ -2,7 +2,7 @@
   <section class="store container">
     <h2>How to spend innopoints?</h2>
 
-    <div class="subtitle">
+    <div class="subtitle padded">
       The following items are the most popular among students.<br />
       Grab ‘em while they’re hot!
     </div>

@@ -4,13 +4,7 @@
     <div class="container">
       <template v-for="(howTo, i) in howTos">
         <HowToCard v-bind="howTo" :key="i" />
-        <!-- TODO: arrow svg icon -->
-        <img
-          :key="i"
-          :src="'/images/icons/arrow-down.svg'"
-          v-if="i !== 2"
-          class="arrow"
-        />
+        <ArrowDown :key="i" v-if="i !== 2" class="arrow" />
       </template>
     </div>
   </section>
@@ -19,10 +13,12 @@
 <script>
   import HowToCard from '../../components/home/how-to-card';
   import howTos from '../../constants/home/how-tos';
+  import ArrowDown from '../../static/images/icons/arrow-down.svg';
 
   export default ({
     components: {
       HowToCard,
+      ArrowDown,
     },
     data() {
       return {

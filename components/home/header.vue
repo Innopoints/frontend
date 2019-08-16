@@ -1,6 +1,6 @@
 <template>
   <header class="container">
-    <img @click="resolution" src="/images/landing/innou-logo-text.png" class="logo" />
+    <img @click="resolution" src="/images/innou-logo.svg" class="logo" />
     <Button
       :label="'sign ' + (isAuth ? 'out' : 'in')"
       @click="toggleAuth"
