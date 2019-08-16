@@ -37,7 +37,7 @@
     <div v-if="$store.state.newProduct.inSizes" class="sizes-wrapper">
       <label class="label">Sizes</label>
       <div class="sizes">
-        <TextField 
+        <TextField
           v-for="size in sizes"
           :key="size"
           :text="size"
@@ -64,7 +64,7 @@
       class="image-platform"
     >
       <template v-if="!hasFiles">
-        <img class="icon mr" src="/images/create-product/image.svg" />
+        <ImagePlaceholder />
         <label class="title" for="file-input1">
           drag &amp; drop here or click to upload photos
         </label>
@@ -88,7 +88,7 @@
                 class="btn danger round"
                 title="Remove image"
               >
-                <img src="/images/product-edit/x.svg" />
+                <X />
               </button>
               <button
                 type="button"
@@ -96,7 +96,7 @@
                 title="Move image"
                 data-move
               >
-                <img src="/images/product-edit/move.svg" />
+                <Move />
               </button>
             </div>
           </div>
@@ -121,6 +121,10 @@
   import Button from '../../components/ui/button';
   import Draggable from 'vuedraggable';
 
+  import X from '../../static/images/icons/x.svg';
+  import Move from '../../static/images/icons/move.svg';
+  import ImagePlaceholder from '../../static/images/icons/image.svg';
+
   export default {
     name: 'ProductFormVariety',
     components: {
@@ -130,6 +134,9 @@
       TextField,
       Dropzone,
       Draggable,
+      X,
+      Move,
+      ImagePlaceholder,
     },
     props: {
       removable: Boolean,

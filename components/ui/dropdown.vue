@@ -19,7 +19,7 @@
           style="margin-right:0;"
           type="button"
         >
-          <img src="/images/ui-kit/x.svg" />
+          <X />
         </button>
         <slot>
           <div
@@ -40,8 +40,11 @@
 </template>
 
 <script>
+  import X from '../../static/images/icons/x.svg';
+
   export default {
     name: 'Dropdown',
+    components: {X},
     props: {
       items: {
         type: Array,
@@ -80,7 +83,7 @@
       options() {
         if(!Array.isArray(this.items))
           return [];
-        return this.items.map(item => 
+        return this.items.map(item =>
           typeof item === 'string'
             ? {text: item, value: item}
             : item
