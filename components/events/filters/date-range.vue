@@ -151,7 +151,6 @@
         let key = 'start';
         if (!this.isFirstChoice) {
           key = 'end';
-          setTimeout(() => this.toggleDropdown(), 500);
         } else {
           newDate['end'] = null;
         }
