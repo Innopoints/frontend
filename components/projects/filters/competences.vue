@@ -42,8 +42,8 @@
     },
     methods: {
       ...mapActions({
-        changeCompetence: 'events/changeCompetence',
-        clearCompetences: 'events/clearCompetences',
+        changeCompetence: 'projects/changeCompetence',
+        clearCompetences: 'projects/clearCompetences',
       }),
       toggleDropdown() {
         this.open = !this.open;

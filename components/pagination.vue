@@ -124,8 +124,8 @@
     methods: {
       changePage(selected) {
         if(selected >= 1 && selected <= this.pageCount) {
-          // Scroll to the top of events block
-          document.getElementById('events-top').scrollIntoView();
+          // Scroll to the top of projects block
+          document.getElementById('projects-top').scrollIntoView();
 
           if (this.selected === selected || isNaN(selected)) return;
           this.innerValue = selected;

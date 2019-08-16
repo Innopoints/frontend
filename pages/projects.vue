@@ -2,44 +2,44 @@
   <div class="material">
     <EventsTagline />
 
-    <section class="events padded">
-      <h1>Ongoing events</h1>
+    <section class="projects padded">
+      <h1>Ongoing projects</h1>
 
-      <Filters />
-      <Ordering />
+      <!--<Filters />
+      <Ordering />-->
 
       <div class="cards">
-        <Event
-          v-for="(event, i) in projects"
+        <Project
+          v-for="(project, i) in projects"
           :key="i"
-          v-bind="event"
+          v-bind="project"
         />
       </div>
     </section>
 
-    <div class="center">
-      <Button img="/images/events/history.svg" label="see past events" />
+    <div class="justify-center">
+      <Button img="/images/icons/book-open.svg" label="see past events" />
     </div>
 
     <!--<Pagination v-if="pageCount > 1" :page-count="pageCount" v-model="currentPage" />-->
 
     <p class="link-bottom padded">
-      What’s so cool about being a volunteer? The <nuxt-link to="/shop">InnoStore</nuxt-link> has your answers!
+      What’s so cool about being a volunteer? The <nuxt-link to="/store">InnoStore</nuxt-link> has your answers!
     </p>
   </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex';
-  import Filters from '../containers/events/filters';
-  import EventsTagline from '../components/events/tagline';
-  import Ordering from '../components/events/filters/ordering';
+  import EventsTagline from '../components/projects/tagline';
   import Button from '../components/ui/button';
+  // import Filters from '../containers/projects/filters';
+  // import Ordering from '../components/projects/filters/ordering';
   // import Pagination from '../components/pagination';
 
   export default {
     head: {
-      title: 'Event Browser',
+      title: 'Project Browser',
       meta: [
         { hid: 'description', name: 'description',
           content: `Search for volunteering opportunities with event browser page` },
@@ -48,29 +48,29 @@
     components: {
       Button,
       // Pagination,
-      Ordering,
-      Filters,
+      // Ordering,
+      // Filters,
       EventsTagline,
-      Event: () => import('../components/events/event'),
+      Project: () => import('../components/projects/project'),
     },
     data() {
       return {
-        eventsPerPage: 8,
+        projectsPerPage: 8,
         currentPage: 1,
       };
     },
     computed: {
       ...mapGetters({
-        allEvents: 'events/events',
+        allProjects: 'projects/projects',
       }),
       pageCount() {
-        return Math.ceil(this.allEvents.length / this.eventsPerPage);
+        return Math.ceil(this.allProjects.length / this.projectsPerPage);
       },
-      events() {
+      projects() {
         const page = this.currentPage - 1;
-        const start = this.eventsPerPage * page;
-        const end = start + this.eventsPerPage;
-        return this.allEvents.slice(start, end);
+        const start = this.projectsPerPage * page;
+        const end = start + this.projectsPerPage;
+        return this.allProjects.slice(start, end);
       },
     },
   };

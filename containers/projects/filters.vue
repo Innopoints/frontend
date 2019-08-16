@@ -8,8 +8,8 @@
 
       <div @click="toggleMobileCollapsed" class="show-filters no-border">
         <img
-          src="/images/events/filter.svg"
-          srcset="/images/events/filter-mobile.svg 18w, /images/events/filter.svg 24w"
+          src="/images/projects/filter.svg"
+          srcset="/images/projects/filter-mobile.svg 18w, /images/projects/filter.svg 24w"
           sizes="(min-width: 640px) 24px, 20px"
         />
         <span>filters</span>
@@ -20,10 +20,10 @@
 
 <script>
   import {mapState, mapActions} from 'vuex';
-  // import Competences from '../../components/events/filters/competences';
-  // import DateRange from '../../components/events/filters/date-range';
-  // import Search from '../../components/events/filters/search';
-  // import Spots from '../../components/events/filters/spots';
+  // import Competences from '../../components/projects/filters/competences';
+  // import DateRange from '../../components/projects/filters/date-range';
+  // import Search from '../../components/projects/filters/search';
+  // import Spots from '../../components/projects/filters/spots';
 
   export default {
     name: 'Filters',
@@ -40,7 +40,7 @@
     },
     methods: {
       ...mapActions({
-        toggleMobileCollapsed: 'events/toggleMobileCollapsed',
+        toggleMobileCollapsed: 'projects/toggleMobileCollapsed',
       }),
     },
   };

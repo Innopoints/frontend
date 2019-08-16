@@ -1,6 +1,6 @@
 export default [
   {
-    img: '/images/events/chess-club.png',
+    img: '/images/projects/chess-club.png',
     title: 'Chess Tournament',
     date: {
       start: new Date('2019-07-05T00:00:00'),
@@ -20,7 +20,7 @@ export default [
     status: 'Unpublished, awaiting review',
   },
   {
-    img: '/images/events/image.png',
+    img: '/images/projects/arro.png',
     title: 'All-Russian Robotics Olympiad',
     date: {
       start: new Date('2019-07-05T00:00:00'),

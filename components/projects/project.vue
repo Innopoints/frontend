@@ -3,21 +3,21 @@
     <h2 class="title">{{ title }}</h2>
 
     <div v-if="isAuth" class="compact">
-      <Labeled icon="/images/events/flag.svg" label="Status">
+      <Labeled icon="/images/icons/flag.svg" label="Status">
         {{ status }}
       </Labeled>
     </div>
 
     <div class="compact">
-      <Labeled icon="/images/events/calendar.svg" label="When">
+      <Labeled icon="/images/icons/calendar.svg" label="When">
         {{ eventDate }}
       </Labeled>
-      <Labeled icon="/images/events/user.svg" label="Organizer">
+      <Labeled icon="/images/icons/user.svg" label="Organizer">
         {{ organizer }}
       </Labeled>
     </div>
 
-    <Labeled icon="/images/events/list.svg" label="Activities">
+    <Labeled icon="/images/icons/list.svg" label="Activities">
       <ul>
         <li v-for="activity in activities.slice(0, 3)" :key="activity">
           {{ activity }}

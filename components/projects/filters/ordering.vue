@@ -2,7 +2,7 @@
   <div class="ordering">
     <!--<span>Order:</span>
     <div id="collapse-toggle">
-      <img src="/images/events/order.svg" />
+      <img src="/images/projects/order.svg" />
       <span>collapse ordering options</span>
     </div>
     <div class="order-grid">

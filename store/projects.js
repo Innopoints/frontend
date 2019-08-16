@@ -1,5 +1,5 @@
-import competences from '../constants/events/competences';
-import events from '../constants/events/events';
+import competences from '../constants/projects/competences';
+import projects from '../constants/projects/projects';
 
 export default {
   namespaced: true,
@@ -12,7 +12,7 @@ export default {
         startDate: null,
         endDate: null,
       },
-      events: events,
+      projects: projects,
       mobileCollapsed: true,
     };
   },
@@ -45,10 +45,9 @@ export default {
     },
   },
   getters: {
-    events: state => {
+    projects: state => {
       return state.projects.filter(event => {
-        if(state.filters.spots > event.spots) return false;
-        return true;
+        return state.filters.spots <= event.spots;
       });
     },
   },

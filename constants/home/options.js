@@ -1,7 +1,7 @@
 export default [
   {
     title: 'Volunteering',
-    subtitle: 'Innopolis University needs heroes like you to organize world-class events!',
+    subtitle: 'Innopolis University needs heroes like you to organize world-class projects!',
     img: '/images/home/volunteering.png',
     buttonLink: '/projects',
     buttonText: 'see the projects',

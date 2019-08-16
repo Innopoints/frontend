@@ -28,8 +28,8 @@
     },
     methods: {
       ...mapActions({
-        changeSearch: 'events/changeSearch',
-        toggleMobileCollapsed: 'events/toggleMobileCollapsed',
+        changeSearch: 'projects/changeSearch',
+        toggleMobileCollapsed: 'projects/toggleMobileCollapsed',
       }),
       changeMobileCollapsed() {
         if(!this.mobileCollapsed) {

@@ -41,7 +41,7 @@
     },
     methods: {
       ...mapActions({
-        changeSpots: 'events/changeSpots',
+        changeSpots: 'projects/changeSpots',
       }),
       editSpots(isInc) {
         let changed = isInc ? this.spots + 1 : this.spots - 1;
