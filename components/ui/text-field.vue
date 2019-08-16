@@ -37,12 +37,8 @@
           {{ text }}
         </span>
 
-        <img
-          v-else-if="item === 'img'"
-          :src="src"
-          class="item"
-          alt=""
-        />
+        <!--eslint-disable-next-line-->
+        <component v-else-if="item === 'img'" :is="svg" class="item" />
       </template>
 
       <span v-if="pattern" class="error"> {{ error }}</span>
@@ -112,6 +108,10 @@
         if(this.outline) arr.push('outline');
 
         return arr;
+      },
+      svg() {
+        if(this.src) return () => import('../../static' + this.src);
+        return '';
       },
     },
     methods: {

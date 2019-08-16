@@ -149,6 +149,30 @@ a:visited {
   }
 }
 
+/* Dividers -------------------------------------- */
+
+hr {
+  border: 0 solid #ddd;
+  border-top-width: 1px;
+  margin-top: 1em;
+}
+
+hr[data-text] {
+  position: relative;
+  overflow: visible;
+}
+
+hr[data-text]::after {
+  content: attr(data-text);
+  background: #fff;
+  padding: 0 .4em;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: .85rem;
+}
+
 /* Buttons -------------------------------------- */
 
 .btn {
@@ -304,7 +328,7 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 20px;
   width: 20px;
   border: 3px solid transparent;
-  background: url('../../images/events/x.svg');
+  background: url('../../images/icons/x.svg');
   background-size: contain;
   cursor: pointer;
   border-radius: 50%;
@@ -373,6 +397,10 @@ textarea:focus {
   padding-left: 3rem;
 }
 
+.text-field.with-item.left input[type="search"] {
+  padding-left: 2.2em;
+}
+
 .text-field.with-item input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -391,14 +419,22 @@ textarea:focus {
   margin-top: -1px;
 }
 
+.text-field.with-item > svg.item {
+  height: 1rem;
+  margin-top: -2px;
+}
+
 .text-field.with-item.right > .item {
   right: 10px;
 }
 
 .text-field.with-item.left > .item {
   left: 10px;
-  color: rgba(0, 0, 0, .5);
   font-weight: 500;
+}
+
+.text-field.with-item.left > .item:not(svg) {
+  color: rgba(0, 0, 0, .5);
 }
 
 .text-field.with-item.left > input:focus + .item,
@@ -434,7 +470,7 @@ textarea:focus {
 }
 
 .text-field.outline.with-item.left svg {
-  stroke: rgba(0, 0, 0, .42);
+  stroke: rgb(148, 148, 148);
 }
 
 .text-field.outline input {
@@ -460,7 +496,7 @@ textarea:focus {
   color: #387800;
 }
 
-.text-field.outline input:focus ~ .item svg {
+.text-field.outline input:focus ~ svg.item {
   stroke: #387800;
 }
 
@@ -480,7 +516,7 @@ textarea:focus {
   color: rgba(186, 3, 3, .7);
 }
 
-.text-field.outline input:invalid ~ .item svg {
+.text-field.outline input:invalid ~ svg.item {
   stroke: rgba(186, 3, 3, .7);
 }
 
@@ -535,6 +571,7 @@ textarea:focus {
 .form-field .desc {
   font-weight: 300;
   font-size: .9rem;
+  line-height: 1.2rem;
 }
 
 .form-field .text-field-wrapper .text-field {
@@ -852,16 +889,16 @@ label:hover input:focus ~ .switch.two-state::before {
 }
 
 .card.with-image > .content {
-  padding: 1em 1.5em;
+  padding: .8em 1.3em;
 }
 
 .card.with-image .title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 400;
 }
 
 .card.with-image .subtitle {
-  font-size: 1rem;
+  font-size: .95rem;
   font-weight: 300;
 }
 
@@ -1163,6 +1200,7 @@ input[type="checkbox"]:checked + .chip::before {
   margin-top: 1rem;
   height: 24px;
   width: 24px;
+  stroke: #387800;
 }
 
 .labeled > .icon svg {
@@ -1423,4 +1461,72 @@ input[type="checkbox"]:checked + .chip::before {
 
 .dot.active {
   background-color: rgba(56, 120, 0, .7);
+}
+
+/* Choice Buttons -------------------------------------- */
+
+.choice-btn > input[type="radio"] {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.choice-btn > .repr {
+  border: 1px solid #387800;
+  border-radius: 15px;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #387800;
+  font-weight: 500;
+}
+
+.choice-btn:hover > .repr {
+  background-color: rgba(56, 120, 0, .05);
+}
+
+.choice-btn > input:checked + .repr {
+  background-color: rgba(56, 120, 0, .1);
+}
+
+.choice-btn > input:focus + .repr {
+  background-color: rgba(56, 120, 0, .12);
+}
+
+.choice-btn .icon {
+  margin-right: .5em;
+  stroke: #387800;
+}
+
+@media only screen and (min-width: 480px) {
+  .choice-btn > .repr {
+    padding: 1.5em 1em;
+  }
+
+  .choice-btn > .repr {
+    flex-direction: column;
+  }
+
+  .choice-btn .icon {
+    margin-right: 0;
+    margin-bottom: .5em;
+    width: 30px;
+    height: 30px;
+    stroke-width: 1.5;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .choice-btn > .repr {
+    font-size: 1.2rem;
+  }
+
+  .choice-btn .icon {
+    width: 48px;
+    height: 48px;
+  }
 }

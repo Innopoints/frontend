@@ -16,7 +16,7 @@
     props: {
       icon: {
         type: String,
-        default: '/images/events/calendar.svg',
+        default: '/images/icons/calendar.svg',
       },
       important: {
         type: Boolean,

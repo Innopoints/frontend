@@ -1,0 +1,9 @@
+#store {
+  @import '../components/header';
+  @import '../components/tagline';
+  @import '../components/pagination';
+  @import '../components/modal-dialog';
+  @import '../product/main';
+  @import './main';
+  @import './filters-spec';
+}

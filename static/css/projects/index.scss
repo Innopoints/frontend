@@ -1,0 +1,8 @@
+#projects {
+  @import './main';
+  @import './filters-spec';
+  @import '../components/header';
+  @import '../components/tagline';
+  @import '../components/filters';
+  @import '../components/pagination';
+}

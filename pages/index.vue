@@ -3,7 +3,7 @@
     <LandingHeader />
     <LandingTagline />
 
-    <Feature />
+    <HowTo />
 
     <Process />
 
@@ -14,12 +14,12 @@
 </template>
 
 <script>
-  import LandingHeader from '../components/landing/header';
-  import LandingTagline from '../components/landing/tagline';
-  import LandingContacts from '../components/landing/contacts';
-  import Feature from '../containers/landing/feature';
-  import Store from '../containers/landing/store';
-  import Process from '../containers/landing/process';
+  import LandingHeader from '../components/home/header';
+  import LandingTagline from '../components/home/tagline';
+  import LandingContacts from '../components/home/contacts';
+  import HowTo from '../containers/home/how-to';
+  import Store from '../containers/home/store';
+  import Process from '../containers/home/options';
 
   export default {
     layout: 'landing',
@@ -33,11 +33,11 @@
       LandingHeader,
       LandingTagline,
       LandingContacts,
-      Feature,
+      HowTo,
       Store,
       Process,
     },
   };
 </script>
 
-<style lang="scss" src="../static/css/landing/index.scss" />
+<style lang="scss" src="../static/css/home/index.scss" />
