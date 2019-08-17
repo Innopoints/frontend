@@ -8,6 +8,16 @@
       <Filters />
       <Ordering />
 
+      <div v-if="events.length === 0" class="empty">
+        <figure>
+          <img class="picture" src="/images/projects/no-projects.svg" alt="" />
+          <figcaption>
+            <div class="title">No projects found...</div>
+            But you can <nuxt-link to="project-edit">create a project</nuxt-link> right now!
+          </figcaption>
+        </figure>
+      </div>
+
       <div class="cards">
         <Event
           v-for="(event, i) in events"
