@@ -68,7 +68,7 @@
     <ul>
       <ProductFormVariety
         v-for="i in $store.state.newProduct.varietiesCount"
-        :colors="['#FF0000', '#00FF00', '#123456']"
+        :colors="['#FF0000', '#00FF00', '#0000FF', '#000000']"
         :key="i"
         :index="i-1"
         :name="i.toString()"

@@ -37,7 +37,7 @@ export default {
       commit('changeFilter', {type: 'search', value: ''});
       commit('changeFilter', {type: 'minPrice', value: 0});
       commit('changeFilter', {type: 'maxPrice', value: 0});
-      commit('changeFilter', {type: 'colors', value: []});
+      commit('changeFilter', {type: 'colors', value: colors.map(color => ({color, checked: true}))});
     },
   },
   getters: {

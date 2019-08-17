@@ -16,7 +16,7 @@
         filters
         <span class="dot active small" />
       </template>
-      <Button @click="$store.dispatch('events/clearFilters')" danger>clear filters</Button>
+      <Button @click="$store.dispatch('projects/clearFilters')" danger>clear filters</Button>
       <ul class="accordion">
         <Spots />
         <Competences />
