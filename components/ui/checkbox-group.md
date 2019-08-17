@@ -2,8 +2,9 @@
 
 Property | Required | Description
 --- | --- | ---
-items | `yes` | *Array* of objects ```{ checked: true/false, label: 'some text'}```
-click | `yes` | *Function* that receives new array of `items` and changes the state.
+value | `yes` | *Array* of objects ```{ checked: true/false, label: 'some text'}```
+round | `no` | circle instead of square
+colored | `no` | item object has color property
 
 
 ### Examples
