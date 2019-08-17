@@ -34,16 +34,16 @@
           label="add Telegram username"
         />
 
-        <Dropdown :chevron="false" right>
-          <template v-slot:opener>
-            <img src="/images/profile/help-circle.svg" class="icon" />
+        <Dropdown
+          :chevron="false"
+          :dropdown-classes="['info-bubble']"
+          :button-classes="['round']"
+          :with-wrapper="false"
+          right
+        >
+          <template v-slot:label>
+            <HelpIcon class="icon" />
           </template>
-          <Button
-            img="/images/x.svg"
-            round
-            normal
-            class="close"
-          />
           Some event organizers prefer to collect those to ease communication. Adding one here will save you the typing for those
           occasions (you will still be able to control what you send).
         </Dropdown>
@@ -56,10 +56,15 @@
   import {mapState} from 'vuex';
   import Button from '../../components/ui/button';
   import Dropdown from '../../components/ui/dropdown';
+  import HelpIcon from '@/static/images/icons/help-circle.svg';
 
   export default {
     name: 'ProfileInfo',
-    components: { Dropdown, Button },
+    components: {
+      Dropdown,
+      Button,
+      HelpIcon,
+    },
     computed: {
       ...mapState({
         balance: state => state.user.balance,
