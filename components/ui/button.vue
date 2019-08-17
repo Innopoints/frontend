@@ -14,7 +14,7 @@
     <template v-if="badge">
       <div class="badge">
         <!--eslint-disable-next-line-->
-        <component v-if="img" :is="svg" viewBox="0 0 24 24" :class="[label && 'mr']" />
+        <component v-if="img" :is="svg" :class="[label && 'mr']" />
       </div>
     </template>
 
@@ -28,14 +28,19 @@
     </slot>
 
     <template v-if="chevron">
-      <img src="/images/profile/chevron-down.svg" class="icon ml chevron" />
+      <Chevron class="icon ml chevron" />
     </template>
   </component>
 </template>
 
 <script>
+  import Chevron from '@/static/images/icons/chevron-down.svg';
+
   export default {
     name: 'Button',
+    components: {
+      Chevron,
+    },
     props: {
       label: {
         type: String,

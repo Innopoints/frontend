@@ -11,7 +11,7 @@ right | `false` | Show item in the right or the left
 text | `''` | Text to show
 src | `''` | Image to show
 
-**Outline props.** If you choose `outlined` - label and id are required
+**Outline props.** If you choose `outline` - label and id are required
 
 Property | Default | Description
 --- | --- | ---

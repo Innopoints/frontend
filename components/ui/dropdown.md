@@ -11,7 +11,10 @@ value     | String\|Object |   | The currently selected item
 label     | String  |         | Text to display on the dropdown
 chevron   | Boolean | `true`  | Adds the chevron icon
 right     | Boolean | `false` | Aligns items to the right
+with-wrapper | Boolean | `true` | Do you need a card-looking dropdown or not
 return-object| Boolean|`false`| Returns (to `v-model`) the selected object as it was given in `items`. Otherwise, returns the text if the items were a string, and _item.value_ if they were objects.
+dropdown-classes | Array | | Array of strings to pass into dropdown div
+button-classes | Array | | Array of strings to pass into the opener button
 
 If the item is in object format, it must have at least the following 2 properties:
 ```json

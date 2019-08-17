@@ -1,26 +1,24 @@
 <template>
   <div :class="{open: isOpen}" class="dropdown-shell">
-    <button
+    <Button
       @click="toggle"
-      v-ripple="'rgba(56, 120, 0, .25)'"
-      type="button"
-      class="btn handle"
+      :class="buttonClasses"
+      class="handle"
     >
       <slot name="label">
         {{ label }}
       </slot>
-      <img v-if="chevron" src="/images/events/chevron-down.svg" class="chevron" />
-    </button>
-    <div :class="{'right-edge': right}" class="dropdown">
-      <div class="relative-wrapper">
-        <button
-          @click="isOpen = false"
-          class="btn normal round close"
-          style="margin-right:0;"
-          type="button"
-        >
-          <X />
-        </button>
+      <Chevron v-if="chevron" class="chevron" />
+    </Button>
+    <div :class="[{'right-edge': right}, ...dropdownClasses]" class="dropdown">
+      <Button
+        @click="toggle"
+        normal
+        round
+        img="/images/icons/x.svg"
+        class="close"
+      />
+      <div v-if="withWrapper || items" class="relative-wrapper">
         <slot>
           <div
             v-for="(option, i) in options"
@@ -35,16 +33,18 @@
           </div>
         </slot>
       </div>
+      <slot v-else />
     </div>
   </div>
 </template>
 
 <script>
-  import X from '../../static/images/icons/x.svg';
+  import Button from '@/components/ui/button';
+  import Chevron from '@/static/images/icons/chevron-down.svg';
 
   export default {
     name: 'Dropdown',
-    components: {X},
+    components: {Button, Chevron},
     props: {
       items: {
         type: Array,
@@ -73,6 +73,12 @@
         type: Boolean,
         default: true,
       },
+      withWrapper: {
+        type: Boolean,
+        default: true,
+      },
+      dropdownClasses: Array,
+      buttonClasses: Array,
     },
     data() {
       return {
@@ -108,20 +114,28 @@
 </script>
 
 <style lang="scss" scoped>
-.dropdown > .relative-wrapper {
-  padding: 1em;
-  padding-right: 3.5em;
-  min-width: 11em;
-}
-.option {
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 10px;
-  &:hover {
-    background-color: #F6F6F6;
+  .close {
+    position: absolute !important;
+    z-index: 100;
   }
-  &.selected {
-    background-color: rgba(56, 120, 0, 0.12);
+
+  .dropdown > .relative-wrapper {
+    padding: 1em;
+    padding-right: 3.5em;
+    min-width: 11em;
   }
-}
+
+  .option {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: #F6F6F6;
+    }
+
+    &.selected {
+      background-color: rgba(56, 120, 0, 0.12);
+    }
+  }
 </style>

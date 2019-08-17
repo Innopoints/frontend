@@ -2,7 +2,7 @@
   <div :class="important ? 'important' : ''" class="entry">
     <div class="icon">
       <!--eslint-disable-next-line-->
-      <component :is="svg" viewBox="0 0 24 24" />
+      <component :is="svg" />
     </div>
     <div class="content">
       <slot />

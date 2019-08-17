@@ -4,7 +4,7 @@
 
     <button v-if="load" @click="handleLoadClick" class="more">
       <div class="icon">
-        <img src="/images/icons/more.svg" />
+        <More />
       </div>
       load more
     </button>
@@ -12,8 +12,13 @@
 </template>
 
 <script>
+  import More from '@/static/images/icons/more-horizontal.svg';
+
   export default {
     name: 'Timeline',
+    components: {
+      More,
+    },
     props: {
       load: {
         type: Boolean,

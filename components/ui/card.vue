@@ -35,3 +35,9 @@
     },
   };
 </script>
+
+<style scoped>
+  .card .image img {
+    width: 100%;
+  }
+</style>

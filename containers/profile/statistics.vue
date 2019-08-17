@@ -63,10 +63,10 @@
   import {mapState} from 'vuex';
   import Dropdown from '../../components/ui/dropdown';
   import Card from '../../components/ui/card';
-  import Clock from '../../static/images/profile/clock.svg';
-  import Rating from '../../static/images/profile/thumbs-up.svg';
-  import Star from '../../static/images/profile/heart.svg';
-  import Stats from '../../static/images/profile/statistics.svg';
+  import Clock from '../../static/images/icons/clock.svg';
+  import Rating from '../../static/images/icons/thumbs-up.svg';
+  import Star from '../../static/images/icons/star.svg';
+  import Stats from '../../static/images/icons/bar-chart-2.svg';
   import Button from '../../components/ui/button';
 
   export default {
