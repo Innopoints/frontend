@@ -1,7 +1,7 @@
 <template>
   <Card>
     <!--eslint-disable-next-line-->
-    <component :is="svg" />
+    <component :is="svg" class="icon" />
     <span class="title">{{ title }}</span>
     <span class="subtitle">{{ subtitle }}</span>
   </Card>

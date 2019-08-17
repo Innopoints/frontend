@@ -12,11 +12,7 @@
       right
     >
       <template v-slot:label>
-        <img
-          src="/images/projects/filter.svg"
-          srcset="/images/projects/filter-mobile.svg 18w, /images/projects/filter.svg 24w"
-          sizes="(min-width: 640px) 24px, 20px"
-        />
+        <FilterIcon class="mr" />
         filters
         <span class="dot active small" />
       </template>
@@ -38,6 +34,7 @@
   import TextField from '@/components/ui/text-field';
   import Dropdown from '@/components/ui/dropdown';
   import Button from '@/components/ui/button';
+  import FilterIcon from '@/static/images/icons/filter.svg';
 
   export default {
     name: 'Filters',
@@ -48,6 +45,7 @@
       TextField,
       Dropdown,
       Button,
+      FilterIcon,
     },
     data() {
       return {

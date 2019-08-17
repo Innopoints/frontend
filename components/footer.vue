@@ -12,7 +12,7 @@
       <div class="left space-between">
         <div>
           <nuxt-link to="/" class="title-container">
-            <Logo />
+            <Logo class="logo" />
             <span class="title">Innopoints</span>
           </nuxt-link>
           <div class="socials space-between">
