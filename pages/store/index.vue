@@ -19,7 +19,6 @@
     </div>
     <ProductModal
       v-if="open"
-      :toggle-modal="toggleModal"
       :product="product"
     />
   </div>
@@ -28,7 +27,6 @@
 <script>
   import StoreCard from "../../components/store/card";
   import StoreTagline from "../../components/store/tagline";
-  import items from "../../constants/store";
 
   export default {
     head: {
@@ -41,14 +39,25 @@
     },
     data() {
       return {
-        items,
         open: false,
         product: null,
       };
     },
+    computed: {
+      items() {
+        return this.$store.getters['store/products'];
+      },
+    },
     watch: {
       $route() {
-        if(this.$route.query.id) this.product = items.find(x => x.id === parseInt(this.$route.query.id));
+        if(this.$route.query.id) {
+          this.product = this.items.find(x => x.id === parseInt(this.$route.query.id));
+          if(this.product != undefined)
+            this.open = true;
+        }
+        else {
+          this.open = false;
+        }
       },
     },
     asyncData ({ query, redirect }) {
