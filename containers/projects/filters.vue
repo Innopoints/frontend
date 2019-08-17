@@ -12,7 +12,7 @@
       right
     >
       <template v-slot:label>
-        <FilterIcon class="mr" />
+        <FilterIcon viewBox="0 0 24 24" class="mr" />
         filters
         <span class="dot active small" />
       </template>

@@ -13,6 +13,12 @@
   flex-direction: column;
 }
 
+.balance .innopoint {
+  stroke-width: 6;
+  margin-left: .05em;
+  margin-right: .1em;
+}
+
 .horizontal {
   display: none;
 }
@@ -28,7 +34,28 @@
 
 .personal .telegram {
   display: flex;
-  flex-wrap: wrap;
+}
+
+.personal .telegram.input {
+  flex-direction: column;
+}
+
+.personal .telegram.exists {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.personal .telegram .error {
+  top: 3.5rem;
+  bottom: unset;
+  margin-right: 12em;
+}
+
+.personal .telegram .actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .5em;
 }
 
 .personal .telegram > .btn {
@@ -68,6 +95,10 @@
 @media only screen and (min-width: 600px) {
   .vertical {
     display: none;
+  }
+
+  .telegram .text-field {
+    width: 20em;
   }
 
   .horizontal {

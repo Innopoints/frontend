@@ -44,9 +44,19 @@
   color: #ba0707;
 }
 
-.timeline .status > .ipt {
-  height: .8rem;
+.timeline .innopoint {
   margin-right: 3px;
+  margin-left: 0;
+  height: .85rem;
+}
+
+.timeline .status > .innopoint {
+  height: .8rem;
+  stroke-width: 7;
+}
+
+.status.good > .innopoint {
+  stroke: #387800;
 }
 
 .timeline .content > .ipt {

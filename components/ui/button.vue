@@ -14,7 +14,7 @@
     <template v-if="badge">
       <div class="badge">
         <!--eslint-disable-next-line-->
-        <component v-if="img" :is="svg" :class="[label && 'mr']" />
+        <component v-if="img" :is="svg" viewBox="0 0 24 24" :class="[label && 'mr']" />
       </div>
     </template>
 

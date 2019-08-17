@@ -8,6 +8,14 @@
   flex-direction: column;
 }
 
+.statistics header .relative-wrapper {
+  padding: 1.5em;
+}
+
+.statistics header .btn {
+  white-space: nowrap;
+}
+
 .statistics .card {
   margin: 1em 0 0;
 }
@@ -91,7 +99,7 @@
 
 .bar-chart > .bar {
   height: 2em;
-  margin: .5em 0;
+  margin: .4em 0;
   display: flex;
 }
 
@@ -144,7 +152,7 @@
   .statistics > div {
     align-items: center;
   }
-  
+
   .card.competences {
     padding: 1em;
   }
@@ -161,6 +169,12 @@
   }
 }
 
+@media only screen and (min-width: 380px) {
+  .card.competences {
+    padding: 1.5em;
+  }
+}
+
 @media only screen and (min-width: 540px) {
   .statistics > header {
     align-items: center;
@@ -173,14 +187,14 @@
   .bar-chart {
     flex-direction: row;
     height: 20em;
-    width: 27em;
+    width: 25em;
     padding: 0 5px;
   }
 
   .bar-chart > .bar {
     height: 100%;
     width: 2em;
-    margin: 0 .5em;
+    margin: 0 .4em;
     flex-direction: column-reverse;
   }
 
@@ -233,6 +247,10 @@
   .statistics > div {
     flex-direction: row;
     justify-content: center;
+  }
+
+  .card.competences {
+    padding-right: 1em;
   }
 
   .top-cards {

@@ -38,7 +38,7 @@
         </span>
 
         <!--eslint-disable-next-line-->
-        <component v-else-if="item === 'img'" :is="svg" class="item" />
+        <component v-else-if="item === 'img'" :is="svg" viewBox="0 0 24 24" class="item" />
       </template>
 
       <span v-if="pattern" class="error"> {{ error }}</span>
