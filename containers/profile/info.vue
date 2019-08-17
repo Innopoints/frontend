@@ -65,7 +65,7 @@
         <Button
           @click="tgChange = true"
           outline
-          img="/images/profile/send.svg"
+          img="/images/icons/send.svg"
           label="add Telegram username"
         />
 

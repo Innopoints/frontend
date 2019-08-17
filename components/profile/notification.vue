@@ -3,13 +3,18 @@
     <header>
       <div class="title">
         {{ title }}
-        <Dropdown v-if="tooltip" :chevron="false">
-          <template v-slot:opener>
+        <Dropdown
+          v-if="tooltip"
+          :chevron="false"
+          :dropdown-classes="['info-bubble']"
+          :button-classes="['round']"
+          :with-wrapper="false"
+          right
+        >
+          <template v-slot:label>
             <HelpIcon class="icon" />
           </template>
-          <template>
-            {{ tooltip }}
-          </template>
+          {{ tooltip }}
         </Dropdown>
         <Button
           v-if="collapsible"
@@ -36,7 +41,7 @@
   import ProfileRadioGroup from './radio-group';
   import Button from '../ui/button';
   import Dropdown from '../ui/dropdown';
-  import HelpIcon from '../../static/images/profile/help-circle.svg';
+  import HelpIcon from '../../static/images/icons/help-circle.svg';
 
   export default {
     name: 'ProfileNotification',
