@@ -19,7 +19,6 @@
     </div>
     <ProductModal
       v-if="open"
-      :toggle-modal="toggleModal"
       :product="product"
     />
   </div>

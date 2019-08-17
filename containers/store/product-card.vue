@@ -105,7 +105,6 @@
     methods: {
       closeModal() {
         this.$router.push({name: 'store', query: {}});
-        if(this.toggleModal) this.toggleModal();
       },
       chooseSize(size) {
         this.chosenSize = size;

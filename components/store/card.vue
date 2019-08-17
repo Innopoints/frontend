@@ -53,7 +53,6 @@
       price: Number,
       varieties: Array,
       isShort: Boolean,
-      toggleModal: Function,
     },
     data() {
       return {
@@ -63,7 +62,6 @@
     methods: {
       openModal(id) {
         this.$router.push({name: 'store', query: {id: id}});
-        this.toggleModal();
       },
     },
   };
