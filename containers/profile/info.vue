@@ -27,8 +27,43 @@
 
     <div class="personal">
       <h1 class="horizontal">{{ name }} {{ surname }}</h1>
-      <div class="telegram">
+      <div v-if="tgChange" class="telegram input">
+        <TextField
+          :value="tgVal"
+          @input="changeVal"
+          outline
+          label="Telegram"
+          item="img"
+          src="/images/icons/at-sign.svg"
+          pattern="[A-Za-z0-9_]{5,32}"
+          error="A username should contain from 5 to 32 symbols: a–z, 0–9, _."
+          class="mt-2"
+        />
+        <div class="actions">
+          <Button
+            @click="tgChange = false"
+            label="cancel"
+            class="mr"
+          />
+          <Button
+            @click="save"
+            filled
+            label="save"
+          />
+        </div>
+      </div>
+      <div v-else-if="telegram" class="telegram exists">
+        @{{ telegram }}
         <Button
+          @click="tgChange = true"
+          img="/images/icons/edit.svg"
+          class="ml"
+          label="edit"
+        />
+      </div>
+      <div v-else class="telegram">
+        <Button
+          @click="tgChange = true"
           outline
           img="/images/profile/send.svg"
           label="add Telegram username"
@@ -53,24 +88,45 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
   import Button from '../../components/ui/button';
   import Dropdown from '../../components/ui/dropdown';
   import HelpIcon from '@/static/images/icons/help-circle.svg';
+  import TextField from '@/components/ui/text-field';
 
   export default {
     name: 'ProfileInfo',
     components: {
+      TextField,
       Dropdown,
       Button,
       HelpIcon,
+    },
+    data() {
+      return {
+        tgChange: false,
+        tgVal: this.telegram,
+      };
     },
     computed: {
       ...mapState({
         balance: state => state.user.balance,
         name: state => state.user.name,
         surname: state => state.user.surname,
+        telegram: state => state.user.telegram,
       }),
+    },
+    methods: {
+      ...mapActions({
+        changeField: 'user/changeField',
+      }),
+      changeVal(val) {
+        this.tgVal = val;
+      },
+      save() {
+        this.changeField({field: 'telegram', value: this.tgVal});
+        this.tgChange = false;
+      },
     },
   };
 </script>
