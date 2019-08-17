@@ -3,6 +3,7 @@
     <div class="material">
       <StoreTagline />
       <section class="shop padded">
+        <Filters />
         <div class="cards">
           <StoreCard
             v-for="item in items"
@@ -27,6 +28,7 @@
 <script>
   import StoreCard from "../../components/store/card";
   import StoreTagline from "../../components/store/tagline";
+  import Filters from '@/containers/store/filters';
 
   export default {
     head: {
@@ -35,6 +37,7 @@
     components: {
       StoreCard,
       StoreTagline,
+      Filters,
       ProductModal: () => import('../../containers/store/product-modal'),
     },
     data() {
