@@ -5,7 +5,7 @@
       You will still see notifications on the website even if you leave them off.
       <div class="dialog notice">
         <div class="message">
-          <img src="/images/ui-kit/alert-triangle-green.svg" class="icon" />
+          <Alert class="icon" />
           <p>Push notifications require permission before they can be used</p>
         </div>
         <div class="actions">
@@ -25,15 +25,17 @@
 </template>
 
 <script>
-  import notifications from '../../constants/profile/notifications';
-  import Button from '../../components/ui/button';
-  import ProfileNotification from '../../components/profile/notification';
+  import notifications from '@/constants/profile/notifications';
+  import Button from '@/components/ui/button';
+  import ProfileNotification from '@/components/profile/notification';
+  import Alert from '@/static/images/icons/alert-triangle.svg';
 
   export default {
     name: 'ProfileNotifications',
     components: {
       ProfileNotification,
       Button,
+      Alert,
     },
     data() {
       return {

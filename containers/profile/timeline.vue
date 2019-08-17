@@ -9,12 +9,12 @@
       />
     </header>
 
-    <TimelineEntry icon="/images/profile/document.svg">
+    <TimelineEntry icon="/images/icons/file-text.svg">
       Applied for <strong>Requisite Management</strong> on <a href="#">Slippers of the Year 2019</a>
       <div class="status good">application accepted, 3 hours of worktime</div>
       <time>21:13, 21 Jun</time>
     </TimelineEntry>
-    <TimelineEntry important icon="/images/profile/document.svg">
+    <TimelineEntry important icon="/images/icons/file-text.svg">
       Applied for <strong>Requisite Management</strong> on <a href="#">Slippers of the Year 2019</a>
       <div class="status good">application accepted, 3 hours of worktime</div>
       <time>21:13, 21 Jun</time>

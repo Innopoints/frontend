@@ -28,14 +28,19 @@
     </slot>
 
     <template v-if="chevron">
-      <img src="/images/profile/chevron-down.svg" class="icon ml chevron" />
+      <Chevron class="icon ml chevron" />
     </template>
   </component>
 </template>
 
 <script>
+  import Chevron from '@/static/images/icons/chevron-down.svg';
+
   export default {
     name: 'Button',
+    components: {
+      Chevron,
+    },
     props: {
       label: {
         type: String,

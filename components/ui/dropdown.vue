@@ -8,7 +8,7 @@
       <slot name="label">
         {{ label }}
       </slot>
-      <img v-if="chevron" src="/images/events/chevron-down.svg" class="chevron" />
+      <Chevron v-if="chevron" class="chevron" />
     </Button>
     <div :class="[{'right-edge': right}, ...dropdownClasses]" class="dropdown">
       <Button
@@ -40,10 +40,11 @@
 
 <script>
   import Button from '@/components/ui/button';
+  import Chevron from '@/static/images/icons/chevron-down.svg';
 
   export default {
     name: 'Dropdown',
-    components: { Button},
+    components: {Button, Chevron},
     props: {
       items: {
         type: Array,

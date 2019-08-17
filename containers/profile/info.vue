@@ -4,21 +4,21 @@
     <div class="balance">
       <p class="btn-align">
         <span>{{ balance }}</span>
-        <img src="/images/innopoint.svg" />
+        <Innopoint />
         available
       </p>
       <nav class="btn-shift">
         <Button
           link
-          href="/shop"
-          img="/images/profile/shopping-bag.svg"
+          href="/store"
+          img="/images/icons/shopping-bag.svg"
           label="go to the InnoStore"
           class="mr"
         />
         <Button
           link
           href="#"
-          img="/images/profile/medal.svg"
+          img="/images/icons/award.svg"
           label="request innopoints"
           class="mr"
         />
@@ -93,6 +93,7 @@
   import Dropdown from '../../components/ui/dropdown';
   import HelpIcon from '@/static/images/icons/help-circle.svg';
   import TextField from '@/components/ui/text-field';
+  import Innopoint from '@/static/images/innopoint-sharp.svg';
 
   export default {
     name: 'ProfileInfo',
@@ -101,6 +102,7 @@
       Dropdown,
       Button,
       HelpIcon,
+      Innopoint,
     },
     data() {
       return {
