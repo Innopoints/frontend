@@ -2,7 +2,7 @@
   <div :class="!icon && 'text'" class="labeled">
     <template v-if="icon">
       <!--eslint-disable-next-line-->
-      <component :is="svg" />
+      <component :is="svg" class="icon" />
       <div class="text">
         <span class="label">{{ label }}</span>
         <span>
