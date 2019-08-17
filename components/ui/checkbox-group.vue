@@ -1,6 +1,6 @@
 <template>
   <div role="group" class="with-labels">
-    <label v-for="(item, index) in data" :key="index" class="clickable">
+    <label v-for="(item, index) in value" :key="index" class="clickable">
       <div :class="{round, colored}" class="checkbox">
         <input
           :checked="item.checked"
