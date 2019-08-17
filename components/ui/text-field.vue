@@ -22,6 +22,7 @@
         :pattern="pattern"
         :min="min"
         :max="max"
+        :maxLength="maxLength"
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
@@ -91,6 +92,7 @@
       name: String,
       min: Number,
       max: Number,
+      maxLength: Number,
       focus: Function,
       input: Function,
       blur: Function,

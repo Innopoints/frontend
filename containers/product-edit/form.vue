@@ -45,6 +45,8 @@
       <TextField
         id="price"
         :min="0"
+        :max="1000000"
+        :max-length="6"
         :value="$store.state.newProduct.price"
         @change="$store.commit('newProduct/setField', {key:'price', value: $event})"
         type="number"

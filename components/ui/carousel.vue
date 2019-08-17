@@ -22,26 +22,31 @@
     </div>
     <template v-if="images.length > 1 && !hideControls">
       <button @click="prev" v-ripple class="btn round prev-slide">
-        <img src="/images/ui-kit/chevron-left-white.svg" />
+        <ChevronLeft />
       </button>
       <button @click="next" v-ripple class="btn round next-slide">
-        <img src="/images/ui-kit/chevron-right-white.svg" />
+        <ChevronRight />
       </button>
     </template>
   </div>
 </template>
 
 <script>
+  import ChevronLeft from '@/static/images/icons/chevron-left.svg';
+  import ChevronRight from '@/static/images/icons/chevron-right.svg';
+
   export default {
+    components: {
+      ChevronLeft,
+      ChevronRight,
+    },
     props: {
       images: {
         type: Array,
         validator(val) {
           if(!Array.isArray(val))
             return false;
-          if(!val.every(item => typeof item === 'string'))
-            return false;
-          return true;
+          return val.every(item => typeof item === 'string');
         },
         required: true,
       },
