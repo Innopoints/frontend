@@ -1,7 +1,7 @@
 <template>
   <header class="top-level padded">
     <span @click="resolution" class="logo">
-      <img src="/images/events/innou-icon-green.svg" alt="Go to the home page" />
+      <img src="/images/innou-icon.svg" alt="Go to the home page" />
       <span class="hide-tb">Innopoints</span>
     </span>
     <div class="actions">

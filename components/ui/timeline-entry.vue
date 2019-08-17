@@ -2,7 +2,7 @@
   <div :class="important ? 'important' : ''" class="entry">
     <div class="icon">
       <!--eslint-disable-next-line-->
-      <component :is="svg" />
+      <component :is="svg" viewBox="0 0 24 24" />
     </div>
     <div class="content">
       <slot />
@@ -16,7 +16,7 @@
     props: {
       icon: {
         type: String,
-        default: '/images/events/calendar.svg',
+        default: '/images/icons/calendar.svg',
       },
       important: {
         type: Boolean,

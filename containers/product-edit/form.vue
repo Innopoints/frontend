@@ -50,7 +50,7 @@
         type="number"
         item="img"
         right
-        src="/images/create-product/innopoint.svg"
+        src="/images/innopoint-sharp.svg"
       />
     </FormField>
 
@@ -77,7 +77,7 @@
       <li class="more">
         <Button
           @click="$store.commit('newProduct/addVariety')"
-          img="/images/create-product/plus.svg"
+          img="/images/icons/plus.svg"
           label="add another variety"
         />
       </li>

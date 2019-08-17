@@ -4,7 +4,7 @@
 
     <button v-if="load" @click="handleLoadClick" class="more">
       <div class="icon">
-        <img src="/images/events/more.svg" />
+        <img src="/images/icons/more.svg" />
       </div>
       load more
     </button>

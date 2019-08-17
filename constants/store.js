@@ -1,0 +1,140 @@
+export default [
+  {
+    id: 1,
+    name: 'Write clean code',
+    type: 'sweatshirt',
+    description: 'Lorem ipsum dolor sit amet, a Lev loh',
+    price: 1337,
+    purchases: 0,
+    varieties: [
+      {
+        color: '#FF0000',
+        background: 'rgba(255, 0, 0, .2)',
+        images: ['/images/store/sweatshirt.png'],
+        sizes: {
+          'XS': 1,
+          'S': 0,
+          'M': 4,
+          'L': 1,
+          'XL': 1,
+          'XXL': 2,
+        },
+      },
+      {
+        color: '#00FF00',
+        background: 'rgba(0, 255, 0, .2)',
+        images: ['/images/store/sweatshirt.png'],
+        sizes: {
+          'XS': 11,
+          'S': 0,
+          'M': 2,
+          'L': 0,
+          'XL': 123,
+          'XXL': 2,
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'ASCII Whale',
+    type: 'T-Shirt',
+    description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
+    price: 1337,
+    purchases: 0,
+    varieties: [
+      {
+        color: '#0000FF',
+        background: 'rgba(0, 0, 255, .2)',
+        images: ['/images/store/tshirt.png', '/images/home/sweatshirt.png'],
+        sizes: {},
+      },
+      {
+        color: '#000000',
+        background: 'rgba(0, 0, 0, .2)',
+        images: ['/images/store/tshirt.png'],
+        sizes: {},
+      },
+      {
+        color: '#FFFFFF',
+        background: 'rgba(255, 255, 255, .2)',
+        images: ['/images/store/tshirt.png'],
+        sizes: {},
+      },
+      {
+        color: '#CC00CC',
+        background: 'rgba(155, 0, 155, .2)',
+        images: ['/images/store/sweatshirt.png', '/images/store/tshirt.png'],
+        sizes: {},
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: 'UI Umbrella',
+    type: '',
+    description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
+    price: 201,
+    purchases: 0,
+    varieties: [
+      {
+        color: '#FF0000',
+        background: 'rgba(255, 0, 0, .2)',
+        images: ['/images/store/umbrella.png'],
+        sizes: {},
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Write clean code',
+    type: 'sweatshirt',
+    description: 'Lorem ipsum dolor sit amet, a Lev loh',
+    price: 1337,
+    purchases: 0,
+    varieties: [
+      {
+        color: '#00FF00', background: 'rgba(0, 255, 0, .2)',
+        images: ['/images/store/sweatshirt.png'],
+        sizes: {},
+      },
+      {
+        color: '#FF0000', background: 'rgba(255, 0, 0, .2)',
+        images: ['/images/store/sweatshirt.png'],
+        sizes: {},
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: 'ASCII Whale',
+    type: 'T-Shirt',
+    description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
+    price: 1337,
+    purchases: 0,
+    varieties: [
+      {
+        color: '#FF0000',
+        background: 'rgba(255, 0, 0, .2)',
+        images: ['/images/store/tshirt.png'],
+        sizes: {},
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: 'UI Umbrella',
+    type: '',
+    description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
+    price: 201,
+    purchases: 0,
+    varieties: [
+      {
+        color: '#FF0000',
+        background: 'rgba(255, 0, 0, .2)',
+        images: ['/images/store/umbrella.png'],
+        sizes: {},
+      },
+    ],
+  },
+];

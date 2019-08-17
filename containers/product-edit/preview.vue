@@ -39,7 +39,7 @@
           <span class="label">Price</span>
           <span class="content">
             <span :class="{placeholder: price <= 0}" class="price">{{ price > 0 ? price.toLocaleString('ru') : '' }}</span>
-            <img src="/images/create-product/innopoint.svg" class="ml" />
+            <Innopoint class="ml" />
           </span>
         </div>
         <div class="purchase">
@@ -63,6 +63,7 @@
   import RadioGroup from '../../components/ui/radio-group';
   import Chip from '../../components/ui/chip';
   import Carousel from '../../components/ui/carousel';
+  import Innopoint from '../../static/images/innopoint-sharp.svg';
 
   export default {
     name: 'ProductEditPreview',
@@ -73,6 +74,7 @@
       RadioGroup,
       Chip,
       Carousel,
+      Innopoint,
     },
     data() {
       return {
