@@ -41,7 +41,15 @@ export default {
       commit('changeCompetence', {index, checked: value.checked});
     },
     clearCompetences({commit, state}) {
-      state.filters.competences.forEach((c, index) => commit('changeCompetence', {index, checked: false}));
+      state.filters.competences.forEach((c, index) => commit('changeCompetence', {index, checked: true}));
+    },
+    clearFilters({commit, dispatch}) {
+      dispatch('clearCompetences');
+      commit('changeFilter', {type: 'search', value: ''});
+      commit('changeFilter', {type: 'spots', value: 1});
+      dispatch('clearCompetences');
+      commit('changeFilter', {type: 'startDate', value: null});
+      commit('changeFilter', {type: 'endDate', value: null});
     },
   },
   getters: {

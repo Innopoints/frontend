@@ -2,7 +2,7 @@
   <Card class="checkboxes">
     <h1>Checkboxes group</h1>
     <div class="showcase">
-      <CheckboxGroup :items="items" :click="handleCheckboxChange" />
+      <CheckboxGroup :value="items" :click="handleCheckboxChange" />
     </div>
 
     <hr />

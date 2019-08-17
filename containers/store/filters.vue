@@ -12,53 +12,48 @@
       right
     >
       <template v-slot:label>
-        <FilterIcon class="mr" />
+        <FilterIcon viewBox="0 0 24 24" class="mr" />
         filters
         <span class="dot active small" />
       </template>
-      <Button @click="$store.dispatch('events/clearFilters')" danger>clear filters</Button>
+      <Button @click="$store.dispatch('store/clearFilters')" danger>clear filters</Button>
       <ul class="accordion">
-        <Spots />
-        <Competences />
-        <DateRange />
+        <Price />
+        <Colors />
       </ul>
     </Dropdown>
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex';
-  import Competences from '@/components/projects/filters/competences';
-  import DateRange from '@/components/projects/filters/date-range';
-  import Spots from '@/components/projects/filters/spots';
   import TextField from '@/components/ui/text-field';
   import Dropdown from '@/components/ui/dropdown';
   import Button from '@/components/ui/button';
   import FilterIcon from '@/static/images/icons/filter.svg';
+  import Price from '@/components/store/filters/price';
+  import Colors from '@/components/store/filters/colors';
 
   export default {
     name: 'Filters',
     components: {
-      DateRange,
-      Competences,
-      Spots,
       TextField,
       Dropdown,
       Button,
       FilterIcon,
+      Price,
+      Colors,
     },
     data() {
       return {
       };
     },
     computed: {
-      ...mapState('projects', ['filters']),
       search: {
         get() {
-          return this.filters.search;
+          return this.$store.state.store.filters.search;
         },
         set(value) {
-          return this.$store.commit('projects/changeFilter', {type: 'search', value});
+          return this.$store.commit('store/changeFilter', {type: 'search', value});
         },
       },
     },
