@@ -50,7 +50,7 @@
     </Card>
     <div class="actions">
       <Button @click="$store.commit('newProduct/reset')" danger label="clear fields" />
-      <Button filled label="create product" />
+      <Button @click="save" filled label="create product" />
     </div>
   </section>
 </template>
@@ -110,6 +110,20 @@
         if(this.selectedVariety == null && value.length > 0) {
           this.selectedVariety = value[0];
         }
+      },
+    },
+    methods: {
+      async save() {
+        // TODO: do some checking on required fields
+        const newProduct = Object.assign({}, this.$store.state.newProduct);
+        newProduct.varieties = Array.from(newProduct.varieties, v => Object.assign({}, v, {
+          images: Array.from(v.images),
+          sizes: Object.assign({}, v.sizes),
+        }));
+        newProduct.id = this.$store.state.store.products.length;
+        await this.$store.dispatch('store/addProduct', newProduct);
+        this.$store.commit('newProduct/reset');
+        this.$router.push('/store');
       },
     },
   };
