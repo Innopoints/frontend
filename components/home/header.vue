@@ -2,8 +2,17 @@
   <header class="container">
     <img @click="resolution" src="/images/innou-logo.svg" class="logo" />
     <Button
-      :label="'sign ' + (isAuth ? 'out' : 'in')"
+      v-if="isAuth"
+      link
+      href="/profile"
+      img="/images/icons/user.svg"
+      round
+      outline
+    />
+    <Button
+      v-else
       @click="toggleAuth"
+      label="sign in"
       outline
     />
   </header>

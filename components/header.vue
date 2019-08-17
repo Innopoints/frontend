@@ -1,13 +1,22 @@
 <template>
   <header class="top-level padded">
-    <span @click="resolution" class="logo">
+    <nuxt-link to="/" class="logo">
       <img src="/images/innou-icon.svg" alt="Go to the home page" />
       <span class="hide-tb">Innopoints</span>
-    </span>
+    </nuxt-link>
     <div class="actions">
       <Button
-        :label="'sign ' + (isAuth ? 'out' : 'in')"
+        v-if="isAuth"
+        link
+        href="/profile"
+        img="/images/icons/user.svg"
+        round
+        outline
+      />
+      <Button
+        v-else
         @click="toggleAuth"
+        label="sign in"
         outline
       />
     </div>
