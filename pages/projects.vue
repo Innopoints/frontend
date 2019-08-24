@@ -31,8 +31,6 @@
       <Button img="/images/icons/book-open.svg" label="see past projects" />
     </div>
 
-    <!--<Pagination v-if="pageCount > 1" :page-count="pageCount" v-model="currentPage" />-->
-
     <p class="link-bottom padded">
       What’s so cool about being a volunteer? The <nuxt-link to="/store">InnoStore</nuxt-link> has your answers!
     </p>
@@ -45,8 +43,7 @@
   import ProjectsTagline from '../components/projects/tagline';
   import Ordering from '../components/projects/filters/ordering';
   import Button from '../components/ui/button';
-  // import Pagination from '../components/pagination';
-
+  
   export default {
     head: {
       title: 'Project Browser',
@@ -57,7 +54,6 @@
     },
     components: {
       Button,
-      // Pagination,
       Ordering,
       Filters,
       ProjectsTagline,
