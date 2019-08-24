@@ -1,10 +1,10 @@
 <template>
   <li class="filter competences panel">
     <img src="/images/icons/label.svg" />
-    <Accordion label="select competencies">
+    <Accordion label="select competences">
       <Button @click="clearCompetences">clear all</Button>
       <CheckboxGroup
-        :items="competences"
+        :value="competences"
         @change="changeCompetence"
       />
     </Accordion>
