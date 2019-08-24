@@ -3,7 +3,7 @@
     <Chip
       v-for="(option, i) in options"
       :key="i"
-      :text="option"
+      :text="option + ' first'"
       :value="selected === option"
       @input="select(option)"
       name="ordering"
