@@ -4,7 +4,7 @@
     <div>
       <div class="headline">Become a volunteer</div>
       <div class="subhead">
-        If you’re seeking an opportunity to contribute to the wonderful world of events,
+        If you’re seeking an opportunity to contribute to the wonderful world of projects,
         you’re in the right place!
       </div>
     </div>
@@ -13,6 +13,6 @@
 
 <script>
   export default {
-    name: "EventsTagline",
+    name: "ProjectsTagline",
   };
 </script>

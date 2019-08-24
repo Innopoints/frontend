@@ -15,7 +15,7 @@
       </section>
       <p class="link-bottom padded">
         Lacking innopoints?
-        <nuxt-link to="/projects">Volunteer on events</nuxt-link> to fill in the shortage!
+        <nuxt-link to="/projects">Volunteer on projects</nuxt-link> to fill in the shortage!
       </p>
     </div>
     <ProductModal
