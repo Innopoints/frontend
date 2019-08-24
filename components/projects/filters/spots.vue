@@ -38,6 +38,8 @@
           return this.$store.state.projects.filters.spots;
         },
         set(value) {
+          if(value < 0)
+            return;
           this.$store.commit('projects/changeFilter', {type: 'spots', value});
         },
       },
