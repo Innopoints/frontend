@@ -1,6 +1,6 @@
 <template>
   <li class="filter competences panel">
-    <img src="/images/icons/label.svg" />
+    <LabelIcon class="icon mr" />
     <Accordion label="select competences">
       <Button @click="clearCompetences">clear all</Button>
       <CheckboxGroup
@@ -16,6 +16,7 @@
   import Accordion from '@/components/ui/accordion';
   import Button from '@/components/ui/button';
   import CheckboxGroup from '@/components/ui/checkbox-group';
+  import LabelIcon from '@/static/images/icons/label.svg';
 
   export default {
     name: 'Competences',
@@ -23,6 +24,7 @@
       Accordion,
       Button,
       CheckboxGroup,
+      LabelIcon,
     },
     data() {
       return {

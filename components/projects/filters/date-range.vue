@@ -1,11 +1,6 @@
 <template>
   <li class="filter date-range panel">
-    <img
-      src="/images/icons/calendar.svg"
-      srcset="/images/icons/calendar-mobile.svg 18w, /images/icons/calendar.svg 24w"
-      sizes="(min-width: 640px) 22px, 18px"
-      class="drop-text-open"
-    />
+    <CalendarIcon class="icon mr" />
     <Accordion label="select date range">
       <div class="drop-header">
         <div>
@@ -46,12 +41,14 @@
   import fecha from 'fecha';
   import Accordion from '@/components/ui/accordion';
   import Button from '@/components/ui/button';
+  import CalendarIcon from '@/static/images/icons/calendar.svg';
 
   export default {
     name: 'DateRange',
     components: {
       Accordion,
       Button,
+      CalendarIcon,
     },
     data() {
       return {
