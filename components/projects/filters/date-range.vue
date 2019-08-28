@@ -239,6 +239,8 @@
       clear() {
         this.isFirstChoice = true;
         this.dateRange = [null, null];
+        this.$store.commit('projects/changeFilter', {type: 'startDate', value: null});
+        this.$store.commit('projects/changeFilter', {type: 'endDate', value: null});
       },
     },
   };
