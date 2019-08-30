@@ -12,6 +12,7 @@
     </Button>
     <div :class="[{'right-edge': right}, ...dropdownClasses]" class="dropdown">
       <Button
+        v-if="!withWrapper && !items"
         @click="toggle"
         normal
         round
@@ -19,6 +20,13 @@
         class="close"
       />
       <div v-if="withWrapper || items" class="relative-wrapper">
+        <Button
+          @click="toggle"
+          normal
+          round
+          img="/images/icons/x.svg"
+          class="close"
+        />
         <slot>
           <div
             v-for="(option, i) in options"
@@ -112,30 +120,3 @@
     },
   };
 </script>
-
-<style lang="scss" scoped>
-  .close {
-    position: absolute !important;
-    z-index: 100;
-  }
-
-  .dropdown > .relative-wrapper {
-    padding: 1em;
-    padding-right: 3.5em;
-    min-width: 11em;
-  }
-
-  .option {
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 10px;
-
-    &:hover {
-      background-color: #F6F6F6;
-    }
-
-    &.selected {
-      background-color: rgba(56, 120, 0, 0.12);
-    }
-  }
-</style>
