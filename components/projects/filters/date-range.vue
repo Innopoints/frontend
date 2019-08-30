@@ -1,39 +1,36 @@
 <template>
-  <li class="filter date-range panel">
-    <CalendarIcon class="icon mr" />
-    <Accordion label="select date range">
-      <div class="drop-header">
-        <div>
-          <Button @click="goToStart" :class="isFirstChoice && 'active'">start date</Button>
-          <Button @click="goToEnd" :class="!isFirstChoice && 'active'">end date</Button>
-        </div>
-        <Button @click="clear" style="color:red; font-weight: 700;">clear</Button>
+  <section>
+    <div class="drop-header">
+      <div>
+        <Button @click="goToStart" :class="isFirstChoice && 'active'">start date</Button>
+        <Button @click="goToEnd" :class="!isFirstChoice && 'active'">end date</Button>
       </div>
+      <Button @click="clear" style="color:red; font-weight: 700;">clear</Button>
+    </div>
 
-      <div class="calendar">
-        <div class="month-header">
-          <button @click="goPrevMonth" class="left" />
-          {{ monthsLocale[activeMonthStart] + ' ' + activeYearStart }}
-          <button @click="goNextMonth" class="right" />
-        </div>
-        <div class="weekdays">
-          <div v-for="item in shortDaysLocale" :key="item">{{ item }}</div>
-        </div>
-        <div v-for="week in maxWeeks" :key="week" class="days">
-          <!-- Next <div> element may have one of the classes:
-          day-in-range, day-selected and day-disabled (if not in this month) -->
-          <div
-            v-for="day in numOfDays"
-            :key="day"
-            :class="[...getCellClass(week, day, startMonthDay, endMonthDate), 'day']"
-            @click="selectFirstItem(week, day)"
-          >
-            <button v-html="getDayCell(week, day, startMonthDay, endMonthDate)" />
-          </div>
+    <div class="calendar">
+      <div class="month-header">
+        <button @click="goPrevMonth" class="left" />
+        {{ monthsLocale[activeMonthStart] + ' ' + activeYearStart }}
+        <button @click="goNextMonth" class="right" />
+      </div>
+      <div class="weekdays">
+        <div v-for="item in shortDaysLocale" :key="item">{{ item }}</div>
+      </div>
+      <div v-for="week in maxWeeks" :key="week" class="days">
+        <!-- Next <div> element may have one of the classes:
+        day-in-range, day-selected and day-disabled (if not in this month) -->
+        <div
+          v-for="day in numOfDays"
+          :key="day"
+          :class="[...getCellClass(week, day, startMonthDay, endMonthDate), 'day']"
+          @click="selectFirstItem(week, day)"
+        >
+          <button v-html="getDayCell(week, day, startMonthDay, endMonthDate)" />
         </div>
       </div>
-    </Accordion>
-  </li>
+    </div>
+  </section>
 </template>
 
 <script>

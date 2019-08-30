@@ -1,6 +1,6 @@
 <template>
   <li class="filter competences panel">
-    <LabelIcon class="icon mr" />
+    <LabelIcon />
     <Accordion label="select competences">
       <Button @click="clearCompetences">clear all</Button>
       <CheckboxGroup

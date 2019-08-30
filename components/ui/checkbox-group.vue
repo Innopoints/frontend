@@ -41,25 +41,27 @@
         this.data[index] = !this.data[index];
       },
       style(item) {
-        let color = item.color;
-        if(!color) color = '#387800';
+        if (this.round || this.colored) {
+          let color = item.color;
+          if(!color) color = '#387800';
 
-        // Parse HEX colors
-        let outline = '';
-        let match = color.toUpperCase().match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
-        if(match) {
-          outline = `
+          // Parse HEX colors
+          let outline = '';
+          let match = color.toUpperCase().match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
+          if(match) {
+            outline = `
             --r: ${parseInt(match[1], 16)};
             --g: ${parseInt(match[2], 16)};
             --b: ${parseInt(match[3], 16)};
           `;
-        }
+          }
 
-        return `
+          return `
           background-color: ${color};
           border-color: ${color};
           ${outline}
         `;
+        }
       },
     },
   };
