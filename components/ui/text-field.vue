@@ -26,6 +26,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
+        @keyup.enter="handleBlur"
       />
 
       <label v-if="outline" :for="id" class="label">{{ label }}</label>

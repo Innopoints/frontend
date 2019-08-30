@@ -23,6 +23,7 @@
       v-if="open"
       :product="product"
     />
+    <Pagination v-model="currentPage" :pageCount="pageCount" />
   </div>
 </template>
 
@@ -31,6 +32,7 @@
   import StoreTagline from "../../components/store/tagline";
   import Filters from '@/containers/store/filters';
   import Ordering from '@/components/store/filters/ordering';
+  import Pagination from '@/components/pagination';
 
   export default {
     head: {
@@ -42,16 +44,27 @@
       Filters,
       Ordering,
       ProductModal: () => import('../../containers/store/product-modal'),
+      Pagination,
     },
     data() {
       return {
         open: false,
         product: null,
+        currentPage: 1,
+        itemsPerPage: 4,
       };
     },
     computed: {
-      items() {
+      products() {
         return this.$store.getters['store/products'];
+      },
+      pageCount() {
+        return Math.ceil(this.products.length / this.itemsPerPage);
+      },
+      items() {
+        const begin = this.itemsPerPage * (this.currentPage - 1);
+        const end = begin + this.itemsPerPage;
+        return this.products.slice(begin, end);
       },
     },
     watch: {
