@@ -7,7 +7,7 @@
 }
 
 .balance > nav {
-  margin-top: 1em;
+  margin-top: .3em;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -19,12 +19,8 @@
   margin-right: .1em;
 }
 
-.horizontal {
-  display: none;
-}
-
 .personal {
-  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 .personal .btn > .icon {
@@ -68,8 +64,12 @@
 }
 
 .info-bubble {
-  padding: 1em 3.5em 1em 1em;
+  padding: 1em;
   font-size: .95rem;
+}
+
+.info-bubble .btn.close {
+  margin-right: 0;
 }
 
 .personal .info-bubble {
@@ -87,22 +87,13 @@
 
   .personal .info-bubble {
     right: -3em;
-    font-size: 1rem;
     min-width: 17em;
   }
 }
 
 @media only screen and (min-width: 600px) {
-  .vertical {
-    display: none;
-  }
-
   .telegram .text-field {
     width: 20em;
-  }
-
-  .horizontal {
-    display: block;
   }
 
   .personal {
@@ -112,8 +103,26 @@
 
   .quick-info {
     display: flex;
-    flex-direction: row-reverse;
     justify-content: space-between;
     margin-top: 4em;
+  }
+
+  .balance > p {
+    text-align: right;
+  }
+
+  .btn-shift {
+    margin-left: 0;
+    margin-right: -.8rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .balance > p {
+    font-size: 1.4rem;
+  }
+
+  .balance .innopoint {
+    height: 1.2rem;
   }
 }

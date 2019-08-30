@@ -22,7 +22,7 @@
 /* Typography -------------------------------------- */
 
 .headline {
-  color: #387800;
+  color: #127800;
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: .2em;
@@ -35,14 +35,14 @@
 }
 
 h1 {
-  color: #387800;
+  color: #127800;
   font-size: 1.4rem;
   font-weight: 500;
   margin: 0 0 .5em 0;
 }
 
 h2 {
-  color: #387800;
+  color: #127800;
   font-size: 1.3rem;
   font-weight: 500;
   margin: 0 0 .4em 0;
@@ -65,7 +65,7 @@ strong {
 
 .label {
   text-transform: uppercase;
-  color: #387800;
+  color: #127800;
   font-weight: 500;
   font-size: .8rem;
 }
@@ -75,7 +75,7 @@ strong {
 }
 
 a {
-  color: #387800;
+  color: #127800;
 }
 
 a:visited {
@@ -155,6 +155,7 @@ hr {
   border: 0 solid #ddd;
   border-top-width: 1px;
   margin-top: 1em;
+  width: 100%;
 }
 
 hr[data-text] {
@@ -179,7 +180,7 @@ hr[data-text]::after {
   font-family: 'Ubuntu';
   font-weight: 500;
   font-size: 1rem;
-  color: #387800;
+  color: #127800;
   text-decoration: none;
   outline: none;
   background: none;
@@ -195,7 +196,7 @@ hr[data-text]::after {
 }
 
 .btn:visited {
-  color: #387800;
+  color: #127800;
 }
 
 .btn.normal {
@@ -207,7 +208,7 @@ button.btn {
 }
 
 .btn.filled {
-  background-color: #387800;
+  background-color: #127800;
   color: #fff;
   box-shadow:
     0 3px 1px -2px rgba(0, 0, 0, .2),
@@ -216,7 +217,7 @@ button.btn {
 }
 
 .btn.filled:hover:not(:disabled), .btn.filled:focus {
-  background-color: #3d8200;
+  background-color: #158a00;
   box-shadow:
     0 2px 4px -1px rgba(0, 0, 0, .2),
     0 4px 5px 0    rgba(0, 0, 0, .14),
@@ -224,11 +225,11 @@ button.btn {
 }
 
 .btn.filled:focus:not(:disabled) {
-  background-color: #449200;
+  background-color: #179900;
 }
 
 .btn.outline {
-  border: 1px solid #387800;
+  border: 1px solid #127800;
 }
 
 .btn.outline.normal {
@@ -236,7 +237,7 @@ button.btn {
 }
 
 .btn:hover:not(:disabled), .btn.outline:hover:not(:disabled) {
-  background-color: rgba(56, 120, 0, .05);
+  background-color: rgba(18, 120, 0, .05);
 }
 
 .btn.normal:hover:not(:disabled), .btn.outline.normal:hover:not(:disabled) {
@@ -244,7 +245,7 @@ button.btn {
 }
 
 .btn.outline:focus:not(:disabled), .btn:focus:not(:disabled) {
-  background-color: rgba(56, 120, 0, .12);
+  background-color: rgba(18, 120, 0, .12);
 }
 
 .btn.outline.normal:focus:not(:disabled), .btn.normal:focus:not(:disabled) {
@@ -300,7 +301,7 @@ button.btn {
 }
 
 .btn > svg {
-  stroke: #387800;
+  stroke: #127800;
 }
 
 .btn.danger > svg {
@@ -354,6 +355,12 @@ input[type="search"]::-webkit-search-cancel-button:hover {
   height: 2.8em;
 }
 
+.text-field input:disabled {
+  background-color: #f8f8f8;
+  border-color: rgba(0, 0, 0, .2);
+  color: #777;
+}
+
 .text-field textarea {
   padding: 12px 10px 1px;
   height: 6em;
@@ -364,13 +371,17 @@ input[type="search"]::-webkit-search-cancel-button:hover {
   background-color: #ededed;
 }
 
+.text-field input:hover:disabled {
+  background-color: #f8f8f8;
+}
+
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="search"]:focus,
 textarea:focus {
   background-color: #e1e1e1;
   border-bottom-width: 2px;
-  border-color: #3d8200;
+  border-color: #158a00;
   padding-bottom: 0;
 }
 
@@ -439,11 +450,11 @@ textarea:focus {
 
 .text-field.with-item.left > input:focus + .item,
 .text-field.outline.with-item.left > input:focus ~ .item {
-  color: #387800;
+  color: #127800;
 }
 
 .text-field.with-item.right > input:focus + .item svg {
-  stroke: #387800;
+  stroke: #127800;
 }
 
 .text-field.outline {
@@ -489,15 +500,15 @@ textarea:focus {
 }
 
 .text-field.outline input:focus {
-  border-color: #387800;
+  border-color: #127800;
 }
 
 .text-field.outline input:focus + label {
-  color: #387800;
+  color: #127800;
 }
 
 .text-field.outline input:focus ~ svg.item {
-  stroke: #387800;
+  stroke: #127800;
 }
 
 :invalid {
@@ -556,7 +567,7 @@ textarea:focus {
 }
 
 .form-field .required {
-  color: #387800;
+  color: #127800;
 }
 
 .form-field .text-field + .required {
@@ -606,9 +617,19 @@ textarea:focus {
   border: 2px solid #ddd;
 }
 
+.radio > input:disabled + .icon {
+  cursor: not-allowed;
+  background-color: #eee;
+}
+
 .radio > input:checked + .icon {
-  background-color: #387800;
-  border-color: #387800;
+  background-color: #127800;
+  border-color: #127800;
+}
+
+.radio > input:disabled:checked + .icon {
+  background-color: #999;
+  border-color: #959595;
 }
 
 .radio > input:checked + .icon::before {
@@ -634,12 +655,12 @@ textarea:focus {
   transform: translate(-50%, -50%);
 }
 
-.radio:hover > .icon::after {
+.radio:hover > :not(:disabled) + .icon::after {
   background-color: rgba(0, 0, 0, .05);
 }
 
 .radio:hover > input:checked + .icon::after {
-  background-color: rgba(56, 120, 0, .05);
+  background-color: rgba(18, 120, 0, .05);
 }
 
 .radio > input:focus + .icon::after {
@@ -647,7 +668,7 @@ textarea:focus {
 }
 
 .radio > input:focus:checked + .icon::after {
-  background-color: rgba(56, 120, 0, .125);
+  background-color: rgba(18, 120, 0, .125);
 }
 
 .radio.colored:hover > input + .icon::after,
@@ -693,8 +714,8 @@ label:hover .radio.colored > input:focus + .icon::after {
 }
 
 .checkbox > input:checked + .icon {
-  background-color: #387800;
-  border-color: #387800;
+  background-color: #127800;
+  border-color: #127800;
 }
 
 .checkbox > input:checked + .icon::before {
@@ -729,7 +750,7 @@ label:hover .checkbox > .icon::after {
 
 .checkbox:hover > input:checked + .icon::after,
 label:hover .checkbox > input:checked + .icon::after {
-  background-color: rgba(56, 120, 0, .05);
+  background-color: rgba(18, 120, 0, .05);
 }
 
 .checkbox > input:focus + .icon::after {
@@ -738,7 +759,7 @@ label:hover .checkbox > input:checked + .icon::after {
 
 .checkbox > input:focus:checked + .icon::after,
 label:hover .checkbox > input:focus:checked + .icon::after {
-  background-color: rgba(56, 120, 0, .125);
+  background-color: rgba(18, 120, 0, .125);
 }
 
 .clickable {
@@ -775,7 +796,7 @@ label:hover .checkbox.colored > input:focus + .icon::after {
 }
 
 .switch.two-state {
-  border-color: #387800;
+  border-color: #127800;
 }
 
 input.switch-ctl {
@@ -800,15 +821,15 @@ input.switch-ctl {
 }
 
 .switch.two-state > .knob {
-  background-color: #387800;
+  background-color: #127800;
 }
 
 input:checked ~ .switch {
-  border-color: #387800;
+  border-color: #127800;
 }
 
 input:checked ~ .switch > .knob {
-  background-color: #387800;
+  background-color: #127800;
   transform: translateY(-50%) translateX(100%);
 }
 
@@ -832,7 +853,7 @@ input:checked ~ .switch:hover::before,
 label:hover input:checked ~ .switch::before,
 .switch.two-state:hover::before,
 label:hover .switch.two-state::before {
-  background-color: rgba(56, 120, 0, .05);
+  background-color: rgba(18, 120, 0, .05);
 }
 
 input:focus ~ .switch::before {
@@ -843,7 +864,7 @@ input:focus:checked ~ .switch::before,
 label:hover input:focus:checked ~ .switch::before,
 input:focus ~ .switch.two-state::before,
 label:hover input:focus ~ .switch.two-state::before {
-  background-color: rgba(56, 120, 0, .1);
+  background-color: rgba(18, 120, 0, .1);
 }
 
 .switch-wrapper .state {
@@ -860,11 +881,11 @@ label:hover input:focus ~ .switch.two-state::before {
 }
 
 .switch-wrapper input:not(:checked) ~ .first {
-  color: #387800;
+  color: #127800;
 }
 
 .switch-wrapper input:checked ~ .second {
-  color: #387800;
+  color: #127800;
 }
 
 /* Cards -------------------------------------- */
@@ -940,7 +961,7 @@ label:hover input:focus ~ .switch.two-state::before {
 }
 
 .chip.unclickable.outline {
-  border-color: #387800;
+  border-color: #127800;
 }
 
 input:disabled + .chip {
@@ -970,22 +991,22 @@ input:focus + .chip.outline {
 }
 
 input:checked + .chip {
-  background-color: rgba(56, 120, 0, .12);
-  color: #387800;
+  background-color: rgba(18, 120, 0, .12);
+  color: #127800;
 }
 
 input:checked + .chip.outline {
-  background-color: rgba(56, 120, 0, .06);
-  color: #387800;
-  border-color: #387800;
+  background-color: rgba(18, 120, 0, .06);
+  color: #127800;
+  border-color: #127800;
 }
 
 input:focus:checked + .chip {
-  background-color: rgba(56, 120, 0, .25);
+  background-color: rgba(18, 120, 0, .25);
 }
 
 input:focus:checked + .chip.outline {
-  background-color: rgba(56, 120, 0, .12);
+  background-color: rgba(18, 120, 0, .12);
 }
 
 input[type="checkbox"] + .chip {
@@ -997,7 +1018,7 @@ input[type="checkbox"]:checked + .chip {
 }
 
 input[type="checkbox"] + .chip::before {
-  border: 0 solid #387800;
+  border: 0 solid #127800;
   content: "";
 }
 
@@ -1031,7 +1052,7 @@ input[type="checkbox"]:checked + .chip::before {
   font-size: 1.3rem;
   font-weight: 500;
   margin-bottom: .7em;
-  color: #387800;
+  color: #127800;
 }
 
 .dialog > .btn.close {
@@ -1067,7 +1088,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dialog svg {
-  stroke: #387800;
+  stroke: #127800;
 }
 
 .dialog.danger svg {
@@ -1076,7 +1097,7 @@ input[type="checkbox"]:checked + .chip::before {
 
 .dialog.notice {
   box-shadow: none;
-  border: 1px solid #387800;
+  border: 1px solid #127800;
   padding: 1em 1.5em .6em;
 }
 
@@ -1200,11 +1221,11 @@ input[type="checkbox"]:checked + .chip::before {
   margin-top: 1rem;
   height: 24px;
   width: 24px;
-  stroke: #387800;
+  stroke: #127800;
 }
 
 .labeled > .icon svg {
-  stroke: #387800;
+  stroke: #127800;
 }
 
 /* Dropdowns -------------------------------------- */
@@ -1222,7 +1243,6 @@ input[type="checkbox"]:checked + .chip::before {
   height: 1px;
   width: 1px;
   overflow: hidden;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   position: absolute;
   background-color: white;
@@ -1231,8 +1251,14 @@ input[type="checkbox"]:checked + .chip::before {
     0 2px 2px 0    rgba(0, 0, 0, .14),
     0 1px 5px 0    rgba(0, 0, 0, .12);
   border-radius: 20px;
-  z-index: 100;
+  z-index: 1001;
   margin-top: 5px;
+}
+
+.dropdown.top {
+  top: 0;
+  transform: translateY(-100%);
+  margin-top: -5px;
 }
 
 .dropdown-shell.open .dropdown {
@@ -1246,7 +1272,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dropdown-shell.open > .handle {
-  background-color: rgba(56, 120, 0, .12);
+  background-color: rgba(18, 120, 0, .12);
 }
 
 .dropdown-shell > .handle > .chevron {
@@ -1258,154 +1284,8 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dropdown .btn.close {
-  position: absolute;
-  top: .7em;
-  right: .7em;
-}
-
-/* Timelines -------------------------------------- */
-
-.timeline .entry {
-  display: flex;
-  align-items: flex-start;
-  padding-bottom: 1.5em;
-  position: relative;
-}
-
-.timeline .entry:last-child {
-  padding-bottom: 0;
-}
-
-.timeline .more {
-  display: flex;
-  position: relative;
-  border: none;
-  background: none;
-  outline: none;
-  align-items: center;
-  font-family: 'Ubuntu';
-  font-weight: 500;
-  color: #387800;
-  font-size: 1rem;
-  padding: 0 7px;
-  cursor: pointer;
-}
-
-.timeline .more svg {
-  stroke: #387800;
-}
-
-.timeline .more::-moz-focus-inner {
-  border: 0;
-}
-
-.timeline .more::before {
-  position: absolute;
-  top: -20%;
-  left: -5%;
-  width: 120%;
-  height: 140%;
-  content: "";
-  border-radius: 25px;
-}
-
-.timeline .more:hover::before {
-  background-color: rgba(56, 120, 0, .05);
-}
-
-.timeline .more:focus::before {
-  background-color: rgba(56, 120, 0, .12);
-}
-
-.timeline .entry:not(:last-child)::before {
-  content: "";
-  height: calc(100% - 50px);
-  position: absolute;
-  top: 50px;
-  left: 24px;
-  width: 2px;
-  background-color: #ddd;
-}
-
-.timeline .entry > .icon {
-  border-radius: 50%;
-  padding: 12px;
-  border: 1px solid #387800;
-  margin-right: 1em;
-  width: 50px;
-  height: 50px;
-  box-sizing: border-box;
-  flex-shrink: 0;
-}
-
-.timeline .entry > .icon svg {
-  stroke: #387800;
-  width: 100%;
-  height: 100%;
-  stroke-width: 1.5;
-}
-
-.timeline .more > .icon {
-  border-radius: 50%;
-  padding: 6px;
-  border: 1px solid #387800;
-  margin-right: 1em;
-  width: 36px;
-  height: 36px;
-  box-sizing: border-box;
-  flex-shrink: 0;
-}
-
-.timeline .entry.important > .icon {
-  border-width: 3px;
-  border-color: #f2994a;
-  padding: 10px;
-}
-
-.timeline .entry.important > .icon svg {
-  stroke: #f2994a;
-}
-
-.timeline .entry > .icon > img,
-.timeline .more > .icon > img {
-  width: 100%;
-  height: 100%;
-}
-
-@media only screen and (min-width: 750px) {
-  .timeline .more {
-    font-size: 1.1rem;
-    padding: 0 8px;
-    margin-left: 3px;
-  }
-
-  .timeline .entry:not(:last-child)::before {
-    height: calc(100% - 64px);
-    top: 64px;
-    left: 31px;
-  }
-
-  .timeline .entry > .icon {
-    padding: 16px;
-    margin-right: 1.3em;
-    width: 64px;
-    height: 64px;
-  }
-
-  .timeline .more > .icon {
-    padding: 8px;
-    margin-right: 1.3em;
-    width: 40px;
-    height: 40px;
-  }
-
-  .timeline .entry.important > .icon {
-    padding: 14px;
-  }
-
-  .timeline .entry {
-    padding-bottom: 2.5em;
-  }
+  float: right;
+  margin-right: .7em;
 }
 
 /* Accordions -------------------------------------- */
@@ -1443,7 +1323,8 @@ input[type="checkbox"]:checked + .chip::before {
   width: .75em;
   height: .75em;
   border-radius: 50%;
-  margin-left: .8em;
+  margin-left: .5em;
+  display: inline-block;
 }
 
 .dot.small {
@@ -1460,7 +1341,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dot.active {
-  background-color: rgba(56, 120, 0, .7);
+  background-color: rgba(18, 120, 0, .7);
 }
 
 /* Choice Buttons -------------------------------------- */
@@ -1475,31 +1356,31 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .choice-btn > .repr {
-  border: 1px solid #387800;
+  border: 1px solid #127800;
   border-radius: 15px;
   padding: 1em;
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #387800;
+  color: #127800;
   font-weight: 500;
 }
 
 .choice-btn:hover > .repr {
-  background-color: rgba(56, 120, 0, .05);
+  background-color: rgba(18, 120, 0, .05);
 }
 
 .choice-btn > input:checked + .repr {
-  background-color: rgba(56, 120, 0, .1);
+  background-color: rgba(18, 120, 0, .1);
 }
 
 .choice-btn > input:focus + .repr {
-  background-color: rgba(56, 120, 0, .12);
+  background-color: rgba(18, 120, 0, .12);
 }
 
 .choice-btn .icon {
   margin-right: .5em;
-  stroke: #387800;
+  stroke: #127800;
 }
 
 @media only screen and (min-width: 480px) {
@@ -1529,4 +1410,81 @@ input[type="checkbox"]:checked + .chip::before {
     width: 48px;
     height: 48px;
   }
+}
+
+/* Tabs -------------------------------------- */
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab > input[type="radio"] {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.tab > .icon {
+  border-bottom: 2px solid rgba(196, 196, 196, .6);
+  font-weight: 500;
+  color: #127800;
+  padding: .8em .3em .5em;
+  cursor: pointer;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.tab > .icon:hover {
+  background: rgba(196, 196, 196, .1);
+}
+
+.tab > input:focus + .icon {
+  background: rgba(196, 196, 196, .15);
+}
+
+.tab > input:checked + .icon {
+  border-color: rgba(18, 120, 0, .6);
+}
+
+/* Popovers -------------------------------------- */
+
+.popover-container {
+  position: relative;
+}
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+}
+
+.popover-container:not(:hover) > .popover {
+  display: none;
+}
+
+.popover.btn {
+  background: rgba(100, 100, 100, .9);
+  border-radius: 10px;
+  font-size: .9rem;
+  color: #fff;
+  padding: 8px 10px;
+}
+
+.popover.btn:hover {
+  background: rgba(70, 70, 70, .9);
+}
+
+.popover.btn:focus {
+  background: rgba(50, 50, 50, .9);
+}
+
+.popover.btn > .icon {
+  width: 18px;
+  height: 18px;
+  stroke: #fff;
 }

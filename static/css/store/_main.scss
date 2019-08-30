@@ -36,6 +36,7 @@
 
 .labeled .content {
   display: inline-flex;
+  align-items: center;
 }
 
 .title + .card-row {
@@ -59,7 +60,7 @@
 }
 
 .card .innopoint {
-  height: 1.3rem;
+  height: 1.05rem;
   margin-left: .3em;
 }
 

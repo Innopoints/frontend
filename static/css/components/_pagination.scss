@@ -24,16 +24,16 @@
 }
 
 .pagination > .page.current {
-  color: #387800;
-  background: rgba(56, 120, 0, .05);
+  color: #127800;
+  background: rgba(18, 120, 0, .05);
 }
 
 .pagination > .page.current:hover {
-  background: rgba(56, 120, 0, .1);
+  background: rgba(18, 120, 0, .1);
 }
 
 .pagination > .page.current:focus {
-  background: rgba(56, 120, 0, .15);
+  background: rgba(18, 120, 0, .15);
 }
 
 @media only screen and (min-width: 380px) {

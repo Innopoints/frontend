@@ -8,6 +8,7 @@
         calc(100% - 20px) 100%,
         0 100%
     );
+  overflow: visible;
 }
 
 footer {
@@ -66,7 +67,7 @@ footer a {
 }
 
 footer a:visited {
-  color: #effad7;
+  color: #dcfad7;
 }
 
 footer .credits {
