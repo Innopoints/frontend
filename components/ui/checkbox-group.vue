@@ -7,7 +7,7 @@
           @change="$emit('change', item)"
           type="checkbox"
         />
-        <div :style="style(item)" class="icon" />
+        <div :class="{white: isWhite(item)}" :style="style(item)" class="icon" />
       </div>
       {{ item.label }}
     </label>
@@ -40,10 +40,17 @@
       changeItems(index) {
         this.data[index] = !this.data[index];
       },
+      isWhite (item) {
+        if(!item.color) return false;
+        if (item.color.toUpperCase() === '#FFF' || item.color.toUpperCase() === '#FFFFFF') return true;
+      },
       style(item) {
+        if(!item.color) return '';
+
+        if (this.isWhite(item)) return '';
+
         if (this.round || this.colored) {
-          let color = item.color;
-          if(!color) color = '#387800';
+          const color = item.color;
 
           // Parse HEX colors
           let outline = '';
@@ -66,3 +73,18 @@
     },
   };
 </script>
+
+<style scoped>
+  .icon.white {
+    background-color: #fff !important;
+    border-color: #999 !important;
+    --r: 153;
+    --g: 153;
+    --b: 153;
+  }
+
+  .icon.white::before {
+    border-color: #999 !important;
+  }
+</style>
+
