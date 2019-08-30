@@ -10,9 +10,9 @@
 
     <div class="calendar">
       <div class="month-header">
-        <button @click="goPrevMonth" class="left" />
+        <Button @click="goPrevMonth" img="/images/icons/chevron-left.svg" />
         {{ monthsLocale[activeMonthStart] + ' ' + activeYearStart }}
-        <button @click="goNextMonth" class="right" />
+        <Button @click="goNextMonth" img="/images/icons/chevron-right.svg" />
       </div>
       <div class="weekdays">
         <div v-for="item in shortDaysLocale" :key="item">{{ item }}</div>
@@ -36,16 +36,12 @@
 <script>
   import {mapState} from 'vuex';
   import fecha from 'fecha';
-  import Accordion from '@/components/ui/accordion';
   import Button from '@/components/ui/button';
-  import CalendarIcon from '@/static/images/icons/calendar.svg';
 
   export default {
     name: 'DateRange',
     components: {
-      Accordion,
       Button,
-      CalendarIcon,
     },
     data() {
       return {
@@ -162,8 +158,10 @@
       selectFirstItem(week, day) {
         const result = this.getDayIndexInMonth(week, day, this.startMonthDay);
         this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart, this.activeYearStart));
-        this.$store.commit('projects/changeFilter', {type: 'startDate', value: this.dateRange.start});
-        this.$store.commit('projects/changeFilter', {type: 'endDate', value: this.dateRange.end});
+        if (this.dateRange.start !== null && this.dateRange.end !== null) {
+          this.$store.commit('projects/changeFilter', {type: 'startDate', value: this.dateRange.start});
+          this.$store.commit('projects/changeFilter', {type: 'endDate', value: this.dateRange.end});
+        }
       },
 
       getCellClass(week, day, startMonthDay, endMonthDate) {
@@ -299,14 +297,7 @@
     height: 24px;
     background-size: cover;
     margin: 0 2em;
-  }
-
-  .month-header .left {
-    background-image: url("../../../static/images/icons/chevron-left.svg");
-  }
-
-  .month-header .right {
-    background-image: url("../../../static/images/icons/chevron-right.svg");
+    padding: .1em;
   }
 
   .calendar {
