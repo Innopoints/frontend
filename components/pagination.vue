@@ -1,6 +1,6 @@
 <!-- Adapted from https://github.com/lokyoung/vuejs-paginate -->
 <template>
-  <nav class="pagination">
+  <nav v-if="pages.length > 1" class="pagination">
     <template v-for="page in pages">
       <TextField
         v-if="editing === page.index"
@@ -8,6 +8,7 @@
         :max="pageCount"
         :min="1"
         :key="page.index"
+        :div-classes="['no-spinner']"
         type="number"
       />
       <Button
@@ -15,6 +16,7 @@
         :key="page.index"
         @click="editing = page.index"
         class="page"
+        normal
       >
         ...
       </Button>
@@ -23,6 +25,7 @@
         :key="page.index"
         :class="['page', page.selected ? activeClass : '']"
         @click="changePage(page.index + 1)"
+        normal
       >
         {{ page.content }}
       </Button>
@@ -122,10 +125,16 @@
         return items;
       },
     },
+    updated() {
+      let el = document.querySelector('.pagination input');
+      if(el) el.focus();
+    },
     methods: {
       changePage(selected) {
         this.editing = -1;
         if(selected >= 1 && selected <= this.pageCount) {
+          document.getElementById('store-top').scrollIntoView();
+
           if (this.selected === selected || isNaN(selected)) return;
           this.innerValue = selected;
           this.$emit('input', selected);

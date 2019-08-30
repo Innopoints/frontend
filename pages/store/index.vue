@@ -2,9 +2,10 @@
   <div :class="{'modal-open': open}">
     <div class="material">
       <StoreTagline />
-      <section class="shop padded">
+      <section id="store-top" class="shop padded">
         <Filters />
         <Ordering />
+
         <div class="cards">
           <StoreCard
             v-for="item in items"
@@ -13,7 +14,10 @@
             :toggle-modal="toggleModal"
           />
         </div>
+
+        <Pagination v-model="currentPage" :pageCount="pageCount" />
       </section>
+
       <p class="link-bottom padded">
         Lacking innopoints?
         <nuxt-link to="/projects">Volunteer on projects</nuxt-link> to fill in the shortage!
@@ -23,7 +27,6 @@
       v-if="open"
       :product="product"
     />
-    <Pagination v-model="currentPage" :pageCount="pageCount" />
   </div>
 </template>
 
@@ -51,7 +54,7 @@
         open: false,
         product: null,
         currentPage: 1,
-        itemsPerPage: 4,
+        itemsPerPage: 20,
       };
     },
     computed: {
@@ -71,7 +74,7 @@
       $route() {
         if(this.$route.query.id) {
           this.product = this.items.find(x => x.id === parseInt(this.$route.query.id));
-          if(this.product != undefined)
+          if(this.product !== undefined)
             this.open = true;
         }
         else {
