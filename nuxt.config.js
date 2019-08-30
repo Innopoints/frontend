@@ -9,7 +9,7 @@ module.exports = {
 
   // Headers of the page
   head: {
-    titleTemplate: '%s | Innopoints',
+    titleTemplate: '%s ⬩ Innopoints',
     htmlAttrs: { lang: 'en' },
     meta: [
       { charset: 'utf-8' },
