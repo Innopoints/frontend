@@ -1,8 +1,6 @@
 <template>
-  <section class="settings padded">
+  <section class="notifications">
     <header>
-      <h2>Notification Settings</h2>
-      You will still see notifications on the website even if you leave them off.
       <div class="dialog notice">
         <div class="message">
           <Alert class="icon" />
@@ -15,32 +13,48 @@
     </header>
 
     <ul>
+      <li class="section">
+        <header>
+          <div class="title">All notifications</div>
+        </header>
+        <ProfileRadioGroup @input="changeAll" name="all" />
+      </li>
+
       <ProfileNotification
-        v-for="(notification, i) in notifications"
-        :key="i"
-        v-bind="notification"
+        v-for="item in notifications"
+        :key="item.name"
+        v-bind="item"
+        :value="value"
       />
     </ul>
   </section>
 </template>
 
 <script>
-  import notifications from '@/constants/profile/notifications';
   import Button from '@/components/ui/button';
   import ProfileNotification from '@/components/profile/notification';
   import Alert from '@/static/images/icons/alert-triangle.svg';
+  import ProfileRadioGroup from '@/components/profile/radio-group';
+  import notifications from '@/constants/profile/notifications';
 
   export default {
     name: 'ProfileNotifications',
     components: {
       ProfileNotification,
+      ProfileRadioGroup,
       Button,
       Alert,
     },
     data() {
       return {
+        value: {},
         notifications,
       };
+    },
+    methods: {
+      changeAll(item) {
+        this.value = item;
+      },
     },
   };
 </script>

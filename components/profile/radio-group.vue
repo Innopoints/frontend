@@ -66,6 +66,5 @@
         this.$emit('input', item);
       },
     },
-
   };
 </script>
