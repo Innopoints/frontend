@@ -1,5 +1,5 @@
 <template>
-  <div :class="important ? 'important' : ''" class="entry">
+  <div class="entry">
     <div class="icon">
       <!--eslint-disable-next-line-->
       <component :is="svg" />
@@ -17,10 +17,6 @@
       icon: {
         type: String,
         default: '/images/icons/calendar.svg',
-      },
-      important: {
-        type: Boolean,
-        default: false,
       },
     },
     computed: {
