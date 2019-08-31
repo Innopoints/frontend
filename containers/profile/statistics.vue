@@ -4,27 +4,15 @@
       <span class="hide-tb">Showing statistics</span>
       <Dropdown>
         <template v-slot:label>
-          over the past 3 months
+          {{ activePeriod.label }}
         </template>
         <span class="label">Period of statistics</span>
         <ul class="mt">
-          <li>
-            <Button label="last week" />
-          </li>
-          <li>
-            <Button label="last month" />
-          </li>
-          <li>
-            <Button label="last 3 month" />
-          </li>
-          <li>
-            <Button label="last semester" />
-          </li>
-          <li>
-            <Button label="last year" />
-          </li>
-          <li>
-            <Button label="all time" />
+          <li
+            v-for="period in periods"
+            :key="period.id"
+          >
+            <Button :label="period.label" @click="changePeriod(period)" />
           </li>
         </ul>
         <hr data-text="or" />
@@ -34,70 +22,37 @@
 
     <Button img="/images/icons/file-text.svg" label="create a volunteer report" />
 
-    <div class="top-stats">
-      <div class="stat">
-        <header>
-          <Clock class="icon" />
-          {{ hours }} volunteering hours
-        </header>
-        <div class="details">15 volunteering positions handled</div>
-      </div>
-      <div class="stat">
-        <header>
-          <Star class="icon" />
-          Volunteer rating
-          <span class="rating">{{ rating }}</span>
-        </header>
-        <Button label="view feedback">
-          view feedback<Dot />
-        </Button>
-      </div>
-    </div>
+    <TopStats />
 
-    <div class="stat competences">
-      <header>
-        <Stats class="icon" />
-        Developed competences
-      </header>
-      <figure>
-        <div class="bar-chart" />
-        <ul class="legend">
-          <li>
-            <Button link href="#" label="proactivity">
-              <div class="icon" style="background: rgb(237, 137, 137);" />
-              proactivity
-            </Button>
-          </li>
-        </ul>
-      </figure>
-    </div>
+    <CompetencesStats />
   </section>
 </template>
 
 <script>
-  import {mapState} from 'vuex';
   import Dropdown from '../../components/ui/dropdown';
-  import Clock from '../../static/images/icons/clock.svg';
-  import Star from '../../static/images/icons/star.svg';
-  import Stats from '../../static/images/icons/bar-chart-2.svg';
   import Button from '../../components/ui/button';
-  import Dot from '@/components/ui/dot';
+  import TopStats from '@/components/profile/top-stats';
+  import CompetencesStats from '@/components/profile/competences-stats';
+  import periods from '@/constants/profile/stats-period';
 
   export default {
     name: 'ProfileStatistics',
     components: {
-      Dot,
+      CompetencesStats,
+      TopStats,
       Button,
       Dropdown,
-      Clock,
-      Star,
-      Stats,
     },
-    computed: {
-      ...mapState({
-        hours: state => state.user.volunteeringHours,
-        rating: state => state.user.rating,
-      }),
+    data() {
+      return {
+        periods,
+        activePeriod: periods[0],
+      };
+    },
+    methods: {
+      changePeriod(period) {
+        this.activePeriod = period;
+      },
     },
   };
 </script>
