@@ -12,7 +12,7 @@
   left: 0;
   top: 0;
   z-index: -1;
-  background: linear-gradient(#97cc25, #a1e117);
+  background: linear-gradient(hsl(105, 69%, 43%), hsl(105, 81%, 32%));
   transform: skewY(7.44deg);
 }
 
@@ -37,7 +37,7 @@
 .how-to .card > .icon {
   width: 3.2em;
   height: 3.2em;
-  stroke: #97cc25;
+  stroke: hsl(105, 69%, 35%);
   stroke-width: 2;
   margin-bottom: 1em;
 }

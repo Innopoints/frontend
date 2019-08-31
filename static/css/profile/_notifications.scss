@@ -1,0 +1,144 @@
+.notifications {
+  margin-top: .5em;
+  padding: 0 .5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notifications .notice {
+  margin: 1em 0;
+  padding: .8em;
+  border-radius: 15px;
+  font-size: .95rem;
+}
+
+.notifications .notice p {
+  margin: 0;
+}
+
+.notifications .notice .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.notifications .notice > .actions {
+  margin-top: .5em;
+}
+
+.notifications .section:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.notifications > ul {
+  padding-bottom: 1em;
+  align-self: stretch;
+}
+
+.section > header {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
+.section .title {
+  margin-top: 1em;
+}
+
+.section .subtitle {
+  font-size: .9rem;
+  font-weight: 300;
+  margin-top: .4em;
+}
+
+.switches {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2em .5em 1em;
+}
+
+.switches .clickable {
+  display: flex;
+  align-items: center;
+}
+
+.switches .radio {
+  margin-left: .5em;
+}
+
+@media only screen and (min-width: 480px) {
+  .section {
+    display: flex;
+  }
+
+  .section > header {
+    flex: 1;
+  }
+
+  .switches .clickable:not(:last-child) {
+    margin-right: 1.5em;
+  }
+
+  .section .subtitle {
+    margin-bottom: 2em;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 980px) {
+  .switches {
+    padding-top: 1em;
+  }
+
+  .switches .clickable {
+    flex-direction: column;
+  }
+
+  .switches .radio {
+    margin-left: 0;
+    margin-top: .5em;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .notifications > ul {
+    padding: 0 5% 2em;
+  }
+
+  .notifications .notice {
+    padding: 1.2em 1.2em .8em;
+    margin-bottom: 1.5em;
+  }
+
+  .notifications .notice .icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .notifications {
+    margin: 2em 10%;
+  }
+
+  .notifications .notice {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+  }
+
+  .notifications .notice .icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  .notifications .notice > .message {
+    align-items: center;
+  }
+
+  .notifications .notice > .actions {
+    margin-top: 0;
+  }
+
+  .switches .clickable:not(:last-child) {
+    margin-right: 2.5em;
+  }
+}

@@ -8,7 +8,7 @@
       class="close"
       img="/images/icons/x.svg"
     />
-    <Carousel :images="activeVariety.images" />
+    <Carousel :images="activeVariety.images" :background="activeVariety.background" />
     <div class="content">
       <div class="title">{{ name }}</div>
       <div class="subtitle">{{ type }}</div>

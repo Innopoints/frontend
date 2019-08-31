@@ -2,9 +2,21 @@
   <div :class="{'modal-open': open}">
     <div class="material">
       <StoreTagline />
-      <section class="shop padded">
+      <section id="store-top" class="shop padded">
         <Filters />
-        <div class="cards">
+        <Ordering />
+
+        <div v-if="items.length === 0" class="empty">
+          <figure>
+            <img class="picture" src="/images/store/no-products.svg" alt="" />
+            <figcaption>
+              <div class="title">No items found...</div>
+              Try raiding 319 or a different filter
+            </figcaption>
+          </figure>
+        </div>
+
+        <div v-else class="cards">
           <StoreCard
             v-for="item in items"
             :key="item.id"
@@ -12,10 +24,13 @@
             :toggle-modal="toggleModal"
           />
         </div>
+
+        <Pagination v-model="currentPage" :pageCount="pageCount" />
       </section>
+
       <p class="link-bottom padded">
         Lacking innopoints?
-        <nuxt-link to="/projects">Volunteer on events</nuxt-link> to fill in the shortage!
+        <nuxt-link to="/projects">Volunteer on projects</nuxt-link> to fill in the shortage!
       </p>
     </div>
     <ProductModal
@@ -29,6 +44,8 @@
   import StoreCard from "../../components/store/card";
   import StoreTagline from "../../components/store/tagline";
   import Filters from '@/containers/store/filters';
+  import Ordering from '@/components/store/filters/ordering';
+  import Pagination from '@/components/pagination';
 
   export default {
     head: {
@@ -38,24 +55,36 @@
       StoreCard,
       StoreTagline,
       Filters,
+      Ordering,
       ProductModal: () => import('../../containers/store/product-modal'),
+      Pagination,
     },
     data() {
       return {
         open: false,
         product: null,
+        currentPage: 1,
+        itemsPerPage: 20,
       };
     },
     computed: {
-      items() {
+      products() {
         return this.$store.getters['store/products'];
+      },
+      pageCount() {
+        return Math.ceil(this.products.length / this.itemsPerPage);
+      },
+      items() {
+        const begin = this.itemsPerPage * (this.currentPage - 1);
+        const end = begin + this.itemsPerPage;
+        return this.products.slice(begin, end);
       },
     },
     watch: {
       $route() {
         if(this.$route.query.id) {
           this.product = this.items.find(x => x.id === parseInt(this.$route.query.id));
-          if(this.product != undefined)
+          if(this.product !== undefined)
             this.open = true;
         }
         else {

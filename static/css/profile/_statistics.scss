@@ -1,100 +1,69 @@
 .statistics {
-  margin-top: 3em;
-}
-
-.statistics > header,
-.statistics > div {
+  margin-top: .5em;
+  padding: 0 .5em;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
-.statistics header .relative-wrapper {
+.statistics .relative-wrapper {
   padding: 1.5em;
 }
 
-.statistics header .btn {
+.statistics .btn.close {
+  margin-right: -.7em;
+  margin-top: -.7em;
+}
+
+.statistics .btn {
   white-space: nowrap;
 }
 
-.statistics .card {
-  margin: 1em 0 0;
+.top-stats,
+.stat.competences > header {
+  margin: 0 1em;
 }
 
-.top-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.stat {
+  margin-top: 2em;
 }
 
-.top-cards > .card {
-  width: 16em;
-}
-
-.card > header {
-  display: flex;
-  align-items: center;
-  font-size: 1.1rem;
-  margin-bottom: 1em;
-}
-
-.card > header > svg {
-  stroke: #387800;
-  width: 30px;
-  height: 30px;
+.stat .icon {
+  stroke: #127800;
   margin-right: .8em;
 }
 
-.card > .details {
-  font-weight: 300;
+.stat > header {
+  font-weight: 500;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
   margin-bottom: .5em;
+}
+
+.stat .rating {
+  color: #127800;
+  font-size: 1.3rem;
+  margin-left: .8em;
+}
+
+.stat > .details {
+  padding: .5em 1em 0;
   font-size: .9rem;
 }
 
-.top-cards .card > .details {
-  text-align: center;
-}
-
-.card > .actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.card.volunteering {
-  padding-bottom: .5em;
-}
-
-.card.rating > .content {
-  display: flex;
-  justify-content: center;
-  margin-bottom: .5em;
-}
-
-.card.rating .star {
-  stroke: #387800;
-}
-
-.card.rating .star.off {
-  stroke: #999;
-}
-
-.card.rating .star:not(:last-child) {
-  margin-right: .5em;
-}
-
-.card.competences > header {
-  margin-bottom: .5em;
-}
-
-.card.competences > .details {
-  margin-bottom: 1em;
+.stat.competences {
+  align-self: stretch;
 }
 
 .bar-chart {
+  margin: 1em .3em 0;
   border: 1px solid #bbb;
   border-radius: 10px;
   padding: 5px 0;
   display: flex;
   flex-direction: column;
+  max-width: 20em;
 }
 
 .bar-chart > .bar {
@@ -114,80 +83,93 @@
   height: 100%;
 }
 
+.bar-chart .future {
+  opacity: .93;
+}
+
+.bar-chart .future:hover {
+  opacity: 1;
+}
+
 .bar-chart .void {
   flex-grow: 1;
 }
 
 .legend {
   margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .legend .icon {
   width: .9em;
   height: .9em;
-  border-radius: 3px;
+  border-radius: 5px;
   margin-right: .8em;
 }
 
-.card.competences {
-  padding: 1em .6em;
+.legend > p {
+  padding: 1em 1em 1.5em;
+  font-weight: 300;
+  font-size: .95rem;
 }
 
-.card.competences header,
-.card.competences .details,
-.card.competences .bar-chart {
-  margin-left: .4em;
-  margin-right: .4em;
-}
-
-.card.competences .btn {
-  font-size: .9rem;
-}
-
-@media only screen and (min-width: 360px) {
-  .card > .details {
-    font-size: 1rem;
+@media only screen and (min-width: 640px) {
+  .statistics .hide-tb {
+    font-weight: 500;
+    margin-right: .3em;
   }
 
-  .statistics > div {
+  .statistics .period {
+    padding: 0 1em;
     align-items: center;
+    display: flex;
   }
 
-  .card.competences {
-    padding: 1em;
+  .top-stats {
+    display: flex;
+    align-self: stretch;
+    padding-bottom: 1.5em;
+    border-bottom: 1px solid #ddd;
   }
 
-  .card.competences header,
-  .card.competences .details,
-  .card.competences .bar-chart {
-    margin-left: 0;
-    margin-right: 0;
+  .top-stats > .stat {
+    width: 50%;
   }
 
-  .card.competences .btn {
-    font-size: 1rem;
+  .top-stats > .stat:last-child {
+    border-left: 1px solid #ddd;
+    padding-left: 1.5em;
+  }
+
+  .stat.competences > figure {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .bar-chart {
+    width: 25em;
   }
 }
 
-@media only screen and (min-width: 380px) {
-  .card.competences {
-    padding: 1.5em;
+@media only screen and (min-width: 720px) {
+  .bar-chart {
+    margin-left: 1.5em;
+    margin-bottom: 2em;
   }
 }
 
-@media only screen and (min-width: 540px) {
-  .statistics > header {
-    align-items: center;
-  }
-
-  .top-cards > .card {
-    margin: 1em .5em 0;
+@media only screen and (min-width: 1024px) {
+  .legend {
+    margin-top: -2em;
+    margin-left: 1em;
   }
 
   .bar-chart {
     flex-direction: row;
     height: 20em;
-    width: 25em;
+    max-width: unset;
     padding: 0 5px;
   }
 
@@ -209,37 +191,9 @@
     height: unset;
     width: 100%;
   }
-}
 
-@media only screen and (min-width: 880px) {
-  .bar-chart {
-    float: left;
-  }
-
-  .legend {
-    float: right;
-    margin-top: 0;
-    margin-left: 1em;
-  }
-
-  @supports (display: grid) {
-    .bar-chart, .legend {
-      float: none;
-    }
-
-    .card.competences {
-      display: grid;
-      grid-template-rows: auto auto auto;
-      grid-template-columns: auto auto;
-    }
-
-    .legend {
-      grid-column-start: 2;
-      grid-column-end: 3;
-      grid-row-start: 1;
-      grid-row-end: 4;
-      align-self: end;
-    }
+  .statistics {
+    margin: 2em 10%;
   }
 }
 

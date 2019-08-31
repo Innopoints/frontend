@@ -26,6 +26,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
+        @keyup.enter="handleBlur"
       />
 
       <label v-if="outline" :for="id" class="label">{{ label }}</label>
@@ -63,6 +64,10 @@
       },
       src: String,
       text: String,
+      divClasses: {
+        type: Array,
+        default: () => [],
+      },
 
       // Outline component requires label and id props
       outline: {
@@ -109,7 +114,7 @@
         }
         if(this.outline) arr.push('outline');
 
-        return arr;
+        return arr.concat(this.divClasses);
       },
       svg() {
         if(this.src) return () => import('../../static' + this.src);

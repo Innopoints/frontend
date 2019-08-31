@@ -1,7 +1,7 @@
 <template>
   <div class="carousel">
     <div class="curr-slide">
-      <img :src="images[current]" />
+      <img :src="images[current]" :style="`background: ${background}`" />
     </div>
     <div v-if="!hideIndicators" class="slides">
       <label
@@ -50,6 +50,7 @@
         },
         required: true,
       },
+      background: String,
       hideControls: {
         type: Boolean,
         default: false,

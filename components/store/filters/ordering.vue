@@ -22,10 +22,10 @@
     data() {
       return {
         options: [
-          'most recent',
-          'least recent',
-          'most valuable',
-          'least valuable',
+          'cheapest',
+          'most expensive',
+          'most popular',
+          'least popular',
         ],
         selected: '',
       };
@@ -33,7 +33,7 @@
     methods: {
       select(option) {
         this.selected = option;
-        this.$store.commit('projects/changeField', {type: 'orderBy', value: option});
+        this.$store.commit('store/changeField', {type: 'orderBy', value: option});
       },
     },
   };

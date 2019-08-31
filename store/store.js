@@ -12,11 +12,15 @@ export default {
         maxPrice: 0,
         colors: colors.map(color => ({color, checked: true})),
       },
+      orderBy: '',
     };
   },
   mutations: {
     addProduct(state, payload) {
       state.products.push(payload);
+    },
+    changeField(state, {type, value}) {
+      state[type] = value;
     },
     changeFilter(state, {type, value}) {
       state.filters[type] = value;
@@ -41,13 +45,37 @@ export default {
     },
   },
   getters: {
-    products: (state, getters) => state.products.filter(product =>
-      product.name.toLowerCase().includes(state.filters.search.toLowerCase())
-      && product.price >= state.filters.minPrice
-      && (product.price <= state.filters.maxPrice
-          || state.filters.maxPrice == 0)  // uninitialized
-      && product.varieties.map(v => v.color).some(color => getters.selectedColors.includes(color))
-    ),
+    products: (state, getters) => {
+      let products = state.products;
+      const query = state.filters.search.toLowerCase();
+      const minPrice = state.filters.minPrice;
+      const maxPrice = state.filters.maxPrice;
+      products = products
+          .filter(product => product.name.toLowerCase().includes(query))
+          .filter(product => product.price >= minPrice)
+          .filter(product => product.varieties.map(v => v.color).some(color => getters.selectedColors.includes(color)));
+      if (maxPrice > 0)
+        products = products.filter(product => product.price <= maxPrice);
+      if(state.orderBy)
+        products.sort((product1, product2) => {
+          const purchaseDiff = product1.purchases - product2.purchases;
+          const priceDiff = product1.price - product2.price;
+
+          switch(state.orderBy) {
+            case 'most popular':
+              return -purchaseDiff;
+            case 'least popular':
+              return purchaseDiff;
+            case 'cheapest':
+              return priceDiff;
+            case 'most expensive':
+              return -priceDiff;
+            default:
+              return 0;
+          }
+        });
+      return products;
+    },
     selectedColors: state => state.filters.colors
         .filter(color => color.checked)
         .map(item => item.color),

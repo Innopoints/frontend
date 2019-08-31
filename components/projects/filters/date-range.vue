@@ -1,56 +1,46 @@
 <template>
-  <li class="filter date-range panel">
-    <img
-      src="/images/icons/calendar.svg"
-      srcset="/images/icons/calendar-mobile.svg 18w, /images/icons/calendar.svg 24w"
-      sizes="(min-width: 640px) 22px, 18px"
-      class="drop-text-open"
-    />
-    <Accordion label="select date range">
-      <div class="drop-header">
-        <div>
-          <Button @click="goToStart" :class="isFirstChoice && 'active'">start date</Button>
-          <Button @click="goToEnd" :class="!isFirstChoice && 'active'">end date</Button>
-        </div>
-        <Button @click="clear" style="color:red; font-weight: 700;">clear</Button>
+  <section>
+    <div class="drop-header">
+      <div>
+        <Button @click="goToStart" :class="isFirstChoice && 'active'">start date</Button>
+        <Button @click="goToEnd" :class="!isFirstChoice && 'active'">end date</Button>
       </div>
+      <Button @click="clear" style="color:red; font-weight: 700;">clear</Button>
+    </div>
 
-      <div class="calendar">
-        <div class="month-header">
-          <button @click="goPrevMonth" class="left" />
-          {{ monthsLocale[activeMonthStart] + ' ' + activeYearStart }}
-          <button @click="goNextMonth" class="right" />
-        </div>
-        <div class="weekdays">
-          <div v-for="item in shortDaysLocale" :key="item">{{ item }}</div>
-        </div>
-        <div v-for="week in maxWeeks" :key="week" class="days">
-          <!-- Next <div> element may have one of the classes:
-          day-in-range, day-selected and day-disabled (if not in this month) -->
-          <div
-            v-for="day in numOfDays"
-            :key="day"
-            :class="[...getCellClass(week, day, startMonthDay, endMonthDate), 'day']"
-            @click="selectFirstItem(week, day)"
-          >
-            <button v-html="getDayCell(week, day, startMonthDay, endMonthDate)" />
-          </div>
+    <div class="calendar">
+      <div class="month-header">
+        <Button @click="goPrevMonth" img="/images/icons/chevron-left.svg" />
+        {{ monthsLocale[activeMonthStart] + ' ' + activeYearStart }}
+        <Button @click="goNextMonth" img="/images/icons/chevron-right.svg" />
+      </div>
+      <div class="weekdays">
+        <div v-for="item in shortDaysLocale" :key="item">{{ item }}</div>
+      </div>
+      <div v-for="week in maxWeeks" :key="week" class="days">
+        <!-- Next <div> element may have one of the classes:
+        day-in-range, day-selected and day-disabled (if not in this month) -->
+        <div
+          v-for="day in numOfDays"
+          :key="day"
+          :class="[...getCellClass(week, day, startMonthDay, endMonthDate), 'day']"
+          @click="selectFirstItem(week, day)"
+        >
+          <button v-html="getDayCell(week, day, startMonthDay, endMonthDate)" />
         </div>
       </div>
-    </Accordion>
-  </li>
+    </div>
+  </section>
 </template>
 
 <script>
   import {mapState} from 'vuex';
   import fecha from 'fecha';
-  import Accordion from '@/components/ui/accordion';
   import Button from '@/components/ui/button';
 
   export default {
     name: 'DateRange',
     components: {
-      Accordion,
       Button,
     },
     data() {
@@ -168,8 +158,10 @@
       selectFirstItem(week, day) {
         const result = this.getDayIndexInMonth(week, day, this.startMonthDay);
         this.dateRange = Object.assign({}, this.dateRange, this.getNewDateRange(result, this.activeMonthStart, this.activeYearStart));
-        this.$store.commit('projects/changeFilter', {type: 'startDate', value: this.dateRange.start});
-        this.$store.commit('projects/changeFilter', {type: 'endDate', value: this.dateRange.end});
+        if (this.dateRange.start !== null && this.dateRange.end !== null) {
+          this.$store.commit('projects/changeFilter', {type: 'startDate', value: this.dateRange.start});
+          this.$store.commit('projects/changeFilter', {type: 'endDate', value: this.dateRange.end});
+        }
       },
 
       getCellClass(week, day, startMonthDay, endMonthDate) {
@@ -242,6 +234,8 @@
       clear() {
         this.isFirstChoice = true;
         this.dateRange = [null, null];
+        this.$store.commit('projects/changeFilter', {type: 'startDate', value: null});
+        this.$store.commit('projects/changeFilter', {type: 'endDate', value: null});
       },
     },
   };
@@ -303,14 +297,7 @@
     height: 24px;
     background-size: cover;
     margin: 0 2em;
-  }
-
-  .month-header .left {
-    background-image: url("../../../static/images/icons/chevron-left.svg");
-  }
-
-  .month-header .right {
-    background-image: url("../../../static/images/icons/chevron-right.svg");
+    padding: .1em;
   }
 
   .calendar {

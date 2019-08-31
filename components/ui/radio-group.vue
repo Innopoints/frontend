@@ -12,7 +12,7 @@
         :name="name"
         type="radio"
       />
-      <div :style="style(item)" class="icon" />
+      <div :class="{white: isWhite(item)}" :style="style(item)" class="icon" />
       {{ (withLabels && item.label) ? item.label : '' }}
     </label>
   </div>
@@ -60,8 +60,14 @@
         this.selected = item;
         this.$emit('input', item);
       },
+      isWhite (item) {
+        if(!item.color) return false;
+        if (item.color.toUpperCase() === '#FFF' || item.color.toUpperCase() === '#FFFFFF') return true;
+      },
       style(item) {
         if(!item.color) return '';
+
+        if (this.isWhite(item)) return '';
 
         // Parse HEX colors
         let outline = '';
@@ -81,20 +87,19 @@
         `;
       },
     },
-
   };
 </script>
 
-<style lang="scss" scoped>
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  &.horizontal {
-    flex-direction: row;
+<style scoped>
+  .radio-group .icon.white {
+    background-color: #fff;
+    border-color: #999;
+    --r: 153;
+    --g: 153;
+    --b: 153;
   }
-  >.radio {
-    padding: 5px;
+
+  .radio-group .icon.white::before {
+    background: #999;
   }
-}
 </style>

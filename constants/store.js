@@ -46,7 +46,7 @@ export default [
       {
         color: '#0000FF',
         background: 'rgba(0, 0, 255, .2)',
-        images: ['/images/store/tshirt.png', '/images/home/sweatshirt.png'],
+        images: ['/images/store/tshirt.png', '/images/store/sweatshirt.png'],
         sizes: {},
       },
       {

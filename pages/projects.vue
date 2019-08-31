@@ -1,14 +1,14 @@
 <template>
   <div class="material">
-    <EventsTagline />
+    <ProjectsTagline />
 
     <section class="projects padded">
-      <h1>Ongoing events</h1>
+      <h1>Ongoing projects</h1>
 
       <Filters />
       <Ordering />
 
-      <div v-if="events.length === 0" class="empty">
+      <div v-if="projects.length === 0" class="empty">
         <figure>
           <img class="picture" src="/images/projects/no-projects.svg" alt="" />
           <figcaption>
@@ -19,19 +19,17 @@
       </div>
 
       <div class="cards">
-        <Event
-          v-for="(event, i) in events"
+        <Project
+          v-for="(project, i) in projects"
           :key="i"
-          v-bind="event"
+          v-bind="project"
         />
       </div>
     </section>
 
     <div class="justify-center">
-      <Button img="/images/icons/book-open.svg" label="see past events" />
+      <Button img="/images/icons/book-open.svg" label="see past projects" />
     </div>
-
-    <!--<Pagination v-if="pageCount > 1" :page-count="pageCount" v-model="currentPage" />-->
 
     <p class="link-bottom padded">
       What’s so cool about being a volunteer? The <nuxt-link to="/store">InnoStore</nuxt-link> has your answers!
@@ -42,26 +40,24 @@
 <script>
   import {mapGetters} from 'vuex';
   import Filters from '../containers/projects/filters';
-  import EventsTagline from '../components/projects/tagline';
+  import ProjectsTagline from '../components/projects/tagline';
   import Ordering from '../components/projects/filters/ordering';
   import Button from '../components/ui/button';
-  // import Pagination from '../components/pagination';
-
+  
   export default {
     head: {
-      title: 'Event Browser',
+      title: 'Project Browser',
       meta: [
         { hid: 'description', name: 'description',
-          content: `Search for volunteering opportunities with event browser page` },
+          content: `Search for volunteering opportunities with project browser page` },
       ],
     },
     components: {
       Button,
-      // Pagination,
       Ordering,
       Filters,
-      EventsTagline,
-      Event: () => import('../components/projects/project'),
+      ProjectsTagline,
+      Project: () => import('../components/projects/project'),
     },
     data() {
       return {
@@ -76,7 +72,7 @@
       pageCount() {
         return Math.ceil(this.allProjects.length / this.projectsPerPage);
       },
-      events() {
+      projects() {
         const page = this.currentPage - 1;
         const start = this.projectsPerPage * page;
         const end = start + this.projectsPerPage;

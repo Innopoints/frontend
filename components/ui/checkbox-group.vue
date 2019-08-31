@@ -7,7 +7,7 @@
           @change="$emit('change', item)"
           type="checkbox"
         />
-        <div :style="style(item)" class="icon" />
+        <div :class="{white: isWhite(item)}" :style="style(item)" class="icon" />
       </div>
       {{ item.label }}
     </label>
@@ -40,27 +40,51 @@
       changeItems(index) {
         this.data[index] = !this.data[index];
       },
+      isWhite (item) {
+        if(!item.color) return false;
+        if (item.color.toUpperCase() === '#FFF' || item.color.toUpperCase() === '#FFFFFF') return true;
+      },
       style(item) {
-        let color = item.color;
-        if(!color) color = '#387800';
+        if(!item.color) return '';
 
-        // Parse HEX colors
-        let outline = '';
-        let match = color.toUpperCase().match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
-        if(match) {
-          outline = `
+        if (this.isWhite(item)) return '';
+
+        if (this.round || this.colored) {
+          const color = item.color;
+
+          // Parse HEX colors
+          let outline = '';
+          let match = color.toUpperCase().match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
+          if(match) {
+            outline = `
             --r: ${parseInt(match[1], 16)};
             --g: ${parseInt(match[2], 16)};
             --b: ${parseInt(match[3], 16)};
           `;
-        }
+          }
 
-        return `
+          return `
           background-color: ${color};
           border-color: ${color};
           ${outline}
         `;
+        }
       },
     },
   };
 </script>
+
+<style scoped>
+  .icon.white {
+    background-color: #fff !important;
+    border-color: #999 !important;
+    --r: 153;
+    --g: 153;
+    --b: 153;
+  }
+
+  .icon.white::before {
+    border-color: #999 !important;
+  }
+</style>
+

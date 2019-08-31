@@ -1,39 +1,47 @@
 <!-- Adapted from https://github.com/lokyoung/vuejs-paginate -->
 <template>
-  <nav class="pagination">
+  <nav v-if="pages.length > 1" class="pagination">
     <template v-for="page in pages">
-      <template v-if="page.breakView">
-        <input
-          v-if="editing === page.index"
-          @keyup.enter.prevent="changePage(parseInt($event.target.value, 10))"
-          @blur="editing = -1"
-          :max="pageCount"
-          min="1"
-          type="number"
-        />
-        <div
-          v-else
-          :key="page.index"
-          @click="editing = page.index"
-          class="page"
-        >
-          ...
-        </div>
-      </template>
-      <div
+      <TextField
+        v-if="editing === page.index"
+        @change="changePage"
+        :max="pageCount"
+        :min="1"
+        :key="page.index"
+        :div-classes="['no-spinner']"
+        type="number"
+      />
+      <Button
+        v-else-if="page.breakView"
+        :key="page.index"
+        @click="editing = page.index"
+        class="page"
+        normal
+      >
+        ...
+      </Button>
+      <Button
         v-else
         :key="page.index"
         :class="['page', page.selected ? activeClass : '']"
         @click="changePage(page.index + 1)"
+        normal
       >
         {{ page.content }}
-      </div>
+      </Button>
     </template>
   </nav>
 </template>
 
 <script>
+  import TextField from '@/components/ui/text-field';
+  import Button from '@/components/ui/button';
+
   export default {
+    components: {
+      TextField,
+      Button,
+    },
     props: {
       value: {
         type: Number,
@@ -123,14 +131,13 @@
     },
     methods: {
       changePage(selected) {
+        this.editing = -1;
         if(selected >= 1 && selected <= this.pageCount) {
-          // Scroll to the top of projects block
-          document.getElementById('projects-top').scrollIntoView();
+          document.getElementById('store-top').scrollIntoView();
 
           if (this.selected === selected || isNaN(selected)) return;
           this.innerValue = selected;
           this.$emit('input', selected);
-          this.editing = -1;
         }
       },
     },

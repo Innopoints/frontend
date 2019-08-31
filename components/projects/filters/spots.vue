@@ -1,7 +1,7 @@
 <template>
   <li class="filter spots">
     <div class="align-center">
-      <img src="/images/icons/users.svg" />
+      <UsersIcon class="icon mr" />
       <span class="name">vacant spots</span>
     </div>
 
@@ -25,12 +25,14 @@
 <script>
   import TextField from '@/components/ui/text-field';
   import Button from '@/components/ui/button';
+  import UsersIcon from '@/static/images/icons/users.svg';
 
   export default {
     name: 'Spots',
     components: {
       TextField,
       Button,
+      UsersIcon,
     },
     computed: {
       spots: {
@@ -38,6 +40,8 @@
           return this.$store.state.projects.filters.spots;
         },
         set(value) {
+          if(value < 0)
+            return;
           this.$store.commit('projects/changeFilter', {type: 'spots', value});
         },
       },
