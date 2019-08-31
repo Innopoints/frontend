@@ -5,16 +5,30 @@
       Developed competences
     </header>
     <figure>
-      <div class="bar-chart" />
+      <div class="bar-chart">
+        <div
+          v-for="stat in stats"
+          :key="stat.id"
+          class="bar"
+        >
+          <nuxt-link
+            :to="'/projects?comp=' + stat.id"
+            :style="`flex-basis: ${stat.future}%`"
+            class="future"
+          >
+            <div :style="`flex-basis: ${stat.now}%`" class="present" />
+          </nuxt-link>
+        </div>
+      </div>
+
       <ul class="legend">
         <li
           v-for="stat in stats"
           :key="stat.id"
         >
           <Button
-            @click="goTo(stat.id)"
             :label="stat.name"
-            href="/projects"
+            :href="'/projects?comp=' + stat.id"
             link
           >
             <div :style="'background: ' + stat.color" class="icon" />
@@ -39,11 +53,6 @@
       return {
         stats,
       };
-    },
-    methods: {
-      goTo(id) {
-        console.log(id);
-      },
     },
   };
 </script>
