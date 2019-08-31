@@ -7,7 +7,7 @@
           {{ activePeriod.label }}
         </template>
         <span class="label">Period of statistics</span>
-        <ul class="mt">
+        <ul v-if="!dateRange" class="mt">
           <li
             v-for="period in periods"
             :key="period.id"
@@ -15,8 +15,15 @@
             <Button :label="period.label" @click="changePeriod(period)" />
           </li>
         </ul>
-        <hr data-text="or" />
-        <Button label="select date range" img="/images/icons/calendar.svg" />
+        <hr v-if="!dateRange" data-text="or" />
+        <Button
+          @click="toggleDateRange"
+          label="select date range"
+          img="/images/icons/calendar.svg"
+          class="mt"
+          chevron
+        />
+        <DateRange v-if="dateRange" />
       </Dropdown>
     </div>
 
@@ -34,10 +41,12 @@
   import TopStats from '@/components/profile/top-stats';
   import CompetencesStats from '@/components/profile/competences-stats';
   import periods from '@/constants/profile/stats-period';
+  import DateRange from '@/components/projects/filters/date-range';
 
   export default {
     name: 'ProfileStatistics',
     components: {
+      DateRange,
       CompetencesStats,
       TopStats,
       Button,
@@ -47,11 +56,15 @@
       return {
         periods,
         activePeriod: periods[0],
+        dateRange: false,
       };
     },
     methods: {
       changePeriod(period) {
         this.activePeriod = period;
+      },
+      toggleDateRange() {
+        this.dateRange = !this.dateRange;
       },
     },
   };
