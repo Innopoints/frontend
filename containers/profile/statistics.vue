@@ -1,89 +1,77 @@
 <template>
-  <section class="statistics padded">
-    <header>
-      <h2 class="btn-align">Statistics</h2>
-      <Dropdown class="btn-shift">
+  <section class="statistics">
+    <div class="period">
+      <span class="hide-tb">Showing statistics</span>
+      <Dropdown>
         <template v-slot:label>
-          over the past 3 months
+          {{ activePeriod.label }}
         </template>
-        <template>
-          When you see it, run!
-        </template>
-      </Dropdown>
-    </header>
-
-    <div>
-      <div class="top-cards">
-        <Card class="volunteering">
-          <header>
-            <Clock />
-            {{ hours }} volunteering hours
-          </header>
-          <div class="details">15 volunteering positions handled</div>
-          <div class="actions">
-            <Button label="export volunteering data" />
-          </div>
-        </Card>
-        <Card class="rating">
-          <header>
-            <Rating />
-            Volunteer rating
-          </header>
-          <div class="content">
-            <Star class="star" />
-            <Star class="star" />
-            <Star class="star" />
-            <Star class="star" />
-            <Star class="star" />
-          </div>
-          <div class="details">average rating of 15 people</div>
-        </Card>
-      </div>
-
-      <Card class="competences">
-        <header>
-          <Stats />
-          Developed competences
-        </header>
-        <div class="details">
-          click a competence to find opportunities for development
-        </div>
-        <div class="bar-chart" />
-        <ul class="legend">
-          <li><Button label="proactivity" /></li>
-          <li><Button label="critical thinking" /></li>
-          <li><Button label="communication" /></li>
+        <span class="label">Period of statistics</span>
+        <ul v-if="!dateRange" class="mt">
+          <li
+            v-for="period in periods"
+            :key="period.id"
+          >
+            <Button :label="period.label" @click="changePeriod(period)" />
+          </li>
         </ul>
-      </Card>
+        <hr v-if="!dateRange" data-text="or" />
+        <Button
+          @click="toggleDateRange"
+          label="select date range"
+          img="/images/icons/calendar.svg"
+          class="mt"
+          chevron
+        />
+        <DateRange v-if="dateRange" />
+      </Dropdown>
     </div>
+
+    <Button img="/images/icons/file-text.svg" label="create a volunteer report" />
+
+    <TopStats />
+
+    <CompetencesStats />
   </section>
 </template>
 
 <script>
-  import {mapState} from 'vuex';
   import Dropdown from '../../components/ui/dropdown';
-  import Card from '../../components/ui/card';
-  import Clock from '../../static/images/icons/clock.svg';
-  import Rating from '../../static/images/icons/thumbs-up.svg';
-  import Star from '../../static/images/icons/star.svg';
-  import Stats from '../../static/images/icons/bar-chart-2.svg';
   import Button from '../../components/ui/button';
+  import TopStats from '@/components/profile/top-stats';
+  import CompetencesStats from '@/components/profile/competences-stats';
+  import periods from '@/constants/profile/stats-period';
+  import DateRange from '@/components/projects/filters/date-range';
 
   export default {
     name: 'ProfileStatistics',
     components: {
+      DateRange,
+      CompetencesStats,
+      TopStats,
       Button,
-      Card,
       Dropdown,
-      Clock,
-      Rating,
-      Star,
-      Stats,
     },
-    computed: {
-      ...mapState({
-        hours: state => state.user.volunteeringHours,
-      }),
+    data() {
+      return {
+        periods,
+        activePeriod: periods[0],
+        dateRange: false,
+      };
+    },
+    methods: {
+      changePeriod(period) {
+        this.activePeriod = period;
+      },
+      toggleDateRange() {
+        this.dateRange = !this.dateRange;
+      },
     },
   };
 </script>
+
+<style>
+  .statistics {
+    display: block !important;
+  }
+</style>

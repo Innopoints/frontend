@@ -1,5 +1,6 @@
 const balance = 1488,
       hours = 111,
+      rating = 3.8,
       name = 'Zeus',
       surname = 'Rozhdestvenskiy',
       telegram = 'TheGod',
@@ -9,12 +10,13 @@ export default {
   state() {
     return {
       isAuth: false,
-      id: id,
-      telegram: telegram,
-      name: name,
-      surname: surname,
+      id,
+      telegram,
+      name,
+      surname,
       balance: balance,
       volunteeringHours: hours,
+      rating,
     };
   },
   mutations: {

@@ -14,13 +14,13 @@
     <template v-if="badge">
       <div class="badge">
         <!--eslint-disable-next-line-->
-        <component v-if="img" :is="svg" :class="[label && 'mr']" />
+        <component v-if="img" :is="svg" :class="[label && 'mr', 'icon']" />
       </div>
     </template>
 
     <template v-else-if="img">
       <!--eslint-disable-next-line-->
-      <component v-if="img" :is="svg" :class="[label && 'mr']" />
+      <component v-if="img" :is="svg" :class="[label && 'mr', 'icon']" />
     </template>
 
     <slot>

@@ -2,22 +2,23 @@
   <div class="timeline">
     <slot />
 
-    <button v-if="load" @click="handleLoadClick" class="more">
-      <div class="icon">
-        <More />
-      </div>
-      load more
-    </button>
+    <Button
+      v-if="load"
+      @click="handleLoadClick"
+      img="/images/icons/more-horizontal.svg"
+      label="load more"
+      class="more"
+    />
   </div>
 </template>
 
 <script>
-  import More from '@/static/images/icons/more-horizontal.svg';
+  import Button from '@/components/ui/button';
 
   export default {
     name: 'Timeline',
     components: {
-      More,
+      Button,
     },
     props: {
       load: {
@@ -28,7 +29,7 @@
     },
     methods: {
       handleLoadClick() {
-        if(this.handleLoad) this.handleLoad();
+        if (this.handleLoad) this.handleLoad();
       },
     },
   };

@@ -1,32 +1,7 @@
 <template>
   <section class="quick-info padded">
-    <h1 class="btn-align vertical">{{ name }} {{ surname }}</h1>
-    <div class="balance">
-      <p class="btn-align">
-        <span>{{ balance }}</span>
-        <Innopoint />
-        available
-      </p>
-      <nav class="btn-shift">
-        <Button
-          link
-          href="/store"
-          img="/images/icons/shopping-bag.svg"
-          label="go to the InnoStore"
-          class="mr"
-        />
-        <Button
-          link
-          href="#"
-          img="/images/icons/award.svg"
-          label="request innopoints"
-          class="mr"
-        />
-      </nav>
-    </div>
-
     <div class="personal">
-      <h1 class="horizontal">{{ name }} {{ surname }}</h1>
+      <h1 class="btn-align">{{ name }} {{ surname }}</h1>
       <div v-if="tgChange" class="telegram input">
         <TextField
           :value="tgVal"
@@ -89,6 +64,22 @@
         </Dropdown>
       </div>
     </div>
+
+    <div class="balance">
+      <p class="btn-align">
+        <span>{{ balance }}</span>
+        <Innopoint />
+        available
+      </p>
+      <nav class="btn-shift">
+        <Button
+          link
+          href="/store"
+          img="/images/icons/shopping-bag.svg"
+          label="go to the InnoStore"
+        />
+      </nav>
+    </div>
   </section>
 </template>
 
@@ -112,7 +103,7 @@
     data() {
       return {
         tgChange: false,
-        tgVal: this.telegram,
+        tgVal: '',
       };
     },
     computed: {
@@ -132,7 +123,9 @@
         this.tgVal = val;
       },
       save() {
-        this.changeField({field: 'telegram', value: this.tgVal});
+        if (this.tgVal !== '')
+          this.changeField({field: 'telegram', value: this.tgVal});
+
         this.tgChange = false;
       },
     },

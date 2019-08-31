@@ -5,7 +5,6 @@
         <Button link href="#buttons" label="Buttons" />
         <Button link href="#checkboxes" label="Checkboxes" />
         <Button link href="#inputs" label="Inputs" />
-        <Button link href="#timeline" label="Timeline" />
         <Button link href="#carousels" label="Carousels" />
         <Button link href="#labeled" label="Labeled" />
         <Button link href="#dropdowns" label="Dropdowns" />
@@ -17,7 +16,6 @@
       <CheckboxesShowcase id="checkboxes" />
       <InputsShowcase id="inputs" />
       <ChipsShowcase id="chips" />
-      <TimelineShowcase id="timeline" />
       <CarouselsShowcase id="carousels" />
       <LabeledShowcase id="labeled" />
       <DropdownsShowcase id="dropdowns" />
@@ -31,7 +29,6 @@
   import ButtonsShowcase from '../containers/ui/buttons';
   import CheckboxesShowcase from '../containers/ui/checkboxes';
   import InputsShowcase from '../containers/ui/inputs';
-  import TimelineShowcase from '../containers/ui/timelines';
   import ChipsShowcase from '../containers/ui/chips';
   import CarouselsShowcase from '../containers/ui/carousels';
   import DialogsShowcase from '../containers/ui/dialogs';
@@ -46,7 +43,6 @@
       ButtonsShowcase,
       CheckboxesShowcase,
       InputsShowcase,
-      TimelineShowcase,
       ChipsShowcase,
       CarouselsShowcase,
       DialogsShowcase,
