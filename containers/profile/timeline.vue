@@ -1,31 +1,64 @@
 <template>
   <Timeline :class="{collapsed}" load>
-    <TimelineEntry icon="/images/icons/file-text.svg">
-      Applied for <strong>Requisite Management</strong> on <a href="#">Slippers of the Year 2019</a>
-      <div class="status good">application accepted, 3 hours of worktime</div>
-      <time>21:13, 21 Jun</time>
-    </TimelineEntry>
-    <TimelineEntry important icon="/images/icons/file-text.svg">
-      Applied for <strong>Requisite Management</strong> on <a href="#">Slippers of the Year 2019</a>
-      <div class="status good">application accepted, 3 hours of worktime</div>
-      <time>21:13, 21 Jun</time>
-    </TimelineEntry>
+    <TimelineEntry
+      :action="{
+        date: '21:13, 21 Jun 2019',
+        application: {
+          name: 'Editing video',
+          status: 'A',
+          project: {
+            name: 'Inno..What?!',
+            link: '15',
+          },
+        },
+      }"
+      type="V"
+    />
+    <TimelineEntry
+      :action="{
+        date: '21:13, 21 Jun 2019',
+        project: {
+          name: 'Dying party',
+          link: '15',
+        },
+      }"
+      type="M"
+    />
+    <TimelineEntry
+      :action="{
+        date: '21:13, 21 Jun 2019',
+        item: {
+          id: 2,
+          name: 'ASCII Whale',
+          type: 'T-Shirt',
+        },
+        status: 'W'
+      }"
+      type="P"
+    />
+    <TimelineEntry
+      :action="{
+        date: '21:13, 21 Jun 2019',
+        status: 'W',
+        project: {
+          name: 'Dying party',
+          link: '15',
+        },
+      }"
+      type="C"
+    />
   </Timeline>
 </template>
 
 <script>
-  import Dot from '@/components/ui/dot';
   import Timeline from '@/components/profile/timeline';
   import TimelineEntry from '@/components/profile/timeline-entry';
-  import Button from '@/components/ui/button';
 
   export default {
     name: 'ProfileTimeline',
     components: {
-      Button,
       TimelineEntry,
       Timeline,
-      Dot,
     },
     data() {
       return {
