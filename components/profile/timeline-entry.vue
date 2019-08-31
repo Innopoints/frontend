@@ -6,6 +6,7 @@
       <ChevronsUpIcon v-if="type === 'M'" />
       <PackageIcon v-if="type === 'C'" />
     </div>
+
     <div class="content">
       <template v-if="type === 'V'">
         <div class="lb">Applied for</div>
@@ -13,7 +14,10 @@
         <nuxt-link :to="'/project/' + action.application.project.link" class="lb">
           {{ action.application.project.name }}
         </nuxt-link>
-        <div :class="['status', {bad: action.application.status === 'R', good: action.application.status === 'A'}]">
+        <div
+          v-if="action.application.project.status === 'C'"
+          :class="['status', {bad: action.application.status === 'R', good: action.application.status === 'A'}]"
+        >
           application&nbsp;
           {{
             {
@@ -23,7 +27,22 @@
             }[action.application.status]
           }}
         </div>
-        <time>{{ action.date }}</time>
+        <template v-else-if="action.application.project.status === 'F'">
+          <div class="status good">
+            1337 <Innopoint /> gained
+            {{ !action.application.comment ? ', leave feedback to claim' : '' }}
+          </div>
+          <Button
+            v-if="!action.application.comment"
+            filled
+            class="mt"
+            label="leave feedback"
+          />
+        </template>
+        <time>
+          {{ action.date }}
+          <Dot v-if="important" />
+        </time>
       </template>
 
       <template v-if="type === 'P'">
@@ -40,7 +59,10 @@
             }[action.status]
           }}
         </div>
-        <time>{{ action.date }}</time>
+        <time>
+          {{ action.date }}
+          <Dot v-if="important" />
+        </time>
       </template>
 
       <template v-if="type === 'M'">
@@ -48,7 +70,10 @@
         <nuxt-link :to="'/project/' + action.project.link" class="lb">
           {{ action.project.name }}
         </nuxt-link>
-        <time>{{ action.date }}</time>
+        <time>
+          {{ action.date }}
+          <Dot v-if="important" />
+        </time>
       </template>
 
       <template v-if="type === 'C'">
@@ -65,7 +90,17 @@
             }[action.status]
           }}
         </div>
-        <time>{{ action.date }}</time>
+        <Button
+          v-if="action.status === 'R'"
+          filled
+          danger
+          class="mt"
+          label="make corrections"
+        />
+        <time>
+          {{ action.date }}
+          <Dot v-if="important" />
+        </time>
       </template>
     </div>
   </div>
@@ -76,14 +111,20 @@
   import ChevronsUpIcon from '@/static/images/icons/chevrons-up.svg';
   import ShoppingBagIcon from '@/static/images/icons/shopping-bag.svg';
   import PackageIcon from '@/static/images/icons/package.svg';
+  import Innopoint from '@/static/images/innopoint-sharp.svg';
+  import Button from '@/components/ui/button';
+  import Dot from '@/components/ui/dot';
 
   export default {
     name: 'TimelineEntry',
     components: {
+      Dot,
+      Button,
       FileIcon,
       ChevronsUpIcon,
       ShoppingBagIcon,
       PackageIcon,
+      Innopoint,
     },
     props: {
       // One of [V for volunteering application, P for purchase,
