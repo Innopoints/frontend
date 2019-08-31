@@ -6,7 +6,17 @@
         <Filters />
         <Ordering />
 
-        <div class="cards">
+        <div v-if="items.length === 0" class="empty">
+          <figure>
+            <img class="picture" src="/images/store/no-products.svg" alt="" />
+            <figcaption>
+              <div class="title">No items found...</div>
+              Try raiding 319 or a different filter
+            </figcaption>
+          </figure>
+        </div>
+
+        <div v-else class="cards">
           <StoreCard
             v-for="item in items"
             :key="item.id"
