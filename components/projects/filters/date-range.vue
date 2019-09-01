@@ -5,7 +5,7 @@
         <Button @click="goToStart" :class="isFirstChoice && 'active'">start date</Button>
         <Button @click="goToEnd" :class="!isFirstChoice && 'active'">end date</Button>
       </div>
-      <Button @click="clear" style="color:red; font-weight: 700;">clear</Button>
+      <Button @click="clear" label="clear" danger />
     </div>
 
     <div class="calendar">

@@ -4,7 +4,7 @@
       <span class="hide-tb">Showing statistics</span>
       <Dropdown>
         <template v-slot:label>
-          {{ activePeriod.label.indexOf('last') !== -1 ? 'over ' : 'for ' }}{{ activePeriod.label }}
+          {{ activePeriod.label.indexOf('last') !== -1 ? 'over the ' : 'for ' }}{{ activePeriod.label }}
         </template>
         <span class="label">Period of statistics</span>
         <ul v-if="!dateRange" class="mt">
@@ -18,10 +18,9 @@
         <hr v-if="!dateRange" data-text="or" />
         <Button
           @click="toggleDateRange"
-          label="select date range"
-          img="/images/icons/calendar.svg"
+          :label="dateRange ? 'back to time periods' : 'select date range'"
+          :img="dateRange ? '/images/icons/arrow-left.svg' : '/images/icons/calendar.svg'"
           class="mt"
-          chevron
         />
         <DateRange v-if="dateRange" />
       </Dropdown>

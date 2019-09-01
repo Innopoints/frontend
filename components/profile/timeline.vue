@@ -2,23 +2,26 @@
   <div class="timeline">
     <slot />
 
-    <Button
+    <button
       v-if="load"
       @click="handleLoadClick"
-      img="/images/icons/more-horizontal.svg"
-      label="load more"
-      class="more"
-    />
+      v-ripple="'rgba(56, 120, 0, .25)'"
+      type="button"
+      class="btn more"
+    >
+      <MoreIcon class="icon mr-2" />
+      more
+    </button>
   </div>
 </template>
 
 <script>
-  import Button from '@/components/ui/button';
+  import MoreIcon from '@/static/images/icons/more-horizontal.svg';
 
   export default {
     name: 'Timeline',
     components: {
-      Button,
+      MoreIcon,
     },
     props: {
       load: {
