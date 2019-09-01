@@ -7,7 +7,7 @@
 
     <div class="align-center">
       <Button @click="spots--" round>
-        <img src="/images/icons/minus.svg" />
+        <MinusIcon class="icon" />
       </Button>
       <TextField
         :min="0"
@@ -16,7 +16,7 @@
         class="no-spinner"
       />
       <Button @click="spots++" round>
-        <img src="/images/icons/plus.svg" />
+        <PlusIcon class="icon" />
       </Button>
     </div>
   </li>
@@ -26,6 +26,8 @@
   import TextField from '@/components/ui/text-field';
   import Button from '@/components/ui/button';
   import UsersIcon from '@/static/images/icons/users.svg';
+  import MinusIcon from '@/static/images/icons/minus.svg';
+  import PlusIcon from '@/static/images/icons/plus.svg';
 
   export default {
     name: 'Spots',
@@ -33,6 +35,8 @@
       TextField,
       Button,
       UsersIcon,
+      MinusIcon,
+      PlusIcon,
     },
     computed: {
       spots: {
