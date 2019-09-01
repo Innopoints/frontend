@@ -12,7 +12,10 @@
       />
     </li>
     <section>
-      <Button @click="clearCompetences" label="clear all" />
+      <Button
+        @click="anyChecked ? clearCompetences() : resetCompetences()"
+        :label="anyChecked ? 'clear all' : 'select all'"
+      />
       <CheckboxGroup
         :value="competences"
         @change="changeCompetence"
@@ -63,11 +66,15 @@
       ...mapState({
         competences: state => state.projects.filters.competences.map(c => ({...c, label: c.name})),
       }),
+      anyChecked() {
+        return this.competences.some(c => c.checked);
+      },
     },
     methods: {
       ...mapActions('projects', [
         'changeCompetence',
         'clearCompetences',
+        'resetCompetences',
       ]),
       toggleCompetences() {
         this.competencesPanel = !this.competencesPanel;

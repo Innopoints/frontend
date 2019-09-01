@@ -40,8 +40,11 @@ export default {
       if(index === -1) return;
       commit('changeCompetence', {index, checked: value.checked});
     },
-    clearCompetences({commit, state}) {
+    resetCompetences({commit, state}) {
       state.filters.competences.forEach((c, index) => commit('changeCompetence', {index, checked: true}));
+    },
+    clearCompetences({commit, state}) {
+      state.filters.competences.forEach((c, index) => commit('changeCompetence', {index, checked: false}));
     },
     clearFilters({commit, dispatch}) {
       dispatch('clearCompetences');
