@@ -35,11 +35,6 @@
           class="ml"
           label="edit"
         />
-        <Button
-          @click="toggleAuth"
-          danger
-          label="sign out"
-        />
       </div>
       <div v-else class="telegram">
         <Button
@@ -117,7 +112,6 @@
     methods: {
       ...mapActions({
         changeField: 'user/changeField',
-        toggleAuth: 'user/toggleAuth',
       }),
       changeVal(val) {
         this.tgVal = val;

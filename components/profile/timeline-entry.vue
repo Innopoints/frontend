@@ -18,7 +18,7 @@
           v-if="action.application.project.status === 'C'"
           :class="['status', {bad: action.application.status === 'R', good: action.application.status === 'A'}]"
         >
-          application&nbsp;
+          application
           {{
             {
               A: 'approved',
@@ -29,8 +29,7 @@
         </div>
         <template v-else-if="action.application.project.status === 'F'">
           <div class="status good">
-            1337 <Innopoint /> gained
-            {{ !action.application.comment ? ', leave feedback to claim' : '' }}
+            1337 <Innopoint /> gained{{ !action.application.comment ? ', leave feedback to claim' : '' }}
           </div>
           <Button
             v-if="!action.application.comment"
@@ -93,7 +92,6 @@
         <Button
           v-if="action.status === 'R'"
           filled
-          danger
           class="mt"
           label="make corrections"
         />

@@ -4,7 +4,7 @@
       <div class="dialog notice">
         <div class="message">
           <Alert class="icon" />
-          <p>Push notifications require permission before they can be used</p>
+          <p>Push notifications require permission before they can be used.</p>
         </div>
         <div class="actions">
           <Button label="prompt for permissions" />

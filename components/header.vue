@@ -6,11 +6,17 @@
     </nuxt-link>
     <div class="actions">
       <Button
-        v-if="isAuth"
+        v-if="isAuth && isProfile"
+        @click="signOut"
+        label="sign out"
+        outline
+      />
+      <Button
+        v-else-if="isAuth"
         link
         href="/profile"
         img="/images/icons/user.svg"
-        round
+        label="profile"
         outline
       />
       <Button
@@ -30,9 +36,14 @@
   export default {
     name: "Header",
     components: { Button },
-    computed: mapState({
-      isAuth: state => state.user.isAuth,
-    }),
+    computed: {
+      ...mapState({
+        isAuth: state => state.user.isAuth,
+      }),
+      isProfile() {
+        return this.$route.name === 'profile';
+      },
+    },
     methods: {
       resolution: (e) => {
         e.preventDefault();
@@ -40,6 +51,10 @@
         Width: ${window.innerWidth}px, height: ${window.innerHeight}px`);
       },
       ...mapActions({toggleAuth: 'user/toggleAuth'}),
+      signOut() {
+        this.toggleAuth();
+        this.$router.push('/');
+      },
     },
   };
 </script>

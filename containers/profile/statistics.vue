@@ -4,7 +4,7 @@
       <span class="hide-tb">Showing statistics</span>
       <Dropdown>
         <template v-slot:label>
-          {{ activePeriod.label }}
+          {{ activePeriod.label.indexOf('last') !== -1 ? 'over ' : 'for ' }}{{ activePeriod.label }}
         </template>
         <span class="label">Period of statistics</span>
         <ul v-if="!dateRange" class="mt">

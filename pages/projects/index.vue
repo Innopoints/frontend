@@ -39,11 +39,11 @@
 
 <script>
   import {mapGetters} from 'vuex';
-  import Filters from '../containers/projects/filters';
-  import ProjectsTagline from '../components/projects/tagline';
-  import Ordering from '../components/projects/filters/ordering';
-  import Button from '../components/ui/button';
-  
+  import Filters from '@/containers/projects/filters';
+  import ProjectsTagline from '@/components/projects/tagline';
+  import Ordering from '@/components/projects/filters/ordering';
+  import Button from '@/components/ui/button';
+
   export default {
     head: {
       title: 'Project Browser',
@@ -57,7 +57,7 @@
       Ordering,
       Filters,
       ProjectsTagline,
-      Project: () => import('../components/projects/project'),
+      Project: () => import('../../components/projects/project'),
     },
     data() {
       return {
@@ -82,4 +82,4 @@
   };
 </script>
 
-<style lang="scss" src="../static/css/projects/index.scss" />
+<style lang="scss" src="../../static/css/projects/index.scss" />
