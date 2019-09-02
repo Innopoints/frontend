@@ -28,22 +28,22 @@ h1 {
   flex-shrink: 0;
 }
 
-.material > .actions {
+.material > .top-info > .actions {
   display: flex;
   flex-wrap: wrap;
   margin-top: 1.5em;
 }
 
-.material > .actions > .btn {
+.material > .top-info > .actions > .btn {
   margin-bottom: .5em;
 }
 
-.material > .actions > .btn > .icon {
+.material > .top-info > .actions > .btn > .icon {
   width: 20px;
   height: 20px;
 }
 
-.material > .actions > .btn:not(:last-child) {
+.material > .top-info > .actions > .btn:not(:last-child) {
   margin-right: .5em;
 }
 
@@ -57,7 +57,7 @@ h2.padded {
   margin: 1em .5em 0;
 }
 
-.material > .card + .btn {
+.material > .activities + .btn {
   margin-left: .5em;
   margin-top: 1em;
 }
@@ -69,7 +69,7 @@ h2.padded {
     margin-right: 1em;
   }
 
-  .material > .card + .btn {
+  .material > .activities + .btn {
     margin-left: 1em;
   }
 }
@@ -86,7 +86,7 @@ h2.padded {
     margin-right: 5%;
   }
 
-  .material > .card + .btn {
+  .material > .activities + .btn {
     margin-left: 5%;
   }
 }

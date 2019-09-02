@@ -1,20 +1,18 @@
 <template>
   <div class="material">
-    <h1 class="padded">{{ proj.title }}</h1>
     <ProjInfo v-bind="proj" :admin="admin" />
-    <ProjActions v-if="admin" />
+
+    <h2 class="padded">Activities</h2>
   </div>
 </template>
 
 <script>
   import {mapState} from 'vuex';
   import projects from '@/constants/projects/projects';
-  import ProjInfo from '@/components/project/info';
-  import ProjActions from '@/components/project/actions';
+  import ProjInfo from '@/containers/project/info';
 
   export default {
     components: {
-      ProjActions,
       ProjInfo,
     },
     head() {
