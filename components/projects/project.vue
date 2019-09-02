@@ -27,7 +27,7 @@
     </Labeled>
 
     <Button
-      :label="isAuth ? 'review' : 'see details'"
+      :label="(isAuth && isAdmin) ? 'review' : 'see details'"
       :href="'/projects/' + id"
       link
       filled
@@ -59,6 +59,7 @@
     computed: {
       ...mapState({
         isAuth: state => state.user.isAuth,
+        isAdmin: state => state.user.isAdmin,
       }),
       eventDate() {
         return printDate(this.date);

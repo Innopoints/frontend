@@ -6,16 +6,22 @@
     <Labeled label="Organizer" icon="/images/icons/user.svg">
       {{ organizer }}
     </Labeled>
-    <Labeled icon="/images/icons/flag.svg" label="Review Status">
+    <Labeled v-if="admin" icon="/images/icons/flag.svg" label="Review Status">
       {{ status }}
     </Labeled>
-    <Labeled icon="/images/icons/message-square.svg" label="Administrator's Comment" class="comment">
+    <Labeled
+      v-if="admin"
+      icon="/images/icons/message-square.svg"
+      label="Administrator's Comment"
+      class="comment"
+    >
       Back in my day, the sun was brighter, the grass was greener, the events weren’t so hopelessly boring. Add some food to the party.
     </Labeled>
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   import Labeled from '@/components/ui/labeled';
   import printDate from '@/utils/eventDate';
 
@@ -28,8 +34,13 @@
       organizer: String,
       status: String,
       date: Object,
+      admin: Boolean,
     },
     computed: {
+      ...mapState({
+        isAuth: state => state.user.isAuth,
+        isAdmin: state => state.user.isAdmin,
+      }),
       eventDate() {
         return printDate(this.date);
       },
