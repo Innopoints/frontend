@@ -28,7 +28,7 @@ export default [
       {
         name: 'Content writing',
         description: 'Writing 5 good-quality post-releases after the event',
-        rewardRate: 1200,
+        reward: 1200,
         worktime: null,
         isFixed: true,
         competences: ['creativity', 'teamwork'],
@@ -36,7 +36,7 @@ export default [
       {
         name: 'Toilet pointer',
         description: 'You\'re a volunteer now. Stand in the hall and point visitors to a toilet',
-        rewardRate: 70,
+        reward: 70,
         worktime: 24,
         isFixed: false,
         competences: ['communication'],
@@ -44,7 +44,7 @@ export default [
       {
         name: 'Just standing',
         description: 'Simple standing for 10 hours. Because you\'re a volunteer',
-        rewardRate: 70,
+        reward: 70,
         worktime: 10,
         isFixed: false,
         competences: ['healthy lifestyle & wellbeing'],
