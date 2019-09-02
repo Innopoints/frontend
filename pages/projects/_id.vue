@@ -1,8 +1,8 @@
 <template>
   <div class="material">
     <ProjInfo v-bind="proj" :admin="admin" />
-
     <h2 class="padded">Activities</h2>
+    <ProjActivities :activities="proj.activities" />
   </div>
 </template>
 
@@ -10,9 +10,11 @@
   import {mapState} from 'vuex';
   import projects from '@/constants/projects/projects';
   import ProjInfo from '@/containers/project/info';
+  import ProjActivities from '@/containers/project/activities';
 
   export default {
     components: {
+      ProjActivities,
       ProjInfo,
     },
     head() {
