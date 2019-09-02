@@ -20,8 +20,8 @@
 
       <div class="cards">
         <Project
-          v-for="(project, i) in projects"
-          :key="i"
+          v-for="project in projects"
+          :key="project.id"
           v-bind="project"
         />
       </div>

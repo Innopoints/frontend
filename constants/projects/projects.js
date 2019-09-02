@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     img: '/images/projects/chess-club.png',
     title: 'Chess Tournament',
     date: {
@@ -16,10 +17,10 @@ export default [
     ],
     spots: 3,
     competences: ['creativity', 'critical thinking', 'leadership', 'conflict aversion', 'communication', 'some other skill'],
-    url: '#',
     status: 'Unpublished, awaiting review',
   },
   {
+    id: 2,
     img: '/images/projects/arro.png',
     title: 'All-Russian Robotics Olympiad',
     date: {
@@ -31,7 +32,6 @@ export default [
       'Requisite management',
       'Catering',
     ],
-    url: '#',
     spots: 5,
     competences: ['conflict aversion', 'communication'],
     status: 'Modified, awaiting review',

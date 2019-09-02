@@ -28,7 +28,7 @@
 
     <Button
       :label="isAuth ? 'review' : 'see details'"
-      :href="url"
+      :href="'/projects/' + id"
       link
       filled
     />
@@ -45,12 +45,12 @@
   export default {
     components: { Button, Labeled, Card },
     props: {
+      id: Number,
       img: String,
       title: String,
       date: Object,
       organizer: String,
       activities: Array,
-      url: String,
       status: {
         type: String,
         required: false,
