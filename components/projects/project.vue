@@ -27,8 +27,8 @@
     </Labeled>
 
     <Button
-      :label="isAuth ? 'review' : 'see details'"
-      :href="url"
+      :label="(isAuth && isAdmin) ? 'review' : 'see details'"
+      :href="'/projects/' + id"
       link
       filled
     />
@@ -45,12 +45,12 @@
   export default {
     components: { Button, Labeled, Card },
     props: {
+      id: Number,
       img: String,
       title: String,
       date: Object,
       organizer: String,
       activities: Array,
-      url: String,
       status: {
         type: String,
         required: false,
@@ -59,6 +59,7 @@
     computed: {
       ...mapState({
         isAuth: state => state.user.isAuth,
+        isAdmin: state => state.user.isAdmin,
       }),
       eventDate() {
         return printDate(this.date);
