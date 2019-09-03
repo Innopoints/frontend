@@ -1,0 +1,110 @@
+.tagline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 .3em;
+  color: #127800;
+  margin-bottom: 6em;
+}
+
+.tagline > .picture {
+  margin-top: 2em;
+  max-height: 15em;
+  margin-bottom: 3em;
+}
+
+.tagline > .picture.desktop {
+  display: none;
+}
+
+.tagline h1 {
+  font-size: 2.3rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.tagline .motto {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.tagline nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.tagline .btn {
+  margin: 1em .5em 0;
+}
+
+@media only screen and (min-width: 640px) {
+  .tagline {
+    padding: 0 10%;
+  }
+
+  .tagline h1 {
+    font-size: 2.6rem;
+  }
+
+  .tagline .motto {
+    font-size: 1.5rem;
+  }
+
+  .tagline .btn {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tagline > .picture.mobile {
+    display: none;
+  }
+
+  .tagline > .picture.desktop {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .tagline {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .tagline > .picture {
+    max-height: 20em;
+    margin-bottom: 0;
+    margin-right: 2em;
+  }
+
+  .tagline h1,
+  .tagline .motto {
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .tagline > .picture {
+    margin-top: 3em;
+    margin-right: 2.5em;
+  }
+
+  .tagline h1 {
+    font-size: 2.8rem;
+  }
+
+  .tagline .motto {
+    font-size: 1.6rem;
+  }
+
+  .tagline nav {
+    margin-top: 1.5em;
+  }
+
+  .tagline .btn {
+    padding: .8em 1.3em;
+  }
+}

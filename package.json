@@ -8,6 +8,7 @@
     "start": "nuxt build && nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint-fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },
   "dependencies": {
@@ -16,7 +17,15 @@
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^5.2.2",
+    "fecha": "^3.0.3",
+    "node-sass": "^4.12.0",
     "nuxt": "^2.8.0",
-    "vue-eslint-parser": "^6.0.4"
-  }
+    "nuxt-dropzone": "^1.0.2",
+    "sass-loader": "^7.1.0",
+    "vue-eslint-parser": "^6.0.4",
+    "vue-ripple-directive": "^2.0.1",
+    "vue-svg-loader": "^0.12.0",
+    "vuedraggable": "^2.23.0"
+  },
+  "browserslist": "> 0.5%, last 3 versions, Firefox ESR, not dead, last 5 iOS major versions"
 }

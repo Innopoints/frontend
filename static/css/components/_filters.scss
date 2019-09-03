@@ -1,0 +1,141 @@
+.filters {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.dropdowns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.dropdowns .dropdown-shell {
+  margin-top: .5em;
+}
+
+.handle .regular {
+  display: none;
+}
+
+.handle .mr {
+  width: 20px;
+  height: 20px;
+}
+
+.relative-wrapper {
+  width: calc(90vw - 1em);
+  max-width: 22em;
+  padding: 1em 0;
+}
+
+.order-options {
+  max-width: 18em;
+}
+
+.relative-wrapper > .btn.danger {
+  margin: 0 1em;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  margin-top: .5em;
+  padding: 0 1em;
+}
+
+.filter .name {
+  padding: 0 .5em 0 1em;
+  flex-shrink: 0;
+}
+
+.filter .icon {
+  stroke: #127800;
+}
+
+.order-options .with-labels {
+  display: flex;
+  flex-direction: column;
+  margin-left: .5em;
+}
+
+.order-options .with-labels label {
+  display: flex;
+  align-items: center;
+}
+
+.order-options .with-labels .radio {
+  margin: .5em 12px;
+}
+
+.hide-mb {
+  display: none;
+}
+
+@media only screen and (min-width: 370px) {
+  .handle .tight {
+    display: none;
+  }
+
+  .handle .regular {
+    display: inline;
+  }
+}
+
+@media only screen and (min-width: 380px) {
+  .filter > .icon,
+  .filter > .align-center > .icon {
+    margin-left: .8em;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .filters {
+    width: 36em;
+    align-self: center;
+  }
+
+  .ordering {
+    width: 38em;
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .filters {
+    display: flex;
+    width: 38em;
+    align-items: center;
+  }
+
+  .filters .text-field {
+    flex: 1;
+  }
+
+  .dropdown-shell:first-child {
+    display: none;
+  }
+
+  .dropdown-shell:last-child {
+    flex: 0;
+    margin-top: 0;
+    margin-left: .5em;
+  }
+
+  .hide-mb {
+    display: flex;
+    align-items: center;
+    align-self: center;
+  }
+
+  .hide-mb > .chip-wrapper:not(:last-child) {
+    margin-right: .5em;
+  }
+
+  .hide-mb .chip {
+    font-size: .9rem;
+  }
+
+  .ordering {
+    margin: .5em 0 1em;
+  }
+}

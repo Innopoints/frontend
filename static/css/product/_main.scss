@@ -1,0 +1,120 @@
+.align-center > .btn {
+  margin: 1em 0 1em;
+}
+
+.product .content > .btn.normal {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+
+.product .image {
+  transition: height 200ms;
+}
+
+.product.expanded .image {
+  height: 0;
+  overflow: hidden;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.balance-tooltip {
+  padding: .5em 1.6em;
+  background-color: rgba(0, 0, 0, .4);
+  color: #fff;
+  border-radius: 25px;
+  margin-bottom: 1em;
+}
+
+.modal-overlay .balance-tooltip {
+  margin-bottom: 0;
+  margin-top: 1em;
+}
+
+.balance-tooltip > .innopoint {
+  stroke: #fff;
+  height: .9rem;
+  margin-left: 0;
+  stroke-width: 7;
+}
+
+.card.product {
+  position: relative;
+  margin: 1em;
+  max-width: 30em;
+}
+
+.product > .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.product > .btn.close {
+  position: absolute;
+  top: .7em;
+  right: .7em;
+  z-index: 1000;
+}
+
+.product .title {
+  margin: .1em 0 .1em;
+}
+
+.product .card-row,
+.product .card-row > div {
+  margin-top: .8em;
+}
+
+.product .radio-options {
+  display: flex;
+}
+
+.product .radio-options > label {
+  margin: 4px 8px 0 0;
+}
+
+.product .purchases {
+  font-weight: 300;
+  font-size: .9rem;
+  text-align: right;
+  margin-bottom: .3em;
+}
+
+.product .price {
+  font-size: 1.2rem;
+}
+
+.product .price .innopoint {
+  height: 1rem;
+  margin-left: 0;
+}
+
+@media only screen and (min-width: 1024px) {
+  .card.product {
+    display: flex;
+    max-width: 50em;
+  }
+
+  .product .image img {
+    display: block;
+  }
+
+  .product .card-row:last-child {
+    margin-top: auto;
+    align-items: flex-end;
+  }
+
+  .product > .content {
+    padding: 1.5em;
+  }
+
+  .card.product .title {
+    font-size: 1.4rem;
+    margin-top: .5em;
+  }
+}
