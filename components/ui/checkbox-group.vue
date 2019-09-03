@@ -4,7 +4,7 @@
       <div :class="{round, colored}" class="checkbox">
         <input
           :checked="item.checked"
-          @change="$emit('change', item)"
+          @change="changeItems(item)"
           type="checkbox"
         />
         <div :class="{white: isWhite(item)}" :style="style(item)" class="icon" />
@@ -36,9 +36,15 @@
         data: this.value,
       };
     },
+    watch: {
+      value(val) {
+        this.data = val;
+      },
+    },
     methods: {
-      changeItems(index) {
-        this.data[index] = !this.data[index];
+      changeItems(item) {
+        item.checked = !item.checked;
+        this.$emit('change', item);
       },
       isWhite (item) {
         if(!item.color) return false;
