@@ -1,9 +1,6 @@
-node_modules
-npm-debug.log
-.nuxt
-.idea
-.vscode
 .DS_Store
-dist
-package-lock.json
-webpack.config.js
+/node_modules/
+/src/node_modules/@sapper/
+yarn-error.log
+/cypress/screenshots/
+/__sapper__/
