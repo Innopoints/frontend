@@ -1,13 +1,11 @@
 # sapper-template
 
-The default [Sapper](https://github.com/sveltejs/sapper) template, with branches for Rollup and webpack. To clone it and get started:
+To clone it and get started:
 
 ```bash
-# for Rollup
-npx degit "sveltejs/sapper-template#rollup" my-app
-# for webpack
-npx degit "sveltejs/sapper-template#webpack" my-app
-cd my-app
+git clone https://github.com/VanishMax/innopoints-frontend.git
+cd innopoints-frontend
+git checkout [branch (svelte)]
 npm install # or yarn!
 npm run dev
 ```
