@@ -1,0 +1,15 @@
+form > .actions {
+  margin-top: 1.5em;
+  padding-bottom: 4em;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+form > .actions > .btn {
+  margin-bottom: 0.5em;
+}
+
+form > .actions > .btn:not(:first-child) {
+  margin-left: 1em;
+}

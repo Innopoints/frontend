@@ -1,0 +1,38 @@
+.templates > p {
+  margin-bottom: 1.3em;
+}
+
+.templates > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.8em;
+}
+
+.templates > .btn {
+  display: inline-flex;
+}
+
+.templates .choice-btn:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+@media only screen and (min-width: 480px) {
+  .templates > div {
+    flex-direction: row;
+  }
+
+  .templates .choice-btn {
+    width: 10em;
+  }
+
+  .templates .choice-btn:not(:last-child) {
+    margin-right: 1em;
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .templates .choice-btn {
+    width: 12em;
+  }
+}
