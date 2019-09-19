@@ -6,6 +6,7 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+import { sveltemarkup, sveltescript } from './src/utils/rollup';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -32,6 +33,11 @@ export default {
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       svelte({
+        extensions: ['.html', '.svelte', '.svg'],
+        preprocess: {
+          markup: sveltemarkup,
+          script: sveltescript,
+        },
         dev,
         hydratable: true,
         emitCss: true,
@@ -84,6 +90,11 @@ export default {
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
       svelte({
+        extensions: ['.html', '.svelte', '.svg'],
+        preprocess: {
+          markup: sveltemarkup,
+          script: sveltescript,
+        },
         generate: 'ssr',
         dev,
       }),

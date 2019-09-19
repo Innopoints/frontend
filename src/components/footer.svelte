@@ -27,7 +27,8 @@
       <div>
         <a href="/" class="title-container">
           <!-- innou-icon -->
-          <!--<InnouIcon />-->
+          <svg src="../../static/images/innou-icon.svg" class="icon" />
+          <!-- <InnouIcon class="icon"/> -->
           <span class="title">Innopoints</span>
         </a>
         <div class="socials space-between">
