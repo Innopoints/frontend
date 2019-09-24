@@ -15,12 +15,7 @@
     <span class="title">{title}</span>
     <span class="subtitle">{subtitle}</span>
     {#if buttonLink}
-      <Button
-        label={buttonText}
-        away={external}
-        href={buttonLink}
-        img={external ? 'images/icons/external-link.svg' : ''}
-        filled />
+      <Button href={buttonLink} away={external} filled>{buttonText}</Button>
     {:else}
       <strong>{buttonText}</strong>
     {/if}

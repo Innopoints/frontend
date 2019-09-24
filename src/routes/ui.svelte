@@ -31,10 +31,10 @@
     <div class="showcase">
       <Button filled>
         button
-        <img alt="" src="images/ui-kit-page/external-link.svg" class="ml" />
+        <img alt="" src="images/icons/flag.svg" class="ml icon" />
       </Button>
       <Button href="#">
-        <img alt="" src="images/ui-kit-page/calendar.svg" class="mr" />
+        <img alt="" src="images/ui-kit-page/calendar.svg" class="mr icon" />
         button
       </Button>
     </div>
@@ -53,7 +53,7 @@
     <hr />
     <div class="showcase">
       <Button filled danger>
-        <img alt="" src="images/ui-kit-page/external-link.svg" class="mr" />
+        <img alt="" src="images/icons/move.svg" class="mr" />
         button
       </Button>
       <Button href="#" outline danger>button</Button>

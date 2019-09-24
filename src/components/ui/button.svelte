@@ -1,8 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
 
-  import A from './html/a.svelte';
-  import Button from './html/button.svelte';
   export let label = '';
   export let away = null;
   export let href = '';
@@ -32,9 +30,35 @@
   let dispatch = createEventDispatcher();
 </script>
 
-<svelte:component
+{#if href}
+  <a {href} target={away && '_blank'} class={classes.join(' ')}>
+    <slot />
+    {#if away}
+      <svg src="images/icons/external-link.svg" class="icon ml" />
+    {/if}
+  </a>
+{:else}
+  <button
+    type="button"
+    {disabled}
+    class={classes.join(' ')}
+    on:click={() => dispatch('click')}>
+    {#if badge}
+      <div class="badge">
+        <slot>{label}</slot>
+      </div>
+    {:else}
+      <slot>{label}</slot>
+    {/if}
+
+    {#if chevron}
+      <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
+    {/if}
+  </button>
+{/if}
+
+<!--<svelte:component
   this={href ? A : Button}
-  v-ripple={ripple}
   class={classes.join(' ')}
   {href}
   to={href}
@@ -53,4 +77,4 @@
   {#if chevron}
     <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
   {/if}
-</svelte:component>
+</svelte:component>-->
