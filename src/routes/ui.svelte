@@ -48,6 +48,7 @@
       <Button outline round normal>
         <img alt="" src="images/ui-kit-page/x.svg" />
       </Button>
+      <Button filled chevron>chevron</Button>
     </div>
     <hr />
     <div class="showcase">
