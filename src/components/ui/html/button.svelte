@@ -1,0 +1,3 @@
+<button {...$$props}>
+  <slot />
+</button>
