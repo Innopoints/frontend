@@ -5,6 +5,8 @@
   import TextField from 'ui/text-field.svelte';
   import Labeled from 'ui/labeled.svelte';
   import Dot from 'ui/dot.svelte';
+  import Accordion from 'ui/accordion.svelte';
+  import Dropdown from 'ui/dropdown.svelte';
 </script>
 
 <svelte:head>
@@ -380,6 +382,18 @@
   <Card id="dropdowns">
     <h1>Dropdowns</h1>
     <div class="showcase vertical">
+      <Dropdown label="open dropdown">
+        great now close me
+        <br />
+        great now close me
+        <br />
+        great now close me
+        <br />
+        great now close me
+      </Dropdown>
+      <Dropdown label="right dropdown" right nowrap>
+        <Button filled>woo alRIGHT</Button>
+      </Dropdown>
       <div class="dropdown-shell">
         <button class="btn handle">
           open dropdown
@@ -423,36 +437,22 @@
     <div class="showcase">
       <ul class="accordion">
         <li>Not expandable</li>
-        <li class="panel">
-          <button class="btn handle">
-            expandable
-            <img
-              alt=""
-              src="images/ui-kit-page/chevron-down.svg"
-              class="ml chevron" />
-          </button>
+        <li>
+          <Accordion label="expandable">
+            Here's some hidden away content
+            <br />
+            for your great pleasure.
+            <Button filled>does nothing</Button>
+          </Accordion>
         </li>
-        <section>
-          Here's some hidden away content
-          <br />
-          for your great pleasure.
-          <button class="btn filled">does nothing</button>
-        </section>
-        <li class="panel">
-          <button class="btn handle">
-            also expandable
-            <img
-              alt=""
-              src="images/ui-kit-page/chevron-down.svg"
-              class="ml chevron" />
-          </button>
+        <li>
+          <Accordion label="also expandable">
+            Here's some hidden away content
+            <br />
+            for your great pleasure.
+            <Button filled>does nothing</Button>
+          </Accordion>
         </li>
-        <section>
-          Here's some hidden away content
-          <br />
-          for your great pleasure.
-          <button class="btn filled">does nothing</button>
-        </section>
       </ul>
     </div>
   </Card>

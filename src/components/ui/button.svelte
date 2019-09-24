@@ -12,6 +12,7 @@
   export let badge = false;
   export let round = false;
   export let normal = false;
+  export let btnclass = '';
 
   $: ripple = filled
     ? 'rgba(255, 255, 255, .35)'
@@ -25,6 +26,7 @@
     danger && 'danger',
     round && 'round',
     normal && 'normal',
+    btnclass,
   ].filter(v => v !== false);
 
   let dispatch = createEventDispatcher();
