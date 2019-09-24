@@ -56,25 +56,3 @@
     {/if}
   </button>
 {/if}
-
-<!--<svelte:component
-  this={href ? A : Button}
-  class={classes.join(' ')}
-  {href}
-  to={href}
-  target={href && away ? '_blank' : ''}
-  disabled={!href && disabled}
-  type={!href ? 'button' : ''}
-  on:click={() => dispatch('click')}>
-  {#if badge}
-    <div class="badge">
-      <slot>{label}</slot>
-    </div>
-  {:else}
-    <slot>{label}</slot>
-  {/if}
-
-  {#if chevron}
-    <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
-  {/if}
-</svelte:component>-->
