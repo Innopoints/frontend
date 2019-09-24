@@ -3,6 +3,8 @@
   import Tagline from '@/containers/home/tagline.svelte';
   import HowTo from '@/containers/home/how-to.svelte';
   import Options from '@/containers/home/options.svelte';
+  import Store from '@/containers/home/store.svelte';
+  import Contacts from '../containers/home/contacts.svelte';
 </script>
 
 <svelte:head>
@@ -23,4 +25,6 @@
   <Tagline />
   <HowTo />
   <Options />
+  <Store />
+  <Contacts />
 </Layout>

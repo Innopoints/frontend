@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import alias from 'rollup-plugin-alias';
+import { eslint } from 'rollup-plugin-eslint';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
@@ -13,13 +14,7 @@ const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-const onwarn = (warning, onwarn) => {
-  if (
-    warning.code === 'CIRCULAR_DEPENDENCY' &&
-    /[/\\]@sapper[/\\]/.test(warning.message)
-  )
-    onwarn(warning);
-};
+const onwarn = (warning, onwarn) => onwarn(warning);
 
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/');
@@ -56,7 +51,7 @@ export default {
         ],
       }),
       commonjs(),
-
+      eslint({}),
       legacy &&
         babel({
           extensions: ['.js', '.mjs', '.html', '.svelte'],
