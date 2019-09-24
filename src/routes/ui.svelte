@@ -19,7 +19,7 @@
 </svelte:head>
 
 <Layout>
-  <Card id="buttons">
+  <Card id="buttons" class="todo">
     <h1>Buttons</h1>
     <div class="showcase">
       <Button filled href="#" away>link</Button>
@@ -89,6 +89,8 @@
     </div>
 
     <hr />
+
+    <h1 class="todo">Form field</h1>
 
     <div class="showcase">
       <form>
@@ -173,7 +175,7 @@
   </Card>
 
   <Card id="radios">
-    <h1>Radio Buttons</h1>
+    <h1 class="todo">Radio Buttons</h1>
     <div class="showcase">
       <div role="group">
         <label class="radio">
@@ -245,7 +247,7 @@
   </Card>
 
   <Card id="checkboxes">
-    <h1>Checkboxes</h1>
+    <h1 class="todo">Checkboxes</h1>
     <div class="showcase">
       <div role="group">
         <label>
@@ -320,7 +322,7 @@
   </Card>
 
   <Card id="switches">
-    <h1>Switches</h1>
+    <h1 class="todo">Switches</h1>
     <div class="showcase">
       <label class="switch-wrapper">
         <input type="checkbox" class="switch-ctl" />
@@ -484,7 +486,7 @@
   </Card>
 
   <Card id="chips">
-    <h1>Chips</h1>
+    <h1 class="todo">Chips</h1>
     <div class="showcase">
       <div style="display: flex; flex-wrap: wrap;">
         <div class="chip unclickable">most first</div>
@@ -611,7 +613,7 @@
   </Card>
 
   <Card id="dialogs">
-    <h1>Dialogs</h1>
+    <h1 class="todo">Dialogs</h1>
     <div class="showcase vertical">
       <div class="dialog">
         <button class="btn normal round close">
@@ -685,7 +687,7 @@
   </Card>
 
   <Card id="carousels">
-    <h1>Image Carousel</h1>
+    <h1 class="todo">Image Carousel</h1>
     <div class="showcase">
       <div class="carousel">
         <div class="curr-slide">
@@ -731,7 +733,7 @@
   </Card>
 
   <Card id="choice-btns">
-    <h1>Choice buttons</h1>
+    <h1 class="todo">Choice buttons</h1>
     <div class="showcase">
       <label class="choice-btn">
         <input type="radio" name="large-choices" />
@@ -768,7 +770,7 @@
   </Card>
 
   <Card id="tabs">
-    <h1>Tabs</h1>
+    <h1 class="todo">Tabs</h1>
     <div class="showcase">
       <nav class="tabs">
         <label class="tab">
@@ -784,7 +786,7 @@
   </Card>
 
   <Card id="popovers">
-    <h2>Popovers</h2>
+    <h2 class="todo">Popovers</h2>
     <div class="showcase">
       <div class="popover-container">
         <a href="##">simple link</a>
@@ -840,3 +842,10 @@
     });
   });
 </script> -->
+
+<style scoped>
+  .todo {
+    background-color: red;
+    width: 100%;
+  }
+</style>
