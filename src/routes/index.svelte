@@ -1,6 +1,6 @@
 <script>
-  import Card from '../components/ui/card.svelte';
-  import Button from '../components/ui/button.svelte';
+  import Layout from '../layouts/home.svelte';
+  import Tagline from '../containers/home/tagline.svelte';
 </script>
 
 <svelte:head>
@@ -8,8 +8,10 @@
 
   <!-- Styles for Home page -->
   <link rel="stylesheet" href="css/page-components/footer.css" />
-  <link rel="stylesheet" href="css/page-components/header.css" />
+  <link rel="stylesheet" href="css/home/header.css" />
+  <link rel="stylesheet" href="css/home/tagline.css" />
 </svelte:head>
-<Card>
-  <Button href="/ui">UI Showcase</Button>
-</Card>
+
+<Layout>
+  <Tagline />
+</Layout>
