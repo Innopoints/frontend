@@ -1,12 +1,14 @@
 <script>
   import Layout from '@/layouts/default.svelte';
-  import Card from 'ui/card.svelte';
-  import Button from 'ui/button.svelte';
-  import TextField from 'ui/text-field.svelte';
-  import Labeled from 'ui/labeled.svelte';
-  import Dot from 'ui/dot.svelte';
-  import Accordion from 'ui/accordion.svelte';
-  import Dropdown from 'ui/dropdown.svelte';
+  import {
+    Accordion,
+    Button,
+    Card,
+    Dot,
+    Dropdown,
+    Labeled,
+    TextField,
+  } from 'ui';
 </script>
 
 <svelte:head>
