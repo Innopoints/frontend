@@ -20,7 +20,7 @@
   <div class="showcase">
     <Button filled href="#" away>link</Button>
     <Button filled>button</Button>
-    <Button outline filled link href="#">link</Button>
+    <Button outline filled href="#">link</Button>
     <Button href="#">link</Button>
     <Button disabled filled>disabled</Button>
     <Button disabled outline>disabled</Button>
@@ -31,7 +31,7 @@
       button
       <img alt="" src="images/ui-kit-page/external-link.svg" class="ml" />
     </Button>
-    <Button link href="#">
+    <Button href="#">
       <img alt="" src="images/ui-kit-page/calendar.svg" class="mr" />
       button
     </Button>
@@ -65,9 +65,9 @@
   </div>
   <div class="showcase half">
     <TextField placeholder="Price" item right>
-      <img alt="" src="images/innopoint-soft.svg" class="item" />
+      <img alt="" src="images/innopoint-sharp.svg" class="item" />
     </TextField>
-    <TextField type="number" item left>
+    <TextField type="number" item>
       <span class="item">XXL</span>
     </TextField>
   </div>
@@ -127,7 +127,7 @@
         <div class="text-field-wrapper">
           <div class="text-field with-item right">
             <input type="number" placeholder="Price" id="price" />
-            <img alt="" src="images/innopoint.svg" class="item" />
+            <img alt="" src="images/innopoint-sharp.svg" class="item" />
           </div>
           <span class="required">* Required</span>
         </div>
@@ -451,15 +451,15 @@
   <div class="showcase vertical">
     <p class="row">
       New information dot
-      <Dot new />
+      <Dot />
     </p>
     <p class="row" style="font-size: .8rem;">
       Smaller text - smaller dot
-      <Dot new />
+      <Dot />
     </p>
     <p class="row">
       Artificially smaller dot
-      <Dot new small />
+      <Dot small />
     </p>
     <p class="row">
       Attention dot

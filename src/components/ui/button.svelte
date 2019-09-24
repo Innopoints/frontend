@@ -3,17 +3,17 @@
 
   import A from './html/a.svelte';
   import Button from './html/button.svelte';
-  export let label;
-  export let away;
-  export let href;
-  export let chevron;
-  export let filled;
-  export let disabled;
-  export let outline;
-  export let danger;
-  export let badge;
-  export let round;
-  export let normal;
+  export let label = '';
+  export let away = null;
+  export let href = '';
+  export let chevron = false;
+  export let filled = false;
+  export let disabled = false;
+  export let outline = false;
+  export let danger = false;
+  export let badge = false;
+  export let round = false;
+  export let normal = false;
 
   $: ripple = filled
     ? 'rgba(255, 255, 255, .35)'

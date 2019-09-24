@@ -11,5 +11,5 @@
   <link rel="stylesheet" href="css/page-components/header.css" />
 </svelte:head>
 <Card>
-  <Button href="/ui-showcase">UI Showcase</Button>
+  <Button href="/ui">UI Showcase</Button>
 </Card>

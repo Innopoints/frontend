@@ -1,5 +1,5 @@
 <script>
-  export let img;
+  export let img = null;
   export let color = '#FFF';
 </script>
 

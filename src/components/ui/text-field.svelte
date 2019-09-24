@@ -1,22 +1,23 @@
 <script>
   import { createEventDispatcher } from 'svelte';
 
-  export let id;
-  export let placeholder;
-  export let name;
-  export let value;
-  export let cols;
-  export let pattern;
-  export let min;
-  export let max;
-  export let maxLength;
-  export let label;
-  export let error;
-  export let text;
-  export let item;
-  export let multiline;
-  export let outline;
-  export let right;
+  export let id = null;
+  export let placeholder = '';
+  export let name = null;
+  export let type = null;
+  export let value = null;
+  export let cols = null;
+  export let pattern = null;
+  export let min = null;
+  export let max = null;
+  export let maxLength = null;
+  export let label = null;
+  export let error = null;
+  export let text = null;
+  export let item = null;
+  export let multiline = null;
+  export let outline = null;
+  export let right = null;
 
   $: classes = [
     'text-field',
@@ -37,8 +38,8 @@
       bind:value
       cols={5}
       on:focus={() => dispatch('focus')}
-      on:focus={() => dispatch('blur')}
-      on:focus={() => dispatch('input')} />
+      on:blur={() => dispatch('blur')}
+      on:input={() => dispatch('input')} />
   {:else}
     <!-- TODO: Bind <input> type -->
     <input
@@ -46,14 +47,15 @@
       type="text"
       {placeholder}
       {name}
+      {type}
       bind:value
       {pattern}
       {min}
       {max}
       {maxLength}
       on:focus={() => dispatch('focus')}
-      on:focus={() => dispatch('blur')}
-      on:focus={() => dispatch('input')}
+      on:blur={() => dispatch('blur')}
+      on:input={() => dispatch('input')}
       on:keyup.enter={() => dispatch('blur')} />
 
     {#if outline}

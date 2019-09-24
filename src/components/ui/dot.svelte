@@ -1,7 +1,7 @@
 <script>
-  export let small;
-  export let attention;
-  export let active;
+  export let small = false;
+  export let attention = false;
+  export let active = false;
 
   $: classes = [
     small && 'small',

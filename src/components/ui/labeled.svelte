@@ -1,6 +1,6 @@
 <script>
-  export let label;
-  export let icon;
+  export let label = '';
+  export let icon = null;
 </script>
 
 <div class:text={!icon} class="labeled">
