@@ -1,9 +1,10 @@
 <script>
+  export let id = null;
   export let img = null;
   export let color = '#FFF';
 </script>
 
-<div class="card" class:with-image={img} id={$$props.id}>
+<div class="card" class:with-image={img} {id}>
   <slot name="image">
     {#if img}
       <img src={img} style={'background: ' + color} class="image" alt="" />

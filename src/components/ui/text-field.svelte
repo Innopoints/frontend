@@ -24,7 +24,7 @@
     item && 'with-item',
     item && ((right && 'right') || 'left'),
     outline && 'outline',
-  ];
+  ].filter(v => v !== false);
 
   let dispatch = createEventDispatcher();
 </script>

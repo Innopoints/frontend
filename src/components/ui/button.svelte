@@ -25,7 +25,7 @@
     danger && 'danger',
     round && 'round',
     normal && 'normal',
-  ];
+  ].filter(v => v !== false);
 
   let dispatch = createEventDispatcher();
 </script>
