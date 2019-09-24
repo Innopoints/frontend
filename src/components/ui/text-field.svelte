@@ -41,7 +41,6 @@
       on:blur={() => dispatch('blur')}
       on:input={() => dispatch('input')} />
   {:else}
-    <!-- TODO: Bind <input> type -->
     <input
       {id}
       type="text"

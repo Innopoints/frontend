@@ -1,6 +1,6 @@
 <script>
-  import Layout from '../layouts/home.svelte';
-  import Tagline from '../containers/home/tagline.svelte';
+  import Layout from '@/layouts/home.svelte';
+  import Tagline from '@/containers/home/tagline.svelte';
 </script>
 
 <svelte:head>

@@ -1,10 +1,10 @@
 <script>
-  import Layout from '../layouts/default.svelte';
-  import Card from '../components/ui/card.svelte';
-  import Button from '../components/ui/button.svelte';
-  import TextField from '../components/ui/text-field.svelte';
-  import Labeled from '../components/ui/labeled.svelte';
-  import Dot from '../components/ui/dot.svelte';
+  import Layout from '@/layouts/default.svelte';
+  import Card from 'ui/card.svelte';
+  import Button from 'ui/button.svelte';
+  import TextField from 'ui/text-field.svelte';
+  import Labeled from 'ui/labeled.svelte';
+  import Dot from 'ui/dot.svelte';
 </script>
 
 <svelte:head>

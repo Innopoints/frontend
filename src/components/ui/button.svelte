@@ -51,8 +51,6 @@
   {/if}
 
   {#if chevron}
-    <svg
-      src="../../../static/images/icons/chevron-down.svg"
-      class="icon ml chevron" />
+    <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
   {/if}
 </svelte:component>
