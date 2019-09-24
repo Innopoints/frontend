@@ -7,7 +7,7 @@
 </script>
 
 <Card>
-  <svg src={img} class="icon" />
+  <img src={img} class="icon" alt="" />
   <span class="title">{title}</span>
   <span class="subtitle">{subtitle}</span>
 </Card>
