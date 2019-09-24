@@ -157,18 +157,16 @@
     <hr />
 
     <div class="showcase">
-      <div class="text-field outline">
-        <input type="text" id="nothing" />
-        <label class="label" for="nothing">Label</label>
-      </div>
-      <div class="text-field outline with-item left">
-        <input type="text" id="username" pattern="[A-Za-z0-9_]{(5, 32)}" />
-        <label class="label" for="username">Telegram</label>
+      <TextField if="nothing" outline label="Label" />
+      <TextField
+        if="username"
+        outline
+        item
+        label="Telegram"
+        pattern="[A-Za-z0-9_](5, 32)"
+        error="A username should contain from 5 to 32 symbols: a–z, 0–9, _.">
         <img alt="" src="images/ui-kit-page/at-sign.svg" class="item" />
-        <span class="error">
-          A username should contain from 5 to 32 symbols: a–z, 0–9, _.
-        </span>
-      </div>
+      </TextField>
     </div>
   </Card>
 
