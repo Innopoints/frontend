@@ -28,6 +28,7 @@ export default {
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
+      eslint(),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
@@ -51,7 +52,6 @@ export default {
         ],
       }),
       commonjs(),
-      eslint({}),
       legacy &&
         babel({
           extensions: ['.js', '.mjs', '.html', '.svelte'],
