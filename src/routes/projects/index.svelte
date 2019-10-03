@@ -70,7 +70,7 @@
 
   <div class="justify-center">
     <Button>
-      <svg src="images/icons/book-open.svg" />
+      <svg src="images/icons/book-open.svg" class="mr" />
       see past projects
     </Button>
   </div>
