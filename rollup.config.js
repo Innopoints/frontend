@@ -8,7 +8,7 @@ import { eslint } from 'rollup-plugin-eslint';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
-import { sveltemarkup, sveltescript } from './src/utils/rollup';
+import preprocess from './src/utils/preprocess';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -18,6 +18,12 @@ const onwarn = (warning, onwarn) => onwarn(warning);
 
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/');
+
+const svgCustomAttrs = {
+  // width: 24,
+  // heigth: 24,
+  // xmlns: 'http://www.w3.org/2000/svg',
+};
 
 export default {
   client: {
@@ -32,8 +38,7 @@ export default {
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
-          markup: sveltemarkup,
-          script: sveltescript,
+          markup: data => preprocess(data, false, svgCustomAttrs),
         },
         dev,
         hydratable: true,
@@ -96,8 +101,7 @@ export default {
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
-          markup: sveltemarkup,
-          script: sveltescript,
+          markup: data => preprocess(data, false, svgCustomAttrs),
         },
         generate: 'ssr',
         dev,
