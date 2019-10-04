@@ -2,8 +2,17 @@
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/projects/tagline.svelte';
   import Button from 'ui/button.svelte';
+  import projectsList from '@/constants/projects/projects';
+  import Project from '@/components/projects/card.svelte';
 
-  const projects = [];
+  // const projectsPerPage = 8;
+  // const currentPage = 1;
+  // const projects = () => {
+  //   const page = currentPage - 1;
+  //   const start = projectsPerPage * page;
+  //   const end = start + projectsPerPage;
+  //   return projectsList.slice(start, end);
+  // };
 </script>
 
 <svelte:head>
@@ -44,7 +53,7 @@
     <!--<Filters />
     <Ordering />-->
 
-    {#if projects.length === 0}
+    {#if projectsList.length === 0}
       <div class="empty">
         <figure>
           <img
@@ -61,8 +70,8 @@
       </div>
     {:else}
       <div class="cards">
-        {#each projects as project, i (project.id)}
-          <!--<Project {...project} />-->
+        {#each projectsList as project, i (project.id)}
+          <Project {...project} />
         {/each}
       </div>
     {/if}
