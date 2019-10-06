@@ -17,7 +17,7 @@
   <!-- Styles for Home page -->
   <link rel="stylesheet" href="css/page-components/footer.css" />
   <link rel="stylesheet" href="css/page-components/header.css" />
-  <link rel="stylesheet" href="css/ui-kit-page.css" />
+  <link rel="stylesheet" href="css/global/ui-kit-page.css" />
 </svelte:head>
 
 <Layout>

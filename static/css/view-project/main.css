@@ -35,7 +35,7 @@ h1 {
 }
 
 .material > .top-info > .actions > .btn {
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
 }
 
 .material > .top-info > .actions > .btn > .icon {
@@ -44,7 +44,7 @@ h1 {
 }
 
 .material > .top-info > .actions > .btn:not(:last-child) {
-  margin-right: 0.5em;
+  margin-right: .5em;
 }
 
 h2.padded {
@@ -54,11 +54,11 @@ h2.padded {
 
 .card.activity,
 .card.create-activity {
-  margin: 1em 0.5em 0;
+  margin: 1em .5em 0;
 }
 
 .material > .activities + .btn {
-  margin-left: 0.5em;
+  margin-left: .5em;
   margin-top: 1em;
 }
 
@@ -68,7 +68,6 @@ h2.padded {
     margin-left: 1em;
     margin-right: 1em;
   }
-
   .material > .activities + .btn {
     margin-left: 1em;
   }
@@ -79,13 +78,11 @@ h2.padded {
     margin-right: 4em;
     margin-top: 1.5em;
   }
-
   .card.activity,
   .card.create-activity {
     margin-left: 5%;
     margin-right: 5%;
   }
-
   .material > .activities + .btn {
     margin-left: 5%;
   }

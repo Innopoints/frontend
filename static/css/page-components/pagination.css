@@ -8,14 +8,14 @@
 .pagination > .page {
   width: 2.5em;
   height: 2.5em;
-  margin: 0 0.2em;
+  margin: 0 .2em;
   justify-content: center;
   padding: 0;
   flex-shrink: 0;
 }
 
 .pagination > .text-field {
-  margin: 0 0.2em;
+  margin: 0 .2em;
 }
 
 .pagination > .text-field > input {
@@ -39,7 +39,7 @@
 @media only screen and (min-width: 380px) {
   .pagination > .page,
   .pagination > .text-field {
-    margin: 0 0.4em;
+    margin: 0 .4em;
   }
 }
 
@@ -48,7 +48,6 @@
     width: 540px;
     align-self: center;
   }
-
   .pagination > .page,
   .pagination input {
     font-size: 1.1rem;

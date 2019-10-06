@@ -1,12 +1,7 @@
+@charset "UTF-8";
 .material {
   background-color: #fff;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 20px),
-    calc(100% - 20px) 100%,
-    0 100%
-  );
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
   overflow: visible;
 }
 
@@ -15,6 +10,14 @@ footer {
   padding: 20px 1em 0;
   color: #fff;
   margin-top: -20px;
+}
+
+footer.low-page > .container {
+  padding-top: 1.5em;
+}
+
+footer.low-page > .to-top {
+  display: none;
 }
 
 footer > .to-top {
@@ -46,7 +49,7 @@ footer .title {
   font-weight: 500;
   color: #fff;
   font-size: 1.7rem;
-  margin: 0 0.5em;
+  margin: 0 .5em;
 }
 
 footer .title-container {
@@ -58,7 +61,7 @@ footer .title-container {
 
 footer .socials {
   padding: 0 10%;
-  margin-top: 0.8em;
+  margin-top: .8em;
 }
 
 footer a {
@@ -97,7 +100,7 @@ footer .search {
   background-color: #fff;
   color: #585858;
   font-weight: 300;
-  padding: 0.7em 1.3em;
+  padding: .7em 1.3em;
   margin-top: 1em;
 }
 
@@ -113,8 +116,8 @@ footer ul li {
 }
 
 footer ul > li::before {
-  content: '‣';
-  padding-right: 0.5em;
+  content: "‣";
+  padding-right: .5em;
   color: #fff;
 }
 
@@ -122,7 +125,6 @@ footer ul > li::before {
   footer {
     padding: 20px 3em 0;
   }
-
   footer .right > nav {
     width: 95%;
   }
@@ -132,7 +134,6 @@ footer ul > li::before {
   footer ul {
     font-size: 1.2rem;
   }
-
   footer .credits {
     font-size: 1.1rem;
   }
@@ -142,37 +143,30 @@ footer ul > li::before {
   footer > .container {
     flex-direction: row;
   }
-
   footer .left {
     margin-bottom: 4rem;
   }
-
   footer .socials {
     margin-bottom: 3em;
     padding: 0;
     margin-top: 0;
   }
-
   footer .title-container {
     justify-content: flex-start;
   }
-
   footer .credits {
     text-align: left;
     margin-top: 0;
   }
-
   footer .right {
     justify-content: flex-start;
   }
-
   footer .right > .pointer {
     display: block;
     margin-right: 1em;
     max-width: 30%;
     align-self: flex-end;
   }
-
   footer .search {
     font-size: 1.1rem;
   }
@@ -182,7 +176,6 @@ footer ul > li::before {
   footer .search {
     width: 16em;
   }
-
   footer .right > .pointer {
     max-width: 22%;
     margin-right: 2em;
@@ -193,7 +186,6 @@ footer ul > li::before {
   footer .title {
     font-size: 2rem;
   }
-
   footer .search {
     font-size: 1.2rem;
     width: 14em;

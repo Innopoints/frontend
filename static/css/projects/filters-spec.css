@@ -3,7 +3,7 @@
 }
 
 .spots .text-field {
-  margin: 0 0.2em;
+  margin: 0 .2em;
 }
 
 .spots input {
@@ -30,7 +30,7 @@
 }
 
 .competences + section label {
-  padding: 0.8em 1em 0.8em 2em;
+  padding: .8em 1em .8em 2em;
   display: flex;
   align-items: center;
 }

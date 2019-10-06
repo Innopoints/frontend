@@ -5,15 +5,15 @@
 }
 
 .how-to::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
   z-index: -1;
-  background: linear-gradient(hsl(105, 69%, 43%), hsl(105, 81%, 32%));
-  transform: skewY(7.44deg);
+  background: linear-gradient(#1e9c07, #26c10b);
+  transform: skewY(6deg);
 }
 
 .how-to > h2 {
@@ -37,7 +37,7 @@
 .how-to .card > .icon {
   width: 3.2em;
   height: 3.2em;
-  stroke: hsl(105, 69%, 35%);
+  stroke: #3a971c;
   stroke-width: 2;
   margin-bottom: 1em;
 }
@@ -45,7 +45,7 @@
 .how-to .card > .title {
   font-weight: 500;
   font-size: 1.4rem;
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
 }
 
 .how-to .card > .subtitle {
@@ -66,20 +66,16 @@
   .how-to > .container {
     padding: 0 2.5em;
   }
-
   .how-to .card {
     padding: 2em 2.5em;
   }
-
   .how-to .card > .icon {
     width: 3.7em;
     height: 3.7em;
   }
-
   .how-to .card > .title {
     font-size: 1.5rem;
   }
-
   .how-to .card > .subtitle {
     font-size: 1.1rem;
   }
@@ -95,39 +91,29 @@
   .how-to > .container {
     padding: 0 20%;
   }
-
   .how-to .card > .icon {
     width: 4em;
     height: 4em;
   }
-
   .how-to .card .title {
-    margin-bottom: 0.6em;
+    margin-bottom: .6em;
   }
 }
 
 @media only screen and (min-width: 700px) {
   .how-to > .container {
-    padding: 2em 0.5em;
+    padding: 2em .5em;
     flex-direction: row;
   }
-
   .how-to > h2 {
     margin-bottom: 1em;
   }
-
   .how-to .card {
     margin: 0;
   }
-
-  .how-to::before {
-    height: 110%;
-  }
-
   .how-to .card > .title {
     font-size: 1.3rem;
   }
-
   .how-to .card > .subtitle {
     font-size: 1rem;
   }
@@ -135,25 +121,20 @@
 
 @media only screen and (min-width: 700px) and (max-width: 1023px) {
   .how-to > .container {
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-      0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     background: #fff;
   }
-
   .how-to .arrow {
     display: none;
   }
-
   .how-to .card {
     border-radius: 0;
     box-shadow: none;
-    padding: 0.5em 1em;
+    padding: .5em 1em;
   }
-
   .how-to .card:not(:last-child) {
     border-right: 1px solid #c9c9c9;
   }
-
   .how-to .card > .icon {
     width: 3.7em;
     height: 3.7em;
@@ -162,34 +143,29 @@
 
 @media only screen and (min-width: 800px) {
   .how-to .card {
-    padding: 0.5em 1.5em;
+    padding: .5em 1.5em;
   }
-
   .how-to .card > .title {
-    margin-bottom: 0.4em;
+    margin-bottom: .4em;
   }
-
   .how-to .card > .subtitle {
     font-size: 1.1rem;
     line-height: 1.45rem;
   }
+  .how-to::before {
+    height: 110%;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
-  .how-to::before {
-    height: 90%;
-  }
-
   .how-to > .container {
     padding: 0 5%;
   }
-
   .how-to .arrow {
     transform: rotate(-90deg);
-    margin: 0 0.5em;
+    margin: 0 .5em;
     width: 5em;
   }
-
   .how-to .card {
     padding: 1.5em;
   }
@@ -199,20 +175,16 @@
   .how-to > .container {
     padding: 0 10%;
   }
-
   .how-to .arrow {
-    margin: 0 0.5em;
+    margin: 0 .5em;
   }
-
   .how-to .card {
     padding: 1.5em 2em;
   }
-
   .how-to .card > img {
     width: 4.8em;
     height: 4.8em;
   }
-
   .how-to .card > .title {
     font-size: 1.4rem;
   }
@@ -221,23 +193,19 @@
 @media only screen and (min-width: 1648px) {
   .how-to > h2 {
     font-size: 2.3rem;
-    margin-bottom: 0.5em;
+    margin-bottom: .5em;
   }
-
   .how-to .card {
     padding: 3em 2.5em;
   }
-
   .how-to .card > .title {
     font-size: 1.8rem;
   }
-
   .how-to .card > .subtitle {
     font-weight: 300;
     font-size: 1.5rem;
     line-height: 1.9rem;
   }
-
   .how-to .arrow {
     margin: 0 2em;
     width: 6em;

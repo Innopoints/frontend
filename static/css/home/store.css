@@ -72,7 +72,6 @@
     flex-direction: row;
     justify-content: center;
   }
-
   .store .card:not(:last-child) {
     margin-right: 1em;
   }
@@ -96,7 +95,6 @@
   .store .cards {
     padding: 0 10%;
   }
-
   .store .card:not(:last-child) {
     margin-right: 2em;
   }

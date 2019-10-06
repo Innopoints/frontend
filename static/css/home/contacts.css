@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0.8em 1.6em;
+  padding: .8em 1.6em;
   margin: 1em 0;
 }
 
@@ -42,11 +42,9 @@
   .contacts .subtitle {
     font-size: 1.2em;
   }
-
   .contacts .card p {
     font-size: 1.2em;
   }
-
   .contacts .card .btn {
     font-size: 1.2em;
   }
@@ -56,12 +54,10 @@
   .contacts {
     padding-bottom: 3em;
   }
-
   .contacts > div {
     display: flex;
     flex-direction: row;
   }
-
   .contacts .card {
     margin: 0 1rem;
   }
@@ -71,17 +67,14 @@
   .contacts {
     padding-bottom: 5em;
   }
-
   .contacts .card {
-    padding: 0.8rem 2rem;
+    padding: .8rem 2rem;
     margin: 0 3rem;
   }
-
   .contacts .card p {
     font-size: 1.3em;
     line-height: 1.4em;
   }
-
   .contacts .card .btn {
     font-size: 1.3em;
   }

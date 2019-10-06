@@ -1,5 +1,5 @@
 .material h1 {
-  margin: 1.2em 0 0.8em;
+  margin: 1.2em 0 .8em;
 }
 
 .material main {
@@ -22,11 +22,11 @@
 }
 
 .form-field > label {
-  margin-bottom: 0.3em;
+  margin-bottom: .3em;
 }
 
 .form-field .desc {
-  margin-bottom: 0.7em;
+  margin-bottom: .7em;
 }
 
 .varieties .switch-wrapper {
@@ -69,14 +69,14 @@
 
 .sizes .text-field {
   width: 30%;
-  margin-top: 0.7em;
+  margin-top: .7em;
 }
 
 .image-platform {
   border: 2px dashed #127800;
   border-radius: 25px;
   padding: 1.5em;
-  margin: 2em 0 0.5em;
+  margin: 2em 0 .5em;
 }
 
 .image-platform.has-content {
@@ -98,12 +98,12 @@
 
 .image-platform small {
   font-weight: 300;
-  font-size: 0.9rem;
+  font-size: .9rem;
   text-align: center;
   display: block;
 }
 
-.image-platform input[type='file'] {
+.image-platform input[type="file"] {
   clip: rect(0, 0, 0, 0);
   width: 1px;
   height: 1px;
@@ -127,22 +127,18 @@
     column-gap: 1em;
     align-items: center;
   }
-
-  .image-platform input[type='file'] {
+  .image-platform input[type="file"] {
     grid-row-start: 1;
     grid-row-end: 1;
   }
-
   .image-platform .icon {
     grid-row-start: 1;
     grid-row-end: 2;
   }
-
   .image-platform .title {
     grid-column-start: 2;
     grid-column-end: 3;
   }
-
   .image-platform small {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -161,13 +157,13 @@
 }
 
 .image-platform.has-content .image:first-child::before {
-  content: 'cover';
+  content: "cover";
   position: absolute;
   display: block;
   text-align: center;
   width: 100%;
   top: -1.2rem;
-  font-size: 0.9rem;
+  font-size: .9rem;
   font-weight: 300;
   color: #127800;
 }
@@ -192,7 +188,7 @@
 }
 
 .more {
-  margin: 0.5em 0;
+  margin: .5em 0;
 }
 
 .preview .actions {
@@ -213,7 +209,7 @@
 }
 
 .color-picker .radio {
-  padding: 0.3em;
+  padding: .3em;
 }
 
 @media only screen and (min-width: 500px) {
@@ -223,19 +219,16 @@
       grid-template-rows: auto auto;
       grid-template-columns: 1fr auto;
     }
-
     .variety.no-size .image-platform,
     .variety.no-size .btn.danger {
       grid-column-start: 1;
       grid-column-end: 3;
     }
-
     .quantity .text-field {
       margin-top: 0;
       margin-left: 1.5em;
       max-width: 6em;
     }
-
     .variety .btn.danger {
       justify-self: start;
     }
@@ -246,44 +239,35 @@
   .form-field {
     flex-direction: row;
   }
-
   .form-field label {
     width: 45%;
   }
-
   .form-field .text-field-wrapper {
     width: 50%;
   }
-
   .form-field.horizontal {
     width: 50%;
   }
-
   header.varieties {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-
   .sizes .text-field {
     width: 15.5%;
   }
-
   .image-platform label,
   .image-platform small {
     text-align: center;
   }
-
   @supports (display: grid) {
     .image-platform {
-      row-gap: 0.3em;
+      row-gap: .3em;
     }
-
     .image-platform small {
       grid-column-start: 2;
       align-content: center;
     }
-
     .image-platform .icon {
       grid-row-start: 1;
       grid-row-end: 3;
@@ -296,16 +280,13 @@
     display: flex;
     align-items: baseline;
   }
-
   .sizes-wrapper .label {
     margin-right: 1.6em;
   }
-
   .sizes .text-field {
     width: 5.4em;
-    margin-right: 0.5em;
+    margin-right: .5em;
   }
-
   .sizes .text-field:last-child {
     margin-right: 0;
   }
@@ -316,17 +297,14 @@
     flex-direction: row;
     justify-content: space-between;
   }
-
   main > form {
     margin-bottom: 3em;
     margin-right: 3em;
   }
-
   .preview {
     width: 25em;
     margin-left: 2em;
   }
-
   .preview .actions {
     align-self: flex-end;
   }

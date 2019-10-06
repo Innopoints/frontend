@@ -1,17 +1,14 @@
-.material {
+body {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-}
-
-.material > header {
-  width: 100%;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  font-family: 'Ubuntu', sans-serif;
   margin: 10px;
 }
 
@@ -73,7 +70,7 @@
   width: 24rem;
 }
 
-#radios div[role='group'] {
+#radios div[role="group"] {
   width: 100%;
   display: flex;
 }
@@ -96,27 +93,24 @@
 }
 
 #radios #blue > input + .icon {
-  background: rgba(0, 0, 255, 1);
-  border-color: rgba(0, 0, 255, 1);
-
+  background: blue;
+  border-color: blue;
   --r: 0;
   --g: 0;
   --b: 255;
 }
 
 #radios #red > input + .icon {
-  background: rgba(255, 0, 0, 1);
-  border-color: rgba(255, 0, 0, 1);
-
+  background: red;
+  border-color: red;
   --r: 255;
   --g: 0;
   --b: 0;
 }
 
 #radios #green > input + .icon {
-  background: rgba(0, 255, 0, 1);
-  border-color: rgba(0, 255, 0, 1);
-
+  background: lime;
+  border-color: lime;
   --r: 0;
   --g: 255;
   --b: 0;
@@ -125,7 +119,6 @@
 #radios #white > input:checked + .icon {
   background: #fff;
   border-color: #999;
-
   --r: 153;
   --g: 153;
   --b: 153;
@@ -135,7 +128,7 @@
   background: #999;
 }
 
-#checkboxes div[role='group'] {
+#checkboxes div[role="group"] {
   width: 100%;
   display: flex;
 }
@@ -158,18 +151,16 @@
 }
 
 #checkboxes #blue-chk > input + .icon {
-  background: rgba(0, 0, 255, 1);
-  border-color: rgba(0, 0, 255, 1);
-
+  background: blue;
+  border-color: blue;
   --r: 0;
   --g: 0;
   --b: 255;
 }
 
 #checkboxes #red-chk > input + .icon {
-  background: rgba(255, 0, 0, 1);
-  border-color: rgba(255, 0, 0, 1);
-
+  background: red;
+  border-color: red;
   --r: 255;
   --g: 0;
   --b: 0;
@@ -178,7 +169,6 @@
 #checkboxes #white-chk > input + .icon {
   background: #fff;
   border-color: #999;
-
   --r: 153;
   --g: 153;
   --b: 153;
@@ -213,7 +203,7 @@ hr {
 
 #dialogs .dialog {
   width: 20em;
-  margin: 0.5em 0;
+  margin: .5em 0;
 }
 
 #carousels .carousel {
@@ -245,7 +235,7 @@ hr {
 #dots .row {
   display: flex;
   align-items: center;
-  margin: 0.2em 0;
+  margin: .2em 0;
 }
 
 #choice-btns .showcase {
@@ -254,5 +244,13 @@ hr {
 }
 
 #choice-btns .choice-btn {
-  margin: 0.5em;
+  margin: .5em;
+}
+
+#autocomplete .autocomplete-field {
+  max-width: 30em;
+}
+
+body > .card {
+  overflow: visible;
 }

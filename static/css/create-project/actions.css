@@ -7,7 +7,7 @@ form > .actions {
 }
 
 form > .actions > .btn {
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
 }
 
 form > .actions > .btn:not(:first-child) {

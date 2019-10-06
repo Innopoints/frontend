@@ -19,7 +19,7 @@
 }
 
 .activity .row {
-  margin-top: 0.8em;
+  margin-top: .8em;
   display: flex;
   justify-content: space-between;
 }
@@ -43,7 +43,6 @@
 
 .labeled .innopoint {
   margin-bottom: -1px;
-  margin-left: 0;
 }
 
 .activity .left > .labeled,
@@ -58,11 +57,11 @@
 }
 
 .activity .chip {
-  font-size: 0.85rem;
+  font-size: .85rem;
   font-weight: 400;
   color: #000;
-  margin: 0 0.3em 0.3em 0;
-  padding: 0.4em 0.7em;
+  margin: 0 .3em .3em 0;
+  padding: .4em .7em;
 }
 
 .activity .panel > .handle {
@@ -70,18 +69,18 @@
 }
 
 .activity .panel {
-  margin-top: 0.8em;
-  margin-left: 0.5em;
+  margin-top: .8em;
+  margin-left: .5em;
   padding-top: 1em;
 }
 
 .activity .panel .name {
-  margin-bottom: 0.3em;
+  margin-bottom: .3em;
 }
 
 .activity .panel + section {
   padding-top: 1em;
-  padding-left: 0.3em;
+  padding-left: .3em;
 }
 
 .activity .stars {
@@ -102,8 +101,8 @@
 .activity .with-icon {
   display: flex;
   align-items: flex-start;
-  font-size: 0.9rem;
-  margin-top: 0.3em;
+  font-size: .9rem;
+  margin-top: .3em;
 }
 
 .activity .with-icon > .icon {
@@ -111,7 +110,7 @@
   height: 20px;
   flex-shrink: 0;
   stroke: #127800;
-  margin-right: 0.3em;
+  margin-right: .3em;
 }
 
 .activity .panel:not(:first-of-type) {
@@ -125,7 +124,6 @@
       grid-template-rows: auto auto;
       grid-template-columns: 1fr 1fr;
     }
-
     .activity .left {
       grid-row-start: 1;
       grid-row-end: 3;
@@ -133,7 +131,6 @@
       border-right: 1px solid #ddd;
       padding-right: 1em;
     }
-
     .activity .middle,
     .activity .right {
       margin-left: 1em;
@@ -148,11 +145,9 @@
       grid-template-rows: auto;
       grid-template-columns: 1fr 1fr 1fr;
     }
-
     .activity .left {
       grid-row-end: 2;
     }
-
     .activity .middle {
       border-bottom-width: 0 !important;
       border-right: 1px solid #ddd;

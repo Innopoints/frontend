@@ -26,7 +26,7 @@
 }
 
 .activity-brief .row {
-  margin-top: 0.8em;
+  margin-top: .8em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,7 +46,6 @@
 
 .labeled .innopoint {
   margin-bottom: -1px;
-  margin-left: 0;
 }
 
 .activity-brief > .labeled,
@@ -61,15 +60,15 @@
 }
 
 .activity-brief .chip {
-  font-size: 0.85rem;
+  font-size: .85rem;
   font-weight: 400;
   color: #000;
-  margin: 0 0.3em 0.3em 0;
-  padding: 0.4em 0.7em;
+  margin: 0 .3em .3em 0;
+  padding: .4em .7em;
 }
 
 .activity-brief > .dropdown-shell {
-  margin-top: 0.5em;
+  margin-top: .5em;
 }
 
 .activity-brief .relative-wrapper {
@@ -77,31 +76,31 @@
 }
 
 .activity-brief .btn.close {
-  margin-right: -0.7em;
-  margin-top: -0.7em;
-  margin-left: 0.5em;
+  margin-right: -.7em;
+  margin-top: -.7em;
+  margin-left: .5em;
 }
 
 .activity-brief .dropdown li {
-  margin-top: 0.8em;
+  margin-top: .8em;
 }
 
 .activity-brief .row:last-child {
-  margin-top: 0.4em;
+  margin-top: .4em;
 }
 
 .activity-brief .application-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.5em;
+  margin-top: .5em;
   font-weight: 500;
   font-size: 1.1rem;
 }
 
 .status-chip {
   color: #fff;
-  font-size: 0.9rem;
+  font-size: .9rem;
   font-weight: 400;
   padding: 5px 10px;
   border-radius: 25px;
@@ -121,7 +120,7 @@
 }
 
 .activity-brief .application-actions > .btn:first-child {
-  margin-right: 0.5em;
+  margin-right: .5em;
 }
 
 @media only screen and (min-width: 360px) {
@@ -133,7 +132,7 @@
 @media only screen and (min-width: 420px) {
   .activity-brief {
     max-width: 18em;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+    margin-left: .5em;
+    margin-right: .5em;
   }
 }

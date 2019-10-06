@@ -8,9 +8,7 @@
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",
     "lint": "eslint --format=pretty .",
-    "lint:fix": "eslint --format=pretty --fix .",
-    "lint:style": "stylelint --ignore-path .eslintignore **/*.{css,scss}",
-    "lint:style:fix": "stylelint --ignore-path .eslintignore --fix **/*.{css,scss}"
+    "lint:fix": "eslint --format=pretty --fix ."
   },
   "husky": {
     "hooks": {
@@ -26,17 +24,11 @@
     ],
     "*.svelte": [
       "eslint --format=pretty",
-      "stylelint --ignore-path .eslintignore --noglob --fix",
       "prettier --ignore-path .eslintignore --svelte-sort-order scripts-markup-styles --noglob --write",
       "eslint --max-warnings 0 --fix",
       "git add"
     ],
-    "*.{css,scss}": [
-      "stylelint --ignore-path .eslintignore --syntax scss --noglob --fix",
-      "prettier --ignore-path .eslintignore --noglob --write",
-      "git add"
-    ],
-    "{*.{json,html,yml,md},.{eslintrc,prettierrc,stylelintrc}}": [
+    "{*.{json,html,yml,md},.{eslintrc,prettierrc}}": [
       "prettier --ignore-path .eslintignore --noglob --write",
       "git add"
     ]
@@ -73,9 +65,6 @@
     "rollup-plugin-svelte": "^5.0.1",
     "rollup-plugin-terser": "^4.0.4",
     "sapper": "^0.27.0",
-    "stylelint": "./tmp_packages/stylelint-11.0.0.tgz",
-    "stylelint-config-prettier": "^5.2.0",
-    "stylelint-config-standard": "^19.0.0",
     "svelte": "^3.0.0"
   }
 }

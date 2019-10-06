@@ -14,7 +14,6 @@ header > .logo {
   header {
     padding: 1.5em 2em;
   }
-
   header > .logo {
     max-width: 8rem;
   }
@@ -24,7 +23,6 @@ header > .logo {
   header {
     padding: 2em 4em 1.5em;
   }
-
   header > .logo {
     max-width: 9rem;
   }
@@ -34,7 +32,6 @@ header > .logo {
   header > .logo {
     max-width: 10rem;
   }
-
   header.container {
     padding: 2em 10% 1em;
   }

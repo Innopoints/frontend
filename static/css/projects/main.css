@@ -34,7 +34,7 @@
 }
 
 .labeled > .icon {
-  margin-top: 0.7rem;
+  margin-top: .7rem;
 }
 
 .card .title {
@@ -58,12 +58,12 @@
 }
 
 .card li {
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
   margin-top: 1px;
 }
 
 .card li.extra {
-  font-size: 0.9rem;
+  font-size: .9rem;
   color: #127800;
 }
 
@@ -80,7 +80,6 @@
     width: 29em;
     margin: 1em 1em;
   }
-
   .projects {
     padding: 0 1.5em;
   }
@@ -90,20 +89,16 @@
   .projects {
     padding: 0 2.5em;
   }
-
   .projects h1 {
     font-size: 1.4rem;
   }
-
   @supports (display: grid) {
     .card > .content {
       display: grid;
       grid-template-columns: 1fr auto;
       grid-template-rows: auto auto auto;
     }
-
-    .card .title,
-    .card .compact {
+    .card .title, .card .compact {
       grid-column-start: 1;
       grid-column-end: 3;
     }

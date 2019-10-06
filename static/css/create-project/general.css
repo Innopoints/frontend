@@ -4,7 +4,7 @@
 }
 
 .general .form-field .name {
-  margin-bottom: 0.4em;
+  margin-bottom: .4em;
 }
 
 .general .form-field .desc {
@@ -34,11 +34,9 @@
   .general .form-field {
     flex-direction: row;
   }
-
   .general .form-field > div {
     flex-basis: 48%;
   }
-
   .general .form-field > label {
     flex-basis: 40%;
   }
@@ -54,7 +52,6 @@
   .general .form-field {
     max-width: 90%;
   }
-
   .general .form-field > div {
     flex-basis: 45%;
   }

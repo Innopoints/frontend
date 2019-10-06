@@ -1,6 +1,6 @@
 .filters {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-top: .5em;
+  margin-bottom: .5em;
 }
 
 .dropdowns {
@@ -10,7 +10,7 @@
 }
 
 .dropdowns .dropdown-shell {
-  margin-top: 0.5em;
+  margin-top: .5em;
 }
 
 .handle .regular {
@@ -39,12 +39,12 @@
 .filter {
   display: flex;
   align-items: center;
-  margin-top: 0.5em;
+  margin-top: .5em;
   padding: 0 1em;
 }
 
 .filter .name {
-  padding: 0 0.5em 0 1em;
+  padding: 0 .5em 0 1em;
   flex-shrink: 0;
 }
 
@@ -55,7 +55,7 @@
 .order-options .with-labels {
   display: flex;
   flex-direction: column;
-  margin-left: 0.5em;
+  margin-left: .5em;
 }
 
 .order-options .with-labels label {
@@ -64,7 +64,7 @@
 }
 
 .order-options .with-labels .radio {
-  margin: 0.5em 12px;
+  margin: .5em 12px;
 }
 
 .hide-mb {
@@ -75,7 +75,6 @@
   .handle .tight {
     display: none;
   }
-
   .handle .regular {
     display: inline;
   }
@@ -84,7 +83,7 @@
 @media only screen and (min-width: 380px) {
   .filter > .icon,
   .filter > .align-center > .icon {
-    margin-left: 0.8em;
+    margin-left: .8em;
   }
 }
 
@@ -93,10 +92,8 @@
     width: 36em;
     align-self: center;
   }
-
   .ordering {
     width: 38em;
-    justify-content: space-between;
   }
 }
 
@@ -106,36 +103,29 @@
     width: 38em;
     align-items: center;
   }
-
   .filters .text-field {
     flex: 1;
   }
-
   .dropdown-shell:first-child {
     display: none;
   }
-
   .dropdown-shell:last-child {
     flex: 0;
     margin-top: 0;
-    margin-left: 0.5em;
+    margin-left: .5em;
   }
-
   .hide-mb {
     display: flex;
     align-items: center;
     align-self: center;
   }
-
   .hide-mb > .chip-wrapper:not(:last-child) {
-    margin-right: 0.5em;
+    margin-right: .5em;
   }
-
   .hide-mb .chip {
-    font-size: 0.9rem;
+    font-size: .9rem;
   }
-
   .ordering {
-    margin: 0.5em 0 1em;
+    margin: .5em 0 1em;
   }
 }

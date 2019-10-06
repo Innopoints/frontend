@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="css/page-components/403.css" />
 </svelte:head>
 
+<Header />
 <div class="material">
-  <Header />
   {#if $isAuthed}
     <slot />
   {:else}

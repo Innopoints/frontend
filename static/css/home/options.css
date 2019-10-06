@@ -7,49 +7,29 @@
 }
 
 .options .step:nth-child(2) {
-  background: linear-gradient(
-    0deg,
-    hsl(130, 100%, 97%) 0%,
-    hsl(130, 100%, 98%) 100%
-  );
+  background: linear-gradient(0deg, #f0fff2 0%, #f5fff7 100%);
 }
 
 .options .step:nth-child(3) {
-  background: linear-gradient(
-    0deg,
-    hsl(180, 100%, 97%) 0%,
-    hsl(180, 100%, 98%) 100%
-  );
+  background: linear-gradient(0deg, azure 0%, #f5ffff 100%);
 }
 
 .options .step:nth-child(4) {
-  background: linear-gradient(
-    0deg,
-    hsl(230, 100%, 97%) 0%,
-    hsl(230, 100%, 98%) 100%
-  );
+  background: linear-gradient(0deg, #f0f2ff 0%, #f5f7ff 100%);
 }
 
 .options .step:nth-child(5) {
-  background: linear-gradient(
-    0deg,
-    hsl(280, 100%, 97%) 0%,
-    hsl(280, 100%, 98%) 100%
-  );
+  background: linear-gradient(0deg, #faf0ff 0%, #fcf5ff 100%);
 }
 
 .options .step:nth-child(6) {
-  background: linear-gradient(
-    0deg,
-    hsl(330, 100%, 97%) 0%,
-    hsl(330, 100%, 98%) 100%
-  );
+  background: linear-gradient(0deg, #fff0f7 0%, #fff5fa 100%);
 }
 
 .options .title {
   font-weight: 500;
   font-size: 1.4rem;
-  margin-bottom: 0.3em;
+  margin-bottom: .3em;
 }
 
 .options .subtitle {
@@ -98,30 +78,25 @@
 @media only screen and (min-width: 640px) {
   .options .title {
     font-size: 1.6rem;
-    margin-bottom: 0.6em;
+    margin-bottom: .6em;
   }
-
   .options .subtitle {
     font-size: 1.2rem;
     line-height: 1.5rem;
   }
-
   .options .step {
     height: 18em;
   }
-
   .options .container {
     flex-direction: row;
     justify-content: space-around;
     height: 100%;
     padding: 0;
   }
-
   .options .description {
     margin: 0;
     flex-basis: 50%;
   }
-
   .options .picture {
     margin-bottom: 0;
   }
@@ -137,8 +112,7 @@
   .options .step {
     border-radius: 25px;
     margin: 0 5% 3em;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-      0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
 }
 
@@ -146,12 +120,10 @@
   .options {
     margin-top: 5em;
   }
-
   .options .step {
     margin: 0 10% 3em;
     height: 20em;
   }
-
   .options strong {
     font-size: 1.1rem;
   }
@@ -173,12 +145,10 @@
       grid-template-columns: 1fr 1fr;
       padding: 0 10%;
     }
-
     .options .step {
       width: unset;
       margin-bottom: 0;
     }
-
     .options h2 {
       grid-column-start: 1;
       grid-column-end: 3;

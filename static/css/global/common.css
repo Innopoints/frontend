@@ -28,7 +28,6 @@
 
 .innopoint {
   stroke: #000;
-  margin-left: 0.2em;
   stroke-width: 5;
 }
 
@@ -61,29 +60,27 @@
 }
 
 .shadow-1 {
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .shadow-2 {
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .ml {
-  margin-left: 0.4em;
+  margin-left: .4em;
 }
 
 .mr {
-  margin-right: 0.4em;
+  margin-right: .4em;
 }
 
 .mt {
-  margin-top: 0.4em;
+  margin-top: .4em;
 }
 
 .mb {
-  margin-bottom: 0.4em;
+  margin-bottom: .4em;
 }
 
 .ml-2 {
@@ -95,7 +92,7 @@
 }
 
 .mr-1-5 {
-  margin-right: 0.7em;
+  margin-right: .7em;
 }
 
 .mt-2 {
@@ -115,19 +112,18 @@
 }
 
 .btn-align {
-  padding-left: 0.2rem;
-  padding-right: 0.2rem;
+  padding-left: .2rem;
+  padding-right: .2rem;
 }
 
 .btn-shift {
-  margin-left: -0.8rem;
+  margin-left: -.8rem;
 }
 
 @media only screen and (min-width: 640px) {
   .hide-tb {
     display: block;
   }
-
   .show-mb {
     display: none;
   }
