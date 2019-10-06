@@ -1,11 +1,6 @@
 <script>
   import Button from 'ui/button.svelte';
-  import user, { logIn } from '@/store/user';
-  let isAuthed;
-
-  user.subscribe(val => {
-    isAuthed = val.isAuthed;
-  });
+  import { isAuthed, logIn } from '@/store/user';
 </script>
 
 <header class="container">
@@ -13,7 +8,7 @@
     src="images/innou-logo.svg"
     class="logo"
     alt="Innopolis University logo" />
-  {#if !isAuthed}
+  {#if !$isAuthed}
     <Button outline on:click={logIn}>sign in</Button>
   {:else}
     <Button href="/profile" round>

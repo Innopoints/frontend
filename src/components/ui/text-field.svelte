@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte';
 
   export let id = null;
+  export let classname = null;
   export let placeholder = '';
   export let name = null;
   export let type = null;
@@ -21,6 +22,7 @@
 
   $: classes = [
     'text-field',
+    classname && classname,
     item && 'with-item',
     item && ((right && 'right') || 'left'),
     outline && 'outline',

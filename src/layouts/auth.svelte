@@ -2,14 +2,9 @@
   import Header from '@/components/header.svelte';
   import Footer from '@/components/footer.svelte';
   import Button from 'ui/button.svelte';
-  import user, { logIn } from '@/store/user';
-  let isAuthed;
+  import { isAuthed, logIn } from '@/store/user';
 
   export let title;
-
-  user.subscribe(val => {
-    isAuthed = val.isAuthed;
-  });
 </script>
 
 <svelte:head>
@@ -18,7 +13,7 @@
 
 <div class="material">
   <Header />
-  {#if isAuthed}
+  {#if $isAuthed}
     <slot />
   {:else}
     <h1 class="padded title-403">{title}</h1>

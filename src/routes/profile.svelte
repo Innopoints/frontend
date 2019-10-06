@@ -1,5 +1,6 @@
 <script>
   import Layout from '@/layouts/auth.svelte';
+  import Info from '@/containers/profile/info.svelte';
 </script>
 
 <svelte:head>
@@ -16,5 +17,11 @@
 </svelte:head>
 
 <Layout title="Profile">
-  <h1>kek</h1>
+  <Info />
+  <section class="card">
+    <!--<ProfileTabs @change="changeTabs" />
+    <ProfileTimeline v-if="activeTab === 'T'" />
+    <ProfileStatistics v-else-if="activeTab === 'S'" />
+    <ProfileNotifications v-else-if="activeTab === 'N'" />-->
+  </section>
 </Layout>

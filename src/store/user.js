@@ -1,11 +1,21 @@
 import { writable } from 'svelte/store';
 
-const user = writable({
-  isAuthed: false,
+export const isAuthed = writable(false);
+export const user = writable({
+  id: 1,
+  balance: 1488,
+  hours: 111,
+  rating: 3.8,
+  isAdmin: true,
+  name: 'Zeus',
+  surname: 'Rozhdestvenskiy',
+  telegram: 'TheGod',
 });
 
-export default user;
+export function changeUserField(field, value) {
+  user.update(usr => ({ ...usr, [field]: value }));
+}
 
 export function logIn() {
-  user.update(us => ({ ...us, isAuthed: true }));
+  isAuthed.update(us => true);
 }
