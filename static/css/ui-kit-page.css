@@ -1,7 +1,11 @@
-body {
+.material {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+}
+
+.material > header {
+  width: 100%;
 }
 
 .card {
