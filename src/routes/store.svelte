@@ -1,8 +1,8 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/store/tagline.svelte';
-
-  const items = [];
+  import StoreCard from '@/components/store/card.svelte';
+  import items from '@/constants/store';
 </script>
 
 <svelte:head>
@@ -54,7 +54,7 @@
     {:else}
       <div class="cards">
         {#each items as item, i (item.id)}
-          <!-- <StoreCard {...item} />-->
+          <StoreCard {...item} />
         {/each}
       </div>
     {/if}

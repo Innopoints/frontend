@@ -1,7 +1,7 @@
 <script>
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
-  // import Labeled from 'ui/labeled.svelte';
+  import Labeled from 'ui/labeled.svelte';
 
   export let id;
   export let name;
@@ -27,14 +27,10 @@
   <span class="subtitle">{type}</span>
   {#if !short}
     <div class="card-row">
-      <!-- TODO: Use Labeled for this card -->
-      <!--<div class="labeled text">
-        <span class="label">Price</span>
-        <span class="content">
-          <span class="price">{{ price }}</span>
-          <Innopoint class="ml" />
-        </span>
-      </div>-->
+      <Labeled label="Price">
+        {price}
+        <svg src="images/innopoint-sharp.svg" class="innopoint" />
+      </Labeled>
       <Button outline>view</Button>
     </div>
   {:else}
