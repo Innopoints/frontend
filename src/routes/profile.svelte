@@ -28,6 +28,7 @@
 <Layout title="Profile">
   <Info />
   <section class="card">
+    <!--todo: change url with tab: /profile?tab=notifications-->
     <Tabs on:change={changeTab} />
     {#if activeTab === 'T'}
       <Timeline />

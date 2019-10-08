@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="css/home/store.css" />
 </svelte:head>
 
+<!--todo: add transitions (animation)-->
 <Layout>
   <Tagline />
   <HowTo />

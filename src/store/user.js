@@ -1,5 +1,7 @@
 import { writable } from 'svelte/store';
 
+// TODO: persist the state with some lib
+
 export const isAuthed = writable(false);
 export const user = writable({
   id: 1,

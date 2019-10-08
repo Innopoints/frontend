@@ -50,6 +50,7 @@
   <section class="projects padded">
     <h1>Ongoing projects</h1>
 
+    <!--todo: add ordering and filters-->
     <!--<Filters />
     <Ordering />-->
 

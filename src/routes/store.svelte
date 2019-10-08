@@ -38,6 +38,7 @@
   <Tagline />
 
   <section id="store-top" class="shop padded">
+    <!--todo: add ordering and filters-->
     <!--<Filters />
     <Ordering />-->
 

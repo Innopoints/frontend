@@ -18,6 +18,13 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
   <link rel="stylesheet" href="css/page-components/header.css" />
   <link rel="stylesheet" href="css/global/ui-kit-page.css" />
+
+  <style>
+    .todo {
+      background-color: red;
+      width: 100%;
+    }
+  </style>
 </svelte:head>
 
 <Layout>
@@ -35,29 +42,29 @@
     <div class="showcase">
       <Button filled>
         button
-        <img alt="" src="images/icons/flag.svg" class="ml icon" />
+        <svg src="images/icons/flag.svg" class="ml icon" />
       </Button>
       <Button href="#">
-        <img alt="" src="images/ui-kit-page/calendar.svg" class="mr icon" />
+        <svg src="images/ui-kit-page/calendar.svg" class="mr icon" />
         button
       </Button>
     </div>
     <div class="showcase">
       <Button round badge>
-        <img alt="" src="images/ui-kit-page/bell.svg" />
+        <svg src="images/ui-kit-page/bell.svg" />
       </Button>
       <Button round normal>
-        <img alt="" src="images/ui-kit-page/x.svg" />
+        <svg src="images/ui-kit-page/x.svg" />
       </Button>
       <Button outline round normal>
-        <img alt="" src="images/ui-kit-page/x.svg" />
+        <svg src="images/ui-kit-page/x.svg" />
       </Button>
       <Button filled chevron>chevron</Button>
     </div>
     <hr />
     <div class="showcase">
       <Button filled danger>
-        <img alt="" src="images/icons/move.svg" class="mr" />
+        <svg src="images/icons/move.svg" class="mr" />
         button
       </Button>
       <Button href="#" outline danger>button</Button>
@@ -72,7 +79,7 @@
     </div>
     <div class="showcase half">
       <TextField placeholder="Price" item right>
-        <img alt="" src="images/innopoint-sharp.svg" class="item" />
+        <svg src="images/innopoint-sharp.svg" class="item" />
       </TextField>
       <TextField type="number" item>
         <span class="item">XXL</span>
@@ -92,6 +99,7 @@
 
     <hr />
 
+    <!--todo: form-field-->
     <h1 class="todo">Form field</h1>
 
     <div class="showcase">
@@ -176,6 +184,7 @@
     </div>
   </Card>
 
+  <!--todo: radios-->
   <Card id="radios">
     <h1 class="todo">Radio Buttons</h1>
     <div class="showcase">
@@ -248,6 +257,7 @@
     </div>
   </Card>
 
+  <!--todo: checkboxes-->
   <Card id="checkboxes">
     <h1 class="todo">Checkboxes</h1>
     <div class="showcase">
@@ -323,6 +333,7 @@
     </div>
   </Card>
 
+  <!--todo: switches-->
   <Card id="switches">
     <h1 class="todo">Switches</h1>
     <div class="showcase">
@@ -373,8 +384,7 @@
         <span style="font-size: 1.4rem">1000 innopoints</span>
       </Labeled>
       <Labeled icon label="Label">
-        <img
-          alt=""
+        <svg
           src="images/ui-kit-page/award.svg"
           class="icon"
           slot="icon" />
@@ -487,6 +497,7 @@
     </div>
   </Card>
 
+  <!--todo: chips-->
   <Card id="chips">
     <h1 class="todo">Chips</h1>
     <div class="showcase">
@@ -734,6 +745,7 @@
     </div>
   </Card>
 
+  <!--todo: choice button-->
   <Card id="choice-btns">
     <h1 class="todo">Choice buttons</h1>
     <div class="showcase">
@@ -787,6 +799,7 @@
     </div>
   </Card>
 
+  <!--todo: popover-->
   <Card id="popovers">
     <h2 class="todo">Popovers</h2>
     <div class="showcase">
@@ -844,10 +857,3 @@
     });
   });
 </script> -->
-
-<!--<style scoped>
-  .todo {
-    background-color: red;
-    width: 100%;
-  }
-</style>-->
