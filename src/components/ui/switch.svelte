@@ -20,7 +20,7 @@
       {id}
       {checked}
       name={name}
-      on:change="{(e) => dispatch('change', e.target.value)}"
+      on:change="{(e) => dispatch('click', e.target.value)}"
       class:first={twoState}
       class="switch-ctl"
       type="checkbox"

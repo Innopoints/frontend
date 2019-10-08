@@ -31,6 +31,34 @@ export function changeItemField(field, value) {
   item.update(itm => ({ ...itm, [field]: value }));
 }
 
+export function changeVarietyField(id, field, value) {
+  item.update(itm => {
+    let varieties = itm.varieties;
+    varieties[id][field] = value;
+    return {...itm, varieties};
+  });
+}
+
+export function changeVarietyQuantity(id, value) {
+  item.update(itm => {
+    let varieties = itm.varieties;
+    varieties[id].quantity = value;
+    return {...itm, varieties};
+  });
+}
+
+export function changeVarietySize(id, size, value) {
+  item.update(itm => {
+    let varieties = itm.varieties;
+    varieties[id].sizes[size] = value;
+    return {...itm, varieties};
+  });
+}
+
 export function toggleSizes() {
   item.update(itm => ({ ...itm, inSizes: !itm.inSizes }));
+}
+
+export function removeVariety(index) {
+  item.update(itm => ({ ...itm, varieties: itm.varieties.filter((x, i) => i !== index) }));
 }

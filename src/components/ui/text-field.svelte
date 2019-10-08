@@ -14,7 +14,6 @@
   export let maxLength = null;
   export let label = null;
   export let error = null;
-  export let text = null;
   export let item = null;
   export let multiline = null;
   export let outline = null;

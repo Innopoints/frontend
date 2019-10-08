@@ -306,8 +306,8 @@
   <Card id="switches">
     <h1 class="todo">Switches</h1>
     <div class="showcase">
-      <Switch />
-      <Switch checked />
+      <Switch name="switch-1" id="switch-1" />
+      <Switch checked name="switch-2" id="switch-2" />
     </div>
 
     <hr />
