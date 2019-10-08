@@ -41,7 +41,9 @@
       cols={5}
       on:focus={() => dispatch('focus')}
       on:blur={() => dispatch('blur')}
-      on:input={() => dispatch('input')} />
+      on:input={() => dispatch('input')}
+      on:change={(e) => dispatch('change', e.target.value)}
+    />
   {:else}
     <input
       {id}
@@ -57,7 +59,9 @@
       on:focus={() => dispatch('focus')}
       on:blur={() => dispatch('blur')}
       on:input={() => dispatch('input')}
-      on:keyup.enter={() => dispatch('blur')} />
+      on:keyup.enter={() => dispatch('blur')}
+      on:change={(e) => dispatch('change', e.target.value)}
+    />
 
     {#if outline}
       <label for={id} class="label">{label}</label>
