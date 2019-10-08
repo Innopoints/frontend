@@ -1,6 +1,7 @@
 <script>
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
+  import Dropdown from 'ui/dropdown.svelte';
   import {item, changeVarietyQuantity, changeVarietySize, removeVariety} from '@/store/item';
 
   export let index;
@@ -13,6 +14,14 @@
 
 <li class="variety">
   <div class="settings">
+    <Dropdown label="open dropdown" chevron={false} dropdownclass="color-picker" btnclass="mb">
+      <div role="group" class="color-choices" />
+      <hr />
+      <Button>
+        <svg src="images/icons/plus.svg" class="icon mr" />
+        add another color
+      </Button>
+    </Dropdown>
     <!--<Dropdown :chevron="false">
       <template v-slot:label>
         choose a color
