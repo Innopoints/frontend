@@ -1,14 +1,14 @@
 <script>
   import Layout from '@/layouts/default.svelte';
-  import {
-    Accordion,
-    Button,
-    Card,
-    Dot,
-    Dropdown,
-    Labeled,
-    TextField,
-  } from 'ui';
+  import Accordion from 'ui/accordion.svelte';
+  import Button from 'ui/button.svelte';
+  import Card from 'ui/card.svelte';
+  import Dot from 'ui/dot.svelte';
+  import Dropdown from 'ui/dropdown.svelte';
+  import Labeled from 'ui/labeled.svelte';
+  import TextField from 'ui/text-field.svelte';
+  import FormField from 'ui/form-field.svelte';
+  import Switch from 'ui/switch.svelte';
 </script>
 
 <svelte:head>
@@ -20,10 +20,18 @@
   <link rel="stylesheet" href="css/global/ui-kit-page.css" />
 
   <style>
+    .material {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
     .todo {
       background-color: red;
       width: 100%;
     }
+    header.top-level { width: 100%; }
+    footer { width: 100%; }
   </style>
 </svelte:head>
 
@@ -99,81 +107,43 @@
 
     <hr />
 
-    <!--todo: form-field-->
     <h1 class="todo">Form field</h1>
 
     <div class="showcase">
       <form>
-        <div class="form-field">
-          <label for="name">
-            <span class="name">
-              Name
-              <span class="required">*</span>
-            </span>
-            <span class="desc">
-              This field is to write the name, so please do.
-            </span>
-          </label>
-          <div class="text-field-wrapper">
-            <div class="text-field">
-              <input type="text" id="name" />
-            </div>
-            <span class="required">* Required</span>
-          </div>
-        </div>
+        <FormField
+            id="ff-1"
+            title="Name"
+            subtitle="This field is to write the name, so please do."
+            required
+        >
+          <TextField id="ff-1" />
+        </FormField>
 
-        <div class="form-field">
-          <label for="type">
-            <span class="name">Type</span>
-            <span class="desc">Write the type here, e.g. sweatshirt</span>
-          </label>
-          <div class="text-field-wrapper">
-            <div class="text-field">
-              <input type="text" id="type" />
-            </div>
-          </div>
-        </div>
+        <FormField title="Type" subtitle="Write the type here, e.g. sweatshirt" id="ff-2">
+          <TextField id="ff-2" />
+        </FormField>
 
-        <div class="form-field">
-          <label for="price">
-            <span class="name">
-              Price
-              <span class="required">*</span>
-            </span>
-          </label>
-          <div class="text-field-wrapper">
-            <div class="text-field with-item right">
-              <input type="number" placeholder="Price" id="price" />
-              <img alt="" src="images/innopoint-sharp.svg" class="item" />
-            </div>
-            <span class="required">* Required</span>
-          </div>
-        </div>
+        <FormField title="Price" id="ff-3" required>
+          <TextField id="ff-3" type="number" placeholder="Price" item right>
+            <svg src="images/innopoint-sharp.svg" class="item innopoint" />
+          </TextField>
+        </FormField>
 
-        <div class="form-field">
-          <label for="size">
-            <span class="name">
-              Size
-              <span class="required">*</span>
-            </span>
-          </label>
-          <div class="text-field-wrapper">
-            <div class="text-field with-item left">
-              <input type="number" id="size" />
-              <span class="item">XXL</span>
-            </div>
-            <span class="required">* Required</span>
-          </div>
-        </div>
+        <FormField title="Size" id="ff-4" required>
+          <TextField id="ff-4" type="number" item>
+            <span class="item">XXL</span>
+          </TextField>
+        </FormField>
       </form>
     </div>
 
     <hr />
 
     <div class="showcase">
-      <TextField if="nothing" outline label="Label" />
+      <TextField id="nothing" outline label="Label" />
       <TextField
-        if="username"
+        id="username"
         outline
         item
         label="Telegram"
@@ -333,47 +303,21 @@
     </div>
   </Card>
 
-  <!--todo: switches-->
   <Card id="switches">
     <h1 class="todo">Switches</h1>
     <div class="showcase">
-      <label class="switch-wrapper">
-        <input type="checkbox" class="switch-ctl" />
-        <div class="switch">
-          <div class="knob" />
-        </div>
-      </label>
-      <label>
-        <input type="checkbox" checked="checked" class="switch-ctl" />
-        <div class="switch">
-          <div class="knob" />
-        </div>
-      </label>
+      <Switch />
+      <Switch checked />
     </div>
 
     <hr />
-
     <div class="showcase">
-      <label class="clickable switch-wrapper" id="with-prefix">
-        Prefixing text
-        <input type="checkbox" checked="checked" class="switch-ctl" />
-        <div class="switch">
-          <div class="knob" />
-        </div>
-      </label>
+      <Switch name="withLabel" id="withLabel">Prefixing text</Switch>
     </div>
 
     <hr />
-
     <div class="showcase">
-      <label class="clickable switch-wrapper">
-        <input type="checkbox" checked="checked" class="switch-ctl first" />
-        <span class="state first">First</span>
-        <div class="switch two-state">
-          <div class="knob" />
-        </div>
-        <span class="state second">Second</span>
-      </label>
+      <Switch twoState first="First" second="Second" name="twoStated" id="twoStated" />
     </div>
   </Card>
 

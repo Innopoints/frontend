@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
 
+  export let id = '';
   export let name = '';
   export let first = '';
   export let second = '';
@@ -10,12 +11,13 @@
   let dispatch = createEventDispatcher();
 </script>
 
-<label class="clickable switch-wrapper">
+<label class="clickable switch-wrapper" for={id}>
   {#if !twoState}
     <slot />
   {/if}
 
   <input
+      {id}
       {checked}
       name={name}
       on:change="{(e) => dispatch('change', e.target.value)}"
