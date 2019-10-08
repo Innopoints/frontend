@@ -5,6 +5,7 @@
 
   export let index;
   export let removable;
+  export let colors;
 
   const sizes = ['XS', 'S', 'M', 'L' , 'XL', 'XXL'];
   const variety = $item.varieties[index];
@@ -43,7 +44,6 @@
       </div>
     {/if}
   </div>
-
 
   {#if $item.inSizes}
     <div class="sizes-wrapper">

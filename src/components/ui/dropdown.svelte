@@ -12,7 +12,7 @@
 </script>
 
 <div class:open class="dropdown-shell">
-  <Button on:click={toggle} class="handle {btnclass}">
+  <Button on:click={toggle} classname="handle {btnclass}">
     <slot name="label">{label}</slot>
     {#if chevron}
       <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
@@ -23,7 +23,7 @@
       <slot />
     {:else}
       <div class="relative-wrapper">
-        <Button on:click={toggle} normal round btnclass="close">
+        <Button on:click={toggle} normal round classname="close">
           <svg src="images/icons/x.svg" />
         </Button>
         <slot />

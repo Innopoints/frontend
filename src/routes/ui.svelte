@@ -107,7 +107,7 @@
 
     <hr />
 
-    <h1 class="todo">Form field</h1>
+    <h1>Form field</h1>
 
     <div class="showcase">
       <form>
@@ -304,7 +304,7 @@
   </Card>
 
   <Card id="switches">
-    <h1 class="todo">Switches</h1>
+    <h1>Switches</h1>
     <div class="showcase">
       <Switch name="switch-1" id="switch-1" />
       <Switch checked name="switch-2" id="switch-2" />
@@ -352,41 +352,12 @@
       <Dropdown label="right dropdown" right nowrap>
         <Button filled>woo alRIGHT</Button>
       </Dropdown>
-      <div class="dropdown-shell">
-        <button class="btn handle">
-          open dropdown
-          <img
-            alt=""
-            src="images/ui-kit-page/chevron-down.svg"
-            class="chevron" />
-        </button>
-        <div class="dropdown">
-          <div class="relative-wrapper" style="padding: 1em; width: 15em;">
-            <button class="btn normal round close">
-              <img alt="" src="images/ui-kit-page/x.svg" />
-            </button>
-            great now close me
-            <br />
-            great now close me
-            <br />
-            great now close me
-            <br />
-            great now close me
-          </div>
-        </div>
-      </div>
-      <div class="dropdown-shell">
-        <button class="btn handle">
-          right dropdown
-          <img
-            alt=""
-            src="images/ui-kit-page/chevron-down.svg"
-            class="chevron" />
-        </button>
-        <div class="dropdown right-edge">
-          <button class="btn filled">woo alRIGHT</button>
-        </div>
-      </div>
+      <Dropdown dropdownclass="info-bubble" btnclass="round" chevron={false} right>
+        <svg slot="label" src="images/icons/help-circle.svg" class="icon" />
+        Some event organizers prefer to collect those to ease communication.
+        Adding one here will save you the typing for those
+        occasions (you will still be able to control what you send).
+      </Dropdown>
     </div>
   </Card>
 

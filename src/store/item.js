@@ -59,6 +59,10 @@ export function toggleSizes() {
   item.update(itm => ({ ...itm, inSizes: !itm.inSizes }));
 }
 
+export function addVariety() {
+  item.update(itm => ({ ...itm, varieties: [...itm.varieties, newVariety()] }));
+}
+
 export function removeVariety(index) {
   item.update(itm => ({ ...itm, varieties: itm.varieties.filter((x, i) => i !== index) }));
 }

@@ -11,7 +11,7 @@ export const user = writable({
   isAdmin: true,
   name: 'Zeus',
   surname: 'Rozhdestvenskiy',
-  telegram: 'TheGod',
+  telegram: '',
 });
 
 export function changeUserField(field, value) {

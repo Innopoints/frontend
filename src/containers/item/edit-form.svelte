@@ -5,7 +5,7 @@
   import FormFields from '@/components/item/form-fields.svelte';
   import FormVariety from '@/components/item/form-variety.svelte';
 
-  import {item, toggleSizes} from '@/store/item';
+  import {item, toggleSizes, addVariety} from '@/store/item';
 </script>
 
 <form>
@@ -28,7 +28,7 @@
     {/each}
 
     <li class="more">
-      <Button>
+      <Button on:click={addVariety}>
         <svg src="images/icons/plus.svg" class="icon" />
         add another variety
       </Button>
