@@ -30,3 +30,7 @@ export const item = writable({
 export function changeItemField(field, value) {
   item.update(itm => ({ ...itm, [field]: value }));
 }
+
+export function toggleSizes() {
+  item.update(itm => ({ ...itm, inSizes: !itm.inSizes }));
+}

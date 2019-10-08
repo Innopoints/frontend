@@ -2,8 +2,9 @@
   import Button from 'ui/button.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
+  import Switch from 'ui/switch.svelte';
 
-  import {item, changeItemField} from '@/store/item';
+  import {item, changeItemField, toggleSizes} from '@/store/item';
   function setField(field, value) {
     changeItemField(field, value);
   }
@@ -69,11 +70,9 @@
 
   <header class="varieties">
     <h2>Varieties</h2>
-    <!--<Toggle
-        :checked="$store.state.newProduct.inSizes"
-        @click="$store.commit('newProduct/toggleSizes')"
-        label="the product comes in sizes"
-    />-->
+    <Switch checked={$item.inSizes} on:change={toggleSizes}>
+      the product comes in sizes
+    </Switch>
   </header>
 
   <ul>
