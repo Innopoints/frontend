@@ -1,48 +1,53 @@
 <script>
   import { createEventDispatcher } from 'svelte';
 
-  export let items = [];
+  export let items;
   export let name;
-  export let classname;
+  export let classname = null;
   export let selected = {};
+  export let isColor = false;
   export let isLabel = false;
   export let isLabelGreen = false;
   export let labelPosition = 'right';
-  export let labelClass = '';
+  export let labelClass = null;
 
   $: selectedId = selected.id || null;
 
   let dispatch = createEventDispatcher();
-
-  const changeRadio = (item) => {
+  const changeRadio = item => {
     selectedId = item.id;
     dispatch('change', item);
   };
-</script>
 
-<!--
-<div :class="{'with-labels': withLabels, horizontal}" class="radio-group" role="group">
-  <label
-    v-for="(item, index) in items"
-    :key="index"
-    :class="{clickable: withLabels, colored: !!item.color}"
-    class="radio"
-  >
-    <input
-      :checked="selected === item"
-      @change="select(item)"
-      :name="name"
-      type="radio"
-    />
-    <div :class="{white: isWhite(item)}" :style="style(item)" class="icon" />
-    {{ (withLabels && item.label) ? item.label : '' }}
-  </label>
-</div>
--->
+  const isWhite = item => {
+    if (!item.color || !isColor) return false;
+    if (item.color.toUpperCase() === '#FFF' || item.color.toUpperCase() === '#FFFFFF') return true;
+  };
+  const style = item => {
+    if (!isColor || !item.color || isWhite(item)) return '';
+
+    // Parse HEX colors
+    let outline = '';
+    let match = item.color.toUpperCase().match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
+    if(match) {
+      outline = `
+            --r: ${parseInt(match[1], 16)};
+            --g: ${parseInt(match[2], 16)};
+            --b: ${parseInt(match[3], 16)};
+          `;
+    }
+
+    return `
+          background-color: ${item.color};
+          border-color: ${item.color};
+          ${outline}
+        `;
+  };
+</script>
 
 <div class:with-labels={isLabel} class={classname} role="group">
   {#each items as item, i (i)}
-    <label class:clickable={isLabel} class={labelClass}>
+    <label class:colored={isColor} class:clickable={isLabel} class={labelClass}>
       {#if isLabel}
         {#if labelPosition === 'left'}
           {#if isLabelGreen}
@@ -59,7 +64,7 @@
               name={name}
               checked="{selectedId === item.id}"
           >
-          <div class="icon"></div>
+          <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
         </div>
 
         {#if labelPosition === 'right'}
@@ -71,8 +76,13 @@
         {/if}
 
       {:else}
-        <input on:change="{() => changeRadio(item)}" type="radio" name={name} checked={item.checked}>
-        <div class="icon"></div>
+        <input
+            on:change="{() => changeRadio(item)}"
+            type="radio"
+            name={name}
+            checked="{selectedId === item.id}"
+        >
+        <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
       {/if}
     </label>
   {/each}
