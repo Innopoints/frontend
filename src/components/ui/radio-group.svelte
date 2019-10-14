@@ -11,11 +11,11 @@
   export let labelPosition = 'right';
   export let labelClass = null;
 
-  $: selectedId = selected.id || null;
+  $: selectedId = selected.id + 1 || null;
 
   let dispatch = createEventDispatcher();
   const changeRadio = item => {
-    selectedId = item.id;
+    selectedId = item.id + 1;
     dispatch('change', item);
   };
 
@@ -62,7 +62,7 @@
               on:change="{() => changeRadio(item)}"
               type="radio"
               name={name}
-              checked="{selectedId === item.id}"
+              checked="{selectedId === item.id + 1}"
           >
           <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
         </div>
@@ -80,7 +80,7 @@
             on:change="{() => changeRadio(item)}"
             type="radio"
             name={name}
-            checked="{selectedId === item.id}"
+            checked="{selectedId === item.id + 1}"
         >
         <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
       {/if}

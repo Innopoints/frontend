@@ -15,7 +15,7 @@
   const eventDate = dateRange(date);
 </script>
 
-<Card {img}>
+<Card {img} imgWrap={false}>
   <h2 class="title">{title}</h2>
 
   <div v-if="isAuth" class="compact">

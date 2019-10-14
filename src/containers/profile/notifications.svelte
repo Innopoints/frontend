@@ -6,17 +6,14 @@
     {
       id: 1,
       label: 'Push',
-      checked: false,
     },
     {
       id: 2,
       label: 'Off',
-      checked: false,
     },
     {
       id: 3,
       label: 'e-mail',
-      checked: false,
     },
   ];
 
@@ -29,7 +26,6 @@
 
   const changeAll = (e) => {
     const item = e.detail;
-    item.checked = true;
 
     selected.all = item;
     selected.store = item;
@@ -38,10 +34,7 @@
   };
 
   const changeOne = (name, e) => {
-    const item = e.detail;
-    item.checked = true;
-
-    selected[name] = item;
+    selected[name] = e.detail;
   };
 </script>
 

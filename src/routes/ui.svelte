@@ -207,7 +207,6 @@
           name="radio3"
           items={radioItems1}
       />
-      <hr />
     </div>
   </Card>
 

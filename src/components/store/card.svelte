@@ -2,6 +2,8 @@
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
+  import RadioGroup from 'ui/radio-group.svelte';
+  import fragment from 'svelte-fragment';
 
   export let id;
   export let name;
@@ -11,18 +13,25 @@
   export let short = false;
 
   $: selected = varieties[0];
+  const changeColor = (e) => {
+    selected = e.detail;
+  };
 </script>
 
 <Card img={selected.images[0]} color={selected.background}>
-  <!--  TODO: implement and use Radio group for this card -->
-  <!--<template v-if="varieties.length > 1 && !isShort" v-slot:radio>
-    <RadioGroup
-        :items="varieties"
-        :name="'color-' + id"
-        v-model="selected"
-        class="color-options"
-    />
-  </template>-->
+  <template use:fragment slot="radio">
+    {#if varieties.length > 1 && !short}
+      <RadioGroup
+          items={varieties}
+          name="{'color-' + id}"
+          selected={selected}
+          classname="color-options"
+          labelClass="radio"
+          isColor
+          on:change={changeColor}
+      />
+    {/if}
+  </template>
   <div class="title">{name}</div>
   <span class="subtitle">{type}</span>
   {#if !short}
