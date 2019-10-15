@@ -24,7 +24,7 @@
     },
     {
       id: 3,
-      label: 'fuck label',
+      label: 'three label',
       color: '#FFFFFF',
     },
   ];
