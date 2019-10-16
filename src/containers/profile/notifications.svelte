@@ -31,6 +31,7 @@
 
   const changeOne = (name, e) => {
     selected[name] = e.detail;
+    selected.all = {};
   };
 </script>
 
