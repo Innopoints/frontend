@@ -45,6 +45,20 @@
   };
 </script>
 
+<style>
+  .radio .icon.white {
+    background-color: #fff !important;
+    border-color: #999 !important;
+    --r: 153;
+    --g: 153;
+    --b: 153;
+  }
+
+  .radio .icon.white::before {
+    background: #999 !important;
+  }
+</style>
+
 <div class:with-labels={isLabel} class={classname} role="group">
   {#each items as item, i (i)}
     <label class:colored={isColor} class:clickable={isLabel} class={labelClass}>

@@ -3,7 +3,6 @@
   import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import fragment from 'svelte-fragment';
 
   export let id;
   export let name;
@@ -19,7 +18,9 @@
 </script>
 
 <Card img={selected.images[0]} color={selected.background}>
-  <template use:fragment slot="radio">
+  <div class="title">{name}</div>
+  <span class="subtitle">{type}</span>
+  <div slot="radio">
     {#if varieties.length > 1 && !short}
       <RadioGroup
           items={varieties}
@@ -31,9 +32,7 @@
           on:change={changeColor}
       />
     {/if}
-  </template>
-  <div class="title">{name}</div>
-  <span class="subtitle">{type}</span>
+  </div>
   {#if !short}
     <div class="card-row">
       <Labeled label="Price">

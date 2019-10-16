@@ -39,10 +39,10 @@ export default {
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
           markup: data => preprocess(data, false, svgCustomAttrs),
+          style: ({ content }) => ({code: content}),
         },
         dev,
         hydratable: true,
-        emitCss: true,
       }),
       resolve({
         browser: true,
