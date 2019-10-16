@@ -9,6 +9,25 @@
   import TextField from 'ui/text-field.svelte';
   import FormField from 'ui/form-field.svelte';
   import Switch from 'ui/switch.svelte';
+  import RadioGroup from 'ui/radio-group.svelte';
+
+  const radioItems1 = [
+    {
+      id: 1,
+      label: 'one label',
+      color: '#FF0000',
+    },
+    {
+      id: 2,
+      label: 'two label',
+      color: '#000000',
+    },
+    {
+      id: 3,
+      label: 'three label',
+      color: '#FFFFFF',
+    },
+  ];
 </script>
 
 <svelte:head>
@@ -154,76 +173,40 @@
     </div>
   </Card>
 
-  <!--todo: radios-->
   <Card id="radios">
-    <h1 class="todo">Radio Buttons</h1>
+    <h1>Radio Buttons</h1>
     <div class="showcase">
-      <div role="group">
-        <label class="radio">
-          <input type="radio" name="choices" checked="checked" />
-          <div class="icon" />
-        </label>
-
-        <label class="radio">
-          <input type="radio" name="choices" />
-          <div class="icon" />
-        </label>
-
-        <label class="radio">
-          <input type="radio" name="choices" />
-          <div class="icon" />
-        </label>
-      </div>
-
+      <RadioGroup
+          labelClass="radio"
+          name="radio0"
+          items={radioItems1}
+      />
       <hr />
 
-      <div role="group" id="colored">
-        <label class="radio colored" id="red">
-          <input type="radio" name="colors" checked="checked" />
-          <div class="icon" />
-        </label>
-
-        <label class="radio colored" id="green">
-          <input type="radio" name="colors" />
-          <div class="icon" />
-        </label>
-
-        <label class="radio colored" id="blue">
-          <input type="radio" name="colors" />
-          <div class="icon" />
-        </label>
-
-        <label class="radio colored" id="white">
-          <input type="radio" name="colors" />
-          <div class="icon" />
-        </label>
-      </div>
-
+      <RadioGroup
+          name="radio1"
+          isLabel
+          items={radioItems1}
+          selected={radioItems1[2]}
+      />
       <hr />
 
-      <div role="group" class="with-labels">
-        <label class="clickable">
-          <div class="radio">
-            <input type="radio" checked="checked" name="radio-choices2" />
-            <div class="icon" />
-          </div>
-          some label
-        </label>
-        <label class="clickable">
-          <div class="radio">
-            <input type="radio" checked="checked" name="radio-choices2" />
-            <div class="icon" />
-          </div>
-          other label
-        </label>
-        <label class="clickable">
-          <div class="radio">
-            <input type="radio" checked="checked" name="radio-choices2" />
-            <div class="icon" />
-          </div>
-          more label
-        </label>
-      </div>
+      <RadioGroup
+          classname="switches"
+          name="radio2"
+          labelPosition="left"
+          isLabel
+          isLabelGreen
+          items={radioItems1}
+      />
+      <hr />
+
+      <RadioGroup
+          isColor
+          labelClass="radio"
+          name="radio3"
+          items={radioItems1}
+      />
     </div>
   </Card>
 
