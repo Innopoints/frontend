@@ -21,7 +21,7 @@
 
   const isWhite = item => {
     if (!item.color || !isColor) return false;
-    if (item.color.toUpperCase() === '#FFF' || item.color.toUpperCase() === '#FFFFFF') return true;
+    return item.color.toUpperCase() === '#FFF' || item.color.toUpperCase() === '#FFFFFF';
   };
   const style = item => {
     if (!isColor || !item.color || isWhite(item)) return '';
