@@ -3,6 +3,7 @@
   import Tagline from '@/containers/store/tagline.svelte';
   import StoreCard from '@/components/store/card.svelte';
   import items from '@/constants/store';
+  import Filters from '@/containers/store/filters.svelte';
 </script>
 
 <svelte:head>
@@ -39,8 +40,8 @@
 
   <section id="store-top" class="shop padded">
     <!--todo: add ordering and filters-->
-    <!--<Filters />
-    <Ordering />-->
+    <Filters />
+    <!--<Ordering />-->
 
     {#if items.length === 0}
       <div lass="empty">

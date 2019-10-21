@@ -4,8 +4,10 @@
   export let label = '';
   export let right = false;
   export let chevron = true;
+  export let customLabel = false;
   export let btnclass = '';
   export let dropdownclass = '';
+  export let wrapperclass = '';
   export let nowrap = false;
   export let open = false;
   export const toggle = () => (open = !open);
@@ -22,7 +24,7 @@
     {#if nowrap}
       <slot />
     {:else}
-      <div class="relative-wrapper">
+      <div class="relative-wrapper {wrapperclass}">
         <Button on:click={toggle} normal round classname="close">
           <svg src="images/icons/x.svg" />
         </Button>
