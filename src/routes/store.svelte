@@ -2,7 +2,7 @@
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/store/tagline.svelte';
   import StoreCard from '@/components/store/card.svelte';
-  import items from '@/constants/store';
+  import items from '@/constants/store/store';
   import Filters from '@/containers/store/filters.svelte';
 </script>
 

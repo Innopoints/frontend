@@ -2,17 +2,17 @@
   margin: 2.5em 0 1.5em;
   display: flex;
   flex-direction: column;
-}
 
-.tagline > div .actions {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1em;
-}
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1em;
 
-.tagline > div .actions .btn {
-  margin-right: .5em;
-  margin-bottom: .5em;
+    .btn {
+      margin-right: .5em;
+      margin-bottom: .5em;
+    }
+  }
 }
 
 @media only screen and (min-width: 400px) and (max-width: 639px) {
@@ -28,9 +28,11 @@
     align-items: center;
     margin-top: 2em;
   }
+
   .tagline > .picture {
     height: 20rem;
   }
+
   .tagline > div {
     margin-top: 2em;
     font-size: 1.1rem;
@@ -42,9 +44,11 @@
     flex-direction: row-reverse;
     justify-content: space-between;
   }
+
   .tagline .picture {
     height: 18em;
   }
+
   .tagline > div {
     margin: 0;
     width: 45%;

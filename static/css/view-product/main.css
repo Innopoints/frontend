@@ -133,6 +133,12 @@
   margin-top: 1em;
 }
 
+.product .purchase-details .action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .product .purchase-details .price {
   font-size: 1.25rem;
   position: relative;

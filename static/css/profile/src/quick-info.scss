@@ -80,9 +80,11 @@
   .personal {
     padding: 0 .2rem;
   }
+
   .personal .telegram > .btn:first-child {
     margin-right: .5em;
   }
+
   .personal .info-bubble {
     right: -3em;
     min-width: 17em;
@@ -93,18 +95,22 @@
   .telegram .text-field {
     width: 20em;
   }
+
   .personal {
     padding: 0;
     margin: 0;
   }
+
   .quick-info {
     display: flex;
     justify-content: space-between;
     margin-top: 4em;
   }
+
   .balance > p {
     text-align: right;
   }
+
   .btn-shift {
     margin-left: 0;
     margin-right: -.8rem;
@@ -115,6 +121,7 @@
   .balance > p {
     font-size: 1.4rem;
   }
+
   .balance .innopoint {
     height: 1.2rem;
   }

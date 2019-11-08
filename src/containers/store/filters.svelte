@@ -4,7 +4,11 @@
   import Dot from 'ui/dot.svelte';
   import Button from 'ui/button.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import {orders, selectedOrder, selectOrder} from '@/store/store';
+  import CheckboxGroup from 'ui/checkbox-group.svelte';
+
+  import orders from '@/constants/store/order-options';
+  import colors from '@/constants/store/colors';
+  import {selectedOrder, selectOrder, selectedColors, selectColors, isColorless, changeColorless} from '@/store/store';
 </script>
 
 <div class="filters">
@@ -18,7 +22,7 @@
       <span slot="label" class="regular">most expensive first</span>
       <RadioGroup
           selected={$selectedOrder}
-          items={$orders}
+          items={orders}
           isLabel
           on:change="{(e) => selectOrder(e.detail)}"
       />
@@ -46,7 +50,22 @@
         </li>
         <li class="filter colors">
           <span class="name">colors</span>
-
+          <CheckboxGroup
+              colored
+              name="colors"
+              items={colors}
+              classname="color-grid"
+              checked={$selectedColors}
+              on:change={(e) => selectColors(e.detail)}
+          >
+            <label class="clickable">
+              <div class="checkbox">
+                <input checked={$isColorless} on:change={changeColorless} type="checkbox" name="colors">
+                <div class="icon" />
+              </div>
+              colorless
+            </label>
+          </CheckboxGroup>
         </li>
       </ul>
     </Dropdown>

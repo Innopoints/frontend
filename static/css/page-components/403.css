@@ -42,12 +42,12 @@
 }
 
 @media only screen and (min-width: 480px) {
-  .container-403 .card .actions .btn:first-child {
-    margin-right: 1em;
-  }
   .container-403 .card {
     max-width: 16.5em;
     flex-shrink: 0;
+  }
+  .container-403 .card .actions .btn:first-child {
+    margin-right: 1em;
   }
 }
 
