@@ -10,6 +10,7 @@
   import FormField from 'ui/form-field.svelte';
   import Switch from 'ui/switch.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
+  import CheckboxGroup from 'ui/checkbox-group.svelte';
 
   const radioItems1 = [
     {
@@ -28,6 +29,28 @@
       color: '#FFFFFF',
     },
   ];
+
+  const checkboxes = [
+    {
+      id: 0,
+      color: '#FF00FF',
+      label: 'one checkbox',
+    },
+    {
+      id: 1,
+      color: '#FFFFFF',
+      label: 'two checkbox',
+    },
+    {
+      id: 2,
+      color: '#000000',
+      label: 'two checkbox',
+    },
+  ];
+
+  const changeCheckbox = (e) => {
+    console.log(e.detail);
+  };
 </script>
 
 <svelte:head>
@@ -214,75 +237,33 @@
   <Card id="checkboxes">
     <h1 class="todo">Checkboxes</h1>
     <div class="showcase">
-      <div role="group">
-        <label>
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices" />
-            <div class="icon" />
-          </div>
-        </label>
-        <label>
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices" />
-            <div class="icon" />
-          </div>
-        </label>
-        <label>
-          <div class="checkbox">
-            <input type="checkbox" name="check-choices" />
-            <div class="icon" />
-          </div>
-        </label>
-      </div>
+      <CheckboxGroup
+          items={checkboxes}
+          name="checkbox-1"
+          on:change={changeCheckbox}
+      />
+    </div>
+    <div class="showcase">
 
       <hr />
 
-      <div role="group">
-        <label>
-          <div class="checkbox round colored" id="red-chk">
-            <input type="checkbox" checked="checked" name="check-choices-clr" />
-            <div class="icon" />
-          </div>
-        </label>
-        <label>
-          <div class="checkbox round colored" id="blue-chk">
-            <input type="checkbox" checked="checked" name="check-choices-clr" />
-            <div class="icon" />
-          </div>
-        </label>
-        <label>
-          <div class="checkbox round colored" id="white-chk">
-            <input type="checkbox" name="check-choices-clr" />
-            <div class="icon" />
-          </div>
-        </label>
-      </div>
+      <CheckboxGroup
+          colored
+          items={checkboxes}
+          checked={[checkboxes[1]]}
+          name="checkbox-2"
+          on:change={changeCheckbox}
+      />
 
       <hr />
 
-      <div role="group" class="with-labels">
-        <label class="clickable">
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices2" />
-            <div class="icon" />
-          </div>
-          some label
-        </label>
-        <label class="clickable">
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices2" />
-            <div class="icon" />
-          </div>
-          other label
-        </label>
-        <label class="clickable">
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices2" />
-            <div class="icon" />
-          </div>
-          more label
-        </label>
-      </div>
+      <CheckboxGroup
+          labeled
+          items={checkboxes}
+          checked={checkboxes}
+          name="checkbox-3"
+          on:change={changeCheckbox}
+      />
     </div>
   </Card>
 

@@ -4,7 +4,6 @@
   import Dot from 'ui/dot.svelte';
   import Button from 'ui/button.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-
   import {orders, selectedOrder, selectOrder} from '@/store/store';
 </script>
 
