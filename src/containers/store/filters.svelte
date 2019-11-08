@@ -9,6 +9,7 @@
   import orders from '@/constants/store/order-options';
   import colors from '@/constants/store/colors';
   import {selectedOrder, selectOrder, selectedColors, selectColors, isColorless, changeColorless} from '@/store/store';
+  import {isAuthed} from '@/store/user';
 </script>
 
 <div class="filters">
@@ -43,10 +44,12 @@
               <TextField classname="no-spinner" type="number" />
             </div>
           </div>
-          <Button classname="mt">
-            <svg src="images/icons/tag.svg" class="icon mr" />
-            show affordable
-          </Button>
+          {#if $isAuthed}
+            <Button classname="mt">
+              <svg src="images/icons/tag.svg" class="icon mr" />
+              show affordable
+            </Button>
+          {/if}
         </li>
         <li class="filter colors">
           <span class="name">colors</span>
