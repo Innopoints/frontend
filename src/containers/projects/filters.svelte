@@ -4,12 +4,12 @@
   import Dot from 'ui/dot.svelte';
   import Button from 'ui/button.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import CheckboxGroup from 'ui/checkbox-group.svelte';
+  // import CheckboxGroup from 'ui/checkbox-group.svelte';
 
-  import orders from '@/constants/store/order';
-  import colors from '@/constants/store/colors';
-  import {selectedOrder, selectOrder, selectedColors, selectColors, isColorless, changeColorless} from '@/store/store';
-  import {isAuthed} from '@/store/user';
+  import orders from '@/constants/projects/order';
+  // import competences from '@/constants/projects/competences';
+  // import {selectedOrder, selectOrder, selectedCompetences, selectCompetences} from '@/store/projects';
+  import {selectedOrder, selectOrder} from '@/store/projects';
 </script>
 
 <div class="filters">
@@ -34,7 +34,7 @@
       <span slot="label">filters</span>
       <span slot="label"><Dot active small /></span>
       <Button danger>Clear filters</Button>
-      <ul>
+      <!--<ul>
         <li class="filter price">
           <div>
             <span class="name">price</span>
@@ -70,7 +70,7 @@
             </label>
           </CheckboxGroup>
         </li>
-      </ul>
+      </ul>-->
     </Dropdown>
   </div>
 </div>

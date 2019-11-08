@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import orderOptions from '@/constants/store/order-options';
+import orderOptions from '@/constants/store/order';
 import colorOptions from '@/constants/store/colors';
 
 export const selectedOrder = writable(orderOptions[0]);

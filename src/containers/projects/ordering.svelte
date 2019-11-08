@@ -1,7 +1,7 @@
 <script>
   import ChipGroup from 'ui/chip-group.svelte';
-  import orders from '@/constants/store/order';
-  import {selectedOrder, selectOrder} from '@/store/store';
+  import orders from '@/constants/projects/order';
+  import {selectedOrder, selectOrder} from '@/store/projects';
 </script>
 
 <ChipGroup
