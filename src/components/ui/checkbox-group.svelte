@@ -64,7 +64,7 @@
     <label class:clickable={labeled} class={labelclass}>
       <div class:colored={colored} class:round={colored} class="checkbox {checkboxclass}">
         <input
-            on:change="{() => changeCheckbox(item)}"
+            on:change={() => changeCheckbox(item)}
             type="checkbox"
             checked={selected.find(x => x.id === item.id)}
             name={name}

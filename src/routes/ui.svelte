@@ -12,6 +12,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import CheckboxGroup from 'ui/checkbox-group.svelte';
   import Chip from 'ui/chip.svelte';
+  import ChipGroup from 'ui/chip-group.svelte';
 
   const radioItems1 = [
     {
@@ -49,21 +50,28 @@
     },
   ];
 
-  // const chips = [
-  //   {
-  //     id: 0,
-  //     label: 'one',
-  //   },
-  //   {
-  //     id: 1,
-  //     label: 'two',
-  //   },
-  //   {
-  //     id: 2,
-  //     label: 'three',
-  //   },
-  // ];
+  const chips = [
+    {
+      id: 0,
+      name: 'one',
+    },
+    {
+      id: 1,
+      name: 'two',
+    },
+    {
+      id: 2,
+      name: 'three',
+    },
+  ];
 </script>
+
+<style>
+  :global(.flex-wrap) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+</style>
 
 <svelte:head>
   <title>UI Showcase – Innopoints</title>
@@ -384,9 +392,8 @@
     </div>
   </Card>
 
-  <!--todo: chips-->
   <Card id="chips">
-    <h1 class="todo">Chips</h1>
+    <h1>Chips</h1>
     <div class="showcase">
       <div style="display: flex; flex-wrap: wrap;">
         <Chip disabled>most first</Chip>
@@ -397,15 +404,10 @@
     </div>
 
     <hr />
+    <ChipGroup items={chips} name="chip-11" classname="flex-wrap" />
 
-    <div class="showcase">
-      <div role="group" style="display: flex; flex-wrap: wrap;">
-        <Chip name="chip-1">most first</Chip>
-        <Chip name="chip-1">least first</Chip>
-        <Chip name="chip-1">least first</Chip>
-        <Chip name="chip-1">most last</Chip>
-      </div>
-    </div>
+    <hr />
+    <ChipGroup items={chips} name="chip-12" multiple classname="flex-wrap" />
 
     <hr />
 

@@ -25,7 +25,6 @@
         name={name}
         disabled={disabled}
         type="{(multiple || disabled) ? 'checkbox' :'radio'}"
-        :name="name"
         on:change={check}
     />
   {/if}
