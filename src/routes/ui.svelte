@@ -47,10 +47,6 @@
       label: 'two checkbox',
     },
   ];
-
-  const changeCheckbox = (e) => {
-    console.log(e.detail);
-  };
 </script>
 
 <svelte:head>
@@ -233,14 +229,12 @@
     </div>
   </Card>
 
-  <!--todo: checkboxes-->
   <Card id="checkboxes">
-    <h1 class="todo">Checkboxes</h1>
+    <h1>Checkboxes</h1>
     <div class="showcase">
       <CheckboxGroup
           items={checkboxes}
           name="checkbox-1"
-          on:change={changeCheckbox}
       />
     </div>
     <div class="showcase">
@@ -252,7 +246,6 @@
           items={checkboxes}
           checked={[checkboxes[1]]}
           name="checkbox-2"
-          on:change={changeCheckbox}
       />
 
       <hr />
@@ -262,7 +255,6 @@
           items={checkboxes}
           checked={checkboxes}
           name="checkbox-3"
-          on:change={changeCheckbox}
       />
     </div>
   </Card>
