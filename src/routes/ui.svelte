@@ -53,15 +53,15 @@
   const chips = [
     {
       id: 0,
-      name: 'one',
+      label: 'one',
     },
     {
       id: 1,
-      name: 'two',
+      label: 'two',
     },
     {
       id: 2,
-      name: 'three',
+      label: 'three',
     },
   ];
 </script>

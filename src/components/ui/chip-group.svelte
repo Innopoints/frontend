@@ -24,7 +24,7 @@
 <div role="group" class={classname}>
   {#each items as item (item.id)}
     <Chip
-            text={item.name}
+            label={item.label}
             name={name}
             multiple={multiple}
             value={multiple ? selected.find(x => x.id === item.id) : selected.id === item.id}

@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
 
-  export let text = '';
+  export let label = '';
   export let name = '';
   export let disabled = false;
   export let small = false;
@@ -34,6 +34,6 @@
       class:outline={outline}
       class="chip"
   >
-    <slot>{text}</slot>
+    <slot>{label}</slot>
   </div>
 </label>
