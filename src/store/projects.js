@@ -17,9 +17,12 @@ function changeFilter(name, value) {
   filters.update((state) => ({...state, [name]: value}));
 }
 
-
 export function changeSpots(value) {
   if (value > 0) changeFilter('spots', value);
   else changeFilter('spots', 1);
+}
+
+export function changeCompetences(value) {
+  changeFilter('competences', value);
 }
 
