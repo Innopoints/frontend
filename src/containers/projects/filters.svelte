@@ -4,10 +4,19 @@
   import Dot from 'ui/dot.svelte';
   import Button from 'ui/button.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
+
   import Spots from '@/components/projects/spots.svelte';
+  import Competences from '@/components/projects/competences.svelte';
+  import DateRange from '@/components/projects/date.svelte';
 
   import orders from '@/constants/projects/order';
   import {selectedOrder, selectOrder} from '@/store/projects';
+
+  let open = null;
+  const changeOpen = (name) => {
+    if (open !== name || !open) open = name;
+    else open = null;
+  };
 </script>
 
 <div class="filters">
@@ -34,6 +43,8 @@
       <Button danger>Clear filters</Button>
       <ul class="accordion">
         <Spots />
+        <Competences open={open === 'competences'} on:toggle={() => changeOpen('competences')} />
+        <DateRange open={open === 'date'} on:toggle={() => changeOpen('date')} />
       </ul>
     </Dropdown>
   </div>
