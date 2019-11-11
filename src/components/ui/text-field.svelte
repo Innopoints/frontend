@@ -38,9 +38,9 @@
       {name}
       bind:value
       cols={5}
-      on:focus={() => dispatch('focus')}
-      on:blur={() => dispatch('blur')}
-      on:input={() => dispatch('input')}
+      on:focus={(e) => dispatch('focus', e.target.value)}
+      on:blur={(e) => dispatch('blur', e.target.value)}
+      on:input={(e) => dispatch('input', e.target.value)}
       on:change={(e) => dispatch('change', e.target.value)}
     />
   {:else}
@@ -55,10 +55,10 @@
       {min}
       {max}
       {maxLength}
-      on:focus={() => dispatch('focus')}
-      on:blur={() => dispatch('blur')}
-      on:input={() => dispatch('input')}
-      on:keyup.enter={() => dispatch('blur')}
+      on:focus={(e) => dispatch('focus', e.target.value)}
+      on:blur={(e) => dispatch('blur', e.target.value)}
+      on:input={(e) => dispatch('input', e.target.value)}
+      on:keyup.enter={(e) => dispatch('blur', e.target.value)}
       on:change={(e) => dispatch('change', e.target.value)}
     />
 
