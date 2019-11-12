@@ -1,5 +1,6 @@
 <script>
   import Button from 'ui/button.svelte';
+  import DatePicker from 'ui/date-picker.svelte';
 
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
@@ -14,6 +15,4 @@
     select date range
   </Button>
 </li>
-<section>
-  <Button>something</Button>
-</section>
+<DatePicker />
