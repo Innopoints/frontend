@@ -1,4 +1,5 @@
 <script>
+  import {get} from 'svelte/store';
   import TextField from 'ui/text-field.svelte';
   import Dropdown from 'ui/dropdown.svelte';
   import Dot from 'ui/dot.svelte';
@@ -8,12 +9,25 @@
 
   import orders from '@/constants/store/order';
   import colors from '@/constants/store/colors';
-  import {selectedOrder, selectOrder, selectedColors, selectColors, isColorless, changeColorless} from '@/store/store';
-  import {isAuthed} from '@/store/user';
+  import {selectedOrder, selectOrder, filters, changeSearch, changeColors, changeIsColorless, changePrice} from '@/store/store';
+  import {isAuthed, user} from '@/store/user';
+
+  const showAffordable = () => {
+    let {balance} = get(user);
+    if (balance) {
+      changePrice(0);
+      changePrice(balance, true);
+    }
+  };
 </script>
 
 <div class="filters">
-  <TextField item>
+  <TextField
+      value={$filters.search}
+      on:change={(e) => changeSearch(e.detail)}
+      on:input={(e) => changeSearch(e.detail)}
+      item
+  >
     <svg src="images/icons/search.svg" class="item" />
   </TextField>
   <div class="dropdowns">
@@ -39,13 +53,25 @@
           <div>
             <span class="name">price</span>
             <div class="align-center">
-              <TextField classname="no-spinner" type="number" />
+              <TextField
+                  value={$filters.priceLow}
+                  on:input={(e) => changePrice(e.detail)}
+                  on:change={(e) => changePrice(e.detail)}
+                  classname="no-spinner"
+                  isNum
+              />
               <span class="ml mr">–</span>
-              <TextField classname="no-spinner" type="number" />
+              <TextField
+                  value={$filters.priceHigh}
+                  on:input={(e) => changePrice(e.detail, true)}
+                  on:change={(e) => changePrice(e.detail, true)}
+                  classname="no-spinner"
+                  isNum
+              />
             </div>
           </div>
           {#if $isAuthed}
-            <Button classname="mt">
+            <Button on:click={showAffordable} classname="mt">
               <svg src="images/icons/tag.svg" class="icon mr" />
               show affordable
             </Button>
@@ -58,12 +84,12 @@
               name="colors"
               items={colors}
               classname="color-grid"
-              checked={$selectedColors}
-              on:change={(e) => selectColors(e.detail)}
+              checked={$filters.colors}
+              on:change={(e) => changeColors(e.detail)}
           >
             <label class="clickable">
               <div class="checkbox">
-                <input checked={$isColorless} on:change={changeColorless} type="checkbox" name="colors">
+                <input checked={$filters.isColorless} on:change={changeIsColorless} type="checkbox" name="colors">
                 <div class="icon" />
               </div>
               colorless

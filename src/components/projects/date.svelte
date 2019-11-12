@@ -1,6 +1,7 @@
 <script>
   import Button from 'ui/button.svelte';
   import DatePicker from 'ui/date-picker.svelte';
+  import {filters, changeDate} from '@/store/projects';
 
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
@@ -15,4 +16,7 @@
     select date range
   </Button>
 </li>
-<DatePicker calendarclass="mt" />
+<DatePicker
+    value={$filters.date}
+    on:change={(e) => changeDate(e.detail)}
+/>

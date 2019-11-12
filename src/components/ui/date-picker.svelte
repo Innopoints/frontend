@@ -1,5 +1,4 @@
 <section class={classname}>
-  <!--
   {#if withControls}
     <div class={controlsclass}>
       <div>
@@ -9,7 +8,6 @@
       <Button danger on:click={clear}>clear</Button>
     </div>
   {/if}
-  -->
 
   <div class={calendarclass}>
     <div class={headerclass}>
@@ -32,30 +30,32 @@
           Next <div> element may have one of the classes:
           day-in-range, day-selected and day-disabled (if not in this month)
         -->
-        {#each week as day (day.index)}
+        {#each week as day, dayi (day.index)}
           <div class="{dayclass} {day.classes}">
-            <button on:click={() => selectItem(weeki, day.index)}>{day.index}</button>
+            <button on:click={() => selectItem(weeki + 1, dayi + 1)}>{day.index}</button>
           </div>
         {/each}
       </div>
     {/each}
   </div>
+
+  <slot />
 </section>
 
 <script>
+  import { createEventDispatcher } from 'svelte';
   import fecha from 'fecha';
   import Button from './button.svelte';
 
-  export let withControls = true;
+  export const withControls = true;
   export let format = 'YYYY-MM-DD';
   export let range = true;
-  export let start = null;
-  export let end = null;
+  export let value = {};
   export let numOfDays = 7;
 
   export let classname = '';
-  export let controlsclass = 'drop-header';
-  export let activeclass = 'active';
+  export const controlsclass = 'drop-header';
+  export const activeclass = 'active';
   export let calendarclass = 'calendar';
   export let headerclass = 'month-header';
   export let weekclass = 'weekdays';
@@ -79,7 +79,7 @@
   let activeYearStart = new Date().getFullYear();
   let activeYearEnd = new Date().getFullYear();
 
-  $: dateRange = {start, end};
+  $: dateRange = {start: value.start ? new Date(value.start) : null, end: value.end ? new Date(value.end) : null};
   $: startNextActiveMonth = activeMonthStart >= 11 ? 0 : activeMonthStart + 1;
   $: startMonthDate = new Date(Date.UTC(activeYearStart, activeMonthStart, 0)).getDay();
   $: endMonthDate = new Date(Date.UTC(activeYearEnd, startNextActiveMonth, 0)).getDate();
@@ -100,48 +100,16 @@
     return arr;
   };
 
-  const getDayCell = (week, day) => {
-    const result = getDayIndexInMonth(week, day);
-    if (result < 1) {
-      return result + new Date(Date.UTC(activeYearEnd, startNextActiveMonth - 1, 0)).getDate();
-    } else if (result > endMonthDate) {
-      // todo: something wrong is here. not rerenders month oct-nov, jan-aug
-      return result - endMonthDate;
-    } else {
-      return result;
-    }
-  };
-
-  const getDayClass = (week, day) => {
-    let arr = [];
-
-    // Give proper classes for day cells
-    if (isDateInRange(week, day))
-      arr.push(inrangeclass);
-    if (isDateDisabled(week, day))
-      arr.push(disabledclass);
-    if (isToday(week, day))
-      arr.push(todayclass);
-
-    arr.concat(isDateSelected(week, day));
-    return arr.join(' ');
-  };
-
+  const dispatch = createEventDispatcher();
   const selectItem = (week, day) => {
     const result = getDayIndexInMonth(week, day);
     dateRange = Object.assign({}, dateRange, getNewDateRange(result));
     if (range) {
-      if (dateRange.start !== null && dateRange.end !== null) {
-        console.log(dateRange);
-        // this.$emit('changeAll', {start: this.getDateString(this.dateRange.start), end: this.getDateString(this.dateRange.end)});
-      } else {
-        console.log('done');
-        // isApplyDisabled = true;
-      }
+      dispatch('change', {start: getDateString(dateRange.start), end: getDateString(dateRange.end)});
     } else {
-      console.log('pick', getDateString(dateRange.start));
-      // this.$emit('pick', this.getDateString(this.dateRange.start));
+      dispatch('change', getDateString(dateRange.start));
     }
+    days = getDays();
   };
 
   // Change months by clicking on the arrows
@@ -160,9 +128,52 @@
     days = getDays();
   };
 
+  const goToEnd = () => {
+    if(!dateRange.start) dateRange.start = new Date(today);
+    dateRange.end = null;
+    isFirstChoice = false;
+    days = getDays();
+  };
+  const goToStart = () => {
+    isFirstChoice = true;
+    days = getDays();
+  };
+
+  const clear = () => {
+    isFirstChoice = true;
+    dateRange = {start: null, end: null};
+    dispatch('change', {start: getDateString(dateRange.start), end: getDateString(dateRange.end)});
+    days = getDays();
+  };
 
   // UTILS
   const getDayIndexInMonth = (week, day) => ((numOfDays * (week - 1)) + day) - startMonthDate;
+
+  const getDayCell = (week, day) => {
+    const result = getDayIndexInMonth(week, day);
+    if (result < 1) {
+      return result + new Date(Date.UTC(activeYearEnd, startNextActiveMonth - 1, 0)).getDate();
+    } else if (result > endMonthDate) {
+      return result - endMonthDate;
+    } else {
+      return result;
+    }
+  };
+
+  const getDayClass = (week, day) => {
+    let arr = [];
+
+    // Give proper classes for day cells
+    if (isDateInRange(week, day))
+      arr.push(inrangeclass);
+    if (isDateDisabled(week, day))
+      arr.push(disabledclass);
+    if (isToday(week, day))
+      arr.push(todayclass);
+
+    arr = arr.concat(isDateSelected(week, day));
+    return arr.join(' ');
+  };
 
   const isToday = (week, day) => {
     const result = getDayIndexInMonth(week, day);
@@ -190,7 +201,6 @@
   const isDateInRange = (week, day) => {
     const result = getDayIndexInMonth(week, day);
     let currDate = new Date(Date.UTC(activeYearStart, activeMonthStart, result));
-
     return (dateRange.start && dateRange.start.getTime() < currDate.getTime()) &&
         (dateRange.end && dateRange.end.getTime() > currDate.getTime());
   };

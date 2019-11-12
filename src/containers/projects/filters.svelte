@@ -10,7 +10,7 @@
   import DateRange from '@/components/projects/date.svelte';
 
   import orders from '@/constants/projects/order';
-  import {selectedOrder, selectOrder} from '@/store/projects';
+  import {selectedOrder, selectOrder, filters, changeSearch} from '@/store/projects';
 
   let open = null;
   const changeOpen = (name) => {
@@ -20,7 +20,12 @@
 </script>
 
 <div class="filters">
-  <TextField item>
+  <TextField
+      value={$filters.search}
+      on:change={(e) => changeSearch(e.detail)}
+      on:input={(e) => changeSearch(e.detail)}
+      item
+  >
     <svg src="images/icons/search.svg" class="item" />
   </TextField>
   <div class="dropdowns">
