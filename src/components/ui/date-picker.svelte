@@ -96,3 +96,166 @@
   const getDayIndexInMonth = (week, day) => ((numOfDays * (week - 1)) + day) - startMonthDate;
   const getDayClass = (week, day) => '';
 </script>
+
+<svelte:head>
+  <style>
+    .drop-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .5em 1em;
+    }
+
+    .drop-header > div {
+      margin-left: 24px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .drop-header span {
+      padding: .8em .8em;
+      border-radius: 25px;
+    }
+
+    .drop-header span {
+      color: #888;
+    }
+
+    .drop-header span.active {
+      background-color: rgba(56, 120, 0, .12);
+      color: #387800;
+    }
+
+    .month-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 1em;
+      border: 0 solid #ccc;
+      border-top-width: 1px;
+      border-bottom-width: 1px;
+      padding: .5em 0;
+      color: #387800;
+      font-weight: 500;
+    }
+
+    .month-header button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      background-size: cover;
+      margin: 0 2em;
+      padding: .1em;
+    }
+
+    .calendar {
+      margin-bottom: 1em;
+    }
+
+    .weekdays {
+      margin: 1em 1em .5em;
+      display: flex;
+    }
+
+    .weekdays > div {
+      color: #888;
+      font-size: .8rem;
+      width: 14.285714285714286%;  /* 100% / 7 */
+      text-align: center;
+    }
+
+    .days {
+      display: flex;
+    }
+
+    .day.today > button {
+      color: #387800;
+    }
+
+    .days > .day {
+      font-size: 1rem;
+      width: 14.285714285714286%;  /* 100% / 7 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .day > button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1px;
+      font-weight: 500;
+      border: none;
+      background: none;
+      z-index: 2;
+    }
+
+    .day:hover > button {
+      background-color: rgba(56, 120, 0, .08);
+    }
+
+    .day.selected > button {
+      background-color: #BABABA;
+      color: #222;
+    }
+
+    .day.in-range.start > button,
+    .day.in-range.end > button,
+    .day.selected > button {
+      background-color: #70a565;
+      color: #fff;
+    }
+
+    .day.outside > button {
+      color: #bbb;
+    }
+
+    .day.outside.in-range > button {
+      color: #fff;
+    }
+
+    .day.in-range::before {
+      background-color: rgba(56, 120, 0, .25);
+      content: "";
+      height: 30px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    .day:last-child {
+      padding-right: 1em;
+    }
+
+    .day:first-child {
+      padding-left: 1em;
+    }
+
+    .day.start::before {
+      left: 15px;
+    }
+
+    .day.start:first-child::before {
+      left: calc(1em + 15px);
+    }
+
+    .day.end::before {
+      right: 15px;
+    }
+
+    .day.end:last-child::before {
+      right: calc(1em + 15px);
+    }
+  </style>
+</svelte:head>
