@@ -10,6 +10,9 @@
   import FormField from 'ui/form-field.svelte';
   import Switch from 'ui/switch.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
+  import CheckboxGroup from 'ui/checkbox-group.svelte';
+  import Chip from 'ui/chip.svelte';
+  import ChipGroup from 'ui/chip-group.svelte';
 
   const radioItems1 = [
     {
@@ -28,7 +31,47 @@
       color: '#FFFFFF',
     },
   ];
+
+  const checkboxes = [
+    {
+      id: 0,
+      color: '#FF00FF',
+      label: 'one checkbox',
+    },
+    {
+      id: 1,
+      color: '#FFFFFF',
+      label: 'two checkbox',
+    },
+    {
+      id: 2,
+      color: '#000000',
+      label: 'three checkbox',
+    },
+  ];
+
+  const chips = [
+    {
+      id: 0,
+      label: 'one',
+    },
+    {
+      id: 1,
+      label: 'two',
+    },
+    {
+      id: 2,
+      label: 'three',
+    },
+  ];
 </script>
+
+<style>
+  :global(.flex-wrap) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+</style>
 
 <svelte:head>
   <title>UI Showcase – Innopoints</title>
@@ -210,79 +253,33 @@
     </div>
   </Card>
 
-  <!--todo: checkboxes-->
   <Card id="checkboxes">
-    <h1 class="todo">Checkboxes</h1>
+    <h1>Checkboxes</h1>
     <div class="showcase">
-      <div role="group">
-        <label>
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices" />
-            <div class="icon" />
-          </div>
-        </label>
-        <label>
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices" />
-            <div class="icon" />
-          </div>
-        </label>
-        <label>
-          <div class="checkbox">
-            <input type="checkbox" name="check-choices" />
-            <div class="icon" />
-          </div>
-        </label>
-      </div>
+      <CheckboxGroup
+          items={checkboxes}
+          name="checkbox-1"
+      />
+    </div>
+    <div class="showcase">
 
       <hr />
 
-      <div role="group">
-        <label>
-          <div class="checkbox round colored" id="red-chk">
-            <input type="checkbox" checked="checked" name="check-choices-clr" />
-            <div class="icon" />
-          </div>
-        </label>
-        <label>
-          <div class="checkbox round colored" id="blue-chk">
-            <input type="checkbox" checked="checked" name="check-choices-clr" />
-            <div class="icon" />
-          </div>
-        </label>
-        <label>
-          <div class="checkbox round colored" id="white-chk">
-            <input type="checkbox" name="check-choices-clr" />
-            <div class="icon" />
-          </div>
-        </label>
-      </div>
+      <CheckboxGroup
+          colored
+          items={checkboxes}
+          checked={[checkboxes[1]]}
+          name="checkbox-2"
+      />
 
       <hr />
 
-      <div role="group" class="with-labels">
-        <label class="clickable">
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices2" />
-            <div class="icon" />
-          </div>
-          some label
-        </label>
-        <label class="clickable">
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices2" />
-            <div class="icon" />
-          </div>
-          other label
-        </label>
-        <label class="clickable">
-          <div class="checkbox">
-            <input type="checkbox" checked="checked" name="check-choices2" />
-            <div class="icon" />
-          </div>
-          more label
-        </label>
-      </div>
+      <CheckboxGroup
+          labeled
+          items={checkboxes}
+          checked={checkboxes}
+          name="checkbox-3"
+      />
     </div>
   </Card>
 
@@ -395,15 +392,32 @@
     </div>
   </Card>
 
-  <!--todo: chips-->
   <Card id="chips">
-    <h1 class="todo">Chips</h1>
+    <h1>Chips</h1>
     <div class="showcase">
       <div style="display: flex; flex-wrap: wrap;">
-        <div class="chip unclickable">most first</div>
-        <div class="chip unclickable">least first</div>
-        <div class="chip unclickable outline">least last</div>
-        <div class="chip unclickable outline">most last</div>
+        <Chip disabled>most first</Chip>
+        <Chip disabled>least first</Chip>
+        <Chip disabled outline>least last</Chip>
+        <Chip disabled outline>most last</Chip>
+      </div>
+    </div>
+
+    <hr />
+    <ChipGroup items={chips} name="chip-11" classname="flex-wrap" />
+
+    <hr />
+    <ChipGroup items={chips} name="chip-12" multiple classname="flex-wrap" />
+
+    <hr />
+
+    <div class="showcase">
+      <div role="group" style="display: flex; flex-wrap: wrap;">
+        <Chip name="chip-2" small>XS</Chip>
+        <Chip name="chip-2" small value={true}>S</Chip>
+        <Chip name="chip-2" small disabled>M</Chip>
+        <Chip name="chip-2" small outline>L</Chip>
+        <Chip name="chip-2" small outline>XL</Chip>
       </div>
     </div>
 
@@ -411,114 +425,10 @@
 
     <div class="showcase">
       <div role="group" style="display: flex; flex-wrap: wrap;">
-        <label class="chip-wrapper">
-          <input type="radio" name="things" />
-          <div class="chip">most first</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="things" checked />
-          <div class="chip">least first</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="things" />
-          <div class="chip">least last</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="things" />
-          <div class="chip">most last</div>
-        </label>
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="showcase">
-      <div role="group" style="display: flex; flex-wrap: wrap;">
-        <label class="chip-wrapper">
-          <input type="radio" name="thhings" disabled />
-          <div class="chip small">XS</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="thhings" checked />
-          <div class="chip small">S</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="thhings" />
-          <div class="chip small">M</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="thhings" />
-          <div class="chip small">XXL</div>
-        </label>
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="showcase">
-      <div role="group" style="display: flex; flex-wrap: wrap;">
-        <label class="chip-wrapper">
-          <input type="radio" name="thingss" />
-          <div class="chip outline">XS</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="thingss" checked />
-          <div class="chip outline">S</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="thingss" />
-          <div class="chip outline">M</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="radio" name="thingss" />
-          <div class="chip outline">XXL</div>
-        </label>
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="showcase">
-      <div role="group" style="display: flex; flex-wrap: wrap;">
-        <label class="chip-wrapper">
-          <input type="checkbox" name="stuff" checked />
-          <div class="chip">most first</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="checkbox" name="stuff" checked />
-          <div class="chip">least first</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="checkbox" name="stuff" />
-          <div class="chip">least last</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="checkbox" name="stuff" />
-          <div class="chip">most last</div>
-        </label>
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="showcase">
-      <div role="group" style="display: flex; flex-wrap: wrap;">
-        <label class="chip-wrapper">
-          <input type="checkbox" name="stufff" checked />
-          <div class="chip outline">XS</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="checkbox" name="stufff" checked />
-          <div class="chip outline">S</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="checkbox" name="stufff" />
-          <div class="chip outline">M</div>
-        </label>
-        <label class="chip-wrapper">
-          <input type="checkbox" name="stufff" />
-          <div class="chip outline">XXL</div>
-        </label>
+        <Chip name="chip-2" multiple>most first</Chip>
+        <Chip name="chip-2" multiple>least first</Chip>
+        <Chip name="chip-2" multiple>least first</Chip>
+        <Chip name="chip-2" multiple>most last</Chip>
       </div>
     </div>
   </Card>

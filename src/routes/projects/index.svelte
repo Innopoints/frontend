@@ -4,6 +4,8 @@
   import Button from 'ui/button.svelte';
   import projectsList from '@/constants/projects/projects';
   import Project from '@/components/projects/card.svelte';
+  import Filters from '@/containers/projects/filters.svelte';
+  import Ordering from '@/containers/projects/ordering.svelte';
 
   // const projectsPerPage = 8;
   // const currentPage = 1;
@@ -50,9 +52,8 @@
   <section class="projects padded">
     <h1>Ongoing projects</h1>
 
-    <!--todo: add ordering and filters-->
-    <!--<Filters />
-    <Ordering />-->
+    <Filters />
+    <Ordering />
 
     {#if projectsList.length === 0}
       <div class="empty">

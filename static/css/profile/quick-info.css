@@ -69,7 +69,7 @@
 }
 
 .info-bubble .btn.close {
-  margin-right: 0;
+  margin: -.7em -.7em .3em .3em;
 }
 
 .personal .info-bubble {

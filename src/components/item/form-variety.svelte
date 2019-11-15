@@ -6,7 +6,7 @@
 
   export let index;
   export let removable;
-  export let colors;
+  export const colors = [];
 
   const sizes = ['XS', 'S', 'M', 'L' , 'XL', 'XXL'];
   const variety = $item.varieties[index];

@@ -15,6 +15,10 @@
   content: "";
 }
 
+.badge .icon {
+  display: block;
+}
+
 /* Typography -------------------------------------- */
 .headline {
   color: #127800;
@@ -316,7 +320,7 @@ button.btn {
   height: 20px;
   width: 20px;
   border: 3px solid transparent;
-  background: url("../images/icons/x.svg");
+  background: url("../../images/icons/x.svg");
   background-size: contain;
   cursor: pointer;
   border-radius: 50%;

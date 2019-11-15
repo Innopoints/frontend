@@ -11,39 +11,44 @@
   align-self: stretch;
 }
 
-.card {
+.cards .card {
   max-width: 18em;
   margin-top: 1em;
 }
 
-.card > .image {
+.cards .card > .image {
   position: relative;
 }
 
-.card > .image > img {
+.cards .card > .image > img {
   width: 100%;
 }
 
-.card .title + .subtitle {
+.cards .card .title + .subtitle {
   margin-top: .2em;
 }
 
-.card-row {
+.cards .card .card-row {
   display: flex;
   justify-content: space-between;
   margin-top: .5rem;
 }
 
-.labeled .content {
+.cards .card .labeled .content {
   display: inline-flex;
   align-items: center;
 }
 
-.title + .card-row {
+.cards .card .title + .card-row {
   margin-top: 1.5rem;
 }
 
-.color-options {
+.cards .card .innopoint {
+  height: 1.05rem;
+  margin-left: .3em;
+}
+
+.cards .card .color-options {
   display: flex;
   flex-direction: column-reverse;
   position: absolute;
@@ -51,28 +56,42 @@
   right: 1em;
 }
 
-.color-options > label {
+.cards .card .color-options > label {
   margin-bottom: .5em;
 }
 
-.card-row .price {
+.cards .card .card-row .price {
   font-size: 1.2rem;
 }
 
-.card .innopoint {
-  height: 1.05rem;
-  margin-left: .3em;
+.cards hr {
+  margin-top: 3em;
+}
+
+.cards hr::after {
+  font-size: 1.2rem;
+  color: #127800;
+  font-weight: 500;
+  padding: 0 .6em;
+  white-space: nowrap;
+}
+
+@supports (display: grid) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 18em);
+    grid-gap: 1rem;
+  }
+  .cards hr {
+    grid-column: 1 / -1;
+  }
 }
 
 @media only screen and (min-width: 600px) {
+  .cards hr::after {
+    font-size: 1.4rem;
+  }
   .card {
     margin: .5em;
-  }
-  @supports (display: grid) {
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, 18em);
-      grid-gap: 1rem;
-    }
   }
 }

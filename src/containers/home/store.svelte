@@ -1,6 +1,6 @@
 <script>
   import StoreCard from '@/components/store/card.svelte';
-  import items from '@/constants/store';
+  import items from '@/constants/store/store';
   const topItems = items.slice(0, 3);
 </script>
 

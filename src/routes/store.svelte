@@ -2,7 +2,9 @@
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/store/tagline.svelte';
   import StoreCard from '@/components/store/card.svelte';
-  import items from '@/constants/store';
+  import items from '@/constants/store/store';
+  import Filters from '@/containers/store/filters.svelte';
+  import Ordering from '@/containers/store/ordering.svelte';
 </script>
 
 <svelte:head>
@@ -38,9 +40,8 @@
   <Tagline />
 
   <section id="store-top" class="shop padded">
-    <!--todo: add ordering and filters-->
-    <!--<Filters />
-    <Ordering />-->
+    <Filters />
+    <Ordering />
 
     {#if items.length === 0}
       <div lass="empty">
