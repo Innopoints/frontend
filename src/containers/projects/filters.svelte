@@ -10,7 +10,7 @@
   import DateRange from '@/components/projects/date.svelte';
 
   import orders from '@/constants/projects/order';
-  import {selectedOrder, selectOrder, filters, changeSearch} from '@/store/projects';
+  import {selectedOrder, selectOrder, filters, changeSearch, clearAllFilters} from '@/store/projects';
 
   let open = null;
   const changeOpen = (name) => {
@@ -32,7 +32,7 @@
     <Dropdown chevron={false} wrapperclass="order-options">
       <svg slot="label" src="images/icons/order.svg" class="mr" />
       <span slot="label" class="tight">order</span>
-      <span slot="label" class="regular">most expensive first</span>
+      <span slot="label" class="regular">{$selectedOrder.label}</span>
       <RadioGroup
           selected={$selectedOrder}
           items={orders}
@@ -44,8 +44,9 @@
     <Dropdown chevron={false} right>
       <svg slot="label" src="images/icons/filter.svg" class="mr" />
       <span slot="label">filters</span>
-      <span slot="label"><Dot active small /></span>
-      <Button danger>Clear filters</Button>
+      <span slot="label">{#if !$filters.isEmpty}<Dot active small />{/if}</span>
+
+      <Button danger on:click={clearAllFilters}>Clear filters</Button>
       <ul class="accordion">
         <Spots />
         <Competences open={open === 'competences'} on:toggle={() => changeOpen('competences')} />

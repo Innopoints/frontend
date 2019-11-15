@@ -2,21 +2,28 @@ import { writable } from 'svelte/store';
 import orderOptions from '@/constants/projects/order';
 import competencesOptions from '@/constants/projects/competences';
 
-export const filters = writable({
-  competences: competencesOptions,
-  spots: 1,
-  date: {},
-  search: '',
-});
-
 export const selectedOrder = writable(orderOptions[0]);
 
 export function selectOrder(value) {
   selectedOrder.update(() => value);
 }
 
+const filtersDefaultState = {
+  competences: competencesOptions,
+  spots: 1,
+  date: {},
+  search: '',
+  isEmpty: true,
+};
+
+export const filters = writable(filtersDefaultState);
+
 function changeFilter(name, value) {
-  filters.update((state) => ({...state, [name]: value}));
+  filters.update((state) => ({...state, [name]: value, isEmpty: false}));
+}
+
+export function clearAllFilters() {
+  filters.update(() => filtersDefaultState);
 }
 
 export function changeSearch(value) {
