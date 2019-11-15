@@ -9,7 +9,7 @@
 
   import orders from '@/constants/store/order';
   import colors from '@/constants/store/colors';
-  import {selectedOrder, selectOrder, filters, changeSearch, changeColors, changeIsColorless, changeLowPrice, changeHighPrice} from '@/store/store';
+  import {selectedOrder, selectOrder, filters, changeSearch, changeColors, changeIsColorless, changeLowPrice, changeHighPrice, clearAllFilters} from '@/store/store';
   import {isAuthed, user} from '@/store/user';
 
   const showAffordable = () => {
@@ -34,7 +34,7 @@
     <Dropdown chevron={false} wrapperclass="order-options">
       <svg slot="label" src="images/icons/order.svg" class="mr" />
       <span slot="label" class="tight">order</span>
-      <span slot="label" class="regular">most expensive first</span>
+      <span slot="label" class="regular">{$selectedOrder.label}</span>
       <RadioGroup
           name="order-options-mobile"
           selected={$selectedOrder}
@@ -47,8 +47,11 @@
     <Dropdown chevron={false} right>
       <svg slot="label" src="images/icons/filter.svg" class="mr" />
       <span slot="label">filters</span>
-      <span slot="label"><Dot active small /></span>
-      <Button danger>Clear filters</Button>
+      <span slot="label">
+        {#if !$filters.isEmpty}<Dot active small />{/if}
+      </span>
+
+      <Button danger on:click={clearAllFilters}>Clear filters</Button>
       <ul>
         <li class="filter price">
           <div>

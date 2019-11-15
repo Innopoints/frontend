@@ -8,16 +8,23 @@ export function selectOrder(value) {
   selectedOrder.update(() => value);
 }
 
-export const filters = writable({
+const filtersDefaultState = {
   colors: colorOptions,
   isColorless: true,
   search: '',
   priceLow: null,
   priceHigh: null,
-});
+  isEmpty: true,
+};
+
+export const filters = writable(filtersDefaultState);
 
 function changeFilter(name, value) {
-  filters.update((state) => ({...state, [name]: value}));
+  filters.update((state) => ({...state, [name]: value, isEmpty: false}));
+}
+
+export function clearAllFilters() {
+  filters.update(() => filtersDefaultState);
 }
 
 export function changeSearch(value) {
