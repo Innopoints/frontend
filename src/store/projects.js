@@ -24,8 +24,7 @@ export function changeSearch(value) {
 }
 
 export function changeSpots(value) {
-  if (value > 0) changeFilter('spots', value);
-  else changeFilter('spots', 1);
+  changeFilter('spots', Math.max(value, 1));
 }
 
 export function changeCompetences(value) {

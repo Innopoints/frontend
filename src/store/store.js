@@ -33,15 +33,13 @@ export function changeIsColorless() {
   changeFilter('isColorless', !isColorless);
 }
 
-export function changePrice(value, isHigh = false) {
-  let {priceLow} = get(filters);
+export function changeLowPrice(value) {
+  changeFilter('priceLow', Math.max(parseInt(value), 0));
+}
 
-  if (isHigh) {
-    if (parseInt(value) > priceLow) {
-      changeFilter('priceHigh', parseInt(value));
-    }
-  } else {
-    if (parseInt(value) >= 0) changeFilter('priceLow', parseInt(value));
-    else changeFilter('priceLow', 0);
+export function changeHighPrice(value) {
+  let {priceLow} = get(filters);
+  if (parseInt(value) > priceLow) {
+    changeFilter('priceHigh', parseInt(value));
   }
 }

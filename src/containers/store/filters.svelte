@@ -9,14 +9,14 @@
 
   import orders from '@/constants/store/order';
   import colors from '@/constants/store/colors';
-  import {selectedOrder, selectOrder, filters, changeSearch, changeColors, changeIsColorless, changePrice} from '@/store/store';
+  import {selectedOrder, selectOrder, filters, changeSearch, changeColors, changeIsColorless, changeLowPrice, changeHighPrice} from '@/store/store';
   import {isAuthed, user} from '@/store/user';
 
   const showAffordable = () => {
     let {balance} = get(user);
     if (balance) {
-      changePrice(0);
-      changePrice(balance, true);
+      changeLowPrice(0);
+      changeHighPrice(balance);
     }
   };
 </script>
@@ -36,6 +36,7 @@
       <span slot="label" class="tight">order</span>
       <span slot="label" class="regular">most expensive first</span>
       <RadioGroup
+          name="order-options-mobile"
           selected={$selectedOrder}
           items={orders}
           isLabel
@@ -54,19 +55,19 @@
             <span class="name">price</span>
             <div class="align-center">
               <TextField
+                  type="number"
                   value={$filters.priceLow}
-                  on:input={(e) => changePrice(e.detail)}
-                  on:change={(e) => changePrice(e.detail)}
+                  on:input={(e) => changeLowPrice(e.detail)}
+                  on:change={(e) => changeLowPrice(e.detail)}
                   classname="no-spinner"
-                  isNum
               />
               <span class="ml mr">–</span>
               <TextField
+                  type="number"
                   value={$filters.priceHigh}
-                  on:input={(e) => changePrice(e.detail, true)}
-                  on:change={(e) => changePrice(e.detail, true)}
+                  on:input={(e) => changeHighPrice(e.detail, true)}
+                  on:change={(e) => changeHighPrice(e.detail, true)}
                   classname="no-spinner"
-                  isNum
               />
             </div>
           </div>

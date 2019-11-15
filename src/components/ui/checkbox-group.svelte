@@ -14,7 +14,7 @@
 
   let dispatch = createEventDispatcher();
   const changeCheckbox = item => {
-    if (selected.find(x => x.id === item.id)) selected = selected.filter(x => x.id !== item.id);
+    if (selected.some(x => x.id === item.id)) selected = selected.filter(x => x.id !== item.id);
     else selected.push(item);
     dispatch('change', selected);
   };
@@ -66,7 +66,7 @@
         <input
             on:change={() => changeCheckbox(item)}
             type="checkbox"
-            checked={selected.find(x => x.id === item.id)}
+            checked={selected.some(x => x.id === item.id)}
             name={name}
         >
         <div class:white={isWhite(item)} style="{style(item)}" class="icon" />

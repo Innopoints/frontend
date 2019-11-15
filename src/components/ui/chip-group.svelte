@@ -12,7 +12,7 @@
   let dispatch = createEventDispatcher();
   const check = (item) => {
     if (multiple) {
-      if (selected.find(x => x.id === item.id)) selected = selected.filter(x => x.id !== item.id);
+      if (selected.some(x => x.id === item.id)) selected = selected.filter(x => x.id !== item.id);
       else selected.push(item);
     } else {
       selected = item;
@@ -27,7 +27,7 @@
             label={item.label}
             name={name}
             multiple={multiple}
-            value={multiple ? selected.find(x => x.id === item.id) : selected.id === item.id}
+            value={multiple ? selected.some(x => x.id === item.id) : selected.id === item.id}
             on:change={() => check(item)}
     />
   {/each}

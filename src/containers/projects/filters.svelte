@@ -14,7 +14,7 @@
 
   let open = null;
   const changeOpen = (name) => {
-    if (open !== name || !open) open = name;
+    if (open !== name) open = name;
     else open = null;
   };
 </script>

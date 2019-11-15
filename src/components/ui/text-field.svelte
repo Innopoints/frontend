@@ -5,7 +5,7 @@
   export let classname = null;
   export let placeholder = '';
   export let name = null;
-  export let isNum = false;
+  export let type = 'text';
   export let value = null;
   export let pattern = null;
   export let min = null;
@@ -19,6 +19,7 @@
   export let right = null;
   export const cols = null;
 
+  $: val = value;
   $: classes = [
     'text-field',
     classname && classname,
@@ -36,7 +37,7 @@
       {id}
       {placeholder}
       {name}
-      bind:value
+      bind:value={val}
       cols={5}
       on:focus={(e) => dispatch('focus', e.target.value)}
       on:blur={(e) => dispatch('blur', e.target.value)}
@@ -44,38 +45,23 @@
       on:change={(e) => dispatch('change', e.target.value)}
     />
   {:else}
-    {#if isNum}
-      <input
-          {id}
-          type="number"
-          {placeholder}
-          {name}
-          bind:value
-          {pattern}
-          {min}
-          {max}
-          {maxLength}
-          on:focus={(e) => dispatch('focus', e.target.value)}
-          on:blur={(e) => dispatch('blur', e.target.value)}
-          on:input={(e) => dispatch('input', e.target.value)}
-          on:keyup.enter={(e) => dispatch('change', e.target.value)}
-          on:change={(e) => dispatch('change', e.target.value)}
-      />
-    {:else}
-      <input
-          {id}
-          type="text"
-          {placeholder}
-          {name}
-          bind:value
-          {pattern}
-          on:focus={(e) => dispatch('focus', e.target.value)}
-          on:blur={(e) => dispatch('blur', e.target.value)}
-          on:input={(e) => dispatch('input', e.target.value)}
-          on:keyup.enter={(e) => dispatch('change', e.target.value)}
-          on:change={(e) => dispatch('change', e.target.value)}
-      />
-    {/if}
+    <input
+        {id}
+        type="number"
+        {placeholder}
+        {name}
+        {type}
+        value={val}
+        {pattern}
+        {min}
+        {max}
+        {maxLength}
+        on:focus={(e) => dispatch('focus', e.target.value)}
+        on:blur={(e) => dispatch('blur', e.target.value)}
+        on:input={(e) => dispatch('input', e.target.value)}
+        on:keyup.enter={(e) => dispatch('change', e.target.value)}
+        on:change={(e) => dispatch('change', e.target.value)}
+    />
 
     {#if outline}
       <label for={id} class="label">{label}</label>
