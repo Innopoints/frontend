@@ -39,9 +39,9 @@
         {price}
         <svg src="images/innopoint-sharp.svg" class="innopoint" />
       </Labeled>
-      <Button outline>view</Button>
+      <Button isOutline>view</Button>
     </div>
   {:else}
-    <Button outline>view</Button>
+    <Button isOutline>view</Button>
   {/if}
 </Card>

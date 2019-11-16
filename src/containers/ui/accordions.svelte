@@ -14,7 +14,7 @@
           Here's some hidden away content
           <br />
           for your great pleasure.
-          <Button filled>does nothing</Button>
+          <Button isFilled>does nothing</Button>
         </Accordion>
       </li>
       <li>
@@ -22,7 +22,7 @@
           Here's some hidden away content
           <br />
           for your great pleasure.
-          <Button filled>does nothing</Button>
+          <Button isFilled>does nothing</Button>
         </Accordion>
       </li>
     </ul>

@@ -51,7 +51,7 @@
         {#if !$filters.isEmpty}<Dot active small />{/if}
       </span>
 
-      <Button danger on:click={clearAllFilters}>Clear filters</Button>
+      <Button isDanger on:click={clearAllFilters}>Clear filters</Button>
       <ul>
         <li class="filter price">
           <div>

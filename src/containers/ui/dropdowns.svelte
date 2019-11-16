@@ -17,7 +17,7 @@
       great now close me
     </Dropdown>
     <Dropdown label="right dropdown" right nowrap>
-      <Button filled>woo alRIGHT</Button>
+      <Button isFilled>woo alRIGHT</Button>
     </Dropdown>
     <Dropdown dropdownclass="info-bubble" btnclass="round" chevron={false} right>
       <svg slot="label" src="images/icons/help-circle.svg" class="icon" />

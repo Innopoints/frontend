@@ -13,7 +13,7 @@
 
 <li class:open={value} class="filter competences panel">
   <svg src="images/icons/tag.svg" class="icon mr" />
-  <Button chevron={true} classname="handle" on:click={() => dispatch('toggle')}>
+  <Button chevron classname="handle" on:click={() => dispatch('toggle')}>
     select competences
   </Button>
 </li>

@@ -6,16 +6,16 @@
 <Card id="buttons" class="todo">
   <h1>Buttons</h1>
   <div class="showcase">
-    <Button filled href="#" away>link</Button>
-    <Button filled>button</Button>
-    <Button outline filled href="#">link</Button>
+    <Button isFilled href="#" away>link</Button>
+    <Button isFilled>button</Button>
+    <Button isFutline isFilled href="#">link</Button>
     <Button href="#">link</Button>
-    <Button disabled filled>disabled</Button>
-    <Button disabled outline>disabled</Button>
+    <Button isFilled disabled>disabled</Button>
+    <Button isOutline disabled>disabled</Button>
     <Button disabled>disabled</Button>
   </div>
   <div class="showcase">
-    <Button filled>
+    <Button isFilled>
       button
       <svg src="images/icons/flag.svg" class="ml icon" />
     </Button>
@@ -25,24 +25,24 @@
     </Button>
   </div>
   <div class="showcase">
-    <Button round badge>
+    <Button isRound badge>
       <svg src="images/ui-kit-page/bell.svg" />
     </Button>
-    <Button round normal>
+    <Button isRound isNormal>
       <svg src="images/ui-kit-page/x.svg" />
     </Button>
-    <Button outline round normal>
+    <Button isOutline isRound normal>
       <svg src="images/ui-kit-page/x.svg" />
     </Button>
-    <Button filled chevron>chevron</Button>
+    <Button isFilled chevron>chevron</Button>
   </div>
   <hr />
   <div class="showcase">
-    <Button filled danger>
+    <Button isFilled isDanger>
       <svg src="images/icons/move.svg" class="mr" />
       button
     </Button>
-    <Button href="#" outline danger>button</Button>
-    <Button href="#" danger>button</Button>
+    <Button href="#" isOutline isDanger>button</Button>
+    <Button href="#" isDanger>button</Button>
   </div>
 </Card>

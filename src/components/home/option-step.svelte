@@ -15,7 +15,7 @@
     <span class="title">{title}</span>
     <span class="subtitle">{subtitle}</span>
     {#if buttonLink}
-      <Button href={buttonLink} away={external} filled>{buttonText}</Button>
+      <Button href={buttonLink} away={external} isFilled>{buttonText}</Button>
     {:else}
       <strong>{buttonText}</strong>
     {/if}

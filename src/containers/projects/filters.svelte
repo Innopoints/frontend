@@ -46,7 +46,7 @@
       <span slot="label">filters</span>
       <span slot="label">{#if !$filters.isEmpty}<Dot active small />{/if}</span>
 
-      <Button danger on:click={clearAllFilters}>Clear filters</Button>
+      <Button isDanger on:click={clearAllFilters}>Clear filters</Button>
       <ul class="accordion">
         <Spots />
         <Competences open={open === 'competences'} on:toggle={() => changeOpen('competences')} />

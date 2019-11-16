@@ -50,7 +50,7 @@
       </div>
     {:else}
       <div class="telegram">
-        <Button on:click="{() => toggleTgChange(true)}" outline>
+        <Button on:click="{() => toggleTgChange(true)}" isOutline>
           <svg src="images/icons/send.svg" class="icon mr" />
           add Telegram username
         </Button>

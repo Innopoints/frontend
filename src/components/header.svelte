@@ -10,7 +10,7 @@
   </a>
   <div class="actions">
     {#if !$isAuthed}
-      <Button outline on:click={logIn}>sign in</Button>
+      <Button isOutline on:click={logIn}>sign in</Button>
     {:else}
       <Button href="/profile" round>
         <svg src="images/icons/user.svg" />
