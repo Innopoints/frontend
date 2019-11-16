@@ -10,10 +10,10 @@
     <TextField placeholder="Placeholder" />
   </div>
   <div class="showcase half">
-    <TextField placeholder="Price" item right>
+    <TextField placeholder="Price" isWithItem isItemRight>
       <svg src="images/innopoint-sharp.svg" class="item" />
     </TextField>
-    <TextField type="number" item>
+    <TextField type="number" isWithItem>
       <span class="item">XXL</span>
     </TextField>
   </div>
@@ -22,16 +22,16 @@
   </div>
   <div class="showcase">
     <TextField
-        type="number"
-        multiline
         id="description"
         placeholder="High-quality bulletproof fabric"
-        cols="5" />
+        type="number"
+        multiline
+    />
   </div>
+</Card>
 
-  <hr />
-
-  <h1>Form field</h1>
+<Card id="forms">
+  <h1>Form fields</h1>
 
   <div class="showcase">
     <form>
@@ -49,13 +49,13 @@
       </FormField>
 
       <FormField title="Price" id="ff-3" required>
-        <TextField id="ff-3" type="number" placeholder="Price" item right>
+        <TextField id="ff-3" type="number" placeholder="Price" isWithItem isItemRight>
           <svg src="images/innopoint-sharp.svg" class="item innopoint" />
         </TextField>
       </FormField>
 
       <FormField title="Size" id="ff-4" required>
-        <TextField id="ff-4" type="number" item>
+        <TextField id="ff-4" type="number" isWithItem>
           <span class="item">XXL</span>
         </TextField>
       </FormField>
@@ -65,11 +65,11 @@
   <hr />
 
   <div class="showcase">
-    <TextField id="nothing" outline label="Label" />
+    <TextField id="nothing" isOutline label="Label" />
     <TextField
         id="username"
-        outline
-        item
+        isOutline
+        isWithItem
         label="Telegram"
         pattern="[A-Za-z0-9_](5, 32)"
         error="A username should contain from 5 to 32 symbols: a–z, 0–9, _.">

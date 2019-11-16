@@ -24,7 +24,7 @@
       value={$filters.search}
       on:change={(e) => changeSearch(e.detail)}
       on:input={(e) => changeSearch(e.detail)}
-      item
+      isWithItem
   >
     <svg src="images/icons/search.svg" class="item" />
   </TextField>
