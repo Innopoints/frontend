@@ -1,31 +1,61 @@
 {
   "name": "innopoints-frontend",
-  "version": "0.1.1",
   "description": "Innopolis University innopoints project",
-  "author": "VanishMax",
+  "version": "0.3.0",
   "scripts": {
-    "dev": "nuxt",
-    "start": "nuxt build && nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint-fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "dev": "sapper dev",
+    "build": "sapper build --legacy",
+    "export": "sapper export --legacy",
+    "start": "node __sapper__/build",
+    "lint": "eslint --format=pretty .",
+    "lint:fix": "eslint --format=pretty --fix ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --format=pretty",
+      "eslint --max-warnings 0 --fix",
+      "git add"
+    ],
+    "*.svelte": [
+      "eslint --format=pretty",
+      "eslint --max-warnings 0 --fix",
+      "git add"
+    ]
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-loader": "^2.1.2",
-    "eslint-plugin-vue": "^5.2.2",
-    "fecha": "^3.0.3",
-    "node-sass": "^4.12.0",
-    "nuxt": "^2.8.0",
-    "nuxt-dropzone": "^1.0.2",
-    "sass-loader": "^7.1.0",
-    "vue-eslint-parser": "^6.0.4",
-    "vue-ripple-directive": "^2.0.1",
-    "vue-svg-loader": "^0.12.0",
-    "vuedraggable": "^2.23.0"
+    "compression": "^1.7.1",
+    "polka": "next",
+    "sirv": "^0.4.0"
   },
-  "browserslist": "> 0.5%, last 3 versions, Firefox ESR, not dead, last 5 iOS major versions"
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.4.0",
+    "eslint-formatter-pretty": "^2.1.1",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "fecha": "^3.0.3",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.12.0",
+    "rollup-plugin-alias": "^2.0.0",
+    "rollup-plugin-babel": "^4.0.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-svelte": "^5.0.1",
+    "rollup-plugin-terser": "^4.0.4",
+    "sapper": "^0.27.9",
+    "svelte": "^3.14.0"
+  }
 }

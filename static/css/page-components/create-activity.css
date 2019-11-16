@@ -1,0 +1,275 @@
+.create-activity {
+  margin-bottom: 1em;
+  overflow: visible;
+}
+
+.create-activity .form-field {
+  flex-direction: column;
+  margin-bottom: 2em;
+}
+
+.create-activity .form-field .name {
+  font-size: 1rem;
+}
+
+.create-activity .form-field > label + .text-field-wrapper {
+  margin-top: 1em;
+}
+
+.create-activity .form-field .btn {
+  align-self: flex-start;
+}
+
+.create-activity .dropdown.with-labels label {
+  flex-direction: row;
+  align-items: center;
+  padding: 1em 1em .2em;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.create-activity .dropdown.with-labels label:last-child {
+  padding: 1em;
+}
+
+.create-activity .tg-username {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.create-activity .tg-username > label {
+  flex-basis: unset;
+}
+
+.create-activity .tg-username .switch-wrapper {
+  margin-left: 1em;
+}
+
+.create-activity .tg-username .name, .create-activity .reward-type .name, .create-activity .work-hours .name {
+  margin-bottom: .3em;
+}
+
+.create-activity .reward-amt .dropdown-shell {
+  margin-bottom: 1.5em;
+}
+
+.create-activity .work-hours .desc {
+  margin-bottom: .8em;
+}
+
+.create-activity .reward-amt .text-field,
+.create-activity .work-hours .text-field {
+  max-width: 6em;
+}
+
+.create-activity .people .text-field {
+  max-width: 3em;
+  margin-bottom: 0 !important;
+}
+
+.create-activity .people .group {
+  display: flex;
+  align-items: center;
+}
+
+.create-activity .people .divider {
+  border-top-width: 0;
+  width: 1em;
+  margin: 0 1.2em;
+  font-size: .9rem;
+}
+
+.create-activity .people label.clickable {
+  flex-direction: row;
+  align-items: center;
+  font-size: .9rem;
+  font-weight: 300;
+}
+
+.create-activity .people .checkbox {
+  margin-right: .5em;
+}
+
+.create-activity .deadline .dropdown,
+.create-activity .questions .dropdown {
+  bottom: 100%;
+  margin-bottom: 5px;
+}
+
+.create-activity .questions > label {
+  padding-right: .5em;
+}
+
+.create-activity .questions .dropdown {
+  padding: 1em;
+  width: 100%;
+}
+
+.create-activity .questions .dropdown .row {
+  margin-top: .5em;
+  display: flex;
+}
+
+.create-activity .questions .dropdown .row .text-field {
+  flex: 1;
+  margin-right: .5em;
+}
+
+.create-activity .questions .dropdown .actions {
+  justify-content: space-between;
+  margin-top: .5em;
+}
+
+.create-activity .actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hinted {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hinted .dropdown-shell {
+  margin-left: 3em;
+}
+
+.hinted .info-bubble {
+  padding: 1em;
+  min-width: 15em;
+  font-weight: 300;
+  line-height: 1.2rem;
+}
+
+.hinted .btn.close {
+  margin-right: -.7em;
+  margin-top: -.7em;
+}
+
+.clickable.switch-wrapper {
+  flex-direction: row;
+}
+
+@media only screen and (min-width: 480px) {
+  .create-activity .date-range, .create-activity .competences, .create-activity .reward-type, .create-activity .reward-amt, .create-activity .work-hours, .create-activity .deadline, .create-activity .questions {
+    flex-direction: row;
+    align-items: center;
+  }
+  .create-activity .competences .name {
+    margin-right: 1em;
+  }
+  .create-activity .competences .handle {
+    white-space: nowrap;
+  }
+  .create-activity .reward-type, .create-activity .reward-amt, .create-activity .work-hours {
+    align-items: baseline;
+  }
+  .create-activity .date-range .dropdown, .create-activity .competences .dropdown, .create-activity .deadline .dropdown, .create-activity .questions .dropdown {
+    right: 0;
+  }
+  .create-activity .questions .dropdown {
+    min-width: 25em;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .create-activity .form-field {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .create-activity .form-field > label {
+    margin-top: .8em;
+  }
+  .create-activity .form-field .name {
+    margin-bottom: 0;
+  }
+  .create-activity .form-field.name .text-field-wrapper, .create-activity .form-field.description .text-field-wrapper {
+    flex-basis: 60%;
+  }
+  .create-activity .form-field.tg-username .name {
+    margin-bottom: .3em;
+  }
+  .create-activity .form-field.tg-username > label:first-child {
+    margin-right: 2em;
+  }
+  .create-activity .form-field.reward-amt .dropdown {
+    margin-right: 0;
+  }
+  .create-activity .form-field.questions .name {
+    margin-bottom: .3em;
+  }
+  .hinted .info-bubble {
+    min-width: 18em;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .create-activity {
+    display: flex;
+  }
+  .create-activity > .left {
+    border-right: 1px solid #ddd;
+    flex-basis: 55%;
+    flex-grow: 1;
+    padding-right: 1.5em;
+  }
+  .create-activity > .right {
+    flex-basis: 45%;
+    flex-shrink: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2em;
+  }
+  .create-activity > .right .actions {
+    flex: 1;
+    align-items: flex-end;
+  }
+  .create-activity .form-field {
+    margin-bottom: 1.5em;
+  }
+  .create-activity .competences .dropdown {
+    bottom: 100%;
+    margin-bottom: 5px;
+  }
+  .create-activity .tg-username .name {
+    margin-bottom: .3em;
+  }
+  .create-activity .questions {
+    display: flex;
+    flex-direction: column;
+  }
+  .create-activity .questions > .dropdown-shell {
+    align-self: flex-end;
+  }
+  .create-activity .questions .dropdown {
+    right: 0 !important;
+    left: unset !important;
+  }
+}
+
+@media only screen and (min-width: 840px) and (max-width: 1023px) {
+  .create-activity .form-field:not(.tg-username) {
+    flex-direction: column;
+  }
+  .create-activity .name .text-field-wrapper, .create-activity .description .text-field-wrapper {
+    width: 100%;
+  }
+  .create-activity .date-range .dropdown, .create-activity .competences .dropdown, .create-activity .deadline .dropdown, .create-activity .questions .dropdown {
+    right: unset;
+    left: 0;
+  }
+  .create-activity .work-hours .desc {
+    margin-bottom: 0;
+  }
+  .create-activity .reward-type, .create-activity .reward-amt, .create-activity .work-hours, .create-activity .people {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-activity .questions {
+    flex-direction: row;
+  }
+}

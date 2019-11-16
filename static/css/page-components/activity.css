@@ -1,0 +1,157 @@
+.activity header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity > div:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+}
+
+.activity > div:not(:first-child) {
+  padding-top: 1.5em;
+}
+
+.activity .title {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.activity .row {
+  margin-top: .8em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.activity .row > .labeled {
+  flex-basis: 50%;
+}
+
+.activity .labeled .icon {
+  flex-shrink: 0;
+}
+
+.activity .actions > .btn > .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.labeled .content {
+  font-size: 1.15rem;
+}
+
+.labeled .innopoint {
+  margin-bottom: -1px;
+}
+
+.activity .left > .labeled,
+.activity .actions {
+  margin-top: 1em;
+}
+
+.activity .chips {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.activity .chip {
+  font-size: .85rem;
+  font-weight: 400;
+  color: #000;
+  margin: 0 .3em .3em 0;
+  padding: .4em .7em;
+}
+
+.activity .panel > .handle {
+  float: right;
+}
+
+.activity .panel {
+  margin-top: .8em;
+  margin-left: .5em;
+  padding-top: 1em;
+}
+
+.activity .panel .name {
+  margin-bottom: .3em;
+}
+
+.activity .panel + section {
+  padding-top: 1em;
+  padding-left: .3em;
+}
+
+.activity .stars {
+  margin-left: 1em;
+}
+
+.activity .stars .star {
+  stroke: #127800;
+  width: 18px;
+  height: 18px;
+  margin: 0 1px;
+}
+
+.activity .stars .star.off {
+  stroke: #d3d3d3;
+}
+
+.activity .with-icon {
+  display: flex;
+  align-items: flex-start;
+  font-size: .9rem;
+  margin-top: .3em;
+}
+
+.activity .with-icon > .icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  stroke: #127800;
+  margin-right: .3em;
+}
+
+.activity .panel:not(:first-of-type) {
+  border-top: 1px solid #ddd;
+}
+
+@media only screen and (min-width: 640px) {
+  @supports (display: grid) {
+    .activity {
+      display: grid;
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr 1fr;
+    }
+    .activity .left {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      border-bottom-width: 0 !important;
+      border-right: 1px solid #ddd;
+      padding-right: 1em;
+    }
+    .activity .middle,
+    .activity .right {
+      margin-left: 1em;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  @supports (display: grid) {
+    .activity {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .activity .left {
+      grid-row-end: 2;
+    }
+    .activity .middle {
+      border-bottom-width: 0 !important;
+      border-right: 1px solid #ddd;
+      padding-right: 1em;
+    }
+  }
+}

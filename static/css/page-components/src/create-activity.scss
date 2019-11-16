@@ -1,0 +1,327 @@
+.create-activity {
+  margin-bottom: 1em;
+  overflow: visible;
+
+  .form-field {
+    flex-direction: column;
+    margin-bottom: 2em;
+
+    .name {
+      font-size: 1rem;
+    }
+
+    & > label + .text-field-wrapper {
+      margin-top: 1em;
+    }
+
+    .btn {
+      align-self: flex-start;
+    }
+  }
+
+  .dropdown.with-labels label {
+    flex-direction: row;
+    align-items: center;
+    padding: 1em 1em .2em;
+    font-weight: 300;
+    white-space: nowrap;
+
+    &:last-child {
+      padding: 1em;
+    }
+  }
+
+  .tg-username {
+    flex-direction: row;
+    justify-content: flex-start;
+
+    & > label {
+      flex-basis: unset;
+    }
+
+    .switch-wrapper {
+      margin-left: 1em;
+    }
+  }
+
+  .tg-username, .reward-type, .work-hours {
+    .name {
+      margin-bottom: .3em;
+    }
+  }
+
+  .reward-amt .dropdown-shell {
+    margin-bottom: 1.5em;
+  }
+
+  .work-hours .desc {
+    margin-bottom: .8em;
+  }
+
+  .reward-amt .text-field,
+  .work-hours .text-field {
+    max-width: 6em;
+  }
+
+  .people {
+    .text-field {
+      max-width: 3em;
+      margin-bottom: 0 !important;
+    }
+
+    .group {
+      display: flex;
+      align-items: center;
+    }
+
+    .divider {
+      border-top-width: 0;
+      width: 1em;
+      margin: 0 1.2em;
+      font-size: .9rem;
+    }
+
+    label.clickable {
+      flex-direction: row;
+      align-items: center;
+      font-size: .9rem;
+      font-weight: 300;
+    }
+
+    .checkbox {
+      margin-right: .5em;
+    }
+  }
+
+  .deadline .dropdown,
+  .questions .dropdown {
+    bottom: 100%;
+    margin-bottom: 5px;
+  }
+
+  .questions {
+    & > label {
+      padding-right: .5em;
+    }
+
+    .dropdown {
+      padding: 1em;
+      width: 100%;
+
+      .row {
+        margin-top: .5em;
+        display: flex;
+
+        .text-field {
+          flex: 1;
+          margin-right: .5em;
+        }
+      }
+
+      .actions {
+        justify-content: space-between;
+        margin-top: .5em;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.hinted {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .dropdown-shell {
+    margin-left: 3em;
+  }
+
+  .info-bubble {
+    padding: 1em;
+    min-width: 15em;
+    font-weight: 300;
+    line-height: 1.2rem;
+  }
+
+  .btn.close {
+    margin-right: -.7em;
+    margin-top: -.7em;
+  }
+}
+
+.clickable.switch-wrapper {
+  flex-direction: row;
+}
+
+@media only screen and (min-width: 480px) {
+  .create-activity {
+    .date-range, .competences, .reward-type, .reward-amt, .work-hours, .deadline, .questions {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .competences {
+      .name {
+        margin-right: 1em;
+      }
+
+      .handle {
+        white-space: nowrap;
+      }
+    }
+
+    .reward-type, .reward-amt, .work-hours {
+      align-items: baseline;
+    }
+
+    .date-range, .competences, .deadline, .questions {
+      .dropdown {
+        right: 0;
+      }
+    }
+
+    .questions .dropdown {
+      min-width: 25em;
+    }
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .create-activity .form-field {
+    flex-direction: row;
+    align-items: flex-start;
+
+    & > label {
+      margin-top: .8em;
+    }
+
+    .name {
+      margin-bottom: 0;
+    }
+
+    &.name, &.description {
+      .text-field-wrapper {
+        flex-basis: 60%;
+      }
+    }
+
+    &.tg-username {
+      .name {
+        margin-bottom: .3em;
+      }
+
+      & > label:first-child {
+        margin-right: 2em;
+      }
+    }
+
+    &.reward-amt .dropdown {
+      margin-right: 0;
+    }
+
+    &.questions {
+      .name {
+        margin-bottom: .3em;
+      }
+    }
+  }
+
+  .hinted .info-bubble {
+    min-width: 18em;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .create-activity {
+    display: flex;
+
+    & > .left {
+      border-right: 1px solid #ddd;
+      flex-basis: 55%;
+      flex-grow: 1;
+      padding-right: 1.5em;
+    }
+
+    & > .right {
+      flex-basis: 45%;
+      flex-shrink: 1;
+      display: flex;
+      flex-direction: column;
+      margin-left: 2em;
+
+      .actions {
+        flex: 1;
+        align-items: flex-end;
+      }
+    }
+
+    .form-field {
+      margin-bottom: 1.5em;
+    }
+
+    .competences .dropdown {
+      bottom: 100%;
+      margin-bottom: 5px;
+    }
+
+    .tg-username .name {
+      margin-bottom: .3em;
+    }
+
+    .questions {
+      display: flex;
+      flex-direction: column;
+
+      & > .dropdown-shell {
+        align-self: flex-end;
+      }
+
+      .dropdown {
+        right: 0 !important;
+        left: unset !important;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 840px) and (max-width: 1023px) {
+  .create-activity {
+    .form-field:not(.tg-username) {
+      flex-direction: column;
+    }
+
+    .name, .description {
+      .text-field-wrapper {
+        width: 100%;
+      }
+    }
+
+    .date-range, .competences, .deadline, .questions {
+      .dropdown {
+        right: unset;
+        left: 0;
+      }
+    }
+
+    .work-hours .desc {
+      margin-bottom: 0;
+    }
+
+    .reward-type, .reward-amt, .work-hours, .people {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .create-activity {
+    .questions {
+      flex-direction: row;
+    }
+  }
+}

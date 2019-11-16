@@ -1,0 +1,128 @@
+.quick-info {
+  margin-top: 1.5em;
+}
+
+.balance > p {
+  font-size: 1.2rem;
+}
+
+.balance > nav {
+  margin-top: .3em;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.balance .innopoint {
+  stroke-width: 6;
+  margin-left: .05em;
+  margin-right: .1em;
+}
+
+.personal {
+  margin-bottom: 1.5em;
+}
+
+.personal .btn > .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.personal .telegram {
+  display: flex;
+}
+
+.personal .telegram.input {
+  flex-direction: column;
+}
+
+.personal .telegram.exists {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.personal .telegram .error {
+  top: 3.5rem;
+  bottom: unset;
+  margin-right: 12em;
+}
+
+.personal .telegram .actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .5em;
+}
+
+.personal .telegram > .btn {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.personal .telegram > .btn:first-child {
+  margin-right: .2em;
+}
+
+.info-bubble {
+  padding: 1em;
+  font-size: .95rem;
+}
+
+.info-bubble .btn.close {
+  margin: -.7em -.7em .3em .3em;
+}
+
+.personal .info-bubble {
+  min-width: 14em;
+}
+
+@media only screen and (min-width: 380px) {
+  .personal {
+    padding: 0 .2rem;
+  }
+
+  .personal .telegram > .btn:first-child {
+    margin-right: .5em;
+  }
+
+  .personal .info-bubble {
+    right: -3em;
+    min-width: 17em;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .telegram .text-field {
+    width: 20em;
+  }
+
+  .personal {
+    padding: 0;
+    margin: 0;
+  }
+
+  .quick-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4em;
+  }
+
+  .balance > p {
+    text-align: right;
+  }
+
+  .btn-shift {
+    margin-left: 0;
+    margin-right: -.8rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .balance > p {
+    font-size: 1.4rem;
+  }
+
+  .balance .innopoint {
+    height: 1.2rem;
+  }
+}
