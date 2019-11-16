@@ -9,11 +9,13 @@
     <Labeled label="Label">
       <span style="font-size: 1.4rem">1000 innopoints</span>
     </Labeled>
+
     <Labeled icon label="Label">
       <svg
           src="images/ui-kit-page/award.svg"
           class="icon"
-          slot="icon" />
+          slot="icon"
+      />
       <span style="font-size: 1.4rem">1000 innopoints</span>
     </Labeled>
   </div>
