@@ -7,7 +7,7 @@
   <h1>Switches</h1>
   <div class="showcase">
     <Switch name="switch-1" id="switch-1" />
-    <Switch checked name="switch-2" id="switch-2" />
+    <Switch value={true} name="switch-2" id="switch-2" />
   </div>
 
   <hr />
@@ -17,6 +17,6 @@
 
   <hr />
   <div class="showcase">
-    <Switch twoState first="First" second="Second" name="twoStated" id="twoStated" />
+    <Switch isTwoState first="First" second="Second" name="twoStated" id="twoStated" />
   </div>
 </Card>
