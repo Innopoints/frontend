@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import parseItems from './utils/parse-items-array';
+  import parseValues from './utils/parse-values';
 
   export let items;
   export let name;
@@ -14,13 +15,11 @@
   export let labelClass = null;
 
   $: parsedItems = parseItems(items);
-  $: selectedId = (typeof value === 'string' || value[uniqueKey || 'label'] || value[uniqueKey || 'label'] === 0) ?
-      parsedItems.find(item => item[uniqueKey || 'label'] === value || item[uniqueKey || 'label'] === value[uniqueKey || 'label']).id :
-      null;
+  $: selected = parseValues(value, parsedItems, {uniqueKey});
 
   let dispatch = createEventDispatcher();
   const changeRadio = item => {
-    selectedId = item.id;
+    selected = item;
     dispatch('change', item);
   };
 
@@ -81,7 +80,7 @@
               on:change="{() => changeRadio(item)}"
               type="radio"
               name={name}
-              checked="{selectedId === item.id}"
+              checked="{selected.id === item.id}"
           >
           <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
         </div>
@@ -99,7 +98,7 @@
             on:change="{() => changeRadio(item)}"
             type="radio"
             name={name}
-            checked="{selectedId === item.id}"
+            checked="{selected.id === item.id}"
         >
         <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
       {/if}

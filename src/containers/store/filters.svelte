@@ -37,7 +37,7 @@
       <span slot="label" class="regular">{$selectedOrder.label}</span>
       <RadioGroup
           name="order-options-mobile"
-          selected={$selectedOrder}
+          value={$selectedOrder}
           items={orders}
           isLabel
           on:change="{(e) => selectOrder(e.detail)}"

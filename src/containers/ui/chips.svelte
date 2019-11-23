@@ -5,18 +5,9 @@
   import ChipGroup from 'ui/chip-group.svelte';
 
   const chips = [
-    {
-      id: 0,
-      label: 'one',
-    },
-    {
-      id: 1,
-      label: 'two',
-    },
-    {
-      id: 2,
-      label: 'three',
-    },
+    'one',
+    'two',
+    'three',
   ];
 </script>
 
@@ -32,10 +23,10 @@
   </div>
 
   <hr />
-  <ChipGroup items={chips} name="chip-11" classname="flex-wrap" />
+  <ChipGroup items={chips} value={chips[0]} name="chip-11" classname="flex-wrap" />
 
   <hr />
-  <ChipGroup items={chips} name="chip-12" multiple classname="flex-wrap" />
+  <ChipGroup items={chips} value={chips} name="chip-12" multiple classname="flex-wrap" />
 
   <hr />
 

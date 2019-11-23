@@ -25,7 +25,7 @@
       <RadioGroup
           items={varieties}
           name="{'color-' + id}"
-          selected={selected}
+          value={selected}
           classname="color-options"
           labelClass="radio"
           isColor

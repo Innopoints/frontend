@@ -1,14 +1,19 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import parseItems from './utils/parse-items-array';
+  import parseValues from './utils/parse-values';
   import Chip from 'ui/chip.svelte';
 
-  export let items = [];
-  export let value = null;
   export let multiple = false;
+  export let items = [];
+  export let value = multiple ? [] : {};
+  export let uniqueKey = null;
   export let classname = '';
   export let name = '';
 
-  $: selected = multiple ? (value || []) : (value || {});
+  $: parsedItems = parseItems(items);
+  $: selected = parseValues(value, parsedItems, {uniqueKey, multiple}) || [];
+
   let dispatch = createEventDispatcher();
   const check = (item) => {
     if (multiple) {
@@ -22,13 +27,13 @@
 </script>
 
 <div role="group" class={classname}>
-  {#each items as item (item.id)}
+  {#each parsedItems as item (item.id)}
     <Chip
-            label={item.label}
-            name={name}
-            multiple={multiple}
-            value={multiple ? selected.some(x => x.id === item.id) : selected.id === item.id}
-            on:change={() => check(item)}
+        label={item.label}
+        name={name}
+        multiple={multiple}
+        value={multiple ? selected.some(x => x.id === item.id) : selected.id === item.id}
+        on:change={() => check(item)}
     />
   {/each}
 </div>
