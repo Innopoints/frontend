@@ -88,7 +88,8 @@
               name="colors"
               items={colors}
               classname="color-grid"
-              checked={$filters.colors}
+              value={$filters.colors}
+              uniqueKey="color"
               on:change={(e) => changeColors(e.detail)}
           >
             <label class="clickable">

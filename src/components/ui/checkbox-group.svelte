@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import parseItems from './utils/parse-items-array';
 
   export let name = '';
   export let classname = '';
@@ -8,9 +9,14 @@
   export let labeled = false;
   export let colored = false;
   export let items = [];
-  export let checked = [];
+  export let value = [];
+  export let uniqueKey = null;
 
-  $: selected = checked;
+  $: parsedItems = parseItems(items);
+  $: selected = value.map(x => {
+    if (typeof x === 'string' || x[uniqueKey || 'label'] || x[uniqueKey || 'label'] === 0)
+      return parsedItems.find(item => item[uniqueKey || 'label'] === x || item[uniqueKey || 'label'] === x[uniqueKey || 'label']);
+  });
 
   let dispatch = createEventDispatcher();
   const changeCheckbox = item => {
@@ -60,7 +66,7 @@
 </style>
 
 <div role="group" class:with-labels={labeled} class={classname}>
-  {#each items as item (item.id)}
+  {#each parsedItems as item (item.id)}
     <label class:clickable={labeled} class={labelclass}>
       <div class:colored={colored} class:round={colored} class="checkbox {checkboxclass}">
         <input

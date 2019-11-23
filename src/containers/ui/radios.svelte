@@ -2,19 +2,17 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import Card from 'ui/card.svelte';
 
+  const radioItems0 = ['one', 'two', 'three', 'four'];
   const radioItems1 = [
     {
-      id: 1,
       label: 'one label',
       color: '#FF0000',
     },
     {
-      id: 2,
       label: 'two label',
       color: '#000000',
     },
     {
-      id: 3,
       label: 'three label',
       color: '#FFFFFF',
     },
@@ -27,7 +25,7 @@
     <RadioGroup
         labelClass="radio"
         name="radio0"
-        items={radioItems1}
+        items={radioItems0}
     />
     <hr />
 
@@ -35,7 +33,7 @@
         name="radio1"
         isLabel
         items={radioItems1}
-        selected={radioItems1[2]}
+        value={radioItems1[2]}
     />
     <hr />
 
@@ -54,6 +52,7 @@
         labelClass="radio"
         name="radio3"
         items={radioItems1}
+        value={radioItems1[0]}
     />
   </div>
 </Card>

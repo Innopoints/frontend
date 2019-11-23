@@ -2,19 +2,18 @@
   import CheckboxGroup from 'ui/checkbox-group.svelte';
   import Card from 'ui/card.svelte';
 
+  const checkboxes0 = ['one', 'two', 'three', 'four'];
+
   const checkboxes = [
     {
-      id: 0,
       color: '#FF00FF',
       label: 'one checkbox',
     },
     {
-      id: 1,
       color: '#FFFFFF',
       label: 'two checkbox',
     },
     {
-      id: 2,
       color: '#000000',
       label: 'three checkbox',
     },
@@ -25,7 +24,7 @@
   <h1>Checkboxes</h1>
   <div class="showcase">
     <CheckboxGroup
-        items={checkboxes}
+        items={checkboxes0}
         name="checkbox-1"
     />
   </div>
@@ -36,7 +35,7 @@
     <CheckboxGroup
         colored
         items={checkboxes}
-        checked={[checkboxes[1]]}
+        value={[checkboxes[1]]}
         name="checkbox-2"
     />
 
@@ -45,7 +44,7 @@
     <CheckboxGroup
         labeled
         items={checkboxes}
-        checked={checkboxes}
+        value={checkboxes}
         name="checkbox-3"
     />
   </div>

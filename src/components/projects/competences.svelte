@@ -22,7 +22,7 @@
   <CheckboxGroup
       labeled
       items={competencesOptions}
-      checked={$filters.competences}
+      value={$filters.competences}
       name="competences"
       on:change={(e) => changeCompetences(e.detail)}
   />

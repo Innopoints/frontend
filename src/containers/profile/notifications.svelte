@@ -4,20 +4,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import notifications from '@/constants/profile/notifications';
 
-  const items = [
-    {
-      id: 1,
-      label: 'Push',
-    },
-    {
-      id: 2,
-      label: 'Off',
-    },
-    {
-      id: 3,
-      label: 'e-mail',
-    },
-  ];
+  const items = ['Push', 'Off', 'e-mail'];
 
   const selected = {};
   onMount(() => {
@@ -66,7 +53,7 @@
             isLabel
             isLabelGreen
             items={items}
-            selected={selected[notification.name]}
+            value={selected[notification.name]}
             on:change="{(e) => {i === 0 ? changeAll(e) : changeOne(notification.name, e);}}"
         />
       </li>

@@ -1,21 +1,26 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import parseItems from './utils/parse-items-array';
 
   export let items;
   export let name;
   export let classname = null;
-  export let selected = {};
+  export let value = {};
+  export let uniqueKey = null;
   export let isColor = false;
   export let isLabel = false;
   export let isLabelGreen = false;
   export let labelPosition = 'right';
   export let labelClass = null;
 
-  $: selectedId = selected.id + 1 || null;
+  $: parsedItems = parseItems(items);
+  $: selectedId = (typeof value === 'string' || value[uniqueKey || 'label'] || value[uniqueKey || 'label'] === 0) ?
+      parsedItems.find(item => item[uniqueKey || 'label'] === value || item[uniqueKey || 'label'] === value[uniqueKey || 'label']).id :
+      null;
 
   let dispatch = createEventDispatcher();
   const changeRadio = item => {
-    selectedId = item.id + 1;
+    selectedId = item.id;
     dispatch('change', item);
   };
 
@@ -60,7 +65,7 @@
 </style>
 
 <div class:with-labels={isLabel} class={classname} role="group">
-  {#each items as item, i (i)}
+  {#each parsedItems as item, i (i)}
     <label class:colored={isColor} class:clickable={isLabel} class={labelClass}>
       {#if isLabel}
         {#if labelPosition === 'left'}
@@ -76,7 +81,7 @@
               on:change="{() => changeRadio(item)}"
               type="radio"
               name={name}
-              checked="{selectedId === item.id + 1}"
+              checked="{selectedId === item.id}"
           >
           <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
         </div>
@@ -94,7 +99,7 @@
             on:change="{() => changeRadio(item)}"
             type="radio"
             name={name}
-            checked="{selectedId === item.id + 1}"
+            checked="{selectedId === item.id}"
         >
         <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
       {/if}
