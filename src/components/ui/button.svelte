@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import rippleEffect from './utils/ripple';
 
   export let classname = null;
   export let isFilled = false;
@@ -7,6 +8,7 @@
   export let isDanger = false;
   export let isRound = false;
   export let isNormal = false;
+  export let ripple = true;
 
   export let disabled = false;
   export let label = '';
@@ -15,11 +17,14 @@
   export let chevron = false;
   export let badge = false;
 
-  $: ripple = isFilled
+  $: rippleColor = ripple
+    ? isFilled
     ? 'rgba(255, 255, 255, .35)'
     : isDanger
     ? 'rgba(186, 3, 3, .25)'
-    : 'rgba(56, 120, 0, .25)';
+    : 'rgba(56, 120, 0, .25)'
+    : null;
+
   $: classes = [
     'btn',
     isFilled && 'filled',
@@ -50,6 +55,7 @@
     {disabled}
     class={classes.join(' ')}
     on:click={() => dispatch('click')}
+    use:rippleEffect={rippleColor}
   >
     {#if badge}
       <div class="badge">
