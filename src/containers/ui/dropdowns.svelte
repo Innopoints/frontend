@@ -16,10 +16,10 @@
       <br />
       great now close me
     </Dropdown>
-    <Dropdown label="right dropdown" right nowrap>
+    <Dropdown label="right dropdown" isRight nowrap>
       <Button isFilled>woo alRIGHT</Button>
     </Dropdown>
-    <Dropdown dropdownclass="info-bubble" btnclass="round" chevron={false} right>
+    <Dropdown dropdownclass="dropdown info-bubble" btnclass="round" chevron={false} isRight>
       <svg slot="label" src="images/icons/help-circle.svg" class="icon" />
       Some event organizers prefer to collect those to ease communication.
       Adding one here will save you the typing for those

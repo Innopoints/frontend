@@ -47,15 +47,15 @@
   import fecha from 'fecha';
   import Button from './button.svelte';
 
-  export const withControls = true;
+  export let withControls = true;
   export let format = 'YYYY-MM-DD';
   export let range = true;
   export let value = {};
   export let numOfDays = 7;
 
   export let classname = '';
-  export const controlsclass = 'drop-header';
-  export const activeclass = 'active';
+  export let controlsclass = 'drop-header';
+  export let activeclass = 'active';
   export let calendarclass = 'calendar';
   export let headerclass = 'month-header';
   export let weekclass = 'weekdays';
