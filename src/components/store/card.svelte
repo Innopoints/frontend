@@ -12,6 +12,7 @@
   export let short = false;
 
   $: selected = varieties[0];
+  // $: console.log(selected);
   const changeColor = (e) => {
     selected = e.detail;
   };
@@ -26,8 +27,8 @@
           items={varieties}
           name="{'color-' + id}"
           value={selected}
+          uniqueKey="id"
           classname="color-options"
-          labelClass="radio"
           isColor
           on:change={changeColor}
       />

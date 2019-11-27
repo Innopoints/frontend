@@ -1,6 +1,10 @@
 <script>
   import { createEventDispatcher } from 'svelte';
 
+  export let classname = 'chip-wrapper';
+  export let inputclass = '';
+  export let chipclass = 'chip';
+
   export let label = '';
   export let name = '';
   export let disabled = false;
@@ -18,13 +22,14 @@
   };
 </script>
 
-<label class="chip-wrapper">
+<label class={classname}>
   {#if !disabled}
     <input
         checked={checked}
         name={name}
         disabled={disabled}
         type="{(multiple || disabled) ? 'checkbox' :'radio'}"
+        class={inputclass}
         on:change={check}
     />
   {/if}
@@ -32,7 +37,7 @@
       class:unclickable={disabled}
       class:small={small}
       class:outline={outline}
-      class="chip"
+      class={chipclass}
   >
     <slot>{label}</slot>
   </div>

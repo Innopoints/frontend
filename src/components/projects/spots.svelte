@@ -17,7 +17,7 @@
     <TextField
         value={$filters.spots}
         type="number"
-        classname="no-spinner"
+        isNoSpinner
         on:input={(e) => changeSpots(e.detail)}
     />
     <Button isRound on:click={() => changeSpots($filters.spots + 1)}>

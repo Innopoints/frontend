@@ -31,7 +31,7 @@
           label="Telegram"
           pattern="[A-Za-z0-9_]&#123;5,32&#125;"
           error="A username should contain from 5 to 32 symbols: a–z, 0–9, _."
-          classname="mt-2"
+          classname="mt-2 text-field"
         >
           <svg src="images/icons/at-sign.svg" class="item" />
         </TextField>

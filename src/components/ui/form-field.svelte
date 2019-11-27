@@ -1,5 +1,5 @@
 <script>
-  export let classname = '';
+  export let classname = 'form-field';
   export let titleclass = 'name';
   export let subtitleclass = 'desc';
   export let requiredclass = 'required';
@@ -11,7 +11,7 @@
   export let id = null;
 </script>
 
-<div class="form-field {classname}">
+<div class={classname}>
   <label for={id}>
       <span class={titleclass}>
         {title}

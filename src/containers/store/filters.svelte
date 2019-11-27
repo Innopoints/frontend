@@ -59,18 +59,18 @@
             <div class="align-center">
               <TextField
                   type="number"
+                  isNoSpinner
                   value={$filters.priceLow}
                   on:input={(e) => changeLowPrice(e.detail)}
                   on:change={(e) => changeLowPrice(e.detail)}
-                  classname="no-spinner"
               />
               <span class="ml mr">–</span>
               <TextField
                   type="number"
+                  isNoSpinner
                   value={$filters.priceHigh}
                   on:input={(e) => changeHighPrice(e.detail, true)}
                   on:change={(e) => changeHighPrice(e.detail, true)}
-                  classname="no-spinner"
               />
             </div>
           </div>

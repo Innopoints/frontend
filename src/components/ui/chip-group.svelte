@@ -4,11 +4,12 @@
   import parseValues from './utils/parse-values';
   import Chip from 'ui/chip.svelte';
 
+  export let classname = '';
+  export let chipclass = null;
   export let multiple = false;
   export let items = [];
   export let value = multiple ? [] : {};
   export let uniqueKey = null;
-  export let classname = '';
   export let name = '';
 
   $: parsedItems = parseItems(items);
@@ -29,6 +30,7 @@
 <div role="group" class={classname}>
   {#each parsedItems as item (item.id)}
     <Chip
+        classname={chipclass ? chipclass : undefined}
         label={item.label}
         name={name}
         multiple={multiple}
