@@ -1,20 +1,19 @@
-export default (node, ripple) => {
+export default (node, ripple, options = {}) => {
   if (ripple) {
     // Default values.
     let props = {
-      event: 'mousedown',
-      transition: 600,
+      event: options.event || 'mousedown',
+      transition: options.transition || 600,
+      zIndex: options.zIndex || '9999',
+      bg: ripple || 'rgba(0, 0, 0, 0.35)',
     };
 
-    let bg = ripple || 'rgba(0, 0, 0, 0.35)';
-    let zIndex = '9999';
-
     node.addEventListener(props.event, function(event) {
-      rippler(event, node, {bg, zIndex, props});
+      rippler(event, node, props);
     });
   }
 
-  const rippler = (event, el, {bg, zIndex, props}) => {
+  const rippler = (event, el, {bg, zIndex, transition}) => {
     let target = el;
     // Get border to avoid offsetting on ripple container position
     let targetBorder = parseInt((getComputedStyle(target).borderWidth).replace('px', ''));
@@ -33,8 +32,6 @@ export default (node, ripple) => {
       radius = Math.sqrt((maxX * maxX) + (maxY * maxY)),
       border = (targetBorder > 0 ) ? targetBorder : 0;
 
-    // console.log(event.clientX, event.clientY, dx, dy, rect);
-
     // Create the ripple and its container
     let ripple = document.createElement('div');
     let rippleContainer = document.createElement('div');
@@ -46,7 +43,7 @@ export default (node, ripple) => {
     ripple.style.marginLeft= '0px';
     ripple.style.width= '1px';
     ripple.style.height= '1px';
-    ripple.style.transition= 'all ' + props.transition + 'ms cubic-bezier(0.4, 0, 0.2, 1)';
+    ripple.style.transition= 'all ' + transition + 'ms cubic-bezier(0.4, 0, 0.2, 1)';
     ripple.style.borderRadius= '50%';
     ripple.style.pointerEvents= 'none';
     ripple.style.position= 'relative';
@@ -74,8 +71,6 @@ export default (node, ripple) => {
     ripple.style.marginTop = dy + 'px';
 
     // No need to set positioning because ripple should be child of target and to it's relative position.
-    // rippleContainer.style.left    = left + (((window.pageXOffset || document.scrollLeft) - (document.clientLeft || 0)) || 0) + "px";
-    // rippleContainer.style.top     = top + (((window.pageYOffset || document.scrollTop) - (document.clientTop || 0)) || 0) + "px";
     rippleContainer.style.width = width + 'px';
     rippleContainer.style.height = height + 'px';
     rippleContainer.style.borderTopLeftRadius = style.borderTopLeftRadius;
@@ -99,7 +94,7 @@ export default (node, ripple) => {
       // Timeout set to get a smooth removal of the ripple
       setTimeout(function() {
         rippleContainer.parentNode.removeChild(rippleContainer);
-      }, 850);
+      }, transition + 250);
 
       el.removeEventListener('mouseup', clearRipple, false);
 
@@ -122,7 +117,7 @@ export default (node, ripple) => {
           }
         }
 
-      }, props.transition + 250);
+      }, transition + 250);
     }
 
     if(event.type === 'mousedown') {

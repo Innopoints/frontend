@@ -16,7 +16,6 @@
         value="timeline"
         checked
     />
-    <!--TODO: Add ripple on buttons like in vue: v-ripple="'rgba(56, 120, 0, .25)'" -->
     <div class="icon">Timeline</div>
   </label>
   <label on:click="{() => changeTab('S')}" class="tab" use:rippleEffect={'rgba(56, 120, 0, .25)'}>
