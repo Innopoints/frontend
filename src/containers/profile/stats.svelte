@@ -27,7 +27,7 @@
         </ul>
         <hr data-text="or" />
       {/if}
-      <Button classname="mt">
+      <Button classname="mt btn">
         <svg src="images/icons/calendar.svg" class="icon mr" />
         select date range
       </Button>

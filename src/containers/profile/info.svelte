@@ -36,7 +36,7 @@
           <svg src="images/icons/at-sign.svg" class="item" />
         </TextField>
         <div class="actions">
-          <Button on:click="{() => toggleTgChange(false)}" classname="mr">
+          <Button on:click="{() => toggleTgChange(false)}" classname="mr btn">
             cancel
           </Button>
           <Button on:click={save} filled>save</Button>
@@ -45,7 +45,7 @@
     {:else if $user.telegram}
       <div class="telegram exists">
         @{$user.telegram}
-        <Button on:click="{() => toggleTgChange(true)}" classname="ml">
+        <Button on:click="{() => toggleTgChange(true)}" classname="ml btn">
           <svg src="images/icons/edit.svg" class="icon mr" />
           edit
         </Button>
@@ -57,7 +57,7 @@
           add Telegram username
         </Button>
 
-        <Dropdown dropdownclass="dropdown info-bubble" btnclass="round" chevron={false} isRight>
+        <Dropdown dropdownclass="dropdown info-bubble" btnclass="round btn" chevron={false} isRight>
           <svg slot="label" src="images/icons/help-circle.svg" class="icon" />
           Some event organizers prefer to collect those to ease communication.
           Adding one here will save you the typing for those

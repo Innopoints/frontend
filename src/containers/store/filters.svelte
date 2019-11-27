@@ -75,7 +75,7 @@
             </div>
           </div>
           {#if $isAuthed}
-            <Button on:click={showAffordable} classname="mt">
+            <Button on:click={showAffordable} classname="mt btn">
               <svg src="images/icons/tag.svg" class="icon mr" />
               show affordable
             </Button>

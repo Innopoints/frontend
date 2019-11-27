@@ -38,7 +38,7 @@
 
 <svelte:window on:click={clickOutside} />
 <div class:open={isOpen} class={classname}>
-  <Button on:click={toggle} classname={btnclass}>
+  <Button on:click={toggle} classname="{btnclass} btn">
     <slot name="label">{label}</slot>
     {#if chevron}
       <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
@@ -49,7 +49,7 @@
       <slot />
     {:else}
       <div class={wrapperclass}>
-        <Button on:click={toggle} normal round classname="close">
+        <Button on:click={toggle} normal round classname="close btn">
           <svg src="images/icons/x.svg" />
         </Button>
         <slot />

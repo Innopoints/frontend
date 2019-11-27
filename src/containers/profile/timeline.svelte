@@ -14,7 +14,7 @@
   {/each}
 
   {#if loadMore}
-    <Button classname="more">
+    <Button classname="more btn">
       <svg src="images/icons/more-horizontal.svg" class="icon mr-2" />
       more
     </Button>

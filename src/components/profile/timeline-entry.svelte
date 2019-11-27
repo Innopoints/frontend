@@ -41,7 +41,7 @@
           1337 <svg src="images/innopoint-sharp.svg" /> gained{!action.application.comment ? ', leave feedback to claim' : ''}
         </div>
         {#if !action.application.comment}
-          <Button isFilled classname="mt">leave feedback</Button>
+          <Button isFilled classname="mt btn">leave feedback</Button>
         {/if}
       {/if}
       <time>
@@ -87,7 +87,7 @@
         }[action.status]}
       </div>
       {#if action.status === 'R'}
-        <Button isFilled classname="mt">make corrections</Button>
+        <Button isFilled classname="mt btn">make corrections</Button>
       {/if}
 
       <time>

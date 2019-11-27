@@ -26,13 +26,12 @@
     : null;
 
   $: classes = [
-    'btn',
     isFilled && 'filled',
     isOutline && 'outline',
     isDanger && 'danger',
     isRound && 'round',
     isNormal && 'normal',
-    classname,
+    classname ? classname : 'btn',
   ].filter(v => v !== false);
 
   let dispatch = createEventDispatcher();

@@ -12,7 +12,7 @@
 
 <li class:open={value} class="filter date-range panel">
   <svg src="images/icons/calendar.svg" class="icon mr" />
-  <Button chevron classname="handle" on:click={() => dispatch('toggle')}>
+  <Button chevron classname="handle btn" on:click={() => dispatch('toggle')}>
     select date range
   </Button>
 </li>
