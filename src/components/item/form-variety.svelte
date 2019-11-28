@@ -4,7 +4,7 @@
   import TextField from 'ui/text-field.svelte';
   import Dropdown from 'ui/dropdown.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import Dropzone from 'ui/dropzone.svelte';
+  import DragDropzone from '@/components/item/drag-dropzone.svelte';
   import {item, changeVarietyQuantity, changeVarietySize, removeVariety, changeVarietyField, colors, customColors, addNewColor} from '@/store/item';
 
   export let index;
@@ -18,7 +18,6 @@
   };
 
   const openColorPicker = () => colorPicker.click();
-  const changeFiles = (files) => console.log(files);
 </script>
 
 <style>
@@ -92,11 +91,7 @@
     </div>
   {/if}
 
-  <Dropzone on:change={(e) => changeFiles(e.detail)} classname="image-platform" id="file-input{index}">
-    <svg src="/images/icons/image.svg" class="icon mr" />
-    <label class="title" for="file-input2">drag &amp; drop here or click to upload photos</label>
-    <small>Make sure the ratio is 1:1 (square)</small>
-  </Dropzone>
+  <DragDropzone {index} />
   <!--<Dropzone
       ref="dropzone"
       :id="'dropzone-'+name"
