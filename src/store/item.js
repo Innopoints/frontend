@@ -1,4 +1,13 @@
 import { writable } from 'svelte/store';
+import colorOptions from '@/constants/item/colors';
+
+export const colors = writable(colorOptions);
+export const customColors = writable({});
+export function addNewColor(id, color) {
+  customColors.update(x => {
+    return {...x, [id]: { color }};
+  });
+}
 
 function newVariety() {
   return {

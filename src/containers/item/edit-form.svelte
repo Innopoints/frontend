@@ -1,6 +1,5 @@
 <script>
   import Button from 'ui/button.svelte';
-  // import TextField from 'ui/text-field.svelte';
   import Switch from 'ui/switch.svelte';
   import FormFields from '@/components/item/form-fields.svelte';
   import FormVariety from '@/components/item/form-variety.svelte';
@@ -21,7 +20,6 @@
   <ul>
     {#each $item.varieties as v, i (i)}
       <FormVariety
-          colors="{['#FF0000', '#00FF00', '#0000FF', '#000000']}"
           index={i}
           removable="{i !== 0}"
       />
@@ -29,7 +27,7 @@
 
     <li class="more">
       <Button on:click={addVariety}>
-        <svg src="images/icons/plus.svg" class="icon" />
+        <svg src="/images/icons/plus.svg" class="icon" />
         add another variety
       </Button>
     </li>

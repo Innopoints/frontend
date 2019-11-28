@@ -1,44 +1,60 @@
 <script>
+  import sizes from '@/constants/item/sizes';
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
   import Dropdown from 'ui/dropdown.svelte';
-  import {item, changeVarietyQuantity, changeVarietySize, removeVariety} from '@/store/item';
+  import RadioGroup from 'ui/radio-group.svelte';
+  import {item, changeVarietyQuantity, changeVarietySize, removeVariety, changeVarietyField, colors, customColors, addNewColor} from '@/store/item';
 
   export let index;
   export let removable;
-  export const colors = [];
 
-  const sizes = ['XS', 'S', 'M', 'L' , 'XL', 'XXL'];
-  const variety = $item.varieties[index];
+  let colorPicker = null;
+
+  $: variety = $item.varieties[index];
+  const chooseColor = e => {
+    changeVarietyField(index, 'color', e.detail.color);
+  };
+
+  const openColorPicker = () => colorPicker.click();
 </script>
+
+<style>
+  #new-color-picker {
+    display: none;
+  }
+</style>
 
 <li class="variety">
   <div class="settings">
-    <Dropdown label="open dropdown" chevron={false} dropdownclass="color-picker" btnclass="mb">
-      <div role="group" class="color-choices" />
+    <Dropdown
+        chevron={false}
+        dropdownclass="dropdown color-picker"
+        btnclass="mb handle btn"
+    >
+      <span slot="label">
+        choose a color
+      </span>
+      <div slot="label" class="selected-color" style="background-color: {variety.color}" />
+      <RadioGroup
+          isColor
+          name="choose-color"
+          items={$colors.concat(Object.values($customColors))}
+          classname="color-choices"
+          on:change={chooseColor}
+      />
       <hr />
-      <Button>
-        <svg src="images/icons/plus.svg" class="icon mr" />
+      <Button on:click={openColorPicker}>
+        <svg src="/images/icons/plus.svg" class="icon mr" />
         add another color
       </Button>
+      <input
+          on:change={(e) => addNewColor(index, e.target.value)}
+          type="color"
+          bind:this={colorPicker}
+          id="new-color-picker"
+      >
     </Dropdown>
-    <!--<Dropdown :chevron="false">
-      <template v-slot:label>
-        choose a color
-        <div
-            v-if="variety.color"
-            :style="`background-color: ${variety.color}`"
-            class="selected-color"
-        />
-      </template>
-      <RadioGroup
-          :name="name"
-          :items="colorOptions"
-          :value="variety"
-          @input="$store.commit('newProduct/setVarField', {index, key:'color', value: $event.color})"
-          horizontal
-      />
-    </Dropdown>-->
 
     {#if !$item.inSizes}
       <div class="quantity">

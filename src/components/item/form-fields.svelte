@@ -3,9 +3,10 @@
   import TextField from 'ui/text-field.svelte';
 
   import {item, changeItemField} from '@/store/item';
-  function setField(field, value) {
+  const setField = (field, value)  => {
+    console.log(field, value);
     changeItemField(field, value);
-  }
+  };
 </script>
 
 <FormField
@@ -47,7 +48,7 @@
 <FormField
     id="price"
     title="Price"
-    classname="horizontal"
+    classname="form-field horizontal"
     required
 >
   <TextField
@@ -58,8 +59,8 @@
       bind:value={$item.price}
       on:change="{(e) => setField('price', e.detail)}"
       type="number"
-      item
-      right
+      isWithItem
+      isItemRight
   >
     <svg src="/images/innopoint-sharp.svg" class="item innopoint" />
   </TextField>
