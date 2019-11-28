@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   export let classname = 'card';
   export let contentclass = 'content';
   export let imgwrapclass = 'image';
@@ -8,9 +9,10 @@
   export let img = null;
   export let imgWrap = true;
   export let color = '#FFF';
+  const dispatch = createEventDispatcher();
 </script>
 
-<div class={classname} class:with-image={img} {id}>
+<div class={classname} class:with-image={img} {id} on:click={(e) => dispatch('click', e)}>
   {#if img}
     {#if imgWrap}
       <div class={imgwrapclass}>

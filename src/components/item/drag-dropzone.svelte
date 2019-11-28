@@ -6,6 +6,7 @@
   export let index;
 
   $: files = [];
+  $: images = [];
 
   const openFiles = async (arr) => {
     let urls = [];
@@ -23,7 +24,16 @@
   };
 
   const changeFiles = async e => {
-    files = await openFiles(e.detail);
+    files = e.detail;
+    images = await openFiles(e.detail);
+  };
+
+  const removeImage = (data) => {
+    let index = images.indexOf(data);
+    if (index > -1) {
+      images = images.filter((x, i) => i !== index);
+      files = files.filter((x, i) => i !== index);
+    }
   };
 </script>
 
@@ -31,27 +41,34 @@
   :global(.image-platform .card img) {
     width: auto;
   }
+  :global(.image-platform) {
+    cursor: pointer;
+  }
+  :global(.image-platform .card) {
+    cursor: default;
+  }
 </style>
 
 <Dropzone
    on:change={changeFiles}
-   classname="image-platform{files.length ? ' has-content' : ''}"
+   classname="image-platform{images.length ? ' has-content' : ''}"
    id="file-input{index}"
 >
-  {#if files.length}
+  {#if images.length}
     <div class="images">
-      {#each Object.values(files) as img, i (i)}
+      {#each Object.values(images) as img, i (i)}
         <Card
             classname="card image"
             img={img}
             imgWrap={false}
             imgclass=" "
             contentclass="actions"
+            on:click={(e) => e.detail.stopPropagation()}
         >
-          <Button isDanger isRound>
+          <Button on:click={() => removeImage(img)} isDanger isRound>
             <svg class="icon" src="/images/icons/x.svg" />
           </Button>
-          <Button isDanger isNormal>
+          <Button isNormal isRound>
             <svg class="icon" src="/images/icons/move.svg" />
           </Button>
         </Card>
