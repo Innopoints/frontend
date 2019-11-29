@@ -5,7 +5,7 @@
   import Dropdown from 'ui/dropdown.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
   import DragDropzone from '@/components/item/drag-dropzone.svelte';
-  import {item, changeVarietyQuantity, changeVarietySize, removeVariety, changeVarietyField, colors, customColors, addNewColor} from '@/store/item';
+  import {item, changeVarietySize, removeVariety, changeVarietyField, colors, customColors, addNewColor} from '@/store/item';
 
   export let index;
   export let removable;
@@ -64,7 +64,7 @@
             id="quantity"
             min="0"
             bind:value={variety.quantity}
-            on:change="{(e) => changeVarietyQuantity(index, e.detail)}"
+            on:change="{(e) => changeVarietyField(index, 'quantity', e.detail)}"
             type="number"
         />
       </div>
@@ -91,59 +91,7 @@
     </div>
   {/if}
 
-  <DragDropzone {index} />
-  <!--<Dropzone
-      ref="dropzone"
-      :id="'dropzone-'+name"
-      :options="dropzoneOptions"
-      :destroyDropzone="false"
-      :useCustomSlot="true"
-      :include-styling="false"
-      @vdropzone-file-added="addFile"
-      @vdropzone-thumbnail="thumbnail"
-      :class="{'has-content': hasFiles}"
-      class="image-platform"
-  >
-    <template v-if="!hasFiles">
-      <ImagePlaceholder />
-      <label class="title" for="file-input1">
-        drag &amp; drop here or click to upload photos
-      </label>
-      <small>Make sure the ratio is 1:1 (square)</small>
-    </template>
-    <Draggable
-        :list="hasFiles ? dropzoneObject.files : []"
-        :class="'dragzone-' + name"
-        :group="name"
-        @change="notifyVuex"
-        handle="[data-move]"
-        class="images"
-    >
-      <template v-if="hasFiles">
-        <div v-for="(file, i) in dropzoneObject.files" :key="file.upload.uuid" class="image card with-image">
-          <img :src="file.dataURL" :alt="file.name" />
-          <div class="actions">
-            <button
-                @click="remove(i)"
-                type="button"
-                class="btn danger round"
-                title="Remove image"
-            >
-              <X />
-            </button>
-            <button
-                type="button"
-                class="btn normal round"
-                title="Move image"
-                data-move
-            >
-              <Move />
-            </button>
-          </div>
-        </div>
-      </template>
-    </Draggable>
-  </Dropzone>-->
+  <DragDropzone files={variety.images} {index} />
 
   {#if removable}
     <Button on:click="{() => removeVariety(index)}" isDanger>

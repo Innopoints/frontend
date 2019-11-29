@@ -1,6 +1,7 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import Form from '@/containers/item/edit-form.svelte';
+  import Preview from '@/containers/item/item-preview.svelte';
 </script>
 
 <svelte:head>
@@ -18,6 +19,6 @@
   </h1>
   <main class="padded">
     <Form />
-    <!--<Preview />-->
+    <Preview />
   </main>
 </Layout>

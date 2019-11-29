@@ -25,7 +25,7 @@ function newVariety() {
   };
 }
 
-export const item = writable({
+const newItem = () => ({
   name: '',
   type: '',
   description: '',
@@ -34,6 +34,8 @@ export const item = writable({
   quantity: 0,
   varieties: [newVariety()],
 });
+
+export const item = writable(newItem());
 
 export function changeItemField(field, value) {
   item.update(itm => ({ ...itm, [field]: value }));
@@ -73,4 +75,9 @@ export function addVariety() {
 
 export function removeVariety(index) {
   item.update(itm => ({ ...itm, varieties: itm.varieties.filter((x, i) => i !== index) }));
+}
+
+export function clearAll() {
+  console.log(newItem());
+  item.update(() => newItem());
 }

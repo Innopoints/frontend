@@ -1,12 +1,7 @@
 <script>
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
-
   import {item, changeItemField} from '@/store/item';
-  const setField = (field, value)  => {
-    console.log(field, value);
-    changeItemField(field, value);
-  };
 </script>
 
 <FormField
@@ -18,7 +13,7 @@
   <TextField
       id="name"
       bind:value={$item.name}
-      on:change="{(e) => setField('name', e.detail)}"
+      on:change="{(e) => changeItemField('name', e.detail)}"
       placeholder="I <3 Innopolis"
   />
 </FormField>
@@ -31,7 +26,7 @@
   <TextField
       id="type"
       bind:value={$item.type}
-      on:change="{(e) => setField('type', e.detail)}"
+      on:change="{(e) => changeItemField('type', e.detail)}"
       placeholder="sweatshirt"
   />
 </FormField>
@@ -39,7 +34,7 @@
 <FormField id="description" title="Description">
   <TextField
       bind:value={$item.description}
-      on:change="{(e) => setField('description', e.detail)}"
+      on:change="{(e) => changeItemField('description', e.detail)}"
       multiline
       placeholder="High quality bulletproof fabric"
   />
@@ -57,7 +52,7 @@
       max="1000000"
       maxLength="6"
       bind:value={$item.price}
-      on:change="{(e) => setField('price', e.detail)}"
+      on:change="{(e) => changeItemField('price', e.detail)}"
       type="number"
       isWithItem
       isItemRight

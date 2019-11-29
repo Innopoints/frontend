@@ -2,12 +2,13 @@
   import Dropzone from 'ui/dropzone.svelte';
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
-  import {item, changeVarietyField} from '@/store/item';
+  import {changeVarietyField} from '@/store/item';
 
   export let index;
+  export let files;
 
-  $: files = $item.varieties[index].images;
-  $: images = [];
+  let images = [];
+  $: (async() => images = await openFiles(files))();
 
   const openFiles = async (arr) => {
     let urls = [];
@@ -24,15 +25,11 @@
     });
   };
 
-  const changeFiles = async e => {
-    changeVarietyField(index, 'images', e.detail);
-    images = await openFiles(e.detail);
-  };
+  const changeFiles = async e => changeVarietyField(index, 'images', e.detail);
 
   const removeImage = (data) => {
     let pos = images.indexOf(data);
     if (pos > -1) {
-      images = images.filter((x, i) => i !== pos);
       changeVarietyField(index, 'images', files.filter((x, i) => i !== pos));
     }
   };
