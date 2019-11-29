@@ -3,7 +3,7 @@
   import Button from './button.svelte';
 
   export let classname = 'dropdown-shell';
-  export let btnclass = 'handle';
+  export let btnclass = 'handle btn';
   export let dropdownclass = 'dropdown';
   export let wrapperclass = 'relative-wrapper';
   export let isRight = false;
@@ -38,7 +38,7 @@
 
 <svelte:window on:click={clickOutside} />
 <div class:open={isOpen} class={classname}>
-  <Button on:click={toggle} classname="{btnclass}">
+  <Button on:click={toggle} classname={btnclass}>
     <slot name="label">{label}</slot>
     {#if chevron}
       <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />

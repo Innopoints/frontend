@@ -45,7 +45,7 @@
     </Dropdown>
 
     <Dropdown chevron={false} isRight>
-      <svg slot="label" src="images/icons/filter.svg" class="mr" />
+      <svg slot="label" src="/images/icons/filter.svg" class="mr" />
       <span slot="label">filters</span>
       <span slot="label">
         {#if !$filters.isEmpty}<Dot active small />{/if}
