@@ -3,6 +3,7 @@
   export let labelclass = 'label';
   export let textclass = 'text';
 
+  export let customContent = false;
   export let label = '';
   export let icon = false;
 </script>
@@ -14,16 +15,24 @@
       <span class={labelclass}>
         <slot name="label">{label}</slot>
       </span>
-      <span>
+      {#if customContent}
         <slot />
-      </span>
+      {:else}
+        <span>
+          <slot />
+        </span>
+      {/if}
     </div>
   {:else}
     <span class={labelclass}>
       <slot name="label">{label}</slot>
     </span>
-    <span>
+    {#if customContent}
       <slot />
-    </span>
+    {:else}
+      <span>
+        <slot />
+      </span>
+    {/if}
   {/if}
 </div>

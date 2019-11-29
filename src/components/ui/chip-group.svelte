@@ -6,6 +6,9 @@
 
   export let classname = '';
   export let chipclass = null;
+  export let isSmall = false;
+  export let isOutline = false;
+
   export let multiple = false;
   export let items = [];
   export let value = multiple ? [] : {};
@@ -31,8 +34,10 @@
   {#each parsedItems as item (item.id)}
     <Chip
         classname={chipclass ? chipclass : undefined}
+        {name}
+        {isSmall}
+        {isOutline}
         label={item.label}
-        name={name}
         multiple={multiple}
         disabled={item.disabled}
         value={multiple ? selected.some(x => x.id === item.id) : selected.id === item.id}
