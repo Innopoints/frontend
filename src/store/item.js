@@ -33,7 +33,6 @@ export const item = writable({
   inSizes: false,
   quantity: 0,
   varieties: [newVariety()],
-  varietiesCount: 1,
 });
 
 export function changeItemField(field, value) {
