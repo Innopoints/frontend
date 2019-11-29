@@ -50,9 +50,11 @@
 </style>
 
 <Dropzone
-   on:change={changeFiles}
-   classname="image-platform{images.length ? ' has-content' : ''}"
+   value={files}
    id="file-input{index}"
+   classname="image-platform{images.length ? ' has-content' : ''}"
+   disabledQuerySelector=".card.image"
+   on:change={changeFiles}
 >
   {#if images.length}
     <div class="images">

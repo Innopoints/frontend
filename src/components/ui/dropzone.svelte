@@ -1,17 +1,29 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   export let classname = '';
+  export let inputclass = '';
   export let id = '';
   export let value = [];
   export let accept = 'image';
   export let maxSize = null;
   export let multiple = true;
+  export let disabled = false;
+  export let disabledElements = [];
+  export let disabledQuerySelector = null;
 
   $: files = value;
 
   let filePlatform = null;
   const dispatch = createEventDispatcher();
-  const fileClick = () => filePlatform.click();
+  const fileClick = (e) => {
+    if (disabled) return;
+    if (disabledElements.length && disabledElements.some(el => {
+      return el.contains(e.target);
+    })) return;
+    if (disabledQuerySelector && e.target.closest(disabledQuerySelector)) return;
+
+    filePlatform.click();
+  };
   const inputChange = e => upload(e.target.files);
 
   const handleDrag = e => {
@@ -47,6 +59,7 @@
     on:drop={drop}
 >
   <input
+      class={inputclass}
       type="file"
       bind:this={filePlatform}
       {id}
