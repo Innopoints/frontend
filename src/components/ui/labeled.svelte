@@ -7,7 +7,7 @@
   export let icon = false;
 </script>
 
-<div class:text={!icon} class="{classname}">
+<div class:text={!icon} class={classname}>
   {#if icon}
     <slot name="icon" />
     <div class={textclass}>

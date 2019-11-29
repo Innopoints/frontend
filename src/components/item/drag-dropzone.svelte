@@ -3,6 +3,7 @@
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
   import {changeVarietyField} from '@/store/item';
+  import openFiles from '@/utils/read-files';
 
   export let index;
   export let files;
@@ -10,23 +11,7 @@
   let images = [];
   $: (async() => images = await openFiles(files))();
 
-  const openFiles = async (arr) => {
-    let urls = [];
-    for (let i = 0; i < arr.length; i++) urls.push(await readFileAsync(arr[i]));
-    return urls;
-  };
-
-  const readFileAsync = (file) => {
-    return new Promise((resolve, reject) => {
-      let reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
-
   const changeFiles = async e => changeVarietyField(index, 'images', e.detail);
-
   const removeImage = (data) => {
     let pos = images.indexOf(data);
     if (pos > -1) {

@@ -34,6 +34,7 @@
         label={item.label}
         name={name}
         multiple={multiple}
+        disabled={item.disabled}
         value={multiple ? selected.some(x => x.id === item.id) : selected.id === item.id}
         on:change={() => check(item)}
     />
