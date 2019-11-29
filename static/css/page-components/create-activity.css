@@ -13,7 +13,7 @@
 }
 
 .create-activity .form-field > label + .text-field-wrapper {
-  margin-top: 1em;
+  margin-top: .5em;
 }
 
 .create-activity .form-field .btn {
@@ -49,6 +49,10 @@
   margin-bottom: .3em;
 }
 
+.create-activity .reward-amt > .hinted {
+  margin-top: .5em;
+}
+
 .create-activity .reward-amt .dropdown-shell {
   margin-bottom: 1.5em;
 }
@@ -70,6 +74,7 @@
 .create-activity .people .group {
   display: flex;
   align-items: center;
+  margin-top: .5em;
 }
 
 .create-activity .people .divider {

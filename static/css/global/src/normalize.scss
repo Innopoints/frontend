@@ -16,7 +16,7 @@ figure {
   margin: 0;
 }
 
-ul {
+ul:not(.actual) {
   list-style: none;
   padding: 0;
   margin: 0;

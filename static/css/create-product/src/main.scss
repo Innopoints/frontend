@@ -112,10 +112,17 @@
   position: absolute;
 }
 
-.color-picker .actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1em;
+.color-picker {
+  .btn.close {
+    margin-right: -.3em;
+    margin-top: -.3em;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1em;
+  }
 }
 
 @supports (display: grid) {

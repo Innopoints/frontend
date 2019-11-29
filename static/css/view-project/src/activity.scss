@@ -1,0 +1,185 @@
+.activity {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  & > div:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1em;
+  }
+
+  & > div:not(:first-child) {
+    padding-top: 1.5em;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 1.3rem;
+  }
+
+  .row {
+    margin-top: .8em;
+    display: flex;
+    justify-content: space-between;
+
+    & > .labeled {
+      flex-basis: 50%;
+    }
+  }
+
+  .labeled {
+    .icon {
+      flex-shrink: 0;
+    }
+
+    .content {
+      font-size: 1.15rem;
+
+      .secondary {
+        font-size: .9rem;
+        font-weight: 300;
+      }
+    }
+
+    .innopoint {
+      margin-bottom: -1px;
+    }
+  }
+
+  .actions > .btn > .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .left > .labeled, .actions {
+    margin-top: 1em;
+  }
+
+  .chips {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-size: .85rem;
+    font-weight: 400;
+    color: #000;
+    margin: 0 .3em .3em 0;
+    padding: .4em .7em;
+  }
+
+  .panel {
+    margin-top: .8em;
+    margin-left: .5em;
+    padding-top: 1em;
+
+    &:not(:first-of-type) {
+      border-top: 1px solid #ddd;
+    }
+
+    .name {
+      margin-bottom: .3em;
+    }
+
+    & > .handle {
+      float: right;
+    }
+
+    & + section {
+      padding-top: 1em;
+      padding-left: .3em;
+    }
+  }
+
+  .stars {
+    margin-left: 1em;
+
+    .star {
+      stroke: #127800;
+      width: 18px;
+      height: 18px;
+      margin: 0 1px;
+
+      &.off {
+        stroke: #d3d3d3;
+      }
+    }
+  }
+
+  .with-icon {
+    display: flex;
+    align-items: flex-start;
+    font-size: .9rem;
+    margin-top: .3em;
+
+    & > .icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      stroke: #127800;
+      margin-right: .3em;
+    }
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  @supports (display: grid) {
+    .activity {
+      display: grid;
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr 1fr;
+
+      & > div:not(:first-child) {
+        padding-top: .5em;
+      }
+
+      & > div:last-child {
+        padding-top: 1.5em;
+      }
+
+      .left {
+        grid-row-start: 1;
+        grid-row-end: 3;
+        border-bottom-width: 0 !important;
+        border-right: 1px solid #ddd;
+        padding-right: 1em;
+      }
+
+      .middle, .right {
+        margin-left: 1em;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  @supports (display: grid) {
+    .activity {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      & > div:last-child {
+        padding-top: .5em;
+      }
+
+      .left {
+        grid-row-end: 2;
+      }
+
+      .middle {
+        border-bottom-width: 0 !important;
+        border-right: 1px solid #ddd;
+        padding-right: 1em;
+      }
+    }
+  }
+}
