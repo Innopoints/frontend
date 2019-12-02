@@ -10,6 +10,7 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import Button from 'ui/button.svelte';
+  import Images from '@/containers/item/image-previews.svelte';
   import {user, isAuthed} from '@/store/user';
   // export let id;
   export let name = '';
@@ -19,9 +20,10 @@
   <title>{name} – Innopoints</title>
 
   <link rel="stylesheet" href="css/page-components/header.css" />
-  <link rel="stylesheet" href="css/view-product/main.css">
-  <link rel="stylesheet" href="css/page-components/modal-dialog.css">
+  <link rel="stylesheet" href="css/view-product/main.css" />
+  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
   <link rel="stylesheet" href="css/page-components/footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
 
   <!-- Store styles -->
   <link rel="preload" as="style" href="css/page-components/tagline.css" />
@@ -56,7 +58,7 @@
         you have {$user.balance} <svg src="/images/innopoint-sharp.svg" class="innopoint" />
       {/if}
     </div>
-    <div class="showcase" />
+    <Images />
     <div class="content" />
   </main>
 </Layout>

@@ -56,6 +56,8 @@
     "rollup-plugin-svelte": "^5.0.1",
     "rollup-plugin-terser": "^4.0.4",
     "sapper": "^0.27.9",
-    "svelte": "^3.14.0"
+    "simplebar": "^5.0.7",
+    "svelte": "^3.14.0",
+    "swiper": "^5.2.1"
   }
 }
