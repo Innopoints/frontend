@@ -3,6 +3,7 @@
   import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
+  import getBackground from '@/utils/optimal-color';
 
   export let id;
   export let name;
@@ -12,13 +13,12 @@
   export let short = false;
 
   $: selected = varieties[0];
-  // $: console.log(selected);
   const changeColor = (e) => {
     selected = e.detail;
   };
 </script>
 
-<Card img={selected.images[0]} color={selected.background}>
+<Card img={selected.images[0]} color={getBackground(selected.color)}>
   <div class="title">{name}</div>
   <span class="subtitle">{type}</span>
   <div slot="radio">

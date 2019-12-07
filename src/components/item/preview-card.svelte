@@ -5,6 +5,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import ChipGroup from 'ui/chip-group.svelte';
   import {item} from '@/store/item';
+  import getBackground from '@/utils/optimal-color';
 
   let images = [];
   $: variety = $item.varieties[0];
@@ -20,7 +21,7 @@
 <Card
     img={images.length ? images[0] : '/images/create-product/placeholder.svg'}
     imgWrap={false}
-    color={variety.color || 'inherit'}
+    color={getBackground(variety.color) || 'inherit'}
 >
   <span class:placeholder={!$item.name} class="name title">{$item.name}</span>
   {#if $item.type}

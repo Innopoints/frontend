@@ -9,8 +9,7 @@ export default [
     varieties: [
       {
         id: 0,
-        color: '#FF0000',
-        background: 'rgba(255, 0, 0, .2)',
+        color: '#FF0',
         images: ['/images/store/sweatshirt.png'],
         sizes: {
           XS: 1,
@@ -24,7 +23,6 @@ export default [
       {
         id: 1,
         color: '#00FF00',
-        background: 'rgba(0, 255, 0, .2)',
         images: ['/images/store/sweatshirt.png'],
         sizes: {
           XS: 11,
@@ -48,28 +46,24 @@ export default [
       {
         id: 0,
         color: '#0000FF',
-        background: 'rgba(0, 0, 255, .2)',
         images: ['/images/store/tshirt.png', '/images/store/sweatshirt.png'],
         sizes: {},
       },
       {
         id: 1,
         color: '#000000',
-        background: 'rgba(0, 0, 0, .2)',
         images: ['/images/store/tshirt.png'],
         sizes: {},
       },
       {
         id: 2,
         color: '#FFFFFF',
-        background: 'rgba(255, 255, 255, .2)',
         images: ['/images/store/tshirt.png'],
         sizes: {},
       },
       {
         id: 3,
         color: '#CC00CC',
-        background: 'rgba(155, 0, 155, .2)',
         images: ['/images/store/sweatshirt.png', '/images/store/tshirt.png'],
         sizes: {},
       },
@@ -86,7 +80,6 @@ export default [
       {
         id: 0,
         color: '#FF0000',
-        background: 'rgba(255, 0, 0, .2)',
         images: ['/images/store/umbrella.png'],
         sizes: {},
       },
@@ -103,14 +96,12 @@ export default [
       {
         id: 0,
         color: '#00FF00',
-        background: 'rgba(0, 255, 0, .2)',
         images: ['/images/store/sweatshirt.png'],
         sizes: {},
       },
       {
         id: 1,
         color: '#FF0000',
-        background: 'rgba(255, 0, 0, .2)',
         images: ['/images/store/sweatshirt.png'],
         sizes: {},
       },
@@ -127,7 +118,6 @@ export default [
       {
         id: 0,
         color: '#FF0000',
-        background: 'rgba(255, 0, 0, .2)',
         images: ['/images/store/tshirt.png'],
         sizes: {},
       },
@@ -144,7 +134,6 @@ export default [
       {
         id: 0,
         color: '#FF0000',
-        background: 'rgba(255, 0, 0, .2)',
         images: ['/images/store/umbrella.png'],
         sizes: {},
       },
