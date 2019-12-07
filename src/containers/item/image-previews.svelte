@@ -3,9 +3,13 @@
   import 'simplebar/dist/simplebar.css';
   import SimpleBar from 'simplebar';
   import Swiper from 'swiper';
+  import getBackground from '@/utils/optimal-color';
+
+  export let variety;
+  $: activeImg = variety.images[0];
 
   let previews = null;
-  let simpleBar;
+  let simpleBar, swiper;
   const scrollThreshold = 3;
   onMount(() => {
     simpleBar = new SimpleBar(previews);
@@ -22,75 +26,50 @@
       }
     });
 
-    new Swiper('.swiper-container', {
+    swiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
       loop: true,
       grabCursor: true,
       pagination: {
         el: '.swiper-container > .swiper-pagination',
       },
+      on: {
+        transitionEnd() {
+          let el = document.querySelector('.swiper-slide.swiper-slide-active img');
+          if (el) activeImg = el.getAttribute('data-img');
+        },
+      },
     });
   });
+
+  const changeActive = img => {
+    activeImg = img;
+    if (swiper) swiper.slideToLoop(variety.images.indexOf(img), 200);
+  };
 </script>
 
-<div class="showcase">
+<div class="showcase" class:no-previews={variety.images.length <= 1}>
   <div role="group" class="previews" bind:this={previews}>
-    <label>
-      <input type="radio" name="preview-images" checked="checked" />
-      <div class="icon">
-        <img src="images/store/sweatshirt.png" style="background: #fff0f0" alt="" />
-      </div>
-    </label>
-    <label>
-      <input type="radio" name="preview-images" />
-      <div class="icon">
-        <img src="images/store/sweatshirt.png" style="background: #f0f0ff" alt="" />
-      </div>
-    </label>
-    <label>
-      <input type="radio" name="preview-images" />
-      <div class="icon">
-        <img src="images/store/sweatshirt.png" style="background: #f0fff0" alt="" />
-      </div>
-    </label>
-    <label>
-      <input type="radio" name="preview-images" />
-      <div class="icon">
-        <img src="images/store/sweatshirt.png" style="background: #f0fff0" alt="" />
-      </div>
-    </label>
-    <label>
-      <input type="radio" name="preview-images" />
-      <div class="icon">
-        <img src="images/store/sweatshirt.png" style="background: #f0fff0" alt="" />
-      </div>
-    </label>
-    <label>
-      <input type="radio" name="preview-images" />
-      <div class="icon">
-        <img src="images/store/sweatshirt.png" style="background: #f0fff0" alt="" />
-      </div>
-    </label>
-    <label>
-      <input type="radio" name="preview-images" />
-      <div class="icon">
-        <img src="images/store/sweatshirt.png" style="background: #f0fff0" alt="" />
-      </div>
-    </label>
+    {#each variety.images as img (img)}
+      <label>
+        <input on:change={() => changeActive(img)} type="radio" name="preview-images" checked={img === activeImg} />
+        <div class="icon">
+          <img src={img} style="{'background: ' + getBackground(variety.color)}" alt="" />
+        </div>
+      </label>
+    {/each}
   </div>
 
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="images/store/sweatshirt.png" style="background: #fff0f0" alt="" />
-      </div>
-      <div class="swiper-slide">
-        <img src="images/store/sweatshirt.png" style="background: #f0fff0" alt="" />
-      </div>
-      <div class="swiper-slide">
-        <img src="images/store/sweatshirt.png" style="background: #f0f0ff" alt="" />
-      </div>
+      {#each variety.images as img (img)}
+        <div class="swiper-slide">
+          <img src={img} data-img={img} style="{'background: ' + getBackground(variety.color)}" alt="" />
+        </div>
+      {/each}
     </div>
+    <div class="swiper-button-prev" on:click={() => swiper.slidePrev(200)}></div>
+    <div class="swiper-button-next" on:click={() => swiper.slideNext(200)}></div>
     <div class="swiper-pagination"></div>
   </div>
 </div>

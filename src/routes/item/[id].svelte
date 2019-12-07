@@ -12,8 +12,10 @@
   import Button from 'ui/button.svelte';
   import Images from '@/containers/item/image-previews.svelte';
   import {user, isAuthed} from '@/store/user';
-  // export let id;
+
   export let name = '';
+  export let varieties = [];
+  $: variety = varieties[0];
 </script>
 
 <svelte:head>
@@ -58,7 +60,7 @@
         you have {$user.balance} <svg src="/images/innopoint-sharp.svg" class="innopoint" />
       {/if}
     </div>
-    <Images />
+    <Images {variety} />
     <div class="content" />
   </main>
 </Layout>
