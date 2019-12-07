@@ -20,19 +20,19 @@
       <svg src="images/icons/flag.svg" class="ml icon" />
     </Button>
     <Button href="#">
-      <svg src="images/ui-kit-page/calendar.svg" class="mr icon" />
+      <svg src="images/icons/calendar.svg" class="mr icon" />
       button
     </Button>
   </div>
   <div class="showcase">
     <Button isRound badge>
-      <svg src="images/ui-kit-page/bell.svg" />
+      <svg src="/images/icons/bell.svg" />
     </Button>
     <Button isRound isNormal>
-      <svg src="images/ui-kit-page/x.svg" />
+      <svg src="/images/icons/x.svg" />
     </Button>
     <Button isOutline isRound normal>
-      <svg src="images/ui-kit-page/x.svg" />
+      <svg src="/images/icons/x.svg" />
     </Button>
     <Button isFilled chevron>chevron</Button>
   </div>
