@@ -6,6 +6,7 @@ export default [
     description: 'Lorem ipsum dolor sit amet, a Lev loh',
     price: 1337,
     purchases: 0,
+    inSizes: true,
     varieties: [
       {
         id: 0,
@@ -42,6 +43,7 @@ export default [
     description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
     price: 1337,
     purchases: 0,
+    inSizes: false,
     varieties: [
       {
         id: 0,
@@ -76,6 +78,7 @@ export default [
     description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
     price: 201,
     purchases: 0,
+    inSizes: false,
     varieties: [
       {
         id: 0,
@@ -92,6 +95,7 @@ export default [
     description: 'Lorem ipsum dolor sit amet, a Lev loh',
     price: 1337,
     purchases: 0,
+    inSizes: false,
     varieties: [
       {
         id: 0,
@@ -114,6 +118,7 @@ export default [
     description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
     price: 1337,
     purchases: 0,
+    inSizes: false,
     varieties: [
       {
         id: 0,
@@ -130,6 +135,7 @@ export default [
     description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
     price: 201,
     purchases: 0,
+    inSizes: false,
     varieties: [
       {
         id: 0,

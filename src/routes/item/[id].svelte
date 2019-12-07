@@ -11,11 +11,17 @@
   import Layout from '@/layouts/default.svelte';
   import Button from 'ui/button.svelte';
   import Images from '@/containers/item/image-previews.svelte';
+  import ItemContent from '@/containers/item/item-content.svelte';
   import {user, isAuthed} from '@/store/user';
 
-  export let name = '';
+  export let name;
+  export let type;
+  export let description;
+  export let price;
+  export let inSizes;
   export let varieties = [];
   $: variety = varieties[0];
+  const changeVariety = e => variety = varieties.find(x => x.color === e.detail.color);
 </script>
 
 <svelte:head>
@@ -61,6 +67,9 @@
       {/if}
     </div>
     <Images {variety} />
-    <div class="content" />
+    <ItemContent
+        {name} {type} {description} {inSizes} {varieties} {variety} {price}
+        on:change={changeVariety}
+    />
   </main>
 </Layout>
