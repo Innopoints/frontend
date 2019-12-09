@@ -66,7 +66,7 @@
         you have {$user.balance} <svg src="/images/innopoint-sharp.svg" class="innopoint" />
       {/if}
     </div>
-    <Images {variety} />
+    <Images {varieties} {variety} />
     <ItemContent
         {name} {type} {description} {inSizes} {varieties} {variety} {price}
         on:change={changeVariety}

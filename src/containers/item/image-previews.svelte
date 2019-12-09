@@ -6,7 +6,19 @@
   import getBackground from '@/utils/optimal-color';
 
   export let variety;
-  $: activeImg = variety.images[0];
+  export let varieties;
+  $: images = varieties.map(x => ({images: x.images, color: x.color}));
+  $: activeIndex = getArrayOffset(variety);
+
+  const getArrayOffset = variety => {
+    let offset = 0;
+    for (let x of varieties) {
+      if (x.id === variety.id) break;
+      else offset += x.images.length;
+    }
+    if (swiper) swiper.slideToLoop(offset, 200);
+    return offset;
+  };
 
   let previews = null;
   let simpleBar, swiper;
@@ -36,40 +48,49 @@
       on: {
         transitionEnd() {
           let el = document.querySelector('.swiper-slide.swiper-slide-active img');
-          if (el) activeImg = el.getAttribute('data-img');
+          if (el) activeIndex = parseInt(el.getAttribute('data-index'));
         },
       },
     });
   });
 
-  const changeActive = img => {
-    activeImg = img;
-    if (swiper) swiper.slideToLoop(variety.images.indexOf(img), 200);
+  const changeActive = (index) => {
+    if (swiper) swiper.slideToLoop(index, 200);
   };
 </script>
 
 <div class="showcase" class:no-previews={variety.images.length <= 1}>
-  <div role="group" class="previews" bind:this={previews}>
-    {#each variety.images as img (img)}
-      <label>
-        <input on:change={() => changeActive(img)} type="radio" name="preview-images" checked={img === activeImg} />
-        <div class="icon">
-          <img src={img} style="{'background: ' + getBackground(variety.color)}" alt="" />
-        </div>
-      </label>
-    {/each}
-  </div>
+  {#if variety.images.length > 1}
+    <div role="group" class="previews" bind:this={previews}>
+      {#each images as variet, i (i)}
+        {#each variet.images as img, j (img)}
+          <label data-index="{i} {j}">
+            <input on:change={() => changeActive(2*i + j)} type="radio" name="preview-images" checked={(2*i + j) === activeIndex} />
+            <div class="icon">
+              <img src={img} style="{'background: ' + getBackground(variet.color)}" alt="" />
+            </div>
+          </label>
+        {/each}
+      {/each}
+    </div>
+  {/if}
 
   <div class="swiper-container">
     <div class="swiper-wrapper">
       {#each variety.images as img (img)}
-        <div class="swiper-slide">
-          <img src={img} data-img={img} style="{'background: ' + getBackground(variety.color)}" alt="" />
-        </div>
+        {#each images as variet, i (i)}
+          {#each variet.images as img, j (img)}
+            <div class="swiper-slide">
+              <img src={img} data-index={2*i + j} style="{'background: ' + getBackground(variet.color)}" alt="" />
+            </div>
+          {/each}
+        {/each}
       {/each}
     </div>
-    <div class="swiper-button-prev" on:click={() => swiper.slidePrev(200)}></div>
-    <div class="swiper-button-next" on:click={() => swiper.slideNext(200)}></div>
-    <div class="swiper-pagination"></div>
+    {#if variety.images.length > 1}
+      <div class="swiper-button-prev" on:click={() => swiper.slidePrev(200)} />
+      <div class="swiper-button-next" on:click={() => swiper.slideNext(200)} />
+      <div class="swiper-pagination"></div>
+    {/if}
   </div>
 </div>
