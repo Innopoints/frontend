@@ -17,14 +17,7 @@
   export let chevron = false;
   export let badge = false;
 
-  $: rippleColor = ripple
-    ? isFilled
-    ? 'rgba(255, 255, 255, .35)'
-    : isDanger
-    ? 'rgba(186, 3, 3, .25)'
-    : 'rgba(56, 120, 0, .25)'
-    : null;
-
+  $: rippleColor = getRippleColor();
   $: classes = [
     isFilled && 'filled',
     isOutline && 'outline',
@@ -33,6 +26,18 @@
     isNormal && 'normal',
     classname ? classname : 'btn',
   ].filter(v => v !== false);
+
+  const getRippleColor = () => {
+    if (ripple) {
+      if (isFilled) {
+        return 'rgba(255, 255, 255, .35)';
+      } else {
+        if (isDanger) return 'rgba(186, 3, 3, .25)';
+        else return 'rgba(56, 120, 0, .25)';
+      }
+    }
+    return null;
+  };
 
   let dispatch = createEventDispatcher();
 </script>
