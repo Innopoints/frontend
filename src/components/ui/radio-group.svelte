@@ -1,21 +1,30 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import parseItems from './utils/parse-items-array';
+  import parseValues from './utils/parse-values';
 
-  export let items;
-  export let name;
-  export let classname = null;
-  export let selected = {};
+  export let classname = '';
+  export let wrapperclass = 'radio';
+  export let radioclass = 'radio';
+  export let inputclass = '';
+  export let labelclass = 'label';
+  export let iconclass = 'icon';
   export let isColor = false;
   export let isLabel = false;
   export let isLabelGreen = false;
-  export let labelPosition = 'right';
-  export let labelClass = null;
 
-  $: selectedId = selected.id + 1 || null;
+  export let items;
+  export let name;
+  export let value = {};
+  export let uniqueKey = null;
+  export let labelPosition = 'right';
+
+  $: parsedItems = parseItems(items, uniqueKey);
+  $: selected = parseValues(value, parsedItems, {uniqueKey});
 
   let dispatch = createEventDispatcher();
   const changeRadio = item => {
-    selectedId = item.id + 1;
+    selected = item;
     dispatch('change', item);
   };
 
@@ -60,30 +69,31 @@
 </style>
 
 <div class:with-labels={isLabel} class={classname} role="group">
-  {#each items as item, i (i)}
-    <label class:colored={isColor} class:clickable={isLabel} class={labelClass}>
+  {#each parsedItems as item, i (i)}
+    <label class:colored={isColor} class:clickable={isLabel} class={wrapperclass}>
       {#if isLabel}
         {#if labelPosition === 'left'}
           {#if isLabelGreen}
-            <span class="label">{item.label}</span>
+            <span class={labelclass}>{item.label}</span>
           {:else}
             {item.label}
           {/if}
         {/if}
 
-        <div class="radio">
+        <div class={radioclass}>
           <input
               on:change="{() => changeRadio(item)}"
               type="radio"
               name={name}
-              checked="{selectedId === item.id + 1}"
+              class={inputclass}
+              checked="{selected.id === item.id}"
           >
-          <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
+          <div class:white={isWhite(item)} style="{style(item)}" class={iconclass}></div>
         </div>
 
         {#if labelPosition === 'right'}
           {#if isLabelGreen}
-            <span class="label">{item.label}</span>
+            <span class={labelclass}>{item.label}</span>
           {:else}
             {item.label}
           {/if}
@@ -94,9 +104,10 @@
             on:change="{() => changeRadio(item)}"
             type="radio"
             name={name}
-            checked="{selectedId === item.id + 1}"
+            class={inputclass}
+            checked="{selected.id === item.id}"
         >
-        <div class:white={isWhite(item)} style="{style(item)}" class="icon"></div>
+        <div class:white={isWhite(item)} style="{style(item)}" class={iconclass}></div>
       {/if}
     </label>
   {/each}

@@ -45,5 +45,5 @@
     </ul>
   </Labeled>
 
-  <Button href={'/projects/' + id} filled>view</Button>
+  <Button href={'/projects/' + id} isFilled>see details</Button>
 </Card>

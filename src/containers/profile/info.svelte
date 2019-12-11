@@ -23,18 +23,20 @@
     {#if tgChange}
       <div class="telegram input">
         <TextField
-          bind:value={tgVal}
+          value={tgVal}
+          on:input={(e) => tgVal = e.detail}
           id="username"
-          outline
+          isOutline
+          isWithItem
           label="Telegram"
-          item
           pattern="[A-Za-z0-9_]&#123;5,32&#125;"
           error="A username should contain from 5 to 32 symbols: a–z, 0–9, _."
-          classname="mt-2">
+          classname="mt-2 text-field"
+        >
           <svg src="images/icons/at-sign.svg" class="item" />
         </TextField>
         <div class="actions">
-          <Button on:click="{() => toggleTgChange(false)}" classname="mr">
+          <Button on:click="{() => toggleTgChange(false)}" classname="mr btn">
             cancel
           </Button>
           <Button on:click={save} filled>save</Button>
@@ -43,19 +45,19 @@
     {:else if $user.telegram}
       <div class="telegram exists">
         @{$user.telegram}
-        <Button on:click="{() => toggleTgChange(true)}" classname="ml">
+        <Button on:click="{() => toggleTgChange(true)}" classname="ml btn">
           <svg src="images/icons/edit.svg" class="icon mr" />
           edit
         </Button>
       </div>
     {:else}
       <div class="telegram">
-        <Button on:click="{() => toggleTgChange(true)}" outline>
+        <Button on:click="{() => toggleTgChange(true)}" isOutline>
           <svg src="images/icons/send.svg" class="icon mr" />
           add Telegram username
         </Button>
 
-        <Dropdown dropdownclass="info-bubble" btnclass="round" chevron={false} right>
+        <Dropdown dropdownclass="dropdown info-bubble" btnclass="round btn" chevron={false} isRight>
           <svg slot="label" src="images/icons/help-circle.svg" class="icon" />
           Some event organizers prefer to collect those to ease communication.
           Adding one here will save you the typing for those

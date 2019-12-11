@@ -13,7 +13,7 @@
 
 <li class:open={value} class="filter competences panel">
   <svg src="images/icons/tag.svg" class="icon mr" />
-  <Button chevron={true} classname="handle" on:click={() => dispatch('toggle')}>
+  <Button chevron classname="handle btn" on:click={() => dispatch('toggle')}>
     select competences
   </Button>
 </li>
@@ -22,7 +22,7 @@
   <CheckboxGroup
       labeled
       items={competencesOptions}
-      checked={$filters.competences}
+      value={$filters.competences}
       name="competences"
       on:change={(e) => changeCompetences(e.detail)}
   />

@@ -11,16 +11,16 @@
     <span class="name">vacant spots</span>
   </div>
   <div class="align-center">
-    <Button round on:click={() => changeSpots($filters.spots - 1)}>
+    <Button isRound on:click={() => changeSpots($filters.spots - 1)}>
       <svg src="images/icons/minus.svg" class="icon" />
     </Button>
     <TextField
         value={$filters.spots}
         type="number"
-        classname="no-spinner"
+        isNoSpinner
         on:input={(e) => changeSpots(e.detail)}
     />
-    <Button round on:click={() => changeSpots($filters.spots + 1)}>
+    <Button isRound on:click={() => changeSpots($filters.spots + 1)}>
       <svg src="images/icons/plus.svg" class="icon" />
     </Button>
   </div>

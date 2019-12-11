@@ -24,29 +24,29 @@
       value={$filters.search}
       on:change={(e) => changeSearch(e.detail)}
       on:input={(e) => changeSearch(e.detail)}
-      item
+      isWithItem
   >
     <svg src="images/icons/search.svg" class="item" />
   </TextField>
   <div class="dropdowns">
-    <Dropdown chevron={false} wrapperclass="order-options">
+    <Dropdown chevron={false} wrapperclass="relative-wrapper order-options">
       <svg slot="label" src="images/icons/order.svg" class="mr" />
       <span slot="label" class="tight">order</span>
-      <span slot="label" class="regular">{$selectedOrder.label}</span>
+      <span slot="label" class="regular">{$selectedOrder.label || $selectedOrder}</span>
       <RadioGroup
-          selected={$selectedOrder}
+          value={$selectedOrder}
           items={orders}
           isLabel
           on:change="{(e) => selectOrder(e.detail)}"
       />
     </Dropdown>
 
-    <Dropdown chevron={false} right>
+    <Dropdown chevron={false} isRight>
       <svg slot="label" src="images/icons/filter.svg" class="mr" />
       <span slot="label">filters</span>
       <span slot="label">{#if !$filters.isEmpty}<Dot active small />{/if}</span>
 
-      <Button danger on:click={clearAllFilters}>Clear filters</Button>
+      <Button isDanger on:click={clearAllFilters}>Clear filters</Button>
       <ul class="accordion">
         <Spots />
         <Competences open={open === 'competences'} on:toggle={() => changeOpen('competences')} />

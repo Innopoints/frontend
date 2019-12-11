@@ -25,8 +25,8 @@
           It seems like you are not authorized to access this page.
         </div>
         <div class="actions">
-          <Button on:click={logIn} filled>sign in</Button>
-          <Button outline href="/">run to homepage</Button>
+          <Button on:click={logIn} isFilled>sign in</Button>
+          <Button href="/" isOutline>run to homepage</Button>
         </div>
       </div>
     </main>

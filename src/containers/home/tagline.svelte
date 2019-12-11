@@ -9,8 +9,8 @@
     <h1>Innopoints</h1>
     <div class="motto">Motivating the great beginnings</div>
     <nav>
-      <Button filled href="/projects">get innopoints</Button>
-      <Button outline href="/store">see the InnoStore</Button>
+      <Button isFilled href="/projects">get innopoints</Button>
+      <Button isOutline href="/store">see the InnoStore</Button>
     </nav>
   </div>
 </section>

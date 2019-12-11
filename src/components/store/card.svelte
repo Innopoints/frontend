@@ -25,9 +25,9 @@
       <RadioGroup
           items={varieties}
           name="{'color-' + id}"
-          selected={selected}
+          value={selected}
+          uniqueKey="id"
           classname="color-options"
-          labelClass="radio"
           isColor
           on:change={changeColor}
       />
@@ -39,9 +39,9 @@
         {price}
         <svg src="images/innopoint-sharp.svg" class="innopoint" />
       </Labeled>
-      <Button outline>view</Button>
+      <Button isOutline>view</Button>
     </div>
   {:else}
-    <Button outline>view</Button>
+    <Button isOutline>view</Button>
   {/if}
 </Card>

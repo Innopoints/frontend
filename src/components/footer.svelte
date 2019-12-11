@@ -8,7 +8,7 @@
 
 <footer>
   <div class="to-top">
-    <Button filled on:click={scrollToTop}>
+    <Button isFilled on:click={scrollToTop}>
       <svg src="images/icons/arrow-up.svg" class="mr" />
       back to top
     </Button>

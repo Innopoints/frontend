@@ -1,39 +1,53 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import rippleEffect from './utils/ripple';
 
+  export let classname = null;
+  export let isFilled = false;
+  export let isOutline = false;
+  export let isDanger = false;
+  export let isRound = false;
+  export let isNormal = false;
+  export let ripple = true;
+
+  export let disabled = false;
   export let label = '';
   export let away = null;
   export let href = '';
   export let chevron = false;
-  export let filled = false;
-  export let disabled = false;
-  export let outline = false;
-  export let danger = false;
   export let badge = false;
-  export let round = false;
-  export let normal = false;
-  export let classname = null;
 
-  $: ripple = filled
-    ? 'rgba(255, 255, 255, .35)'
-    : danger
-    ? 'rgba(186, 3, 3, .25)'
-    : 'rgba(56, 120, 0, .25)';
+  $: rippleColor = getRippleColor();
   $: classes = [
-    'btn',
-    filled && 'filled',
-    outline && 'outline',
-    danger && 'danger',
-    round && 'round',
-    normal && 'normal',
-    classname,
+    isFilled && 'filled',
+    isOutline && 'outline',
+    isDanger && 'danger',
+    isRound && 'round',
+    isNormal && 'normal',
+    classname ? classname : 'btn',
   ].filter(v => v !== false);
+
+  const getRippleColor = () => {
+    if (ripple) {
+      if (isFilled) {
+        return 'rgba(255, 255, 255, .35)';
+      } else {
+        if (isDanger) return 'rgba(186, 3, 3, .25)';
+        else return 'rgba(56, 120, 0, .25)';
+      }
+    }
+    return null;
+  };
 
   let dispatch = createEventDispatcher();
 </script>
 
 {#if href}
-  <a {href} target={away && '_blank'} class={classes.join(' ')}>
+  <a
+      {href}
+      target={away && '_blank'}
+      class={classes.join(' ')}
+  >
     <slot />
     {#if away}
       <svg src="images/icons/external-link.svg" class="icon ml" />
@@ -44,7 +58,9 @@
     type="button"
     {disabled}
     class={classes.join(' ')}
-    on:click={() => dispatch('click')}>
+    on:click={() => dispatch('click')}
+    use:rippleEffect={rippleColor}
+  >
     {#if badge}
       <div class="badge">
         <slot>{label}</slot>
