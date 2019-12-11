@@ -3,12 +3,12 @@
   import Card from 'ui/card.svelte';
 </script>
 
-<Card id="buttons" class="todo">
+<Card id="buttons" classname="todo">
   <h1>Buttons</h1>
   <div class="showcase">
     <Button isFilled href="#" away>link</Button>
     <Button isFilled>button</Button>
-    <Button isFutline isFilled href="#">link</Button>
+    <Button isOutline isFilled href="#">link</Button>
     <Button href="#">link</Button>
     <Button isFilled disabled>disabled</Button>
     <Button isOutline disabled>disabled</Button>
@@ -31,7 +31,7 @@
     <Button isRound isNormal>
       <svg src="images/ui-kit-page/x.svg" />
     </Button>
-    <Button isOutline isRound normal>
+    <Button isOutline isRound isNormal>
       <svg src="images/ui-kit-page/x.svg" />
     </Button>
     <Button isFilled chevron>chevron</Button>

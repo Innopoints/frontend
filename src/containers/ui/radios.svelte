@@ -23,7 +23,7 @@
   <h1>Radio Buttons</h1>
   <div class="showcase">
     <RadioGroup
-        labelClass="radio"
+        labelclass="radio"
         name="radio0"
         items={radioItems0}
     />
@@ -49,7 +49,7 @@
 
     <RadioGroup
         isColor
-        labelClass="radio"
+        labelclass="radio"
         name="radio3"
         items={radioItems1}
         value={radioItems1[0]}

@@ -49,7 +49,7 @@
       <slot />
     {:else}
       <div class={wrapperclass}>
-        <Button on:click={toggle} normal round classname="close btn">
+        <Button on:click={toggle} isNormal isRound classname="close btn">
           <svg src="images/icons/x.svg" />
         </Button>
         <slot />

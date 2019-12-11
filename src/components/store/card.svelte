@@ -12,7 +12,6 @@
   export let short = false;
 
   $: selected = varieties[0];
-  // $: console.log(selected);
   const changeColor = (e) => {
     selected = e.detail;
   };
