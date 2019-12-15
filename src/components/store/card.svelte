@@ -20,7 +20,7 @@
 
 <Card img={selected.images[0]} color={getBackground(selected.color)}>
   <div class="title">{name}</div>
-  <span class="subtitle">{type}</span>
+  {#if type}<span class="subtitle">{type}</span>{/if}
   <div slot="radio">
     {#if varieties.length > 1 && !short}
       <RadioGroup
@@ -37,7 +37,7 @@
   {#if !short}
     <div class="card-row">
       <Labeled label="Price">
-        {price}
+        <span class="price">{price}</span>
         <svg src="images/innopoint-sharp.svg" class="innopoint" />
       </Labeled>
       <Button href="/item/{id}" isOutline>view</Button>

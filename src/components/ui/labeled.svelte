@@ -2,6 +2,7 @@
   export let classname = 'labeled';
   export let labelclass = 'label';
   export let textclass = 'text';
+  export let contentclass = 'content';
 
   export let customContent = false;
   export let label = '';
@@ -18,7 +19,7 @@
       {#if customContent}
         <slot />
       {:else}
-        <span>
+        <span class={contentclass}>
           <slot />
         </span>
       {/if}
@@ -30,7 +31,7 @@
     {#if customContent}
       <slot />
     {:else}
-      <span>
+      <span class={contentclass}>
         <slot />
       </span>
     {/if}

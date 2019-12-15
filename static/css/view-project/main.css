@@ -104,6 +104,108 @@ h2.padded {
   margin-bottom: .25em;
 }
 
+.dialog p {
+  margin-top: .5em;
+}
+
+.modal-overlay .card {
+  position: relative;
+  margin: .5em;
+}
+
+.modal-overlay .card .title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #127800;
+  display: block;
+  padding-right: 2em;
+}
+
+.modal-overlay .card .btn.close {
+  position: absolute;
+  top: .7em;
+  right: .7em;
+}
+
+.modal-overlay .card .reports {
+  margin-top: 1.5em;
+  width: 40em;
+  font-size: .95rem;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.modal-overlay .card .reports .report {
+  padding-top: 1em;
+}
+
+.modal-overlay .card .reports .report:not(:last-child) {
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-overlay .card .reports .data-points {
+  display: flex;
+}
+
+.modal-overlay .card .reports .data-points .labeled:first-child {
+  margin-right: 10%;
+}
+
+.modal-overlay .card .reports .feedback {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.modal-overlay .card .reports .feedback .stars {
+  margin-left: 1em;
+  flex-shrink: 0;
+}
+
+.modal-overlay .card .reports .feedback .stars .star {
+  width: 16px;
+  height: 16px;
+}
+
+.modal-overlay .card .reports .labeled > .icon {
+  margin-top: .6rem;
+}
+
+.stars {
+  margin-left: 1em;
+}
+
+.stars .star {
+  stroke: #127800;
+  width: 18px;
+  height: 18px;
+  margin: 0 1px;
+}
+
+.stars .star.off {
+  stroke: #ddd;
+}
+
+.report-form > label {
+  margin-top: 1em;
+  margin-bottom: .5em;
+  display: block;
+  line-height: 1.3rem;
+}
+
+.report-form .actions {
+  margin-top: .5em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 359px) {
+  .dialog {
+    padding: 1.2em;
+  }
+}
+
 @media only screen and (min-width: 480px) and (max-width: 699px) {
   .project-header {
     background: var(--image-url);

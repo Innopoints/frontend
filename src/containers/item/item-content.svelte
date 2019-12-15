@@ -63,10 +63,6 @@
         />
         <span class="not-selected">please, select a size</span>
       </Labeled>
-    {:else if variety.quantity}
-      <Labeled label="Quantity" classname="labeled text sizes">
-        {variety.quantity}
-      </Labeled>
     {/if}
   </div>
 

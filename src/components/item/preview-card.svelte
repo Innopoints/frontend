@@ -57,10 +57,6 @@
             uniqueKey="label"
         />
       </Labeled>
-    {:else if variety.quantity}
-      <Labeled label="Quantity" classname="labeled text mt-2">
-        {variety.quantity}
-      </Labeled>
     {/if}
   </div>
   <div class:mt-2={sizes || variety.quantity || $item.varieties.length > 1 || $item.description} class="card-row">

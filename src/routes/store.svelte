@@ -17,9 +17,7 @@
   <link rel="stylesheet" href="css/page-components/empty-state.css" />
   <link rel="stylesheet" href="css/store/filters-spec.css" />
   <link rel="stylesheet" href="css/store/main.css" />
-  <link rel="stylesheet" href="css/view-product/main.css" />
   <link rel="stylesheet" href="css/page-components/pagination.css" />
-  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
   <link rel="stylesheet" href="css/page-components/footer.css" />
 
   <!-- Projects styles -->

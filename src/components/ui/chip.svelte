@@ -23,16 +23,14 @@
 </script>
 
 <label class={classname}>
-  {#if !disabled}
-    <input
-        checked={checked}
-        name={name}
-        disabled={disabled}
-        type="{(multiple || disabled) ? 'checkbox' :'radio'}"
-        class={inputclass}
-        on:change={check}
-    />
-  {/if}
+  <input
+      checked={checked}
+      name={name}
+      disabled={disabled}
+      type="{(multiple || disabled) ? 'checkbox' :'radio'}"
+      class={inputclass}
+      on:change={check}
+  />
   <div
       class:unclickable={disabled}
       class:small={isSmall}
