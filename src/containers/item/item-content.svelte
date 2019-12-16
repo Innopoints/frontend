@@ -22,7 +22,27 @@
     label: size,
     disabled: variety.sizes[size] <= 0,
   })) : null;
-  const changeVariety = e => dispatch('change', e.detail);
+  const changeVariety = e => {
+    chosenSize = null;
+    dispatch('change', e.detail);
+  };
+
+  let chosenSize = null;
+  let err = false;
+  let animation = false;
+  const chooseSize = e => chosenSize = e.detail;
+  const purchase = () => {
+    if (inSizes && chosenSize) {
+      // todo: open modal
+      err = false;
+    } else {
+      err = true;
+      animation = true;
+      setTimeout(function() {
+        animation = false;
+      }, 1000);
+    }
+  };
 </script>
 
 <div class="content">
@@ -54,7 +74,7 @@
       </Labeled>
     {/if}
     {#if sizes}
-      <Labeled label="sizes" classname="labeled text sizes" customContent>
+      <Labeled label="sizes" classname="labeled text sizes{err ? ' wrong' : ''}{animation ? ' fire-animation' : ''}" customContent>
         <ChipGroup
           items={sizes}
           isSmall
@@ -62,6 +82,7 @@
           classname="radio-options"
           chipclass="chip-wrapper size"
           uniqueKey="label"
+          on:change={chooseSize}
         />
         <span class="not-selected">please, select a size</span>
       </Labeled>
@@ -85,7 +106,7 @@
       <div class="purchases">
         {purchases || 0} purchases
       </div>
-      <Button isFilled>purchase</Button>
+      <Button isFilled on:click={purchase}>purchase</Button>
       <!--<Button isFilled>edit</Button>-->
       <!-- <a href="###">Sign in</a> to purchase -->
     </div>
