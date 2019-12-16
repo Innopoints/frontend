@@ -42,7 +42,7 @@ export default [
     type: 'T-Shirt',
     description: 'Lorem ipsum dolor sit amet, a Lev kakaha',
     price: 1337,
-    purchases: 0,
+    purchases: 11,
     inSizes: false,
     varieties: [
       {

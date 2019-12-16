@@ -18,6 +18,7 @@
   export let type;
   export let description;
   export let price;
+  export let purchases;
   export let inSizes;
   export let varieties = [];
   $: variety = varieties[0];
@@ -68,7 +69,7 @@
     </div>
     <Images {varieties} {variety} />
     <ItemContent
-        {name} {type} {description} {inSizes} {varieties} {variety} {price}
+        {name} {type} {description} {inSizes} {varieties} {variety} {price} {purchases}
         on:change={changeVariety}
     />
   </main>

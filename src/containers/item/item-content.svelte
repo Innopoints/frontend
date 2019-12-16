@@ -5,6 +5,8 @@
   import ChipGroup from 'ui/chip-group.svelte';
   import Button from 'ui/button.svelte';
 
+  import {isAuthed, user} from '@/store/user';
+
   export let name;
   export let type;
   export let description;
@@ -41,25 +43,25 @@
     {#if varieties.length > 1}
       <Labeled label="colors" classname="labeled text colors" customContent>
         <RadioGroup
-                isColor
-                name="variety-colors"
-                classname="radio-options"
-                items={varieties}
-                value={variety}
-                uniqueKey="color"
-                on:change={changeVariety}
+          isColor
+          name="variety-colors"
+          classname="radio-options"
+          items={varieties}
+          value={variety}
+          uniqueKey="color"
+          on:change={changeVariety}
         />
       </Labeled>
     {/if}
     {#if sizes}
       <Labeled label="sizes" classname="labeled text sizes" customContent>
         <ChipGroup
-                items={sizes}
-                isSmall
-                name="sizes"
-                classname="radio-options"
-                chipclass="chip-wrapper size"
-                uniqueKey="label"
+          items={sizes}
+          isSmall
+          name="sizes"
+          classname="radio-options"
+          chipclass="chip-wrapper size"
+          uniqueKey="label"
         />
         <span class="not-selected">please, select a size</span>
       </Labeled>
@@ -68,18 +70,20 @@
 
   <div class="purchase-details">
     <div class="labeled text">
-        <span class="label">
-          Price
-        </span>
+      <span class="label">
+        Price
+      </span>
       <span class="price" title="Not enough innopoints">
-          {price}
+        {price}
         <svg src="/images/innopoint-sharp.svg" class="innopoint" />
+        {#if $isAuthed && $user.balance < price}
           <svg src="/images/icons/frown.svg" class="frown" />
-          </span>
+        {/if}
+      </span>
     </div>
     <div class="action">
       <div class="purchases">
-        1337 {purchases}
+        {purchases || 0} purchases
       </div>
       <Button isFilled>purchase</Button>
       <!--<Button isFilled>edit</Button>-->
