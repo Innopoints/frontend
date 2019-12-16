@@ -4,6 +4,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import ChipGroup from 'ui/chip-group.svelte';
   import Button from 'ui/button.svelte';
+  import PurchaseModal from '@/components/item/purchase-modal.svelte';
 
   import {isAuthed, user} from '@/store/user';
 
@@ -30,11 +31,12 @@
   let chosenSize = null;
   let err = false;
   let animation = false;
+  let open = false;
   const chooseSize = e => chosenSize = e.detail;
   const purchase = () => {
     if (inSizes && chosenSize) {
-      // todo: open modal
       err = false;
+      open = true;
     } else {
       err = true;
       animation = true;
@@ -46,6 +48,12 @@
 </script>
 
 <div class="content">
+  <PurchaseModal
+    {name} {type} {inSizes} {variety}  {price}
+    value={open}
+    size={chosenSize}
+  />
+
   <header>
     <div class="title">
       {name}
@@ -103,12 +111,18 @@
       </span>
     </div>
     <div class="action">
-      <div class="purchases">
-        {purchases || 0} purchases
-      </div>
-      <Button isFilled on:click={purchase}>purchase</Button>
-      <!--<Button isFilled>edit</Button>-->
-      <!-- <a href="###">Sign in</a> to purchase -->
+      {#if $isAuthed}
+        <div class="purchases">
+          {purchases || 0} purchases
+        </div>
+        {#if $user.isAdmin}
+          <Button isFilled>edit</Button>
+        {:else}
+          <Button isFilled on:click={purchase}>purchase</Button>
+        {/if}
+      {:else}
+        <a href="/profile">Sign in</a> to purchase
+      {/if}
     </div>
   </div>
 </div>
