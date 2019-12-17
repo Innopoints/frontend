@@ -25,8 +25,7 @@
     if (val) {
       document.body.classList.add(openerclass);
       document.querySelector('html').style.overflow = 'hidden';
-    }
-    else {
+    } else {
       document.body.classList.remove(openerclass);
       document.querySelector('html').style.overflow = 'initial';
     }

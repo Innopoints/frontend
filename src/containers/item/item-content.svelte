@@ -4,10 +4,12 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import ChipGroup from 'ui/chip-group.svelte';
   import Button from 'ui/button.svelte';
+  import Snackbar from 'ui/snackbar.svelte';
   import PurchaseModal from '@/components/item/purchase-modal.svelte';
 
   import {isAuthed, user} from '@/store/user';
   import {openModal} from '@/store/modal';
+  import {open as snackbarOpen, closeSnackbar} from '@/store/snackbar';
 
   export let name;
   export let type;
@@ -52,6 +54,10 @@
     {name} {type} {inSizes} {variety}  {price}
     size={chosenSize}
   />
+  <Snackbar bind:value={$snackbarOpen}>
+    <div class="text">Purchase successful! Track its status in the <a href="/profile">profile</a>.</div>
+    <Button on:click={closeSnackbar}>dismiss</Button>
+  </Snackbar>
 
   <header>
     <div class="title">

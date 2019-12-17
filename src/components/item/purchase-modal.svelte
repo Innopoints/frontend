@@ -7,6 +7,7 @@
   import { createEventDispatcher } from 'svelte';
   import {user} from '@/store/user';
   import {open, closeModal} from '@/store/modal';
+  import {openSnackbar} from '@/store/snackbar';
 
   export let size;
   export let name;
@@ -29,6 +30,7 @@
   const confirm = () => {
     if (finalPrice >= 0) {
       closeModal();
+      openSnackbar();
       dispatch('success');
     }
   };
