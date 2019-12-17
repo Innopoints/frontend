@@ -2,11 +2,7 @@
 // and return array of strings that should be passed as src:
 // <img src={images}>
 
-export default async (arr) => {
-  let urls = [];
-  for (let i = 0; i < arr.length; i++) urls.push(await readFileAsync(arr[i]));
-  return urls;
-};
+export default (arr) => Promise.all(arr.map(readFileAsync));
 
 export const readFileAsync = (file) => {
   return new Promise((resolve, reject) => {

@@ -78,6 +78,5 @@ export function removeVariety(index) {
 }
 
 export function clearAll() {
-  console.log(newItem());
   item.update(() => newItem());
 }
