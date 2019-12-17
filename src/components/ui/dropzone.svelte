@@ -4,7 +4,7 @@
   export let inputclass = '';
   export let id = '';
   export let value = [];
-  export let accept = 'image';
+  export let accept = 'image/*';
   export let maxSize = null;
   export let multiple = true;
   export let disabled = false;
@@ -17,9 +17,7 @@
   const dispatch = createEventDispatcher();
   const fileClick = (e) => {
     if (disabled) return;
-    if (disabledElements.length && disabledElements.some(el => {
-      return el.contains(e.target);
-    })) return;
+    if (disabledElements.length && disabledElements.some(el => el.contains(e.target))) return;
     if (disabledQuerySelector && e.target.closest(disabledQuerySelector)) return;
 
     filePlatform.click();
@@ -44,7 +42,8 @@
           return;
         }
       }
-      multiple ? files.push(file) : files = [file];
+      if(multiple) files.push(file);
+      else files = [file];
     }
     dispatch('change', files);
   };

@@ -14,9 +14,8 @@
   const changeFiles = async e => changeVarietyField(index, 'images', e.detail);
   const removeImage = (data) => {
     let pos = images.indexOf(data);
-    if (pos > -1) {
-      changeVarietyField(index, 'images', files.filter((x, i) => i !== pos));
-    }
+    if (pos === -1) return;
+    changeVarietyField(index, 'images', files.filter((x, i) => i !== pos));
   };
 </script>
 

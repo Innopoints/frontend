@@ -36,7 +36,7 @@
       <span slot="label">
         choose a color
       </span>
-      <div slot="label" class="selected-color" style="background-color: {variety.color}" />
+      <div slot="label" class="selected-color" style={'background-color:' + variety.color} />
       <RadioGroup
           isColor
           name="choose-color"
