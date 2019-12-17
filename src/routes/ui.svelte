@@ -10,6 +10,7 @@
   import Radios from '@/containers/ui/radios.svelte';
   import Switches from '@/containers/ui/switches.svelte';
   import TextFields from '@/containers/ui/text-fields.svelte';
+  import Modals from '@/containers/ui/modals.svelte';
   import Others from '@/containers/ui/others.svelte';
 </script>
 
@@ -19,6 +20,7 @@
   <!-- Styles for Home page -->
   <link rel="stylesheet" href="css/page-components/footer.css" />
   <link rel="stylesheet" href="css/page-components/header.css" />
+  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
   <link rel="stylesheet" href="css/global/ui-kit-page.css" />
 
   <style>
@@ -49,6 +51,7 @@
   <Switches />
   <Labeleds />
   <Dropdowns />
+  <Modals />
   <Accordions />
   <Dots />
   <Chips />

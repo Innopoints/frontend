@@ -2,54 +2,6 @@
   import Card from 'ui/card.svelte';
 </script>
 
-<Card id="dialogs">
-  <h1 class="todo">Dialogs</h1>
-  <div class="showcase vertical">
-    <div class="dialog">
-      <button class="btn normal round close">
-        <img alt="" src="/images/icons/x.svg" />
-      </button>
-      <span class="title">
-          <img alt="" src="/images/icons/award.svg" class="icon" />
-          U Got Mail
-        </span>
-      <p>Text of the dialog here text text.</p>
-      <div class="actions">
-        <button class="btn">cancel</button>
-        <button class="btn filled">action</button>
-      </div>
-    </div>
-
-    <div class="dialog danger">
-        <span class="title">
-          <img
-              alt=""
-              src="/images/icons/alert-triangle.svg"
-              class="icon" />
-          Warning
-        </span>
-      <p>Something bad is about to happen. You just gonna let it roll?</p>
-      <div class="actions">
-        <button class="btn">no, wait</button>
-        <button class="btn filled danger">yeah lmao</button>
-      </div>
-    </div>
-
-    <div class="dialog notice">
-      <div class="message">
-        <img
-            alt=""
-            src="/images/icons/alert-triangle.svg"
-            class="icon" />
-        <p>What's it gonna take for you to ever let go?</p>
-      </div>
-      <div class="actions">
-        <button class="btn">wait, what</button>
-      </div>
-    </div>
-  </div>
-</Card>
-
 <Card id="typo">
   <h1>Typography</h1>
   <div class="showcase vertical">

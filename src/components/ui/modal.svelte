@@ -6,6 +6,8 @@
   export let classname = 'modal-overlay column';
   export let cardclass = 'card';
   export let openerclass = 'modal-open';
+  export let overlaydisplay = 'block';
+  export let closebutton = true;
 
   export let value = false;
   $: toggleBodyClass(value);
@@ -32,11 +34,13 @@
   };
 </script>
 
-<div bind:this={modal} class={classname} on:click={close}>
+<div style={'display:'+ (value ? overlaydisplay : 'none')} bind:this={modal} class={classname} on:click={close}>
   <Card classname={cardclass}>
-    <Button isNormal isRound classname="close btn" on:click={(e) => close(e, true)}>
-      <svg src="/images/icons/x.svg" />
-    </Button>
+    {#if closebutton}
+      <Button isNormal isRound classname="close btn" on:click={(e) => close(e, true)}>
+        <svg src="/images/icons/x.svg" />
+      </Button>
+    {/if}
     <slot />
   </Card>
 </div>
