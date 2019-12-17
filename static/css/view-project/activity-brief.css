@@ -1,65 +1,118 @@
-.activities.brief {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1em;
-  align-items: flex-start;
-}
-
 .activity-brief {
   overflow: visible;
   margin-bottom: 1em;
   padding-bottom: 1em;
 }
 
-@supports (display: grid) {
-  .activity-brief {
-    display: grid;
-    grid-template-rows: auto auto auto 1fr auto auto;
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-}
-
 .activity-brief .title {
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+  letter-spacing: .2px;
+}
+
+.activity-brief .labeled {
+  font-size: 1.05rem;
+}
+
+.activity-brief .labeled .icon {
+  margin-top: .7em;
+  flex-shrink: 0;
+}
+
+.activity-brief .labeled .content.secondary {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.activity-brief .application-status {
+  font-size: .9em;
+  font-weight: 300;
+  margin-top: 1em;
+}
+
+.activity-brief .application-status .dot {
+  margin-right: .3em;
+  margin-left: 0;
 }
 
 .activity-brief .row {
   margin-top: .8em;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .activity-brief .row > .labeled {
   flex-basis: 50%;
 }
 
-.activity-brief .labeled .icon {
-  flex-shrink: 0;
+.activity-brief .additional {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
 }
 
-.labeled .content {
-  font-size: 1.15rem;
+.activity-brief .chevron {
+  transition: transform 100ms;
 }
 
-.labeled .innopoint {
-  margin-bottom: -1px;
+.activity-brief.expanded .chevron {
+  transform: rotate(180deg);
 }
 
-.activity-brief > .labeled,
-.activity-brief .actions {
-  margin-top: 1em;
+.activity-brief.expanded .row.info {
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.activity-brief .chips {
+.activity-brief.expanded .row.info .labeled:last-child {
+  margin-top: .8em;
+}
+
+.activity-brief.expanded .labeled .content.primary {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.activity-brief.expanded .labeled .content.secondary,
+.activity-brief.expanded .additional {
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+}
+
+.activity-brief.expanded .description,
+.activity-brief.expanded .chips,
+.activity-brief.expanded .volunteers {
+  margin-top: .8em;
+}
+
+.activity-brief.expanded .description .content {
+  font-size: .95rem;
+}
+
+.activity-brief.expanded .chips {
   margin-top: 1em;
   display: flex;
   flex-wrap: wrap;
 }
 
-.activity-brief .chip {
+.activity-brief.expanded .chip {
   font-size: .85rem;
   font-weight: 400;
   color: #000;
@@ -67,72 +120,82 @@
   padding: .4em .7em;
 }
 
-.activity-brief > .dropdown-shell {
+.activity-brief.expanded .volunteers ul {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.activity-brief.expanded .volunteers ul li {
   margin-top: .5em;
 }
 
-.activity-brief .relative-wrapper {
-  padding: 1em;
-}
-
-.activity-brief .btn.close {
-  margin-right: -.7em;
-  margin-top: -.7em;
-  margin-left: .5em;
-}
-
-.activity-brief .dropdown li {
+.activity-brief.expanded .volunteers ul strong {
   margin-top: .8em;
+  display: block;
 }
 
-.activity-brief .row:last-child {
-  margin-top: .4em;
+.activity-brief.expanded .application {
+  border-top: 1px solid #ddd;
+  padding-top: .8em;
+  font-weight: 300;
 }
 
-.activity-brief .application-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.activity-brief.expanded .application .with-icon {
   margin-top: .5em;
-  font-weight: 500;
-  font-size: 1.1rem;
 }
 
-.status-chip {
-  color: #fff;
+.activity-brief.expanded .not-logged-in {
+  align-self: center;
+  font-weight: 300;
+}
+
+.activity-brief .with-icon {
+  display: flex;
+  align-items: flex-start;
   font-size: .9rem;
-  font-weight: 400;
-  padding: 5px 10px;
-  border-radius: 25px;
-  background: #1289a3;
+  margin-top: .3em;
 }
 
-.status-chip.bad {
-  background: #ba0303;
+.activity-brief .with-icon > .icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  stroke: #127800;
+  margin-right: .3em;
 }
 
-.status-chip.good {
-  background: #127800;
+.labeled .innopoint {
+  margin-bottom: -1px;
 }
 
-.activity-brief .application-actions {
-  justify-content: flex-end;
-}
-
-.activity-brief .application-actions > .btn:first-child {
-  margin-right: .5em;
-}
-
-@media only screen and (min-width: 360px) {
-  .activity-brief .row:last-child {
-    font-size: 1.1rem;
+@media only screen and (max-width: 379px) {
+  .volunteers .icon {
+    display: none;
   }
 }
 
-@media only screen and (min-width: 420px) {
-  .activity-brief {
-    max-width: 18em;
-    margin-left: .5em;
-    margin-right: .5em;
+@media screen and (min-width: 420px) and (max-width: 679px), (min-width: 1024px) and (max-width: 1199px), (min-width: 1400px) {
+  .activity-brief .row > .labeled:first-child {
+    flex-basis: 40%;
+  }
+  .activity-brief .row > .labeled:last-child {
+    flex-basis: 60%;
+  }
+  .activity-brief:not(.expanded) .labeled .content.secondary {
+    clip: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    font-size: .95rem;
+    font-weight: 300;
+  }
+  .activity-brief.expanded .row.info {
+    flex-direction: row;
+  }
+  .activity-brief.expanded .row.info > .labeled:last-child {
+    margin-top: 0;
   }
 }

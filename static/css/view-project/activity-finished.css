@@ -1,0 +1,65 @@
+.project-header .data-points {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.actual-hours {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.actual-hours .text-field > input {
+  width: 3em;
+  margin-left: 2em;
+}
+
+.btn.report {
+  margin-top: 1em;
+  flex-shrink: 0;
+}
+
+.btn.report .icon {
+  width: 20px;
+  height: 20px;
+}
+
+@media only screen and (min-width: 1024px) {
+  @supports (display: grid) {
+    .activity .right {
+      grid-column: 2 / 4;
+    }
+    .activity .panel {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto auto;
+      align-items: start;
+      justify-items: start;
+    }
+    .activity .panel .name {
+      grid-row: 1 / 2;
+    }
+    .activity .panel .telegram {
+      grid-row: 2 / 3;
+    }
+    .activity .panel .actual-hours {
+      grid-row: 1 / 3;
+      grid-column: 2 / 3;
+      margin-top: 0;
+      justify-self: center;
+    }
+    .activity .panel .handle {
+      grid-column: 3 / 4;
+      grid-row: 1 / 3;
+    }
+    .activity .panel + section {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .activity .panel + section .btn.outline {
+      margin-left: 1em;
+      margin-top: 0;
+    }
+  }
+}

@@ -4,12 +4,12 @@
   export let classname = 'chip-wrapper';
   export let inputclass = '';
   export let chipclass = 'chip';
+  export let isSmall = false;
+  export let isOutline = false;
 
   export let label = '';
   export let name = '';
   export let disabled = false;
-  export let small = false;
-  export let outline = false;
   export let multiple = false;
   export let value = null;
 
@@ -35,8 +35,8 @@
   {/if}
   <div
       class:unclickable={disabled}
-      class:small={small}
-      class:outline={outline}
+      class:small={isSmall}
+      class:outline={isOutline}
       class={chipclass}
   >
     <slot>{label}</slot>

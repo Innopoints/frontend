@@ -4,6 +4,11 @@
   align-items: center;
 }
 
+.activity .actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .activity > div:not(:last-child) {
   border-bottom: 1px solid #ddd;
   padding-bottom: 1em;
@@ -32,21 +37,25 @@
   flex-shrink: 0;
 }
 
+.activity .labeled .content {
+  font-size: 1.15rem;
+}
+
+.activity .labeled .content .secondary {
+  font-size: .9rem;
+  font-weight: 300;
+}
+
+.activity .labeled .innopoint {
+  margin-bottom: -1px;
+}
+
 .activity .actions > .btn > .icon {
   width: 20px;
   height: 20px;
 }
 
-.labeled .content {
-  font-size: 1.15rem;
-}
-
-.labeled .innopoint {
-  margin-bottom: -1px;
-}
-
-.activity .left > .labeled,
-.activity .actions {
+.activity .left > .labeled, .activity .actions {
   margin-top: 1em;
 }
 
@@ -64,18 +73,22 @@
   padding: .4em .7em;
 }
 
-.activity .panel > .handle {
-  float: right;
-}
-
 .activity .panel {
   margin-top: .8em;
   margin-left: .5em;
   padding-top: 1em;
 }
 
+.activity .panel:not(:first-of-type) {
+  border-top: 1px solid #ddd;
+}
+
 .activity .panel .name {
   margin-bottom: .3em;
+}
+
+.activity .panel > .handle {
+  float: right;
 }
 
 .activity .panel + section {
@@ -113,10 +126,6 @@
   margin-right: .3em;
 }
 
-.activity .panel:not(:first-of-type) {
-  border-top: 1px solid #ddd;
-}
-
 @media only screen and (min-width: 640px) {
   @supports (display: grid) {
     .activity {
@@ -124,7 +133,12 @@
       grid-template-rows: auto auto;
       grid-template-columns: 1fr 1fr;
     }
-
+    .activity > div:not(:first-child) {
+      padding-top: .5em;
+    }
+    .activity > div:last-child {
+      padding-top: 1.5em;
+    }
     .activity .left {
       grid-row-start: 1;
       grid-row-end: 3;
@@ -132,9 +146,7 @@
       border-right: 1px solid #ddd;
       padding-right: 1em;
     }
-
-    .activity .middle,
-    .activity .right {
+    .activity .middle, .activity .right {
       margin-left: 1em;
     }
   }
@@ -147,11 +159,12 @@
       grid-template-rows: auto;
       grid-template-columns: 1fr 1fr 1fr;
     }
-
+    .activity > div:last-child {
+      padding-top: .5em;
+    }
     .activity .left {
       grid-row-end: 2;
     }
-
     .activity .middle {
       border-bottom-width: 0 !important;
       border-right: 1px solid #ddd;

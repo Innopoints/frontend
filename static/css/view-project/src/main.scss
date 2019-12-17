@@ -1,21 +1,66 @@
+@import "../../global/src/_variables.scss";
+@import "../../global/src/_mixins.scss";
+
 .material {
   padding-bottom: 3em;
 }
 
-h1 {
-  margin-top: 1.5em;
-  margin-bottom: 0;
+.project-header {
+  margin-bottom: 1.5em;
+
+  .cover-image {
+    width: 100%;
+  }
+
+  h1 {
+    margin-top: 1em;
+    margin-bottom: 0;
+    font-size: 1.3rem;
+  }
+
+  .info {
+    margin: 0 calc(1em - 2px);
+    padding: 0 4px 1.5em;
+    border-bottom: 1px solid $light-gray;
+  }
+
+  .labeled {
+    align-items: flex-end;
+    margin-top: 1em;
+    margin-right: 2.5em;
+    font-size: 1.05rem;
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: -2px;
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn.filled {
+      margin-top: 1em;
+    }
+
+    .btn.outline {
+      margin-top: 1em;
+      margin-right: .5em;
+    }
+  }
 }
 
-.info {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.info .labeled {
-  margin-top: 1em;
-  margin-right: 2.5em;
-  font-size: 1.1rem;
+.material > h2 {
+  @include hide-accessible;
 }
 
 .labeled.comment {
@@ -28,28 +73,13 @@ h1 {
   flex-shrink: 0;
 }
 
-.material > .top-info > .actions {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1.5em;
-}
-
-.material > .top-info > .actions > .btn {
-  margin-bottom: .5em;
-}
-
-.material > .top-info > .actions > .btn > .icon {
-  width: 20px;
-  height: 20px;
-}
-
-.material > .top-info > .actions > .btn:not(:last-child) {
-  margin-right: .5em;
-}
-
 h2.padded {
   margin-bottom: 0;
   margin-top: 2em;
+}
+
+.activities.brief {
+  margin-top: 1em;
 }
 
 .card.activity,
@@ -62,31 +92,109 @@ h2.padded {
   margin-top: 1em;
 }
 
-@media only screen and (min-width: 640px) {
-  .card.activity,
-  .card.create-activity {
-    margin-left: 1em;
-    margin-right: 1em;
-  }
+.consequences {
+  font-weight: 300;
+  display: block;
+  margin-top: .3em;
+}
 
-  .material > .activities + .btn {
-    margin-left: 1em;
+.modal-overlay ul.actual li {
+  margin-bottom: .25em;
+}
+
+@media only screen and (min-width: 480px) and (max-width: 699px) {
+  .project-header {
+    background: var(--image-url);
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: $shadow-1;
+
+    h1 {
+      margin-top: 1.5em;
+    }
+
+    .cover-image {
+      display: none;
+    }
+
+    .info {
+      width: 60%;
+      background: linear-gradient(
+        to left,
+        #fff 0%,
+        rgba(255, 255, 255, 1) 90%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      margin: 0;
+      padding-left: 4em;
+      padding-right: 1em;
+      border-bottom: none;
+    }
   }
 }
 
-@media only screen and (min-width: 840px) {
-  .info .labeled {
-    margin-right: 4em;
-    margin-top: 1.5em;
+@media only screen and (min-width: 700px) {
+  .project-header {
+    display: flex;
+    margin-top: 1em;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+
+    .cover-image {
+      width: 40%;
+      max-width: 25em;
+      border-radius: 1em;
+      margin: 1em 1em 1em 0;
+      object-fit: cover;
+    }
+
+    .info {
+      border-bottom: none;
+    }
   }
 
-  .card.activity,
-  .card.create-activity {
-    margin-left: 5%;
-    margin-right: 5%;
+  .activities.brief {
+    column-count: 2;
+
+    .card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
   }
 
-  .material > .activities + .btn {
-    margin-left: 5%;
+  .activities.moderated {
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+  }
+
+  .material > .moderated + .btn {
+    margin-left: 2.5em;
+  }
+
+  .material > h2 {
+    @include show-accessible;
+    text-align: center;
+  }
+}
+
+.dialog {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
+@media only screen and (min-width: 1200px) {
+  .activities.brief {
+    column-count: 3;
+  }
+
+  .activities.moderated,
+  .project-header {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+
+  .material > .moderated + .btn {
+    margin-left: 8%;
   }
 }

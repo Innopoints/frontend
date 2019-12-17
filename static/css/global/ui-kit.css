@@ -440,6 +440,10 @@ button.btn {
   margin-top: -2px;
 }
 
+.text-field.with-item input:invalid + svg.item {
+  stroke: #ab0303;
+}
+
 .text-field.outline {
   position: relative;
 }
@@ -514,8 +518,13 @@ button.btn {
   stroke: #127800;
 }
 
-.text-field :invalid {
+.text-field input:invalid {
   box-shadow: none;
+  border-bottom-color: #ab0303;
+}
+
+.text-field input:not(.outline):invalid {
+  background-color: #e4dfdf;
 }
 
 .text-field :-moz-ui-invalid {
@@ -1066,7 +1075,7 @@ input[type="checkbox"]:checked + .chip::before {
   stroke: #127800;
 }
 
-.dialog.danger svg {
+.dialog.danger .title svg {
   stroke: #ba0303;
 }
 
@@ -1305,7 +1314,11 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dot.active {
-  background-color: rgba(18, 120, 0, 0.7);
+  background-color: rgba(18, 120, 0, 0.5);
+}
+
+.dot.pending {
+  background-color: rgba(134, 211, 255, 0.5);
 }
 
 /* Choice Buttons -------------------------------------- */
@@ -1394,6 +1407,7 @@ input[type="checkbox"]:checked + .chip::before {
   cursor: pointer;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  user-select: none;
 }
 
 .tab > .icon:hover {

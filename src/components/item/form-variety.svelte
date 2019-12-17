@@ -1,44 +1,61 @@
 <script>
+  import sizes from '@/constants/item/sizes';
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
   import Dropdown from 'ui/dropdown.svelte';
-  import {item, changeVarietyQuantity, changeVarietySize, removeVariety} from '@/store/item';
+  import RadioGroup from 'ui/radio-group.svelte';
+  import DragDropzone from '@/components/item/drag-dropzone.svelte';
+  import {item, changeVarietySize, removeVariety, changeVarietyField, colors, customColors, addNewColor} from '@/store/item';
 
   export let index;
   export let removable;
-  export const colors = [];
 
-  const sizes = ['XS', 'S', 'M', 'L' , 'XL', 'XXL'];
-  const variety = $item.varieties[index];
+  let colorPicker = null;
+
+  $: variety = $item.varieties[index];
+  const chooseColor = e => {
+    changeVarietyField(index, 'color', e.detail.color);
+  };
+
+  const openColorPicker = () => colorPicker.click();
 </script>
+
+<style>
+  #new-color-picker {
+    display: none;
+  }
+</style>
 
 <li class="variety">
   <div class="settings">
-    <Dropdown label="open dropdown" chevron={false} dropdownclass="color-picker" btnclass="mb">
-      <div role="group" class="color-choices" />
+    <Dropdown
+        chevron={false}
+        dropdownclass="dropdown color-picker"
+        btnclass="mb handle btn"
+    >
+      <span slot="label">
+        choose a color
+      </span>
+      <div slot="label" class="selected-color" style={'background-color:' + variety.color} />
+      <RadioGroup
+          isColor
+          name="choose-color"
+          items={$colors.concat(Object.values($customColors))}
+          classname="color-choices"
+          on:change={chooseColor}
+      />
       <hr />
-      <Button>
-        <svg src="images/icons/plus.svg" class="icon mr" />
+      <Button on:click={openColorPicker}>
+        <svg src="/images/icons/plus.svg" class="icon mr" />
         add another color
       </Button>
+      <input
+          on:change={(e) => addNewColor(index, e.target.value)}
+          type="color"
+          bind:this={colorPicker}
+          id="new-color-picker"
+      >
     </Dropdown>
-    <!--<Dropdown :chevron="false">
-      <template v-slot:label>
-        choose a color
-        <div
-            v-if="variety.color"
-            :style="`background-color: ${variety.color}`"
-            class="selected-color"
-        />
-      </template>
-      <RadioGroup
-          :name="name"
-          :items="colorOptions"
-          :value="variety"
-          @input="$store.commit('newProduct/setVarField', {index, key:'color', value: $event.color})"
-          horizontal
-      />
-    </Dropdown>-->
 
     {#if !$item.inSizes}
       <div class="quantity">
@@ -47,7 +64,7 @@
             id="quantity"
             min="0"
             bind:value={variety.quantity}
-            on:change="{(e) => changeVarietyQuantity(index, e.detail)}"
+            on:change="{(e) => changeVarietyField(index, 'quantity', e.detail)}"
             type="number"
         />
       </div>
@@ -62,9 +79,9 @@
           <TextField
               bind:value={variety.sizes[size]}
               on:change="{(e) => changeVarietySize(index, size, e.detail)}"
-              item
+              isWithItem
               type="number"
-              classname="right-align"
+              classname="right-align text-field"
               placeholder="0"
           >
             <span class="item">{size}</span>
@@ -74,61 +91,10 @@
     </div>
   {/if}
 
-  <!--<Dropzone
-      ref="dropzone"
-      :id="'dropzone-'+name"
-      :options="dropzoneOptions"
-      :destroyDropzone="false"
-      :useCustomSlot="true"
-      :include-styling="false"
-      @vdropzone-file-added="addFile"
-      @vdropzone-thumbnail="thumbnail"
-      :class="{'has-content': hasFiles}"
-      class="image-platform"
-  >
-    <template v-if="!hasFiles">
-      <ImagePlaceholder />
-      <label class="title" for="file-input1">
-        drag &amp; drop here or click to upload photos
-      </label>
-      <small>Make sure the ratio is 1:1 (square)</small>
-    </template>
-    <Draggable
-        :list="hasFiles ? dropzoneObject.files : []"
-        :class="'dragzone-' + name"
-        :group="name"
-        @change="notifyVuex"
-        handle="[data-move]"
-        class="images"
-    >
-      <template v-if="hasFiles">
-        <div v-for="(file, i) in dropzoneObject.files" :key="file.upload.uuid" class="image card with-image">
-          <img :src="file.dataURL" :alt="file.name" />
-          <div class="actions">
-            <button
-                @click="remove(i)"
-                type="button"
-                class="btn danger round"
-                title="Remove image"
-            >
-              <X />
-            </button>
-            <button
-                type="button"
-                class="btn normal round"
-                title="Move image"
-                data-move
-            >
-              <Move />
-            </button>
-          </div>
-        </div>
-      </template>
-    </Draggable>
-  </Dropzone>-->
+  <DragDropzone files={variety.images} {index} />
 
   {#if removable}
-    <Button on:click="{() => removeVariety(index)}" danger>
+    <Button on:click="{() => removeVariety(index)}" isDanger>
       remove variety
     </Button>
   {/if}

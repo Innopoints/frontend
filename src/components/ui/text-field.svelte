@@ -25,7 +25,7 @@
   export let multiline = null;
   export let cols = 5;
 
-  let dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 </script>
 
 <div

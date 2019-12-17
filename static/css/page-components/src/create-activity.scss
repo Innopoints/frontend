@@ -11,7 +11,7 @@
     }
 
     & > label + .text-field-wrapper {
-      margin-top: 1em;
+      margin-top: .5em;
     }
 
     .btn {
@@ -50,6 +50,10 @@
     }
   }
 
+  .reward-amt > .hinted {
+    margin-top: .5em;
+  }
+
   .reward-amt .dropdown-shell {
     margin-bottom: 1.5em;
   }
@@ -72,6 +76,7 @@
     .group {
       display: flex;
       align-items: center;
+      margin-top: .5em;
     }
 
     .divider {
