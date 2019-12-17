@@ -7,6 +7,7 @@
   import PurchaseModal from '@/components/item/purchase-modal.svelte';
 
   import {isAuthed, user} from '@/store/user';
+  import {openModal} from '@/store/modal';
 
   export let name;
   export let type;
@@ -31,12 +32,11 @@
   let chosenSize = null;
   let err = false;
   let animation = false;
-  let open = false;
   const chooseSize = e => chosenSize = e.detail;
   const purchase = () => {
-    if (inSizes && chosenSize) {
+    if (!inSizes || (inSizes && chosenSize)) {
       err = false;
-      open = true;
+      openModal();
     } else {
       err = true;
       animation = true;
@@ -50,7 +50,6 @@
 <div class="content">
   <PurchaseModal
     {name} {type} {inSizes} {variety}  {price}
-    value={open}
     size={chosenSize}
   />
 

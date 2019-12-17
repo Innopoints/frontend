@@ -15,20 +15,27 @@
   onDestroy(() => document.body.removeChild(modal));
 
   const dispatch = createEventDispatcher();
-  const close = () => {
-    value = false;
-    dispatch('close');
-    dispatch('change', value);
+  const close = (e, isCloser) => {
+    if (e.target === modal || isCloser) {
+      value = false;
+      dispatch('close');
+    }
   };
   const toggleBodyClass = (val) => {
-    if (val) document.body.classList.add(openerclass);
-    else document.body.classList.remove(openerclass);
+    if (val) {
+      document.body.classList.add(openerclass);
+      document.querySelector('html').style.overflow = 'hidden';
+    }
+    else {
+      document.body.classList.remove(openerclass);
+      document.querySelector('html').style.overflow = 'initial';
+    }
   };
 </script>
 
 <div bind:this={modal} class={classname} on:click={close}>
   <Card classname={cardclass}>
-    <Button isNormal isRound classname="close btn">
+    <Button isNormal isRound classname="close btn" on:click={(e) => close(e, true)}>
       <svg src="/images/icons/x.svg" />
     </Button>
     <slot />

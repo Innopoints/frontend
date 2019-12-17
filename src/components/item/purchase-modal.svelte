@@ -5,8 +5,8 @@
   import Chip from 'ui/chip.svelte';
   import Labeled from 'ui/labeled.svelte';
   import {user} from '@/store/user';
+  import {open, closeModal} from '@/store/modal';
 
-  export let value;
   export let size;
   export let name;
   export let type;
@@ -15,7 +15,7 @@
   export let variety;
 </script>
 
-<Modal {value}>
+<Modal value={$open} on:close={closeModal}>
   <h1>confirm your purchase</h1>
 
   <div class="purchase">
