@@ -4,6 +4,7 @@
   import TextField from 'ui/text-field.svelte';
   import Chip from 'ui/chip.svelte';
   import Labeled from 'ui/labeled.svelte';
+  import { createEventDispatcher } from 'svelte';
   import {user} from '@/store/user';
   import {open, closeModal} from '@/store/modal';
 
@@ -13,6 +14,24 @@
   export let price;
   export let inSizes;
   export let variety;
+
+  let amount = 1;
+  $: checkAmount(amount);
+  const inc = () => amount++;
+  const dec = () => amount--;
+  const checkAmount = num => {
+    if (num < 1) amount = 1;
+    else amount = num;
+  };
+  $: finalPrice = $user.balance - amount*price;
+
+  const dispatch = createEventDispatcher();
+  const confirm = () => {
+    if (finalPrice >= 0) {
+      closeModal();
+      dispatch('success');
+    }
+  };
 </script>
 
 <Modal value={$open} on:close={closeModal}>
@@ -25,11 +44,11 @@
     </div>
 
     <div class="quantity">
-      <Button isRound>
+      <Button isRound on:click={dec}>
         <svg src="/images/icons/minus.svg" />
       </Button>
-      <TextField value={1} isNoSpinner type="number" />
-      <Button isRound>
+      <TextField value={amount} on:input={(e) => checkAmount(parseInt(e.detail))} isNoSpinner type="number" />
+      <Button isRound on:click={inc}>
         <svg src="/images/icons/plus.svg" />
       </Button>
     </div>
@@ -51,10 +70,10 @@
           {$user.balance}
           <svg src="/images/innopoint-sharp.svg" class="innopoint" />
         </s>
-        {$user.balance - price}
+        {finalPrice}
         <svg src="/images/innopoint-sharp.svg" class="innopoint" />
       </div>
     </Labeled>
-    <Button isFilled>confirm</Button>
+    <Button isFilled on:click={confirm}>confirm</Button>
   </div>
 </Modal>
