@@ -40,21 +40,21 @@ h2 {
   position: absolute;
 }
 
-nav.dropdown-shell {
+.dropdown-shell.steps-navigation {
   align-self: center;
 }
 
-nav.dropdown-shell .handle {
+.dropdown-shell.steps-navigation .handle {
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14), 0 1px 5px rgba(0, 0, 0, 0.12);
   margin-top: 1em;
 }
 
-nav.dropdown-shell .handle .step-index, nav.dropdown-shell .handle .step-name {
+.dropdown-shell.steps-navigation .handle .step-index, .dropdown-shell.steps-navigation .handle .step-name {
   margin-right: 1em;
 }
 
-nav .dropdown {
+.steps-navigation .dropdown {
   top: 1em;
   margin-top: 0;
   height: 3.125em;
@@ -66,28 +66,28 @@ nav .dropdown {
   justify-content: center;
 }
 
-nav .dropdown .btn {
+.steps-navigation .dropdown .btn {
   width: 100%;
   border-radius: 0;
   padding-left: 1.5em;
   text-align: center;
 }
 
-nav .dropdown .btn .icon {
+.steps-navigation .dropdown .btn .icon {
   font-size: 1.25rem;
   margin-right: 1em;
   width: 24px;
 }
 
-nav .dropdown .btn.highlight {
+.steps-navigation .dropdown .btn.highlight {
   background: rgba(18, 120, 0, 0.05);
 }
 
-nav .dropdown .btn.highlight:focus {
+.steps-navigation .dropdown .btn.highlight:focus {
   background: rgba(18, 120, 0, 0.1);
 }
 
-nav.dropdown-shell.open .dropdown {
+.steps-navigation.dropdown-shell.open .dropdown {
   height: 13.5em;
 }
 
@@ -170,15 +170,15 @@ form > .actions .error {
   form > .actions .forward {
     order: 1;
   }
-  nav.dropdown-shell {
+  .steps-navigation.dropdown-shell {
     position: absolute;
     top: .5em;
     right: 2.5em;
   }
-  nav.dropdown-shell .step-index {
+  .steps-navigation.dropdown-shell .step-index {
     font-size: 1.2rem;
   }
-  nav.dropdown-shell .step-index .step {
+  .steps-navigation.dropdown-shell .step-index .step {
     clip: rect(0, 0, 0, 0);
     width: 1px;
     height: 1px;
@@ -195,7 +195,7 @@ form > .actions .error {
 }
 
 @media only screen and (min-width: 840px) {
-  nav.dropdown-shell {
+  .steps-navigation.dropdown-shell {
     top: 1.2em;
     right: 8%;
   }
@@ -210,7 +210,7 @@ form > .actions .error {
     padding-left: 12%;
     padding-right: 12%;
   }
-  nav.dropdown-shell {
+  .steps-navigation.dropdown-shell {
     right: 12%;
   }
 }

@@ -1,15 +1,18 @@
 <script>
+  import { fade } from 'svelte/transition';
+
   import Button from 'ui/button.svelte';
 </script>
 
-<div class="left">
+<div class="left" transition:fade={{duration:200}}>
   <h1>Create a Project</h1>
   <div class="subtitle">
     Unleash your creative genius — we're here to help you!
   </div>
   <img class="illustration" src="/images/create-project/create-project.svg" alt="">
 </div>
-<div class="right">
+
+<div class="right" transition:fade={{duration:200}}>
   <h2>Starting Point</h2>
 
   <section class="drafts">

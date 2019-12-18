@@ -1,5 +1,13 @@
 <script>
+  import {step, changeStep} from '@/store/new-project';
+  import { stores } from '@sapper/app';
+  const { page } = stores();
+  $: changeStep(parseInt($page.query.step || 0));
+
   import StepZero from '@/containers/projects/new/step-0.svelte';
+  import StepOne from '@/containers/projects/new/step-1.svelte';
+  import StepTwo from '@/containers/projects/new/step-2.svelte';
+  import StepThree from '@/containers/projects/new/step-3.svelte';
   import Layout from '@/layouts/default.svelte';
 </script>
 
@@ -7,10 +15,22 @@
   <title>Create project – Innopoints</title>
   <link rel="stylesheet" href="/css/page-components/header.css" />
   <link rel="stylesheet" href="/css/create-project/steps.css">
+  <link rel="stylesheet" href="/css/create-project/main.css">
+  <link rel="stylesheet" href="/css/create-project/general.css">
+  <link rel="stylesheet" href="/css/create-project/activity.css">
+  <link rel="stylesheet" href="/css/create-project/actions.css">
   <link rel="stylesheet" href="/css/page-components/create-activity.css" />
   <link rel="stylesheet" href="/css/page-components/footer.css" />
 </svelte:head>
 
-<Layout classname="step0">
-  <StepZero />
+<Layout classname="step{$step}">
+  {#if $step === 0}
+    <StepZero />
+  {:else if $step === 1}
+    <StepOne />
+  {:else if $step === 2}
+    <StepTwo />
+  {:else if $step === 3}
+    <StepThree />
+  {/if}
 </Layout>
