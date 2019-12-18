@@ -13,15 +13,19 @@
 
 <div class={classname}>
   <label for={id}>
+    <slot name="title">
       <span class={titleclass}>
         {title}
         {#if required}
           <span class={requiredclass}>*</span>
         {/if}
       </span>
+    </slot>
+    <slot name="subtitle">
       <span class={subtitleclass}>
         {subtitle}
       </span>
+    </slot>
   </label>
   <div class={wrapperclass}>
     <slot />
