@@ -2,6 +2,7 @@
   import { fade } from 'svelte/transition';
   import NavigationDropdown from '@/components/projects/new/steps-navigation.svelte';
   import NewActivityCard from '@/components/projects/new/new-activity.svelte';
+  import ActivityCard from '@/components/projects/new/activity.svelte';
   import Button from 'ui/button.svelte';
 </script>
 
@@ -17,6 +18,8 @@
     <h2>Step 2. Add volunteering activities</h2>
   </header>
   <NavigationDropdown />
+  <ActivityCard />
+  <ActivityCard />
   <NewActivityCard />
 
   <Button>
