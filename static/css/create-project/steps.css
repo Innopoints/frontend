@@ -1,0 +1,348 @@
+h1 {
+  margin-top: 1em;
+}
+
+h2 {
+  margin-bottom: 1em;
+}
+
+.step0 h1, .step0 h2 {
+  text-align: center;
+}
+
+.step0 .left {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.step0 .left .illustration {
+  display: none;
+}
+
+.step0 .left h1 {
+  text-align: left;
+}
+
+.step0 .right {
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-top: 2.5em;
+  font-size: .9rem;
+}
+
+.step0 .tablet {
+  display: none;
+}
+
+.step0 .drafts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step0 .drafts .card {
+  margin-top: 1em;
+  padding-right: .6em;
+  padding-bottom: .6em;
+  max-width: 18em;
+}
+
+.step0 .drafts .card .title {
+  font-size: 1.05rem;
+  margin-bottom: .3em;
+}
+
+.step0 .drafts .card .subtitle {
+  font-size: .9rem;
+  font-weight: 300;
+}
+
+.step0 .drafts .card .actions {
+  margin-top: .5em;
+  display: flex;
+}
+
+.step0 .drafts nav {
+  display: flex;
+  margin-top: 1em;
+}
+
+.step0 .templates {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 3em;
+}
+
+.step0 .templates .actions {
+  margin-top: .5em;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  margin-bottom: 1.5em;
+}
+
+.step0 .templates .btn {
+  margin-top: .5em;
+}
+
+@media only screen and (min-width: 420px) {
+  .step0 .templates .actions {
+    flex-direction: row;
+  }
+  .step0 .templates .actions .btn:first-child {
+    margin-right: .5em;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .step0 .left, .step0 .right {
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .step0 .mobile {
+    display: none !important;
+  }
+  .step0 .tablet {
+    display: flex;
+  }
+  .step0 .drafts .cards {
+    display: flex;
+    align-items: center;
+  }
+  .step0 .drafts .cards .card {
+    margin-left: .5em;
+    margin-right: .5em;
+  }
+  .step0 .templates {
+    margin-top: 2em;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .step0 .left, .step0 .right {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .step0 {
+    display: flex;
+    justify-content: space-between;
+  }
+  .step0 .left {
+    padding-left: 8%;
+    padding-right: 2.5rem;
+  }
+  .step0 .left .illustration {
+    display: block;
+    width: 100%;
+    max-width: 30em;
+    margin-top: 3em;
+  }
+  .step0 .right {
+    padding-right: 8%;
+    padding-left: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+.step1 .form-field {
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.step1 .form-field .text-field-wrapper {
+  margin-top: 1em;
+}
+
+.step1 .form-field .image-picker {
+  margin-top: 1em;
+  align-self: flex-start;
+}
+
+.step1 .image-picker {
+  display: flex;
+  flex-direction: column;
+}
+
+.step1 .image-picker:not(.selected) img, .step1 .image-picker:not(.selected) .btn.danger {
+  display: none;
+}
+
+.step1 .image-picker.selected img {
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: .5em;
+}
+
+.step1 .image-picker.selected .btn.option {
+  display: none;
+}
+
+.step1 .image-picker.selected .btn.danger {
+  align-self: flex-start;
+}
+
+.step1 .image-picker.selected .btn.danger .icon {
+  margin-right: .4em;
+}
+
+@media only screen and (min-width: 420px) {
+  .step1 .image-picker.selected {
+    flex-direction: row;
+  }
+  .step1 .image-picker.selected .btn.danger {
+    padding: .7em;
+  }
+  .step1 .image-picker.selected .btn.danger .text {
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+  }
+  .step1 .image-picker.selected .btn.danger .icon {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .step1 .form-field .image-picker {
+    display: flex;
+  }
+  .step1 .form-field .image-picker .btn:first-child {
+    margin-right: 1em;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .step1 .form-field {
+    flex-direction: row;
+  }
+  .step1 .form-field label {
+    flex-basis: 48%;
+  }
+  .step1 .form-field .text-field-wrapper, .step1 .form-field .image-picker {
+    flex-basis: 50%;
+  }
+  .step1 .form-field .image-picker:not(.selected) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .step1 .form-field label {
+    flex-basis: 45%;
+    margin-right: 2em;
+  }
+}
+
+.step2 nav.dropdown-shell {
+  margin-bottom: 1em;
+}
+
+.step2 form {
+  padding: 0 10px 4em 10px;
+}
+
+.step2 form > .card {
+  margin-top: .5em;
+  align-self: stretch;
+  border-radius: 1em;
+}
+
+.step2 form > .btn {
+  align-self: flex-start;
+}
+
+.step2 form > .actions {
+  border-top: 1px solid #ddd;
+  padding-top: 1.5em;
+  margin-top: 1em;
+}
+
+@media only screen and (min-width: 740px) {
+  .step2 form > .card,
+  .step2 form > .btn,
+  .step2 form > .actions {
+    margin-left: 2.5em;
+    margin-right: 2.5em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .step2 form {
+    margin-left: 8%;
+    margin-right: 8%;
+  }
+}
+
+.step3 form {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.step3 p + .label {
+  margin: 1.5em 0 .5em 5px;
+}
+
+.step3 .error > .btn {
+  display: inline-flex;
+}
+
+.step3 p {
+  font-size: .95rem;
+  line-height: 1.3rem;
+  margin-top: .5em;
+}
+
+.step3 p:first-of-type {
+  margin-top: 2em;
+}
+
+@media only screen and (max-width: 479px) {
+  .step3 .autocomplete-field .dropdown {
+    margin-top: 0;
+    margin-left: -10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .step3 .autocomplete-field input {
+    padding-left: 1em;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .step3 form {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .step3 form {
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .step3 form {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+  .step3 p + .label {
+    margin-top: 4em;
+  }
+  .step3 .autocomplete-field {
+    margin-bottom: 3em;
+  }
+}

@@ -276,7 +276,7 @@
   margin-right: 1em;
 }
 
-.modal-overlay .options .color-label {
+.modal-overlay .options .color-label:not(:first-child) {
   margin-left: 4em;
 }
 

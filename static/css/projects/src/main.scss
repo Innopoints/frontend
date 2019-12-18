@@ -1,14 +1,18 @@
+.material > .justify-center {
+  margin-top: 1em;
+}
+
 .projects {
   padding: 0 1em;
   margin-top: 3em;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-}
 
-.projects h1 {
-  text-align: center;
-  font-size: 1.2rem;
+  h1 {
+    text-align: center;
+    font-size: 1.2rem;
+  }
 }
 
 .text-field.with-item.left input {
@@ -23,56 +27,57 @@
 
 .card {
   margin-top: 1em;
-}
 
-.card.with-image > .content {
-  padding: 1em 1.5em;
+  &.with-image > .content {
+    padding: 1em 1.5em;
+  }
+
+  .title {
+    margin-bottom: 0;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .compact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .labeled {
+      flex-basis: 50%;
+
+      &:first-child {
+        padding-right: 1em;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  li {
+    margin-bottom: .5em;
+    margin-top: 1px;
+
+    &.extra {
+      font-size: .9rem;
+      color: #127800;
+    }
+  }
+
+  .btn {
+    align-self: flex-end;
+  }
 }
 
 .labeled {
   margin-top: 1em;
-}
 
-.labeled > .icon {
-  margin-top: .7rem;
-}
-
-.card .title {
-  margin-bottom: 0;
-}
-
-.card .content {
-  display: flex;
-  flex-direction: column;
-}
-
-.card .compact {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.card .compact .labeled:first-child {
-  margin-right: 1em;
-}
-
-.card li {
-  margin-bottom: .5em;
-  margin-top: 1px;
-}
-
-.card li.extra {
-  font-size: .9rem;
-  color: #127800;
-}
-
-.card .btn {
-  align-self: flex-end;
-}
-
-.material > .justify-center {
-  margin-top: 1em;
+  & > .icon {
+    margin-top: .7rem;
+  }
 }
 
 @media only screen and (min-width: 500px) {
@@ -89,22 +94,24 @@
 @media only screen and (min-width: 640px) {
   .projects {
     padding: 0 2.5em;
-  }
 
-  .projects h1 {
-    font-size: 1.4rem;
+    h1 {
+      font-size: 1.4rem;
+    }
   }
 
   @supports (display: grid) {
-    .card > .content {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-rows: auto auto auto;
-    }
+    .card {
+      & > .content {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto auto;
+      }
 
-    .card .title, .card .compact {
-      grid-column-start: 1;
-      grid-column-end: 3;
+      .title, .compact {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
     }
   }
 }
