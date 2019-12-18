@@ -8,6 +8,7 @@
   export let isDanger = false;
   export let isRound = false;
   export let isNormal = false;
+  export let isRectangle = false;
   export let ripple = true;
 
   export let disabled = false;
@@ -24,6 +25,7 @@
     isDanger && 'danger',
     isRound && 'round',
     isNormal && 'normal',
+    isRectangle && 'rectangle',
     classname ? classname : 'btn',
   ].filter(v => v !== false);
 
