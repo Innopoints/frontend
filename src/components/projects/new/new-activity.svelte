@@ -13,28 +13,30 @@
 <Card classname="card create-activity">
   <div class="left">
     <FormField
-            classname="form-field name"
-            id="activity-name"
-            title="Activity name"
-            required
+      classname="form-field name"
+      id="activity-name"
+      title="Activity name"
+      required
     >
       <TextField id="activity-name" />
     </FormField>
 
     <FormField
-            classname="form-field description"
-            id="activity-description"
-            title="Description"
+      classname="form-field description"
+      id="activity-description"
+      title="Description"
     >
       <TextField multiline id="activity-description" />
     </FormField>
 
     <FormField
-            title="Activity date"
-            required
-            classname="form-field date-range"
-            wrapperclass="some-wrapper"
+      title="Activity date"
+      classname="form-field date-range"
+      wrapperclass="some-wrapper"
     >
+      <span slot="title" class="name">
+        Activity date&nbsp;<span class="required">*</span>
+      </span>
       <Dropdown>
         <svg src="/images/icons/calendar.svg" class="icon mr-2" slot="label" />
         <span slot="label">select date range</span>
@@ -43,27 +45,28 @@
     </FormField>
 
     <FormField
-            title="Competences, developed by this activity (no more than 3)"
-            required
-            classname="form-field competences"
-            wrapperclass="some-wrapper"
+      title="Competences, developed by this activity (no more than 3)"
+      classname="form-field competences"
+      wrapperclass="some-wrapper"
     >
+      <span slot="title" class="name">
+        Competences, developed by this activity (no more than&nbsp;3)&nbsp;<span class="required">*</span>
+      </span>
       <Dropdown label="select competences">
         <CheckboxGroup
-                labeled
-                items={competencesOptions}
-                name="competences"
+          labeled
+          items={competencesOptions}
+          name="competences"
         />
       </Dropdown>
     </FormField>
 
     <FormField
-            title="Telegram username required"
-            subtitle="With this option on, applicants will be prompted for their Telegram username."
-            required
-            classname="form-field tg-username"
-            wrapperclass="some-wrapper"
-            id="tg-username"
+      title="Telegram username required"
+      subtitle="With this option on, applicants will be prompted for their Telegram username."
+      classname="form-field tg-username"
+      wrapperclass="some-wrapper"
+      id="tg-username"
     >
       <Switch id="tg-username" />
     </FormField>
@@ -72,10 +75,10 @@
 
   <div class="right">
     <FormField
-            classname="form-field reward-type"
-            id="reward-type"
-            title="The reward is"
-            wrapperclass="hinted"
+      classname="form-field reward-type"
+      id="reward-type"
+      title="The reward is"
+      wrapperclass="hinted"
     >
       <Switch isTwoState id="reward-type" first="fixes" second="hourly" />
       <Dropdown dropdownclass="dropdown info-bubble" btnclass="handle round btn" chevron={false} isRight>
@@ -86,15 +89,19 @@
     </FormField>
 
     <FormField
-            classname="form-field reward-amt"
-            id="reward-amt-fixed"
-            title=" Innopoints awarded"
-            wrapperclass="hinted"
-            required
+      classname="form-field reward-amt"
+      id="reward-amt-fixed"
+      wrapperclass="hinted"
     >
-      <TextField isWithItem isItemRight id="reward-amt-fixed" type="number">
-        <svg src="/images/innopoint-sharp.svg" class="innopoint item" />
-      </TextField>
+      <span slot="title" class="name">
+        Innopoints awarded&nbsp;<span class="required">*</span>
+      </span>
+      <div class="text-field-wrapper">
+        <TextField isWithItem isItemRight id="reward-amt-fixed" type="number">
+          <svg src="/images/innopoint-sharp.svg" class="innopoint item" />
+        </TextField>
+        <span class="required">* Required</span>
+      </div>
       <Dropdown dropdownclass="dropdown info-bubble" btnclass="handle round btn" chevron={false} isRight>
         <svg slot="label" src="/images/icons/help-circle.svg" class="icon" />
         Stage performances and tasks for a single day earn around 300 ipts,
@@ -103,36 +110,38 @@
     </FormField>
 
     <FormField
-            classname="form-field work-hours"
-            id="work-hours"
-            title="Work hours"
-            subtitle="Reward rate: 70 ipts/hour"
-            required
+      classname="form-field work-hours"
+      id="work-hours"
+      title="Work hours"
+      subtitle="Reward rate: 70 ipts/hour"
+      required
     >
-      <TextField id="work-hours" type="number" />
+      <TextField id="work-hours" type="number" placeholder="0" />
     </FormField>
 
     <FormField
-            classname="form-field people"
-            id="people-required"
-            title="People required"
-            wrapperclass="group"
-            required
+      classname="form-field people"
+      id="people-required"
+      title="People required"
+      wrapperclass="group"
     >
-      <TextField id="people-required" type="number" isNoSpinner />
+      <span slot="title" class="name">
+        People required&nbsp;<span class="required">*</span>
+      </span>
+      <TextField id="people-required" type="number" placeholder="0" isNoSpinner />
       <span class="divider">or</span>
       <CheckboxGroup
-              labeled
-              items={['the more, the better']}
-              name="the-more"
+        labeled
+        items={['the more, the better']}
+        name="the-more"
       />
     </FormField>
 
     <FormField
-            classname="form-field deadline"
-            id="deadline"
-            title="Application deadline"
-            wrapperclass="some-wrapper"
+      classname="form-field deadline"
+      id="deadline"
+      title="Application deadline"
+      wrapperclass="some-wrapper"
     >
       <Dropdown dropdownclass="dropdown btn-shift">
         <svg src="/images/icons/calendar.svg" class="icon mr-2" slot="label" />
@@ -142,11 +151,11 @@
     </FormField>
 
     <FormField
-            classname="form-field questions"
-            id="questions"
-            title="Feedback questions"
-            subtitle="Those will make up the feedback form for volunteers."
-            wrapperclass="some-wrapper"
+      classname="form-field questions"
+      id="questions"
+      title="Feedback questions"
+      subtitle="Those will make up the feedback form for volunteers."
+      wrapperclass="some-wrapper"
     >
       <Dropdown dropdownclass="dropdown btn-shift">
         <svg src="/images/icons/message-circle.svg" class="icon mr" slot="label" />

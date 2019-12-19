@@ -22,9 +22,11 @@
       </span>
     </slot>
     <slot name="subtitle">
-      <span class={subtitleclass}>
-        {subtitle}
-      </span>
+      {#if subtitle}
+        <span class={subtitleclass}>
+          {subtitle}
+        </span>
+      {/if}
     </slot>
   </label>
   <div class={wrapperclass}>
