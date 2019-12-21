@@ -2,9 +2,11 @@
   import Header from '@/components/header.svelte';
   import Footer from '@/components/footer.svelte';
   import Button from 'ui/button.svelte';
-  import { isAuthed, logIn } from '@/store/user';
+  import { isAuthed, logIn, user } from '@/store/user';
 
+  export let classname = '';
   export let title;
+  export let adminsOnly = false;
 </script>
 
 <svelte:head>
@@ -12,8 +14,8 @@
 </svelte:head>
 
 <Header />
-<div class="material">
-  {#if $isAuthed}
+<div class="material {classname}">
+  {#if $isAuthed && (!adminsOnly || (adminsOnly && $user.isAdmin))}
     <slot />
   {:else}
     <h1 class="padded title-403">{title}</h1>

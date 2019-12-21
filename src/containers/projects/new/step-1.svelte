@@ -1,6 +1,7 @@
 <script>
   import { fade } from 'svelte/transition';
   import NavigationDropdown from '@/components/projects/new/steps-navigation.svelte';
+  import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
@@ -55,11 +56,5 @@
     <TextField id="organized" />
   </FormField>
 
-  <div class="actions padded">
-    <p class="error">Some required fields are still empty :c</p>
-    <Button href="/projects/new?step=2" isFilled classname="btn mt">
-      next step
-      <svg src="/images/icons/arrow-right.svg" class="icon ml" />
-    </Button>
-  </div>
+  <BottomNavigation />
 </form>
