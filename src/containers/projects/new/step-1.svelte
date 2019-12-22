@@ -1,10 +1,16 @@
 <script>
   import { fade } from 'svelte/transition';
+  import { onMount } from 'svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import StepHeader from '@/components/projects/new/step-header.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
+  import {project, changeField, save, createProject} from '@/store/new-project';
+
+  onMount(() => {
+    createProject();
+  });
 </script>
 
 <form transition:fade={{duration:200}}>
@@ -16,7 +22,12 @@
       <span class="lb">Adding the year to the name usually helps:</span><br>
       <em>“Halloween” → “Halloween 2019”</em>
     </span>
-    <TextField id="title" />
+    <TextField
+      id="title"
+      value={$project.name}
+      on:input={(e) => changeField('name', e.detail)}
+      on:delayedChange={save}
+    />
   </FormField>
 
   <FormField title="Cover image" classname="form-field padded" id="image" wrapperclass="image-picker">
