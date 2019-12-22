@@ -17,6 +17,7 @@
   let justOpened = false;
   const dispatch = createEventDispatcher();
   const toggle = () => {
+    value = !isOpen;
     isOpen = !isOpen;
     dispatch('change', isOpen);
     if (isOpen) justOpened = true;
@@ -29,6 +30,7 @@
       if (justOpened) justOpened = false;
       else if (isOpen) {
         isOpen = false;
+        value = false;
         dispatch('change', isOpen);
       }
     }
@@ -38,12 +40,14 @@
 
 <svelte:window on:click={clickOutside} />
 <div class:open={isOpen} class={classname}>
-  <Button ripple={false} on:click={toggle} classname={btnclass}>
-    <slot name="label">{label}</slot>
-    {#if chevron}
-      <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
-    {/if}
-  </Button>
+  <slot name="handle">
+    <Button ripple={false} on:click={toggle} classname={btnclass}>
+      <slot name="label">{label}</slot>
+      {#if chevron}
+        <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
+      {/if}
+    </Button>
+  </slot>
   <div class:right-edge={isRight} class={dropdownclass} bind:this={dropNode}>
     {#if nowrap}
       <slot />

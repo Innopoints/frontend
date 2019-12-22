@@ -2,6 +2,10 @@
   import { fade } from 'svelte/transition';
   import NavigationDropdown from '@/components/projects/new/steps-navigation.svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
+  import Autocomplete from '@/components/projects/new/autocomplete.svelte';
+
+  const options = ['lolka-polka', 'lol', 'kek', 'cheburek', 'chto tam', 'lulz', 'lurk'];
+  let values = [];
 </script>
 
 <form transition:fade={{duration:200}}>
@@ -23,6 +27,12 @@
   <p>
     You are the creator, therefore, also a moderator.
   </p>
-  <!--TODO: add autocomplete component-->
+  <Autocomplete bind:value={values} {options} />
   <BottomNavigation />
 </form>
+
+<style>
+  :global(.autocomplete-field .dropdown) {
+    list-style: none;
+  }
+</style>
