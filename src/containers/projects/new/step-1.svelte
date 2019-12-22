@@ -8,9 +8,7 @@
   import Button from 'ui/button.svelte';
   import {project, changeField, save, createProject} from '@/store/new-project';
 
-  onMount(() => {
-    createProject();
-  });
+  onMount(() => createProject());
 </script>
 
 <form transition:fade={{duration:200}}>

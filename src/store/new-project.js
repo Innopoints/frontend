@@ -48,3 +48,18 @@ export const save = () => {
   localStorage.setItem('project-drafts', JSON.stringify(projects));
   changeSaved(true);
 };
+
+export const drafts = writable([]);
+export const getDrafts = () => {
+  drafts.update(() => JSON.parse(localStorage.getItem('project-drafts')) || []);
+};
+
+export const deleteDraft = (date) => {
+  let projects = JSON.parse(localStorage.getItem('project-drafts'));
+  if (projects) {
+    let projIndex = projects.findIndex(x => x.creationTime === date);
+    if (projIndex > -1) projects.splice(projIndex, 1);
+    localStorage.setItem('project-drafts', JSON.stringify(projects));
+    getDrafts();
+  }
+};

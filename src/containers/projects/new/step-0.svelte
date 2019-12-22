@@ -1,8 +1,11 @@
 <script>
   import { fade } from 'svelte/transition';
+  import { onMount } from 'svelte';
 
   import Button from 'ui/button.svelte';
   import DraftCard from '@/components/projects/new/draft-card.svelte';
+  import {drafts, getDrafts} from '@/store/new-project';
+  onMount(() => getDrafts());
 </script>
 
 <div class="left" transition:fade={{duration:200}}>
@@ -16,21 +19,28 @@
 <div class="right" transition:fade={{duration:200}}>
   <h2>Starting Point</h2>
 
-  <section class="drafts">
-    You could continue from one of your drafts:
-    <div class="cards">
-      <Button classname="btn round tablet">
-        <svg src="/images/icons/chevron-left.svg" />
-      </Button>
-      <DraftCard title="Some project" subtitle="Try it" />
-      <DraftCard title="Slippers of the Year 2019" subtitle="draft from 21.09.19" />
-      <Button classname="btn round tablet">
-        <svg src="/images/icons/chevron-right.svg" />
-      </Button>
-    </div>
-    <nav class="mobile">
-    </nav>
-  </section>
+  {#if $drafts.length > 0}
+    <section class="drafts">
+      You could continue from one of your drafts:
+      <div class="cards">
+        {#if $drafts.length > 2}
+          <Button classname="btn round tablet">
+            <svg src="/images/icons/chevron-left.svg" />
+          </Button>
+        {/if}
+        {#each $drafts as draft}
+          <DraftCard title={draft.name} date={draft.creationTime} />
+        {/each}
+        {#if $drafts.length > 2}
+          <Button classname="btn round tablet">
+            <svg src="/images/icons/chevron-right.svg" />
+          </Button>
+        {/if}
+      </div>
+      <nav class="mobile">
+      </nav>
+    </section>
+  {/if}
 
   <section class="templates">
     Jumpstart your project with a template:
