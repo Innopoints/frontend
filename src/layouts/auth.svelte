@@ -7,15 +7,23 @@
   export let classname = '';
   export let title;
   export let adminsOnly = false;
+
+  $: condition = $isAuthed && (!adminsOnly || (adminsOnly && $user.isAdmin));
 </script>
 
 <svelte:head>
   <link rel="stylesheet" href="css/page-components/403.css" />
 </svelte:head>
 
+<style>
+  :global(.layout-403) {
+    flex-direction: column;
+  }
+</style>
+
 <Header />
-<div class="material {classname}">
-  {#if $isAuthed && (!adminsOnly || (adminsOnly && $user.isAdmin))}
+<div class="material {condition ? classname : 'layout-403'}">
+  {#if condition}
     <slot />
   {:else}
     <h1 class="padded title-403">{title}</h1>
