@@ -54,7 +54,7 @@ export const getDrafts = () => {
   drafts.update(() => JSON.parse(localStorage.getItem('project-drafts')) || []);
 };
 
-export const deleteDraft = (date) => {
+export const deleteDraft = date => {
   let projects = JSON.parse(localStorage.getItem('project-drafts'));
   if (projects) {
     let projIndex = projects.findIndex(x => x.creationTime === date);

@@ -6,6 +6,23 @@
   import DraftCard from '@/components/projects/new/draft-card.svelte';
   import {drafts, getDrafts} from '@/store/new-project';
   onMount(() => getDrafts());
+
+  $: rangeLen = $drafts.length;
+  let range = {start: 0, end: 1};
+  const next = () => {
+    if (range.start + 1 >= rangeLen) range.start = 0;
+    else range.start++;
+
+    if (range.end + 1 >= rangeLen) range.end = 0;
+    else range.end++;
+  };
+  const prev = () => {
+    if (range.start - 1 < 0) range.start = rangeLen - 1;
+    else range.start--;
+
+    if (range.end - 1 < 0) range.end = rangeLen - 1;
+    else range.end--;
+  };
 </script>
 
 <div class="left" transition:fade={{duration:200}}>
@@ -24,20 +41,28 @@
       You could continue from one of your drafts:
       <div class="cards">
         {#if $drafts.length > 2}
-          <Button classname="btn round tablet">
+          <Button classname="btn round tablet" on:click={prev}>
             <svg src="/images/icons/chevron-left.svg" />
           </Button>
         {/if}
-        {#each $drafts as draft}
-          <DraftCard title={draft.name} date={draft.creationTime} />
+        {#each $drafts as draft, i}
+          {#if i === range.start || i === range.end}
+            <DraftCard title={draft.name} date={draft.creationTime} />
+          {/if}
         {/each}
         {#if $drafts.length > 2}
-          <Button classname="btn round tablet">
+          <Button classname="btn round tablet" on:click={next}>
             <svg src="/images/icons/chevron-right.svg" />
           </Button>
         {/if}
       </div>
       <nav class="mobile">
+        <Button isRound on:click={prev}>
+          <svg src="/images/icons/chevron-left.svg" />
+        </Button>
+        <Button isRound on:click={next}>
+          <svg src="/images/icons/chevron-right.svg" />
+        </Button>
       </nav>
     </section>
   {/if}

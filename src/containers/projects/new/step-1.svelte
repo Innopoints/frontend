@@ -22,7 +22,7 @@
     </span>
     <TextField
       id="title"
-      value={$project.name}
+      value={$project.name || ''}
       on:input={(e) => changeField('name', e.detail)}
       on:delayedChange={save}
     />
