@@ -1,6 +1,6 @@
 <script>
   import { fade } from 'svelte/transition';
-  import NavigationDropdown from '@/components/projects/new/steps-navigation.svelte';
+  import StepHeader from '@/components/projects/new/step-header.svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import NewActivityCard from '@/components/projects/new/new-activity.svelte';
   import ActivityCard from '@/components/projects/new/activity.svelte';
@@ -8,17 +8,8 @@
 </script>
 
 <form transition:fade={{duration:200}}>
-  <header class="padded form-header">
-    <h1>
-      Create a Project
-      <span class="autosave visible">
-        <svg src="/images/icons/check.svg" class="icon mr" />
-          draft auto-saved
-        </span>
-    </h1>
-    <h2>Step 2. Add volunteering activities</h2>
-  </header>
-  <NavigationDropdown />
+  <StepHeader subtitle="Step 2. Add volunteering activities" />
+
   <ActivityCard />
   <ActivityCard />
   <NewActivityCard />

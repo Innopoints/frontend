@@ -1,24 +1,15 @@
 <script>
   import { fade } from 'svelte/transition';
-  import NavigationDropdown from '@/components/projects/new/steps-navigation.svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
+  import StepHeader from '@/components/projects/new/step-header.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
 </script>
 
 <form transition:fade={{duration:200}}>
-  <header class="padded form-header">
-    <h1>
-      Create a Project
-      <span class="autosave visible">
-        <svg src="/images/icons/check.svg" class="icon mr" />
-          draft auto-saved
-        </span>
-    </h1>
-    <h2>Step 1. Fill out the general information about the project</h2>
-  </header>
-  <NavigationDropdown />
+  <StepHeader subtitle="Step 1. Fill out the general information about the project" />
+
   <FormField title="Project name" classname="form-field padded" id="title" required>
     <span slot="subtitle" class="desc">
       <span class="lb">This has to be different from other projects.</span>
