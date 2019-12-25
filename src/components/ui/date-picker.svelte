@@ -32,7 +32,7 @@
         -->
         {#each week as day, dayi (day.index)}
           <div class="{dayclass} {day.classes}">
-            <button on:click={() => selectItem(weeki + 1, dayi + 1)}>{day.index}</button>
+            <button type="button" on:click={() => selectItem(weeki + 1, dayi + 1)}>{day.index}</button>
           </div>
         {/each}
       </div>
@@ -79,7 +79,7 @@
   let activeYearStart = new Date().getFullYear();
   let activeYearEnd = new Date().getFullYear();
 
-  $: dateRange = {start: value.start ? new Date(value.start) : null, end: value.end ? new Date(value.end) : null};
+  $: dateRange = {start: (value && value.start) ? new Date(value.start) : null, end: (value && value.end) ? new Date(value.end) : null};
   $: startNextActiveMonth = activeMonthStart >= 11 ? 0 : activeMonthStart + 1;
   $: startMonthDate = new Date(Date.UTC(activeYearStart, activeMonthStart, 0)).getDay();
   $: endMonthDate = new Date(Date.UTC(activeYearEnd, startNextActiveMonth, 0)).getDate();

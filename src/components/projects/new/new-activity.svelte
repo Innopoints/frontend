@@ -11,8 +11,21 @@
 
   import {project, changeDeepField, save} from '@/store/new-project';
   $: activity = $project.newActivity;
-  const change = (field, value) => {
-    changeDeepField('newActivity', field, value);
+  $: console.log(activity);
+  const change = (field, value) => changeDeepField('newActivity', field, value);
+  const changeAndSave = (field, value) => {
+    change(field, value);
+    save();
+  };
+
+  const morePeopleCheckbox = ['the more, the better'];
+  const changeMorePeople = (value) => {
+    change('morePeople', value.length > 0);
+    if (value.length > 0) changeAndSave('people', null);
+  };
+  const changePeople = (val) => {
+    if (activity.morePeople) change('morePeople', false);
+    change('people', val);
   };
 </script>
 
@@ -57,7 +70,10 @@
       <Dropdown>
         <svg src="/images/icons/calendar.svg" class="icon mr-2" slot="label" />
         <span slot="label">select date range</span>
-        <DatePicker />
+        <DatePicker
+          value={activity.date}
+          on:change={(e) => changeAndSave('date', e.detail)}
+        />
       </Dropdown>
     </FormField>
 
@@ -69,11 +85,13 @@
       <span slot="title" class="name">
         Competences, developed by this activity (no more than&nbsp;3)&nbsp;<span class="required">*</span>
       </span>
-      <Dropdown label="select competences">
+      <Dropdown label="select competences" dropdownclass="dropdown with-labels btn-shift">
         <CheckboxGroup
           labeled
-          items={competencesOptions}
           name="competences"
+          value={activity.competences}
+          items={competencesOptions}
+          on:change={(e) => changeAndSave('competences', e.detail)}
         />
       </Dropdown>
     </FormField>
@@ -85,7 +103,11 @@
       wrapperclass="some-wrapper"
       id="tg-username"
     >
-      <Switch id="tg-username" />
+      <Switch
+        id="tg-username"
+        value={activity.telegramRequired}
+        on:change={(e) => changeAndSave('telegramRequired', e.detail)}
+      />
     </FormField>
   </div>
 
@@ -97,7 +119,14 @@
       title="The reward is"
       wrapperclass="hinted"
     >
-      <Switch isTwoState id="reward-type" first="fixes" second="hourly" />
+      <Switch
+        isTwoState
+        id="reward-type"
+        first="fixed"
+        second="hourly"
+        value={activity.isHourly}
+        on:change={(e) => changeAndSave('isHourly', e.detail)}
+      />
       <Dropdown dropdownclass="dropdown info-bubble" btnclass="handle round btn" chevron={false} isRight>
         <svg slot="label" src="/images/icons/help-circle.svg" class="icon" />
         Hourly rewards are typically granted for volunteering, while fixed rewards are
@@ -105,16 +134,43 @@
       </Dropdown>
     </FormField>
 
+    {#if activity.isHourly}
+      <FormField
+        classname="form-field work-hours"
+        id="work-hours"
+        title="Work hours"
+        subtitle="Reward rate: 70 ipts/hour"
+        required
+      >
+        <TextField
+          id="work-hours"
+          type="number"
+          placeholder="0"
+          value={activity.hours || 0}
+          on:input={(e) => change('hours', e.detail)}
+          on:delayedChange={save}
+        />
+      </FormField>
+    {/if}
+
     <FormField
       classname="form-field reward-amt"
       id="reward-amt-fixed"
       wrapperclass="hinted"
     >
-      <span slot="title" class="name">
-        Innopoints awarded&nbsp;<span class="required">*</span>
-      </span>
+    <span slot="title" class="name">
+      Innopoints awarded&nbsp;<span class="required">*</span>
+    </span>
       <div class="text-field-wrapper">
-        <TextField isWithItem isItemRight id="reward-amt-fixed" type="number">
+        <TextField
+          isWithItem
+          isItemRight
+          id="reward-amt-fixed"
+          type="number"
+          value={activity.reward || 0}
+          on:input={(e) => change('reward', e.detail)}
+          on:delayedChange={save}
+        >
           <svg src="/images/innopoint-sharp.svg" class="innopoint item" />
         </TextField>
         <span class="required">* Required</span>
@@ -127,16 +183,6 @@
     </FormField>
 
     <FormField
-      classname="form-field work-hours"
-      id="work-hours"
-      title="Work hours"
-      subtitle="Reward rate: 70 ipts/hour"
-      required
-    >
-      <TextField id="work-hours" type="number" placeholder="0" />
-    </FormField>
-
-    <FormField
       classname="form-field people"
       id="people-required"
       title="People required"
@@ -145,12 +191,22 @@
       <span slot="title" class="name">
         People required&nbsp;<span class="required">*</span>
       </span>
-      <TextField id="people-required" type="number" placeholder="0" isNoSpinner />
+      <TextField
+        id="people-required"
+        type="number"
+        placeholder="0"
+        isNoSpinner
+        value={activity.people || 0}
+        on:input={(e) => changePeople(e.detail)}
+        on:delayedChange={save}
+      />
       <span class="divider">or</span>
       <CheckboxGroup
         labeled
-        items={['the more, the better']}
         name="the-more"
+        value={activity.morePeople ? morePeopleCheckbox : []}
+        items={morePeopleCheckbox}
+        on:change={(e) => changeMorePeople(e.detail)}
       />
     </FormField>
 
@@ -163,7 +219,11 @@
       <Dropdown dropdownclass="dropdown btn-shift">
         <svg src="/images/icons/calendar.svg" class="icon mr-2" slot="label" />
         <span slot="label">select date</span>
-        <DatePicker />
+        <DatePicker
+          value={activity.deadline}
+          range={false}
+          on:change={(e) => changeAndSave('deadline', e.detail)}
+        />
       </Dropdown>
     </FormField>
 

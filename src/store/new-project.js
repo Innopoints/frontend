@@ -23,11 +23,11 @@ const activityTemplate = {
   },
   competences: [],
   telegramRequired: false,
-  reward: {
-    type: 'fixed',
-    amount: null,
-  },
+  isHourly: false,
+  hours: null,
+  reward: null,
   people: null,
+  morePeople: false,
   deadline: null,
   feedbacks: [],
 };
@@ -74,6 +74,7 @@ export const changeDeepField = (field, deepField, value) => {
   project.update(proj => ({ ...proj, [field]: {...proj[field], [deepField]: value} }));
   changeSaved(false);
 };
+
 
 export const save = () => {
   let projects = JSON.parse(localStorage.getItem('project-drafts'));
