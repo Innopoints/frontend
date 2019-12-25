@@ -2,7 +2,7 @@
 @import "../../global/src/_mixins.scss";
 
 h1 {
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 
 h2 {
@@ -327,7 +327,7 @@ h2 {
     margin-top: .5em;
   }
 
-  p:first-of-type {
+  p:first-of-type:not(.error) {
     margin-top: 2em;
   }
 

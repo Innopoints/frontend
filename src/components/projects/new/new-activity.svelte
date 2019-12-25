@@ -176,10 +176,10 @@
         </TextField>
         <span class="required">* Required</span>
       </div>
-      <Dropdown dropdownclass="dropdown info-bubble" btnclass="handle round btn" chevron={false} isRight>
-        <svg slot="label" src="/images/icons/help-circle.svg" class="icon" />
-        Stage performances and tasks for a single day earn around 300 ipts,
-        more global tasks like sponsor communication could earn 500 ipts.
+      <Dropdown dropdownclass="dropdown info-bubble" btnclass="handle round danger btn" chevron={false} isRight>
+        <svg slot="label" src="/images/icons/alert-circle.svg" class="icon" />
+        Make sure you reconcile the amount of awarded innopoints with Andrey
+        of Student Affairs, otherwise your project may be rejected!
       </Dropdown>
     </FormField>
 
