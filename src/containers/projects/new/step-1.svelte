@@ -1,14 +1,11 @@
 <script>
   import { fade } from 'svelte/transition';
-  import { onMount } from 'svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import StepHeader from '@/components/projects/new/step-header.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
-  import {project, changeField, save, createProject} from '@/store/new-project';
-
-  onMount(() => createProject());
+  import {project, changeField, save} from '@/store/new-project';
 </script>
 
 <form transition:fade={{duration:200}}>
@@ -31,7 +28,7 @@
   <FormField title="Cover image" classname="form-field padded" id="image" wrapperclass="image-picker">
     <span slot="subtitle" class="desc">
       <span class="lb">This is shown on the project card to catch attention.</span>
-          <span class="lb">Best to use 16:9 photos.</span>
+      <span class="lb">Best to use 16:9 photos.</span>
     </span>
 
     <Button classname="btn option">
@@ -49,11 +46,16 @@
     </Button>
   </FormField>
 
-  <FormField title="Organizer" classname="form-field padded" id="organized" required>
+  <FormField title="Organizer" classname="form-field padded" id="organizer" required>
     <span slot="subtitle" class="desc">
       Name of the organizing department or individual.
     </span>
-    <TextField id="organized" />
+    <TextField
+      id="organizer"
+      value={$project.organizer || ''}
+      on:input={(e) => changeField('organizer', e.detail)}
+      on:delayedChange={save}
+    />
   </FormField>
 
   <BottomNavigation />

@@ -2,10 +2,15 @@
   import { slide } from 'svelte/transition';
   import Button from 'ui/button.svelte';
   import fecha from 'fecha';
-  import {deleteDraft} from '@/store/new-project';
+  import {deleteDraft, chooseProject} from '@/store/new-project';
 
   export let title = '';
   export let date = '';
+
+  const choose = e => {
+    e.preventDefault();
+    chooseProject(date);
+  };
 </script>
 
 <div class="card" in:slide="{{duration: 300}}">
@@ -18,7 +23,7 @@
       <svg src="/images/icons/trash-2.svg" class="mr"/>
       delete
     </Button>
-    <Button href="/projects/new?step=1">
+    <Button on:click={choose} href="/projects/new?step=1">
       <svg src="/images/icons/corner-down-right.svg" class="mr"/>
       continue
     </Button>

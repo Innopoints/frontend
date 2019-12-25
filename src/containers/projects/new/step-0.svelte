@@ -4,8 +4,13 @@
 
   import Button from 'ui/button.svelte';
   import DraftCard from '@/components/projects/new/draft-card.svelte';
-  import {drafts, getDrafts} from '@/store/new-project';
+  import {drafts, getDrafts, createProject} from '@/store/new-project';
   onMount(() => getDrafts());
+
+  const create = e => {
+    e.preventDefault();
+    createProject();
+  };
 
   $: rangeLen = $drafts.length;
   let range = {start: 0, end: 1};
@@ -70,18 +75,18 @@
   <section class="templates">
     Jumpstart your project with a template:
     <div class="actions">
-      <Button href="/projects/new?step=1" isOutline isRectangle>
+      <Button on:click={create} href="/projects/new?step=1" isOutline isRectangle>
         <svg src="/images/icons/award.svg" class="icon mr" />
         Olympiad
       </Button>
-      <Button href="/projects/new?step=1" isOutline isRectangle>
+      <Button on:click={create} href="/projects/new?step=1" isOutline isRectangle>
         <svg src="/images/icons/speaker.svg" class="icon mr" />
         Student Party
       </Button>
     </div>
     Or start completely from scratch:
     <div class="actions">
-      <Button href="/projects/new?step=1" isOutline isRectangle>
+      <Button on:click={create} href="/projects/new?step=1" isOutline isRectangle>
         <svg src="/images/icons/package.svg" class="icon mr" />
         Blank Project
       </Button>

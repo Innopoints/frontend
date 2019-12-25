@@ -49,6 +49,7 @@
       {href}
       target={away && '_blank'}
       class={classes.join(' ')}
+      on:click={() => dispatch('click')}
   >
     <slot />
     {#if away}

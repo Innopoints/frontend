@@ -8,6 +8,12 @@
   import CheckboxGroup from 'ui/checkbox-group.svelte';
   import competencesOptions from '@/constants/projects/competences';
   import Switch from 'ui/switch.svelte';
+
+  import {project, changeDeepField, save} from '@/store/new-project';
+  $: activity = $project.newActivity;
+  const change = (field, value) => {
+    changeDeepField('newActivity', field, value);
+  };
 </script>
 
 <Card classname="card create-activity">
@@ -18,7 +24,12 @@
       title="Activity name"
       required
     >
-      <TextField id="activity-name" />
+      <TextField
+        id="activity-name"
+        value={activity.name || ''}
+        on:input={(e) => change('name', e.detail)}
+        on:delayedChange={save}
+      />
     </FormField>
 
     <FormField
@@ -26,7 +37,13 @@
       id="activity-description"
       title="Description"
     >
-      <TextField multiline id="activity-description" />
+      <TextField
+        multiline
+        id="activity-description"
+        value={activity.description || ''}
+        on:input={(e) => change('description', e.detail)}
+        on:delayedChange={save}
+      />
     </FormField>
 
     <FormField
