@@ -10,9 +10,8 @@
   import Switch from 'ui/switch.svelte';
   import ActivityQuestions from './activity-questions.svelte';
 
-  import {project, changeDeepField, save} from '@/store/new-project';
+  import {project, changeDeepField, save, createActivity} from '@/store/new-project';
   $: activity = $project.newActivity;
-  // $: console.log(activity);
   const change = (field, value) => changeDeepField('newActivity', field, value);
   const changeAndSave = (field, value) => {
     change(field, value);
@@ -244,7 +243,7 @@
 
     <div class="actions">
       <Button classname="btn mr" isDanger>discard</Button>
-      <Button isFilled>create</Button>
+      <Button isFilled on:click={createActivity}>create</Button>
     </div>
   </div>
 </Card>
