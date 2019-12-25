@@ -11,6 +11,7 @@
   export let label = '';
   export let chevron = true;
   export let nowrap = false;
+  export let noclose = false;
   export let value = false;
 
   $: isOpen = value;
@@ -53,9 +54,11 @@
       <slot />
     {:else}
       <div class={wrapperclass}>
-        <Button on:click={toggle} isNormal isRound classname="close btn">
-          <svg src="images/icons/x.svg" />
-        </Button>
+        {#if !noclose}
+          <Button on:click={toggle} isNormal isRound classname="close btn">
+            <svg src="images/icons/x.svg" />
+          </Button>
+        {/if}
         <slot />
       </div>
     {/if}

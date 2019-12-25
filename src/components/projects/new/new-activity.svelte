@@ -8,10 +8,11 @@
   import CheckboxGroup from 'ui/checkbox-group.svelte';
   import competencesOptions from '@/constants/projects/competences';
   import Switch from 'ui/switch.svelte';
+  import ActivityQuestions from './activity-questions.svelte';
 
   import {project, changeDeepField, save} from '@/store/new-project';
   $: activity = $project.newActivity;
-  $: console.log(activity);
+  // $: console.log(activity);
   const change = (field, value) => changeDeepField('newActivity', field, value);
   const changeAndSave = (field, value) => {
     change(field, value);
@@ -234,27 +235,11 @@
       subtitle="Those will make up the feedback form for volunteers."
       wrapperclass="some-wrapper"
     >
-      <Dropdown dropdownclass="dropdown btn-shift">
-        <svg src="/images/icons/message-circle.svg" class="icon mr" slot="label" />
-        <span slot="label">customize</span>
-        <span class="label">Feedback questions</span>
-        <div class="row">
-          <TextField id="question-1" />
-          <Button isDanger isRound>
-            <svg src="/images/icons/trash-2.svg" />
-          </Button>
-        </div>
-        <div class="actions">
-          <Button>
-            <svg src="/images/icons/plus.svg" class="icon mr" />
-            add
-          </Button>
-          <Button>
-            <svg src="/images/icons/check.svg" class="icon mr" />
-            save
-          </Button>
-        </div>
-      </Dropdown>
+      <ActivityQuestions
+        value={activity.questions.length ? activity.questions : ['']}
+        on:change={(e) => change('questions', e.detail)}
+        on:save={save}
+      />
     </FormField>
 
     <div class="actions">
