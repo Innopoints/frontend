@@ -6,12 +6,13 @@
   import ActivityCard from '@/components/projects/new/activity.svelte';
   import Button from 'ui/button.svelte';
   import {project, addActivity} from '@/store/new-project';
+  $: activities = $project.activities;
 </script>
 
 <form transition:fade={{duration:200}}>
   <StepHeader subtitle="Step 2. Add volunteering activities" />
 
-  {#each $project.activities as activity, index (activity.name)}
+  {#each activities as activity, index (index)}
     <ActivityCard {activity} {index} />
   {/each}
 

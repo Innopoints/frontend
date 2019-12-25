@@ -101,6 +101,12 @@ export const discardActivity = () => {
   changeField('newActivity', null);
   save();
 };
+export const duplicateActivity = index => {
+  const {activities} = get(project);
+  const activity = activities[index];
+  changeField('activities', [...activities, activity]);
+  save();
+};
 export const deleteActivity = index => {
   const {activities} = get(project);
   changeField('activities', activities.filter((x, i) => i !== index));

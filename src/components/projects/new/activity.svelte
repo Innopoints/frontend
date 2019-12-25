@@ -2,7 +2,7 @@
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
-  import {deleteActivity} from '@/store/new-project';
+  import {deleteActivity, duplicateActivity} from '@/store/new-project';
 
   export let activity;
   export let index;
@@ -27,7 +27,7 @@
 
   <div class="actions">
     <!-- TODO: add 'title' tooltip on hover -->
-    <Button title="Duplicate">
+    <Button title="Duplicate" on:click={() => duplicateActivity(index)}>
       <svg src="/images/icons/copy.svg" class="icon mr" />
       <span class="text">copy</span>
     </Button>
