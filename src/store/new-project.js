@@ -15,6 +15,8 @@ export const changeSaved = (val) => {
 };
 
 const activityTemplate = {
+  order: null,
+  editing: false,
   name: '',
   description: '',
   date: {
@@ -76,19 +78,31 @@ export const changeDeepField = (field, deepField, value) => {
   changeSaved(false);
 };
 
+export const changeActivityField = (index, field, value) => {
+  const {activities} = get(project);
+  changeField('activities', activities.map(activity => {
+    if (activity.order === index) return {...activity, [field]: value};
+    return activity;
+  }));
+  changeSaved(false);
+};
+
 export const createActivity = () => {
-  const activity = get(project).newActivity;
+  let activity = get(project).newActivity;
   if (
     activity.name && activity.description && activity.competences.length
     && activity.date.start && activity.date.end
     && activity.reward && (!activity.isHourly || activity.isHourly && activity.hours)
     && (activity.morePeople || activity.people)
   ) {
-    project.update(proj => ({
-      ...proj,
-      activities: [...proj.activities, activity],
-      newActivity: null,
-    }));
+    project.update(proj => {
+      activity.order = proj.activities.length;
+      return {
+        ...proj,
+        activities: [...proj.activities, activity],
+        newActivity: null,
+      };
+    });
   }
   save();
 };
@@ -101,15 +115,21 @@ export const discardActivity = () => {
   changeField('newActivity', null);
   save();
 };
+export const editActivity = (index, edit = true) => {
+  changeActivityField(index, 'editing', edit);
+  save();
+};
 export const duplicateActivity = index => {
   const {activities} = get(project);
-  const activity = activities[index];
-  changeField('activities', [...activities, activity]);
+  const activity = activities.find(x => x.order === index);
+  let order = activities[activities.length - 1].order + 1;
+  changeField('activities', [...activities, {...activity, order}]);
   save();
 };
 export const deleteActivity = index => {
   const {activities} = get(project);
-  changeField('activities', activities.filter((x, i) => i !== index));
+  changeField('activities', activities.filter(x => x.order !== index));
+  if (!get(project).activities.length) addActivity();
   save();
 };
 

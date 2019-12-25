@@ -9,13 +9,26 @@
   import competencesOptions from '@/constants/projects/competences';
   import Switch from 'ui/switch.svelte';
   import ActivityQuestions from './activity-questions.svelte';
+  import {project, changeDeepField, save, createActivity, discardActivity, editActivity, changeActivityField, changeSaved} from '@/store/new-project';
 
-  import {project, changeDeepField, save, createActivity, discardActivity} from '@/store/new-project';
-  $: activity = $project.newActivity;
-  const change = (field, value) => changeDeepField('newActivity', field, value);
+  export let activity;
+  export let newly = true;
+
+  const change = (field, value, stop = false) => {
+    if (!stop) {
+      if (newly) changeDeepField('newActivity', field, value);
+      else changeActivityField(activity.order, field, value);
+    } else {
+      changeSaved(false);
+    }
+  };
   const changeAndSave = (field, value) => {
     change(field, value);
     save();
+  };
+  const delayedChange = (field, value) => {
+    if (newly) save();
+    else changeAndSave(field, value);
   };
 
   const morePeopleCheckbox = ['the more, the better'];
@@ -23,9 +36,10 @@
     change('morePeople', value.length > 0);
     if (value.length > 0) changeAndSave('people', null);
   };
-  const changePeople = (val) => {
+  const changePeople = (val, stop) => {
     if (activity.morePeople) change('morePeople', false);
-    change('people', val);
+    if (!stop) change('people', val);
+    else changeSaved(false);
   };
 </script>
 
@@ -40,8 +54,8 @@
       <TextField
         id="activity-name"
         value={activity.name || ''}
-        on:input={(e) => change('name', e.detail)}
-        on:delayedChange={save}
+        on:input={(e) => change('name', e.detail, activity.editing)}
+        on:delayedChange={(e) => delayedChange('name', e.detail)}
       />
     </FormField>
 
@@ -54,8 +68,8 @@
         multiline
         id="activity-description"
         value={activity.description || ''}
-        on:input={(e) => change('description', e.detail)}
-        on:delayedChange={save}
+        on:input={(e) => change('description', e.detail, activity.editing)}
+        on:delayedChange={(e) => delayedChange('description', e.detail)}
       />
     </FormField>
 
@@ -147,8 +161,8 @@
           type="number"
           placeholder="0"
           value={activity.hours || 0}
-          on:input={(e) => change('hours', e.detail)}
-          on:delayedChange={save}
+          on:input={(e) => change('hours', e.detail, activity.editing)}
+          on:delayedChange={(e) => delayedChange('hours', e.detail)}
         />
       </FormField>
     {/if}
@@ -168,8 +182,8 @@
           id="reward-amt-fixed"
           type="number"
           value={activity.reward || 0}
-          on:input={(e) => change('reward', e.detail)}
-          on:delayedChange={save}
+          on:input={(e) => change('reward', e.detail, activity.editing)}
+          on:delayedChange={(e) => delayedChange('reward', e.detail)}
         >
           <svg src="/images/innopoint-sharp.svg" class="innopoint item" />
         </TextField>
@@ -197,8 +211,8 @@
         placeholder="0"
         isNoSpinner
         value={activity.people || 0}
-        on:input={(e) => changePeople(e.detail)}
-        on:delayedChange={save}
+        on:input={(e) => changePeople(e.detail, activity.editing)}
+        on:delayedChange={(e) => changeAndSave('people', e.detail)}
       />
       <span class="divider">or</span>
       <CheckboxGroup
@@ -242,10 +256,14 @@
     </FormField>
 
     <div class="actions">
-      {#if $project.activities.length}
+      {#if $project.activities.length && !activity.editing}
         <Button classname="btn mr" isDanger on:click={discardActivity}>discard</Button>
       {/if}
-      <Button isFilled on:click={createActivity}>create</Button>
+      {#if newly}
+        <Button isFilled on:click={createActivity}>create</Button>
+      {:else}
+        <Button isFilled on:click={() => editActivity(activity.order, false)}>save</Button>
+      {/if}
     </div>
   </div>
 </Card>

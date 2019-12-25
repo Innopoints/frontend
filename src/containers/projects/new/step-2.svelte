@@ -12,12 +12,16 @@
 <form transition:fade={{duration:200}}>
   <StepHeader subtitle="Step 2. Add volunteering activities" />
 
-  {#each activities as activity, index (index)}
-    <ActivityCard {activity} {index} />
+  {#each activities as activity (activity.name + activity.order)}
+    {#if activity.editing}
+      <NewActivityCard newly={false} activity={activity} />
+    {:else}
+      <ActivityCard {activity} />
+    {/if}
   {/each}
 
   {#if $project.newActivity}
-    <NewActivityCard />
+    <NewActivityCard activity={$project.newActivity} />
   {:else}
     <Button on:click={addActivity}>
       <svg src="/images/icons/plus.svg" class="icon mr" />
