@@ -10,7 +10,7 @@
   import Switch from 'ui/switch.svelte';
   import ActivityQuestions from './activity-questions.svelte';
 
-  import {project, changeDeepField, save, createActivity} from '@/store/new-project';
+  import {project, changeDeepField, save, createActivity, discardActivity} from '@/store/new-project';
   $: activity = $project.newActivity;
   const change = (field, value) => changeDeepField('newActivity', field, value);
   const changeAndSave = (field, value) => {
@@ -235,14 +235,16 @@
       wrapperclass="some-wrapper"
     >
       <ActivityQuestions
-        value={activity.questions.length ? activity.questions : ['']}
+        value={(activity.questions && activity.questions.length) ? activity.questions : ['']}
         on:change={(e) => change('questions', e.detail)}
         on:save={save}
       />
     </FormField>
 
     <div class="actions">
-      <Button classname="btn mr" isDanger>discard</Button>
+      {#if $project.activities.length}
+        <Button classname="btn mr" isDanger on:click={discardActivity}>discard</Button>
+      {/if}
       <Button isFilled on:click={createActivity}>create</Button>
     </div>
   </div>

@@ -5,20 +5,20 @@
   import NewActivityCard from '@/components/projects/new/new-activity.svelte';
   import ActivityCard from '@/components/projects/new/activity.svelte';
   import Button from 'ui/button.svelte';
-  import {project} from '@/store/new-project';
+  import {project, addActivity} from '@/store/new-project';
 </script>
 
 <form transition:fade={{duration:200}}>
   <StepHeader subtitle="Step 2. Add volunteering activities" />
 
-  {#each $project.activities as activity}
-    <ActivityCard />
+  {#each $project.activities as activity, index (activity.name)}
+    <ActivityCard {activity} {index} />
   {/each}
 
   {#if $project.newActivity}
     <NewActivityCard />
   {:else}
-    <Button>
+    <Button on:click={addActivity}>
       <svg src="/images/icons/plus.svg" class="icon mr" />
       add another activity
     </Button>

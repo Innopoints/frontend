@@ -37,6 +37,7 @@ const projectTemplate = {
   updateTime: null,
   name: '',
   organizer: '',
+  editing: null,
   newActivity: activityTemplate,
   activities: [],
   moderators: [],
@@ -89,6 +90,20 @@ export const createActivity = () => {
       newActivity: null,
     }));
   }
+  save();
+};
+
+export const addActivity = () => {
+  const {newActivity} = get(project);
+  if (!newActivity) changeField('newActivity', activityTemplate);
+};
+export const discardActivity = () => {
+  changeField('newActivity', null);
+  save();
+};
+export const deleteActivity = index => {
+  const {activities} = get(project);
+  changeField('activities', activities.filter((x, i) => i !== index));
   save();
 };
 

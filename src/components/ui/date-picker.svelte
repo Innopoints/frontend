@@ -285,6 +285,7 @@
       padding: .5em 0;
       color: #387800;
       font-weight: 500;
+      white-space: nowrap;
     }
 
     .month-header button {
