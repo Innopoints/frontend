@@ -1,13 +1,14 @@
 <script>
-  import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
   import {deleteActivity, duplicateActivity, editActivity} from '@/store/new-project';
+
   export let activity;
 </script>
 
-<Card classname="card activity">
+<div class="card activity">
   <svg src="/images/icons/drag-handle.svg" class="drag-handle" />
+
   <div class="title">{activity.name}</div>
   <div class="parameters">
     <div class="labeled text">
@@ -25,17 +26,17 @@
 
   <div class="actions">
     <!-- TODO: add 'title' tooltip on hover -->
-    <Button title="Duplicate" on:click={() => duplicateActivity(activity.order)}>
+    <Button title="Duplicate" on:click={() => duplicateActivity(activity.index)}>
       <svg src="/images/icons/copy.svg" class="icon mr" />
       <span class="text">copy</span>
     </Button>
-    <Button title="Edit" on:click={() => editActivity(activity.order)}>
+    <Button title="Edit" on:click={() => editActivity(activity.index)}>
       <svg src="/images/icons/edit.svg" class="icon mr" />
       <span class="text">edit</span>
     </Button>
-    <Button isDanger on:click={() => deleteActivity(activity.order)}>
+    <Button isDanger on:click={() => deleteActivity(activity.index)}>
       <svg src="/images/icons/trash-2.svg" class="icon mr" />
       <span class="text">delete</span>
     </Button>
   </div>
-</Card>
+</div>

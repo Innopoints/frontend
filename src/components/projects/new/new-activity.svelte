@@ -17,7 +17,7 @@
   const change = (field, value, stop = false) => {
     if (!stop) {
       if (newly) changeDeepField('newActivity', field, value);
-      else changeActivityField(activity.order, field, value);
+      else changeActivityField(activity.index, field, value);
     } else {
       changeSaved(false);
     }
@@ -262,7 +262,7 @@
       {#if newly}
         <Button isFilled on:click={createActivity}>create</Button>
       {:else}
-        <Button isFilled on:click={() => editActivity(activity.order, false)}>save</Button>
+        <Button isFilled on:click={() => editActivity(activity.index, false)}>save</Button>
       {/if}
     </div>
   </div>

@@ -15,7 +15,7 @@ export const changeSaved = (val) => {
 };
 
 const activityTemplate = {
-  order: null,
+  index: null,
   editing: false,
   name: '',
   description: '',
@@ -81,7 +81,7 @@ export const changeDeepField = (field, deepField, value) => {
 export const changeActivityField = (index, field, value) => {
   const {activities} = get(project);
   changeField('activities', activities.map(activity => {
-    if (activity.order === index) return {...activity, [field]: value};
+    if (activity.index === index) return {...activity, [field]: value};
     return activity;
   }));
   changeSaved(false);
@@ -96,7 +96,7 @@ export const createActivity = () => {
     && (activity.morePeople || activity.people)
   ) {
     project.update(proj => {
-      activity.order = proj.activities.length;
+      activity.index = proj.activities.length;
       return {
         ...proj,
         activities: [...proj.activities, activity],
@@ -121,14 +121,14 @@ export const editActivity = (index, edit = true) => {
 };
 export const duplicateActivity = index => {
   const {activities} = get(project);
-  const activity = activities.find(x => x.order === index);
-  let order = activities[activities.length - 1].order + 1;
-  changeField('activities', [...activities, {...activity, order}]);
+  const activity = activities.find(x => x.index === index);
+  let i = activities[activities.length - 1].index + 1;
+  changeField('activities', [...activities, {...activity, index: i}]);
   save();
 };
 export const deleteActivity = index => {
   const {activities} = get(project);
-  changeField('activities', activities.filter(x => x.order !== index));
+  changeField('activities', activities.filter(x => x.index !== index));
   if (!get(project).activities.length) addActivity();
   save();
 };
