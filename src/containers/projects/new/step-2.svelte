@@ -7,7 +7,7 @@
   import ActivityCard from '@/components/projects/new/activity.svelte';
   import Button from 'ui/button.svelte';
   import Sortable from 'sortablejs';
-  import {project, addActivity} from '@/store/new-project';
+  import {project, addActivity, swapActivities} from '@/store/new-project';
   $: activities = $project.activities;
 
   let dragContainer = null;
@@ -18,11 +18,9 @@
       draggable: '.card.activity',
       animations: 150,
       sort: true,
-      // onEnd: function (e) {
-      //   let els = dragContainer.querySelectorAll('.card.activity');
-      //   console.log(e);
-      //   console.log(els);
-      // },
+      onEnd: function (e) {
+        swapActivities(e.oldDraggableIndex, e.newDraggableIndex);
+      },
     });
   };
 </script>

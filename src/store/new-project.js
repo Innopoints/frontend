@@ -126,6 +126,11 @@ export const duplicateActivity = index => {
   changeField('activities', [...activities, {...activity, index: i}]);
   save();
 };
+export const swapActivities = (oldPlace, newPlace) => {
+  let {activities} = get(project);
+  changeField('activities', array_move(activities, oldPlace, newPlace));
+  save();
+};
 export const deleteActivity = index => {
   const {activities} = get(project);
   changeField('activities', activities.filter(x => x.index !== index));
@@ -165,4 +170,14 @@ export const deleteDraft = date => {
     localStorage.setItem('project-drafts', JSON.stringify(projects));
     getDrafts();
   }
+};
+
+// Thanks stackoverflow for it
+const array_move = (arr, old_index, new_index) => {
+  if (new_index >= arr.length) {
+    let k = new_index - arr.length + 1;
+    while (k--) arr.push(undefined);
+  }
+  arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+  return arr;
 };
