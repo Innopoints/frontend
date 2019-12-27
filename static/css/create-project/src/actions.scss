@@ -4,12 +4,12 @@ form > .actions {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
-}
 
-form > .actions > .btn {
-  margin-bottom: .5em;
-}
+  & > .btn {
+    margin-bottom: .5em;
+  }
 
-form > .actions > .btn:not(:first-child) {
-  margin-left: 1em;
+  & > .btn:not(:first-child) {
+    margin-left: 1em;
+  }
 }
