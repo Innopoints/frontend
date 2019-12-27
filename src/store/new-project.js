@@ -38,6 +38,7 @@ const projectTemplate = {
   creationTime: null,
   updateTime: null,
   name: '',
+  image: null,
   organizer: '',
   editing: null,
   newActivity: activityTemplate,

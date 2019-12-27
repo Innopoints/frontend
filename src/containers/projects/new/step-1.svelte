@@ -5,8 +5,27 @@
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
+  import Dropzone from 'ui/dropzone.svelte';
   import {project, changeField, save} from '@/store/new-project';
+  import {readFileAsync} from '@/utils/read-files';
+
+  $: file = $project.image;
+  let image = null;
+  $: (async() => image = file ? await readFileAsync(file) : null)();
+
+  const addImage = async e => changeImageAndSave(e.detail[0]);
+  const removeImage = () => changeImageAndSave(null);
+  const changeImageAndSave = (val) => {
+    changeField('image', val);
+    save();
+  };
 </script>
+
+<style>
+  :global(.image-picker) {
+    margin-top: 0;
+  }
+</style>
 
 <form transition:fade={{duration:200}}>
   <StepHeader subtitle="Step 1. Fill out the general information about the project" />
@@ -25,25 +44,30 @@
     />
   </FormField>
 
-  <FormField title="Cover image" classname="form-field padded" id="image" wrapperclass="image-picker">
+  <FormField title="Cover image" classname="form-field padded" id="image" wrapperclass="image-picker{image ? ' selected' : ''}">
     <span slot="subtitle" class="desc">
       <span class="lb">This is shown on the project card to catch attention.</span>
       <span class="lb">Best to use 16:9 photos.</span>
     </span>
 
-    <Button classname="btn option">
-      <svg src="/images/icons/image.svg" class="icon mr" />
-      upload cover image
-    </Button>
-    <Button classname="btn option">
-      <svg src="/images/icons/grid.svg" class="icon mr" />
-      select from stock gallery
-    </Button>
-    <img src="/images/create-project/arro.png" class="shadow-1 mr" alt="">
-    <Button isDanger>
-      <svg src="/images/icons/trash-2.svg" class="icon" />
-      <span class="text">delete</span>
-    </Button>
+    {#if image}
+      <img src={image} alt="" class="shadow-1 mr" />
+      <Button isDanger on:click={removeImage}>
+        <svg src="/images/icons/trash-2.svg" class="icon" />
+        <span class="text">delete</span>
+      </Button>
+    {:else}
+      <Dropzone
+        multiple={false}
+        id="file-input"
+        classname="image-platform"
+        on:change={addImage}
+      >
+        <svg src="/images/icons/image.svg" class="icon mr" />
+        <label class="title" for="file-input2">drag &amp; drop here or click to upload photo</label>
+        <small>Make sure the ratio is 1:1 (square)</small>
+      </Dropzone>
+    {/if}
   </FormField>
 
   <FormField title="Organizer" classname="form-field padded" id="organizer" required>
