@@ -14,9 +14,8 @@
     Moderators can process applications from volunteers and edit activities.
     Feedback on volunteers is also shared between all moderators.
   </p>
-  <p>
-    You are the creator, therefore, also a moderator.
-  </p>
+  <p>You are the creator, therefore, also a moderator.</p>
+  <span class="label">Search for people</span>
   <Autocomplete bind:value={values} {options} />
   <BottomNavigation />
 </form>
