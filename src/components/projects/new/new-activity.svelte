@@ -10,6 +10,7 @@
   import Switch from 'ui/switch.svelte';
   import ActivityQuestions from './activity-questions.svelte';
   import {project, changeDeepField, save, createActivity, discardActivity, editActivity, changeActivityField, changeSaved} from '@/store/new-project';
+  import {parseDates} from '@/utils/date-range';
 
   export let activity;
   export let newly = true;
@@ -83,7 +84,7 @@
       </span>
       <Dropdown>
         <svg src="/images/icons/calendar.svg" class="icon mr-2" slot="label" />
-        <span slot="label">select date range</span>
+        <span slot="label">{activity.date.start ? parseDates(activity.date) : 'select date range'}</span>
         <DatePicker
           value={activity.date}
           on:change={(e) => changeAndSave('date', e.detail)}
@@ -232,7 +233,7 @@
     >
       <Dropdown dropdownclass="dropdown btn-shift">
         <svg src="/images/icons/calendar.svg" class="icon mr-2" slot="label" />
-        <span slot="label">select date</span>
+        <span slot="label">{activity.deadline ? parseDates({start: activity.deadline}) : 'select date'}</span>
         <DatePicker
           value={activity.deadline}
           range={false}
