@@ -236,6 +236,7 @@
         <DatePicker
           value={activity.deadline}
           range={false}
+          withControls={false}
           on:change={(e) => changeAndSave('deadline', e.detail)}
         />
       </Dropdown>

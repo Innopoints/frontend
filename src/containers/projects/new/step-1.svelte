@@ -65,7 +65,7 @@
       >
         <svg src="/images/icons/image.svg" class="icon mr" />
         <label class="title" for="file-input2">drag &amp; drop here or click to upload photo</label>
-        <small>Make sure the ratio is 1:1 (square)</small>
+        <small>Make sure the ratio is 16:9</small>
       </Dropzone>
     {/if}
   </FormField>

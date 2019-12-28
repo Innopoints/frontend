@@ -91,7 +91,7 @@ export const changeActivityField = (index, field, value) => {
 export const createActivity = () => {
   let activity = get(project).newActivity;
   if (
-    activity.name && activity.description && activity.competences.length
+    activity.name && activity.competences.length
     && activity.date.start && activity.date.end
     && activity.reward && (!activity.isHourly || activity.isHourly && activity.hours)
     && (activity.morePeople || activity.people)

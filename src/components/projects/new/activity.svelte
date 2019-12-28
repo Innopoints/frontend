@@ -20,7 +20,7 @@
       </div>
     </div>
     <Labeled label="People required">
-      {activity.morePeople ? 'the more, the better' : activity.people + (activity.people === 1 ? ' person' : ' people')}
+      {activity.morePeople ? 'the more, the better' : activity.people + (parseInt(activity.people) === 1 ? ' person' : ' people')}
     </Labeled>
   </div>
 

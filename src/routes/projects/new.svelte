@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-  <title>Create project – Innopoints</title>
+  <title>Create Project – Innopoints</title>
   <link rel="stylesheet" href="/css/page-components/header.css" />
   <link rel="stylesheet" href="/css/create-project/steps.css">
   <link rel="stylesheet" href="/css/create-project/main.css">
