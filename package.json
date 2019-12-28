@@ -3,7 +3,7 @@
   "description": "Innopolis University innopoints project",
   "version": "0.3.0",
   "engines": {
-    "node": "10.7.0"
+    "node": "v12.14.0"
   },
   "scripts": {
     "dev": "sapper dev",
@@ -62,5 +62,10 @@
     "simplebar": "^5.0.7",
     "svelte": "^3.14.0",
     "swiper": "^5.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VanishMax/innopoints-frontend.git"
+  },
+  "license": "MIT"
 }
