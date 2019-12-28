@@ -1,9 +1,19 @@
+.material {
+  display: flex;
+  justify-content: center;
+}
+
 h1 {
   margin-top: 1.5em;
 }
 
 h2 {
   margin-bottom: 1em;
+}
+
+.step0 {
+  flex-direction: column;
+  align-items: center;
 }
 
 .step0 h1, .step0 h2 {
@@ -132,7 +142,7 @@ h2 {
 
 @media only screen and (min-width: 1200px) {
   .step0 {
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
   }
   .step0 .left {
@@ -261,6 +271,7 @@ h2 {
 
 .step2 form > .btn {
   align-self: flex-start;
+  margin-top: 1em;
 }
 
 .step2 form > .actions {
@@ -269,10 +280,14 @@ h2 {
   margin-top: 1em;
 }
 
+@media only screen and (min-width: 640px) {
+  .step2 form {
+    width: calc(100% - 20px);
+  }
+}
+
 @media only screen and (min-width: 740px) {
-  .step2 form > .card,
-  .step2 form > .btn,
-  .step2 form > .actions {
+  .step2 form > .card, .step2 form > .btn, .step2 form > .actions {
     margin-left: 2.5em;
     margin-right: 2.5em;
   }
