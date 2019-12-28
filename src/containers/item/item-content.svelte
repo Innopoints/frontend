@@ -36,7 +36,7 @@
   let animation = false;
   const chooseSize = e => chosenSize = e.detail;
   const purchase = () => {
-    if (!inSizes || (inSizes && chosenSize)) {
+    if (!inSizes || chosenSize) {
       err = false;
       openModal();
     } else {
