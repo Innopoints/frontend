@@ -1,12 +1,8 @@
 const trimHEX = (color) => {
   if (!color) return '';
-
-  let unhashed = color.replace(/[^0-9A-Fa-f]/g, '');
-  if (unhashed.length === 3) {
-    let normalized = [];
-    unhashed.split('').forEach(x => normalized.push(x.repeat(2)));
-    return normalized.join('');
-  }
+  let unhashed = color.replace(/[^0-9a-f]/gi, '');
+  if (unhashed.length === 3)
+    return unhashed.split('').map(x => x.repeat(2)).join('');
   return unhashed;
 };
 

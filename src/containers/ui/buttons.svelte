@@ -31,7 +31,7 @@
     <Button isRound isNormal>
       <svg src="/images/icons/x.svg" />
     </Button>
-    <Button isOutline isRound normal>
+    <Button isOutline isRound isNormal>
       <svg src="/images/icons/x.svg" />
     </Button>
     <Button isFilled chevron>chevron</Button>

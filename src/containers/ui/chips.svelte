@@ -17,8 +17,8 @@
     <div style="display: flex; flex-wrap: wrap;">
       <Chip disabled>most first</Chip>
       <Chip disabled>least first</Chip>
-      <Chip disabled outline>least last</Chip>
-      <Chip disabled outline>most last</Chip>
+      <Chip disabled isOutline>least last</Chip>
+      <Chip disabled isOutline>most last</Chip>
     </div>
   </div>
 
@@ -32,11 +32,11 @@
 
   <div class="showcase">
     <div role="group" style="display: flex; flex-wrap: wrap;">
-      <Chip name="chip-2" small>XS</Chip>
-      <Chip name="chip-2" small value={true}>S</Chip>
-      <Chip name="chip-2" small disabled>M</Chip>
-      <Chip name="chip-2" small outline>L</Chip>
-      <Chip name="chip-2" small outline>XL</Chip>
+      <Chip name="chip-2" isSmall>XS</Chip>
+      <Chip name="chip-2" isSmall value={true}>S</Chip>
+      <Chip name="chip-2" isSmall disabled>M</Chip>
+      <Chip name="chip-2" isSmall isOutline>L</Chip>
+      <Chip name="chip-2" isSmall isOutline>XL</Chip>
     </div>
   </div>
 

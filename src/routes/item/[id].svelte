@@ -1,7 +1,7 @@
 <script context="module">
   import items from '@/constants/store/store';
   export function preload({params}) {
-    const item = items.find(x => parseInt(x.id) === parseInt(params.id)) || null;
+    const item = items.find(x => parseInt(x.id) === parseInt(params.id));
     if (!item) return this.redirect(302, 'store');
     return {...item};
   }
