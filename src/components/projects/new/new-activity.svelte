@@ -42,6 +42,15 @@
     if (!stop) change('people', val);
     else changeSaved(false);
   };
+
+  let dropdowns = {
+    date: false,
+    deadline: false,
+  };
+  const saveDates = (field, val, two = false) => {
+    changeAndSave(field, val);
+    if ((two && val.start && val.end) || (!two && val)) dropdowns[field] = false;
+  };
 </script>
 
 <Card classname="card create-activity">
@@ -82,12 +91,12 @@
       <span slot="title" class="name">
         Activity date&nbsp;<span class="required">*</span>
       </span>
-      <Dropdown>
+      <Dropdown bind:value={dropdowns.date}>
         <svg src="/images/icons/calendar.svg" class="icon mr-2" slot="label" />
         <span slot="label">{activity.date.start ? parseDates(activity.date) : 'select date range'}</span>
         <DatePicker
           value={activity.date}
-          on:change={(e) => changeAndSave('date', e.detail)}
+          on:change={(e) => saveDates('date', e.detail, true)}
         />
       </Dropdown>
     </FormField>
@@ -231,14 +240,14 @@
       title="Application deadline"
       wrapperclass="some-wrapper"
     >
-      <Dropdown dropdownclass="dropdown btn-shift">
+      <Dropdown bind:value={dropdowns.deadline} dropdownclass="dropdown btn-shift">
         <svg src="/images/icons/calendar.svg" class="icon mr-2" slot="label" />
         <span slot="label">{activity.deadline ? parseDates({start: activity.deadline}) : 'select date'}</span>
         <DatePicker
           value={activity.deadline}
           range={false}
           withControls={false}
-          on:change={(e) => changeAndSave('deadline', e.detail)}
+          on:change={(e) => saveDates('deadline', e.detail)}
         />
       </Dropdown>
     </FormField>
