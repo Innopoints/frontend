@@ -96,21 +96,6 @@
   padding-left: .3em;
 }
 
-.activity .stars {
-  margin-left: 1em;
-}
-
-.activity .stars .star {
-  stroke: #127800;
-  width: 18px;
-  height: 18px;
-  margin: 0 1px;
-}
-
-.activity .stars .star.off {
-  stroke: #d3d3d3;
-}
-
 .activity .with-icon {
   display: flex;
   align-items: flex-start;

@@ -1541,3 +1541,47 @@ input[type="checkbox"]:checked + .chip::before {
   background: none;
   color: #127800;
 }
+
+/* Star rating -------------------------------------- */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.star-rating label {
+  padding: .5em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.star-rating label:hover {
+  background: rgba(18, 120, 0, 0.05);
+}
+
+.star-rating label:hover .star {
+  stroke: rgba(18, 120, 0, 0.4);
+}
+
+.star-rating label:hover ~ label .star {
+  stroke: rgba(18, 120, 0, 0.4);
+}
+
+.star-rating label .star {
+  stroke: #ddd;
+  display: block;
+}
+
+.star-rating input[type="radio"] {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.star-rating input:checked + label .star,
+.star-rating input:checked ~ input + label .star {
+  stroke: #127800;
+}

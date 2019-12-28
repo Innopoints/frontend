@@ -3,6 +3,7 @@
   import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
+  import getBackground from '@/utils/optimal-color';
 
   export let id;
   export let name;
@@ -17,9 +18,9 @@
   };
 </script>
 
-<Card img={selected.images[0]} color={selected.background}>
+<Card img={selected.images[0]} color={getBackground(selected.color)}>
   <div class="title">{name}</div>
-  <span class="subtitle">{type}</span>
+  {#if type}<span class="subtitle">{type}</span>{/if}
   <div slot="radio">
     {#if varieties.length > 1 && !short}
       <RadioGroup
@@ -36,12 +37,12 @@
   {#if !short}
     <div class="card-row">
       <Labeled label="Price">
-        {price}
+        <span class="price">{price}</span>
         <svg src="images/innopoint-sharp.svg" class="innopoint" />
       </Labeled>
-      <Button isOutline>view</Button>
+      <Button href="/item/{id}" isOutline>view</Button>
     </div>
   {:else}
-    <Button isOutline>view</Button>
+    <Button href="/item/{id}" isOutline>view</Button>
   {/if}
 </Card>

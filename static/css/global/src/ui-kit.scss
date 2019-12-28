@@ -1596,3 +1596,45 @@ input[type="checkbox"]:checked + .chip::before {
     }
   }
 }
+
+/* Star rating -------------------------------------- */
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+
+  label {
+    padding: .5em;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background: transparentize($main, .95);
+
+      .star {
+        stroke: transparentize($main, .6);
+      }
+    }
+
+    &:hover ~ label {
+      .star {
+        stroke: transparentize($main, .6);
+      }
+    }
+
+    .star {
+      stroke: $light-gray;
+      display: block;
+    }
+  }
+
+  input[type="radio"] {
+    @include hide-accessible;
+  }
+
+  input:checked + label .star,
+  input:checked ~ input + label .star {
+    stroke: $main;
+  }
+}

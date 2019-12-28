@@ -22,7 +22,7 @@
   $: parsedItems = parseItems(items, uniqueKey);
   $: selected = parseValues(value, parsedItems, {uniqueKey});
 
-  let dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
   const changeRadio = item => {
     selected = item;
     dispatch('change', item);

@@ -12,7 +12,7 @@
 
     <Labeled icon label="Label">
       <svg
-          src="images/ui-kit-page/award.svg"
+          src="/images/icons/award.svg"
           class="icon"
           slot="icon"
       />

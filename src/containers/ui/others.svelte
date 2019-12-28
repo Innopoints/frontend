@@ -2,54 +2,6 @@
   import Card from 'ui/card.svelte';
 </script>
 
-<Card id="dialogs">
-  <h1 class="todo">Dialogs</h1>
-  <div class="showcase vertical">
-    <div class="dialog">
-      <button class="btn normal round close">
-        <img alt="" src="images/ui-kit-page/x.svg" />
-      </button>
-      <span class="title">
-          <img alt="" src="images/ui-kit-page/award.svg" class="icon" />
-          U Got Mail
-        </span>
-      <p>Text of the dialog here text text.</p>
-      <div class="actions">
-        <button class="btn">cancel</button>
-        <button class="btn filled">action</button>
-      </div>
-    </div>
-
-    <div class="dialog danger">
-        <span class="title">
-          <img
-              alt=""
-              src="images/ui-kit-page/alert-triangle.svg"
-              class="icon" />
-          Warning
-        </span>
-      <p>Something bad is about to happen. You just gonna let it roll?</p>
-      <div class="actions">
-        <button class="btn">no, wait</button>
-        <button class="btn filled danger">yeah lmao</button>
-      </div>
-    </div>
-
-    <div class="dialog notice">
-      <div class="message">
-        <img
-            alt=""
-            src="images/ui-kit-page/alert-triangle-green.svg"
-            class="icon" />
-        <p>What's it gonna take for you to ever let go?</p>
-      </div>
-      <div class="actions">
-        <button class="btn">wait, what</button>
-      </div>
-    </div>
-  </div>
-</Card>
-
 <Card id="typo">
   <h1>Typography</h1>
   <div class="showcase vertical">
@@ -81,7 +33,7 @@
   <div class="showcase">
     <div class="carousel">
       <div class="curr-slide">
-        <img alt="" src="images/ui-kit-page/sweatshirt.png" />
+        <img alt="" src="/images/store/sweatshirt.png" />
       </div>
       <div class="slides">
         <label class="slide">
@@ -102,10 +54,10 @@
         </label>
       </div>
       <button class="btn round prev-slide">
-        <img alt="" src="images/ui-kit-page/chevron-left-white.svg" />
+        <img alt="" src="/images/icons/chevron-left.svg" />
       </button>
       <button class="btn round next-slide">
-        <img alt="" src="images/ui-kit-page/chevron-right-white.svg" />
+        <img alt="" src="/images/icons/chevron-right.svg" />
       </button>
     </div>
   </div>
@@ -115,7 +67,7 @@
   <h1>Cards</h1>
   <div class="showcase vertical">
     <Card>This is a small card, nothing special.</Card>
-    <Card img="images/ui-kit-page/sweatshirt.png">
+    <Card img="/images/store/sweatshirt.png">
       <div class="title">Write clean code</div>
       <div class="subtitle">subtitle</div>
     </Card>
@@ -129,21 +81,21 @@
     <label class="choice-btn">
       <input type="radio" name="large-choices" />
       <div class="repr">
-        <img alt="" src="images/ui-kit-page/at-sign.svg" class="icon" />
+        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
         Title
       </div>
     </label>
     <label class="choice-btn">
       <input type="radio" name="large-choices" />
       <div class="repr">
-        <img alt="" src="images/ui-kit-page/at-sign.svg" class="icon" />
+        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
         Title 2
       </div>
     </label>
     <label class="choice-btn">
       <input type="radio" name="large-choices" />
       <div class="repr">
-        <img alt="" src="images/ui-kit-page/at-sign.svg" class="icon" />
+        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
         Title 3
       </div>
     </label>
