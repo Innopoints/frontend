@@ -95,7 +95,7 @@ export const createActivity = () => {
   if (
     activity.name && activity.competences.length
     && activity.date.start && activity.date.end
-    && activity.reward && (!activity.isHourly || activity.isHourly && activity.hours)
+    && ((activity.isHourly && activity.hours) || (!activity.isHourly && activity.reward))
     && (activity.morePeople || activity.people)
   ) {
     project.update(proj => {

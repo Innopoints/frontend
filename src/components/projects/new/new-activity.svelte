@@ -175,36 +175,36 @@
           on:delayedChange={(e) => delayedChange('hours', e.detail)}
         />
       </FormField>
+    {:else}
+      <FormField
+        classname="form-field reward-amt"
+        id="reward-amt-fixed"
+        wrapperclass="hinted"
+      >
+      <span slot="title" class="name">
+        Innopoints awarded&nbsp;<span class="required">*</span>
+      </span>
+        <div class="text-field-wrapper">
+          <TextField
+            isWithItem
+            isItemRight
+            id="reward-amt-fixed"
+            type="number"
+            value={activity.reward || 0}
+            on:input={(e) => change('reward', e.detail, activity.editing)}
+            on:delayedChange={(e) => delayedChange('reward', e.detail)}
+          >
+            <svg src="/images/innopoint-sharp.svg" class="innopoint item" />
+          </TextField>
+          <span class="required">* Required</span>
+        </div>
+        <Dropdown dropdownclass="dropdown info-bubble" btnclass="handle round danger btn" chevron={false} isRight>
+          <svg slot="label" src="/images/icons/alert-circle.svg" class="icon" />
+          Make sure you reconcile the amount of awarded innopoints with Andrey
+          of Student Affairs, otherwise your project may be rejected!
+        </Dropdown>
+      </FormField>
     {/if}
-
-    <FormField
-      classname="form-field reward-amt"
-      id="reward-amt-fixed"
-      wrapperclass="hinted"
-    >
-    <span slot="title" class="name">
-      Innopoints awarded&nbsp;<span class="required">*</span>
-    </span>
-      <div class="text-field-wrapper">
-        <TextField
-          isWithItem
-          isItemRight
-          id="reward-amt-fixed"
-          type="number"
-          value={activity.reward || 0}
-          on:input={(e) => change('reward', e.detail, activity.editing)}
-          on:delayedChange={(e) => delayedChange('reward', e.detail)}
-        >
-          <svg src="/images/innopoint-sharp.svg" class="innopoint item" />
-        </TextField>
-        <span class="required">* Required</span>
-      </div>
-      <Dropdown dropdownclass="dropdown info-bubble" btnclass="handle round danger btn" chevron={false} isRight>
-        <svg slot="label" src="/images/icons/alert-circle.svg" class="icon" />
-        Make sure you reconcile the amount of awarded innopoints with Andrey
-        of Student Affairs, otherwise your project may be rejected!
-      </Dropdown>
-    </FormField>
 
     <FormField
       classname="form-field people"

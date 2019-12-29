@@ -3,6 +3,7 @@
   import Labeled from 'ui/labeled.svelte';
   import {deleteActivity, duplicateActivity, editActivity} from '@/store/new-project';
 
+  const HOURLY_RATE = 70;
   export let activity;
 </script>
 
@@ -14,9 +15,8 @@
     <div class="labeled text">
       <div class="label">Reward</div>
       <div class="content">
-        {activity.reward}
+        {activity.isHourly ? HOURLY_RATE * activity.hours : activity.reward}
         <svg src="/images/innopoint-sharp.svg" class="innopoint" />
-        {activity.isHourly ? '/h' : ''}
       </div>
     </div>
     <Labeled label="People required">
