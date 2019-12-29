@@ -13,7 +13,7 @@
   let image = null;
   $: (async() => image = file && file.name ? await readFileAsync(file) : null)();
 
-  const addImage = async e => changeImageAndSave(e.detail[0]);
+  const addImage = e => changeImageAndSave(e.detail[0]);
   const removeImage = () => changeImageAndSave(null);
   const changeImageAndSave = (val) => {
     changeField('image', val);

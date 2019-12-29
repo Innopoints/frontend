@@ -6,7 +6,7 @@
   import Autocomplete from '@/components/projects/new/autocomplete.svelte';
   import {checkProject} from '@/store/new-project';
 
-  onMount(() => checkProject());
+  onMount(checkProject);
   const options = ['lolka-polka', 'lol', 'kek', 'cheburek', 'chto tam', 'lulz', 'lurk'];
   let values = [];
 </script>

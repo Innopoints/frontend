@@ -114,9 +114,9 @@ export const findErrors = () => {
 
 export const endProject = () => {
   checkProject();
-  if (!get(errors).length) {
-    alert('You have done a great job!');
-  }
+  if (!get(errors).length) return;
+
+  alert('You have done a great job!');
 };
 
 // ***
