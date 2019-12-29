@@ -36,6 +36,9 @@ const activityTemplate = {
   feedbacks: [],
 };
 
+
+// ***
+// Project part
 const projectTemplate = {
   creationTime: null,
   updateTime: null,
@@ -49,6 +52,7 @@ const projectTemplate = {
 };
 
 export const project = writable(projectTemplate);
+export const errors = writable([]);
 
 export const createProject = () => {
   project.update(value => {
@@ -90,6 +94,17 @@ export const changeActivityField = (index, field, value) => {
   changeSaved(false);
 };
 
+export const checkProject = () => {
+  const proj = get(project);
+  let errs = [];
+  if (!proj.name) errs.push('name');
+  if (!proj.organizer) errs.push('organizer');
+  if (!proj.activities.length) errs.push('activities');
+  errors.update(() => errs);
+};
+
+// ***
+// Activity part
 export const checkActivity = (activity) => {
   let errorFields = [];
   if (!activity.name) errorFields.push('name');
@@ -103,7 +118,6 @@ export const checkActivity = (activity) => {
 
 export const createActivity = () => {
   let activity = get(project).newActivity;
-  console.log(checkActivity(activity));
   if (!checkActivity(activity).length) {
     project.update(proj => {
       activity.index = proj.activities.length;
@@ -149,6 +163,8 @@ export const deleteActivity = index => {
 };
 
 
+// ***
+// Drafts part
 export const save = () => {
   let projects = JSON.parse(localStorage.getItem('project-drafts'));
   if (!projects) {
@@ -165,6 +181,7 @@ export const save = () => {
 
   localStorage.setItem('project-drafts', JSON.stringify(projects));
   changeSaved(true);
+  checkProject();
 };
 
 export const drafts = writable([]);

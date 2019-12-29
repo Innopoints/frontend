@@ -9,12 +9,15 @@
   import competencesOptions from '@/constants/projects/competences';
   import Switch from 'ui/switch.svelte';
   import ActivityQuestions from './activity-questions.svelte';
-  import {project, changeDeepField, save, createActivity, discardActivity, editActivity, changeActivityField, changeSaved, checkActivity} from '@/store/new-project';
+  import {project, changeDeepField, save, createActivity, discardActivity, editActivity, changeActivityField, changeSaved, checkActivity, errors as globalErrors} from '@/store/new-project';
   import {parseDates} from '@/utils/date-range';
 
   export let activity;
   export let newly = true;
   let errors = [];
+  $: {
+    if ($globalErrors.includes('activities') && newly) errors = checkActivity(activity);
+  }
 
   const change = (field, value, stop = false) => {
     if (!stop) {

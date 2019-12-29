@@ -6,7 +6,7 @@
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
   import Dropzone from 'ui/dropzone.svelte';
-  import {project, changeField, save} from '@/store/new-project';
+  import {project, changeField, save, errors} from '@/store/new-project';
   import {readFileAsync} from '@/utils/read-files';
 
   $: file = $project.image;
@@ -33,7 +33,13 @@
 <form transition:fade={{duration:200}}>
   <StepHeader subtitle="Step 1. Fill out the general information about the project" />
 
-  <FormField title="Project name" classname="form-field padded" id="title" required>
+  <FormField
+    title="Project name"
+    classname="form-field padded"
+    id="title"
+    required
+    error={$errors.includes('name')}
+  >
     <span slot="subtitle" class="desc">
       <span class="lb">This has to be different from other projects.</span>
       <span class="lb">Adding the year to the name usually helps:</span><br>
@@ -47,7 +53,12 @@
     />
   </FormField>
 
-  <FormField title="Cover image" classname="form-field padded" id="image" wrapperclass="image-picker{image ? ' selected' : ''}">
+  <FormField
+    title="Cover image"
+    classname="form-field padded"
+    id="image"
+    wrapperclass="image-picker{image ? ' selected' : ''}"
+  >
     <span slot="subtitle" class="desc">
       <span class="lb">This is shown on the project card to catch attention.</span>
       <span class="lb">Best to use 16:9 photos.</span>
@@ -74,7 +85,13 @@
     {/if}
   </FormField>
 
-  <FormField title="Organizer" classname="form-field padded" id="organizer" required>
+  <FormField
+    title="Organizer"
+    classname="form-field padded"
+    id="organizer"
+    required
+    error={$errors.includes('organizer')}
+  >
     <span slot="subtitle" class="desc">
       Name of the organizing department or individual.
     </span>
