@@ -12,14 +12,18 @@
   export let items = [];
   export let value = [];
   export let uniqueKey = null;
+  export let max = null;
 
   $: parsedItems = parseItems(items);
   $: selected = parseValues(value, parsedItems, {uniqueKey, multiple: true});
 
   let dispatch = createEventDispatcher();
-  const changeCheckbox = item => {
+  const changeCheckbox = (item, e) => {
     if (selected.some(x => x.id === item.id)) selected = selected.filter(x => x.id !== item.id);
-    else selected.push(item);
+    else {
+      if (!max || selected.length < max) selected.push(item);
+      else e.target.checked = false;
+    }
     dispatch('change', selected);
   };
 
@@ -68,7 +72,7 @@
     <label class:clickable={labeled} class={labelclass}>
       <div class:colored={colored} class:round={colored} class="checkbox {checkboxclass}">
         <input
-            on:change={() => changeCheckbox(item)}
+            on:change={(e) => changeCheckbox(item, e)}
             type="checkbox"
             checked={selected.some(x => x.id === item.id)}
             name={name}

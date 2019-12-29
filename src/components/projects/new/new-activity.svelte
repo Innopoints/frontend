@@ -113,6 +113,7 @@
         <CheckboxGroup
           labeled
           name="competences"
+          max={3}
           value={activity.competences}
           items={competencesOptions}
           on:change={(e) => changeAndSave('competences', e.detail)}
