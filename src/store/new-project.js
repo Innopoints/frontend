@@ -62,6 +62,7 @@ export const createProject = () => {
         creationTime: new Date().toISOString(),
       };
   });
+  errors.update(() => []);
   goto('/projects/new?step=1');
 };
 
@@ -70,6 +71,7 @@ export const chooseProject = date => {
   const found = projects.find(x => x.creationTime === date);
   if (found) {
     project.update(() => found);
+    errors.update(() => []);
   } else {
     createProject();
   }
@@ -101,6 +103,20 @@ export const checkProject = () => {
   if (!proj.organizer) errs.push('organizer');
   if (!proj.activities.length) errs.push('activities');
   errors.update(() => errs);
+};
+
+export const findErrors = () => {
+  checkProject();
+  const errs = get(errors);
+  if (errs.includes('name') || errs.includes('organizer')) goto('/projects/new?step=1');
+  else if (errs.includes('activities')) goto('/projects/new?step=2');
+};
+
+export const endProject = () => {
+  checkProject();
+  if (!get(errors).length) {
+    alert('You have done a great job!');
+  }
 };
 
 // ***

@@ -1,9 +1,12 @@
 <script>
   import { fade } from 'svelte/transition';
+  import { onMount } from 'svelte';
   import StepHeader from '@/components/projects/new/step-header.svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import Autocomplete from '@/components/projects/new/autocomplete.svelte';
+  import {checkProject} from '@/store/new-project';
 
+  onMount(() => checkProject());
   const options = ['lolka-polka', 'lol', 'kek', 'cheburek', 'chto tam', 'lulz', 'lurk'];
   let values = [];
 </script>

@@ -1,11 +1,16 @@
 <script>
   import Button from 'ui/button.svelte';
-  import {step, errors} from '@/store/new-project';
+  import {step, errors, findErrors, endProject} from '@/store/new-project';
 </script>
 
 <div class="actions">
   {#if $errors.length}
-    <p class="error">Some required fields are still empty :c</p>
+    <p class="error">
+      Some required fields are still empty :c
+      {#if $step === 3}
+        <Button classname="btn ml" on:click={findErrors}>where?</Button>
+      {/if}
+    </p>
   {/if}
   {#if $step > 1}
     <Button href="/projects/new?step={$step - 1}" classname="btn back">
@@ -19,7 +24,7 @@
       next step
     </Button>
   {:else if $step === 3}
-    <Button classname="btn" isFilled disabled={$errors.length}>
+    <Button classname="btn" isFilled disabled={$errors.length} on:click={endProject}>
       create project
     </Button>
   {/if}
