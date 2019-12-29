@@ -36,7 +36,7 @@
       on:input={() => open = true}
     />
     {#each options.slice(0, 5) as option (option)}
-      {#if value.indexOf(option) === -1}
+      {#if !value.includes(option)}
         <li on:click={() => choose(option)}>{option}</li>
       {/if}
     {/each}

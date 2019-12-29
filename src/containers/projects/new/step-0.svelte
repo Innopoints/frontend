@@ -5,7 +5,7 @@
   import Button from 'ui/button.svelte';
   import DraftCard from '@/components/projects/new/draft-card.svelte';
   import {drafts, getDrafts, createProject} from '@/store/new-project';
-  onMount(() => getDrafts());
+  onMount(getDrafts);
 
   const create = e => {
     e.preventDefault();

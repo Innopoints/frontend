@@ -8,7 +8,7 @@
   export let title;
   export let adminsOnly = false;
 
-  $: condition = $isAuthed && (!adminsOnly || (adminsOnly && $user.isAdmin));
+  $: condition = $isAuthed && (!adminsOnly || $user.isAdmin);
 </script>
 
 <svelte:head>

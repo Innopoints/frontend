@@ -10,6 +10,7 @@
 
   const { page } = stores();
   $: changeStep(parseInt($page.query.step || 0));
+  const stepComponents = [StepZero, StepOne, StepTwo, StepThree];
 </script>
 
 <svelte:head>
@@ -26,13 +27,5 @@
 </svelte:head>
 
 <Layout classname="step{$step}" title="Create project">
-  {#if $step === 0}
-    <StepZero />
-  {:else if $step === 1}
-    <StepOne />
-  {:else if $step === 2}
-    <StepTwo />
-  {:else if $step === 3}
-    <StepThree />
-  {/if}
+  <svelte:component this={stepComponents[$step]} />
 </Layout>
