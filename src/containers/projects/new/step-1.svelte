@@ -25,6 +25,9 @@
   :global(.image-picker) {
     margin-top: 0;
   }
+  :global(.image-platform input) {
+    display: none;
+  }
 </style>
 
 <form transition:fade={{duration:200}}>
@@ -63,9 +66,10 @@
         classname="image-platform"
         on:change={addImage}
       >
-        <svg src="/images/icons/image.svg" class="icon mr" />
-        <label class="title" for="file-input2">drag &amp; drop here or click to upload photo</label>
-        <small>Make sure the ratio is 16:9</small>
+        <Button classname="btn option">
+          <svg src="/images/icons/image.svg" class="icon mr" />
+          upload cover image
+        </Button>
       </Dropzone>
     {/if}
   </FormField>
