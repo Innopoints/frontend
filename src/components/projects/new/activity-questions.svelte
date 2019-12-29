@@ -46,7 +46,7 @@
         on:delayedChange={(e) => changeValue(i, e.detail)}
         on:blur={() => dispatch('save')}
       />
-      <Button isDanger isRound on:click={() => removeValue(i)}>
+      <Button isDanger isRound on:mousedown={(e) => removeValue(i, e)}>
         <svg src="/images/icons/trash-2.svg" />
       </Button>
     </div>

@@ -71,7 +71,7 @@
       classname="form-field name"
       id="activity-name"
       title="Activity name"
-      error={errors.indexOf('name') > -1}
+      error={errors.includes('name')}
       required
     >
       <TextField
@@ -100,7 +100,7 @@
       title="Activity date"
       classname="form-field date-range"
       wrapperclass="some-wrapper"
-      error={errors.indexOf('date') > -1}
+      error={errors.includes('date')}
     >
       <span slot="title" class="name">
         Activity date&nbsp;<span class="required">*</span>
@@ -119,7 +119,7 @@
       title="Competences, developed by this activity (no more than 3)"
       classname="form-field competences"
       wrapperclass="some-wrapper"
-      error={errors.indexOf('competences') > -1}
+      error={errors.includes('competences')}
     >
       <span slot="title" class="name">
         Competences, developed by this activity (no more than&nbsp;3)&nbsp;<span class="required">*</span>
@@ -180,7 +180,7 @@
         id="work-hours"
         title="Work hours"
         subtitle="Reward rate: 70 ipts/hour"
-        error={errors.indexOf('hours') > -1}
+        error={errors.includes('hours')}
         required
       >
         <TextField
@@ -197,7 +197,7 @@
         classname="form-field reward-amt"
         id="reward-amt-fixed"
         wrapperclass="hinted"
-        error={errors.indexOf('reward') > -1}
+        error={errors.includes('reward')}
       >
       <span slot="title" class="name">
         Innopoints awarded&nbsp;<span class="required">*</span>
@@ -229,7 +229,7 @@
       id="people-required"
       title="People required"
       wrapperclass="group"
-      error={errors.indexOf('people') > -1}
+      error={errors.includes('people')}
     >
       <span slot="title" class="name">
         People required&nbsp;<span class="required">*</span>

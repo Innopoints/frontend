@@ -61,7 +61,9 @@
     type="button"
     {disabled}
     class={classes.join(' ')}
-    on:click={() => dispatch('click')}
+    on:click={(e) => dispatch('click', e)}
+    on:mousedown={(e) => dispatch('mousedown', e)}
+    on:mouseup={(e) => dispatch('mouseup', e)}
     use:rippleEffect={rippleColor}
   >
     {#if badge}
