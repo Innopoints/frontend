@@ -90,14 +90,21 @@ export const changeActivityField = (index, field, value) => {
   changeSaved(false);
 };
 
+export const checkActivity = (activity) => {
+  let errorFields = [];
+  if (!activity.name) errorFields.push('name');
+  if (!activity.competences.length) errorFields.push('competences');
+  if (!activity.date.start || !activity.date.end) errorFields.push('date');
+  if (!activity.isHourly && !activity.reward) errorFields.push('reward');
+  if (activity.isHourly && !activity.hours) errorFields.push('hours');
+  if (!activity.morePeople && !activity.people) errorFields.push('people');
+  return errorFields;
+};
+
 export const createActivity = () => {
   let activity = get(project).newActivity;
-  if (
-    activity.name && activity.competences.length
-    && activity.date.start && activity.date.end
-    && ((activity.isHourly && activity.hours) || (!activity.isHourly && activity.reward))
-    && (activity.morePeople || activity.people)
-  ) {
+  console.log(checkActivity(activity));
+  if (!checkActivity(activity).length) {
     project.update(proj => {
       activity.index = proj.activities.length;
       return {

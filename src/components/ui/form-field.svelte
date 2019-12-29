@@ -4,14 +4,16 @@
   export let subtitleclass = 'desc';
   export let requiredclass = 'required';
   export let wrapperclass = 'text-field-wrapper';
+  export let errorclass = 'error';
 
   export let title = '';
   export let subtitle = '';
   export let required = false;
   export let id = null;
+  export let error = null;
 </script>
 
-<div class={classname}>
+<div class="{classname}{error ? ' ' + errorclass : ''}">
   <label for={id}>
     <slot name="title">
       <span class={titleclass}>

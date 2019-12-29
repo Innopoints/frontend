@@ -5,7 +5,7 @@
         <Button class={isFirstChoice ? activeclass : ''} on:click={goToStart}>start date</Button>
         <Button class={isFirstChoice ? '' : activeclass} on:click={goToEnd}>end date</Button>
       </div>
-      <Button danger on:click={clear}>clear</Button>
+      <Button isDanger on:click={clear}>clear</Button>
     </div>
   {/if}
 

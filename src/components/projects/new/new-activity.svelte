@@ -9,11 +9,12 @@
   import competencesOptions from '@/constants/projects/competences';
   import Switch from 'ui/switch.svelte';
   import ActivityQuestions from './activity-questions.svelte';
-  import {project, changeDeepField, save, createActivity, discardActivity, editActivity, changeActivityField, changeSaved} from '@/store/new-project';
+  import {project, changeDeepField, save, createActivity, discardActivity, editActivity, changeActivityField, changeSaved, checkActivity} from '@/store/new-project';
   import {parseDates} from '@/utils/date-range';
 
   export let activity;
   export let newly = true;
+  let errors = [];
 
   const change = (field, value, stop = false) => {
     if (!stop) {
@@ -51,6 +52,14 @@
     changeAndSave(field, val);
     if ((two && val.start && val.end) || (!two && val)) dropdowns[field] = false;
   };
+
+  const create = (isEdit = false) => {
+    errors = checkActivity(activity);
+    if (!errors.length) {
+      if (isEdit) editActivity(activity.index, false);
+      else createActivity();
+    }
+  };
 </script>
 
 <Card classname="card create-activity">
@@ -59,6 +68,7 @@
       classname="form-field name"
       id="activity-name"
       title="Activity name"
+      error={errors.indexOf('name') > -1}
       required
     >
       <TextField
@@ -87,6 +97,7 @@
       title="Activity date"
       classname="form-field date-range"
       wrapperclass="some-wrapper"
+      error={errors.indexOf('date') > -1}
     >
       <span slot="title" class="name">
         Activity date&nbsp;<span class="required">*</span>
@@ -105,6 +116,7 @@
       title="Competences, developed by this activity (no more than 3)"
       classname="form-field competences"
       wrapperclass="some-wrapper"
+      error={errors.indexOf('competences') > -1}
     >
       <span slot="title" class="name">
         Competences, developed by this activity (no more than&nbsp;3)&nbsp;<span class="required">*</span>
@@ -165,6 +177,7 @@
         id="work-hours"
         title="Work hours"
         subtitle="Reward rate: 70 ipts/hour"
+        error={errors.indexOf('hours') > -1}
         required
       >
         <TextField
@@ -181,6 +194,7 @@
         classname="form-field reward-amt"
         id="reward-amt-fixed"
         wrapperclass="hinted"
+        error={errors.indexOf('reward') > -1}
       >
       <span slot="title" class="name">
         Innopoints awarded&nbsp;<span class="required">*</span>
@@ -212,6 +226,7 @@
       id="people-required"
       title="People required"
       wrapperclass="group"
+      error={errors.indexOf('people') > -1}
     >
       <span slot="title" class="name">
         People required&nbsp;<span class="required">*</span>
@@ -272,9 +287,9 @@
         <Button classname="btn mr" isDanger on:click={discardActivity}>discard</Button>
       {/if}
       {#if newly}
-        <Button isFilled on:click={createActivity}>create</Button>
+        <Button isFilled on:click={() => create()}>create</Button>
       {:else}
-        <Button isFilled on:click={() => editActivity(activity.index, false)}>save</Button>
+        <Button isFilled on:click={() => create(true)}>save</Button>
       {/if}
     </div>
   </div>
