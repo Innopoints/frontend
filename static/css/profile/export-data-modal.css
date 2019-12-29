@@ -1,0 +1,94 @@
+.export-data-modal .content {
+  max-height: calc(100vh - 11em);
+}
+
+.export-data-modal p {
+  margin-bottom: 1em;
+  font-weight: 300;
+  font-size: .9rem;
+}
+
+.export-data-modal .form-field {
+  flex-direction: column;
+}
+
+.export-data-modal .form-field label {
+  margin-bottom: .5em;
+}
+
+.export-data-modal .details-chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.export-data-modal .details-chips .chip {
+  margin-right: .5em;
+}
+
+.export-data-modal .activity-radio .clickable {
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: .5em;
+}
+
+.export-data-modal .activity-radio .clickable .radio {
+  margin-right: 1em;
+  margin-left: .5em;
+}
+
+.export-data-modal .activity-radio .clickable .option {
+  display: flex;
+  flex-direction: column;
+}
+
+.export-data-modal .activity-radio .clickable .option > .dropdown-shell > .btn {
+  margin-left: -1em;
+  margin-top: .5em;
+}
+
+.export-data-modal .activity-selection {
+  border: 0 solid #ddd;
+  border-width: 1px 0;
+  margin-top: .3em;
+  margin-bottom: 1em;
+}
+
+.export-data-modal .activity-selection li {
+  padding-left: .5em;
+  margin-left: .5em;
+}
+
+.export-data-modal .activity-selection li:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.export-data-modal .activity-selection .clickable {
+  padding: 1em 0;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.export-data-modal .activity-selection .clickable .vertical {
+  display: flex;
+  flex-direction: column;
+  font-size: .9rem;
+}
+
+.export-data-modal .activity-selection .clickable time {
+  color: #6f6f6f;
+  margin-top: .5em;
+  display: block;
+}
+
+.export-data-modal .relative-wrapper {
+  padding: 1.5em;
+}
+
+.export-data-modal .relative-wrapper .btn.close {
+  margin-right: -.7em;
+  margin-top: -.7em;
+}
+
+.export-data-modal .form-field > .btn {
+  align-self: flex-start;
+}

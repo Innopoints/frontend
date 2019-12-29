@@ -212,19 +212,10 @@
   background: #127800;
 }
 
-.modal-overlay .card {
+.modal-overlay .dialog {
   min-width: 16em;
-}
-
-.modal-overlay h1 {
-  font-size: 1.15rem;
-}
-
-.modal-overlay .btn.close {
-  float: right;
-  position: relative;
-  top: -.7em;
-  right: -.7em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
 }
 
 .modal-overlay .purchase {
@@ -290,10 +281,8 @@
 }
 
 .modal-overlay .actions {
-  display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 1em;
 }
 
 .modal-overlay .actions .label {

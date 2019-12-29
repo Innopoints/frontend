@@ -4,6 +4,15 @@
   align-items: center;
 }
 
+.shop .balance {
+  color: #127800;
+  margin-bottom: 1em;
+}
+
+.shop .balance .innopoint {
+  stroke: #127800;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;

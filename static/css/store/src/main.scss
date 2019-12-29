@@ -4,6 +4,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .balance {
+    color: $main;
+    margin-bottom: 1em;
+
+    .innopoint {
+      stroke: $main;
+    }
+  }
 }
 
 .cards {
@@ -94,7 +103,7 @@
   .cards hr::after {
     font-size: 1.4rem;
   }
-  
+
   .card {
     margin: .5em;
   }

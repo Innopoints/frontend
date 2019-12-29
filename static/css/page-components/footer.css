@@ -13,7 +13,7 @@ footer {
 }
 
 footer.low-page > .container {
-  padding-top: 1.5em;
+  padding-top: 3.125em;
 }
 
 footer.low-page > .to-top {
@@ -107,15 +107,15 @@ footer .search {
 footer ul {
   font-size: 1.1rem;
   font-weight: 300;
-  padding-left: 1em;
-  margin: 1em 0;
+  padding-left: 1em !important;
+  margin: 1em 0 !important;
 }
 
 footer ul li {
   line-height: 2rem;
 }
 
-footer ul > li::before {
+footer ul li::before {
   content: "‣";
   padding-right: .5em;
   color: #fff;

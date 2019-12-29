@@ -1,70 +1,77 @@
-.material h1 {
-  margin: 1.2em 0 .8em;
-}
+@import "../../global/src/_variables.scss";
+@import "../../global/src/_mixins.scss";
 
-.material main {
-  display: flex;
-  flex-direction: column;
+.material {
+  h1 {
+    margin: 1.2em 0 .8em;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .form-field {
   flex-direction: column;
   margin-bottom: 2em;
+
+  &.horizontal {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .text-field-wrapper {
+      width: 8em;
+    }
+  }
+
+  & > label {
+    margin-bottom: .3em;
+  }
+
+  .desc {
+    margin-bottom: .7em;
+  }
 }
 
-.form-field.horizontal {
-  flex-direction: row;
-  justify-content: space-between;
-}
+.varieties {
+  .switch-wrapper {
+    display: flex;
+  }
 
-.form-field.horizontal .text-field-wrapper {
-  width: 8em;
-}
-
-.form-field > label {
-  margin-bottom: .3em;
-}
-
-.form-field .desc {
-  margin-bottom: .7em;
-}
-
-.varieties .switch-wrapper {
-  display: flex;
-}
-
-.varieties h2 {
-  color: #127800;
+  h2 {
+    color: $main;
+  }
 }
 
 .variety {
   margin-top: 1.5em;
   padding-bottom: 1.2em;
-  border-bottom: 1px solid #d6d6d6;
-}
+  border-bottom: 1px solid $light-gray;
 
-.variety .selected-color {
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 50%;
-  margin-left: 1em;
-}
+  .selected-color {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    margin-left: 1em;
+  }
 
-.variety .sizes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  .sizes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }
 
 .quantity {
   display: flex;
   align-items: baseline;
-}
 
-.quantity .text-field {
-  margin-top: 1em;
-  margin-left: 1.5em;
-  max-width: 6em;
+  .text-field {
+    margin-top: 1em;
+    margin-left: 1.5em;
+    max-width: 6em;
+  }
 }
 
 .sizes .text-field {
@@ -73,43 +80,83 @@
 }
 
 .image-platform {
-  border: 2px dashed #127800;
+  border: 2px dashed $main;
   border-radius: 25px;
   padding: 1.5em;
   margin: 2em 0 .5em;
-}
 
-.image-platform.has-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
+  &.has-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 
-.image-platform .icon {
-  stroke: #127800;
-}
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
-.image-platform .title {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #127800;
-}
+    .image {
+      margin: 0 10px 10px 0;
+      border-radius: 10px;
+      overflow: visible;
 
-.image-platform small {
-  font-weight: 300;
-  font-size: .9rem;
-  text-align: center;
-  display: block;
-}
+      &:first-child::before {
+        content: "cover image";
+        position: absolute;
+        display: block;
+        text-align: center;
+        width: 100%;
+        top: -1.2rem;
+        font-size: .9rem;
+        font-weight: 300;
+        color: $main;
+      }
 
-.image-platform input[type="file"] {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
+      & > .actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+        position: relative;
+      }
+
+      & > img {
+        height: 120px;
+      }
+
+      .drag-handle {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 50%;
+        right: 3px;
+        stroke: #888;
+        cursor: move;
+        transform: translateY(-50%) rotate(90deg);
+      }
+    }
+  }
+
+  .icon {
+    stroke: $main;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: $main;
+  }
+
+  small {
+    font-weight: 300;
+    font-size: .9rem;
+    text-align: center;
+    display: block;
+  }
+
+  input[type="file"] {
+    @include hide-accessible;
+  }
 }
 
 .color-picker {
@@ -123,79 +170,54 @@
     justify-content: flex-end;
     margin-top: 1em;
   }
+
+  .relative-wrapper {
+    padding: 1em;
+  }
+
+  .color-choices {
+    padding-right: 2.4em;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 15em;
+  }
+
+  .radio {
+    padding: .3em;
+  }
 }
 
 @supports (display: grid) {
-  .image-platform:not(.has-content) {
-    display: grid;
-    grid-template-columns: 24px 1fr;
-    grid-template-rows: 24px 1fr;
-    row-gap: 1.3em;
-    column-gap: 1em;
-    align-items: center;
+  .image-platform {
+    &:not(.has-content) {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      grid-template-rows: 24px 1fr;
+      row-gap: 1.3em;
+      column-gap: 1em;
+      align-items: center;
+    }
+
+    input[type="file"] {
+      grid-row-start: 1;
+      grid-row-end: 1;
+    }
+
+    .icon {
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+
+    .title {
+      grid-column-start: 2;
+      grid-column-end: 3;
+    }
+
+    small {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
   }
-
-  .image-platform input[type="file"] {
-    grid-row-start: 1;
-    grid-row-end: 1;
-  }
-
-  .image-platform .icon {
-    grid-row-start: 1;
-    grid-row-end: 2;
-  }
-
-  .image-platform .title {
-    grid-column-start: 2;
-    grid-column-end: 3;
-  }
-
-  .image-platform small {
-    grid-column-start: 1;
-    grid-column-end: 3;
-  }
-}
-
-.image-platform.has-content .images {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.image-platform.has-content .image {
-  margin: 0 10px 10px 0;
-  border-radius: 10px;
-  position: relative;
-}
-
-.image-platform.has-content .image:first-child::before {
-  content: "cover";
-  position: absolute;
-  display: block;
-  text-align: center;
-  width: 100%;
-  top: -1.2rem;
-  font-size: .9rem;
-  font-weight: 300;
-  color: #127800;
-}
-
-.image-platform.has-content .image > .actions {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-}
-
-.image-platform.has-content .image > img {
-  background-color: #fff1f1;
-  height: 120px;
-}
-
-.image-platform.has-content .image .drag-handle {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 3px;
-  right: 3px;
 }
 
 .more {
@@ -208,33 +230,17 @@
   align-self: center;
 }
 
-.color-picker .relative-wrapper {
-  padding: 1em;
-}
-
-.color-picker .color-choices {
-  padding-right: 2.4em;
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 15em;
-}
-
-.color-picker .radio {
-  padding: .3em;
-}
-
 @media only screen and (min-width: 500px) {
   @supports (display: grid) {
     .variety.no-size {
       display: grid;
       grid-template-rows: auto auto;
       grid-template-columns: 1fr auto;
-    }
 
-    .variety.no-size .image-platform,
-    .variety.no-size .btn.danger {
-      grid-column-start: 1;
-      grid-column-end: 3;
+      .image-platform, .btn.danger {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
     }
 
     .quantity .text-field {
@@ -252,18 +258,18 @@
 @media only screen and (min-width: 640px) {
   .form-field {
     flex-direction: row;
-  }
 
-  .form-field label {
-    width: 45%;
-  }
+    &.horizontal {
+      width: 50%;
+    }
 
-  .form-field .text-field-wrapper {
-    width: 50%;
-  }
+    label {
+      width: 45%;
+    }
 
-  .form-field.horizontal {
-    width: 50%;
+    .text-field-wrapper {
+      width: 50%;
+    }
   }
 
   header.varieties {
@@ -284,16 +290,16 @@
   @supports (display: grid) {
     .image-platform {
       row-gap: .3em;
-    }
 
-    .image-platform small {
-      grid-column-start: 2;
-      align-content: center;
-    }
+      small {
+        grid-column-start: 2;
+        align-content: center;
+      }
 
-    .image-platform .icon {
-      grid-row-start: 1;
-      grid-row-end: 3;
+      .icon {
+        grid-row-start: 1;
+        grid-row-end: 3;
+      }
     }
   }
 }
@@ -302,19 +308,21 @@
   .sizes-wrapper {
     display: flex;
     align-items: baseline;
+
+    .label {
+      margin-right: 1.6em;
+    }
   }
 
-  .sizes-wrapper .label {
-    margin-right: 1.6em;
-  }
+  .sizes {
+    .text-field {
+      width: 5.4em;
+      margin-right: .5em;
+    }
 
-  .sizes .text-field {
-    width: 5.4em;
-    margin-right: .5em;
-  }
-
-  .sizes .text-field:last-child {
-    margin-right: 0;
+    .text-field:last-child {
+      margin-right: 0;
+    }
   }
 }
 
@@ -332,9 +340,9 @@
   .preview {
     width: 25em;
     margin-left: 2em;
-  }
 
-  .preview .actions {
-    align-self: flex-end;
+    .actions {
+      align-self: flex-end;
+    }
   }
 }

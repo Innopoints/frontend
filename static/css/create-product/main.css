@@ -40,7 +40,7 @@
 .variety {
   margin-top: 1.5em;
   padding-bottom: 1.2em;
-  border-bottom: 1px solid #d6d6d6;
+  border-bottom: 1px solid #ddd;
 }
 
 .variety .selected-color {
@@ -86,6 +86,51 @@
   justify-content: space-between;
 }
 
+.image-platform.has-content .images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-platform.has-content .image {
+  margin: 0 10px 10px 0;
+  border-radius: 10px;
+  overflow: visible;
+}
+
+.image-platform.has-content .image:first-child::before {
+  content: "cover image";
+  position: absolute;
+  display: block;
+  text-align: center;
+  width: 100%;
+  top: -1.2rem;
+  font-size: .9rem;
+  font-weight: 300;
+  color: #127800;
+}
+
+.image-platform.has-content .image > .actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+}
+
+.image-platform.has-content .image > img {
+  height: 120px;
+}
+
+.image-platform.has-content .image .drag-handle {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 50%;
+  right: 3px;
+  stroke: #888;
+  cursor: move;
+  transform: translateY(-50%) rotate(90deg);
+}
+
 .image-platform .icon {
   stroke: #127800;
 }
@@ -123,6 +168,21 @@
   margin-top: 1em;
 }
 
+.color-picker .relative-wrapper {
+  padding: 1em;
+}
+
+.color-picker .color-choices {
+  padding-right: 2.4em;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 15em;
+}
+
+.color-picker .radio {
+  padding: .3em;
+}
+
 @supports (display: grid) {
   .image-platform:not(.has-content) {
     display: grid;
@@ -150,48 +210,6 @@
   }
 }
 
-.image-platform.has-content .images {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.image-platform.has-content .image {
-  margin: 0 10px 10px 0;
-  border-radius: 10px;
-  position: relative;
-}
-
-.image-platform.has-content .image:first-child::before {
-  content: "cover";
-  position: absolute;
-  display: block;
-  text-align: center;
-  width: 100%;
-  top: -1.2rem;
-  font-size: .9rem;
-  font-weight: 300;
-  color: #127800;
-}
-
-.image-platform.has-content .image > .actions {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-}
-
-.image-platform.has-content .image > img {
-  background-color: #fff1f1;
-  height: 120px;
-}
-
-.image-platform.has-content .image .drag-handle {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 3px;
-  right: 3px;
-}
-
 .more {
   margin: .5em 0;
 }
@@ -202,21 +220,6 @@
   align-self: center;
 }
 
-.color-picker .relative-wrapper {
-  padding: 1em;
-}
-
-.color-picker .color-choices {
-  padding-right: 2.4em;
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 15em;
-}
-
-.color-picker .radio {
-  padding: .3em;
-}
-
 @media only screen and (min-width: 500px) {
   @supports (display: grid) {
     .variety.no-size {
@@ -224,8 +227,7 @@
       grid-template-rows: auto auto;
       grid-template-columns: 1fr auto;
     }
-    .variety.no-size .image-platform,
-    .variety.no-size .btn.danger {
+    .variety.no-size .image-platform, .variety.no-size .btn.danger {
       grid-column-start: 1;
       grid-column-end: 3;
     }
@@ -244,13 +246,13 @@
   .form-field {
     flex-direction: row;
   }
+  .form-field.horizontal {
+    width: 50%;
+  }
   .form-field label {
     width: 45%;
   }
   .form-field .text-field-wrapper {
-    width: 50%;
-  }
-  .form-field.horizontal {
     width: 50%;
   }
   header.varieties {

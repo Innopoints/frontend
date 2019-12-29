@@ -11,8 +11,21 @@
 }
 
 .projects h1 {
-  text-align: center;
+  display: flex;
+  justify-content: space-around;
   font-size: 1.2rem;
+}
+
+@supports (display: grid) {
+  .projects h1 {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    justify-items: start;
+  }
+  .projects h1 .text {
+    grid-column: 2 / 3;
+  }
 }
 
 .text-field.with-item.left input {

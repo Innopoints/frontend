@@ -21,7 +21,6 @@
   <link rel="stylesheet" href="/css/create-project/activity.css">
   <link rel="stylesheet" href="/css/create-project/actions.css">
   <link rel="stylesheet" href="/css/page-components/create-activity.css" />
-  <link rel="stylesheet" href="/css/page-components/image-platform.css" />
   <link rel="stylesheet" href="/css/page-components/403.css" />
   <link rel="stylesheet" href="/css/page-components/footer.css" />
 </svelte:head>

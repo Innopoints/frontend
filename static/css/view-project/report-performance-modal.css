@@ -1,0 +1,31 @@
+.report-performance .refresher {
+  padding-right: 2em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.report-performance .refresher .labeled {
+  margin-top: 1em;
+}
+
+.report-performance .refresher .labeled:first-child {
+  margin-right: 2em;
+}
+
+.report-performance .refresher .labeled .text {
+  justify-content: space-evenly;
+}
+
+.report-performance .refresher .labeled .text .content {
+  overflow: visible;
+}
+
+.report-performance .refresher .telegram {
+  margin-left: .5em;
+  font-size: .9rem;
+}
+
+.report-performance .required {
+  color: #127800;
+}
