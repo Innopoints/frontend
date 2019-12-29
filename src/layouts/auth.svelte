@@ -2,18 +2,28 @@
   import Header from '@/components/header.svelte';
   import Footer from '@/components/footer.svelte';
   import Button from 'ui/button.svelte';
-  import { isAuthed, logIn } from '@/store/user';
+  import { isAuthed, logIn, user } from '@/store/user';
 
+  export let classname = '';
   export let title;
+  export let adminsOnly = false;
+
+  $: condition = $isAuthed && (!adminsOnly || $user.isAdmin);
 </script>
 
 <svelte:head>
   <link rel="stylesheet" href="css/page-components/403.css" />
 </svelte:head>
 
+<style>
+  :global(.layout-403) {
+    flex-direction: column;
+  }
+</style>
+
 <Header />
-<div class="material">
-  {#if $isAuthed}
+<div class="material {condition ? classname : 'layout-403'}">
+  {#if condition}
     <slot />
   {:else}
     <h1 class="padded title-403">{title}</h1>

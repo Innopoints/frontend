@@ -1,3 +1,5 @@
+@import "../../global/src/_variables.scss";
+
 .material {
   padding-bottom: 3em;
 }
@@ -9,6 +11,39 @@
 
 .tabs {
   padding: .5em .8em;
+}
+
+.empty {
+  padding: 4em 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .icon {
+    border-radius: 50%;
+    background: transparentize($main, .9);
+    padding: 1em;
+    width: 4em;
+    height: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5em;
+
+    & > svg {
+      stroke: $main;
+      width: 80%;
+      height: 80%;
+    }
+  }
+
+  .title {
+    color: $main;
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin-bottom: .3em;
+  }
 }
 
 @media only screen and (min-width: 360px) {

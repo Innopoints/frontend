@@ -556,6 +556,7 @@ button.btn {
   input:invalid {
     box-shadow: none;
     border-bottom-color: $danger;
+    background: $textfield-bg-error;
   }
 
   input:not(.outline):invalid {
@@ -623,6 +624,42 @@ button.btn {
 
     &:only-child {
       margin-bottom: 20px;
+    }
+  }
+
+  &.error {
+    .text-field {
+      input, textarea {
+        box-shadow: none;
+        border-bottom-color: $danger;
+        background: $textfield-bg-error;
+      }
+
+      & + .required {
+        color: $danger;
+      }
+    }
+
+    .dropdown-shell {
+      .btn.handle {
+        color: $danger;
+
+        & > svg {
+          stroke: $danger;
+        }
+
+        &:hover:not(:disabled) {
+          background: transparentize($danger, .95);
+        }
+
+        &:focus:not(:disabled) {
+          background: transparentize($danger, .88);
+        }
+      }
+
+      &.open .btn.handle {
+        background: transparentize($danger, .95);
+      }
     }
   }
 }
@@ -1071,73 +1108,91 @@ input[type="checkbox"]:checked + .chip::before {
     0 3px 1px -2px rgba(0, 0, 0, .2),
     0 2px 2px 0    rgba(0, 0, 0, .14),
     0 1px 5px 0    rgba(0, 0, 0, .12);
-  padding: 1.6em 2em 1em;
+  padding: 1.6em 2em 1.4em;
   position: relative;
   background-color: #fff;
-}
-
-.dialog .title {
-  display: flex;
-  align-items: flex-end;
-  font-size: 1.3rem;
-  font-weight: 500;
-  margin-bottom: .7em;
-  color: #127800;
-}
-
-.dialog > .btn.close {
-  position: absolute;
-  top: .7em;
-  right: .7em;
-}
-
-.dialog .title > .icon,
-.dialog .message > .icon {
-  margin-right: .5em;
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-}
-
-.dialog .message > .icon {
-  margin-right: .7em;
-}
-
-.dialog .actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: .9em;
-}
-
-.dialog .actions > button {
   margin-left: .5em;
-}
+  margin-right: .5em;
 
-.dialog.danger .title {
-  color: #ba0303;
-}
+  .title {
+    display: flex;
+    align-items: flex-end;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: .7em;
+    padding-right: 1.5em;
+    color: $main;
 
-.dialog svg {
-  stroke: #127800;
-}
+    .icon {
+      stroke: $main;
+      margin-right: .5em;
+      flex-shrink: 0;
+    }
+  }
 
-.dialog.danger .title svg {
-  stroke: #ba0303;
-}
+  .message .icon {
+    stroke: $main;
+  }
 
-.dialog.notice {
-  box-shadow: none;
-  border: 1px solid #127800;
-  padding: 1em 1.5em .6em;
-}
+  & > .btn.close {
+    position: absolute;
+    top: .7em;
+    right: .7em;
+  }
 
-.dialog.notice p {
-  margin-top: .3em;
-}
+  .message > .icon {
+    margin-right: .7em;
+    flex-shrink: 0;
+  }
 
-.dialog.notice .message {
-  display: flex;
-  align-items: flex-start;
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .9em;
+
+    & > .btn {
+      margin-left: .5em;
+    }
+  }
+
+  .constrain-width {
+    max-width: 30em;
+  }
+
+  .consequences {
+    display: block;
+    margin-top: .3em;
+  }
+
+  &.danger {
+    .title {
+      color: $danger;
+
+      .icon {
+        stroke: $danger;
+      }
+    }
+  }
+
+  &.notice {
+    box-shadow: none;
+    border: 1px solid #127800;
+    padding: 1em 1.5em .6em;
+
+    p {
+      margin-top: .3em;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+
+  .content {
+    max-height: calc(100vh - 10em);
+    overflow-y: auto;
+  }
 }
 
 /* Carousel -------------------------------------- */
@@ -1231,31 +1286,31 @@ input[type="checkbox"]:checked + .chip::before {
 
 .labeled {
   display: flex;
-}
 
-.labeled .text {
-  display: flex;
-  flex-direction: column;
-}
+  &.text {
+    flex-direction: column;
+  }
 
-.labeled.text {
-  flex-direction: column;
-}
+  .text {
+    display: flex;
+    flex-direction: column;
+  }
 
-.labeled .label {
-  margin-bottom: .2em;
-}
+  .label {
+    margin-bottom: .2em;
+  }
 
-.labeled > .icon {
-  margin-right: .4em;
-  margin-top: 1rem;
-  height: 24px;
-  width: 24px;
-  stroke: #127800;
-}
+  & > .icon {
+    margin-right: .4em;
+    margin-top: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    stroke: $main;
 
-.labeled > .icon svg {
-  stroke: #127800;
+    svg {
+      stroke: $main;
+    }
+  }
 }
 
 /* Dropdowns -------------------------------------- */

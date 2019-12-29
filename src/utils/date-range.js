@@ -1,6 +1,15 @@
 import fecha from 'fecha';
 
-export default date => {
+export const parseDates = date => {
+  if (date.start && date.end) {
+    return parseTwoDates(date);
+  } else if (date.start) {
+    return fecha.format(new Date(date.start), 'YYYY-MM-DD');
+  }
+  return null;
+};
+
+const parseTwoDates = date => {
   let y1 = fecha.format(new Date(date.start), 'YYYY');
   let y2 = fecha.format(new Date(date.end), 'YYYY');
 
@@ -44,3 +53,5 @@ export default date => {
     return `${m1} ${d2}, ${y1} – ${m2} ${d2}, ${y2}`;
   }
 };
+
+export default parseTwoDates;

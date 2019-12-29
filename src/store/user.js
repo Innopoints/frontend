@@ -8,7 +8,7 @@ export const user = writable({
   balance: 1488,
   hours: 111,
   rating: 3.8,
-  isAdmin: false,
+  isAdmin: true,
   name: 'Zeus',
   surname: 'Rozhdestvenskiy',
   telegram: '',

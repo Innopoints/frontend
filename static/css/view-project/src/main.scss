@@ -102,86 +102,66 @@ h2.padded {
   margin-bottom: .25em;
 }
 
-.dialog p {
+.dialog > p {
   margin-top: .5em;
 }
 
-.modal-overlay .card {
-  position: relative;
-  margin: .5em;
+.reports {
+  margin-top: 1.5em;
+  font-size: .95rem;
 
-  .title {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: $main;
-    display: block;
-    padding-right: 2em;
+  .report {
+    padding-top: 1em;
+
+    &:not(:last-child) {
+      padding-bottom: 1em;
+      border-bottom: 1px solid $light-gray;
+    }
   }
 
-  .btn.close {
-    position: absolute;
-    top: .7em;
-    right: .7em;
+  .data-points {
+    display: flex;
+    flex-direction: column;
+
+    .labeled:first-child {
+      margin-bottom: 1em;
+    }
+
+    a {
+      display: inline-block;
+    }
   }
 
-  .reports {
-    margin-top: 1.5em;
-    width: 40em;
-    font-size: .95rem;
-    max-height: 80vh;
-    overflow-y: scroll;
+  .feedback {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    margin-top: 1em;
 
-    .report {
-      padding-top: 1em;
-
-      &:not(:last-child) {
-        padding-bottom: 1em;
-        border-bottom: 1px solid $light-gray;
-      }
+    .stars {
+      margin-bottom: .5em;
+      flex-shrink: 0;
     }
 
-    .data-points {
-      display: flex;
-
-      .labeled:first-child {
-        margin-right: 10%;
-      }
+    .stars .star {
+      width: 16px;
+      height: 16px;
     }
+  }
 
-    .feedback {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1em;
-
-      .stars {
-        margin-left: 1em;
-        flex-shrink: 0;
-      }
-
-      .stars .star {
-        width: 16px;
-        height: 16px;
-      }
-    }
-
-    .labeled > .icon {
-      margin-top: .6rem;
-    }
+  .labeled > .icon {
+    margin-top: .6rem;
   }
 }
 
-.stars {
-  margin-left: 1em;
+.stars .star {
+  stroke: $main;
+  width: 18px;
+  height: 18px;
+  margin: 0 1px;
 
-  .star {
-    stroke: $main;
-    width: 18px;
-    height: 18px;
-    margin: 0 1px;
-
-    &.off {
-      stroke: $light-gray;
-    }
+  &.off {
+    stroke: $light-gray;
   }
 }
 
@@ -191,6 +171,10 @@ h2.padded {
     margin-bottom: .5em;
     display: block;
     line-height: 1.3rem;
+  }
+
+  & > label:first-child {
+    margin-top: 0;
   }
 
   .actions {
@@ -282,9 +266,20 @@ h2.padded {
   }
 }
 
-.dialog {
-  margin-left: .5em;
-  margin-right: .5em;
+@media only screen and (min-width: 1024px) {
+  .reports {
+    .data-points, .feedback {
+      flex-direction: row;
+    }
+
+    .data-points .labeled:first-child {
+      margin-right: 10%;
+    }
+
+    .feedback .stars {
+      margin-left: 1em;
+    }
+  }
 }
 
 @media only screen and (min-width: 1200px) {

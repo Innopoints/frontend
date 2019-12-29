@@ -104,76 +104,56 @@ h2.padded {
   margin-bottom: .25em;
 }
 
-.dialog p {
+.dialog > p {
   margin-top: .5em;
 }
 
-.modal-overlay .card {
-  position: relative;
-  margin: .5em;
-}
-
-.modal-overlay .card .title {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #127800;
-  display: block;
-  padding-right: 2em;
-}
-
-.modal-overlay .card .btn.close {
-  position: absolute;
-  top: .7em;
-  right: .7em;
-}
-
-.modal-overlay .card .reports {
+.reports {
   margin-top: 1.5em;
-  width: 40em;
   font-size: .95rem;
-  max-height: 80vh;
-  overflow-y: scroll;
 }
 
-.modal-overlay .card .reports .report {
+.reports .report {
   padding-top: 1em;
 }
 
-.modal-overlay .card .reports .report:not(:last-child) {
+.reports .report:not(:last-child) {
   padding-bottom: 1em;
   border-bottom: 1px solid #ddd;
 }
 
-.modal-overlay .card .reports .data-points {
+.reports .data-points {
   display: flex;
+  flex-direction: column;
 }
 
-.modal-overlay .card .reports .data-points .labeled:first-child {
-  margin-right: 10%;
+.reports .data-points .labeled:first-child {
+  margin-bottom: 1em;
 }
 
-.modal-overlay .card .reports .feedback {
+.reports .data-points a {
+  display: inline-block;
+}
+
+.reports .feedback {
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
   margin-top: 1em;
 }
 
-.modal-overlay .card .reports .feedback .stars {
-  margin-left: 1em;
+.reports .feedback .stars {
+  margin-bottom: .5em;
   flex-shrink: 0;
 }
 
-.modal-overlay .card .reports .feedback .stars .star {
+.reports .feedback .stars .star {
   width: 16px;
   height: 16px;
 }
 
-.modal-overlay .card .reports .labeled > .icon {
+.reports .labeled > .icon {
   margin-top: .6rem;
-}
-
-.stars {
-  margin-left: 1em;
 }
 
 .stars .star {
@@ -192,6 +172,10 @@ h2.padded {
   margin-bottom: .5em;
   display: block;
   line-height: 1.3rem;
+}
+
+.report-form > label:first-child {
+  margin-top: 0;
 }
 
 .report-form .actions {
@@ -272,9 +256,16 @@ h2.padded {
   }
 }
 
-.dialog {
-  margin-left: .5em;
-  margin-right: .5em;
+@media only screen and (min-width: 1024px) {
+  .reports .data-points, .reports .feedback {
+    flex-direction: row;
+  }
+  .reports .data-points .labeled:first-child {
+    margin-right: 10%;
+  }
+  .reports .feedback .stars {
+    margin-left: 1em;
+  }
 }
 
 @media only screen and (min-width: 1200px) {

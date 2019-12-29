@@ -1,12 +1,6 @@
 @import "../../global/src/_variables.scss";
 @import "../../global/src/_mixins.scss";
 
-.material {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 form {
   padding-bottom: 4em;
   display: flex;
@@ -33,11 +27,11 @@ h2 {
   @include hide-accessible;
 }
 
-nav.dropdown-shell {
+.steps-navigation.dropdown-shell {
   align-self: center;
 }
 
-nav.dropdown-shell .handle {
+.steps-navigation.dropdown-shell .handle {
   background: white;
   box-shadow: $shadow-1;
   margin-top: 1em;
@@ -47,7 +41,7 @@ nav.dropdown-shell .handle {
   }
 }
 
-nav .dropdown {
+.steps-navigation .dropdown {
   top: 1em;
   margin-top: 0;
   height: 3.125em;
@@ -80,7 +74,7 @@ nav .dropdown {
   }
 }
 
-nav.dropdown-shell.open .dropdown {
+.steps-navigation.dropdown-shell.open .dropdown {
   height: 13.5em;
 }
 
@@ -164,7 +158,7 @@ form > .actions {
     }
   }
 
-  nav.dropdown-shell {
+  .steps-navigation.dropdown-shell {
     position: absolute;
     top: .5em;
     right: 2.5em;
@@ -186,7 +180,7 @@ form > .actions {
 }
 
 @media only screen and (min-width: 840px) {
-  nav.dropdown-shell {
+  .steps-navigation.dropdown-shell {
     top: 1.2em;
     right: 8%;
   }
@@ -203,7 +197,7 @@ form > .actions {
     padding-right: 12%;
   }
 
-  nav.dropdown-shell {
+  .steps-navigation.dropdown-shell {
     right: 12%;
   }
 }

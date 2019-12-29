@@ -27,7 +27,7 @@
       {id}
       checked={value}
       name={name}
-      on:change="{(e) => dispatch('click', e.target.value)}"
+      on:change="{(e) => dispatch('change', e.target.checked)}"
       on:focus="{(e) => dispatch('focus', e)}"
       class:first={isTwoState}
       class={inputclass}

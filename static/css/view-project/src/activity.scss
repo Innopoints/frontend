@@ -1,3 +1,5 @@
+@import "../../global/src/_variables.scss";
+
 .activity {
   header {
     display: flex;
@@ -111,6 +113,30 @@
       flex-shrink: 0;
       stroke: #127800;
       margin-right: .3em;
+    }
+  }
+
+  .middle, .right {
+    display: flex;
+    flex-direction: column;
+
+    .empty {
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 2em;
+      padding-bottom: 2em;
+      flex-grow: 1;
+
+      .title {
+        color: $main;
+        font-weight: 500;
+        font-size: 1.3rem;
+        margin-bottom: .3em;
+        margin-top: .5em;
+      }
     }
   }
 }

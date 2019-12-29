@@ -26,6 +26,10 @@
   margin-top: .5em;
 }
 
+.notifications .notice .message {
+  align-items: center;
+}
+
 .notifications .section:not(:last-child) {
   border-bottom: 1px solid #ddd;
 }

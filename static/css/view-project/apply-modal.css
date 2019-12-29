@@ -1,21 +1,5 @@
-.apply-modal {
-  margin: 1em;
-}
-
 .apply-modal form {
   margin-top: .5em;
-}
-
-.apply-modal .close {
-  float: right;
-  margin-right: -.5em;
-  margin-top: -.5em;
-}
-
-.apply-modal .title {
-  font-size: 1.1rem;
-  font-weight: 500;
-  line-height: 1.35rem;
 }
 
 .apply-modal .label {
@@ -47,12 +31,6 @@
 
 .apply-modal label.clickable .checkbox {
   margin-right: .5em;
-}
-
-.apply-modal .actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: .5em;
 }
 
 @media only screen and (min-width: 520px) {

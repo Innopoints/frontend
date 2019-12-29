@@ -24,8 +24,17 @@
   export let error = null;
   export let multiline = null;
   export let cols = 5;
+  export let changeTimeout = 400;
 
   const dispatch = createEventDispatcher();
+  let timeout = null;
+  const delayedChange = (e) => {
+    dispatch('change', e.target.value);
+    clearTimeout(timeout);
+    setTimeout(() => {
+      dispatch('delayedChange', e.target.value);
+    }, changeTimeout);
+  };
 </script>
 
 <div
@@ -44,7 +53,7 @@
       on:focus={(e) => dispatch('focus', e.target.value)}
       on:blur={(e) => dispatch('blur', e.target.value)}
       on:input={(e) => dispatch('input', e.target.value)}
-      on:change={(e) => dispatch('change', e.target.value)}
+      on:change={delayedChange}
     />
   {:else}
     <input
@@ -63,7 +72,7 @@
         on:blur={(e) => dispatch('blur', e.target.value)}
         on:input={(e) => dispatch('input', e.target.value)}
         on:keyup.enter={(e) => dispatch('change', e.target.value)}
-        on:change={(e) => dispatch('change', e.target.value)}
+        on:change={delayedChange}
     />
 
     {#if isOutline}

@@ -8,6 +8,7 @@
   export let isDanger = false;
   export let isRound = false;
   export let isNormal = false;
+  export let isRectangle = false;
   export let ripple = true;
 
   export let disabled = false;
@@ -24,6 +25,7 @@
     isDanger && 'danger',
     isRound && 'round',
     isNormal && 'normal',
+    isRectangle && 'rectangle',
     classname ? classname : 'btn',
   ].filter(v => v !== false);
 
@@ -47,6 +49,7 @@
       {href}
       target={away && '_blank'}
       class={classes.join(' ')}
+      on:click={() => dispatch('click')}
   >
     <slot />
     {#if away}
@@ -58,7 +61,9 @@
     type="button"
     {disabled}
     class={classes.join(' ')}
-    on:click={() => dispatch('click')}
+    on:click={(e) => dispatch('click', e)}
+    on:mousedown={(e) => dispatch('mousedown', e)}
+    on:mouseup={(e) => dispatch('mouseup', e)}
     use:rippleEffect={rippleColor}
   >
     {#if badge}

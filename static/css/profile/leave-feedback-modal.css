@@ -1,0 +1,48 @@
+.feedback-modal .title {
+  padding-right: 2em;
+  margin-bottom: .5em;
+}
+
+.feedback-modal p {
+  font-weight: 300;
+  margin-bottom: .3em;
+  font-size: .9rem;
+  line-height: 1.1rem;
+}
+
+.feedback-modal .content {
+  max-height: calc(100vh - 10em);
+}
+
+.feedback-modal form {
+  margin-top: 1em;
+}
+
+.feedback-modal form label {
+  display: block;
+  margin-bottom: .3em;
+}
+
+.feedback-modal form .competence-chips {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 40em;
+}
+
+.feedback-modal form .competence-chips .chip {
+  margin-right: .5em;
+}
+
+.feedback-modal form .form-field {
+  flex-direction: column;
+}
+
+.feedback-modal textarea {
+  height: 4em;
+}
+
+@media only screen and (min-width: 480px) {
+  .feedback-modal .content {
+    max-height: calc(100vh - 7em);
+  }
+}

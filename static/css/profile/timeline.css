@@ -2,6 +2,13 @@
   margin: 1em .6em;
 }
 
+.timeline .entry {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 2em;
+  position: relative;
+}
+
 .timeline .entry:last-of-type {
   padding-bottom: 0;
 }
@@ -34,13 +41,6 @@
   stroke-width: 1.5;
 }
 
-.timeline .entry {
-  display: flex;
-  align-items: flex-start;
-  padding-bottom: 2em;
-  position: relative;
-}
-
 .timeline .lb {
   line-height: 1.25rem;
 }
@@ -52,8 +52,12 @@
   margin-top: .3em;
 }
 
-.timeline .status,
-.timeline time {
+.timeline .content .btn {
+  font-size: .9rem;
+  margin-top: .8em;
+}
+
+.timeline .status, .timeline time {
   font-size: .85rem;
   color: #666;
   margin-top: .4em;
@@ -73,7 +77,7 @@
 }
 
 .timeline .status.bad {
-  color: #ba0707;
+  color: #ab0303;
 }
 
 .timeline .innopoint {
@@ -86,13 +90,8 @@
   height: .8rem;
 }
 
-.status.good > .innopoint {
+.timeline .status.good > .innopoint {
   stroke: #127800;
-}
-
-.timeline .content .btn {
-  font-size: .9rem;
-  margin-top: .8em;
 }
 
 .timeline .more {
@@ -113,21 +112,20 @@
 }
 
 @media only screen and (min-width: 700px) {
-  .timeline .entry > .icon {
-    width: 54px;
-    height: 54px;
-    padding: 14px;
-  }
   .timeline .entry:not(:last-of-type)::before {
     height: calc(100% - 54px);
     top: 54px;
     left: 27px;
   }
+  .timeline .entry > .icon {
+    width: 54px;
+    height: 54px;
+    padding: 14px;
+  }
   .timeline .content {
     font-size: 1rem;
   }
-  .timeline .status,
-  .timeline time {
+  .timeline .status, .timeline time {
     font-size: .95rem;
   }
   .timeline .status .innopoint {

@@ -1,0 +1,31 @@
+.review-verdict {
+  margin-top: 1.5em;
+}
+
+.review-verdict .title {
+  margin-bottom: .5em;
+  font-weight: 500;
+}
+
+.review-verdict .actions {
+  margin-top: .5em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.activity .right {
+  padding-top: 0 !important;
+}
+
+.activity .panel {
+  grid-template-columns: 1fr auto;
+  column-gap: 10%;
+}
+
+.activity .panel :first-child {
+  margin-top: 0;
+}
+
+.activity .hours, .activity .reward {
+  grid-row: 1 / 3;
+}
