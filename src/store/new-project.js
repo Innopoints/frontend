@@ -4,7 +4,9 @@ import { goto } from '@sapper/app';
 export const step = writable(0);
 export const changeStep = (st) => {
   step.update( () => {
-    if (!get(project).creationTime && st !== 0) goto('/projects/new');
+    const proj = get(project);
+    if (proj && !proj.creationTime && st !== 0) goto('/projects/new');
+    else if (!proj && st !== 0) createProject();
     return st;
   });
 };
@@ -50,7 +52,7 @@ export const project = writable(projectTemplate);
 
 export const createProject = () => {
   project.update(value => {
-    if (!value.creationTime)
+    if (!value || !value.creationTime)
       return {
         ...projectTemplate,
         creationTime: new Date().toISOString(),

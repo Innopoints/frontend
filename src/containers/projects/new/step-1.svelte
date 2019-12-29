@@ -11,7 +11,7 @@
 
   $: file = $project.image;
   let image = null;
-  $: (async() => image = file ? await readFileAsync(file) : null)();
+  $: (async() => image = file && file.name ? await readFileAsync(file) : null)();
 
   const addImage = async e => changeImageAndSave(e.detail[0]);
   const removeImage = () => changeImageAndSave(null);
