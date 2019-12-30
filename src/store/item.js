@@ -1,4 +1,5 @@
 import { writable, get } from 'svelte/store';
+import {API_HOST} from '@/constants/env';
 import colorOptions from '@/constants/item/colors';
 
 export const colors = writable(colorOptions);
@@ -70,6 +71,21 @@ export const addVariety = () => {
 export const removeVariety = (index) => {
   item.update(itm => ({ ...itm, varieties: itm.varieties.filter((x, i) => i !== index) }));
   saveDraft();
+};
+
+export const uploadFiles = async files => {
+  // let images = [];
+  // TODO: wait for backend explanations and upload all the photos
+  for (let file of files) {
+    try {
+      await fetch(API_HOST + 'file/product', {
+        method: 'POST',
+        body: file,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
 };
 
 export const clearAll = () => {

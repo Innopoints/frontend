@@ -3,7 +3,7 @@
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
   import Sortable from 'sortablejs';
-  import {changeVarietyField, saveDraft} from '@/store/item';
+  import {changeVarietyField, saveDraft, uploadFiles} from '@/store/item';
   import openFiles from '@/utils/read-files';
   import swapIndexes from '@/utils/swap-indexes';
 
@@ -15,6 +15,7 @@
 
   const changeFiles = async e => {
     changeVarietyField(index, 'images', e.detail);
+    await uploadFiles(e.detail);
     saveDraft();
   };
   const removeImage = (data) => {
