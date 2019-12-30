@@ -2,7 +2,7 @@
 // and return array of strings that should be passed as src:
 // <img src={images}>
 
-export default (arr) => Promise.all(arr.map(readFileAsync));
+export default (arr) => Promise.all(arr.filter(x => x && x.name).map(readFileAsync));
 
 export const readFileAsync = (file) => {
   return new Promise((resolve, reject) => {

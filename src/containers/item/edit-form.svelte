@@ -12,7 +12,7 @@
 
   <header class="varieties">
     <h2>Varieties</h2>
-    <Switch value={$item.inSizes} on:click={toggleSizes} name="sizes" id="sizes">
+    <Switch value={$item.inSizes} on:change={toggleSizes} name="sizes" id="sizes">
       the product comes in sizes
     </Switch>
   </header>

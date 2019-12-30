@@ -2,7 +2,7 @@
   import Dropzone from 'ui/dropzone.svelte';
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
-  import {changeVarietyField} from '@/store/item';
+  import {changeVarietyField, saveDraft} from '@/store/item';
   import openFiles from '@/utils/read-files';
 
   export let index;
@@ -11,11 +11,15 @@
   let images = [];
   $: (async() => images = await openFiles(files))();
 
-  const changeFiles = async e => changeVarietyField(index, 'images', e.detail);
+  const changeFiles = async e => {
+    changeVarietyField(index, 'images', e.detail);
+    saveDraft();
+  };
   const removeImage = (data) => {
     let pos = images.indexOf(data);
     if (pos === -1) return;
     changeVarietyField(index, 'images', files.filter((x, i) => i !== pos));
+    saveDraft();
   };
 </script>
 

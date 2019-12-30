@@ -5,7 +5,7 @@
   import Dropdown from 'ui/dropdown.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
   import DragDropzone from '@/components/item/drag-dropzone.svelte';
-  import {item, changeVarietySize, removeVariety, changeVarietyField, colors, customColors, addNewColor} from '@/store/item';
+  import {item, changeVarietySize, removeVariety, changeVarietyField, colors, customColors, addNewColor, saveDraft} from '@/store/item';
 
   export let index;
   export let removable;
@@ -15,6 +15,7 @@
   $: variety = $item.varieties[index];
   const chooseColor = e => {
     changeVarietyField(index, 'color', e.detail.color);
+    saveDraft();
   };
 
   const openColorPicker = () => colorPicker.click();
@@ -50,10 +51,10 @@
         add another color
       </Button>
       <input
-          on:change={(e) => addNewColor(index, e.target.value)}
+          id="new-color-picker"
           type="color"
           bind:this={colorPicker}
-          id="new-color-picker"
+          on:change={(e) => addNewColor(index, e.target.value)}
       >
     </Dropdown>
 
@@ -63,9 +64,10 @@
         <TextField
             id="quantity"
             min="0"
+            type="number"
             bind:value={variety.quantity}
             on:change="{(e) => changeVarietyField(index, 'quantity', e.detail)}"
-            type="number"
+            on:blur={saveDraft}
         />
       </div>
     {/if}
@@ -77,12 +79,13 @@
       <div class="sizes">
         {#each sizes as size (size)}
           <TextField
-              bind:value={variety.sizes[size]}
-              on:change="{(e) => changeVarietySize(index, size, e.detail)}"
               isWithItem
               type="number"
               classname="right-align text-field"
               placeholder="0"
+              bind:value={variety.sizes[size]}
+              on:change="{(e) => changeVarietySize(index, size, e.detail)}"
+              on:blur={saveDraft}
           >
             <span class="item">{size}</span>
           </TextField>

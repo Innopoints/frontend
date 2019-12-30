@@ -2,6 +2,10 @@
   import Layout from '@/layouts/default.svelte';
   import Form from '@/containers/item/edit-form.svelte';
   import Preview from '@/containers/item/item-preview.svelte';
+
+  import {onMount} from 'svelte';
+  import {getDraft} from '@/store/item';
+  onMount(getDraft);
 </script>
 
 <svelte:head>
