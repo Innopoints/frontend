@@ -9,6 +9,7 @@ import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import preprocess from './src/utils/preprocess';
+import sapperEnv from 'sapper-environment';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -19,18 +20,13 @@ const onwarn = (warning, onwarn) => onwarn(warning);
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/');
 
-const svgCustomAttrs = {
-  // width: 24,
-  // heigth: 24,
-  // xmlns: 'http://www.w3.org/2000/svg',
-};
-
 export default {
   client: {
     input: config.client.input(),
     output: config.client.output(),
     plugins: [
       replace({
+        ...sapperEnv(),
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
@@ -38,7 +34,7 @@ export default {
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
-          markup: data => preprocess(data, false, svgCustomAttrs),
+          markup: data => preprocess(data, false, {}),
           style: ({ content }) => ({code: content}),
         },
         dev,
@@ -101,7 +97,7 @@ export default {
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
-          markup: data => preprocess(data, false, svgCustomAttrs),
+          markup: data => preprocess(data, false, {}),
         },
         generate: 'ssr',
         dev,
@@ -121,7 +117,7 @@ export default {
     ],
     external: Object.keys(pkg.dependencies).concat(
       require('module').builtinModules ||
-        Object.keys(process.binding('natives'))
+        Object.keys(process.binding('natives')),
     ),
 
     onwarn,
