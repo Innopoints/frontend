@@ -2,8 +2,10 @@
   import Dropzone from 'ui/dropzone.svelte';
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
+  import Sortable from 'sortablejs';
   import {changeVarietyField, saveDraft} from '@/store/item';
   import openFiles from '@/utils/read-files';
+  import swapIndexes from '@/utils/swap-indexes';
 
   export let index;
   export let files;
@@ -21,6 +23,23 @@
     changeVarietyField(index, 'images', files.filter((x, i) => i !== pos));
     saveDraft();
   };
+  const swapImages = (oldIndex, newIndex) => {
+    changeVarietyField(index, 'images', swapIndexes(files, oldIndex, newIndex));
+    saveDraft();
+  };
+
+  let dropzone = null;
+  const mountSortable = () => {
+    new Sortable(dropzone, {
+      handle: '.btn.move',
+      draggable: '.card.image',
+      animations: 150,
+      onEnd: function (e) {
+        swapImages(e.oldDraggableIndex, e.newDraggableIndex);
+      },
+    });
+  };
+  $: { if (dropzone) mountSortable(); }
 </script>
 
 <style>
@@ -43,8 +62,8 @@
    on:change={changeFiles}
 >
   {#if images.length}
-    <div class="images">
-      {#each Object.values(images) as img, i (i)}
+    <div class="images" bind:this={dropzone}>
+      {#each images as img, i (i + img)}
         <Card
             classname="card image"
             img={img}
@@ -56,7 +75,7 @@
           <Button on:click={() => removeImage(img)} isDanger isRound>
             <svg class="icon" src="/images/icons/x.svg" />
           </Button>
-          <Button isNormal isRound>
+          <Button isNormal isRound classname="btn move">
             <svg class="icon" src="/images/icons/move.svg" />
           </Button>
         </Card>
