@@ -1,13 +1,16 @@
 import { writable } from 'svelte/store';
+import request from '@/utils/request';
+import { goto } from '@sapper/app';
 
 export const isAuthed = writable(false);
-export const user = writable({
-  balance: 1488,
+const userTemplate = {
+  balance: 0,
   is_admin: true,
   full_name: '',
   telegram_username: '',
   email: '',
-});
+};
+export const user = writable(userTemplate);
 
 export const changeUserField = (field, value) => {
   user.update(usr => ({ ...usr, [field]: value }));
@@ -18,6 +21,10 @@ export const changeUser = (value) => {
   isAuthed.update(() => !!value.email);
 };
 
-export const logIn = () => {
-  isAuthed.update(us => true);
+export const signOut = async () => {
+  if (!(await request(fetch, 'logout'))) return;
+
+  user.update(() => userTemplate);
+  isAuthed.update(() => false);
+  goto('/');
 };

@@ -9,7 +9,8 @@ export default async (fetchType = fetch, url = '', method = 'GET', body = {}) =>
     body: Object.entries(body).length ? JSON.stringify(body) : undefined,
     method,
   }).then(res => {
-    if (res.ok) return res.json();
+    if (res.status === 204) return true;
+    else if (res.ok) return res.json();
     return null;
   });
 };
