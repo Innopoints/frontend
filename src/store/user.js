@@ -16,6 +16,11 @@ export const changeUserField = (field, value) => {
   user.update(usr => ({ ...usr, [field]: value }));
 };
 
+export const changeTelegram = (value) => {
+  // TODO: place a request(fetch, 'account', 'PUT', {telegram_username: value}) function when backend will implement it
+  changeUserField('telegram_username', value);
+};
+
 export const changeUser = (value) => {
   user.update(() => value);
   isAuthed.update(() => !!value.email);

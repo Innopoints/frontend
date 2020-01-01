@@ -2,24 +2,21 @@
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
   import Dropdown from 'ui/dropdown.svelte';
-  import { user, changeUserField } from '@/store/user';
+  import { user, changeTelegram } from '@/store/user';
 
   let tgVal = '';
   let tgChange = false;
 
-  function toggleTgChange(bool) {
-    tgChange = bool;
-  }
-
-  function save() {
-    if (tgVal !== '') changeUserField('telegram', tgVal);
+  const toggleTgChange = (bool) => tgChange = bool;
+  const save = () => {
+    if (tgVal !== '') changeTelegram(tgVal);
     tgChange = false;
-  }
+  };
 </script>
 
 <section class="quick-info padded">
   <div class="personal">
-    <h1 class="btn-align">{$user.name} {$user.surname}</h1>
+    <h1 class="btn-align">{$user.full_name}</h1>
     {#if tgChange}
       <div class="telegram input">
         <TextField
@@ -42,9 +39,9 @@
           <Button on:click={save} filled>save</Button>
         </div>
       </div>
-    {:else if $user.telegram}
+    {:else if $user.telegram_username}
       <div class="telegram exists">
-        @{$user.telegram}
+        @{$user.telegram_username}
         <Button on:click="{() => toggleTgChange(true)}" classname="ml btn">
           <svg src="images/icons/edit.svg" class="icon mr" />
           edit
