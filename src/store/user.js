@@ -1,23 +1,23 @@
 import { writable } from 'svelte/store';
 
-// TODO: persist the state with some lib
-
 export const isAuthed = writable(false);
 export const user = writable({
-  id: 1,
   balance: 1488,
-  hours: 111,
-  rating: 3.8,
-  isAdmin: true,
-  name: 'Zeus',
-  surname: 'Rozhdestvenskiy',
-  telegram: '',
+  is_admin: true,
+  full_name: '',
+  telegram_username: '',
+  email: '',
 });
 
-export function changeUserField(field, value) {
+export const changeUserField = (field, value) => {
   user.update(usr => ({ ...usr, [field]: value }));
-}
+};
 
-export function logIn() {
+export const changeUser = (value) => {
+  user.update(() => value);
+  isAuthed.update(() => !!value.email);
+};
+
+export const logIn = () => {
   isAuthed.update(us => true);
-}
+};

@@ -1,14 +1,8 @@
-<script context="module">
-  import {API_HOST} from '@/constants/env';
-  export async function preload() {
-    try {
-      return await this.fetch(API_HOST + 'account', {
-        credentials: 'include',
-      });
-    } catch (e) {
-      return null;
-    }
-  }
+<script>
+  import {onMount} from 'svelte';
+  import {changeUser} from '@/store/user';
+  import request from '@/utils/request';
+  onMount(async () => changeUser(await request(fetch, 'account', 'GET')));
 </script>
 
 <slot />
