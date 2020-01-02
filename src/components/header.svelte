@@ -1,6 +1,6 @@
 <script>
   import Button from 'ui/button.svelte';
-  import { isAuthed, logIn } from '@/store/user';
+  import { isAuthed, logIn, user } from '@/store/user';
 </script>
 
 <header class="top-level padded">
@@ -12,7 +12,7 @@
     {#if !$isAuthed}
       <Button isOutline on:click={logIn}>sign in</Button>
     {:else}
-      <Button href="/profile" isRound>
+      <Button href={$user.isAdmin ? '/dashboard' : '/profile'} isRound>
         <svg src="images/icons/user.svg" />
       </Button>
     {/if}
