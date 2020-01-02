@@ -4,6 +4,7 @@
   import Purchases from '@/containers/dashboard/purchases.svelte';
   import InnopointTransfer from '@/containers/dashboard/innopoint-transfer.svelte';
   import reviews from '@/constants/dashboard/review';
+  import purchases from '@/constants/dashboard/purchases';
 </script>
 
 <svelte:head>
@@ -18,7 +19,7 @@
   <h1 class="padded">Dashboard</h1>
   <div class="cards padded">
     <Reviews {reviews} />
-    <Purchases />
+    <Purchases {purchases} />
     <InnopointTransfer />
   </div>
 </Layout>
