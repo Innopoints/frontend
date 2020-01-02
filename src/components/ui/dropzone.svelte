@@ -42,6 +42,7 @@
           return;
         }
       }
+      dispatch('upload', newFiles);
       if(multiple) files.push(file);
       else files = [file];
     }

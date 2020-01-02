@@ -15,7 +15,7 @@
       The place where your hard work and proactivity turns into cool merch of
       Innopolis University.
     </div>
-    {#if $isAuthed && $user.isAdmin}
+    {#if $isAuthed && $user.is_admin}
       <div class="actions">
         <Button isOutline classname="btn rectangle" href="/item/new">
           <svg src="/images/icons/plus.svg" class="icon mr" />

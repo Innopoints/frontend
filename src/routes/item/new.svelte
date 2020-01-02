@@ -1,5 +1,5 @@
 <script>
-  import Layout from '@/layouts/default.svelte';
+  import Layout from '@/layouts/auth.svelte';
   import Form from '@/containers/item/edit-form.svelte';
   import Preview from '@/containers/item/item-preview.svelte';
 
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout title="Create product">
   <h1 class="padded">
     Create a Product
   </h1>

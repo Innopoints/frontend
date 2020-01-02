@@ -13,9 +13,11 @@
   let images = [];
   $: (async() => images = await openFiles(files))();
 
+  const upload = async e => {
+    await uploadFiles(e.detail);
+  };
   const changeFiles = async e => {
     changeVarietyField(index, 'images', e.detail);
-    await uploadFiles(e.detail);
     saveDraft();
   };
   const removeImage = (data) => {
@@ -61,6 +63,7 @@
    classname="image-platform{images.length ? ' has-content' : ''}"
    disabledQuerySelector=".card.image"
    on:change={changeFiles}
+   on:upload={upload}
 >
   {#if images.length}
     <div class="images" bind:this={dropzone}>
