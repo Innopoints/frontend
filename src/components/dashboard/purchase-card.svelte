@@ -3,6 +3,11 @@
   import parseColor from '@/utils/optimal-color';
 
   export let purchase;
+
+  const copy = () => {
+    if (!navigator.clipboard) alert('Browser does not support copying');
+    else navigator.clipboard.writeText(purchase.clientEmail);
+  };
 </script>
 
 <li>
@@ -18,7 +23,7 @@
       <time>{purchase.date}</time>
       <div class="purchaser">
         Purchased by {purchase.client}
-        <span class="copy-email">click to copy e-mail</span>
+        <span on:click={copy} class="copy-email">click to copy e-mail</span>
       </div>
       <div class="parameters">
         {#if purchase.variety.size}
