@@ -2,8 +2,7 @@
   import Header from '@/components/header.svelte';
   import Footer from '@/components/footer.svelte';
   import Button from 'ui/button.svelte';
-  import {API_HOST} from '@/constants/env';
-  import { isAuthed, user } from '@/store/user';
+  import { isAuthed, user, login } from '@/store/user';
 
   export let classname = '';
   export let title;
@@ -13,7 +12,7 @@
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="css/page-components/403.css" />
+  <link rel="stylesheet" href="/css/page-components/403.css" />
 </svelte:head>
 
 <style>
@@ -36,7 +35,7 @@
           It seems like you are not authorized to access this page.
         </div>
         <div class="actions">
-          <Button href="{API_HOST}login" isFilled>sign in</Button>
+          <Button isFilled on:click={login}>sign in</Button>
           <Button href="/" isOutline>run to homepage</Button>
         </div>
       </div>

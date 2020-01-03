@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
 import request from '@/utils/request';
+import generateQuery from '@/utils/generateQuery';
 import { goto } from '@sapper/app';
+import {API_HOST, FRONTEND_BASE} from '@/constants/env';
 
 export const isAuthed = writable(false);
 const userTemplate = {
@@ -16,6 +18,13 @@ export const changeUserField = (field, value) => {
   user.update(usr => ({ ...usr, [field]: value }));
 };
 
+export const login = () => {
+  window.location.href = API_HOST + 'login' + generateQuery({
+    final_redirect_location: window.location.pathname,
+    frontend_base: FRONTEND_BASE,
+  });
+};
+
 export const changeTelegram = (value) => {
   // TODO: place a request(fetch, 'account', 'PUT', {telegram_username: value}) function when backend will implement it
   changeUserField('telegram_username', value);
@@ -23,7 +32,7 @@ export const changeTelegram = (value) => {
 
 export const changeUser = (value) => {
   user.update(() => value);
-  isAuthed.update(() => !!value.email);
+  isAuthed.update(() => !!(value && value.email));
 };
 
 export const signOut = async () => {

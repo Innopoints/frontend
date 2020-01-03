@@ -1,8 +1,7 @@
 <script>
   import Button from 'ui/button.svelte';
   import NotificationCenter from '@/components/profile/notification-center.svelte';
-  import {API_HOST} from '@/constants/env';
-  import {isAuthed, signOut} from '@/store/user';
+  import {isAuthed, signOut, login} from '@/store/user';
   export let isProfile = false;
 </script>
 
@@ -13,7 +12,7 @@
   </a>
   <div class="actions">
     {#if !$isAuthed}
-      <Button isOutline href="{API_HOST}login">sign in</Button>
+      <Button isOutline on:click={login}>sign in</Button>
     {:else}
       {#if isProfile}
         <NotificationCenter />

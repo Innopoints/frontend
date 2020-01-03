@@ -1,7 +1,6 @@
 <script>
   import Button from 'ui/button.svelte';
-  import {API_HOST} from '@/constants/env';
-  import {isAuthed} from '@/store/user';
+  import {isAuthed, login} from '@/store/user';
 </script>
 
 <section class="tagline padded">
@@ -25,7 +24,7 @@
         </div>
       {:else}
         <p class="signin-prompt">
-          Got a fresh idea? <a href="{API_HOST}login">Sign in</a> to create a project of your own.
+          Got a fresh idea? <a href="/" on:click|preventDefault={login}>Sign in</a> to create a project of your own.
         </p>
       {/if}
     </div>
