@@ -70,6 +70,11 @@ h1 {
   margin-bottom: .3em;
 }
 
+.projects-review {
+  max-height: 70em;
+  overflow-y: auto;
+}
+
 .projects-review li {
   padding-top: 1em;
   padding-bottom: 1em;
@@ -106,6 +111,11 @@ h1 {
 .projects-review li .btn {
   margin-right: -1em;
   margin-top: .3em;
+}
+
+.purchases {
+  max-height: 70em;
+  overflow-y: auto;
 }
 
 .purchases li {

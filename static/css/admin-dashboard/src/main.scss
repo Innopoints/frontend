@@ -73,6 +73,9 @@ h1 {
 }
 
 .projects-review {
+  max-height: 70em;
+  overflow-y: auto;
+  
   li {
     padding-top: 1em;
     padding-bottom: 1em;
@@ -112,6 +115,9 @@ h1 {
 }
 
 .purchases {
+  max-height: 70em;
+  overflow-y: auto;
+
   li {
     padding: 1em 0;
     border-bottom: 1px solid $light-gray;

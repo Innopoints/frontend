@@ -1111,6 +1111,7 @@ input[type="checkbox"]:checked + .chip::before {
 .dialog .consequences {
   display: block;
   margin-top: .3em;
+  font-weight: 300;
 }
 
 .dialog.danger .title {

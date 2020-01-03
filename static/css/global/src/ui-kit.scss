@@ -1162,6 +1162,7 @@ input[type="checkbox"]:checked + .chip::before {
   .consequences {
     display: block;
     margin-top: .3em;
+    font-weight: 300;
   }
 
   &.danger {

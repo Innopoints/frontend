@@ -13,20 +13,20 @@
   }
 }
 
-.activity {
-  .right {
+.activity.finished {
+  .right.long {
     padding-top: 0 !important;
-  }
 
-  .panel {
-    grid-template-columns: 1fr auto;
-    column-gap: 10%;
-    :first-child {
-      margin-top: 0;
+    .panel {
+      grid-template-columns: 1fr auto;
+      column-gap: 10%;
+      :first-child {
+        margin-top: 0;
+      }
     }
-  }
 
-  .hours, .reward {
-    grid-row: 1 / 3;
+    .hours, .reward {
+      grid-row: 1 / 3;
+    }
   }
 }
