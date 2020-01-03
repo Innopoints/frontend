@@ -4,30 +4,30 @@
   import Button from 'ui/button.svelte';
   import Sortable from 'sortablejs';
   import {changeVarietyField, saveDraft, uploadFiles} from '@/store/item';
-  import openFiles from '@/utils/read-files';
   import swapIndexes from '@/utils/swap-indexes';
+  import {API_HOST} from '@/constants/env';
 
   export let index;
-  export let files;
+  export let images;
 
-  let images = [];
-  $: (async() => images = await openFiles(files))();
-
+  let isLoading = false;
   const upload = async e => {
-    await uploadFiles(e.detail);
-  };
-  const changeFiles = async e => {
-    changeVarietyField(index, 'images', e.detail);
+    if (isLoading) return;
+
+    isLoading = true;
+    const imgs = await uploadFiles(e.detail);
+    await changeVarietyField(index, 'images', images.concat(imgs));
+    isLoading = false;
     saveDraft();
   };
   const removeImage = (data) => {
     let pos = images.indexOf(data);
     if (pos === -1) return;
-    changeVarietyField(index, 'images', files.filter((x, i) => i !== pos));
+    changeVarietyField(index, 'images', images.filter((x, i) => i !== pos));
     saveDraft();
   };
   const swapImages = (oldIndex, newIndex) => {
-    changeVarietyField(index, 'images', swapIndexes(files, oldIndex, newIndex));
+    changeVarietyField(index, 'images', swapIndexes(images, oldIndex, newIndex));
     saveDraft();
   };
 
@@ -58,23 +58,21 @@
 </style>
 
 <Dropzone
-   value={files}
    id="file-input{index}"
    classname="image-platform{images.length ? ' has-content' : ''}"
    disabledQuerySelector=".card.image"
-   on:change={changeFiles}
    on:upload={upload}
 >
   {#if images.length}
     <div class="images" bind:this={dropzone}>
-      {#each images as img, i (i + img)}
+      {#each images as img, i (i + img.url)}
         <Card
-            classname="card image"
-            img={img}
-            imgWrap={false}
-            imgclass=" "
-            contentclass="actions"
-            on:click={(e) => e.detail.stopPropagation()}
+          classname="card image"
+          img={API_HOST + img.url}
+          imgWrap={false}
+          imgclass=" "
+          contentclass="actions"
+          on:click={(e) => e.detail.stopPropagation()}
         >
           <Button on:click={() => removeImage(img)} isDanger isRound>
             <svg class="icon" src="/images/icons/x.svg" />

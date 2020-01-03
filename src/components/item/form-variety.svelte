@@ -94,7 +94,7 @@
     </div>
   {/if}
 
-  <DragDropzone files={variety.images} {index} />
+  <DragDropzone images={variety.images} {index} />
 
   {#if removable}
     <Button on:click="{() => removeVariety(index)}" isDanger>

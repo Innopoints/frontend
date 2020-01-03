@@ -19,7 +19,7 @@ export const changeUserField = (field, value) => {
 };
 
 export const login = () => {
-  window.location.href = API_HOST + 'login' + generateQuery({
+  window.location.href = API_HOST + '/login' + generateQuery({
     final_redirect_location: window.location.pathname,
     frontend_base: FRONTEND_BASE,
   });

@@ -74,11 +74,13 @@ export const removeVariety = (index) => {
 };
 
 export const uploadFiles = async files => {
+  let images = [];
   for (let file of files) {
     const formData = new FormData();
     formData.append('file', file);
-    await request(fetch, 'file/product', 'POST', formData, true);
+    images.push(await request(fetch, '/file/product', 'POST', formData, true));
   }
+  return images;
 };
 
 export const clearAll = () => {
