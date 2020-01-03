@@ -5,6 +5,7 @@ export default [
     client: 'VanishMax',
     clientEmail: 'vanishmax@gmail.com',
     date: '2019-12-16',
+    status: null,
     variety: {
       image: '/images/store/sweatshirt.png',
       size: 'S',
@@ -17,6 +18,7 @@ export default [
     client: 'illright',
     clientEmail: 'illright@innopolis.ru',
     date: '2019-12-18',
+    status: 'ready for pickup',
     variety: {
       image: '/images/store/umbrella.png',
       size: null,
@@ -29,6 +31,7 @@ export default [
     client: 'someone',
     clientEmail: 'someone@gmail.com',
     date: '2019-12-24',
+    status: 'rejected',
     variety: {
       image: '/images/store/tshirt.png',
       size: 'L',
@@ -41,6 +44,7 @@ export default [
     client: 'myself',
     clientEmail: 'myself@gmail.com',
     date: '2019-12-31',
+    status: 'delivered',
     variety: {
       image: '/images/store/food.png',
       size: null,

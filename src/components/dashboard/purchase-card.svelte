@@ -8,6 +8,7 @@
     if (!navigator.clipboard) alert('Browser does not support copying');
     else navigator.clipboard.writeText(purchase.clientEmail);
   };
+  const updateStatus = status => purchase.status = status;
 </script>
 
 <li>
@@ -36,17 +37,25 @@
     </div>
   </div>
   <div class="actions">
-    <Button isDanger>
-      <svg src="/images/icons/x.svg" class="icon mr" />
-      reject
-    </Button>
-    <Button>
-      <svg src="/images/icons/package.svg" class="icon mr" />
-      ready for pickup
-    </Button>
-    <Button>
-      <svg src="/images/icons/smile.svg" class="icon mr" />
-      delivered
-    </Button>
+    {#if purchase.status}
+      Marked as {purchase.status}
+      <Button classname="btn ml" on:click={() => updateStatus(null)}>
+        <svg src="/images/icons/edit.svg" class="icon" />
+        edit status
+      </Button>
+    {:else}
+      <Button isDanger on:click={() => updateStatus('rejected')}>
+        <svg src="/images/icons/x.svg" class="icon mr" />
+        reject
+      </Button>
+      <Button on:click={() => updateStatus('ready for pickup')}>
+        <svg src="/images/icons/package.svg" class="icon mr" />
+        ready for pickup
+      </Button>
+      <Button on:click={() => updateStatus('delivered')}>
+        <svg src="/images/icons/smile.svg" class="icon mr" />
+        delivered
+      </Button>
+    {/if}
   </div>
 </li>
