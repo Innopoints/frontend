@@ -12,7 +12,7 @@
     InnoStore purchases
   </div>
   {#if purchases.length}
-    <ul class="purchases">
+    <ul class="purchases-list">
       {#each purchases as purchase (purchase.name + purchase.type)}
         <PurchaseCard {purchase} />
       {/each}
