@@ -36,6 +36,7 @@ const newItem = () => ({
   inSizes: false,
   quantity: 0,
   varieties: [newVariety()],
+  error: true,
 });
 
 export const item = writable(newItem());
@@ -97,4 +98,13 @@ export const getDraft = () => {
 
 export const saveDraft = () => {
   localStorage.setItem('product-draft', JSON.stringify(get(item)));
+  validate();
+};
+
+const validate = () => {
+  let product = get(item);
+  if (product.name && product.price && product.varieties[0].images.length)
+    changeItemField('error', false);
+  else
+    changeItemField('error', true);
 };
