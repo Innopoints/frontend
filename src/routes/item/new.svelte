@@ -1,3 +1,12 @@
+<script context="module">
+  import request from '@/utils/request';
+  import {setColors} from '@/store/item';
+  export async function preload() {
+    const res = await request(this.fetch, '/colors');
+    setColors(res);
+  }
+</script>
+
 <script>
   import Layout from '@/layouts/auth.svelte';
   import Form from '@/containers/item/edit-form.svelte';
