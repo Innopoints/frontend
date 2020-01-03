@@ -5,9 +5,9 @@
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import Autocomplete from '@/components/projects/new/autocomplete.svelte';
   import {checkProject} from '@/store/new-project';
+  import options from '@/constants/autocomplete-options';
 
   onMount(checkProject);
-  const options = ['lolka-polka', 'lol', 'kek', 'cheburek', 'chto tam', 'lulz', 'lurk'];
   let values = [];
 </script>
 

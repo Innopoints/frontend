@@ -56,12 +56,13 @@
       on:change={delayedChange}
     />
   {:else}
-    <input
+    {#if type === 'number'}
+      <input
         {id}
         {placeholder}
         {name}
-        {type}
-        value={value}
+        type="number"
+        bind:value={value}
         {pattern}
         {min}
         {max}
@@ -73,7 +74,23 @@
         on:input={(e) => dispatch('input', e.target.value)}
         on:keyup.enter={(e) => dispatch('change', e.target.value)}
         on:change={delayedChange}
-    />
+      />
+    {:else}
+      <input
+        {id}
+        {placeholder}
+        {name}
+        bind:value={value}
+        {pattern}
+        {maxLength}
+        class={inputclass}
+        on:focus={(e) => dispatch('focus', e.target.value)}
+        on:blur={(e) => dispatch('blur', e.target.value)}
+        on:input={(e) => dispatch('input', e.target.value)}
+        on:keyup.enter={(e) => dispatch('change', e.target.value)}
+        on:change={delayedChange}
+      />
+    {/if}
 
     {#if isOutline}
       <label for={id} class={labelclass}>

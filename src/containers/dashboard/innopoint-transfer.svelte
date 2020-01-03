@@ -4,6 +4,8 @@
   import SendMoney from '@/components/dashboard/send-money.svelte';
   import SendComment from '@/components/dashboard/send-comment.svelte';
   import SeeProfile from '@/components/dashboard/see-profile.svelte';
+  import options from '@/constants/autocomplete-options';
+  let users = [];
 </script>
 
 <Card classname="card individual-ctls">
@@ -13,13 +15,13 @@
   </div>
   <div class="panel">
     <div class="user-selection">
-      <AutoComplete />
+      <AutoComplete bind:value={users} {options} />
       <p>You may select several people for a certain operation.</p>
     </div>
     <div class="operations">
-      <SendMoney />
-      <SendComment />
-      <SeeProfile />
+      <SendMoney {users} />
+      <SendComment {users} />
+      <SeeProfile {users} />
     </div>
   </div>
 </Card>
