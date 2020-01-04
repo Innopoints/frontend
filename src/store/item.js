@@ -1,4 +1,5 @@
 import { writable, get } from 'svelte/store';
+import { goto } from '@sapper/app';
 import request from '@/utils/request';
 
 export const colors = writable([]);
@@ -34,9 +35,8 @@ const newItem = () => ({
   description: '',
   price: 0,
   inSizes: false,
-  quantity: 0,
   varieties: [newVariety()],
-  error: true,
+  error: false,
 });
 
 export const item = writable(newItem());
@@ -94,6 +94,7 @@ export const clearAll = () => {
 export const getDraft = () => {
   let product = JSON.parse(localStorage.getItem('product-draft'));
   if (product) item.update(() => product);
+  validate();
 };
 
 export const saveDraft = () => {
@@ -103,8 +104,55 @@ export const saveDraft = () => {
 
 const validate = () => {
   let product = get(item);
-  if (product.name && product.price && product.varieties[0].images.length)
-    changeItemField('error', false);
-  else
-    changeItemField('error', true);
+
+  let error = true;
+  if (product.name && product.price && product.varieties[0].images.length) error = false;
+
+  changeItemField('error', error);
+  return error;
+};
+
+export const createProduct = async () => {
+  if (validate()) return;
+
+  const product = get(item);
+  let varieties = [];
+  product.varieties.forEach(variety => {
+    let color = variety.color.replace(/[^0-9a-f]/gi, '');
+    let imgs = variety.images.map(img => img.url);
+
+    if (product.inSizes) {
+      for (let size in variety.sizes) {
+        if (variety.sizes[size] > 0) {
+          varieties.push({
+            color: color,
+            images: imgs,
+            amount: variety.sizes[size],
+            size,
+          });
+        }
+      }
+    } else {
+      varieties.push({
+        color: variety.color.replace(/[^0-9a-f]/gi, ''),
+        images: variety.images.map(img => img.url),
+        amount: variety.quantity,
+        size: null,
+      });
+    }
+  });
+
+  const readyProduct = {
+    name: product.name,
+    type: product.type,
+    description: product.description,
+    price: product.price,
+    varieties,
+  };
+
+  const res = await request(fetch, '/products', 'POST', readyProduct);
+  if (res) {
+    clearAll();
+    goto('/store');
+  }
 };
