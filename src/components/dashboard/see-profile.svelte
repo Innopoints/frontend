@@ -16,6 +16,6 @@
   </header>
   <div class="subtitle">This will open new tabs.</div>
   <Button on:click={open} disabled={!users.length}>
-    open profile
+    open profiles
   </Button>
 </div>
