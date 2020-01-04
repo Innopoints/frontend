@@ -1,10 +1,19 @@
+<script context="module">
+  import request from '@/utils/request';
+  export async function preload() {
+    const res = await request(this.fetch, '/products');
+    return {items: res};
+  }
+</script>
+
 <script>
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/store/tagline.svelte';
   import StoreCard from '@/components/store/card.svelte';
-  import items from '@/constants/store/store';
   import Filters from '@/containers/store/filters.svelte';
   import Ordering from '@/containers/store/ordering.svelte';
+
+  export let items;
 </script>
 
 <svelte:head>
@@ -53,6 +62,7 @@
       </div>
     {:else}
       <div class="cards">
+        <hr data-text="All items" />
         {#each items as item, i (item.id)}
           <StoreCard {...item} />
         {/each}
