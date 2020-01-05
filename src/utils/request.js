@@ -12,9 +12,11 @@ export default async (fetchType = fetch, url = '', method = 'GET', body = {}, is
   if (isForm) options.body = body;
   else if (Object.entries(body).length) options.body = JSON.stringify(body);
 
-  let headers = new Headers();
-  if (!isForm && Object.entries(body).length) headers.append('Content-Type', 'application/json');
-  options.headers = headers;
+  if (!isForm && Object.entries(body).length) {
+    options.headers = {
+      'Content-Type': 'application/json',
+    };
+  }
 
   return await fetchType(API_HOST + url, options).then(res => {
     if (res.status === 204) return true;

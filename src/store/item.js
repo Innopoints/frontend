@@ -118,24 +118,24 @@ export const createProduct = async () => {
   const product = get(item);
   let varieties = [];
   product.varieties.forEach(variety => {
-    let color = variety.color.replace(/[^0-9a-f]/gi, '');
+    let color = variety.color ? variety.color.replace(/[^0-9a-f]/gi, '') : null;
     let imgs = variety.images.map(img => img.url);
 
     if (product.inSizes) {
       for (let size in variety.sizes) {
         if (variety.sizes[size] > 0) {
           varieties.push({
-            color: color,
+            size,
+            color,
             images: imgs,
             amount: variety.sizes[size],
-            size,
           });
         }
       }
     } else {
       varieties.push({
-        color: variety.color.replace(/[^0-9a-f]/gi, ''),
-        images: variety.images.map(img => img.url),
+        color,
+        images: imgs,
         amount: variety.quantity,
         size: null,
       });

@@ -1,8 +1,7 @@
 <script context="module">
-  import request from '@/utils/request';
   export async function preload() {
-    const res = await request(this.fetch, '/products');
-    return {items: res};
+    const res = await this.fetch('/store.json');
+    return {items: await res.json()};
   }
 </script>
 
