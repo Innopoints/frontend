@@ -36,7 +36,7 @@ export const changeUser = (value) => {
 };
 
 export const signOut = async () => {
-  if (!(await request(fetch, 'logout'))) return;
+  if (!(await request(fetch, '/logout'))) return;
 
   user.update(() => userTemplate);
   isAuthed.update(() => false);
