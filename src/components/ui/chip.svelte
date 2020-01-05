@@ -16,7 +16,7 @@
 
   $: checked = value;
 
-  let dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
   const check = () => {
     checked = !checked;
     dispatch('change', checked);
