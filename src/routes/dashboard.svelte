@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/css/admin-dashboard/main.css" />
   <link rel="stylesheet" href="/css/page-components/header.css" />
   <link rel="stylesheet" href="/css/page-components/footer.css" />
+  <link rel="stylesheet" href="/css/page-components/empty-state.css" />
 </svelte:head>
 
 <Layout title="Dashboard" adminsOnly>

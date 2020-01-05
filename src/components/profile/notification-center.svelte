@@ -16,7 +16,7 @@
     <svg src="/images/icons/bell.svg" class="icon" />
   </div>
   <div class="title">Notifications</div>
-  <div class="empty">
+  <div class="empty small">
     <svg src="/images/icons/bell-off.svg" class="icon" />
     <div class="title">No notifications</div>
   </div>

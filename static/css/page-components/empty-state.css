@@ -20,3 +20,32 @@
   margin: 0 15%;
   font-weight: 300;
 }
+
+.empty.small {
+  padding: 4em 0;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty.small .icon {
+  border-radius: 50%;
+  background: rgba(18, 120, 0, 0.1);
+  padding: 1em;
+  width: 4em;
+  height: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5em;
+}
+
+.empty.small .icon > svg {
+  stroke: #127800;
+  width: 80%;
+  height: 80%;
+}
+
+.empty.small .title {
+  margin: 0 0 .3em;
+}

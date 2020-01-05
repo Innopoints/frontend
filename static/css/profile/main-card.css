@@ -11,39 +11,6 @@
   padding: .5em .8em;
 }
 
-.empty {
-  padding: 4em 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.empty .icon {
-  border-radius: 50%;
-  background: rgba(18, 120, 0, 0.1);
-  padding: 1em;
-  width: 4em;
-  height: 4em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5em;
-}
-
-.empty .icon > svg {
-  stroke: #127800;
-  width: 80%;
-  height: 80%;
-}
-
-.empty .title {
-  color: #127800;
-  font-weight: 500;
-  font-size: 1.3rem;
-  margin-bottom: .3em;
-}
-
 @media only screen and (min-width: 360px) {
   .tabs {
     padding-left: 6%;

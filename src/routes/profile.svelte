@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="css/profile/statistics.css" />
   <link rel="stylesheet" href="css/profile/bar-colors.css" />
   <link rel="stylesheet" href="css/profile/notifications.css" />
+  <link rel="stylesheet" href="css/page-components/empty-state.css"/>
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 

@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/home/contacts.css" />
   <link rel="stylesheet" href="css/home/options.css" />
   <link rel="stylesheet" href="css/home/store.css" />
+  <link rel="stylesheet" href="css/page-components/empty-state.css" />
 </svelte:head>
 
 <!--todo: add transitions (animation)-->

@@ -38,38 +38,6 @@ h1 {
   flex-grow: 1;
 }
 
-.empty {
-  padding: 4em 1em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.empty .icon {
-  border-radius: 50%;
-  background: rgba(18, 120, 0, 0.1);
-  padding: 1em;
-  width: 4em;
-  height: 4em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5em;
-}
-
-.empty .icon > svg {
-  stroke: #127800;
-  width: 80%;
-  height: 80%;
-}
-
-.empty .title {
-  color: #127800;
-  font-weight: 500;
-  font-size: 1.3rem;
-  margin-bottom: .3em;
-}
-
 .projects-review li {
   padding-top: 1em;
   padding-bottom: 1em;
