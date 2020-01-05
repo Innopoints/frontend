@@ -36,7 +36,7 @@
           <Button on:click="{() => toggleTgChange(false)}" classname="mr btn">
             cancel
           </Button>
-          <Button on:click={save} filled>save</Button>
+          <Button on:click={save} isFilled>save</Button>
         </div>
       </div>
     {:else if $user.telegram_username}

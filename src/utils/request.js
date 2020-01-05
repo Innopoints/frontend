@@ -7,9 +7,6 @@ export default async (fetchType = fetch, url = '', method = 'GET', body = {}, is
   return await fetchType(API_HOST + url, {
     credentials: 'include',
     body: isForm ? body : Object.entries(body).length ? JSON.stringify(body) : undefined,
-    headers: {
-      'content-type': (!isForm && Object.entries(body).length) ? 'application/json' : undefined,
-    },
     method,
   }).then(res => {
     if (res.status === 204) return true;
