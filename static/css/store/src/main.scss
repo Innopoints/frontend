@@ -24,13 +24,23 @@
   .card {
     max-width: 18em;
     margin-top: 1em;
+    display: flex;
+    flex-direction: column;
 
     & > .image {
       position: relative;
+      display: block;
 
       & > img {
         width: 100%;
+        display: block;
       }
+    }
+
+    & > .content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .title + .subtitle {
@@ -39,6 +49,8 @@
 
     .card-row {
       display: flex;
+      flex-grow: 1;
+      align-items: flex-end;
       justify-content: space-between;
       margin-top: .5rem;
     }

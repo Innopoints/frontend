@@ -13,19 +13,19 @@
   justify-content: flex-end;
 }
 
-.activity .right {
+.activity.finished .right.long {
   padding-top: 0 !important;
 }
 
-.activity .panel {
+.activity.finished .right.long .panel {
   grid-template-columns: 1fr auto;
   column-gap: 10%;
 }
 
-.activity .panel :first-child {
+.activity.finished .right.long .panel :first-child {
   margin-top: 0;
 }
 
-.activity .hours, .activity .reward {
+.activity.finished .right.long .hours, .activity.finished .right.long .reward {
   grid-row: 1 / 3;
 }

@@ -29,3 +29,7 @@
 .report-performance .required {
   color: #127800;
 }
+
+.report-performance > .content {
+  max-height: calc(100vh - 7em);
+}

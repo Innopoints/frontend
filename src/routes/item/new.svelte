@@ -1,7 +1,20 @@
+<script context="module">
+  import request from '@/utils/request';
+  import {setColors} from '@/store/item';
+  export async function preload() {
+    const res = await request(this.fetch, '/colors');
+    setColors(res);
+  }
+</script>
+
 <script>
-  import Layout from '@/layouts/default.svelte';
+  import Layout from '@/layouts/auth.svelte';
   import Form from '@/containers/item/edit-form.svelte';
   import Preview from '@/containers/item/item-preview.svelte';
+
+  import {onMount} from 'svelte';
+  import {getDraft} from '@/store/item';
+  onMount(getDraft);
 </script>
 
 <svelte:head>
@@ -13,7 +26,7 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout title="Create product">
   <h1 class="padded">
     Create a Product
   </h1>

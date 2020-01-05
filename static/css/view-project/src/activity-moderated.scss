@@ -1,0 +1,141 @@
+@import "../../global/src/_variables.scss";
+
+.activity.moderated {
+  .left, .middle {
+    border-bottom: 1px solid $light-gray;
+    padding-bottom: 1em;
+  }
+
+  .middle, .right {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.5em;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    .btn > .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .left > .labeled,
+  .actions {
+    margin-top: 1em;
+  }
+
+  .panel {
+    margin-top: .8em;
+    margin-left: .5em;
+    padding-top: 1em;
+
+    &:not(:first-of-type) {
+      border-top: 1px solid #ddd;
+    }
+
+    .name {
+      margin-bottom: .3em;
+    }
+
+    & > .handle {
+      float: right;
+    }
+
+    & + section {
+      padding-top: 1em;
+      padding-left: .3em;
+    }
+  }
+
+  .stars .star {
+    stroke: $main;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0 1px;
+
+    &.off {
+      stroke: $light-gray;
+    }
+  }
+
+  .empty {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    flex-grow: 1;
+
+    .title {
+      color: $main;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-bottom: .3em;
+      margin-top: .5em;
+    }
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  @supports (display: grid) {
+    .activity.moderated {
+      display: grid;
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr 1fr;
+
+      .middle {
+        padding-top: .5em;
+      }
+
+      .right {
+        padding-top: 1.5em;
+      }
+
+      .left {
+        grid-row-start: 1;
+        grid-row-end: 3;
+        border-bottom-width: 0 !important;
+        border-right: 1px solid $light-gray;
+        padding-right: 1em;
+      }
+
+      .middle, .right {
+        margin-left: 1em;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  @supports (display: grid) {
+    .activity.moderated {
+      grid-template-rows: auto;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      .right {
+        padding-top: .5em;
+      }
+
+      .left {
+        grid-row-end: 2;
+      }
+
+      .middle {
+        border-bottom-width: 0 !important;
+        border-right: 1px solid #ddd;
+        padding-right: 1em;
+      }
+    }
+  }
+}

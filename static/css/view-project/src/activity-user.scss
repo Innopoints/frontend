@@ -1,31 +1,7 @@
 @import "../../global/src/_mixins.scss";
 @import "../../global/src/_variables.scss";
 
-.activity-brief {
-  overflow: visible;
-  margin-bottom: 1em;
-  padding-bottom: 1em;
-
-  .title {
-    font-weight: 500;
-    font-size: 1.1rem;
-    line-height: 1.4rem;
-    letter-spacing: .2px;
-  }
-
-  .labeled {
-    font-size: 1.05rem;
-
-    .icon {
-      margin-top: .7em;
-      flex-shrink: 0;
-    }
-
-    .content.secondary {
-      @include hide-accessible;
-    }
-  }
-
+.activity.user {
   .application-status {
     font-size: .9em;
     font-weight: 300;
@@ -34,17 +10,6 @@
     .dot {
       margin-right: .3em;
       margin-left: 0;
-    }
-  }
-
-  .row {
-    margin-top: .8em;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    & > .labeled {
-      flex-basis: 50%;
     }
   }
 
@@ -70,10 +35,6 @@
       }
     }
 
-    .labeled .content.primary {
-      @include hide-accessible;
-    }
-
     .labeled .content.secondary,
     .additional {
       @include show-accessible;
@@ -89,24 +50,9 @@
       font-size: .95rem;
     }
 
-    .chips {
-      margin-top: 1em;
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .chip {
-      font-size: .85rem;
-      font-weight: 400;
-      color: #000;
-      margin: 0 .3em .3em 0;
-      padding: .4em .7em;
-    }
-
     .volunteers ul {
-      list-style: disc;
       padding-left: 1.5em;
-      margin-bottom: 1em;
+      margin: .5em 0 1em;
 
       li {
         margin-top: .5em;
@@ -134,24 +80,22 @@
     }
   }
 
-  .with-icon {
+  .warning {
+    background: #fff4e5;
+    padding: .5em .8em;
+    margin-top: .8em;
+    border-radius: .75em;
+    color: #995400;
     display: flex;
-    align-items: flex-start;
-    font-size: .9rem;
-    margin-top: .3em;
+    align-items: center;
 
-    & > .icon {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      stroke: $main;
-      margin-right: .3em;
+    .icon {
+      stroke: #995400;
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-right: .6em;
     }
   }
-}
-
-.labeled .innopoint {
-  margin-bottom: -1px;
 }
 
 @media only screen and (max-width: 379px) {
@@ -163,7 +107,7 @@
 @media screen and (min-width: 420px) and (max-width: 679px),
                   (min-width: 1024px) and (max-width: 1199px),
                   (min-width: 1400px) {
-  .activity-brief {
+  .activity.user {
     .row > .labeled:first-child {
       flex-basis: 40%;
     }
@@ -175,8 +119,6 @@
     &:not(.expanded) {
       .labeled .content.secondary {
         @include show-accessible;
-        font-size: .95rem;
-        font-weight: 300;
       }
     }
 

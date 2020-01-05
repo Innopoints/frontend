@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store';
 import { goto } from '@sapper/app';
+import swapIndexes from '@/utils/swap-indexes';
 
 export const step = writable(0);
 export const changeStep = (st) => {
@@ -168,7 +169,7 @@ export const duplicateActivity = index => {
 };
 export const swapActivities = (oldPlace, newPlace) => {
   let {activities} = get(project);
-  changeField('activities', array_move(activities, oldPlace, newPlace));
+  changeField('activities', swapIndexes(activities, oldPlace, newPlace));
   save();
 };
 export const deleteActivity = index => {
@@ -213,14 +214,4 @@ export const deleteDraft = date => {
     localStorage.setItem('project-drafts', JSON.stringify(projects));
     getDrafts();
   }
-};
-
-// Thanks stackoverflow for it
-const array_move = (arr, old_index, new_index) => {
-  if (new_index >= arr.length) {
-    let k = new_index - arr.length + 1;
-    while (k--) arr.push(undefined);
-  }
-  arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-  return arr;
 };

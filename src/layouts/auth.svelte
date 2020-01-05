@@ -2,17 +2,17 @@
   import Header from '@/components/header.svelte';
   import Footer from '@/components/footer.svelte';
   import Button from 'ui/button.svelte';
-  import { isAuthed, logIn, user } from '@/store/user';
+  import { isAuthed, user, login } from '@/store/user';
 
   export let classname = '';
   export let title;
   export let adminsOnly = false;
 
-  $: condition = $isAuthed && (!adminsOnly || $user.isAdmin);
+  $: condition = $isAuthed && (!adminsOnly || $user.is_admin);
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="css/page-components/403.css" />
+  <link rel="stylesheet" href="/css/page-components/403.css" />
 </svelte:head>
 
 <style>
@@ -21,7 +21,7 @@
   }
 </style>
 
-<Header />
+<Header isProfile={title === 'Profile'} />
 <div class="material {condition ? classname : 'layout-403'}">
   {#if condition}
     <slot />
@@ -35,7 +35,7 @@
           It seems like you are not authorized to access this page.
         </div>
         <div class="actions">
-          <Button on:click={logIn} isFilled>sign in</Button>
+          <Button isFilled on:click={login}>sign in</Button>
           <Button href="/" isOutline>run to homepage</Button>
         </div>
       </div>
