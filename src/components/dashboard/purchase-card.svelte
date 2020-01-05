@@ -1,5 +1,6 @@
 <script>
   import Button from 'ui/button.svelte';
+  import Chip from 'ui/chip.svelte';
   import parseColor from '@/utils/optimal-color';
 
   export let purchase;
@@ -28,7 +29,7 @@
       </div>
       <div class="parameters">
         {#if purchase.variety.size}
-          <div class="chip small unclickable size">{purchase.variety.size}</div>
+          <Chip isSmall unclickable chipclass="chip size">{purchase.variety.size}</Chip>
         {/if}
         {#if purchase.variety.color}
           <div class="color" style={'background:' + purchase.variety.color} />
