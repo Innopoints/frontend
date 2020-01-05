@@ -29,7 +29,7 @@
       {/each}
     </ul>
   {:else}
-    <div class="empty">
+    <div class="empty small">
       <svg class="icon" src="/images/icons/smile.svg" />
       <div class="title">Everything reviewed!</div>
     </div>

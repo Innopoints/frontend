@@ -1,15 +1,23 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import Chip from 'ui/chip.svelte';
   import parseColor from '@/utils/optimal-color';
 
   export let purchase;
 
+  let dispatch = createEventDispatcher();
+  let editing = true;
+  let ready = false;
+
+  const setReady = () => {
+    ready = true;
+    editing = false;
+  };
   const copy = () => {
     if (!navigator.clipboard) alert('Browser does not support copying');
     else navigator.clipboard.writeText(purchase.clientEmail);
   };
-  const updateStatus = status => purchase.status = status;
 </script>
 
 <li>
@@ -38,22 +46,31 @@
     </div>
   </div>
   <div class="actions">
-    {#if purchase.status}
-      Marked as {purchase.status}
-      <Button classname="btn ml" on:click={() => updateStatus(null)}>
-        <svg src="/images/icons/edit.svg" class="icon" />
+    {#if !editing}
+      Marked as ready for pickup
+      <Button classname="btn ml" on:click={() => editing = true}>
+        <svg src="/images/icons/edit.svg" class="icon mr" />
         edit status
       </Button>
     {:else}
-      <Button isDanger on:click={() => updateStatus('rejected')}>
+      <Button isDanger on:click={() => dispatch('reject', purchase)}>
         <svg src="/images/icons/x.svg" class="icon mr" />
         reject
       </Button>
-      <Button on:click={() => updateStatus('ready for pickup')}>
-        <svg src="/images/icons/package.svg" class="icon mr" />
-        ready for pickup
-      </Button>
-      <Button on:click={() => updateStatus('delivered')}>
+
+      {#if ready}
+        <Button on:click={() => editing = false}>
+          <svg src="/images/icons/archive.svg" class="icon mr" />
+          pending
+        </Button>
+      {:else}
+        <Button on:click={setReady}>
+          <svg src="/images/icons/package.svg" class="icon mr" />
+          ready for pickup
+        </Button>
+      {/if}
+
+      <Button on:click={() => dispatch('deliver', purchase)}>
         <svg src="/images/icons/smile.svg" class="icon mr" />
         delivered
       </Button>
