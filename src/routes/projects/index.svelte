@@ -55,7 +55,7 @@
     <Filters />
     <Ordering />
 
-    {#if projectsList.length === 0}
+    {#if !projectsList || projectsList.length === 0}
       <div class="empty">
         <figure>
           <img

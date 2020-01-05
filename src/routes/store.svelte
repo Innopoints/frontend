@@ -50,7 +50,7 @@
     <Filters />
     <Ordering />
 
-    {#if items.length === 0}
+    {#if !items || items.length === 0}
       <div lass="empty">
         <figure>
           <img class="picture" src="/images/store/no-products.svg" alt="" />
