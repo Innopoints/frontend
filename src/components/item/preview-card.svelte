@@ -1,27 +1,26 @@
 <script>
-  import openFiles from '@/utils/read-files';
   import Card from 'ui/card.svelte';
   import Labeled from 'ui/labeled.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
   import ChipGroup from 'ui/chip-group.svelte';
   import {item} from '@/store/item';
   import getBackground from '@/utils/optimal-color';
+  import {API_HOST} from '@/constants/env';
 
-  let images = [];
   $: variety = $item.varieties[0];
   $: sizes = $item.inSizes ? Object.keys(variety.sizes).map(size => ({
     label: size,
     disabled: variety.sizes[size] <= 0,
   })) : null;
-  $: (async() => images = await openFiles(variety.images))();
+  $: images = variety.images;
 
   const changeVariety = e => variety = $item.varieties.find(x => x.color === e.detail.color);
 </script>
 
 <Card
-    img={images.length ? images[0] : '/images/create-product/placeholder.svg'}
-    imgWrap={false}
-    color={getBackground(variety.color) || 'inherit'}
+  img={images.length ? API_HOST + images[0].url : '/images/create-product/placeholder.svg'}
+  imgWrap={false}
+  color={getBackground(variety.color) || 'inherit'}
 >
   <span class:placeholder={!$item.name} class="name title">{$item.name}</span>
   {#if $item.type}

@@ -24,8 +24,8 @@
 }
 
 .personal .btn > .icon {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .personal .telegram {
@@ -37,15 +37,8 @@
 }
 
 .personal .telegram.exists {
-  display: flex;
   align-items: center;
   font-size: 1.2rem;
-}
-
-.personal .telegram .error {
-  top: 3.5rem;
-  bottom: unset;
-  margin-right: 12em;
 }
 
 .personal .telegram .actions {

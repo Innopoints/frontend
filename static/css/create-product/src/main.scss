@@ -100,6 +100,9 @@
       margin: 0 10px 10px 0;
       border-radius: 10px;
       overflow: visible;
+      position: relative;
+      display: flex;
+      flex-direction: column;
 
       &:first-child::before {
         content: "cover image";
@@ -114,14 +117,101 @@
       }
 
       & > .actions {
+        flex-grow: 1;
         display: flex;
         justify-content: space-between;
         padding: 5px;
         position: relative;
       }
 
-      & > img {
+      & > .text {
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        display: none;
+        padding: 0 1em;
+        font-weight: 300;
+        font-size: .9rem;
+
+        &.error {
+          color: $danger;
+          font-weight: 500;
+        }
+      }
+
+      .image-wrapper {
+        overflow: hidden;
+
+        img {
+          display: block;
+          height: 100%;
+        }
+      }
+
+      .image-wrapper,
+      .status-overlay {
         height: 120px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .status-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        background: transparentize(black, .5);
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+
+        .lds-default, .retry {
+          display: none;
+        }
+
+        .retry .icon {
+          width: 2.5em;
+          height: 2.5em;
+          stroke-width: 1.5;
+          stroke: #fff;
+        }
+      }
+
+      &.loading, &.error {
+        .image-wrapper img {
+          overflow: hidden;
+          filter: blur(4px);
+        }
+
+        .status-overlay {
+          visibility: visible;
+        }
+
+        & > .actions {
+          display: none;
+        }
+      }
+
+      &.loading {
+        .lds-default {
+          display: block;
+        }
+
+        & > .text.loading {
+          display: flex;
+        }
+      }
+
+      &.error {
+        .retry {
+          display: flex;
+        }
+
+        & > .text.error {
+          display: flex;
+        }
       }
 
       .drag-handle {

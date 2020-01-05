@@ -120,7 +120,7 @@
         <div class="purchases">
           {purchases || 0} purchases
         </div>
-        {#if $user.isAdmin}
+        {#if $user.is_admin}
           <Button isFilled>edit</Button>
         {:else}
           <Button isFilled on:click={purchase}>purchase</Button>

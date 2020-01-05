@@ -430,14 +430,12 @@ button.btn {
 .text-field.with-item > .item {
   height: 1.1rem;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-top: -1px;
+  top: .85rem;
 }
 
 .text-field.with-item > svg.item {
   height: 1rem;
-  margin-top: -2px;
+  top: .9rem;
 }
 
 .text-field.with-item input:invalid + svg.item {
@@ -510,6 +508,10 @@ button.btn {
   stroke: rgba(171, 3, 3, 0.7);
 }
 
+.text-field.outline input:invalid:focus ~ svg.item {
+  stroke: rgba(171, 3, 3, 0.7);
+}
+
 .text-field.outline input:invalid ~ .error {
   display: inline;
 }
@@ -537,8 +539,6 @@ button.btn {
   font-size: .8rem;
   color: rgba(171, 3, 3, 0.7);
   font-weight: 500;
-  position: absolute;
-  bottom: -1.5rem;
 }
 
 .text-field.no-spinner > input[type="number"] {

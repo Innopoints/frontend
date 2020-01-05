@@ -1,7 +1,7 @@
 <script>
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
-  import {item, changeItemField} from '@/store/item';
+  import {item, changeItemField, saveDraft} from '@/store/item';
 </script>
 
 <FormField
@@ -12,9 +12,10 @@
 >
   <TextField
       id="name"
+      placeholder="I <3 Innopolis"
       bind:value={$item.name}
       on:change="{(e) => changeItemField('name', e.detail)}"
-      placeholder="I <3 Innopolis"
+      on:blur={saveDraft}
   />
 </FormField>
 
@@ -25,18 +26,20 @@
 >
   <TextField
       id="type"
+      placeholder="sweatshirt"
       bind:value={$item.type}
       on:change="{(e) => changeItemField('type', e.detail)}"
-      placeholder="sweatshirt"
+      on:blur={saveDraft}
   />
 </FormField>
 
 <FormField id="description" title="Description">
   <TextField
       bind:value={$item.description}
-      on:change="{(e) => changeItemField('description', e.detail)}"
       multiline
       placeholder="High quality bulletproof fabric"
+      on:change="{(e) => changeItemField('description', e.detail)}"
+      on:blur={saveDraft}
   />
 </FormField>
 
@@ -48,14 +51,15 @@
 >
   <TextField
       id="price"
+      type="number"
       min="0"
       max="1000000"
       maxLength="6"
-      bind:value={$item.price}
-      on:change="{(e) => changeItemField('price', e.detail)}"
-      type="number"
       isWithItem
       isItemRight
+      bind:value={$item.price}
+      on:change="{(e) => changeItemField('price', e.detail)}"
+      on:blur={saveDraft}
   >
     <svg src="/images/innopoint-sharp.svg" class="item innopoint" />
   </TextField>

@@ -105,7 +105,6 @@ h1 {
     }
 
     .btn {
-      margin-right: -1em;
       margin-top: .3em;
     }
   }
@@ -152,6 +151,10 @@ h1 {
     font-weight: 300;
   }
 
+  time {
+    text-align: right;
+  }
+
   .purchaser {
     font-weight: 300;
     font-size: .9em;
@@ -162,15 +165,20 @@ h1 {
     margin-top: .2em;
     text-decoration: underline;
     font-size: .95em;
+    cursor: pointer;
   }
 
   .parameters {
     display: flex;
     align-self: flex-start;
+    justify-content: flex-end;
 
     .color {
       border-radius: 50%;
       padding: .9em;
+    }
+
+    .size + .color {
       margin-left: .5em;
     }
   }

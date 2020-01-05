@@ -4,6 +4,7 @@
   import Labeled from 'ui/labeled.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
   import getBackground from '@/utils/optimal-color';
+  import {API_HOST} from '@/constants/env';
 
   export let id;
   export let name;
@@ -18,7 +19,7 @@
   };
 </script>
 
-<Card img={selected.images[0]} color={getBackground(selected.color)}>
+<Card img={API_HOST + selected.images[0]} color={getBackground(selected.color)}>
   <div class="title">{name}</div>
   {#if type}<span class="subtitle">{type}</span>{/if}
   <div slot="radio">
