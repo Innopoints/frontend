@@ -462,14 +462,12 @@ button.btn {
     & > .item {
       height: 1.1rem;
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      margin-top: -1px;
+      top: .85rem;
     }
 
     & > svg.item {
       height: 1rem;
-      margin-top: -2px;
+      top: .9rem;
     }
 
     input:invalid + svg.item {
@@ -542,6 +540,10 @@ button.btn {
           stroke: transparentize($danger, .3);
         }
 
+        &:focus ~ svg.item {
+          stroke: transparentize($danger, .3);
+        }
+
         & ~ .error {
           display: inline;
         }
@@ -572,8 +574,6 @@ button.btn {
     font-size: .8rem;
     color: transparentize($danger, .3);
     font-weight: 500;
-    position: absolute;
-    bottom: -1.5rem;
   }
 
   &.no-spinner > input[type="number"] {
@@ -1162,6 +1162,7 @@ input[type="checkbox"]:checked + .chip::before {
   .consequences {
     display: block;
     margin-top: .3em;
+    font-weight: 300;
   }
 
   &.danger {

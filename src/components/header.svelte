@@ -14,8 +14,8 @@
     {#if !$isAuthed}
       <Button isOutline on:click={login}>sign in</Button>
     {:else}
+      <NotificationCenter />
       {#if isProfile}
-        <NotificationCenter />
         <Button on:click={signOut}>sign out</Button>
       {:else}
         <Button href="/profile" isRound>

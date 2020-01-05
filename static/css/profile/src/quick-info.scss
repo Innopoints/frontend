@@ -2,74 +2,69 @@
   margin-top: 1.5em;
 }
 
-.balance > p {
-  font-size: 1.2rem;
-}
+.balance {
+  & > p {
+    font-size: 1.2rem;
+  }
 
-.balance > nav {
-  margin-top: .3em;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-}
+  & > nav {
+    margin-top: .3em;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
 
-.balance .innopoint {
-  stroke-width: 6;
-  margin-left: .05em;
-  margin-right: .1em;
+  .innopoint {
+    stroke-width: 6;
+    margin-left: .05em;
+    margin-right: .1em;
+  }
 }
 
 .personal {
   margin-bottom: 1.5em;
-}
 
-.personal .btn > .icon {
-  width: 20px;
-  height: 20px;
-}
+  .btn > .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
 
-.personal .telegram {
-  display: flex;
-}
+  .telegram {
+    display: flex;
 
-.personal .telegram.input {
-  flex-direction: column;
-}
+    &.input {
+      flex-direction: column;
+    }
 
-.personal .telegram.exists {
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-}
+    &.exists {
+      align-items: center;
+      font-size: 1.2rem;
+    }
 
-.personal .telegram .error {
-  top: 3.5rem;
-  bottom: unset;
-  margin-right: 12em;
-}
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: .5em;
+    }
 
-.personal .telegram .actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: .5em;
-}
+    & > .btn {
+      flex-shrink: 0;
+      flex-grow: 0;
 
-.personal .telegram > .btn {
-  flex-shrink: 0;
-  flex-grow: 0;
-}
-
-.personal .telegram > .btn:first-child {
-  margin-right: .2em;
+      &:first-child {
+        margin-right: .2em;
+      }
+    }
+  }
 }
 
 .info-bubble {
   padding: 1em;
   font-size: .95rem;
-}
 
-.info-bubble .btn.close {
-  margin: -.7em -.7em .3em .3em;
+  .btn.close {
+    margin: -.7em -.7em .3em .3em;
+  }
 }
 
 .personal .info-bubble {
@@ -79,15 +74,15 @@
 @media only screen and (min-width: 380px) {
   .personal {
     padding: 0 .2rem;
-  }
 
-  .personal .telegram > .btn:first-child {
-    margin-right: .5em;
-  }
+    .telegram > .btn:first-child {
+      margin-right: .5em;
+    }
 
-  .personal .info-bubble {
-    right: -3em;
-    min-width: 17em;
+    .info-bubble {
+      right: -3em;
+      min-width: 17em;
+    }
   }
 }
 
@@ -118,11 +113,13 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .balance > p {
-    font-size: 1.4rem;
-  }
+  .balance {
+    & > p {
+      font-size: 1.4rem;
+    }
 
-  .balance .innopoint {
-    height: 1.2rem;
+    .innopoint {
+      height: 1.2rem;
+    }
   }
 }

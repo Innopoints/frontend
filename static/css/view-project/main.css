@@ -2,6 +2,12 @@
   padding-bottom: 3em;
 }
 
+h2.padded {
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 2em;
+}
+
 .project-header {
   margin-bottom: 1.5em;
 }
@@ -14,6 +20,17 @@
   margin-top: 1em;
   margin-bottom: 0;
   font-size: 1.3rem;
+}
+
+.project-header h1 .status-chip {
+  display: inline-block;
+  padding: .3em .6em;
+  border-radius: 1em;
+  background: #127800;
+  font-weight: 500;
+  color: #fff;
+  font-size: .9rem;
+  margin-left: .5em;
 }
 
 .project-header .info {
@@ -30,8 +47,8 @@
 }
 
 .project-header .icon {
-  width: 28px;
-  height: 28px;
+  width: 1.75rem;
+  height: 1.75rem;
   margin-bottom: -2px;
   flex-shrink: 0;
   align-self: flex-start;
@@ -43,8 +60,8 @@
 }
 
 .project-header .actions .icon {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .project-header .actions .btn.filled {
@@ -56,51 +73,21 @@
   margin-right: .5em;
 }
 
-.material > h2 {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
+.project-header.wrap .data-points {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.labeled.comment {
-  width: 100%;
-  font-size: 1rem;
-  line-height: 1.2rem;
-}
-
-.labeled.comment > .icon {
-  flex-shrink: 0;
-}
-
-h2.padded {
-  margin-bottom: 0;
-  margin-top: 2em;
-}
-
-.activities.brief {
+.activities {
   margin-top: 1em;
 }
 
-.card.activity,
-.card.create-activity {
-  margin: 1em .5em 0;
-}
-
-.material > .activities + .btn {
+.activities.moderated + .btn {
   margin-left: .5em;
   margin-top: 1em;
 }
 
-.consequences {
-  font-weight: 300;
-  display: block;
-  margin-top: .3em;
-}
-
-.modal-overlay ul.actual li {
+.dialog ul.actual li {
   margin-bottom: .25em;
 }
 
@@ -135,6 +122,10 @@ h2.padded {
   display: inline-block;
 }
 
+.reports .data-points .icon {
+  flex-shrink: 0;
+}
+
 .reports .feedback {
   display: flex;
   flex-direction: column-reverse;
@@ -148,22 +139,19 @@ h2.padded {
 }
 
 .reports .feedback .stars .star {
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
 }
 
 .reports .labeled > .icon {
   margin-top: .6rem;
 }
 
-.stars .star {
+.star {
   stroke: #127800;
-  width: 18px;
-  height: 18px;
-  margin: 0 1px;
 }
 
-.stars .star.off {
+.star.off {
   stroke: #ddd;
 }
 
@@ -231,28 +219,8 @@ h2.padded {
   .project-header .info {
     border-bottom: none;
   }
-  .activities.brief {
-    column-count: 2;
-  }
-  .activities.brief .card {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-  .activities.moderated {
-    padding-left: 2.5em;
-    padding-right: 2.5em;
-  }
   .material > .moderated + .btn {
     margin-left: 2.5em;
-  }
-  .material > h2 {
-    clip: auto;
-    width: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    text-align: center;
   }
 }
 
@@ -269,10 +237,6 @@ h2.padded {
 }
 
 @media only screen and (min-width: 1200px) {
-  .activities.brief {
-    column-count: 3;
-  }
-  .activities.moderated,
   .project-header {
     padding-left: 8%;
     padding-right: 8%;

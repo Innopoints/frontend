@@ -95,6 +95,9 @@
   margin: 0 10px 10px 0;
   border-radius: 10px;
   overflow: visible;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .image-platform.has-content .image:first-child::before {
@@ -110,14 +113,95 @@
 }
 
 .image-platform.has-content .image > .actions {
+  flex-grow: 1;
   display: flex;
   justify-content: space-between;
   padding: 5px;
   position: relative;
 }
 
-.image-platform.has-content .image > img {
+.image-platform.has-content .image > .text {
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  padding: 0 1em;
+  font-weight: 300;
+  font-size: .9rem;
+}
+
+.image-platform.has-content .image > .text.error {
+  color: #ab0303;
+  font-weight: 500;
+}
+
+.image-platform.has-content .image .image-wrapper {
+  overflow: hidden;
+}
+
+.image-platform.has-content .image .image-wrapper img {
+  display: block;
+  height: 100%;
+}
+
+.image-platform.has-content .image .image-wrapper,
+.image-platform.has-content .image .status-overlay {
   height: 120px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.image-platform.has-content .image .status-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.image-platform.has-content .image .status-overlay .lds-default, .image-platform.has-content .image .status-overlay .retry {
+  display: none;
+}
+
+.image-platform.has-content .image .status-overlay .retry .icon {
+  width: 2.5em;
+  height: 2.5em;
+  stroke-width: 1.5;
+  stroke: #fff;
+}
+
+.image-platform.has-content .image.loading .image-wrapper img, .image-platform.has-content .image.error .image-wrapper img {
+  overflow: hidden;
+  filter: blur(4px);
+}
+
+.image-platform.has-content .image.loading .status-overlay, .image-platform.has-content .image.error .status-overlay {
+  visibility: visible;
+}
+
+.image-platform.has-content .image.loading > .actions, .image-platform.has-content .image.error > .actions {
+  display: none;
+}
+
+.image-platform.has-content .image.loading .lds-default {
+  display: block;
+}
+
+.image-platform.has-content .image.loading > .text.loading {
+  display: flex;
+}
+
+.image-platform.has-content .image.error .retry {
+  display: flex;
+}
+
+.image-platform.has-content .image.error > .text.error {
+  display: flex;
 }
 
 .image-platform.has-content .image .drag-handle {

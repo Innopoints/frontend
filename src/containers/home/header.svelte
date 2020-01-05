@@ -1,5 +1,6 @@
 <script>
   import Button from 'ui/button.svelte';
+  // import NotificationCenter from '@/components/profile/notification-center.svelte';
   import { isAuthed, login } from '@/store/user';
 </script>
 
@@ -11,8 +12,12 @@
   {#if !$isAuthed}
     <Button isOutline on:click={login}>sign in</Button>
   {:else}
-    <Button href="/profile" isRound>
-      <svg src="images/icons/user.svg" />
-    </Button>
+    <div class="actions">
+      <!-- TODO: decomment after markup changes -->
+      <!--<NotificationCenter />-->
+      <Button href="/profile" isRound>
+        <svg src="images/icons/user.svg" />
+      </Button>
+    </div>
   {/if}
 </header>
