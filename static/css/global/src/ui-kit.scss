@@ -201,6 +201,10 @@ hr {
   align-items: center;
   cursor: pointer;
 
+  .ripple {
+    background: transparentize($main, .9);
+  }
+
   &::-moz-focus-inner {
     border: 0;
   }
@@ -215,6 +219,10 @@ hr {
     & > svg {
       stroke: black;
     }
+
+    .ripple {
+      background: transparentize(black, .9);
+    }
   }
 
   &.danger {
@@ -222,6 +230,10 @@ hr {
 
     & > svg {
       stroke: $danger;
+    }
+
+    .ripple {
+      background: transparentize($danger, .9);
     }
   }
 
@@ -270,6 +282,10 @@ hr {
 
     & > svg {
       stroke: white;
+    }
+
+    .ripple {
+      background: transparentize(#fff, .75);
     }
   }
 
