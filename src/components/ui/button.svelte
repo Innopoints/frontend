@@ -32,10 +32,10 @@
   const getRippleColor = () => {
     if (ripple) {
       if (isFilled) {
-        return 'rgba(255, 255, 255, .35)';
+        return 'rgba(255, 255, 255, .25)';
       } else {
-        if (isDanger) return 'rgba(186, 3, 3, .25)';
-        else return 'rgba(56, 120, 0, .25)';
+        if (isDanger) return 'rgba(186, 3, 3, .1)';
+        else return 'rgba(56, 120, 0, .1)';
       }
     }
     return null;
