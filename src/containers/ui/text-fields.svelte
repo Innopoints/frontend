@@ -11,7 +11,7 @@
   </div>
   <div class="showcase half">
     <TextField placeholder="Price" isWithItem isItemRight>
-      <svg src="/images/innopoint-sharp.svg" class="item" />
+      <svg src="/images/innopoint-sharp.svg" class="item innopoint" />
     </TextField>
     <TextField type="number" isWithItem>
       <span class="item">XXL</span>
@@ -24,14 +24,11 @@
     <TextField
         id="description"
         placeholder="High-quality bulletproof fabric"
-        type="number"
         multiline
     />
   </div>
-</Card>
 
-<Card id="forms">
-  <h1>Form fields</h1>
+  <hr />
 
   <div class="showcase">
     <form>
@@ -71,9 +68,9 @@
         isOutline
         isWithItem
         label="Telegram"
-        pattern="[A-Za-z0-9_](5, 32)"
+        pattern="[A-Za-z0-9_]{'{'}5,32{'}'}"
         error="A username should contain from 5 to 32 symbols: a–z, 0–9, _.">
-      <img alt="" src="/images/icons/at-sign.svg" class="item" />
+      <svg src="/images/icons/at-sign.svg" class="item" />
     </TextField>
   </div>
 </Card>
