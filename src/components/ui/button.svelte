@@ -56,6 +56,7 @@
       class={classes.join(' ')}
       on:click
       use:rippleEffect={rippleColor}
+      rel="prefetch"
   >
     <slot />
     {#if away}
