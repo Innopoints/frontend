@@ -1,113 +1,92 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import parseItems from './utils/parse-items-array';
-  import parseValues from './utils/parse-values';
-
   export let classname = '';
   export let wrapperclass = 'radio';
   export let radioclass = 'radio';
   export let inputclass = '';
-  export let labelclass = 'label';
+  export let labelclass = null;
   export let iconclass = 'icon';
   export let isColor = false;
-  export let isLabel = false;
-  export let isLabelGreen = false;
 
-  export let items;
+  export let values;
+  export let labels = null;
+  export let value = null;
   export let name;
-  export let value = {};
-  export let uniqueKey = null;
   export let labelPosition = 'right';
 
-  $: parsedItems = parseItems(items, uniqueKey);
-  $: selected = parseValues(value, parsedItems, {uniqueKey});
+  if (values.length === 0) {
+    throw new Error('Must have at least one item in the radio group.');
+  }
 
-  const dispatch = createEventDispatcher();
-  const changeRadio = item => {
-    selected = item;
-    dispatch('change', item);
-  };
+  if (labels !== null && values.length !== labels.length) {
+    throw new Error('Must have as many labels as there is values.');
+  }
 
-  const isWhite = item => {
-    if (!item.color || !isColor) return false;
-    return item.color.toUpperCase() === '#FFF' || item.color.toUpperCase() === '#FFFFFF';
-  };
-  const style = item => {
-    if (!isColor || !item.color || isWhite(item)) return '';
+  if (labelPosition !== 'right' && labelPosition !== 'left') {
+    throw new Error('Label position must be either left or right.');
+  }
 
-    // Parse HEX colors
-    let outline = '';
-    let match = item.color.toUpperCase().match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
-    if(match) {
-      outline = `
-            --r: ${parseInt(match[1], 16)};
-            --g: ${parseInt(match[2], 16)};
-            --b: ${parseInt(match[3], 16)};
-          `;
+  function radioColor(hexColor) {
+    if (!isColor) return '';
+
+    if (hexColor.length !== 7) {
+      throw new Error('Values of colored radio groups must be #XXXXXX hex colors.');
     }
 
-    return `
-          background-color: ${item.color};
-          border-color: ${item.color};
-          ${outline}
-        `;
-  };
+    let r = parseInt(hexColor.slice(1, 3), 16);
+    let g = parseInt(hexColor.slice(3, 5), 16);
+    let b = parseInt(hexColor.slice(5, 7), 16);
+
+    const whiteThreshold = 245;
+    const gray = 153;
+    if (r > whiteThreshold && g > whiteThreshold && b > whiteThreshold) {
+      r = gray;
+      g = gray;
+      b = gray;
+    }
+
+    return `background-color: rgb(${r}, ${g}, ${b});
+            border-color: rgb(${r}, ${g}, ${b});
+            --r: ${r}; --g: ${g}; --b: ${b};`;
+  }
 </script>
 
-<style>
-  .radio .icon.white {
-    background-color: #fff !important;
-    border-color: #999 !important;
-    --r: 153;
-    --g: 153;
-    --b: 153;
-  }
-
-  .radio .icon.white::before {
-    background: #999 !important;
-  }
-</style>
-
-<div class:with-labels={isLabel} class={classname} role="group">
-  {#each parsedItems as item, i (i)}
-    <label class:colored={isColor} class:clickable={isLabel} class={wrapperclass}>
-      {#if isLabel}
-        {#if labelPosition === 'left'}
-          {#if isLabelGreen}
-            <span class={labelclass}>{item.label}</span>
-          {:else}
-            {item.label}
-          {/if}
+<div class:with-labels={!isColor} class={classname} role="group">
+  {#each values as loopValue, i (i)}
+    <label class:colored={isColor} class:clickable={!isColor} class={wrapperclass}>
+      {#if !isColor && labelPosition === 'left'}
+        {#if labelclass !== null}
+          <span class={labelclass}>{labels === null ? loopValue : labels[i]}</span>
+        {:else}
+          {labels === null ? loopValue : labels[i]}
         {/if}
-
+      {/if}
+      {#if !isColor}
         <div class={radioclass}>
           <input
-              on:change="{() => changeRadio(item)}"
+              bind:group={value}
+              value={loopValue}
               type="radio"
               name={name}
               class={inputclass}
-              checked="{selected.id === item.id}"
           >
-          <div class:white={isWhite(item)} style="{style(item)}" class={iconclass}></div>
+          <div style="{radioColor(loopValue)}" class={iconclass}></div>
         </div>
-
-        {#if labelPosition === 'right'}
-          {#if isLabelGreen}
-            <span class={labelclass}>{item.label}</span>
-          {:else}
-            {item.label}
-          {/if}
-        {/if}
-
       {:else}
         <input
-            on:change="{() => changeRadio(item)}"
+            bind:group={value}
+            value={loopValue}
             type="radio"
             name={name}
             class={inputclass}
-            checked="{selected.id === item.id}"
         >
-        <div class:white={isWhite(item)} style="{style(item)}" class={iconclass}></div>
+        <div style="{radioColor(loopValue)}" class={iconclass}></div>
+      {/if}
+      {#if !isColor && labelPosition === 'right'}
+        {#if labelclass !== null}
+          <span class={labelclass}>{labels === null ? loopValue : labels[i]}</span>
+        {:else}
+          {labels === null ? loopValue : labels[i]}
+        {/if}
       {/if}
     </label>
   {/each}
