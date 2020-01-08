@@ -30,16 +30,15 @@
       flex-wrap: wrap;
       align-items: stretch;
     }
+
     .todo {
       background-color: red;
       width: 100%;
     }
+
     header.top-level { width: 100%; }
+
     footer { width: 100%; }
-    .flex-wrap {
-      display: flex;
-      flex-wrap: wrap;
-    }
   </style>
 </svelte:head>
 

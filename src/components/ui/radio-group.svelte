@@ -2,11 +2,11 @@
   import getColorPickerStyles from './utils/color-picker-styles.js';
 
   export let classname = '';
-  export let wrapperclass = 'radio';
-  export let radioclass = 'radio';
+  export let wrapperclass = '';
+  export let radioclass = '';
   export let inputclass = '';
   export let labelclass = null;
-  export let iconclass = 'icon';
+  export let iconclass = '';
   export let isColor = false;
 
   export let values;
@@ -30,7 +30,12 @@
 
 <div class:with-labels={!isColor} class={classname} role="group">
   {#each values as loopValue, i (i)}
-    <label class:colored={isColor} class:clickable={!isColor} class={wrapperclass}>
+    <label
+      class:colored={isColor}
+      class:radio={isColor}
+      class:clickable={!isColor}
+      class={wrapperclass}
+    >
       {#if !isColor && labelPosition === 'left'}
         {#if labelclass !== null}
           <span class={labelclass}>{labels === null ? loopValue : labels[i]}</span>
@@ -39,7 +44,7 @@
         {/if}
       {/if}
       {#if !isColor}
-        <div class={radioclass}>
+        <div class="radio {radioclass}">
           <input
               bind:group={value}
               value={loopValue}

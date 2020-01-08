@@ -31,6 +31,7 @@
         isColor
         name="radio2"
         values={colors}
+        classname="flex-wrap"
     />
   </div>
 </Card>
