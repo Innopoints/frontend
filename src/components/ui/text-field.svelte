@@ -31,7 +31,7 @@
   const delayedChange = (e) => {
     dispatch('change', e.target.value);
     clearTimeout(timeout);
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       dispatch('delayedChange', e.target.value);
     }, changeTimeout);
   };
