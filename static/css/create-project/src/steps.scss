@@ -350,6 +350,15 @@ h2 {
     margin-top: 2em;
   }
 
+  .autocomplete-field {
+    margin-bottom: 1em;
+
+    .dropdown {
+      max-height: 12em;
+      overflow-y: auto;
+    }
+  }
+
   @media only screen and (max-width: 479px) {
     .autocomplete-field {
       .dropdown {
@@ -390,7 +399,7 @@ h2 {
     }
 
     .autocomplete-field {
-      margin-bottom: 3em;
+      margin-bottom: 6em;
     }
   }
 }

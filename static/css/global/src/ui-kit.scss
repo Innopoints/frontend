@@ -1657,13 +1657,94 @@ input[type="checkbox"]:checked + .chip::before {
       padding: .8em 2.5em .8em 1.5em;
       cursor: pointer;
 
-      &:hover {
+      &:hover:not(.loading) {
         background: transparentize($main, .92);
       }
 
       mark {
         background: none;
         color: $main;
+        font-weight: 500;
+      }
+
+      .subtext {
+        font-size: .9rem;
+        font-weight: 300;
+        margin-top: .2em;
+      }
+
+      &.loading {
+        padding-top: .5em;
+        padding-bottom: .5em;
+        display: flex;
+        align-items: center;
+        font-size: .9rem;
+        cursor: wait;
+
+        .lds-ellipsis {
+          display: inline-block;
+          position: relative;
+          width: 32px;
+          height: 32px;
+          margin-right: .8em;
+
+          div {
+            position: absolute;
+            top: 13px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: $main;
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+            &:nth-child(1) {
+              left: 3px;
+              animation: lds-ellipsis1 0.6s infinite;
+            }
+
+            &:nth-child(2) {
+              left: 3px;
+              animation: lds-ellipsis2 0.6s infinite;
+            }
+
+            &:nth-child(3) {
+              left: 13px;
+              animation: lds-ellipsis2 0.6s infinite;
+            }
+
+            &:nth-child(4) {
+              left: 22px;
+              animation: lds-ellipsis3 0.6s infinite;
+            }
+          }
+
+          @keyframes lds-ellipsis1 {
+            0% {
+              transform: scale(0);
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+
+          @keyframes lds-ellipsis3 {
+            0% {
+              transform: scale(1);
+            }
+            100% {
+              transform: scale(0);
+            }
+          }
+
+          @keyframes lds-ellipsis2 {
+            0% {
+              transform: translate(0, 0);
+            }
+            100% {
+              transform: translate(10px, 0);
+            }
+          }
+        }
       }
     }
   }

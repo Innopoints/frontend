@@ -46,6 +46,11 @@ h2.padded {
   font-size: 1.05rem;
 }
 
+.project-header .labeled .secondary {
+  display: block;
+  margin-top: .2em;
+}
+
 .project-header .icon {
   width: 1.75rem;
   height: 1.75rem;
