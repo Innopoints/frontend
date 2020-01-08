@@ -10,6 +10,14 @@
   export let isRectangle = false;
   export let ripple = true;
 
+  if (isFilled + isOutline > 1) {
+    throw new Error('A button may not be filled and outlined at the same time.');
+  }
+
+  if (isDanger + isNormal > 1) {
+    throw new Error('A button may not be danger and normal at the same time.');
+  }
+
   export let disabled = false;
   export let label = '';
   export let away = null;
