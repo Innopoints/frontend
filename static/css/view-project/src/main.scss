@@ -46,6 +46,11 @@ h2.padded {
     margin-top: 1em;
     margin-right: 2.5em;
     font-size: 1.05rem;
+
+    .secondary {
+      display: block;
+      margin-top: .2em;
+    }
   }
 
   .icon {
