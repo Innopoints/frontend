@@ -16,15 +16,15 @@
   export let labelPosition = 'right';
 
   if (values.length === 0) {
-    throw new Error('Must have at least one item in the radio group.');
+    console.error('Must have at least one item in the radio group.');
   }
 
   if (labels !== null && values.length !== labels.length) {
-    throw new Error('Must have as many labels as there is values.');
+    console.error('Must have as many labels as there is values.');
   }
 
   if (labelPosition !== 'right' && labelPosition !== 'left') {
-    throw new Error('Label position must be either left or right.');
+    console.error('Label position must be either left or right.');
   }
 </script>
 
