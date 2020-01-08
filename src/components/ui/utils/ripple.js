@@ -3,9 +3,9 @@ export default (node, ripple, options = {}) => {
     // Default values.
     let props = {
       event: options.event || 'mousedown',
-      transition: options.transition || 600,
+      transition: options.transition || 150,
       zIndex: options.zIndex || '9999',
-      bg: ripple || 'rgba(0, 0, 0, 0.35)',
+      bg: ripple || 'rgba(0, 0, 0, 0.15)',
     };
 
     node.addEventListener(props.event, function(event) {
