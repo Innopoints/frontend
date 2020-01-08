@@ -3,25 +3,31 @@
   import Card from 'ui/card.svelte';
 </script>
 
-<Card id="buttons" classname="todo">
+<Card id="buttons">
   <h1>Buttons</h1>
   <div class="showcase">
-    <Button isFilled href="#" away>link</Button>
     <Button isFilled>button</Button>
-    <Button isOutline isFilled href="#">link</Button>
-    <Button href="#">link</Button>
+    <Button isOutline>button</Button>
+    <Button>button</Button>
+  </div>
+  <div class="showcase">
+    <Button isFilled href="/ui" away>link away</Button>
+    <Button isOutline href="/ui">link</Button>
+    <Button href="/ui">link</Button>
+  </div>
+  <div class="showcase">
     <Button isFilled disabled>disabled</Button>
     <Button isOutline disabled>disabled</Button>
     <Button disabled>disabled</Button>
   </div>
   <div class="showcase">
     <Button isFilled>
-      button
+      icon right
       <svg src="images/icons/flag.svg" class="ml icon" />
     </Button>
     <Button href="#">
       <svg src="images/icons/calendar.svg" class="mr icon" />
-      button
+      icon left
     </Button>
   </div>
   <div class="showcase">
@@ -36,13 +42,23 @@
     </Button>
     <Button isFilled chevron>chevron</Button>
   </div>
-  <hr />
   <div class="showcase">
     <Button isFilled isDanger>
-      <svg src="images/icons/move.svg" class="mr" />
       button
     </Button>
-    <Button href="#" isOutline isDanger>button</Button>
-    <Button href="#" isDanger>button</Button>
+    <Button isOutline isDanger>button</Button>
+    <Button isDanger>button</Button>
+  </div>
+  <div class="showcase">
+    <Button isRectangle>
+      rectangle
+    </Button>
+    <Button isRectangle isOutline>
+      <svg src="/images/icons/bell.svg" class="icon mr" />
+      rect
+    </Button>
+    <Button isRectangle isFilled>
+      rect
+    </Button>
   </div>
 </Card>
