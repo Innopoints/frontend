@@ -8,7 +8,6 @@
   export let isRound = false;
   export let isNormal = false;
   export let isRectangle = false;
-  export let ripple = true;
 
   if (isFilled + isOutline > 1) {
     throw new Error('A button may not be filled and outlined at the same time.');
@@ -25,7 +24,6 @@
   export let chevron = false;
   export let badge = false;
 
-  $: rippleColor = getRippleColor();
   $: classes = [
     isFilled && 'filled',
     isOutline && 'outline',
@@ -35,18 +33,6 @@
     isRectangle && 'rectangle',
     classname ? classname : 'btn',
   ].filter(v => v !== false);
-
-  const getRippleColor = () => {
-    if (ripple) {
-      if (isFilled) {
-        return 'rgba(255, 255, 255, .25)';
-      } else {
-        if (isDanger) return 'rgba(186, 3, 3, .1)';
-        else return 'rgba(56, 120, 0, .1)';
-      }
-    }
-    return null;
-  };
 </script>
 
 {#if href}
@@ -55,7 +41,7 @@
       target={away && '_blank'}
       class={classes.join(' ')}
       on:click
-      use:rippleEffect={rippleColor}
+      use:rippleEffect
       rel="prefetch"
   >
     <slot />
@@ -69,7 +55,7 @@
     {disabled}
     class={classes.join(' ')}
     on:click on:mousedown on:mouseup
-    use:rippleEffect={rippleColor}
+    use:rippleEffect
   >
     {#if badge}
       <div class="badge">
