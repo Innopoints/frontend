@@ -256,6 +256,6 @@ hr {
   max-width: 30em;
 }
 
-body > .card {
+body .card {
   overflow: visible;
 }
