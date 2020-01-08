@@ -2,10 +2,10 @@
   import { createEventDispatcher } from 'svelte';
   import Button from './button.svelte';
 
-  export let classname = 'dropdown-shell';
-  export let btnclass = 'handle btn';
-  export let dropdownclass = 'dropdown';
-  export let wrapperclass = 'relative-wrapper';
+  export let classname = '';
+  export let handleclass = '';
+  export let dropdownclass = '';
+  export let wrapperclass = '';
   export let isRight = false;
 
   export let label = '';
@@ -40,20 +40,18 @@
 </script>
 
 <svelte:window on:click={clickOutside} />
-<div class:open={isOpen} class={classname}>
+
+<div class:open={isOpen} class="dropdown-shell {classname}">
   <slot name="handle">
-    <Button ripple={false} on:click={toggle} classname={btnclass}>
+    <Button chevron={chevron} on:click={toggle} classname="btn handle {handleclass}">
       <slot name="label">{label}</slot>
-      {#if chevron}
-        <svg src="images/icons/chevron-down.svg" class="icon ml chevron" />
-      {/if}
     </Button>
   </slot>
-  <div class:right-edge={isRight} class={dropdownclass} bind:this={dropNode}>
+  <div class:right-edge={isRight} class="dropdown {dropdownclass}" bind:this={dropNode}>
     {#if nowrap}
       <slot />
     {:else}
-      <div class={wrapperclass}>
+      <div class="relative-wrapper {wrapperclass}">
         {#if !noclose}
           <Button on:click={toggle} isNormal isRound classname="close btn">
             <svg src="images/icons/x.svg" />
