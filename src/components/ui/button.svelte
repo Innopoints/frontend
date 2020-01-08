@@ -1,5 +1,4 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
   import rippleEffect from './utils/ripple';
 
   export let classname = null;
@@ -40,8 +39,6 @@
     }
     return null;
   };
-
-  let dispatch = createEventDispatcher();
 </script>
 
 {#if href}
@@ -49,7 +46,8 @@
       {href}
       target={away && '_blank'}
       class={classes.join(' ')}
-      on:click={() => dispatch('click')}
+      on:click
+      use:rippleEffect={rippleColor}
   >
     <slot />
     {#if away}
@@ -61,9 +59,7 @@
     type="button"
     {disabled}
     class={classes.join(' ')}
-    on:click={(e) => dispatch('click', e)}
-    on:mousedown={(e) => dispatch('mousedown', e)}
-    on:mouseup={(e) => dispatch('mouseup', e)}
+    on:click on:mousedown on:mouseup
     use:rippleEffect={rippleColor}
   >
     {#if badge}
