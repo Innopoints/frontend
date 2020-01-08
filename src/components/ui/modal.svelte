@@ -1,20 +1,21 @@
 <script>
   import Card from './card.svelte';
   import Button from './button.svelte';
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+  // import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
 
   export let classname = 'modal-overlay column';
   export let cardclass = 'card';
-  export let openerclass = 'modal-open';
+  // export let openerclass = 'modal-open';
   export let overlaydisplay = 'block';
   export let closebutton = true;
 
-  export let value = false;
-  $: toggleBodyClass(value);
+  export let value = null;
+  // $: try { toggleBodyClass(value); } catch (e) {}
 
   let modal = null;
-  onMount(() => document.body.appendChild(modal));
-  onDestroy(() => document.body.removeChild(modal));
+  // onMount(() => document.body.appendChild(modal));
+  // onDestroy(() => document.body.removeChild(modal));
 
   const dispatch = createEventDispatcher();
   const close = (e, isCloser) => {
@@ -23,15 +24,15 @@
       dispatch('close');
     }
   };
-  const toggleBodyClass = (val) => {
-    if (val) {
-      document.body.classList.add(openerclass);
-      document.querySelector('html').style.overflow = 'hidden';
-    } else {
-      document.body.classList.remove(openerclass);
-      document.querySelector('html').style.overflow = 'initial';
-    }
-  };
+  // const toggleBodyClass = (val) => {
+  //   if (val) {
+  //     document.body.classList.add(openerclass);
+  //     document.querySelector('html').style.overflow = 'hidden';
+  //   } else {
+  //     document.body.classList.remove(openerclass);
+  //     document.querySelector('html').style.overflow = 'initial';
+  //   }
+  // };
 </script>
 
 <div style={'display:'+ (value ? overlaydisplay : 'none')} bind:this={modal} class={classname} on:click={close}>
