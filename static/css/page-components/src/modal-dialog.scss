@@ -10,7 +10,7 @@
   z-index: 1000;
 }
 
-.modal-open .modal-overlay {
+.modal-overlay.open {
   display: flex;
   align-items: center;
   justify-content: center;
