@@ -13,6 +13,8 @@
   import Modals from '@/containers/ui/modals.svelte';
   import ModalTriggers from '@/containers/ui/modal-triggers.svelte';
   import Others from '@/containers/ui/others.svelte';
+  import Tabs from '@/containers/ui/tabs.svelte';
+  import Popovers from '@/containers/ui/popovers.svelte';
 
   let m1 = false;
   let m2 = false;
@@ -28,7 +30,6 @@
   <link rel="stylesheet" href="css/global/ui-kit-page.css" />
 </svelte:head>
 
-
 <Layout>
   <div class="material">
     <Buttons />
@@ -43,6 +44,8 @@
     <Dots />
     <Chips />
     <Others />
+    <Tabs />
+    <Popovers />
   </div>
   <Modals bind:m1={m1} bind:m2={m2} />
 </Layout>
