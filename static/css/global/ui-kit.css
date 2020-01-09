@@ -995,18 +995,8 @@ label:hover input:focus ~ .switch.two-state::before {
   background-color: transparent;
 }
 
-.chip.unclickable.outline {
+.chip.outline.unclickable {
   border-color: #127800;
-}
-
-input:disabled + .chip {
-  background-color: rgba(0, 0, 0, 0.03);
-  color: #aaa;
-  cursor: default;
-}
-
-input:disabled + .chip:hover {
-  background-color: rgba(0, 0, 0, 0.03);
 }
 
 input + .chip:hover {
@@ -1015,6 +1005,16 @@ input + .chip:hover {
 
 input + .chip.outline:hover {
   background-color: rgba(0, 0, 0, 0.06);
+}
+
+input:disabled + .chip {
+  background-color: rgba(0, 0, 0, 0.03);
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+input:disabled + .chip:hover {
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 input:focus + .chip {
@@ -1044,17 +1044,21 @@ input:focus:checked + .chip.outline {
   background-color: rgba(18, 120, 0, 0.12);
 }
 
-input[type="checkbox"] + .chip {
-  position: relative;
+.max-reached input:not(:checked) + .chip:not(.unclickable) {
+  cursor: not-allowed;
 }
 
-input[type="checkbox"]:checked + .chip {
-  padding-left: 2em;
+input[type="checkbox"] + .chip {
+  position: relative;
 }
 
 input[type="checkbox"] + .chip::before {
   border: 0 solid #127800;
   content: "";
+}
+
+input[type="checkbox"]:checked + .chip {
+  padding-left: 2em;
 }
 
 input[type="checkbox"]:checked + .chip::before {
