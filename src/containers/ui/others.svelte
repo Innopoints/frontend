@@ -67,38 +67,13 @@
   <h1>Cards</h1>
   <div class="showcase vertical">
     <Card>This is a small card, nothing special.</Card>
-    <Card img="/images/store/sweatshirt.png">
-      <div class="title">Write clean code</div>
-      <div class="subtitle">subtitle</div>
+    <Card classname="with-image">
+      <img src="/images/store/sweatshirt.png" class="image" alt="sweatshirt" />
+      <div class="content">
+        <div class="title">Write clean code</div>
+        <div class="subtitle">subtitle</div>
+      </div>
     </Card>
-  </div>
-</Card>
-
-<!--todo: choice button-->
-<Card id="choice-btns">
-  <h1 class="todo">Choice buttons</h1>
-  <div class="showcase">
-    <label class="choice-btn">
-      <input type="radio" name="large-choices" />
-      <div class="repr">
-        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
-        Title
-      </div>
-    </label>
-    <label class="choice-btn">
-      <input type="radio" name="large-choices" />
-      <div class="repr">
-        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
-        Title 2
-      </div>
-    </label>
-    <label class="choice-btn">
-      <input type="radio" name="large-choices" />
-      <div class="repr">
-        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
-        Title 3
-      </div>
-    </label>
   </div>
 </Card>
 
