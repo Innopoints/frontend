@@ -1,18 +1,15 @@
 <script>
-  import Button from './button.svelte';
+  export let classname = '';
 
-  export let label = '';
-  export let open = false;
-  export const toggle = () => (open = !open);
+  let closeCallback = null;
+  function panelController(event) {
+    if (closeCallback !== null && closeCallback !== event.detail.closeCallback) {
+      closeCallback();
+    }
+    closeCallback = event.detail.closeCallback;
+  }
 </script>
 
-<div class="accordion">
-  <div class:open class="panel">
-    <slot name="label">
-      <Button on:click={toggle} chevron>{label}</Button>
-    </slot>
-  </div>
-  <section>
-    <slot />
-  </section>
-</div>
+<ul class="accordion {classname}">
+  <slot {panelController}></slot>
+</ul>
