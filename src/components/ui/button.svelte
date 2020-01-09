@@ -1,7 +1,7 @@
 <script>
   import rippleEffect from './utils/ripple';
 
-  export let classname = null;
+  export let classname = '';
   export let isFilled = false;
   export let isOutline = false;
   export let isDanger = false;
@@ -39,7 +39,7 @@
   <a
       {href}
       target={away && '_blank'}
-      class={classes.join(' ')}
+      class="btn {classes.join(' ')}"
       on:click
       use:rippleEffect
       rel="prefetch"
@@ -53,7 +53,7 @@
   <button
     type="button"
     {disabled}
-    class={classes.join(' ')}
+    class="btn {classes.join(' ')}"
     on:click on:mousedown on:mouseup
     use:rippleEffect
   >
