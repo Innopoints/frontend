@@ -8,15 +8,15 @@
   <div class="showcase vertical">
     <p class="row">
       New information dot
-      <Dot />
+      <Dot pending />
     </p>
     <p class="row" style="font-size: .8rem;">
       Smaller text - smaller dot
-      <Dot />
+      <Dot pending />
     </p>
     <p class="row">
       Artificially smaller dot
-      <Dot small />
+      <Dot small pending />
     </p>
     <p class="row">
       Attention dot
