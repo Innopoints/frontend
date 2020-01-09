@@ -62,7 +62,9 @@ export default (node, options = {}) => {
     // Store target position to change it after
     let storedTargetPosition = ((target.style.position).length > 0) ? target.style.position : getComputedStyle(target).position;
     // Change target position to relative to guarantee ripples correct positioning
-    if (storedTargetPosition !== 'relative') target.style.position = 'relative';
+    if (storedTargetPosition !== 'relative' && storedTargetPosition !== 'absolute') {
+      target.style.position = 'relative';
+    }
 
     rippleContainer.appendChild(ripple);
     target.appendChild(rippleContainer);
