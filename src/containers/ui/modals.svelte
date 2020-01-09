@@ -1,49 +1,38 @@
 <script>
-  import Card from 'ui/card.svelte';
   import Modal from 'ui/modal.svelte';
   import Button from 'ui/button.svelte';
+  import Dialog from 'ui/dialog.svelte';
+  import { fade } from 'svelte/transition';
 
-  let m1 = false;
-  let m2 = false;
+  export let m1 = false;
+  export let m2 = false;
+
+  function closeM1() { m1 = false; }
+  function closeM2() { m2 = false; }
 </script>
 
-<Card id="modals">
-  <h1>Modals</h1>
-  <div class="showcase vertical">
-    <Button on:click={() => m1 = true}>open me</Button>
-    <Button on:click={() => m2 = true}>and me</Button>
-  </div>
-
-  <Modal
-    overlaydisplay="flex"
-    classname="modal-overlay column dialog"
-    bind:value={m1}
-  >
-    <span class="title">
-      <svg src="/images/icons/award.svg" class="icon" />
-      U Got Mail
-    </span>
-    <p>Text of the dialog here text text.</p>
-    <div class="actions">
-      <Button on:click={() => m1 = false}>cancel</Button>
-      <Button isFilled>action</Button>
+<Modal bind:isOpen={m1}>
+  <Dialog isDanger title="Are you sure you want to?" closeCallback={closeM1} transition={fade}>
+    <svg slot="icon" src="/images/icons/alert-triangle.svg" class="icon" />
+    <div slot="content" class="content">
+      <p>You might not want to.</p>
+      <div class="actions">
+        <Button on:click={closeM1}>cancel</Button>
+        <Button isFilled isDanger>i want to</Button>
+      </div>
     </div>
-  </Modal>
+  </Dialog>
+</Modal>
 
-  <Modal
-    classname="modal-overlay column dialog danger"
-    overlaydisplay="flex"
-    closebutton={false}
-    bind:value={m2}
-  >
-    <span class="title">
-      <svg src="/images/icons/alert-triangle.svg" class="icon" />
-      Warning
-    </span>
-    <p>Something bad is about to happen. You just gonna let it roll?</p>
-    <div class="actions">
-      <Button on:click={() => m2 = false}>no, wait</Button>
-      <Button isFilled isDanger>let's try</Button>
+<Modal bind:isOpen={m2}>
+  <Dialog title="U Got Mail" closeCallback={closeM2} transition={null}>
+    <svg slot="icon" src="/images/icons/award.svg" class="icon" />
+    <div slot="content" class="content">
+      <p>Text of the dialog here text text.</p>
+      <div class="actions">
+        <Button on:click={closeM2}>cancel</Button>
+        <Button isFilled>action</Button>
+      </div>
     </div>
-  </Modal>
-</Card>
+  </Dialog>
+</Modal>
