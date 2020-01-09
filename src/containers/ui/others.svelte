@@ -1,5 +1,11 @@
 <script>
   import Card from 'ui/card.svelte';
+  import Tabs from 'ui/tabs.svelte';
+
+  const tabs = ['Tab 1', 'Tab 2'];
+  const values = ['tab_1', 'tab_2'];
+  let value = values[0];
+  $: console.log(value);
 </script>
 
 <Card id="typo">
@@ -23,13 +29,13 @@
     <strong>Bold text</strong>
     <span class="label">Label</span>
     <span class="label small">Small Label</span>
-    <a href="nowhere">Link</a>
-    <a href="##">Visited</a>
+    <a href="/nowhere">Link</a>
+    <a href="/ui">Visited</a>
   </div>
 </Card>
 
 <Card id="carousels">
-  <h1 class="todo">Image Carousel</h1>
+  <h1>Image Carousel</h1>
   <div class="showcase">
     <div class="carousel">
       <div class="curr-slide">
@@ -88,18 +94,9 @@
 </Card>
 
 <Card id="tabs">
-  <h1 class="todo">Tabs</h1>
+  <h1>Tabs</h1>
   <div class="showcase">
-    <nav class="tabs">
-      <label class="tab">
-        <input type="radio" name="tabs" />
-        <div class="icon">Tab 1</div>
-      </label>
-      <label class="tab">
-        <input type="radio" name="tabs" />
-        <div class="icon">Tab 2</div>
-      </label>
-    </nav>
+    <Tabs {values} labels={tabs} bind:value={value} name="tabs" />
   </div>
 </Card>
 
