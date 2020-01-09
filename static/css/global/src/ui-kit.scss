@@ -1023,97 +1023,103 @@ label:hover input:focus ~ .switch.two-state::before {
   color: #656565;
   padding: .6em .9em;
   font-weight: 500;
+
+  &:not(.unclickable) {
+    cursor: pointer;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  &.small {
+    padding: .5em;
+    font-size: .9rem;
+    min-width: .9rem;
+    text-align: center;
+  }
+
+  &.outline {
+    border: 1px solid transparentize(black, .8);
+    background-color: transparent;
+
+    &.unclickable {
+      border-color: $main;
+    }
+  }
 }
 
-.chip:not(.unclickable) {
-  cursor: pointer;
-  user-select: none;
-  -webkit-touch-callout: none;
-}
+input + .chip {
+  &:hover {
+    background-color: transparentize(black, .87);
+  }
 
-.chip.small {
-  padding: .5em;
-  font-size: .9rem;
-  min-width: .9rem;
-  text-align: center;
-}
-
-.chip.outline {
-  border: 1px solid rgba(0, 0, 0, .2);
-  background-color: transparent;
-}
-
-.chip.unclickable.outline {
-  border-color: #127800;
+  &.outline:hover {
+    background-color: transparentize(black, .94);
+  }
 }
 
 input:disabled + .chip {
-  background-color: rgba(0, 0, 0, .03);
+  background-color: transparentize(black, .97);
   color: #aaa;
-  cursor: default;
-}
+  cursor: not-allowed;
 
-input:disabled + .chip:hover {
-  background-color: rgba(0, 0, 0, .03);
-}
-
-input + .chip:hover {
-  background-color: rgba(0, 0, 0, .13);
-}
-
-input + .chip.outline:hover {
-  background-color: rgba(0, 0, 0, .06);
+  &:hover {
+    background-color: transparentize(black, .97);
+  }
 }
 
 input:focus + .chip {
-  background-color: rgba(0, 0, 0, .18);
-}
+  background-color: transparentize(black, .82);
 
-input:focus + .chip.outline {
-  background-color: rgba(0, 0, 0, .1);
+  &.outline {
+    background-color: transparentize(black, .9);
+  }
 }
 
 input:checked + .chip {
-  background-color: rgba(18, 120, 0, .12);
-  color: #127800;
-}
+  background-color: transparentize($main, .88);
+  color: $main;
 
-input:checked + .chip.outline {
-  background-color: rgba(18, 120, 0, .06);
-  color: #127800;
-  border-color: #127800;
+  &.outline {
+    background-color: transparentize($main, .94);
+    color: $main;
+    border-color: $main;
+  }
 }
 
 input:focus:checked + .chip {
-  background-color: rgba(18, 120, 0, .25);
+  background-color: transparentize($main, .75);
+
+  &.outline {
+    background-color: transparentize($main, .88);
+  }
 }
 
-input:focus:checked + .chip.outline {
-  background-color: rgba(18, 120, 0, .12);
+.max-reached input:not(:checked) + .chip:not(.unclickable) {
+  cursor: not-allowed;
 }
 
 input[type="checkbox"] + .chip {
   position: relative;
+
+  &::before {
+    border: 0 solid $main;
+    content: "";
+  }
 }
 
 input[type="checkbox"]:checked + .chip {
   padding-left: 2em;
-}
 
-input[type="checkbox"] + .chip::before {
-  border: 0 solid #127800;
-  content: "";
-}
-
-input[type="checkbox"]:checked + .chip::before {
-  width: 5px;
-  height: 9px;
-  border-bottom-width: 2px;
-  border-right-width: 2px;
-  transform: translateY(-50%) rotate(45deg);
-  position: absolute;
-  left: .9em;
-  top: 45%;
+  &::before {
+    width: 5px;
+    height: 9px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    transform: translateY(-50%) rotate(45deg);
+    position: absolute;
+    left: .9em;
+    top: 45%;
+  }
 }
 
 /* Dialogs -------------------------------------- */
