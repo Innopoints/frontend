@@ -5,6 +5,14 @@
   import callOnSight from 'ui/utils/call-on-sight.js';
 
   export let classname = '';
+  export let chipclass = '';
+  export let dropdownshellclass = '';
+  export let listclass = '';
+  export let itemclass = '';
+  export let notenoughclass = '';
+  export let inputclass = '';
+  export let loadingclass = '';
+  export let loadbuttonclass = '';
 
   export let getOptions;
   export let values = [];
@@ -82,31 +90,37 @@
 
 <div class:focus class="autocomplete-field {classname}">
   {#each values as loopValue (loopValue.name)}
-    <div class="chip">
+    <div class="chip {chipclass}">
       {loopValue.name}
       <Button isNormal isRound on:click={() => deleteValue(loopValue)}>
         <svg src="/images/icons/x.svg" class="icon" />
       </Button>
     </div>
   {/each}
-  <Dropdown bind:this={dropdown} bind:value={focus} classname="dropdown-shell" nowrap>
+  <Dropdown
+    bind:this={dropdown}
+    bind:value={focus}
+    classname="dropdown-shell {dropdownshellclass}"
+    nowrap
+  >
     <input
       slot="handle"
       on:input={handleInput}
       on:focus={onInputFocus}
       bind:this={input}
+      class={inputclass}
     />
     {#if searchQuery.length < minSearchLength}
       {#if values.length === 0}
-        <p class="not-enough-input">
+        <p class="not-enough-input {notenoughclass}">
           Type {itemAmount(minSearchLength, 'character')} to search
         </p>
       {/if}
     {:else}
-      <ul>
+      <ul class={listclass}>
         {#each promises as promise}
           {#await promise}
-            <li class="loading">
+            <li class="loading {loadingclass}">
               <div class="lds-ellipsis">
                 <div></div>
                 <div></div>
@@ -117,7 +131,10 @@
             </li>
           {:then generatorValue}
             {#each checkDone(generatorValue) as option (option.name)}
-              <li on:click={(click) => { click.stopPropagation(); selectValue(option); }}>
+              <li
+                on:click={(click) => { click.stopPropagation(); selectValue(option); }}
+                class={itemclass}
+              >
                 {@html markMatch(searchQuery, option.name)}
                 {#if option.details}
                   <div class="subtext">
@@ -131,7 +148,7 @@
         {#await Promise.all(promises) then _}
           {#if hasMoreOptions}
             <li
-              class="load-more"
+              class="load-more {loadbuttonclass}"
               on:click={moreOptions}
               use:callOnSight={{ callback: moreOptions }}
             >
