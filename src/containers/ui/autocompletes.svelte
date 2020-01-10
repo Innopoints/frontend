@@ -53,5 +53,9 @@
 
 <Card id="autocomplete">
   <h1>Autocomplete</h1>
-  <Autocomplete {getOptions} bind:values />
+  <div class="showcase">
+    <Autocomplete {getOptions} bind:values />
+    <hr />
+    <Autocomplete {getOptions} maxOptions={3} />
+  </div>
 </Card>

@@ -10,6 +10,7 @@
   export let listclass = '';
   export let itemclass = '';
   export let notenoughclass = '';
+  export let toomanyclass = '';
   export let inputclass = '';
   export let loadingclass = '';
   export let loadbuttonclass = '';
@@ -17,6 +18,7 @@
   export let getOptions;
   export let values = [];
   export let minSearchLength = 3;
+  export let maxOptions = null;
 
   export let markMatch = (match, string) => {
     if (match.length === 0) {
@@ -81,7 +83,7 @@
 </script>
 
 <style>
-  .not-enough-input {
+  .not-enough-input, .limit-reached {
     padding: 0 1em;
     font-size: .9rem;
     font-weight: 300;
@@ -110,7 +112,11 @@
       bind:this={input}
       class={inputclass}
     />
-    {#if searchQuery.length < minSearchLength}
+    {#if maxOptions !== null && values.length >= maxOptions}
+      <p class="limit-reached {toomanyclass}">
+        At most {itemAmount(maxOptions, 'option')} can be selected.
+      </p>
+    {:else if searchQuery.length < minSearchLength}
       {#if values.length === 0}
         <p class="not-enough-input {notenoughclass}">
           Type {itemAmount(minSearchLength, 'character')} to search
