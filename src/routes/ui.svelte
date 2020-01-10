@@ -15,6 +15,7 @@
   import Others from '@/containers/ui/others.svelte';
   import Tabs from '@/containers/ui/tabs.svelte';
   import Popovers from '@/containers/ui/popovers.svelte';
+  import Autocompletes from '@/containers/ui/autocompletes.svelte';
 
   let m1 = false;
   let m2 = false;
@@ -41,6 +42,7 @@
     <Dropdowns />
     <ModalTriggers bind:m1={m1} bind:m2={m2} />
     <Accordions />
+    <Autocompletes />
     <Dots />
     <Chips />
     <Others />
