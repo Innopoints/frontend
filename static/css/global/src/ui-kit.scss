@@ -1658,6 +1658,7 @@ input[type="checkbox"]:checked + .chip {
     border-radius: .5em;
     margin-left: -1.5em;
     box-shadow: $shadow-raised;
+    overflow-y: auto;
 
     li {
       padding: .8em 2.5em .8em 1.5em;
@@ -1677,6 +1678,13 @@ input[type="checkbox"]:checked + .chip {
         font-size: .9rem;
         font-weight: 300;
         margin-top: .2em;
+      }
+
+      &.load-more {
+        font-weight: 500;
+        color: $main;
+        display: flex;
+        align-items: center;
       }
 
       &.loading {

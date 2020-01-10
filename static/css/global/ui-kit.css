@@ -1594,6 +1594,7 @@ input[type="checkbox"]:checked + .chip::before {
   border-radius: .5em;
   margin-left: -1.5em;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 3px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
 }
 
 .autocomplete-field .dropdown li {
@@ -1615,6 +1616,13 @@ input[type="checkbox"]:checked + .chip::before {
   font-size: .9rem;
   font-weight: 300;
   margin-top: .2em;
+}
+
+.autocomplete-field .dropdown li.load-more {
+  font-weight: 500;
+  color: #127800;
+  display: flex;
+  align-items: center;
 }
 
 .autocomplete-field .dropdown li.loading {
