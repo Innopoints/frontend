@@ -15,21 +15,18 @@
   export let value = false;
 
   $: isOpen = value;
-  let justOpened = false;
   const dispatch = createEventDispatcher();
-  const toggle = () => {
+  export const toggle = () => {
     value = !isOpen;
     isOpen = !isOpen;
     dispatch('change', isOpen);
-    if (isOpen) justOpened = true;
   };
 
-  let dropNode = null;
+  let dropdownShell = null;
   const clickOutside = (event) => {
-    let isClickInside = dropNode.contains(event.target);
+    let isClickInside = dropdownShell.contains(event.target);
     if (!isClickInside) {
-      if (justOpened) justOpened = false;
-      else if (isOpen) {
+      if (isOpen) {
         isOpen = false;
         value = false;
         dispatch('change', isOpen);
@@ -41,13 +38,13 @@
 
 <svelte:window on:click={clickOutside} />
 
-<div class:open={isOpen} class="dropdown-shell {classname}">
+<div class:open={isOpen} class="dropdown-shell {classname}" bind:this={dropdownShell}>
   <slot name="handle">
     <Button chevron={chevron} on:click={toggle} classname="btn handle {handleclass}">
       <slot name="label">{label}</slot>
     </Button>
   </slot>
-  <div class:right-edge={isRight} class="dropdown {dropdownclass}" bind:this={dropNode}>
+  <div class:right-edge={isRight} class="dropdown {dropdownclass}">
     {#if nowrap}
       <slot />
     {:else}
