@@ -47,9 +47,11 @@
       { name: 'Final Human', details: 'f.human@email.com' },
     ];
   }
+
+  let values = [{ name: 'Person Awesome1', details: 'p.awesome1@email.com' }];
 </script>
 
 <Card id="autocomplete">
   <h1>Autocomplete</h1>
-  <Autocomplete {getOptions} />
+  <Autocomplete {getOptions} bind:values />
 </Card>

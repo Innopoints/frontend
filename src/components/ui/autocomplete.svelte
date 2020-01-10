@@ -23,7 +23,7 @@
   let optionGen;
   let promises = [];
   let hasMoreOptions;
-  let selected = new Set();
+  let selected = new Set(values.map(opt => opt.name));
 
   let dropdown;
   let input;
@@ -59,6 +59,7 @@
 
   function selectValue(option) {
     values.push(option);
+    values = values;
     selected.add(option.name);
     promises = [];
     input.value = searchQuery = '';
