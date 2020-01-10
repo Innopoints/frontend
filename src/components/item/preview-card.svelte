@@ -2,7 +2,7 @@
   import Card from 'ui/card.svelte';
   import Labeled from 'ui/labeled.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import ChipGroup from 'ui/chip-group.svelte';
+  import RadioChipGroup from 'ui/radio-chip-group.svelte';
   import {item} from '@/store/item';
   import getBackground from '@/utils/optimal-color';
   import {API_HOST} from '@/constants/env';
@@ -47,13 +47,12 @@
     {/if}
     {#if sizes}
       <Labeled label="sizes" classname="labeled text mt-2" customContent>
-        <ChipGroup
-            items={sizes}
-            isSmall
-            name="sizes"
-            classname="content"
-            chipclass="chip-wrapper size"
-            uniqueKey="label"
+        <RadioChipGroup
+          values={sizes}
+          small
+          name="sizes"
+          classname="content"
+          chipclass="size"
         />
       </Labeled>
     {/if}
