@@ -5,7 +5,7 @@ import competencesOptions from '@/constants/projects/competences';
 export const selectedOrder = writable(orderOptions[0]);
 
 export function selectOrder(value) {
-  selectedOrder.update(() => value);
+  selectedOrder.set(value);
 }
 
 const filtersDefaultState = {
@@ -41,4 +41,3 @@ export function changeCompetences(value) {
 export function changeDate(value) {
   changeFilter('date', value);
 }
-

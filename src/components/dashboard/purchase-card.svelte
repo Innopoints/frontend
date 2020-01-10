@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
-  import Chip from 'ui/chip.svelte';
+  import UnclickableChip from 'ui/unclickable-chip.svelte';
   import parseColor from '@/utils/optimal-color';
 
   export let purchase;
@@ -37,7 +37,7 @@
       </div>
       <div class="parameters">
         {#if purchase.variety.size}
-          <Chip isSmall unclickable chipclass="chip size">{purchase.variety.size}</Chip>
+          <UnclickableChip small classname="size">{purchase.variety.size}</UnclickableChip>
         {/if}
         {#if purchase.variety.color}
           <div class="color" style={'background:' + purchase.variety.color} />

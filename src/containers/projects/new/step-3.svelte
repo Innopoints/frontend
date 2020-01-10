@@ -3,9 +3,9 @@
   import { onMount } from 'svelte';
   import StepHeader from '@/components/projects/new/step-header.svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
-  import Autocomplete from '@/components/projects/new/autocomplete.svelte';
+  import Autocomplete from 'ui/autocomplete.svelte';
   import {checkProject} from '@/store/new-project';
-  import options from '@/constants/autocomplete-options';
+  import getUsers from '@/constants/autocomplete-options';
 
   onMount(checkProject);
   let values = [];
@@ -19,12 +19,6 @@
   </p>
   <p>You are the creator, therefore, also a moderator.</p>
   <span class="label">Search for people</span>
-  <Autocomplete bind:value={values} {options} />
+  <Autocomplete bind:values getOptions={getUsers} />
   <BottomNavigation />
 </form>
-
-<style>
-  :global(.autocomplete-field .dropdown) {
-    list-style: none;
-  }
-</style>

@@ -1,10 +1,10 @@
 <script>
   import Card from 'ui/card.svelte';
-  import AutoComplete from '@/components/projects/new/autocomplete.svelte';
+  import Autocomplete from 'ui/autocomplete.svelte';
   import SendMoney from '@/components/dashboard/send-money.svelte';
   import SendComment from '@/components/dashboard/send-comment.svelte';
   import SeeProfile from '@/components/dashboard/see-profile.svelte';
-  import options from '@/constants/autocomplete-options';
+  import getUsers from '@/constants/autocomplete-options';
   let users = [];
 </script>
 
@@ -15,7 +15,7 @@
   </div>
   <div class="panel">
     <div class="user-selection">
-      <AutoComplete bind:value={users} {options} />
+      <Autocomplete bind:values={users} getOptions={getUsers} />
       <p>You may select several people for a certain operation.</p>
     </div>
     <div class="operations">
