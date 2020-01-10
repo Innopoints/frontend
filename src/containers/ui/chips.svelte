@@ -2,7 +2,7 @@
   import Card from 'ui/card.svelte';
 
   // import Chip from 'ui/chip.svelte';
-  import UnclickableChipGroup from 'ui/unclickable-chip-group.svelte';
+  import UnclickableChip from 'ui/unclickable-chip.svelte';
   import CheckChipGroup from 'ui/check-chip-group.svelte';
   import RadioChipGroup from 'ui/radio-chip-group.svelte';
 
@@ -18,9 +18,17 @@
 
 <Card id="chips">
   <h1>Chips</h1>
-  <UnclickableChipGroup values={['most first', 'least first']} classname="flex-wrap" />
+  <div role="group" class="flex-wrap">
+    {#each ['most first', 'least first'] as value (value)}
+      <UnclickableChip {value} />
+    {/each}
+  </div>
   <hr />
-  <UnclickableChipGroup small outline values={['most last', 'least last']} classname="flex-wrap" />
+  <div role="group" class="flex-wrap">
+    {#each ['most last', 'least last'] as value (value)}
+      <UnclickableChip {value} small outline />
+    {/each}
+  </div>
   <hr />
   <CheckChipGroup bind:values={checkValues} labels={labels} name="chip0" classname="flex-wrap" />
   <hr />
