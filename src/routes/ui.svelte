@@ -16,6 +16,7 @@
   import Tabs from '@/containers/ui/tabs.svelte';
   import Popovers from '@/containers/ui/popovers.svelte';
   import Autocompletes from '@/containers/ui/autocompletes.svelte';
+  import StarRatings from '@/containers/ui/star-ratings.svelte';
 
   let m1 = false;
   let m2 = false;
@@ -48,6 +49,7 @@
     <Others />
     <Tabs />
     <Popovers />
+    <StarRatings />
   </div>
   <Modals bind:m1={m1} bind:m2={m2} />
 </Layout>
