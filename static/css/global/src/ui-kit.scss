@@ -3,7 +3,7 @@
 
 /* Badges -------------------------------------- */
 
-$badge-bg: #ff5757;
+$badge-bg: lighten($danger, 25%);
 
 .badge {
   position: relative;
@@ -16,10 +16,7 @@ $badge-bg: #ff5757;
     height: 10px;
     border-radius: 50%;
     background-color: $badge-bg;
-    box-shadow:
-      0 2px 4px -1px rgba(0, 0, 0, .2),
-      0 4px 5px 0    rgba(0, 0, 0, .14),
-      0 1px 10px 0   rgba(0, 0, 0, .12);
+    box-shadow: $shadow-raised;
     content: "";
   }
 
@@ -79,10 +76,10 @@ strong {
   color: $main;
   font-weight: 500;
   font-size: .8rem;
-}
 
-.label.small {
-  font-size: .7rem;
+  &.small {
+    font-size: .7rem;
+  }
 }
 
 a {
@@ -301,7 +298,7 @@ hr {
     }
 
     &:disabled {
-      border-color: #d7d7d7;
+      border-color: $disabled-bg;
     }
   }
 
@@ -372,14 +369,14 @@ button.btn {
     border-radius: 50%;
 
     &:hover {
-      background-color: rgba(0, 0, 0, .1);
+      background-color: transparentize(black, .9);
     }
   }
 
   input, textarea {
     outline: none;
     padding: 0 10px 1px;
-    font-family: "Ubuntu", sans-serif;
+    font-family: $font-face;
     font-size: 1rem;
     font-weight: 300;
     box-sizing: border-box;
@@ -438,7 +435,7 @@ button.btn {
       }
 
       & > .item:not(svg) {
-        color: rgba(0, 0, 0, .5);
+        color: transparentize(black, .5);
       }
 
       & > input:focus + .item {
@@ -684,77 +681,74 @@ button.btn {
 
 .radio {
   position: relative;
-}
 
-.radio > input[type="radio"] {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
-}
+  & > input[type="radio"] {
+    @include hide-accessible;
+  }
 
-.radio > .icon {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  border: 2px solid #ddd;
-}
+  & > .icon {
+    border-radius: 50%;
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    border: 2px solid $light-gray;
 
-.radio > input:disabled + .icon {
-  cursor: not-allowed;
-  background-color: #eee;
-}
+    &::after {
+      content: "";
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
-.radio > input:checked + .icon {
-  background-color: #127800;
-  border-color: #127800;
-}
+  & > input:disabled + .icon {
+    cursor: not-allowed;
+    background-color: lighten($light-gray, 6%);
+  }
 
-.radio > input:disabled:checked + .icon {
-  background-color: #999;
-  border-color: #959595;
-}
+  & > input:checked + .icon {
+    background-color: $main;
+    border-color: $main;
 
-.radio > input:checked + .icon::before {
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
-  border-radius: 50%;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+    &::before {
+      content: "";
+      width: .5rem;
+      height: .5rem;
+      background-color: #fff;
+      border-radius: 50%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
-.radio > .icon::after {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+  & > input:disabled:checked + .icon {
+    background-color: $disabled;
+    border-color: lighten($disabled, 4%);
+  }
 
-.radio:hover > :not(:disabled) + .icon::after {
-  background-color: rgba(0, 0, 0, .05);
-}
+  &:hover {
+    & > input:not(:disabled) + .icon::after {
+      background-color: transparentize(black, .95);
+    }
 
-.radio:hover > input:checked + .icon::after {
-  background-color: rgba(18, 120, 0, .05);
-}
+    & > input:checked + .icon::after {
+      background-color: transparentize($main, .95);
+    }
+  }
 
-.radio > input:focus + .icon::after {
-  background-color: rgba(0, 0, 0, .125);
-}
+  & > input:focus + .icon::after {
+    background-color: transparentize(black, .875);
+  }
 
-.radio > input:focus:checked + .icon::after {
-  background-color: rgba(18, 120, 0, .125);
+  & > input:focus:checked + .icon::after {
+    background-color: transparentize($main, .875);
+  }
 }
 
 .radio.colored:hover > input + .icon::after,
@@ -774,78 +768,73 @@ label:hover .radio.colored > input:focus + .icon::after {
 .checkbox {
   position: relative;
   display: inline-block;
-}
 
-.checkbox > input[type="checkbox"] {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
-}
+  & > input[type="checkbox"] {
+    @include hide-accessible;
+  }
 
-.checkbox > .icon {
-  border-radius: 4px;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #ddd;
-  cursor: pointer;
-}
+  & > .icon {
+    border-radius: .25rem;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid $light-gray;
+    cursor: pointer;
 
-.checkbox.round > .icon {
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-}
+    &::after {
+      content: "";
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
-.checkbox > input:checked + .icon {
-  background-color: #127800;
-  border-color: #127800;
-}
+  &.round > .icon {
+    border-radius: 50%;
+    width: 1.375rem;
+    height: 1.375rem;
+  }
 
-.checkbox > input:checked + .icon::before {
-  width: 9px;
-  height: 6px;
-  border: 0 solid #fff;
-  border-bottom-width: 2px;
-  border-left-width: 2px;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 45%;
-  transform: translate(-50%, -50%) rotate(-57deg) skew(-11deg);
-  border-bottom-left-radius: 2px;
-}
+  & > input:checked + .icon {
+    background-color: $main;
+    border-color: $main;
 
-.checkbox > .icon::after {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+    &::before {
+      content: "";
+      width: 9px;
+      height: 6px;
+      border: 0 solid white;
+      border-bottom-width: 2px;
+      border-left-width: 2px;
+      left: 50%;
+      position: absolute;
+      top: 45%;
+      transform: translate(-50%, -50%) rotate(-57deg) skew(-11deg);
+      border-bottom-left-radius: 2px;
+    }
+  }
 }
 
 .checkbox:hover > .icon::after,
 label:hover .checkbox > .icon::after {
-  background-color: rgba(0, 0, 0, .05);
+  background-color: transparentize(black, .95);
 }
 
 .checkbox:hover > input:checked + .icon::after,
 label:hover .checkbox > input:checked + .icon::after {
-  background-color: rgba(18, 120, 0, .05);
+  background-color: transparentize($main, .95);
 }
 
 .checkbox > input:focus + .icon::after {
-  background-color: rgba(0, 0, 0, .125);
+  background-color: transparentize(black, .875);
 }
 
 .checkbox > input:focus:checked + .icon::after,
 label:hover .checkbox > input:focus:checked + .icon::after {
-  background-color: rgba(18, 120, 0, .125);
+  background-color: transparentize($main, .875);
 }
 
 .clickable {
@@ -855,7 +844,7 @@ label:hover .checkbox > input:focus:checked + .icon::after {
 }
 
 .with-labels .checkbox {
-  margin-right: 12px;
+  margin-right: .75rem;
 }
 
 .checkbox.colored:hover > input + .icon::after,
@@ -874,104 +863,98 @@ label:hover .checkbox.colored > input:focus + .icon::after {
 
 .switch {
   position: relative;
-  width: 32px;
-  height: 18px;
-  border-radius: 12px;
-  border: 2px solid #999;
+  width: 2rem;
+  height: 1.125rem;
+  border-radius: .75rem;
+  border: 2px solid $off-state;
   cursor: pointer;
-}
 
-.switch.two-state {
-  border-color: #127800;
-}
+  &::before {
+    content: "";
+    width: 3.25rem;
+    height: 2.375rem;
+    border-radius: 1.125rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-input.switch-ctl {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
-}
+  &.two-state {
+    border-color: $main;
 
-.switch > .knob {
-  border-radius: 50%;
-  width: 12px;
-  height: 12px;
-  background-color: #999;
-  position: absolute;
-  top: 50%;
-  left: 4px;
-  transform: translateY(-50%);
-  transition: transform 100ms;
-}
+    & > .knob {
+      background-color: $main;
+    }
+  }
 
-.switch.two-state > .knob {
-  background-color: #127800;
+  & > .knob {
+    border-radius: 50%;
+    width: .75rem;
+    height: .75rem;
+    background-color: $off-state;
+    position: absolute;
+    top: 50%;
+    left: .25rem;
+    transform: translateY(-50%);
+    transition: transform 100ms;
+  }
 }
 
 input:checked ~ .switch {
-  border-color: #127800;
+  border-color: $main;
+
+  & > .knob {
+    background-color: $main;
+    transform: translateY(-50%) translateX(100%);
+  }
 }
 
-input:checked ~ .switch > .knob {
-  background-color: #127800;
-  transform: translateY(-50%) translateX(100%);
-}
-
-.switch::before {
-  width: 52px;
-  height: 38px;
-  border-radius: 18px;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+input.switch-ctl {
+  @include hide-accessible;
 }
 
 .switch:hover::before,
 label:hover .switch::before {
-  background-color: rgba(0, 0, 0, .05);
+  background-color: transparentize(black, .95);
 }
 
 input:checked ~ .switch:hover::before,
 label:hover input:checked ~ .switch::before,
 .switch.two-state:hover::before,
 label:hover .switch.two-state::before {
-  background-color: rgba(18, 120, 0, .05);
+  background-color: transparentize($main, .95);
 }
 
 input:focus ~ .switch::before {
-  background-color: rgba(0, 0, 0, .1);
+  background-color: transparentize(black, .9);
 }
 
 input:focus:checked ~ .switch::before,
 label:hover input:focus:checked ~ .switch::before,
 input:focus ~ .switch.two-state::before,
 label:hover input:focus ~ .switch.two-state::before {
-  background-color: rgba(18, 120, 0, .1);
+  background-color: transparentize($main, .9);
 }
 
-.switch-wrapper .state {
-  color: #999;
-  font-weight: 500;
-}
+.switch-wrapper {
+  .state {
+    color: $off-state;
+    font-weight: 500;
 
-.switch-wrapper .state.first {
-  margin-right: .8em;
-}
+    &.first {
+      margin-right: .8em;
+    }
 
-.switch-wrapper .state.second {
-  margin-left: .8em;
-}
+    &.second {
+      margin-left: .8em;
+    }
+  }
 
-.switch-wrapper input:not(:checked) ~ .first {
-  color: #127800;
-}
-
-.switch-wrapper input:checked ~ .second {
-  color: #127800;
+  input:not(:checked) ~ .first,
+  input:checked ~ .second {
+    color: $main;
+  }
 }
 
 /* Cards -------------------------------------- */
@@ -979,31 +962,31 @@ label:hover input:focus ~ .switch.two-state::before {
 .card {
   box-shadow: $shadow-0;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   padding: 1.5em;
   overflow: hidden;
-}
 
-.card.with-image {
-  padding: 0;
-}
+  &.with-image {
+    padding: 0;
 
-.card.with-image > .image {
-  width: 100%;
-}
+    & > .image {
+      width: 100%;
+    }
 
-.card.with-image > .content {
-  padding: .8em 1.3em;
-}
+    & > .content {
+      padding: .8em 1.3em;
+    }
 
-.card.with-image .title {
-  font-size: 1.15rem;
-  font-weight: 400;
-}
+    .title {
+      font-size: 1.15rem;
+      font-weight: 400;
+    }
 
-.card.with-image .subtitle {
-  font-size: .95rem;
-  font-weight: 300;
+    .subtitle {
+      font-size: .95rem;
+      font-weight: 300;
+    }
+  }
 }
 
 /* Chips -------------------------------------- */
@@ -1199,7 +1182,7 @@ input[type="checkbox"]:checked + .chip {
 
   &.notice {
     box-shadow: none;
-    border: 1px solid #127800;
+    border: 1px solid $main;
     padding: 1em 1.5em .6em;
 
     p {
@@ -1237,12 +1220,7 @@ input[type="checkbox"]:checked + .chip {
 }
 
 .carousel .slide > input {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
+  @include hide-accessible;
 }
 
 .carousel .slide > .icon {
@@ -1349,16 +1327,10 @@ input[type="checkbox"]:checked + .chip {
 }
 
 .dropdown {
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  position: absolute;
+  @include hide-accessible;
+
   background-color: white;
-  box-shadow:
-    0 3px 1px -2px rgba(0, 0, 0, .2),
-    0 2px 2px 0    rgba(0, 0, 0, .14),
-    0 1px 5px 0    rgba(0, 0, 0, .12);
+  box-shadow: $shadow-raised;
   border-radius: 20px;
   z-index: 1001;
   margin-top: 5px;
@@ -1371,9 +1343,9 @@ input[type="checkbox"]:checked + .chip {
 }
 
 .dropdown-shell.open .dropdown {
-  clip: auto;
-  height: auto;
-  width: auto;
+  @include show-accessible;
+
+  position: absolute;
 }
 
 .dropdown.right-edge {
@@ -1381,11 +1353,11 @@ input[type="checkbox"]:checked + .chip {
 }
 
 .dropdown-shell.open > .handle {
-  background-color: rgba(18, 120, 0, .12);
-}
+  background-color: transparentize($main, .88);
 
-.dropdown-shell.open > .handle > .chevron {
-  transform: rotate(180deg);
+  & > .chevron {
+    transform: rotate(180deg);
+  }
 }
 
 .dropdown .btn.close {
@@ -1396,21 +1368,11 @@ input[type="checkbox"]:checked + .chip {
 /* Accordions -------------------------------------- */
 
 .accordion > section {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
+  @include hide-accessible;
 }
 
 .accordion > .panel.open + section {
-  clip: auto;
-  width: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
+  @include show-accessible;
 }
 
 .accordion > .panel .chevron {
@@ -1442,7 +1404,7 @@ input[type="checkbox"]:checked + .chip {
 }
 
 .dot.attention {
-  background-color: #ffb359;
+  background-color: $attention;
 }
 
 .dot.active {
@@ -1453,67 +1415,6 @@ input[type="checkbox"]:checked + .chip {
   background-color: transparentize($info, .5);
 }
 
-/* Choice Buttons -------------------------------------- */
-
-.choice-btn > input[type="radio"] {
-  @include hide-accessible;
-}
-
-.choice-btn > .repr {
-  border: 1px solid $main;
-  border-radius: 15px;
-  padding: 1.2em;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  color: $main;
-  font-weight: 500;
-  font-size: 1.1rem;
-}
-
-.choice-btn:hover > .repr {
-  background-color: transparentize($main, .95);
-}
-
-.choice-btn > input:checked + .repr {
-  background-color: transparentize($main, .9);
-}
-
-.choice-btn > input:focus + .repr {
-  background-color: transparentize($main, .88);
-}
-
-.choice-btn .icon {
-  margin-right: .8em;
-  stroke: $main;
-}
-
-@media only screen and (min-width: 480px) {
-  .choice-btn > .repr {
-    padding: 1.5em 1em;
-    flex-direction: column;
-  }
-
-  .choice-btn .icon {
-    margin-right: 0;
-    margin-bottom: .5em;
-    width: 30px;
-    height: 30px;
-    stroke-width: 1.5;
-  }
-}
-
-@media only screen and (min-width: 840px) {
-  .choice-btn > .repr {
-    font-size: 1.2rem;
-  }
-
-  .choice-btn .icon {
-    width: 48px;
-    height: 48px;
-  }
-}
-
 /* Tabs -------------------------------------- */
 
 .tabs {
@@ -1522,18 +1423,13 @@ input[type="checkbox"]:checked + .chip {
 }
 
 .tab > input[type="radio"] {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
+  @include hide-accessible;
 }
 
 .tab > .icon {
   border-bottom: 2px solid rgba(196, 196, 196, .6);
   font-weight: 500;
-  color: #127800;
+  color: $main;
   padding: .8em .3em .5em;
   cursor: pointer;
   border-top-left-radius: 5px;
@@ -1550,7 +1446,7 @@ input[type="checkbox"]:checked + .chip {
 }
 
 .tab > input:checked + .icon {
-  border-color: rgba(18, 120, 0, .6);
+  border-color: transparentize($main, .4);
 }
 
 /* Popovers -------------------------------------- */
@@ -1623,7 +1519,7 @@ input[type="checkbox"]:checked + .chip {
   }
 
   input {
-    font-family: "Ubuntu", sans-serif;
+    font-family: $font-face;
     font-size: 1rem;
     font-weight: 300;
     border: none;
@@ -1658,7 +1554,7 @@ input[type="checkbox"]:checked + .chip {
     border-radius: .5em;
     margin-left: -1.5em;
     box-shadow: $shadow-raised;
-    overflow-y: auto;
+    overflow-y: auto !important;
 
     li {
       padding: .8em 2.5em .8em 1.5em;
@@ -1713,22 +1609,22 @@ input[type="checkbox"]:checked + .chip {
 
             &:nth-child(1) {
               left: 3px;
-              animation: lds-ellipsis1 0.6s infinite;
+              animation: lds-ellipsis1 .6s infinite;
             }
 
             &:nth-child(2) {
               left: 3px;
-              animation: lds-ellipsis2 0.6s infinite;
+              animation: lds-ellipsis2 .6s infinite;
             }
 
             &:nth-child(3) {
               left: 13px;
-              animation: lds-ellipsis2 0.6s infinite;
+              animation: lds-ellipsis2 .6s infinite;
             }
 
             &:nth-child(4) {
               left: 22px;
-              animation: lds-ellipsis3 0.6s infinite;
+              animation: lds-ellipsis3 .6s infinite;
             }
           }
 
@@ -1736,6 +1632,7 @@ input[type="checkbox"]:checked + .chip {
             0% {
               transform: scale(0);
             }
+
             100% {
               transform: scale(1);
             }
@@ -1745,6 +1642,7 @@ input[type="checkbox"]:checked + .chip {
             0% {
               transform: scale(1);
             }
+
             100% {
               transform: scale(0);
             }
@@ -1754,6 +1652,7 @@ input[type="checkbox"]:checked + .chip {
             0% {
               transform: translate(0, 0);
             }
+
             100% {
               transform: translate(10px, 0);
             }

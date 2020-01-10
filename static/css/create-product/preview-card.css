@@ -26,14 +26,14 @@
   display: inline-block;
 }
 
-.preview .name.placeholder {
+.preview .placeholder.name {
   height: 1.6em;
   width: 70%;
   align-self: flex-start;
   margin-bottom: 1.3em;
 }
 
-.preview .price.placeholder {
+.preview .placeholder.price {
   height: 1.3em;
   width: 3em;
 }
@@ -56,12 +56,11 @@
 }
 
 .preview .colored {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
-.preview .size,
-.preview .colored {
+.preview .size, .preview .colored {
   margin: .3em .5em 0 0;
 }
 
@@ -69,12 +68,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.preview .innopoint {
-  height: .9rem;
-  margin-bottom: 1px;
-  margin-left: .2em;
 }
 
 .preview .purchase > span {
@@ -85,6 +78,12 @@
 
 .preview .purchase > button {
   pointer-events: none;
+}
+
+.preview .innopoint {
+  height: .9rem;
+  margin-bottom: 1px;
+  margin-left: .2em;
 }
 
 @media only screen and (min-width: 480px) {

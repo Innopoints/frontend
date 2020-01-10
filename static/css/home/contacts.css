@@ -28,24 +28,21 @@
   margin: 1em 0;
 }
 
-.contacts .icon {
-  width: 3.6em;
-  height: 3.6em;
-}
-
 .contacts .card p {
   font-weight: 300;
   text-align: center;
+}
+
+.contacts .icon {
+  width: 3.6em;
+  height: 3.6em;
 }
 
 @media only screen and (min-width: 640px) {
   .contacts .subtitle {
     font-size: 1.2em;
   }
-  .contacts .card p {
-    font-size: 1.2em;
-  }
-  .contacts .card .btn {
+  .contacts .card p, .contacts .card .btn {
     font-size: 1.2em;
   }
 }

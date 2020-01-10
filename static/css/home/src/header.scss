@@ -4,29 +4,29 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1em 2em;
-}
 
-header > .logo {
-  max-width: 7rem;
+  & > .logo {
+    max-width: 7rem;
+  }
 }
 
 @media only screen and (min-width: 386px) {
   header {
     padding: 1.5em 2em;
-  }
 
-  header > .logo {
-    max-width: 8rem;
+    & > .logo {
+      max-width: 8rem;
+    }
   }
 }
 
 @media only screen and (min-width: 640px) {
   header {
     padding: 2em 4em 1.5em;
-  }
 
-  header > .logo {
-    max-width: 9rem;
+    & > .logo {
+      max-width: 9rem;
+    }
   }
 }
 

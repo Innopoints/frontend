@@ -74,8 +74,7 @@
     margin-bottom: 0;
     margin-right: 2em;
   }
-  .tagline h1,
-  .tagline .motto {
+  .tagline h1, .tagline .motto {
     text-align: left;
   }
   .tagline .btn {
