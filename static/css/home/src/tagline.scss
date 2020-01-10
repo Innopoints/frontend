@@ -1,70 +1,74 @@
+@import "../../global/src/_variables.scss";
+
 .tagline {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 .3em;
-  color: #127800;
+  color: $main;
   margin-bottom: 5em;
-}
 
-.tagline > .picture {
-  margin-top: 1.5em;
-  max-height: 15em;
-  margin-bottom: 2.5em;
-}
+  & > .picture {
+    margin-top: 1.5em;
+    max-height: 15em;
+    margin-bottom: 2.5em;
 
-.tagline > .picture.desktop {
-  display: none;
-}
+    &.desktop {
+      display: none;
+    }
+  }
 
-.tagline h1 {
-  font-size: 1.9rem;
-  font-weight: 500;
-  margin-bottom: 8px;
-  text-align: center;
-}
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+  }
 
-.tagline .motto {
-  font-size: 1.2rem;
-  text-align: center;
-}
+  .motto {
+    font-size: 1.2rem;
+    text-align: center;
+  }
 
-.tagline nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 1em;
-}
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1em;
+  }
 
-.tagline .btn {
-  margin: 1em .5em 0;
+  .btn {
+    margin: 1em .5em 0;
+  }
 }
 
 @media only screen and (min-width: 640px) {
   .tagline {
     padding: 0 10%;
-  }
 
-  .tagline h1 {
-    font-size: 2.6rem;
-  }
+    h1 {
+      font-size: 2.6rem;
+    }
 
-  .tagline .motto {
-    font-size: 1.5rem;
-  }
+    .motto {
+      font-size: 1.5rem;
+    }
 
-  .tagline .btn {
-    font-size: 1.1rem;
+    .btn {
+      font-size: 1.1rem;
+    }
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .tagline > .picture.mobile {
-    display: none;
-  }
+  .tagline > .picture {
+    &.mobile {
+      display: none;
+    }
 
-  .tagline > .picture.desktop {
-    display: block;
+    &.desktop {
+      display: block;
+    }
   }
 }
 
@@ -72,47 +76,48 @@
   .tagline {
     flex-direction: row-reverse;
     justify-content: space-between;
-  }
 
-  .tagline > .picture {
-    max-height: 20em;
-    margin-bottom: 0;
-    margin-right: 2em;
-  }
+    & > .picture {
+      max-height: 20em;
+      margin-bottom: 0;
+      margin-right: 2em;
+    }
 
-  .tagline h1,
-  .tagline .motto {
-    text-align: left;
-  }
+    h1, .motto {
+      text-align: left;
+    }
 
-  .tagline .btn {
-    margin: 1em 0 0;
-  }
+    .btn {
+      margin: 1em 0 0;
 
-  .tagline .btn:first-child {
-    margin-right: .8em;
+      &:first-child {
+        margin-right: .8em;
+      }
+    }
   }
 }
 
 @media only screen and (min-width: 1200px) {
-  .tagline > .picture {
-    margin-top: 3em;
-    margin-right: 2.5em;
-  }
+  .tagline {
+    & > .picture {
+      margin-top: 3em;
+      margin-right: 2.5em;
+    }
 
-  .tagline h1 {
-    font-size: 2.8rem;
-  }
+    h1 {
+      font-size: 2.8rem;
+    }
 
-  .tagline .motto {
-    font-size: 1.6rem;
-  }
+    .motto {
+      font-size: 1.6rem;
+    }
 
-  .tagline nav {
-    margin-top: 1.5em;
-  }
+    nav {
+      margin-top: 1.5em;
+    }
 
-  .tagline .btn {
-    padding: .8em 1.3em;
+    .btn {
+      padding: .8em 1.3em;
+    }
   }
 }

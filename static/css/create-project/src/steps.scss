@@ -179,7 +179,6 @@ h2 {
       font-size: 1rem;
     }
   }
-
 }
 
 .step1 {
@@ -314,8 +313,8 @@ h2 {
 
     @media only screen and (min-width: 740px) {
       & > .card, & > .btn, & > .actions {
-       margin-left: 2.5em;
-       margin-right: 2.5em;
+        margin-left: 2.5em;
+        margin-right: 2.5em;
       }
     }
 

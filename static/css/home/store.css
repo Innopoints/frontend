@@ -36,12 +36,12 @@
   align-self: flex-end;
 }
 
-.card > .image > img {
-  width: 100%;
-}
-
 .store .card .title + .btn {
   margin-top: 1em;
+}
+
+.store .card > .image > img {
+  width: 100%;
 }
 
 .store > .own-designs {

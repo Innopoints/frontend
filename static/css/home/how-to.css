@@ -55,7 +55,7 @@
 }
 
 .how-to .arrow {
-  stroke: #fff;
+  stroke: white;
   stroke-width: 3;
   width: 30px;
   height: 30px;
@@ -122,7 +122,7 @@
 @media only screen and (min-width: 700px) and (max-width: 1023px) {
   .how-to > .container {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    background: #fff;
+    background: white;
   }
   .how-to .arrow {
     display: none;
@@ -133,7 +133,7 @@
     padding: .5em 1em;
   }
   .how-to .card:not(:last-child) {
-    border-right: 1px solid #c9c9c9;
+    border-right: 1px solid #ddd;
   }
   .how-to .card > .icon {
     width: 3.7em;
@@ -145,15 +145,15 @@
   .how-to .card {
     padding: .5em 1.5em;
   }
+  .how-to .card::before {
+    height: 110%;
+  }
   .how-to .card > .title {
     margin-bottom: .4em;
   }
   .how-to .card > .subtitle {
     font-size: 1.1rem;
     line-height: 1.45rem;
-  }
-  .how-to::before {
-    height: 110%;
   }
 }
 

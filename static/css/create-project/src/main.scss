@@ -127,6 +127,7 @@ form > .actions {
 
     .autosave.visible {
       @include show-accessible;
+
       height: 100%;
       margin-left: .5em;
     }
@@ -134,6 +135,7 @@ form > .actions {
 
   h2 {
     @include show-accessible;
+
     font-size: 1.2rem;
     margin-top: 1.5em;
   }
@@ -187,6 +189,10 @@ form > .actions {
 }
 
 @media only screen and (min-width: 1200px) {
+  .material.step0 {
+    flex-direction: row;
+  }
+
   .material form {
     margin-left: 12%;
     margin-right: 12%;

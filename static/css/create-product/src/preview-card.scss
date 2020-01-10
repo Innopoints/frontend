@@ -1,90 +1,91 @@
+@import "../../global/src/_variables.scss";
+
 .preview {
   margin: 1.5em 0 3em;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
-.preview > h2 {
-  margin-bottom: .5em;
-  color: #127800;
-}
+  & > h2 {
+    margin-bottom: .5em;
+    color: $main;
+  }
 
-.preview .card {
-  max-width: 25rem;
-}
+  .card {
+    max-width: 25rem;
 
-.preview .card > .content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
+    & > .content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
 
-.preview .placeholder {
-  background: rgba(0, 0, 0, .1);
-  border-radius: 5px;
-  display: inline-block;
-}
+  .placeholder {
+    background: transparentize(black, .9);
+    border-radius: 5px;
+    display: inline-block;
 
-.preview .name.placeholder {
-  height: 1.6em;
-  width: 70%;
-  align-self: flex-start;
-  margin-bottom: 1.3em;
-}
+    &.name {
+      height: 1.6em;
+      width: 70%;
+      align-self: flex-start;
+      margin-bottom: 1.3em;
+    }
 
-.preview .price.placeholder {
-  height: 1.3em;
-  width: 3em;
-}
+    &.price {
+      height: 1.3em;
+      width: 3em;
+    }
+  }
 
-.preview .card-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-self: stretch;
-  flex-wrap: wrap;
-}
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: stretch;
+    flex-wrap: wrap;
 
-.preview .card-row.top {
-  align-items: flex-start;
-}
+    &.top {
+      align-items: flex-start;
+    }
+  }
 
-.preview .labeled > .content {
-  display: flex;
-  align-items: center;
-}
+  .labeled > .content {
+    display: flex;
+    align-items: center;
+  }
 
-.preview .colored {
-  width: 24px;
-  height: 24px;
-}
+  .colored {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 
-.preview .size,
-.preview .colored {
-  margin: .3em .5em 0 0;
-}
+  .size, .colored {
+    margin: .3em .5em 0 0;
+  }
 
-.preview .purchase {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .purchase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.preview .innopoint {
-  height: .9rem;
-  margin-bottom: 1px;
-  margin-left: .2em;
-}
+    & > span {
+      font-size: .9rem;
+      font-weight: 300;
+      margin-bottom: .3em;
+    }
 
-.preview .purchase > span {
-  font-size: .9rem;
-  font-weight: 300;
-  margin-bottom: .3em;
-}
+    & > button {
+      pointer-events: none;
+    }
+  }
 
-.preview .purchase > button {
-  pointer-events: none;
+  .innopoint {
+    height: .9rem;
+    margin-bottom: 1px;
+    margin-left: .2em;
+  }
 }
 
 @media only screen and (min-width: 480px) {
@@ -92,10 +93,10 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-  }
 
-  .preview .card {
-    width: 27em;
+    .card {
+      width: 27em;
+    }
   }
 }
 

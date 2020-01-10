@@ -96,22 +96,22 @@
 
     &:nth-child(1) {
       left: 5px;
-      animation: lds-ellipsis1 0.6s infinite;
+      animation: lds-ellipsis1 .6s infinite;
     }
 
     &:nth-child(2) {
       left: 5px;
-      animation: lds-ellipsis2 0.6s infinite;
+      animation: lds-ellipsis2 .6s infinite;
     }
 
     &:nth-child(3) {
       left: 19px;
-      animation: lds-ellipsis2 0.6s infinite;
+      animation: lds-ellipsis2 .6s infinite;
     }
 
     &:nth-child(4) {
       left: 34px;
-      animation: lds-ellipsis3 0.6s infinite;
+      animation: lds-ellipsis3 .6s infinite;
     }
   }
 
@@ -119,6 +119,7 @@
     0% {
       transform: scale(0);
     }
+
     100% {
       transform: scale(1);
     }
@@ -128,6 +129,7 @@
     0% {
       transform: scale(1);
     }
+
     100% {
       transform: scale(0);
     }
@@ -137,6 +139,7 @@
     0% {
       transform: translate(0, 0);
     }
+
     100% {
       transform: translate(14px, 0);
     }
