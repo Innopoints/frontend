@@ -2,13 +2,12 @@
   import { createEventDispatcher } from 'svelte';
   import Labeled from 'ui/labeled.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import ChipGroup from 'ui/chip-group.svelte';
+  import RadioChipGroup from 'ui/radio-chip-group.svelte';
   import Button from 'ui/button.svelte';
   import Snackbar from 'ui/snackbar.svelte';
-  import PurchaseModal from '@/components/item/purchase-modal.svelte';
 
   import {isAuthed, user} from '@/store/user';
-  import {openModal} from '@/store/modal';
+  // import {openModal} from '@/store/modal';
   import {open as snackbarOpen, closeSnackbar} from '@/store/snackbar';
 
   export let name;
@@ -38,7 +37,7 @@
   const purchase = () => {
     if (!inSizes || chosenSize) {
       err = false;
-      openModal();
+      // openModal();
     } else {
       err = true;
       animation = true;
@@ -50,10 +49,6 @@
 </script>
 
 <div class="content">
-  <PurchaseModal
-    {name} {type} {inSizes} {variety}  {price}
-    size={chosenSize}
-  />
   <Snackbar bind:value={$snackbarOpen}>
     <div class="text">Purchase successful! Track its status in the <a href="/profile">profile</a>.</div>
     <Button on:click={closeSnackbar}>dismiss</Button>
@@ -88,13 +83,12 @@
     {/if}
     {#if sizes}
       <Labeled label="sizes" classname="labeled text sizes{err ? ' wrong' : ''}{animation ? ' fire-animation' : ''}" customContent>
-        <ChipGroup
-          items={sizes}
+        <RadioChipGroup
+          values={sizes}
           isSmall
           name="sizes"
           classname="radio-options"
-          chipclass="chip-wrapper size"
-          uniqueKey="label"
+          chipclass="size"
           on:change={chooseSize}
         />
         <span class="not-selected">please, select a size</span>

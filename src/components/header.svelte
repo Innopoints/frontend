@@ -6,7 +6,7 @@
 </script>
 
 <header class="top-level padded">
-  <a class="logo" href="/">
+  <a class="logo" href="/" rel="prefetch">
     <img src="/images/innou-icon.svg" alt="Go to the home page" />
     <span class="hide-tb">Innopoints</span>
   </a>
