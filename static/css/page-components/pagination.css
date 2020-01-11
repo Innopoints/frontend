@@ -1,0 +1,62 @@
+.pagination {
+  margin: 2em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination > .page {
+  width: 2.5em;
+  height: 2.5em;
+  margin: 0 .2em;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.pagination > .text-field {
+  margin: 0 .2em;
+}
+
+.pagination > .text-field > input {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.pagination > .page.current {
+  color: #127800;
+  background: rgba(18, 120, 0, 0.05);
+}
+
+.pagination > .page.current:hover {
+  background: rgba(18, 120, 0, 0.1);
+}
+
+.pagination > .page.current:focus {
+  background: rgba(18, 120, 0, 0.15);
+}
+
+@media only screen and (min-width: 380px) {
+  .pagination > .page,
+  .pagination > .text-field {
+    margin: 0 .4em;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .pagination {
+    width: 540px;
+    align-self: center;
+  }
+  .pagination > .page,
+  .pagination input {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .pagination > .page,
+  .pagination input {
+    font-size: 1.2rem;
+  }
+}

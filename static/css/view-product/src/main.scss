@@ -1,0 +1,587 @@
+@import "../../global/src/_mixins.scss";
+@import "../../global/src/_variables.scss";
+
+@media only screen and (max-width: 599px) {
+  header.top-level {
+    @include hide-accessible;
+  }
+
+  .btn.back {
+    padding: .5em;
+    background: $dark-spot-bg;
+
+    &:hover {
+      background: lighten($dark-spot-bg, 10%);
+    }
+
+    &:focus {
+      background: lighten($dark-spot-bg, 15%);
+    }
+
+    span {
+      @include hide-accessible;
+    }
+  }
+}
+
+@keyframes flash-border {
+  0% {
+    border-color: transparent;
+  }
+
+  33% {
+    border-color: transparentize($main, .7);
+  }
+
+  66% {
+    border-color: transparentize($main, .7);
+  }
+
+  100% {
+    border-color: transparent;
+  }
+}
+
+.product {
+  position: relative;
+  padding-bottom: 2em;
+
+  .previews {
+    display: none;
+  }
+
+  .content {
+    header, .description, .purchase-details {
+      padding: 0 1em;
+    }
+  }
+
+  .title {
+    margin-top: .5em;
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: .9rem;
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  .description {
+    margin-top: 1.5em;
+
+    .text {
+      white-space: pre-wrap;
+      line-height: 1.35rem;
+    }
+  }
+
+  .parameters {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+
+    .labeled {
+      margin-bottom: .5em;
+    }
+
+    .colors {
+      margin-right: 3em;
+      padding: .5em 1em;
+    }
+
+    .sizes {
+      padding: .5rem;
+      margin-left: .5rem;
+      margin-right: .5rem;
+      border: 1px solid transparent;
+      transition: border-color 300ms;
+      border-radius: 5px;
+
+      .not-selected {
+        font-weight: 300;
+        font-size: .9rem;
+        margin-top: .5em;
+        color: darken($main, 5%);
+        display: none;
+      }
+
+      &.wrong > .not-selected {
+        display: inline;
+      }
+
+      &.fire-animation {
+        animation-name: flash-border;
+        animation-duration: 1000ms;
+      }
+    }
+  }
+
+  .radio-options {
+    display: flex;
+    margin-top: .2em;
+
+    label:not(:last-child) {
+      margin-right: .3em;
+    }
+  }
+
+  .purchase-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2em;
+    margin-top: 1em;
+
+    .action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      position: relative;
+
+      .innopoint {
+        height: 1.1rem;
+        stroke-width: 7;
+      }
+
+      .frown {
+        position: absolute;
+        margin-left: .8em;
+        top: -2px;
+        stroke: $danger;
+        cursor: help;
+      }
+    }
+
+    .purchases {
+      font-weight: 300;
+      font-size: .9rem;
+      margin-bottom: .4em;
+    }
+  }
+}
+
+.btn.back {
+  position: absolute;
+  top: .8em;
+  left: .8em;
+  z-index: 300;
+
+  & > svg {
+    stroke: white;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.balance {
+  position: absolute;
+  bottom: 2em;
+  left: 1em;
+  color: $main;
+  z-index: 300;
+
+  .innopoint {
+    stroke: $main;
+    margin-bottom: -1px;
+  }
+}
+
+.swiper-container {
+  width: 100%;
+
+  .swiper-slide > img {
+    height: 100%;
+  }
+
+  .swiper-pagination {
+    position: static;
+    margin-top: .2em;
+    margin-bottom: .2em;
+
+    .swiper-pagination-bullet {
+      width: 6px;
+      height: 6px;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: $main;
+    }
+  }
+}
+
+.modal-overlay {
+  .dialog {
+    min-width: 16em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  .purchase {
+    margin-top: 1.2em;
+    display: flex;
+    justify-content: space-between;
+
+    .identifier {
+      flex-shrink: 0;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+
+      .text-field {
+        width: 3.2em;
+        font-size: .9rem;
+
+        input {
+          height: 2.5em;
+          text-align: right;
+        }
+      }
+
+      #quantity-inc {
+        margin-left: 5px;
+      }
+
+      #quantity-dec {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .type {
+    margin-top: .25em;
+    font-weight: 300;
+    font-size: .95rem;
+  }
+
+  .options {
+    margin-top: .8em;
+    display: flex;
+    align-items: center;
+
+    .label {
+      margin-right: 1em;
+    }
+
+    .color-label:not(:first-child) {
+      margin-left: 4em;
+    }
+
+    .size {
+      padding: .3em .5em;
+    }
+
+    .color {
+      padding: .75em;
+      border-radius: 50%;
+    }
+  }
+
+  .actions {
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .label {
+      margin-bottom: 7px;
+    }
+
+    .delta-balance {
+      color: $main;
+
+      .innopoint {
+        stroke: $main;
+        margin-bottom: -1px;
+      }
+
+      s {
+        text-decoration: none;
+        position: relative;
+        color: $danger;
+        margin-right: .7em;
+
+        .innopoint {
+          stroke: $danger;
+        }
+      }
+    }
+
+    s::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      top: 50%;
+      left: 0;
+      background: $danger;
+    }
+  }
+}
+
+#popup {
+  position: fixed;
+  top: 20px;
+  right: 3%;
+  min-width: 16em;
+  padding: .2em .2em .2em 1em;
+  width: max-content;
+  max-width: 85%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  visibility: hidden;
+
+  .text {
+    padding-top: .7em;
+    padding-bottom: .7em;
+    flex: 1;
+    font-size: .95rem;
+  }
+
+  .btn {
+    margin-left: .5em;
+  }
+}
+
+body.popup-open #popup {
+  visibility: visible;
+}
+
+@media only screen and (min-width: 360px) {
+  .purchase .identifier {
+    margin-right: 1em;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .product {
+    padding-top: 4.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .showcase {
+      align-self: stretch;
+      padding: 0 1em;
+      margin-bottom: 2em;
+      display: flex;
+      height: 26em;
+      justify-content: center;
+    }
+
+    .previews {
+      $preview-item-size: 4em;
+      display: block;
+      flex-basis: $preview-item-size + 1.5em;
+      flex-shrink: 0;
+      position: relative;
+      margin-right: .5em;
+
+      input[type="radio"] {
+        @include hide-accessible;
+      }
+
+      .icon {
+        width: $preview-item-size;
+        height: $preview-item-size;
+        margin-left: .5em;
+        margin-right: .5em;
+        margin-bottom: .5em;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        position: relative;
+
+        img {
+          width: 100%;
+          border-radius: 10px;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: .5em;
+        }
+      }
+
+      .icon:hover::after, input:focus + .icon::after {
+        content: "";
+        position: absolute;
+        border-radius: 10px;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        width: $preview-item-size;
+        height: $preview-item-size;
+        background-color: transparentize($main, .9);
+        cursor: pointer;
+      }
+
+      input:checked + .icon {
+        border-color: $main;
+      }
+
+      .simplebar-scrollbar {
+        width: 5px;
+      }
+
+      .simplebar-scrollbar::before {
+        opacity: .25;
+      }
+    }
+
+    .swiper-container {
+      width: 26em;
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: 10px;
+    }
+
+    .content {
+      max-width: 28em;
+    }
+  }
+
+  .btn.back > svg {
+    stroke: $main;
+    margin-right: .4em;
+  }
+
+  .balance {
+    top: 1.6em;
+    right: 1.9em;
+    left: unset;
+    bottom: unset;
+  }
+
+  .simplebar-offset::before, .simplebar-offset::after {
+    content: "";
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    width: 100%;
+    height: 3em;
+    transition: opacity 300ms;
+    pointer-events: none;
+  }
+
+  .simplebar-offset::before {
+    top: 0;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, white 100%);
+  }
+
+  .simplebar-offset.at-top::before {
+    opacity: 0;
+  }
+
+  .simplebar-offset::after {
+    bottom: 0;
+    background: linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .simplebar-offset.at-bottom::after {
+    opacity: 0;
+  }
+
+  #popup {
+    right: 2.5rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .product {
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    padding-left: 10%;
+    padding-right: 10%;
+
+    .showcase {
+      flex-shrink: 0;
+      padding: 0;
+      margin-right: 1em;
+
+      .swiper-container {
+        flex-shrink: 0;
+      }
+    }
+
+    .showcase:not(.no-previews) {
+      width: 32em;
+    }
+
+    .content {
+      padding: 0 0 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .title {
+      font-size: 1.3rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .label {
+      font-size: .9rem;
+    }
+
+    .parameters .label {
+      padding-bottom: .3rem;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.4rem;
+    }
+
+    .radio-options label:not(:last-child) {
+      margin-right: .5em;
+    }
+  }
+
+  .btn.back {
+    top: 1.2em;
+    left: 10%;
+  }
+
+  .balance {
+    top: 2.1em;
+    right: 10%;
+  }
+
+  @supports (display: grid) {
+    .product {
+      padding-top: 2em;
+      display: grid;
+      grid-template: auto auto / auto auto;
+      row-gap: 1em;
+      align-items: center;
+
+      .showcase {
+        justify-content: flex-start;
+      }
+    }
+
+    .btn.back, .balance {
+      position: static;
+    }
+
+    .btn.back {
+      justify-self: start;
+    }
+
+    .balance {
+      justify-self: end;
+    }
+  }
+
+  #popup {
+    right: 8%;
+  }
+}

@@ -1,9 +1,10 @@
-node_modules
-npm-debug.log
-.nuxt
-.idea
-.vscode
 .DS_Store
-dist
+/node_modules/
+/src/node_modules/@sapper/
+yarn-error.log
+/__sapper__/
+.idea
+yarn.lock
 package-lock.json
 webpack.config.js
+.env

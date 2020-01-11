@@ -1,0 +1,79 @@
+.bar-chart > .bar:nth-child(1) > .future {
+  background-color: rgba(237, 137, 137, 0.5);
+}
+
+.bar-chart > .bar:nth-child(1) .present {
+  background-color: #ed8989;
+}
+
+/* ----- */
+.bar-chart > .bar:nth-child(2) > .future {
+  background-color: rgba(237, 195, 137, 0.5);
+}
+
+.bar-chart > .bar:nth-child(2) .present {
+  background-color: #edc389;
+}
+
+/* ----- */
+.bar-chart > .bar:nth-child(3) > .future {
+  background-color: rgba(229, 237, 137, 0.5);
+}
+
+.bar-chart > .bar:nth-child(3) .present {
+  background-color: #e5ed89;
+}
+
+/* ----- */
+.bar-chart > .bar:nth-child(4) > .future {
+  background-color: rgba(170, 237, 137, 0.5);
+}
+
+.bar-chart > .bar:nth-child(4) .present {
+  background-color: #aaed89;
+}
+
+/* ----- */
+.bar-chart > .bar:nth-child(5) > .future {
+  background-color: rgba(137, 237, 200, 0.5);
+}
+
+.bar-chart > .bar:nth-child(5) .present {
+  background-color: #89edc8;
+}
+
+/* ----- */
+.bar-chart > .bar:nth-child(6) > .future {
+  background-color: rgba(137, 219, 237, 0.5);
+}
+
+.bar-chart > .bar:nth-child(6) .present {
+  background-color: #89dbed;
+}
+
+/* ----- */
+.bar-chart > .bar:nth-child(7) > .future {
+  background-color: rgba(137, 151, 237, 0.5);
+}
+
+.bar-chart > .bar:nth-child(7) .present {
+  background-color: #8997ed;
+}
+
+/* ----- */
+.bar-chart > .bar:nth-child(8) > .future {
+  background-color: rgba(185, 137, 237, 0.5);
+}
+
+.bar-chart > .bar:nth-child(8) .present {
+  background-color: #b989ed;
+}
+
+/* ----- */
+.bar-chart > .bar:nth-child(9) > .future {
+  background-color: rgba(237, 137, 237, 0.5);
+}
+
+.bar-chart > .bar:nth-child(9) .present {
+  background-color: #ed89ed;
+}

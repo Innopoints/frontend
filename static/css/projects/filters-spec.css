@@ -1,0 +1,50 @@
+.spots {
+  justify-content: space-between;
+}
+
+.spots .text-field {
+  margin: 0 .2em;
+}
+
+.spots input {
+  text-align: center;
+  width: 2.5em;
+}
+
+.spots button {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.competences + section .with-labels {
+  display: flex;
+  flex-direction: column;
+}
+
+.competences + section > .btn {
+  margin: 0 1em;
+}
+
+.competences + section label {
+  padding: .8em 1em .8em 2em;
+  display: flex;
+  align-items: center;
+}
+
+.competences + section label:hover {
+  background-color: rgba(18, 120, 0, 0.1);
+}
+
+@media only screen and (min-width: 370px) {
+  .spots button {
+    clip: auto;
+    width: unset;
+    height: unset;
+    margin: 0;
+    position: static;
+  }
+}

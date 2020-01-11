@@ -1,0 +1,214 @@
+form {
+  padding-bottom: 4em;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-header {
+  text-align: center;
+}
+
+h1 {
+  margin-top: 1.5em;
+}
+
+h1 .autosave {
+  display: none;
+}
+
+h1 .autosave.visible {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+h2 {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.steps-navigation.dropdown-shell {
+  align-self: center;
+}
+
+.steps-navigation.dropdown-shell .handle {
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14), 0 1px 5px rgba(0, 0, 0, 0.12);
+  margin-top: 1em;
+}
+
+.steps-navigation.dropdown-shell .handle .step-index, .steps-navigation.dropdown-shell .handle .step-name {
+  margin-right: 1em;
+}
+
+.steps-navigation .dropdown {
+  top: 1em;
+  margin-top: 0;
+  height: 3.125em;
+  width: 100% !important;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 3px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: height 200ms;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.steps-navigation .dropdown .btn {
+  width: 100%;
+  border-radius: 0;
+  padding-left: 1.5em;
+  text-align: center;
+}
+
+.steps-navigation .dropdown .btn .icon {
+  font-size: 1.25rem;
+  margin-right: 1em;
+  width: 24px;
+}
+
+.steps-navigation .dropdown .btn.highlight {
+  background: rgba(18, 120, 0, 0.05);
+}
+
+.steps-navigation .dropdown .btn.highlight:focus {
+  background: rgba(18, 120, 0, 0.1);
+}
+
+.steps-navigation.dropdown-shell.open .dropdown {
+  height: 13.5em;
+}
+
+form > .actions {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-weight: 300;
+  font-size: .9rem;
+}
+
+form > .actions .back {
+  order: 3;
+}
+
+form > .actions .forward {
+  order: 2;
+}
+
+form > .actions .error {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+@media only screen and (min-width: 640px) {
+  .form-header {
+    text-align: left;
+  }
+  h1 .autosave {
+    display: inline-flex;
+    align-items: center;
+    font-size: .9rem;
+    font-weight: 300;
+    color: #888;
+    height: 100%;
+    margin-left: 1.5em;
+  }
+  h1 .autosave .icon {
+    stroke: #888;
+    stroke-width: 1;
+    width: 20px;
+    height: 20px;
+  }
+  h1 .autosave.visible {
+    clip: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    height: 100%;
+    margin-left: .5em;
+  }
+  h2 {
+    clip: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    font-size: 1.2rem;
+    margin-top: 1.5em;
+  }
+  form {
+    position: relative;
+  }
+  form > .actions {
+    align-items: center;
+  }
+  form > .actions .error {
+    width: auto;
+    flex: 1;
+    order: 2;
+    text-align: right;
+    margin: 0 1em;
+  }
+  form > .actions .forward {
+    order: 1;
+  }
+  .steps-navigation.dropdown-shell {
+    position: absolute;
+    top: .5em;
+    right: 2.5em;
+  }
+  .steps-navigation.dropdown-shell .step-index {
+    font-size: 1.2rem;
+  }
+  .steps-navigation.dropdown-shell .step-index .step {
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  h1 .autosave.visible {
+    margin-left: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .steps-navigation.dropdown-shell {
+    top: 1.2em;
+    right: 8%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .material.step0 {
+    flex-direction: row;
+  }
+
+  .material form {
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+  .material .padded {
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+  .steps-navigation.dropdown-shell {
+    right: 12%;
+  }
+}

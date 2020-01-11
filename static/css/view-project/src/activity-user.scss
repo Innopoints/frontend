@@ -1,0 +1,135 @@
+@import "../../global/src/_mixins.scss";
+@import "../../global/src/_variables.scss";
+
+.activity.user {
+  .application-status {
+    font-size: .9em;
+    font-weight: 300;
+    margin-top: 1em;
+
+    .dot {
+      margin-right: .3em;
+      margin-left: 0;
+    }
+  }
+
+  .additional {
+    @include hide-accessible;
+  }
+
+  .chevron {
+    transition: transform 100ms;
+  }
+
+  &.expanded {
+    .chevron {
+      transform: rotate(180deg);
+    }
+
+    .row.info {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .labeled:last-child {
+        margin-top: .8em;
+      }
+    }
+
+    .labeled .content.secondary,
+    .additional {
+      @include show-accessible;
+    }
+
+    .description,
+    .chips,
+    .volunteers {
+      margin-top: .8em;
+    }
+
+    .description .content {
+      font-size: .95rem;
+    }
+
+    .volunteers ul {
+      padding-left: 1.5em;
+      margin: .5em 0 1em;
+
+      li {
+        margin-top: .5em;
+      }
+
+      strong {
+        margin-top: .8em;
+        display: block;
+      }
+    }
+
+    .application {
+      border-top: 1px solid $light-gray;
+      padding-top: .8em;
+      font-weight: 300;
+
+      .with-icon {
+        margin-top: .5em;
+      }
+    }
+
+    .not-logged-in {
+      align-self: center;
+      font-weight: 300;
+    }
+  }
+
+  .warning {
+    background: #fff4e5;
+    padding: .5em .8em;
+    margin-top: .8em;
+    border-radius: .75em;
+    color: #995400;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      stroke: #995400;
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-right: .6em;
+    }
+  }
+}
+
+@media only screen and (max-width: 379px) {
+  .volunteers .icon {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 420px) and (max-width: 679px),
+                  (min-width: 1024px) and (max-width: 1199px),
+                  (min-width: 1400px) {
+  .activity.user {
+    .row > .labeled:first-child {
+      flex-basis: 40%;
+    }
+
+    .row > .labeled:last-child {
+      flex-basis: 60%;
+    }
+
+    &:not(.expanded) {
+      .labeled .content.secondary {
+        @include show-accessible;
+      }
+    }
+
+    &.expanded {
+      .row.info {
+        flex-direction: row;
+
+        & > .labeled:last-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+.feedback-modal {
+  .title {
+    padding-right: 2em;
+    margin-bottom: .5em;
+  }
+
+  p {
+    font-weight: 300;
+    margin-bottom: .3em;
+    font-size: .9rem;
+    line-height: 1.1rem;
+  }
+
+  .content {
+    max-height: calc(100vh - 10em);
+  }
+
+  form {
+    margin-top: 1em;
+
+    label {
+      display: block;
+      margin-bottom: .3em;
+    }
+
+    .competence-chips {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 40em;
+
+      .chip {
+        margin-right: .5em;
+      }
+    }
+
+    .form-field {
+      flex-direction: column;
+    }
+  }
+
+  textarea {
+    height: 4em;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .feedback-modal .content {
+    max-height: calc(100vh - 7em);
+  }
+}

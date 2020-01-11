@@ -1,0 +1,53 @@
+@import "../../global/src/_variables.scss";
+
+.empty {
+  margin: 2em 0 3em;
+  display: flex;
+  justify-content: center;
+
+  .picture {
+    width: 100%;
+    max-width: 25em;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 1.3em;
+    margin: .7em 0 .4em;
+    color: $main;
+  }
+
+  figcaption {
+    margin: 0 15%;
+    font-weight: 300;
+  }
+}
+
+.empty.small {
+  padding: 4em 0;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+
+  .icon {
+    border-radius: 50%;
+    background: transparentize($main, .9);
+    padding: 1em;
+    width: 4em;
+    height: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5em;
+
+    & > svg {
+      stroke: $main;
+      width: 80%;
+      height: 80%;
+    }
+  }
+
+  .title {
+    margin: 0 0 .3em;
+  }
+}

@@ -1,0 +1,31 @@
+<script>
+  import Card from 'ui/card.svelte';
+</script>
+
+<section class="contacts">
+  <header>
+    <h2>Any questions?</h2>
+    <div class="subtitle">Don’t hesitate to contact us!</div>
+  </header>
+  <div>
+    <Card>
+      <a href="mailto:319@innopolis.ru" class="mr-2">
+        <img class="icon" src="/images/home/mail-us.svg" alt="write to 319" />
+      </a>
+      <div>
+        <p style="padding-top: 1em;">319@innopolis.ru</p>
+        <a class="btn" href="mailto:319@innopolis.ru">send us an email</a>
+      </div>
+    </Card>
+    <Card>
+      <a href="tel:+7 (843) 203-92-53">
+        <img class="icon" src="/images/home/call-us.svg" alt="call to 319" />
+      </a>
+      <p style="padding: 0 1em;">
+        +7 (843) 203-92-53
+        <br />
+        (ext. 176)
+      </p>
+    </Card>
+  </div>
+</section>

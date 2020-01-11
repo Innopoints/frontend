@@ -1,0 +1,271 @@
+@import "../../global/src/_variables.scss";
+@import "../../global/src/_mixins.scss";
+
+.material {
+  padding-bottom: 3em;
+}
+
+h2.padded {
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 2em;
+}
+
+.project-header {
+  margin-bottom: 1.5em;
+
+  .cover-image {
+    width: 100%;
+  }
+
+  h1 {
+    margin-top: 1em;
+    margin-bottom: 0;
+    font-size: 1.3rem;
+
+    .status-chip {
+      display: inline-block;
+      padding: .3em .6em;
+      border-radius: 1em;
+      background: $main;
+      font-weight: 500;
+      color: #fff;
+      font-size: .9rem;
+      margin-left: .5em;
+    }
+  }
+
+  .info {
+    margin: 0 calc(1em - 2px);
+    padding: 0 4px 1.5em;
+    border-bottom: 1px solid $light-gray;
+  }
+
+  .labeled {
+    align-items: flex-end;
+    margin-top: 1em;
+    margin-right: 2.5em;
+    font-size: 1.05rem;
+  }
+
+  .icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-bottom: -2px;
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .btn.filled {
+      margin-top: 1em;
+    }
+
+    .btn.outline {
+      margin-top: 1em;
+      margin-right: .5em;
+    }
+  }
+
+  &.wrap .data-points {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+}
+
+.activities {
+  margin-top: 1em;
+}
+
+.activities.moderated + .btn {
+  margin-left: .5em;
+  margin-top: 1em;
+}
+
+.dialog {
+  ul.actual li {
+    margin-bottom: .25em;
+  }
+
+  & > p {
+    margin-top: .5em;
+  }
+}
+
+.reports {
+  margin-top: 1.5em;
+  font-size: .95rem;
+
+  .report {
+    padding-top: 1em;
+
+    &:not(:last-child) {
+      padding-bottom: 1em;
+      border-bottom: 1px solid $light-gray;
+    }
+  }
+
+  .data-points {
+    display: flex;
+    flex-direction: column;
+
+    .labeled:first-child {
+      margin-bottom: 1em;
+    }
+
+    a {
+      display: inline-block;
+    }
+
+    .icon {
+      flex-shrink: 0;
+    }
+  }
+
+  .feedback {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    margin-top: 1em;
+
+    .stars {
+      margin-bottom: .5em;
+      flex-shrink: 0;
+
+      .star {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+
+  .labeled > .icon {
+    margin-top: .6rem;
+  }
+}
+
+.star {
+  stroke: $main;
+
+  &.off {
+    stroke: $light-gray;
+  }
+}
+
+.report-form {
+  & > label {
+    margin-top: 1em;
+    margin-bottom: .5em;
+    display: block;
+    line-height: 1.3rem;
+  }
+
+  & > label:first-child {
+    margin-top: 0;
+  }
+
+  .actions {
+    margin-top: .5em;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@media only screen and (max-width: 359px) {
+  .dialog {
+    padding: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 699px) {
+  .project-header {
+    background: var(--image-url);
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: $shadow-1;
+
+    h1 {
+      margin-top: 1.5em;
+    }
+
+    .cover-image {
+      display: none;
+    }
+
+    .info {
+      width: 60%;
+      background: linear-gradient(
+        to left,
+        #fff 0%,
+        rgba(255, 255, 255, 1) 90%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      margin: 0;
+      padding-left: 4em;
+      padding-right: 1em;
+      border-bottom: none;
+    }
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .project-header {
+    display: flex;
+    margin-top: 1em;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+
+    .cover-image {
+      width: 40%;
+      max-width: 25em;
+      border-radius: 1em;
+      margin: 1em 1em 1em 0;
+      object-fit: cover;
+    }
+
+    .info {
+      border-bottom: none;
+    }
+  }
+
+  .material > .moderated + .btn {
+    margin-left: 2.5em;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .reports {
+    .data-points, .feedback {
+      flex-direction: row;
+    }
+
+    .data-points .labeled:first-child {
+      margin-right: 10%;
+    }
+
+    .feedback .stars {
+      margin-left: 1em;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .project-header {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+
+  .material > .moderated + .btn {
+    margin-left: 8%;
+  }
+}

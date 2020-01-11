@@ -1,0 +1,79 @@
+.activity {
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+}
+
+.activity .title {
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+  letter-spacing: .2px;
+}
+
+.activity .row {
+  margin-top: .8em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.activity .row > .labeled {
+  flex-basis: 50%;
+}
+
+.activity .chips {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.activity .chips .chip {
+  font-size: .85rem;
+  font-weight: 400;
+  color: black;
+  margin: 0 .3em .3em 0;
+  padding: .4em .7em;
+}
+
+.activity .labeled {
+  font-size: 1.05rem;
+}
+
+.activity .labeled .icon {
+  margin-top: .7em;
+  flex-shrink: 0;
+}
+
+.activity .labeled .content {
+  font-size: 1.15rem;
+}
+
+.activity .labeled .content.secondary {
+  font-size: .9rem;
+  font-weight: 300;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.activity .labeled .innopoint {
+  margin-bottom: -1px;
+}
+
+.activity .with-icon {
+  display: flex;
+  align-items: flex-start;
+  font-size: .9rem;
+  margin-top: .3em;
+}
+
+.activity .with-icon > .icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  stroke: #127800;
+  margin-right: .3em;
+}
