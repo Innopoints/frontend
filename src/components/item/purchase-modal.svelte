@@ -2,11 +2,10 @@
   import Modal from 'ui/modal.svelte';
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
-  import Chip from 'ui/chip.svelte';
+  import UnclickableChip from 'ui/unclickable-chip.svelte';
   import Labeled from 'ui/labeled.svelte';
   import { createEventDispatcher } from 'svelte';
   import {user} from '@/store/user';
-  import {open, closeModal} from '@/store/modal';
   import {openSnackbar} from '@/store/snackbar';
 
   export let size;
@@ -29,14 +28,14 @@
   const dispatch = createEventDispatcher();
   const confirm = () => {
     if (finalPrice >= 0) {
-      closeModal();
+      // closeModal();
       openSnackbar();
       dispatch('success');
     }
   };
 </script>
 
-<Modal value={$open} on:close={closeModal}>
+<Modal>
   <h1>confirm your purchase</h1>
 
   <div class="purchase">
@@ -59,7 +58,7 @@
   <div class="options">
     {#if inSizes && size}
       <span class="label size-label">size</span>
-      <Chip isSmall unclickable chipclass="chip size">{size.label}</Chip>
+      <UnclickableChip small classname="size">{size.label}</UnclickableChip>
     {/if}
     <span class="label color-label">color</span>
     <div class="color" style={'background:' + variety.color}></div>
