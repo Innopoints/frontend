@@ -17,11 +17,11 @@ export default function callOnSight(node, { callback, args = [] }) {
     observer.observe(node);
   }
 
-	return {
-		destroy() {
-			if (observer != null) {
+  return {
+    destroy() {
+      if (observer != null) {
         observer.disconnect();
       }
-		},
-	};
+    },
+  };
 }

@@ -3,8 +3,8 @@
   import Button from 'ui/button.svelte';
 
   export let error;
-	export let status;
-	const dev = process.env.NODE_ENV === 'development';
+  export let status;
+  const dev = process.env.NODE_ENV === 'development';
 </script>
 
 <svelte:head>

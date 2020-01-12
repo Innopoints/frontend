@@ -1,7 +1,6 @@
 <script>
   import Card from 'ui/card.svelte';
 
-  // import Chip from 'ui/chip.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
   import CheckChipGroup from 'ui/check-chip-group.svelte';
   import RadioChipGroup from 'ui/radio-chip-group.svelte';
