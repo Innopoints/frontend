@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   export let classname = '';
   export let chipwrapperclass = '';
   export let chipclass = '';
@@ -18,6 +19,11 @@
   if (labels !== null && values.length !== labels.length) {
     console.error('Must have as many labels as there is values.');
   }
+
+  const dispatch = createEventDispatcher();
+  function newSelection() {
+    dispatch('change', value);
+  }
 </script>
 
 <div role="group" class={classname}>
@@ -29,6 +35,7 @@
         type="radio"
         name={name}
         class={inputclass}
+        on:change={newSelection}
       />
       <div class="chip {chipclass}" class:small class:outline>
         {labels === null ? loopValue : labels[i]}
