@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import itemAmount from 'utils/item-amount.js';
+  import itemAmount from 'ui/utils/item-amount.js';
 
   export let classname = '';
   export let chipwrapperclass = '';
@@ -13,9 +13,8 @@
   export let labels = null;
   export let name;
   export let maxChecked = null;
-  let currentChecked = 0;
-  values.forEach((elt) => currentChecked += elt.checked);
-  let titleObj = { title: `Can only select ${itemAmount(maxChecked, 'value')}.` };
+  $: currentChecked = values.reduce((acc, elt) => acc + elt.checked, 0);
+  const titleObj = { title: `Can only select ${itemAmount(maxChecked, 'value')}.` };
 
   if (values.length === 0) {
     console.error('Must have at least one value in the checkbox group.');
@@ -27,20 +26,11 @@
 
   const dispatch = createEventDispatcher();
   function checkLimit(evt) {
-    currentChecked += (this.checked ? 1 : -1);
-    if (maxChecked !== null && currentChecked > maxChecked) {
-      this.checked = false;
-      for (let val of values) {
-        if (val.value == this.value) {
-          val.checked = false;
-          values = values;  // Invalidate the values;
-          break;
-        }
-      }
-      currentChecked--;
-    } else {
-      dispatch('change', evt);
+    if (maxChecked !== null && currentChecked + evt.target.checked  > maxChecked) {
+      evt.preventDefault();
+      return false;
     }
+    return true;
   }
 </script>
 
@@ -54,7 +44,7 @@
         disabled={loopValue.disabled}
         name={name}
         class={inputclass}
-        on:change={checkLimit}
+        on:click={(evt) => checkLimit(evt) && dispatch('change', loopValue)}
       />
       <div
         class="chip {chipclass}"

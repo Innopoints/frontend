@@ -825,6 +825,10 @@ label:hover .checkbox.colored > input:focus + .icon::after {
   background-color: rgba(var(--r), var(--g), var(--b), 0.125);
 }
 
+.max-reached input:not(:checked) + .icon {
+  cursor: not-allowed;
+}
+
 /* Switches -------------------------------------- */
 .switch {
   position: relative;
