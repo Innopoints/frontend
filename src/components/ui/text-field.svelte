@@ -1,10 +1,10 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
 
-  export let classname = 'text-field';
+  export let classname = '';
   export let inputclass = '';
-  export let labelclass = 'label';
-  export let errorclass = 'error';
+  export let labelclass = '';
+  export let errorclass = '';
 
   export let isOutline = false;
   export let isWithItem = false;
@@ -26,6 +26,7 @@
   export let multiline = null;
   export let cols = 5;
   export let changeTimeout = 400;
+  export let autofocus = false;
 
   const dispatch = createEventDispatcher();
   let timeout = null;
@@ -36,12 +37,21 @@
       dispatch('delayedChange', e.target.value);
     }, changeTimeout);
   };
+
+  let inputElement;
+  onMount(() => {
+    if (autofocus) {
+      inputElement.focus();
+    }
+  });
 </script>
 
 <div
-    class:with-item={isWithItem}
+    class="text-field {classname}"
     class:outline={isOutline}
-    class="{classname} {isWithItem ? (isItemRight ? 'right' : 'left') : ''}"
+    class:with-item={isWithItem}
+    class:left={isWithItem && !isItemRight}
+    class:right={isWithItem && isItemRight}
 >
   {#if multiline}
     <textarea
@@ -55,6 +65,7 @@
       on:blur={() => dispatch('blur', value)}
       on:input={() => dispatch('input', value)}
       on:change={delayedChange}
+      bind:this={inputElement}
     />
   {:else}
     {#if type === 'number'}
@@ -74,8 +85,8 @@
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}
         on:input={(e) => dispatch('input', e.target.value)}
-        on:keyup.enter={(e) => dispatch('change', e.target.value)}
         on:change={delayedChange}
+        bind:this={inputElement}
       />
     {:else}
       <input
@@ -90,13 +101,13 @@
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}
         on:input={(e) => dispatch('input', e.target.value)}
-        on:keyup.enter={(e) => dispatch('change', e.target.value)}
         on:change={delayedChange}
+        bind:this={inputElement}
       />
     {/if}
 
     {#if isOutline}
-      <label for={id} class={labelclass}>
+      <label for={id} class="label {labelclass}">
         <slot name="label">{label}</slot>
       </label>
     {/if}
@@ -106,7 +117,7 @@
     {/if}
 
     {#if pattern}
-      <span class={errorclass}>
+      <span class="error {errorclass}">
         <slot name="error">{error}</slot>
       </span>
     {/if}
