@@ -433,14 +433,6 @@ button.btn {
         left: 10px;
         font-weight: 500;
       }
-
-      & > .item:not(svg) {
-        color: transparentize(black, .5);
-      }
-
-      & > input:focus + .item {
-        color: $main;
-      }
     }
 
     &.right {
@@ -452,8 +444,17 @@ button.btn {
       & > .item {
         right: 10px;
       }
+    }
 
-      & > input:focus + .item svg {
+    & > .item {
+      color: #7a7a7a;
+    }
+
+    & > input:focus + .item {
+      color: $main;
+      stroke: $main;
+
+      svg {
         stroke: $main;
       }
     }

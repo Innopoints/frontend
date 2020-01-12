@@ -409,14 +409,6 @@ button.btn {
   font-weight: 500;
 }
 
-.text-field.with-item.left > .item:not(svg) {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.text-field.with-item.left > input:focus + .item {
-  color: #127800;
-}
-
 .text-field.with-item.right input, .text-field.with-item.right textarea {
   padding-right: 30px;
   text-align: right;
@@ -426,7 +418,16 @@ button.btn {
   right: 10px;
 }
 
-.text-field.with-item.right > input:focus + .item svg {
+.text-field.with-item > .item {
+  color: #7a7a7a;
+}
+
+.text-field.with-item > input:focus + .item {
+  color: #127800;
+  stroke: #127800;
+}
+
+.text-field.with-item > input:focus + .item svg {
   stroke: #127800;
 }
 
