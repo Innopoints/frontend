@@ -26,7 +26,7 @@
 
   const dispatch = createEventDispatcher();
   function checkLimit(evt) {
-    if (maxChecked !== null && currentChecked + evt.target.checked  > maxChecked) {
+    if (maxChecked !== null && currentChecked + evt.target.checked > maxChecked) {
       evt.preventDefault();
       return false;
     }
