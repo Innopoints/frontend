@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import getColorPickerStyles from './utils/color-picker-styles.js';
 
   export let classname = '';
@@ -26,6 +27,11 @@
   if (labelPosition !== 'right' && labelPosition !== 'left') {
     console.error('Label position must be either left or right.');
   }
+
+  const dispatch = createEventDispatcher();
+  function newSelection() {
+    dispatch('change', value);
+  }
 </script>
 
 <div class:with-labels={!isColor} class={classname} role="group">
@@ -46,11 +52,12 @@
       {#if !isColor}
         <div class="radio {radioclass}">
           <input
-              bind:group={value}
-              value={loopValue}
-              type="radio"
-              name={name}
-              class={inputclass}
+            bind:group={value}
+            value={loopValue}
+            type="radio"
+            name={name}
+            class={inputclass}
+            on:change={newSelection}
           >
           <div
             style="{isColor ? getColorPickerStyles(loopValue) : ''}"

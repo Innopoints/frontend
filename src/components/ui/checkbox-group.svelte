@@ -26,7 +26,7 @@
   if (labels !== null && values.length !== labels.length) {
     console.error('Must have as many labels as there is values.');
   }
-  
+
   if (labelPosition !== 'right' && labelPosition !== 'left') {
     console.error('Label position must be either left or right.');
   }
@@ -44,9 +44,9 @@
         }
       }
       currentChecked--;
-    } else {
-      dispatch('change', evt);
+      return false;
     }
+    return true;
   }
 </script>
 
@@ -67,7 +67,7 @@
             type="checkbox"
             name={name}
             class={inputclass}
-            on:change={checkLimit}
+            on:change={(evt) => { checkLimit(evt) && dispatch('change', loopValue); }}
         >
         <div
           style="{isColor ? getColorPickerStyles(loopValue.value) : ''}"

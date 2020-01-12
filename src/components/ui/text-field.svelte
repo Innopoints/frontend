@@ -50,9 +50,9 @@
       bind:value={value}
       {cols}
       class={inputclass}
-      on:focus={(e) => dispatch('focus', e.target.value)}
-      on:blur={(e) => dispatch('blur', e.target.value)}
-      on:input={(e) => dispatch('input', e.target.value)}
+      on:focus={() => dispatch('focus', value)}
+      on:blur={() => dispatch('blur', value)}
+      on:input={() => dispatch('input', value)}
       on:change={delayedChange}
     />
   {:else}
