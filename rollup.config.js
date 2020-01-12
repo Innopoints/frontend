@@ -8,7 +8,7 @@ import { eslint } from 'rollup-plugin-eslint';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
-import preprocess from './src/utils/preprocess';
+import substituteSvgs from './src/utils/substitute-svgs.js';
 import sapperEnv from 'sapper-environment';
 
 const mode = process.env.NODE_ENV;
@@ -34,8 +34,7 @@ export default {
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
-          markup: data => preprocess(data, false, {}),
-          style: ({ content }) => ({code: content}),
+          markup: substituteSvgs,
         },
         dev,
         hydratable: true,
@@ -97,7 +96,7 @@ export default {
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
-          markup: data => preprocess(data, false, {}),
+          markup: substituteSvgs,
         },
         generate: 'ssr',
         dev,
