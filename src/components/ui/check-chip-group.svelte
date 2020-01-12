@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import itemAmount from 'utils/item-amount.js';
 
   export let classname = '';
   export let chipwrapperclass = '';
@@ -14,7 +15,7 @@
   export let maxChecked = null;
   let currentChecked = 0;
   values.forEach((elt) => currentChecked += elt.checked);
-  let titleObj = { title: `Can only select ${maxChecked} value.` + (maxChecked !== 1 ? 's' : '') };
+  let titleObj = { title: `Can only select ${itemAmount(maxChecked, 'value')}.` };
 
   if (values.length === 0) {
     console.error('Must have at least one value in the checkbox group.');
