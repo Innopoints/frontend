@@ -27,11 +27,21 @@
   }
 }
 
+.color-selection {
+  margin-left: 1.5em;
+
+  .clickable {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: .5em;
+  }
+}
+
 .color-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  margin-left: 1.5em;
 
   & > label {
     margin: 5px;

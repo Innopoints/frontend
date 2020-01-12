@@ -752,6 +752,11 @@ button.btn {
   }
 }
 
+.radio.colored > input + .icon::before {
+  border-color: lightgray;
+  border-color: rgb(var(--before-r), var(--before-g), var(--before-b));
+}
+
 .radio.colored:hover > input + .icon::after,
 label:hover .radio.colored > input + .icon::after {
   background-color: rgba(0, 0, 0, .05);
@@ -846,6 +851,11 @@ label:hover .checkbox > input:focus:checked + .icon::after {
 
 .with-labels .checkbox {
   margin-right: .75rem;
+}
+
+.checkbox.colored > input + .icon::before {
+  border-color: lightgray;
+  border-color: rgb(var(--before-r), var(--before-g), var(--before-b));
 }
 
 .checkbox.colored:hover > input + .icon::after,
@@ -1025,12 +1035,20 @@ label:hover input:focus ~ .switch.two-state::before {
     text-align: center;
   }
 
+  .ripple {
+    background: transparentize($main, .9);
+  }
+
   &.outline {
     border: 1px solid transparentize(black, .8);
     background-color: transparent;
 
     &.unclickable {
       border-color: $main;
+    }
+
+    .ripple {
+      background: transparentize($main, .9);
     }
   }
 }

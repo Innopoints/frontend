@@ -714,6 +714,11 @@ button.btn {
   background-color: rgba(18, 120, 0, 0.125);
 }
 
+.radio.colored > input + .icon::before {
+  border-color: lightgray;
+  border-color: rgb(var(--before-r), var(--before-g), var(--before-b));
+}
+
 .radio.colored:hover > input + .icon::after,
 label:hover .radio.colored > input + .icon::after {
   background-color: rgba(0, 0, 0, 0.05);
@@ -812,6 +817,11 @@ label:hover .checkbox > input:focus:checked + .icon::after {
 
 .with-labels .checkbox {
   margin-right: .75rem;
+}
+
+.checkbox.colored > input + .icon::before {
+  border-color: lightgray;
+  border-color: rgb(var(--before-r), var(--before-g), var(--before-b));
 }
 
 .checkbox.colored:hover > input + .icon::after,
@@ -992,6 +1002,10 @@ label:hover input:focus ~ .switch.two-state::before {
   text-align: center;
 }
 
+.chip .ripple {
+  background: rgba(18, 120, 0, 0.1);
+}
+
 .chip.outline {
   border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: transparent;
@@ -999,6 +1013,10 @@ label:hover input:focus ~ .switch.two-state::before {
 
 .chip.outline.unclickable {
   border-color: #127800;
+}
+
+.chip.outline .ripple {
+  background: rgba(18, 120, 0, 0.1);
 }
 
 input + .chip:hover {
