@@ -32,6 +32,7 @@
     "brace-style": 0,
     "no-return-assign": 0,
     "no-trailing-spaces": 0,
+    "no-constant-condition": "off",
     "curly": [0, "multi"],
     "indent": "off",
     "comma-dangle": ["warn", "always-multiline"],
