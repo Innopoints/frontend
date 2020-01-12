@@ -17,9 +17,10 @@
   export let type = 'text';
   export let value = null;
   export let pattern = null;
+  export let minlength = null;
+  export let maxlength = null;
   export let min = null;
   export let max = null;
-  export let maxLength = null;
   export let label = null;
   export let error = null;
   export let multiline = null;
@@ -66,7 +67,8 @@
         {pattern}
         {min}
         {max}
-        {maxLength}
+        {minlength}
+        {maxlength}
         class={inputclass}
         class:no-spinner={isNoSpinner}
         on:focus={(e) => dispatch('focus', e.target.value)}
@@ -82,7 +84,8 @@
         {name}
         bind:value={value}
         {pattern}
-        {maxLength}
+        {minlength}
+        {maxlength}
         class={inputclass}
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}

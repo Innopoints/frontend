@@ -22,9 +22,9 @@
   </div>
   <div class="showcase">
     <TextField
-        id="description"
-        placeholder="High-quality bulletproof fabric"
-        multiline
+      id="description"
+      placeholder="High-quality bulletproof fabric"
+      multiline
     />
   </div>
 
@@ -33,10 +33,10 @@
   <div class="showcase">
     <form>
       <FormField
-          id="ff-1"
-          title="Name"
-          subtitle="This field is to write the name, so please do."
-          required
+        id="ff-1"
+        title="Name"
+        subtitle="This field is to write the name, so please do."
+        required
       >
         <TextField id="ff-1" />
       </FormField>
@@ -64,12 +64,14 @@
   <div class="showcase">
     <TextField id="nothing" isOutline label="Label" />
     <TextField
-        id="username"
-        isOutline
-        isWithItem
-        label="Telegram"
-        pattern="[A-Za-z0-9_]{'{'}5,32{'}'}"
-        error="A username should contain from 5 to 32 symbols: a–z, 0–9, _.">
+      id="username"
+      isOutline
+      isWithItem
+      label="Telegram"
+      pattern="[A-Za-z0-9_]+"
+      minlength={5}
+      maxlength={32}
+      error="A username should contain from 5 to 32 symbols: a–z, 0–9, _.">
       <svg src="/images/icons/at-sign.svg" class="item" />
     </TextField>
   </div>
