@@ -25,9 +25,6 @@
       "eslint --format=pretty",
       "eslint --max-warnings 0 --fix",
       "git add"
-    ],
-    "*.scss": [
-      "stylelint --max-warning 0 --syntax scss"
     ]
   },
   "dependencies": {
