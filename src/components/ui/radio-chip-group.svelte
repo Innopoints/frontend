@@ -1,4 +1,5 @@
 <script>
+  import rippleEffect from './utils/ripple';
   import { createEventDispatcher } from 'svelte';
   export let classname = '';
   export let chipwrapperclass = '';
@@ -37,7 +38,7 @@
         class={inputclass}
         on:change={newSelection}
       />
-      <div class="chip {chipclass}" class:small class:outline>
+      <div class="chip {chipclass}" class:small class:outline use:rippleEffect>
         {labels === null ? loopValue : labels[i]}
       </div>
     </label>
