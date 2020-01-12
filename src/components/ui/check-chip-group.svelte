@@ -25,12 +25,13 @@
   }
 
   const dispatch = createEventDispatcher();
-  function checkLimit(evt) {
+  function checkLimit(evt, value) {
     if (maxChecked !== null && currentChecked + evt.target.checked > maxChecked) {
       evt.preventDefault();
-      return false;
+    } else {
+      value.checked = !value.checked;
+      dispatch('change', value);
     }
-    return true;
   }
 </script>
 
@@ -44,7 +45,7 @@
         disabled={loopValue.disabled}
         name={name}
         class={inputclass}
-        on:click={(evt) => checkLimit(evt) && dispatch('change', loopValue)}
+        on:click={(evt) => checkLimit(evt, loopValue)}
       />
       <div
         class="chip {chipclass}"
