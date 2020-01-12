@@ -1,14 +1,11 @@
 <script>
   import Button from 'ui/button.svelte';
-  import Dot from 'ui/dot';
+  import Dot from 'ui/dot.svelte';
   import {isAuthed, user} from '@/store/user';
 </script>
 
 <section class="tagline padded">
-  <img
-    src="images/store/voxel-trolley.png"
-    class="hide-tb picture"
-    alt="store image" />
+  <img src="images/store/voxel-trolley.png" class="hide-tb picture" alt="" />
   <div>
     <div class="headline">InnoStore</div>
     <div class="subhead">
@@ -24,7 +21,7 @@
         <Button isOutline classname="btn rectangle" href="/dashboard">
           <svg src="/images/icons/shopping-bag.svg" class="icon mr" />
           manage purchases
-          <Dot active />
+          <Dot active small />
         </Button>
       </div>
     {/if}
