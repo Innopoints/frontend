@@ -4,7 +4,5 @@
 yarn-error.log
 /__sapper__/
 .idea
-yarn.lock
-package-lock.json
 webpack.config.js
 .env
