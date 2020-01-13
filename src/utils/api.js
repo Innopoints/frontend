@@ -23,14 +23,14 @@ function request(method, url, data) {
   }
 
   return fetch(url, options)
-		.then(r => r.text())
-		.then(json => {
-			try {
-				return JSON.parse(json);
-			} catch (err) {
-				return json;
-			}
-		});
+    .then(r => r.text())
+    .then(json => {
+      try {
+        return JSON.parse(json);
+      } catch (err) {
+        return json;
+      }
+    });
 }
 
 

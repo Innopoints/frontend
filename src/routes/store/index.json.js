@@ -4,8 +4,10 @@ const productLimit = 24;
 
 
 export async function get(req, res, next) {
-  const products = await api.get(`/products?limit=${productLimit}`);
-  const colors = await api.get('/colors');
+  const [products, colors] = await Promise.all([
+    api.get(`/products?limit=${productLimit}`),
+    api.get('/colors'),
+  ]);
 
   const respObject = {
     products: products,

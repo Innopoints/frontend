@@ -3,8 +3,10 @@
   const productLimit = 24;
 
   export async function preload() {
-    const { pages, data } = await api.get(`/products?limit=${productLimit}`);
-    const colors = await api.get('/colors');
+    const [{ pages, data }, colors] = await Promise.all([
+      api.get(`/products?limit=${productLimit}`),
+      api.get('/colors'),
+    ]);
     return { products: data, colors, pages };
   }
 </script>
