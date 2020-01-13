@@ -110,59 +110,5 @@
         </Button>
       {/if}
     {/each}
-    <!--
-    {#if currentPage !== 1}
-      <Button classname="page" isNormal on:click={() => goTo(1)}>1</Button>
-    {/if}
-    {#if currentPage - 1 == 3}
-      <Button classname="page" isNormal on:click={() => goTo(currentPage - 2)}>
-        {currentPage - 2}
-      </Button>
-    {:else if currentPage - 1 > 3}
-      {#if leftInputActive}
-        <TextField
-          type="number"
-          min={1}
-          max={pages}
-          isNoSpinner
-          autofocus
-          on:change={(evt) => goTo(+evt.detail)}
-        />
-      {:else}
-        <Button classname="page" isNormal on:click={activateLeftInput}>...</Button>
-      {/if}
-    {/if}
-    {#if currentPage > 2}
-      <Button classname="page" isNormal on:click={() => goTo(currentPage - 1)}>
-        {currentPage - 1}
-      </Button>
-    {/if}
-    <Button classname="page current" isNormal>{currentPage}</Button>
-    {#if currentPage < pages - 1}
-      <Button classname="page" isNormal on:click={() => goTo(currentPage + 1)}>
-        {currentPage + 1}
-      </Button>
-    {/if}
-    {#if pages - currentPage == 3}
-      <Button classname="page" isNormal on:click={() => goTo(currentPage + 2)}>
-        {currentPage + 2}
-      </Button>
-    {:else if pages - currentPage > 3}
-      {#if rightInputActive}
-        <TextField
-          type="number"
-          min={1}
-          max={pages}
-          isNoSpinner
-          autofocus
-          on:change={(evt) => goTo(+evt.detail)}
-        />
-      {:else}
-        <Button classname="page" isNormal on:click={activateRightInput}>...</Button>
-      {/if}
-    {/if}
-    {#if currentPage !== pages}
-      <Button classname="page" isNormal on:click={() => goTo(pages)}>{pages}</Button>
-    {/if}-->
   </nav>
 {/if}
