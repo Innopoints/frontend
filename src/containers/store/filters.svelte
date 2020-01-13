@@ -128,6 +128,7 @@
                 type="number"
                 isNoSpinner
                 value={filtering.minPrice}
+                min={0}
                 max={filtering.maxPrice}
                 on:input={changeMinPrice}
               />
@@ -136,7 +137,7 @@
                 type="number"
                 isNoSpinner
                 value={filtering.maxPrice}
-                min={filtering.minPrice}
+                min={filtering.minPrice || 0}
                 on:input={changeMaxPrice}
               />
             </div>
