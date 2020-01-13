@@ -10,6 +10,10 @@ const fullSvg = /<svg([^>]*)>([^]*)<\/svg>/i;
 function processCustomSvg(svg) {
   const svgMatch = svg.match(selfClosingSvgsLocal);
   const attributes = {};
+  if (svgMatch.length < 2) {
+    console.error('A self-closing SVG without attributes was located.');
+    return '';
+  }
 
   for (let attrMatch of svgMatch[1].matchAll(attributesRegex)) {
     attributes[attrMatch[1]] = attrMatch[2];
