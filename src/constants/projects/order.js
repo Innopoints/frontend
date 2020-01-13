@@ -9,5 +9,5 @@ export const orderLabels = [
   'newest first',
   'newest last',
   'soonest first',
-  'furthest last',
+  'soonest last',
 ];
