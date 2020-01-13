@@ -25,12 +25,13 @@ function request(method, url, data) {
   }
 
   return fetch(url, options)
-    .then(r => r.text())
-    .then(json => {
-      try {
-        return JSON.parse(json);
-      } catch (err) {
-        return json;
+    .then(r => {
+      console.log(r);
+      console.log(r.status);
+      if (r.status == 204) {
+        return null;
+      } else {
+        return r.json();
       }
     });
 }
