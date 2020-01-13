@@ -52,6 +52,7 @@
     class:with-item={isWithItem}
     class:left={isWithItem && !isItemRight}
     class:right={isWithItem && isItemRight}
+    class:no-spinner={isNoSpinner}
 >
   {#if multiline}
     <textarea
@@ -81,7 +82,6 @@
         {minlength}
         {maxlength}
         class={inputclass}
-        class:no-spinner={isNoSpinner}
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}
         on:input={(e) => dispatch('input', e.target.value)}
