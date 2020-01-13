@@ -1,7 +1,7 @@
 <script>
-  import StoreCard from '@/components/store/card.svelte';
-  import items from '@/constants/store/store';
-  const topItems = items.slice(0, 3);
+  import ProductCard from '@/components/store/product-card.svelte';
+
+  export let products;
 </script>
 
 <section class="store container">
@@ -14,10 +14,8 @@
   </div>
 
   <div class="cards">
-    {#each topItems as item, i (item.id)}
-      <StoreCard
-        {...{ id: item.id, name: item.name, type: item.type, varieties: item.varieties, price: item.price }}
-        short />
+    {#each products as product (product.id)}
+      <ProductCard {...product} short />
     {/each}
   </div>
 

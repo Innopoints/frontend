@@ -1,3 +1,13 @@
+<script context="module">
+  import * as api from '@/utils/api.js';
+  const productLimit = 3;
+
+  export async function preload() {
+    const { data } = await api.get(`/products?limit=${productLimit}`);
+    return { products: data };
+  }
+</script>
+
 <script>
   import Layout from '@/layouts/home.svelte';
   import Tagline from '@/containers/home/tagline.svelte';
@@ -5,6 +15,8 @@
   import Options from '@/containers/home/options.svelte';
   import Store from '@/containers/home/store.svelte';
   import Contacts from '../containers/home/contacts.svelte';
+
+  export let products;
 </script>
 
 <svelte:head>
@@ -27,6 +39,6 @@
   <Tagline />
   <HowTo />
   <Options />
-  <Store />
+  <Store {products} />
   <Contacts />
 </Layout>
