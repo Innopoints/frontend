@@ -23,7 +23,7 @@
 
 
 <li class:open class="panel {classname}">
-  <slot name="handle">
+  <slot name="handle" {toggle}>
     <Button on:click={toggle} chevron>{label}</Button>
   </slot>
 </li>

@@ -20,7 +20,7 @@
   export let disabled = false;
   export let label = '';
   export let away = null;
-  export let href = '';
+  export let href = null;
   export let chevron = false;
   export let badge = false;
 
