@@ -20,19 +20,7 @@
   import StoreCard from '@/components/store/card.svelte';
   import Pagination from '@/components/common/pagination.svelte';
   import generateQueryString from '@/utils/generate-query-string.js';
-
-  const orderOptions = [
-    { orderBy: 'addition_time', order: 'asc' },
-    { orderBy: 'addition_time', order: 'desc' },
-    { orderBy: 'price', order: 'asc' },
-    { orderBy: 'price', order: 'desc' },
-  ];
-  const orderLabels = [
-    'newest first',
-    'newest last',
-    'cheapest first',
-    'cheapest last',
-  ];
+  import { orderLabels, orderOptions } from '@/constants/store/order.js';
 
   const { session } = stores();
 
