@@ -35,14 +35,14 @@
 
   const dispatch = createEventDispatcher();
 
-  let searchThrottle = null;
+  let searchDebounce = null;
   function changeSearch(event) {
     filtering.searchQuery = event.detail;
-    if (searchThrottle != null) {
-      clearTimeout(searchThrottle);
+    if (searchDebounce != null) {
+      clearTimeout(searchDebounce);
     }
-    searchThrottle = setTimeout(() => {
-      searchThrottle = null;
+    searchDebounce = setTimeout(() => {
+      searchDebounce = null;
       dispatch('change-filters', filtering);
     }, 500);
   }
