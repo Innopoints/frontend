@@ -15,7 +15,7 @@
   import Tagline from '@/containers/store/tagline.svelte';
   import Balance from '@/components/store/balance.svelte';
   import Filters from '@/containers/store/filters.svelte';
-  import StoreCard from '@/components/store/card.svelte';
+  import ProductCard from '@/components/store/product-card.svelte';
   import Pagination from '@/components/common/pagination.svelte';
 
   const orderOptions = [
@@ -77,7 +77,7 @@
     queryString += `&page=${currentPage}`;
     console.log(queryString);
     api.get(`/products?${queryString}`)
-      .then(newProducts => { ({ pages, products} = newProducts); });
+      .then(newProducts => { ({ pages, products } = newProducts); });
   }
 
   function handlePageSwitch(evt) {
@@ -124,7 +124,7 @@
         <div class="cards">
           <hr data-text="All items" />
           {#each products as product (products.id)}
-            <StoreCard {...product} />
+            <ProductCard {...product} />
           {/each}
         </div>
       {/if}
