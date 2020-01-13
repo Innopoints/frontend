@@ -17,6 +17,7 @@
   import Filters from '@/containers/store/filters.svelte';
   import StoreCard from '@/components/store/card.svelte';
   import Pagination from '@/components/common/pagination.svelte';
+  import generateQueryString from '@/utils/generate-query-string.js';
 
   const orderOptions = [
     { orderBy: 'addition_time', order: 'asc' },
@@ -51,32 +52,29 @@
   }
 
   function updateProducts(filtering) {
-    let query = [];
+    let queryArgs = new Map();
+
     if (filtering.searchQuery) {
-      query.push(`q=${filtering.searchQuery}`);
+      queryArgs.set('q', filtering.searchQuery);
     }
     if (filtering.minPrice != null) {
-      query.push(`min=${filtering.minPrice}`);
+      queryArgs.set('min', filtering.minPrice);
     }
     if (filtering.maxPrice != null) {
-      query.push(`max=${filtering.maxPrice}`);
+      queryArgs.set('max', filtering.maxPrice);
     }
     let excludedColors = filtering.excludedColors.map(color => color.slice(1));
     if (filtering.colorlessExcluded) {
-      excludedColors.push('null');
+      excludedColors.push(null);
     }
     if (excludedColors.length !== 0) {
-      query.push(`excluded_colors=${excludedColors.join(',')}`);
+      queryArgs.set('excluded_colors', JSON.stringify(excludedColors));
     }
-    query.push(`order_by=${filtering.order.orderBy}`);
-    query.push(`order=${filtering.order.order}`);
-    let queryString = `limit=${productLimit}`;
-    if (query) {
-      queryString += '&' + query.join('&');
-    }
-    queryString += `&page=${currentPage}`;
-    console.log(queryString);
-    api.get(`/products?${queryString}`)
+    queryArgs.set('order_by', filtering.order.orderBy);
+    queryArgs.set('order', filtering.order.order);
+    queryArgs.set('limit', productLimit);
+    queryArgs.set('page', currentPage);
+    api.get(`/products?${generateQueryString(queryArgs)}`)
       .then(newProducts => { ({ pages, products} = newProducts); });
   }
 

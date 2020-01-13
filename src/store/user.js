@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import request from '@/utils/request';
-import generateQuery from '@/utils/generateQuery';
+import generateQueryString from '@/utils/generate-query-string.js';
 import { goto } from '@sapper/app';
 import { AUTH_HOST, FRONTEND_BASE } from '@/constants/env';
 
@@ -19,10 +19,10 @@ export const changeUserField = (field, value) => {
 };
 
 export const login = () => {
-  window.location.href = AUTH_HOST + '/login' + generateQuery({
-    final_redirect_location: window.location.pathname,
-    frontend_base: FRONTEND_BASE,
-  });
+  window.location.href = AUTH_HOST + '/login' + generateQueryString(new Map([
+    ['final_redirect_location', window.location.pathname],
+    ['frontend_base', FRONTEND_BASE],
+  ]));
 };
 
 export const changeTelegram = (value) => {
