@@ -3,7 +3,9 @@
      https://github.com/sveltejs/realworld/blob/master/src/node_modules/api.js */
 
 export const API_HOST = process.env.SAPPER_APP_API_HOST;
-
+if (API_HOST == null) {
+  throw new Error('The API host is undefined.');
+}
 
 function request(method, url, data) {
   const fetch = process.browser ? window.fetch : require('node-fetch').default;
@@ -33,35 +35,18 @@ function request(method, url, data) {
     });
 }
 
-
 export function get(path) {
-  if (API_HOST == null) {
-    throw new Error('The API host is undefined.');
-  }
-
   return request('GET', API_HOST + path);
 }
 
 export function post(path, data) {
-  if (API_HOST == null) {
-    throw new Error('The API host is undefined.');
-  }
-
   return request('POST', API_HOST + path, data);
 }
 
 export function patch(path, data) {
-  if (API_HOST == null) {
-    throw new Error('The API host is undefined.');
-  }
-
   return request('PATCH', API_HOST + path, data);
 }
 
 export function del(path) {
-  if (API_HOST == null) {
-    throw new Error('The API host is undefined.');
-  }
-
   return request('DELETE', API_HOST + path);
 }
