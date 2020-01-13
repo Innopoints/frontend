@@ -1,20 +1,61 @@
+<script context="module">
+  import * as api from '@/utils/api.js';
+
+  export async function preload() {
+    const [projects, competences] = await Promise.all([
+      api.get('/projects'),
+      api.get('/competences'),
+    ]);
+    return { projects, competences };
+  }
+</script>
+
 <script>
+  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/projects/tagline.svelte';
   import Button from 'ui/button.svelte';
-  import projectsList from '@/constants/projects/projects';
-  import Project from '@/components/projects/card.svelte';
+  import ProjectCard from '@/components/projects/card.svelte';
   import Filters from '@/containers/projects/filters.svelte';
-  import Ordering from '@/containers/projects/ordering.svelte';
+  import generateQueryString from '@/utils/generate-query-string.js';
+  import { orderLabels, orderOptions } from '@/constants/projects/order.js';
 
-  // const projectsPerPage = 8;
-  // const currentPage = 1;
-  // const projects = () => {
-  //   const page = currentPage - 1;
-  //   const start = projectsPerPage * page;
-  //   const end = start + projectsPerPage;
-  //   return projectsList.slice(start, end);
-  // };
+  const { session } = stores();
+
+  export let projects;
+  export let competences;
+
+  let order = orderOptions[0];
+  let orderLabel = orderLabels[0];
+
+  function updateProjects(filtering) {
+    let queryArgs = new Map();
+
+    if (filtering.searchQuery) {
+      queryArgs.set('q', filtering.searchQuery);
+    }
+
+    if (filtering.vacantSpots != null) {
+      queryArgs.set('spots', filtering.vacantSpots.toString());
+    }
+
+    // if (filtering.minDate != null) {
+    //   queryArgs.set('min', filtering.minPrice);
+    // }
+    // if (filtering.maxDate != null) {
+    //   queryArgs.set('max', filtering.maxPrice);
+    // }
+
+    if (filtering.excludedCompetences.length !== 0) {
+      queryArgs.set('excluded_competences', JSON.stringify(filtering.excludedCompetences));
+    }
+
+    queryArgs.set('order_by', filtering.order.orderBy);
+    queryArgs.set('order', filtering.order.order);
+    const queryString = generateQueryString(queryArgs);
+    api.get('/projects' + (queryString ? '?' + queryString : ''))
+      .then(newProjects => { projects = newProjects; });
+  }
 </script>
 
 <svelte:head>
@@ -28,67 +69,52 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
   <link rel="stylesheet" href="css/projects/filters-spec.css" />
   <link rel="stylesheet" href="css/projects/main.css" />
-
-  <!-- Styles for the landing -->
-  <link rel="preload" href="css/home/main.css" as="style" />
-  <link rel="preload" href="css/home/header.css" as="style" />
-  <link rel="preload" href="css/home/tagline.css" as="style" />
-  <link rel="preload" href="css/home/how-to.css" as="style" />
-  <link rel="preload" href="css/home/options.css" as="style" />
-  <link rel="preload" href="css/home/store.css" as="style" />
-  <link rel="preload" href="css/home/contacts.css" as="style" />
-
-  <!-- Store styles -->
-  <link rel="preload" href="css/store/filters-spec.css" as="style" />
-  <link rel="preload" href="css/store/main.css" as="style" />
-  <link rel="preload" href="css/view-product/main.css" as="style" />
-  <link rel="preload" href="css/page-components/pagination.css" as="style" />
-  <link rel="preload" href="css/page-components/modal-dialog.css" as="style" />
 </svelte:head>
 
 <Layout>
-  <Tagline />
+  <div class="material">
+    <Tagline />
 
-  <section class="projects padded">
-    <h1>Ongoing projects</h1>
+    <section class="projects padded">
+      <h1><span class="text">Ongoing Projects</span></h1>
+      <Filters
+        {order} {orderLabel} {competences} {orderOptions} {orderLabels}
+        on:change-filters={(event) => updateProjects(event.detail)}
+      />
+      {#if !projects || projects.length === 0}
+        <div class="empty">
+          <figure>
+            <img class="picture" src="images/projects/no-projects.svg" alt="" />
+            <figcaption>
+              <div class="title">No projects found...</div>
+              {#if session.user}
+                But you can
+                <a href="/project/new" rel="prefetch">create a project</a>
+                right now!
+              {/if}
+            </figcaption>
+          </figure>
+        </div>
+      {:else}
+        <div class="cards">
+          {#each projects as project (project.id)}
+            <ProjectCard {...project} />
+          {/each}
+        </div>
+      {/if}
+    </section>
 
-    <Filters />
-    <Ordering />
+    <div class="justify-center">
+      <Button href="/projects/past">
+        <svg src="images/icons/book-open.svg" class="icon mr" />
+        see past projects
+      </Button>
+    </div>
 
-    {#if !projectsList || projectsList.length === 0}
-      <div class="empty">
-        <figure>
-          <img
-            class="picture"
-            src="images/projects/no-projects.svg"
-            alt="no projects found" />
-          <figcaption>
-            <div class="title">No projects found...</div>
-            But you can
-            <a href="/project/new">create a project</a>
-            right now!
-          </figcaption>
-        </figure>
-      </div>
-    {:else}
-      <div class="cards">
-        {#each projectsList as project, i (project.id)}
-          <Project {...project} />
-        {/each}
-      </div>
-    {/if}
-  </section>
-
-  <div class="justify-center">
-    <Button>
-      <svg src="images/icons/book-open.svg" class="mr" />
-      see past projects
-    </Button>
+    <p class="link-bottom padded">
+      What’s so cool about being a volunteer? The
+      <a href="/store" rel="prefetch">InnoStore</a>
+      has your answers!
+    </p>
   </div>
-
-  <p class="link-bottom padded">
-    What’s so cool about being a volunteer? The
-    <nuxt-link to="/store">InnoStore</nuxt-link>
-    has your answers!
-  </p>
 </Layout>
