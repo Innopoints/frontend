@@ -65,7 +65,7 @@
     queryArgs.set('limit', productLimit);
     queryArgs.set('page', currentPage);
     api.get(`/products?${generateQueryString(queryArgs)}`)
-      .then(newProducts => { ({ pages, products} = newProducts); });
+      .then(newProducts => { ({ pages, products } = newProducts); });
   }
 
   function handlePageSwitch(evt) {
@@ -101,7 +101,7 @@
       {#if !products || products.length === 0}
         <div class="empty">
           <figure>
-            <img class="picture" src="/images/store/no-products.svg" alt="" />
+            <img class="picture" src="images/store/no-products.svg" alt="" />
             <figcaption>
               <div class="title">No items found...</div>
               Try raiding 319 or a different filter
@@ -120,7 +120,7 @@
     </section>
     <p class="link-bottom padded">
       Lacking innopoints?
-      <a href="/projects">Volunteer on projects</a>
+      <a href="/projects" rel="prefetch">Volunteer on projects</a>
       to fill in the shortage!
     </p>
   </div>
