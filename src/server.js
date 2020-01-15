@@ -13,7 +13,7 @@ polka()
     sirv('static', { dev }),
     sapper.middleware({
       session: (req, res) => ({
-        cookies: req.cookie,
+        cookies: req.headers.cookie,
       }),
     }),
   )
