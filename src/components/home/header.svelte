@@ -1,7 +1,13 @@
 <script>
+  import { stores } from '@sapper/app';
   import Button from 'ui/button.svelte';
-  // import NotificationCenter from '@/components/profile/notification-center.svelte';
-  import { isAuthed, login, user } from '@/store/user';
+  import NotificationCenter from '@/components/common/notification-center.svelte';
+  import { login, loginCheat } from '@/utils/auth.js';
+  import { ENV } from '@/constants/env.js';
+
+  const loginFunction = (ENV === 'development' ? loginCheat : login);
+
+  const { session } = stores();
 </script>
 
 <header class="container">
@@ -9,13 +15,12 @@
     src="/images/innou-logo.svg"
     class="logo"
     alt="Innopolis University logo" />
-  {#if !$isAuthed}
-    <Button isOutline on:click={login}>sign in</Button>
+  {#if $session.user == null}
+    <Button isOutline on:click={loginFunction}>sign in</Button>
   {:else}
     <div class="actions">
-      <!-- TODO: decomment after markup changes -->
-      <!--<NotificationCenter />-->
-      {#if $user.is_admin}
+      <NotificationCenter />
+      {#if $session.user.is_admin}
         <Button href="/dashboard" isRound>
           <svg src="images/icons/grid.svg" />
         </Button>
