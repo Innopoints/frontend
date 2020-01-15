@@ -16,6 +16,10 @@ function request(method, url, options) {
     headers: options && options.headers || {},
   };
 
+  if (options && 'cookie' in options) {
+    actualOptions.headers['Cookie'] = options.cookie; 
+  }
+
   if (options && options.data instanceof formDataClass) {
     actualOptions.body = options.data;
   } else if (options && options.data != null) {
