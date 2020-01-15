@@ -1,7 +1,8 @@
 <script>
   import Button from 'ui/button.svelte';
   import Dot from 'ui/dot.svelte';
-  import {isAuthed, user} from '@/store/user';
+
+  export let isAdmin;
 </script>
 
 <section class="tagline padded">
@@ -12,9 +13,9 @@
       The place where your hard work and proactivity turns into cool merch of
       Innopolis University.
     </div>
-    {#if $isAuthed && $user.is_admin}
+    {#if isAdmin}
       <div class="actions">
-        <Button isOutline classname="btn rectangle" href="/item/new">
+        <Button isOutline classname="btn rectangle" href="/product/new">
           <svg src="/images/icons/plus.svg" class="icon mr" />
           create new product
         </Button>

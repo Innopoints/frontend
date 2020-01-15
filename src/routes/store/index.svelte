@@ -1,13 +1,14 @@
 <script context="module">
-  import * as api from '@/utils/api.js';
+  import getInitialData from '@/utils/get-initial-data.js';
   const productLimit = 24;
 
-  export async function preload() {
-    const [{ pages, data }, colors] = await Promise.all([
-      api.get(`/products?limit=${productLimit}`),
-      api.get('/colors'),
-    ]);
-    return { products: data, colors, pages };
+  export async function preload(page, session) {
+    let { account, products, colors } = await getInitialData(this, session, new Map([
+      ['account', '/account?from_cache=true'],
+      ['products', `/products?limit=${productLimit}`],
+      ['colors', `/colors`],
+    ]));
+    return { products: products.data, pages: products.pages, colors, account };
   }
 </script>
 
@@ -21,12 +22,15 @@
   import Pagination from '@/components/common/pagination.svelte';
   import generateQueryString from '@/utils/generate-query-string.js';
   import { orderLabels, orderOptions } from '@/constants/store/order.js';
+  import * as api from '@/utils/api.js';
 
   const { session } = stores();
 
   export let products;
   export let pages;
   export let colors;
+  export let account;
+  $session.user = account;
 
   let balance;
   let order = orderOptions[0];
@@ -35,10 +39,8 @@
 
   let filterElement;
 
-  try {
+  if ($session.user != null) {
     balance = $session.user.balance;
-  } catch (e) {
-    balance = 1;
   }
 
   function updateProducts(filtering) {
@@ -90,7 +92,7 @@
 
 <Layout>
   <div class="material">
-    <Tagline />
+    <Tagline isAdmin={$session.user != null && $session.user.is_admin} />
     <section class="shop padded">
       <Balance value={balance} />
       <Filters
