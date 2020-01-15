@@ -15,6 +15,10 @@
   content: "";
 }
 
+.badge.hidden::after {
+  display: none;
+}
+
 .badge .icon {
   display: block;
 }

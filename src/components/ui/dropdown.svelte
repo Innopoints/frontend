@@ -46,7 +46,7 @@
   </slot>
   <div class:right-edge={isRight} class="dropdown {dropdownclass}">
     {#if nowrap}
-      <slot />
+      <slot {toggle}/>
     {:else}
       <div class="relative-wrapper {wrapperclass}">
         {#if !noclose}

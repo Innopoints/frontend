@@ -20,6 +20,10 @@ $badge-bg: lighten($danger, 25%);
     content: "";
   }
 
+  &.hidden::after {
+    display: none;
+  }
+
   .icon {
     display: block;
   }
