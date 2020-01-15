@@ -7,45 +7,41 @@ if (API_HOST == null) {
   throw new Error('The API host is undefined.');
 }
 
-function request(method, url, data) {
-  const fetch = process.browser ? window.fetch : require('node-fetch').default;
+function request(method, url, options) {
   const formDataClass = process.browser ? FormData : require('url').URLSearchParams;
 
-  let options = {
+  let actualOptions = {
     credentials: 'include',
     method,
-    headers: {},
+    headers: options && options.headers || {},
   };
 
-  if (data instanceof formDataClass) {
-    options.body = data;
-  } else if (data != null) {
-    options.headers['Content-Type'] = 'application/json';
-    options.body = JSON.stringify(data);
+  if (options && options.data instanceof formDataClass) {
+    actualOptions.body = options.data;
+  } else if (options && options.data != null) {
+    actualOptions.headers['Content-Type'] = 'application/json';
+    actualOptions.body = JSON.stringify(options.data);
   }
 
-  return fetch(url, options)
-    .then(r => {
-      if (r.status == 204) {
-        return null;
-      } else {
-        return r.json();
-      }
-    });
+  if (this == null || this.fetch == null) {
+    return window.fetch(url, actualOptions);
+  }
+
+  return this.fetch(url, actualOptions);
 }
 
-export function get(path) {
-  return request('GET', API_HOST + path);
+export function get(path, options) {
+  return request.call(this, 'GET', API_HOST + path, options);
 }
 
-export function post(path, data) {
-  return request('POST', API_HOST + path, data);
+export function post(path, options) {
+  return request.call(this, 'POST', API_HOST + path, options);
 }
 
-export function patch(path, data) {
-  return request('PATCH', API_HOST + path, data);
+export function patch(path, options) {
+  return request.call(this, 'PATCH', API_HOST + path, options);
 }
 
-export function del(path) {
-  return request('DELETE', API_HOST + path);
+export function del(path, options) {
+  return request.call(this, 'DELETE', API_HOST + path, options);
 }
