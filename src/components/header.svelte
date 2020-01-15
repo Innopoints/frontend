@@ -2,10 +2,7 @@
   import { stores } from '@sapper/app';
   import Button from 'ui/button.svelte';
   import NotificationCenter from '@/components/common/notification-center.svelte';
-  import { login, loginCheat, logout } from '@/utils/auth.js';
-  import { ENV } from '@/constants/env.js';
-
-  const loginFunction = (ENV === 'development' ? loginCheat : login);
+  import { login, logout } from '@/utils/auth.js';
 
   const { session } = stores();
   export let isProfile = false;
@@ -18,7 +15,7 @@
   </a>
   <div class="actions">
     {#if $session.user == null}
-      <Button isOutline on:click={loginFunction}>sign in</Button>
+      <Button isOutline on:click={login}>sign in</Button>
     {:else}
       <NotificationCenter />
       {#if isProfile}
