@@ -2,10 +2,7 @@
   import { stores } from '@sapper/app';
   import Button from 'ui/button.svelte';
   import NotificationCenter from '@/components/common/notification-center.svelte';
-  import { login, loginCheat } from '@/utils/auth.js';
-  import { ENV } from '@/constants/env.js';
-
-  const loginFunction = (ENV === 'development' ? loginCheat : login);
+  import { login } from '@/utils/auth.js';
 
   const { session } = stores();
 </script>
@@ -16,7 +13,7 @@
     class="logo"
     alt="Innopolis University logo" />
   {#if $session.user == null}
-    <Button isOutline on:click={loginFunction}>sign in</Button>
+    <Button isOutline on:click={login}>sign in</Button>
   {:else}
     <div class="actions">
       <NotificationCenter />

@@ -1,22 +1,24 @@
-import { AUTH_HOST, FRONTEND_BASE, USER_EMAIL } from '@/constants/env.js';
+import { AUTH_HOST, FRONTEND_BASE, USER_EMAIL, ENV } from '@/constants/env.js';
 import generateQueryString from '@/utils/generate-query-string.js';
 import * as api from '@/utils/api.js';
 import { goto } from '@sapper/app';
 
 
-export function login() {
+function loginOAuth() {
   window.location.href = AUTH_HOST + '/login?' + generateQueryString(new Map([
     ['final_redirect_location', window.location.pathname],
     ['frontend_base', FRONTEND_BASE],
   ]));
 }
 
-export function loginCheat() {
+function loginCheat() {
   window.location.href = `${AUTH_HOST}/login_cheat/${USER_EMAIL}?` + generateQueryString(new Map([
     ['final_redirect_location', window.location.pathname],
     ['frontend_base', FRONTEND_BASE],
   ]));
 }
+
+export const login = (ENV === 'development' ? loginCheat : loginOAuth);
 
 export async function logout(session) {
   try {
