@@ -1,12 +1,13 @@
 <script context="module">
-  import * as api from '@/utils/api.js';
+  import getInitialData from '@/utils/get-initial-data.js';
 
-  export async function preload() {
-    const [projects, competences] = await Promise.all([
-      api.get('/projects'),
-      api.get('/competences'),
-    ]);
-    return { projects, competences };
+  export async function preload(page, session) {
+    let { account, projects, competences } = await getInitialData(this, session, new Map([
+      ['account', '/account?from_cache=true'],
+      ['projects', `/projects`],
+      ['competences', `/competences`],
+    ]));
+    return { projects, competences, account };
   }
 </script>
 
@@ -19,11 +20,14 @@
   import Filters from '@/containers/projects/filters.svelte';
   import generateQueryString from '@/utils/generate-query-string.js';
   import { orderLabels, orderOptions } from '@/constants/projects/order.js';
-
-  const { session } = stores();
+  import * as api from '@/utils/api.js';
 
   export let projects;
   export let competences;
+  export let account;
+
+  const { session } = stores();
+  $session.user = account;
 
   let order = orderOptions[0];
   let orderLabel = orderLabels[0];
