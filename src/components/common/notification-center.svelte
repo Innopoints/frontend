@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import fecha from 'fecha';
   import Dropdown from 'ui/dropdown.svelte';
   import Button from 'ui/button.svelte';
   import * as api from '@/utils/api.js';
@@ -83,7 +82,12 @@
             <svg src="images/icons/check.svg" class="icon" />
           </Button>
           <time datetime={notification.timestamp}>
-            {fecha.format(new Date(notification.timestamp), 'HH:mm, DD.MM')}
+            {new Date(notification.timestamp).toLocaleString('ru', {
+              hour: '2-digit',
+              minute: '2-digit',
+              day: '2-digit',
+              month: '2-digit',
+            })}
           </time>
         </li>
       {/each}
