@@ -1,26 +1,35 @@
-import fecha from 'fecha';
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export const parseDates = date => {
   if (date.start && date.end) {
-    return parseTwoDates(date);
+    return formatDateRange(date);
   } else if (date.start) {
-    return fecha.format(new Date(date.start), 'YYYY-MM-DD');
+    let dateObj = new Date(date.start);
+    return (
+      dateObj.getFullYear() + '-'
+      + ('' + dateObj.getMonth() + 1).padStart(2, '0') + '-'
+      + ('' + dateObj.getDate() + 1).padStart(2, '0')
+    );
   }
   return null;
 };
 
-const parseTwoDates = date => {
-  let y1 = fecha.format(new Date(date.start), 'YYYY');
-  let y2 = fecha.format(new Date(date.end), 'YYYY');
+export default function formatDateRange({start, end}) {
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+  const now = new Date();
 
-  let m1 = fecha.format(new Date(date.start), 'MMM');
-  let m2 = fecha.format(new Date(date.end), 'MMM');
+  let y1 = startDate.getFullYear();
+  let y2 = endDate.getFullYear();
 
-  let d1 = fecha.format(new Date(date.start), 'D');
-  let d2 = fecha.format(new Date(date.end), 'D');
+  let m1 = months[startDate.getMonth()];
+  let m2 = months[endDate.getMonth()];
 
-  let startThisYear = y1 === fecha.format(new Date(), 'YYYY');
-  let endThisYear = y2 === fecha.format(new Date(), 'YYYY');
+  let d1 = startDate.getDate();
+  let d2 = endDate.getDate();
+
+  let startThisYear = y1 === now.getFullYear();
+  let endThisYear = y2 === now.getFullYear();
   let inOneYear = y1 === y2;
   let inOneMonth = m1 === m2;
   let inOneDay = d1 === d2;
@@ -40,18 +49,21 @@ const parseTwoDates = date => {
         return `${m1} ${d1} – ${m2} ${d2}`;
       }
     } else {
-      if (inOneDay) {
-        // Jan 12, 2020
-        return `${m1} ${d1}, ${y1}`;
+      if (inOneMonth) {
+        if (inOneDay) {
+          // Jan 12, 2020
+          return `${m1} ${d1}, ${y1}`;
+        } else {
+          // Jun 12 - 15, 2020
+          return `${m1} ${d1} – ${d2}, ${y1}`;
+        }
       } else {
-        // Jun 12 - 15, 2020
-        return `${m1} ${d2} – ${d2}, ${y1}`;
+        // Jun 12 - Jul 15, 2020
+        return `${m1} ${d1} – ${m2} ${d2}, ${y1}`;
       }
     }
   } else {
     // Dec 25, 2019 - Jan 5, 2020
     return `${m1} ${d2}, ${y1} – ${m2} ${d2}, ${y2}`;
   }
-};
-
-export default parseTwoDates;
+}
