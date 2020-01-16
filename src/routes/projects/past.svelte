@@ -59,7 +59,7 @@
 
 <Layout>
   <div class="material">
-    <Tagline />
+    <Tagline {account} />
 
     <section class="projects padded">
       <h1>
