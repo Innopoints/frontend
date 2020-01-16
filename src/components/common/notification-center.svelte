@@ -1,20 +1,32 @@
 <script>
   import { onMount } from 'svelte';
+  import fecha from 'fecha';
   import Dropdown from 'ui/dropdown.svelte';
   import Button from 'ui/button.svelte';
   import * as api from '@/utils/api.js';
+  import SimplebarList from 'ui/simplebar-list.svelte';
+  import getNotificationContent from '@/constants/notification-content.js';
 
   export let notifications = null;
   $: unread = notifications != null && notifications.some(notification => !notification.is_read);
 
   onMount(async () => {
     try {
-      let resp = await api.get('/notifications');
+      let resp = await api.get('/notifications?unread');
       if (resp.status === 200) {
         notifications = await resp.json();
       }
     } catch (e) { console.error(e); }
   });
+
+  async function readNotification(id) {
+    try {
+      let resp = await api.patch(`/notifications/${id}/read`);
+      if (resp.status === 204) {
+        notifications = notifications.filter(x => x.id !== id);
+      }
+    } catch (e) { console.error(e); }
+  }
 </script>
 
 <Dropdown
@@ -46,6 +58,39 @@
       <div class="title">No notifications</div>
     </div>
   {:else}
-    <p>List notifications here</p>
+    <SimplebarList classname="notification-list">
+      {#each notifications as notification (notification.id)}
+        <li class="notification">
+          <span class="content">
+            {#each getNotificationContent(notification) as fragment}
+              {#if typeof fragment === 'string'}
+                {fragment}
+              {:else if 'bold' in fragment}
+                <strong>{fragment.text}</strong>
+              {:else}
+                <a href="{fragment.url}" rel="prefetch">
+                  {fragment.text}
+                </a>
+              {/if}
+            {/each}
+          </span>
+          <Button
+            isRound
+            tooltip="Mark as read"
+            classname="mt"
+            on:click={() => readNotification(notification.id)}
+          >
+            <svg src="images/icons/check.svg" class="icon" />
+          </Button>
+          <time datetime={notification.timestamp}>
+            {fecha.format(new Date(notification.timestamp), 'HH:mm, DD.MM')}
+          </time>
+        </li>
+      {/each}
+    </SimplebarList>
+    <Button on:click={() => notifications.forEach(x => readNotification(x.id))}>
+      <svg src="images/icons/check.svg" class="icon mr" />
+      mark all as read
+    </Button>
   {/if}
 </Dropdown>
