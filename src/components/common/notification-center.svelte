@@ -64,7 +64,7 @@
             {#each getNotificationContent(notification) as fragment}
               {#if typeof fragment === 'string'}
                 {fragment}
-              {:else if 'bold' in fragment}
+              {:else if fragment.bold}
                 <strong>{fragment.text}</strong>
               {:else}
                 <a href="{fragment.url}" rel="prefetch">
