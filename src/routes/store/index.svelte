@@ -69,7 +69,6 @@
     api.get(`/products?${generateQueryString(queryArgs)}`)
       .then(resp => resp.json()).then((newProducts) => {
         ({ pages, data: products } = newProducts);
-        console.log(products);
       }).catch(console.error);
   }
 
