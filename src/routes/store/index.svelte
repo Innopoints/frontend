@@ -50,10 +50,10 @@
       queryArgs.set('q', filtering.searchQuery);
     }
     if (filtering.minPrice != null) {
-      queryArgs.set('min', filtering.minPrice);
+      queryArgs.set('min_price', filtering.minPrice);
     }
     if (filtering.maxPrice != null) {
-      queryArgs.set('max', filtering.maxPrice);
+      queryArgs.set('max_price', filtering.maxPrice);
     }
     let excludedColors = filtering.excludedColors.map(color => color.slice(1));
     if (filtering.colorlessExcluded) {
@@ -67,7 +67,10 @@
     queryArgs.set('limit', productLimit);
     queryArgs.set('page', currentPage);
     api.get(`/products?${generateQueryString(queryArgs)}`)
-      .then(newProducts => { ({ pages, products } = newProducts); });
+      .then(resp => resp.json()).then((newProducts) => {
+        ({ pages, data: products } = newProducts);
+        console.log(products);
+      }).catch(console.error);
   }
 
   function handlePageSwitch(evt) {
@@ -113,7 +116,7 @@
       {:else}
         <div class="cards">
           <hr data-text="All items" />
-          {#each products as product (products.id)}
+          {#each products as product (product.id)}
             <ProductCard {...product} />
           {/each}
         </div>
