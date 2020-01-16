@@ -3,13 +3,13 @@ export default function getNotificationContent({ type, payload }) {
   switch (type) {
     case "purchase_status_changed": {
       fragments = [
-        'Your',
+        'Your ',
         {
           text: (payload.product.type == null ?
             payload.product.name : `'${payload.product.name}' ${payload.product.type}`),
           url: '/products/' + payload.product.id,
         },
-        'purchase',
+        ' purchase ',
         (payload.stock_change.status === 'ready_for_pickup' ?
           'is ready to be picked up at 319 Office' : 'was rejected'),
       ];
@@ -18,7 +18,7 @@ export default function getNotificationContent({ type, payload }) {
 
     case "new_arrivals": {
       fragments = [
-        'New products have arrived at',
+        'New products have arrived at ',
         {
           text: 'the InnoStore',
           url: '/store',
@@ -29,12 +29,12 @@ export default function getNotificationContent({ type, payload }) {
 
     case "application_status_changed": {
       fragments = [
-        'Your volunteering application for',
+        'Your volunteering application for ',
         {
           text: payload.activity.name,
           url: '/projects/' + payload.project.id,
         },
-        'was',
+        ' was ',
       ];
 
       if (payload.application.status === 'approved') {
@@ -50,35 +50,35 @@ export default function getNotificationContent({ type, payload }) {
 
     case "claim_innopoints": {
       fragments = [
-        'Leave feedback on',
+        'Leave feedback on ',
         {
           text: 'your volunteering work',
           url: '/projects/' + payload.project.id,
         },
-        'to claim',
+        ' to claim ',
         payload.application.actual_hours * payload.activity.reward_rate,
-        'innopoints',
+        ' innopoints',
       ];
       break;
     }
 
     case "project_review_status_changed": {
       fragments = [
-        'The project',
+        'The project ',
         {
           text: payload.project.name,
           url: '/projects/' + payload.project.id,
         },
-        'was',
+        ' was ',
         payload.project.review_status,
-        'by the administrator',
+        ' by the administrator',
       ];
       break;
     }
 
     case "added_as_moderator": {
       fragments = [
-        'You have been promoted to moderate',
+        'You have been promoted to moderate ',
         {
           text: payload.project.name,
           url: '/projects/' + payload.project.id,
@@ -89,25 +89,25 @@ export default function getNotificationContent({ type, payload }) {
 
     case "all_feedback_in": {
       fragments = [
-        'All volunteers of',
+        'All volunteers of ',
         {
           text: payload.project.name,
           url: '/projects/' + payload.project.id,
         },
-        'have submitted feedback',
+        ' have submitted feedback',
       ];
       break;
     }
 
     case "out_of_stock": {
       fragments = [
-        'The',
+        'The ',
         {
           text: (payload.product.type == null ?
             payload.product.name : `'${payload.product.name}' ${payload.product.type}`),
           url: '/products/' + payload.product.id,
         },
-        'was sold out',
+        ' was sold out',
       ];
       break;
     }
@@ -130,12 +130,12 @@ export default function getNotificationContent({ type, payload }) {
 
     case "project_review_requested": {
       fragments = [
-        'The project',
+        'The project ',
         {
           text: payload.project.name,
           url: '/projects/' + payload.project.id,
         },
-        'is ready for review',
+        ' is ready for review',
       ];
       break;
     }
@@ -143,7 +143,7 @@ export default function getNotificationContent({ type, payload }) {
     case "service": {
       fragments = [
         {
-          text: 'Administrator\'s message:',
+          text: 'Administrator\'s message: ',
           bold: true,
         },
         payload.message,
@@ -153,13 +153,18 @@ export default function getNotificationContent({ type, payload }) {
 
     case "manual_transaction": {
       fragments = [
-        'The administrator',
+        'The administrator ',
       ];
       if (payload.transaction.change > 0) {
         fragments.push(`granted ${payload.transaction.change} innopoints to you`);
       } else {
         fragments.push(`deducted ${-payload.transaction.change} innopoints from you`);
       }
+      break;
+    }
+
+    default: {
+      fragments = ['Just a message from heaven wishing you a great day'];
     }
   }
 
