@@ -1,6 +1,9 @@
 <script>
   import Button from 'ui/button.svelte';
-  import {isAuthed, login} from '@/store/user';
+  import { login } from '@/utils/auth.js';
+
+
+  export let account;
 </script>
 
 <section class="tagline padded">
@@ -15,7 +18,7 @@
         If you’re seeking an opportunity to contribute to the wonderful world of Innopolis projects,
         you’re in the right place!
       </p>
-      {#if $isAuthed}
+      {#if account}
         <div class="actions">
           <Button isOutline classname="btn rectangle" href="/projects/new">
             <svg src="/images/icons/plus.svg" class="icon mr" />

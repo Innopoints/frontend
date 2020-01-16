@@ -86,7 +86,7 @@
 
 <Layout>
   <div class="material">
-    <Tagline />
+    <Tagline {account} />
 
     <section class="projects padded">
       <h1><span class="text">Ongoing Projects</span></h1>
