@@ -66,7 +66,7 @@ export default (color) => {
 
   let [h, s] = rgbToHsl([r, g, b]);
   let contrast = getContrast([255, 255, 255], [r, g, b]);
-  let bgL = (contrast > 1.08 ? 0.97 : 0.9);
+  let bgL = (contrast > 1.08 ? 0.97 : 0.96);
 
   return `hsl(${Math.floor(h * 360)}, ${s * 100}%, ${bgL * 100}%)`;
 };

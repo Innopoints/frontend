@@ -23,6 +23,7 @@
   export let href = null;
   export let chevron = false;
   export let badge = false;
+  export let tooltip = '';
 
   $: classes = [
     isFilled && 'filled',
@@ -37,12 +38,13 @@
 
 {#if href}
   <a
-      {href}
-      target={away && '_blank'}
-      class="btn {classes.join(' ')}"
-      on:click
-      use:rippleEffect
-      rel="prefetch"
+    {href}
+    target={away && '_blank'}
+    class="btn {classes.join(' ')}"
+    on:click
+    use:rippleEffect
+    title="{tooltip}"
+    rel="prefetch"
   >
     <slot />
     {#if away}
@@ -55,6 +57,7 @@
     {disabled}
     class="btn {classes.join(' ')}"
     on:click on:mousedown on:mouseup
+    title="{tooltip}"
     use:rippleEffect
   >
     {#if badge}
