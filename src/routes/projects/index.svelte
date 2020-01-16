@@ -16,7 +16,7 @@
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/projects/tagline.svelte';
   import Button from 'ui/button.svelte';
-  import ProjectCard from '@/components/projects/card.svelte';
+  import ProjectCard from '@/components/projects/project-card.svelte';
   import Filters from '@/containers/projects/filters.svelte';
   import generateQueryString from '@/utils/generate-query-string.js';
   import { orderLabels, orderOptions } from '@/constants/projects/order.js';
@@ -60,6 +60,15 @@
     api.get('/projects' + (queryString ? '?' + queryString : ''))
       .then(newProjects => { projects = newProjects; });
   }
+
+  function filterProps(props) {
+    let newProps = Object.assign({}, props);
+    delete newProps.creation_time;
+    delete newProps.moderators;
+    delete newProps.creator;
+    delete newProps.review_status;
+    return newProps;
+  }
 </script>
 
 <svelte:head>
@@ -102,7 +111,12 @@
       {:else}
         <div class="cards">
           {#each projects as project (project.id)}
-            <ProjectCard {...project} />
+            <ProjectCard
+              moderated={account && project.moderators.some(
+                x => x.email === account.email,
+              )}
+              {...filterProps(project)}
+            />
           {/each}
         </div>
       {/if}
