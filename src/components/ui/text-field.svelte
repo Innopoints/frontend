@@ -93,14 +93,15 @@
         {id}
         {placeholder}
         {name}
-        bind:value={value}
+        {type}
+        {value}
         {pattern}
         {minlength}
         {maxlength}
         class={inputclass}
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}
-        on:input={(e) => dispatch('input', e.target.value)}
+        on:input={(e) => { value = e.target.value; dispatch('input', e.target.value); }}
         on:change={delayedChange}
         bind:this={inputElement}
       />
