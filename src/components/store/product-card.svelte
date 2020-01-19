@@ -5,7 +5,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import getBackground from '@/utils/optimal-color.js';
   import { groupByColor } from '@/utils/group-varieties.js';
-  import { API_HOST } from '@/constants/env';
+  import { API_HOST } from '@/constants/env.js';
 
   export let id;
   export let name;
