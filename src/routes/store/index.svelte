@@ -8,7 +8,11 @@
       ['products', `/products?limit=${productLimit}`],
       ['colors', `/colors`],
     ]));
-    return { products: products.data, pages: products.pages, colors, account };
+    return {
+      products: products != null ? products.data : [],
+      pages: products != null ? products.pages : 0,
+      colors, account,
+    };
   }
 </script>
 
