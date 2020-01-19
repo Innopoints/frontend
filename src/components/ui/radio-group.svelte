@@ -65,11 +65,12 @@
         </div>
       {:else}
         <input
-            bind:group={value}
-            value={loopValue}
-            type="radio"
-            name={name}
-            class={inputclass}
+          bind:group={value}
+          value={loopValue}
+          type="radio"
+          name={name}
+          class={inputclass}
+          on:change={newSelection}
         >
         <div
           style="{isColor ? getColorPickerStyles(loopValue) : ''}"
