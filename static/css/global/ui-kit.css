@@ -381,14 +381,14 @@ button.btn {
   padding-bottom: 0;
 }
 
-.text-field input:disabled {
+.text-field input:disabled, .text-field textarea:disabled {
   background-color: #f8f8f8;
   border-color: rgba(0, 0, 0, 0.2);
   color: #888;
 }
 
 .text-field textarea {
-  padding: 12px 10px 1px;
+  padding: .75rem .625rem .0625rem;
   height: 6em;
 }
 

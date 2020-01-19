@@ -408,14 +408,14 @@ button.btn {
     }
   }
 
-  input:disabled {
+  input:disabled, textarea:disabled {
     background-color: lighten($textfield-bg, 1%);
     border-color: transparentize(black, .8);
     color: $disabled;
   }
 
   textarea {
-    padding: 12px 10px 1px;
+    padding: .75rem .625rem .0625rem;
     height: 6em;
   }
 
