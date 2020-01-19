@@ -6,6 +6,7 @@
   export let switchclass = '';
 
   export let name = '';
+  export let disabled = false;
   export let label;
   export let value = false;
 </script>
@@ -26,12 +27,13 @@
   {/if}
 
   <input
-      bind:checked={value}
-      name={name}
-      on:change
-      on:focus
-      class="switch-ctl {inputclass}"
-      type="checkbox"
+    bind:checked={value}
+    name={name}
+    on:change
+    on:focus
+    class="switch-ctl {inputclass}"
+    type="checkbox"
+    {disabled}
   />
 
   <div class="switch {switchclass}">
