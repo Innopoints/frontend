@@ -23,7 +23,7 @@
     if (product.type) {
       altText += `"${product.name}" ${product.type}`;
     } else {
-      altText += name;
+      altText += product.name;
     }
   }
 

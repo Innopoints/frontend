@@ -72,14 +72,14 @@
 
     {#if !showSizes}
       <div class="quantity">
-        <label for="quantity" class="label">Quantity</label>
+        <label for="quantity-{index}" class="label">Quantity</label>
         <TextField
-          id="quantity"
+          id="quantity-{index}"
           min="0"
           placeholder="0"
           type="number"
           value={variety.quantity || ''}
-          on:change={(e) => changeField('quantity', e.detail)}
+          on:change={(e) => changeField('quantity', +e.detail)}
         />
       </div>
     {/if}
@@ -96,7 +96,7 @@
             classname="right-align"
             placeholder="0"
             value={variety.sizes[size] || ''}
-            on:change={(e) => changeSizeAmount(size, e.detail)}
+            on:change={(e) => changeSizeAmount(size, +e.detail)}
           >
             <span class="item">{size}</span>
           </TextField>
