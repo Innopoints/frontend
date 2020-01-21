@@ -47,7 +47,12 @@
         continue;
       }
 
-      let formData = new FormData();
+      if (images.some(img => img.file.name === file.name)) {
+        error = 'You have already uploaded this image';
+        setTimeout(() => error = null, 4000);        
+      }
+
+      const formData = new FormData();
       formData.append('file', file);
       let promise = api.post('/file/product', {
         cookie: session.cookies,
@@ -56,12 +61,23 @@
       let placementIndex = images.length;
       images.push({ file, promise });
       promise
-        .then(resp => resp.json())
+        .then(resp => {
+          if (!resp.ok) {
+            throw resp.status;
+          }
+          return resp.json();
+        })
         .then(data => dispatch('new-file', {
           id: data.id,
           fileIndex: placementIndex,
           varietyIndex: index,
-        }));
+        }))
+        .catch(e => {
+          images.splice(placementIndex, 1);
+          images = images;
+          error = 'Upload failed. Please, try again.';
+          setTimeout(() => error = null, 4000);
+        });
       images = images;
     }
   }

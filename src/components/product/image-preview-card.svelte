@@ -21,7 +21,7 @@
 
     image.promise.then(resp => {
       loading = false;
-      if (resp.status !== 200) {
+      if (!resp.ok) {
         error = true;
       }
     });
@@ -43,9 +43,6 @@
       <div class="lds-ellipsis">
         <div></div><div></div><div></div><div></div>
       </div>
-      <Button isRound isNormal classname="retry" on:click={() => console.log('implement me')}>
-        <svg src="images/icons/refresh-cw.svg" class="icon" />
-      </Button>
     </div>
   </div>
   {#if url}
@@ -66,23 +63,17 @@
         Uploading...
       </div>
     {:then resp}
-      {#if resp.status == 200}
-        <div class="actions">
-          <svg src="images/icons/drag-handle.svg" class="drag-handle" />
-          <Button
-            isDanger
-            isRound
-            tooltip="Delete image"
-            on:click={(e) => { e.preventDefault(); dispatch('delete-file', { fileIndex: index }); }}
-          >
-            <svg src="images/icons/trash-2.svg" class="icon" />
-          </Button>
-        </div>
-      {:else}
-        <div class="text error">
-          Failed
-        </div>
-      {/if}
+      <div class="actions">
+        <svg src="images/icons/drag-handle.svg" class="drag-handle" />
+        <Button
+          isDanger
+          isRound
+          tooltip="Delete image"
+          on:click={(e) => { e.preventDefault(); dispatch('delete-file', { fileIndex: index }); }}
+        >
+          <svg src="images/icons/trash-2.svg" class="icon" />
+        </Button>
+      </div>
     {/await}
   {/if}
 </Card>
