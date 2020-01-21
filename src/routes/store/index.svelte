@@ -8,7 +8,11 @@
       ['products', `/products?limit=${productLimit}`],
       ['colors', `/colors`],
     ]));
-    return { products: products.data, pages: products.pages, colors, account };
+    return {
+      products: products != null ? products.data : [],
+      pages: products != null ? products.pages : 0,
+      colors, account,
+    };
   }
 </script>
 
@@ -76,6 +80,12 @@
     currentPage = evt.detail;
     updateProducts(filterElement.getLastFiltering());
   }
+
+  function filterProps(props) {
+    let newProps = Object.assign({}, props);
+    delete newProps.addition_time;
+    return newProps;
+  }
 </script>
 
 <svelte:head>
@@ -116,7 +126,7 @@
         <div class="cards">
           <hr data-text="All items" />
           {#each products as product (product.id)}
-            <ProductCard {...product} />
+            <ProductCard {...filterProps(product)} />
           {/each}
         </div>
       {/if}

@@ -12,6 +12,7 @@
   export let isNoSpinner = false;
 
   export let id = null;
+  export let disabled = false;
   export let placeholder = '';
   export let name = null;
   export let type = 'text';
@@ -62,6 +63,7 @@
       bind:value={value}
       {cols}
       class={inputclass}
+      {disabled}
       on:focus={() => dispatch('focus', value)}
       on:blur={() => dispatch('blur', value)}
       on:input={() => dispatch('input', value)}
@@ -82,6 +84,7 @@
         {minlength}
         {maxlength}
         class={inputclass}
+        {disabled}
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}
         on:input={(e) => dispatch('input', e.target.value)}
@@ -99,6 +102,7 @@
         {minlength}
         {maxlength}
         class={inputclass}
+        {disabled}
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}
         on:input={(e) => { value = e.target.value; dispatch('input', e.target.value); }}

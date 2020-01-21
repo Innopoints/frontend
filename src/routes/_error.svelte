@@ -1,6 +1,8 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import Button from 'ui/button.svelte';
+  import Card from 'ui/card.svelte';
+  import { login } from '@/utils/auth.js';
 
   export let error;
   export let status;
@@ -10,11 +12,14 @@
 <svelte:head>
   {#if status == 404}
     <title>Page not found – Innopoints</title>
+  {:else if status == 403}
+    <title>{error.message} – Innopoints</title>
   {:else}
     <title>Something went wrong...</title>
   {/if}
   <link rel="stylesheet" href="/css/page-components/header.css">
   <link rel="stylesheet" href="/css/page-components/404.css">
+  <link rel="stylesheet" href="/css/page-components/403.css">
   <link rel="stylesheet" href="/css/page-components/footer.css">
 </svelte:head>
 
@@ -43,6 +48,21 @@
       <a href="/" class="destination">
         <img src="images/404/random.svg" width="212" height="137" class="repr" alt="Go somewhere random">
       </a>
+    </div>
+  {:else if status == 403}
+    <div class="material">
+      <h1 class="padded header-403">{error.message}</h1>
+      <main class="padded container-403">
+        <img src="/images/who-are-you.svg" class="picture" alt="" />
+        <Card>
+          <div class="title">What to do?</div>
+          <div class="subtitle">It seems like you are not authorized to access this page.</div>
+          <div class="actions">
+            <Button isFilled on:click={login}>sign in</Button>
+            <Button isOutline href="/">run to homepage</Button>
+          </div>
+        </Card>
+      </main>
     </div>
   {:else}
     <div class="material">

@@ -10,8 +10,8 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import Button from 'ui/button.svelte';
-  import Images from '@/containers/item/image-previews.svelte';
-  import ItemContent from '@/containers/item/item-content.svelte';
+  import Images from '@/containers/product/image-previews.svelte';
+  import ItemContent from '@/containers/product/item-content.svelte';
   import {user, isAuthed} from '@/store/user';
 
   export let name;

@@ -32,7 +32,6 @@
     isRound && 'round',
     isNormal && 'normal',
     isRectangle && 'rectangle',
-    classname ? classname : 'btn',
   ].filter(v => v !== false);
 </script>
 
@@ -40,7 +39,7 @@
   <a
     {href}
     target={away && '_blank'}
-    class="btn {classes.join(' ')}"
+    class="btn {classes.join(' ')} {classname}"
     on:click
     use:rippleEffect
     title="{tooltip}"
@@ -55,7 +54,7 @@
   <button
     type="button"
     {disabled}
-    class="btn {classes.join(' ')}"
+    class="btn {classes.join(' ')} {classname}"
     on:click on:mousedown on:mouseup
     title="{tooltip}"
     use:rippleEffect

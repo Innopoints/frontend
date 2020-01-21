@@ -5,7 +5,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import getBackground from '@/utils/optimal-color.js';
   import { groupByColor } from '@/utils/group-varieties.js';
-  import { API_HOST } from '@/constants/env';
+  import { API_HOST } from '@/constants/env.js';
 
   export let id;
   export let name;
@@ -23,13 +23,18 @@
   } else {
     altText += name;
   }
+  let imageURL = (
+    varietiesByColor.get(selectedColor)[0].images.length !== 0 ?
+      API_HOST + varietiesByColor.get(selectedColor)[0].images[0]
+      : '/images/create-product/placeholder.svg'
+  );
 </script>
 
 <Card classname="with-image">
   {#if colors.length > 1 && !short}
     <div class="image">
       <img
-        src={API_HOST + varietiesByColor.get(selectedColor)[0].images[0]}
+        src={imageURL}
         style="background: {getBackground(selectedColor)}"
         alt={altText}
       />
@@ -43,7 +48,7 @@
     </div>
   {:else}
     <img
-      src={API_HOST + varietiesByColor.get(selectedColor)[0].images[0]}
+      src={imageURL}
       style="background: {getBackground(selectedColor)}"
       alt={altText}
       class="image"

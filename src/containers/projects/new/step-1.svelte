@@ -5,7 +5,7 @@
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
-  import Dropzone from 'ui/dropzone.svelte';
+  // import Dropzone from 'ui/dropzone.svelte';
   import {project, changeField, save, errors} from '@/store/new-project';
   import {readFileAsync} from '@/utils/read-files';
 
@@ -13,7 +13,7 @@
   let image = null;
   $: (async() => image = file && file.name ? await readFileAsync(file) : null)();
 
-  const addImage = e => changeImageAndSave(e.detail[0]);
+  // const addImage = e => changeImageAndSave(e.detail[0]);
   const removeImage = () => changeImageAndSave(null);
   const changeImageAndSave = (val) => {
     changeField('image', val);
@@ -71,7 +71,7 @@
         <span class="text">delete</span>
       </Button>
     {:else}
-      <Dropzone
+      <!-- <Dropzone
         multiple={false}
         id="file-input"
         classname="image-platform"
@@ -81,7 +81,7 @@
           <svg src="/images/icons/image.svg" class="icon mr" />
           upload cover image
         </Button>
-      </Dropzone>
+      </Dropzone> -->
     {/if}
   </FormField>
 

@@ -30,7 +30,7 @@
   height: 1.6em;
   width: 70%;
   align-self: flex-start;
-  margin-bottom: 1.3em;
+  margin-bottom: .3em;
 }
 
 .preview .placeholder.price {
@@ -84,6 +84,11 @@
   height: .9rem;
   margin-bottom: 1px;
   margin-left: .2em;
+}
+
+.preview .error {
+  color: #ab0303;
+  margin-top: 1em;
 }
 
 @media only screen and (min-width: 480px) {

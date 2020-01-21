@@ -2,6 +2,12 @@
   import ProductCard from '@/components/store/product-card.svelte';
 
   export let products;
+
+  function filterProps(props) {
+    let newProps = Object.assign({}, props);
+    delete newProps.addition_time;
+    return newProps;
+  }
 </script>
 
 {#if products && products.length !== 0}
@@ -16,7 +22,7 @@
 
     <div class="cards">
       {#each products as product (product.id)}
-        <ProductCard {...product} short />
+        <ProductCard {...filterProps(product)} short />
       {/each}
     </div>
 

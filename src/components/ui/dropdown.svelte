@@ -54,7 +54,7 @@
             <svg src="images/icons/x.svg" />
           </Button>
         {/if}
-        <slot />
+        <slot {toggle} />
       </div>
     {/if}
   </div>
