@@ -1,11 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { stores } from '@sapper/app';
   import Sortable from 'sortablejs';
   import ImagePreviewCard from '@/components/product/image-preview-card.svelte';
   import * as api from '@/utils/api.js';
-
-  const { session } = stores();
 
   export let index;
   export let images;
@@ -49,13 +46,12 @@
 
       if (images.some(img => img.file.name === file.name)) {
         error = 'You have already uploaded this image';
-        setTimeout(() => error = null, 4000);        
+        setTimeout(() => error = null, 4000);
       }
 
       const formData = new FormData();
       formData.append('file', file);
       let promise = api.post('/file/product', {
-        cookie: session.cookies,
         data: formData,
       });
       let placementIndex = images.length;
@@ -133,7 +129,7 @@
   <div class="empty-layer" bind:this={emptyLayer}>
     <svg src="/images/icons/image.svg" class="icon mr" />
     <div class="title">drag &amp; drop here or click to upload photos</div>
-    <small>Make sure the ratio is 1:1 (square)</small>
+    <small>Make sure the aspect ratio is 1:1 (square)</small>
   </div>
   <div
     class="dropzone-layer"

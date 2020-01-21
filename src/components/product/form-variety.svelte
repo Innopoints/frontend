@@ -75,7 +75,7 @@
         <label for="quantity-{index}" class="label">Quantity</label>
         <TextField
           id="quantity-{index}"
-          min="0"
+          min={0}
           placeholder="0"
           type="number"
           value={variety.quantity || ''}
@@ -95,6 +95,7 @@
             type="number"
             classname="right-align"
             placeholder="0"
+            min={0}
             value={variety.sizes[size] || ''}
             on:change={(e) => changeSizeAmount(size, +e.detail)}
           >

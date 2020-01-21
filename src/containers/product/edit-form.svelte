@@ -9,6 +9,10 @@
   export let product;
   export let colors;
   export let sizes;
+  export let errors = {
+    name: false,
+    price: false,
+  };
 
   const dispatch = createEventDispatcher();
 </script>
@@ -19,10 +23,12 @@
     title="Display Name"
     subtitle="If the product has a print, make that the name. Short names work best."
     required
+    error={errors.name}
   >
     <TextField
       id="name"
       placeholder="I <3 Innopolis"
+      maxlength={128}
       on:change={({detail}) => dispatch('change', { field: 'name', value: detail })}
       disabled={!!product}
       {...product && { value: product.name || '' }}
@@ -37,6 +43,7 @@
     <TextField
       id="type"
       placeholder="sweatshirt"
+      maxlength={128}
       on:change={({detail}) => dispatch('change', { field: 'type', value: detail })}
       disabled={!!product}
       {...product && { value: product.type || '' }}
@@ -47,6 +54,7 @@
     <TextField
       multiline
       placeholder="High-quality bulletproof fabric"
+      maxlength={1024}
       on:change={({detail}) => dispatch('change', { field: 'description', value: detail })}
       disabled={!!product}
       {...product && { value: product.description || '' }}
@@ -58,13 +66,14 @@
     title="Price"
     classname="horizontal"
     required
+    error={errors.price}
   >
     <TextField
       id="price"
       type="number"
-      min="0"
+      min="1"
       max="1000000"
-      placeholder="0"
+      placeholder="1337"
       maxlength="6"
       isWithItem
       isItemRight

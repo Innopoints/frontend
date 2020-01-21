@@ -16,7 +16,7 @@
 
 <script>
   import { onMount } from 'svelte';
-  import { stores } from '@sapper/app';
+  import { stores, prefetch, goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Form from '@/containers/product/edit-form.svelte';
   import PreviewCard from '@/components/product/preview-card.svelte';
@@ -34,6 +34,11 @@
   $session.user = account;
 
   let product = null;
+  let errors = {
+    name: false,
+    price: false,
+  };
+  let errorMessage = null;
   let warningDialogOpen = false;
 
   onMount(() => {
@@ -57,6 +62,9 @@
 
   function changeProductField({ field, value }) {
     product[field] = value;
+    if (errors[field]) {
+      errors[field] = false;
+    }
     persistToStorage();
   }
 
@@ -109,6 +117,78 @@
     product = product;
     persistToStorage();
   }
+
+  function createProduct() {
+    prefetch('/store');
+    if (!product.name) {
+      errors.name = true;
+      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+    }
+
+    if (!product.price || product.price < 1) {
+      errors.price = true;
+      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+    }
+
+    if (!errors.name && !errors.price) {
+      let cleanVarieties = [];
+      for (let variety of product.varieties) {
+        if (product.sized) {
+          for (let size of sizes) {
+            if (size.value in variety.sizes) {
+              cleanVarieties.push({
+                color: variety.color || null,
+                images: variety.images,
+                size: size.value,
+                amount: variety.sizes[size.value],
+              });
+            }
+          }
+        } else {
+          cleanVarieties.push({
+            color: variety.color || null,
+            images: variety.images,
+            size: null,
+            amount: variety.quantity,
+          });
+        }
+      }
+
+      if (cleanVarieties.length === 0) {
+        errorMessage = 'The product must be in stock at creation.';
+        return;
+      }
+
+      api.post('/products', {
+        data: {
+          name: product.name,
+          type: product.type || null,
+          description: product.description || '',
+          price: product.price,
+          varieties: cleanVarieties,
+        },
+      }).then(resp => {
+        if (resp.ok) {
+          localStorage.removeItem('product-draft');
+          return goto('/store');
+        }
+
+        if (resp.status === 400) {
+          resp.json().then(message => {
+            if ('message' in message) {
+              errorMessage = JSON.stringify(message.message);
+            } else {
+              errorMessage = JSON.stringify(message);
+            }
+            console.error(message);
+          });
+        } else {
+          errorMessage = 'The universe just doesn\'t want this product. Try again later.';
+          resp.text().then(console.error);
+        }
+      });
+    }
+  }
 </script>
 
 <svelte:head>
@@ -126,7 +206,7 @@
     <h1 class="padded">Create a Product</h1>
     <main class="padded">
       <Form
-        {product}
+        {product} {errors}
         colors={colors.map(unwrapValue)}
         sizes={sizes.map(unwrapValue)}
         on:new-color={(e) => addColor(e.detail)}
@@ -145,10 +225,15 @@
           <Button isDanger on:click={() => warningDialogOpen = true} disabled={!product}>
             clear fields
           </Button>
-          <Button isFilled classname="ml" on:click={() => console.log('implement me')} disabled={!product}>
+          <Button isFilled classname="ml" on:click={createProduct} disabled={!product}>
             create product
           </Button>
         </div>
+        {#if errorMessage != null}
+          <p class="error">
+            {errorMessage}
+          </p>
+        {/if}
       </section>
     </main>
   </div>

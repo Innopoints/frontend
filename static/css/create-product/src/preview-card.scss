@@ -86,6 +86,11 @@
     margin-bottom: 1px;
     margin-left: .2em;
   }
+
+  .error {
+    color: $danger;
+    margin-top: 1em;
+  }
 }
 
 @media only screen and (min-width: 480px) {
