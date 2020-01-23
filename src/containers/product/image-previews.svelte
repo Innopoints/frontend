@@ -1,96 +1,90 @@
 <script>
-  import {onMount} from 'svelte';
-  import 'simplebar/dist/simplebar.css';
-  import SimpleBar from 'simplebar';
+  import { onMount } from 'svelte';
+  import SimplebarList from 'ui/simplebar-list.svelte';
   import Swiper from 'swiper';
-  import getBackground from '@/utils/optimal-color';
+  import 'swiper/css/swiper.min.css';
+  import getBackground from '@/utils/optimal-color.js';
+  import { API_HOST } from '@/constants/env.js';
 
-  export let variety;
-  export let varieties;
-  $: images = varieties.map(x => ({images: x.images, color: x.color}));
-  $: activeIndex = getArrayOffset(variety);
+  export let productControl;
+  export let selectedColor;
 
-  const getArrayOffset = variety => {
-    let offset = 0;
-    for (let x of varieties) {
-      if (x.id === variety.id) break;
-      else offset += x.images.length;
-    }
-    if (swiper) swiper.slideToLoop(offset, 200);
-    return offset;
-  };
-
-  let previews = null;
-  let simpleBar, swiper;
-  const scrollThreshold = 3;
+  let swiper;
   onMount(() => {
-    if (images.length > 1) {
-      simpleBar = new SimpleBar(previews);
-      document.querySelector('.simplebar-offset').classList.add('at-top');
-      simpleBar.getScrollElement().addEventListener('scroll', function() {
-        const scrollContainer = document.querySelector('.simplebar-offset');
-        if (this.scrollTop < scrollThreshold) {
-          scrollContainer.classList.add('at-top');
-        } else if (this.scrollHeight - this.offsetHeight - this.scrollTop < scrollThreshold) {
-          scrollContainer.classList.add('at-bottom');
-        } else {
-          scrollContainer.classList.remove('at-top');
-          scrollContainer.classList.remove('at-bottom');
-        }
-      });
-
+    if (productControl.flatImages.length > 1) {
       swiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
-        loop: true,
-        grabCursor: true,
+        cssMode: true,
         pagination: {
           el: '.swiper-container > .swiper-pagination',
         },
+        scrollbar: {
+          el: null,
+        },
         on: {
-          transitionEnd() {
-            let el = document.querySelector('.swiper-slide.swiper-slide-active img');
-            if (el) activeIndex = parseInt(el.getAttribute('data-index'));
+          slideChange() {
+            selectedColor = productControl.flatImages[this.realIndex].color;
           },
         },
       });
     }
   });
 
-  const changeActive = (index) => {
-    if (swiper) swiper.slideToLoop(index, 200);
-  };
+  $: swiper != null && showImageForColor(selectedColor);
+
+  function showImageForColor(color) {
+    selectedColor = color;
+    for (let i = 0; i < productControl.flatImages.length; ++i) {
+      if (productControl.flatImages[i].color === color) {
+        swiper.slideTo(i);
+        break;
+      }
+    }
+  }
 </script>
 
-<div class="showcase" class:no-previews={images.length <= 1}>
-  {#if images.length > 1}
-    <div role="group" class="previews" bind:this={previews}>
-      {#each images as variet, i (i)}
-        {#each variet.images as img, j (img)}
-          <label data-index="{i} {j}">
-            <input on:change={() => changeActive(2*i + j)} type="radio" name="preview-images" checked={(2*i + j) === activeIndex} />
-            <div class="icon">
-              <img src={img} style="{'background: ' + getBackground(variet.color)}" alt="" />
-            </div>
-          </label>
-        {/each}
+<div class="showcase" class:no-previews={productControl.flatImages.length <= 1}>
+  {#if productControl.flatImages.length > 1}
+    <SimplebarList classname="previews">
+      {#each productControl.flatImages as image}
+        <label>
+          <input
+            type="radio"
+            name="preview-images"
+            value={image.color}
+            checked={
+              image.color == selectedColor
+              && image.url == productControl.coverImage(image.color)
+            }
+            on:change={(evt) => showImageForColor(evt.target.value)}
+          />
+          <div class="icon">
+            <img
+              src={API_HOST + image.url}
+              style="background: {getBackground(image.color)}"
+              alt=""
+            />
+          </div>
+        </label>
       {/each}
-    </div>
+    </SimplebarList>
   {/if}
 
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      {#each variety.images as img (img)}
-        {#each images as variet, i (i)}
-          {#each variet.images as img, j (img)}
-            <div class="swiper-slide">
-              <img src={img} data-index={2*i + j} style="{'background: ' + getBackground(variet.color)}" alt="" />
-            </div>
-          {/each}
-        {/each}
+      {#each productControl.flatImages as image}
+        <div class="swiper-slide">
+          <img
+            src={API_HOST + image.url}
+            style="background: {getBackground(image.color)}"
+            alt=""
+          />
+        </div>
       {/each}
     </div>
-    {#if images.length > 1}
-      <div class="swiper-pagination"></div>
+
+    {#if productControl.flatImages.length > 1}
+      <div class="swiper-pagination" />
     {/if}
   </div>
 </div>

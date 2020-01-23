@@ -133,10 +133,10 @@
   margin-top: 1em;
 }
 
-.product .purchase-details .action {
+.product .purchase-details .action.purchaseable {
   display: flex;
-  flex-direction: column;
   align-items: flex-end;
+  flex-direction: column;
 }
 
 .product .purchase-details .price {
@@ -195,6 +195,7 @@
 
 .swiper-container .swiper-slide > img {
   height: 100%;
+  width: 100%;
 }
 
 .swiper-container .swiper-pagination {
@@ -243,11 +244,11 @@
   text-align: right;
 }
 
-.modal-overlay .purchase .quantity #quantity-inc {
+.modal-overlay .purchase .quantity .btn:last-child {
   margin-left: 5px;
 }
 
-.modal-overlay .purchase .quantity #quantity-dec {
+.modal-overlay .purchase .quantity .btn:first-child {
   margin-right: 5px;
 }
 
@@ -278,6 +279,8 @@
 .modal-overlay .options .color {
   padding: .75em;
   border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
 }
 
 .modal-overlay .actions {
@@ -401,6 +404,7 @@
   }
   .product .content {
     max-width: 28em;
+    min-width: 26em;
   }
   .btn.back > svg {
     stroke: #127800;
