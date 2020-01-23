@@ -1,6 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte';
-  import 'simplebar/dist/simplebar.css';
+  import 'simplebar/dist/simplebar.min.css';
   import SimpleBar from 'simplebar';
 
   export let classname = '';
@@ -63,9 +63,6 @@
       </div>
     </div>
     <div class="simplebar-placeholder" />
-  </div>
-  <div class="simplebar-track simplebar-horizontal">
-    <div class="simplebar-scrollbar" />
   </div>
   <div class="simplebar-track simplebar-vertical">
     <div class="simplebar-scrollbar" />
