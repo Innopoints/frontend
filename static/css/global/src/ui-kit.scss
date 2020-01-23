@@ -1731,3 +1731,40 @@ input[type="checkbox"]:checked + .chip {
     stroke: $main;
   }
 }
+
+/* Snackbar -------------------------------------- */
+
+.snackbar {
+  position: fixed;
+  z-index: 100;
+  bottom: 3em;
+  left: 5%;
+  min-width: 16em;
+  padding: .375em;
+  width: max-content;
+  max-width: 85%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  visibility: hidden;
+  background: lighten($dark, 5%);
+  box-shadow: $shadow-raised;
+
+  .text {
+    padding-top: .8em;
+    padding-bottom: .8em;
+    margin-left: .625em;
+    margin-right: .625em;
+    color: white;
+    flex: 1;
+    font-size: .95rem;
+  }
+
+  .btn {
+    color: lighten($main, 17%);
+  }
+}
+
+.snackbar.open {
+  visibility: visible;
+}

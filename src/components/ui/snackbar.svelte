@@ -1,32 +1,36 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
+  import { fly } from 'svelte/transition';
+  import dynamic from 'ui/utils/dynamic-transition.js';
 
-  export let id = 'popup';
-  export let classname = 'card';
-  export let openerclass = 'popup-open';
+  export let classname = '';
+  export let isOpen = false;
+  export let timeout = 5000;
+  export let transition = fly;
+  export let transitionOptions = { x: -20, duration: 150 };
+  let timeoutInstance = null;
 
-  export let value = false;
-  export let time = 5000;
-  $: toggleBodyClass(value);
-
-  let snackbar = null;
-  onMount(() => document.body.appendChild(snackbar));
-  onDestroy(() => document.body.removeChild(snackbar));
-
-  let timeout = null;
-  const toggleBodyClass = (val) => {
-    if (val) {
-      document.body.classList.add(openerclass);
-      timeout = setTimeout(() => {
-        value = false;
-      }, time);
-    } else {
-      clearTimeout(timeout);
-      document.body.classList.remove(openerclass);
+  export function open() {
+    isOpen = true;
+    if (timeoutInstance != null) {
+      clearTimeout(timeoutInstance);
     }
-  };
+    timeoutInstance = setTimeout(() => { isOpen = false; }, timeout);
+  }
+
+  export function close() {
+    isOpen = false;
+    if (timeoutInstance != null) {
+      clearTimeout(timeoutInstance);
+      timeoutInstance = null;
+    }
+  }
 </script>
 
-<div {id} class={classname} bind:this={snackbar}>
-  <slot />
-</div>
+{#if isOpen}
+  <div
+    class="snackbar open {classname}"
+    transition:dynamic={{ transition, options: transitionOptions }}
+  >
+    <slot />
+  </div>
+{/if}

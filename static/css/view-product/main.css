@@ -319,35 +319,6 @@
   background: #ab0303;
 }
 
-#popup {
-  position: fixed;
-  top: 20px;
-  right: 3%;
-  min-width: 16em;
-  padding: .2em .2em .2em 1em;
-  width: max-content;
-  max-width: 85%;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  visibility: hidden;
-}
-
-#popup .text {
-  padding-top: .7em;
-  padding-bottom: .7em;
-  flex: 1;
-  font-size: .95rem;
-}
-
-#popup .btn {
-  margin-left: .5em;
-}
-
-body.popup-open #popup {
-  visibility: visible;
-}
-
 @media only screen and (min-width: 360px) {
   .purchase .identifier {
     margin-right: 1em;
