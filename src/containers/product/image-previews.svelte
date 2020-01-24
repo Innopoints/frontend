@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import SimplebarList from 'ui/simplebar-list.svelte';
   import Swiper from 'swiper';
   import 'swiper/css/swiper.min.css';
@@ -8,6 +8,8 @@
 
   export let productControl;
   export let selectedColor;
+
+  const dispatch = createEventDispatcher();
 
   let swiper;
   onMount(() => {
@@ -24,6 +26,7 @@
         on: {
           slideChange() {
             selectedColor = productControl.flatImages[this.realIndex].color;
+            dispatch('color-change', selectedColor);
           },
         },
       });
@@ -33,7 +36,10 @@
   $: swiper != null && showImageForColor(selectedColor);
 
   function showImageForColor(color) {
-    selectedColor = color;
+    if (selectedColor !== color) {
+      selectedColor = color;
+      dispatch('color-change', selectedColor);
+    }
     for (let i = 0; i < productControl.flatImages.length; ++i) {
       if (productControl.flatImages[i].color === color) {
         swiper.slideTo(i);

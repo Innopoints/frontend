@@ -15,14 +15,14 @@
   export let selectedColor;
   export let account;
 
-  let chosenVariety = null;
+  let selectedVarietyID = null;
   let err = false;
   let animation = false;
 
   function purchase() {
-    if (!productControl.productSized || chosenVariety != null) {
+    if (!productControl.productSized || selectedVarietyID != null) {
       err = false;
-      dispatch('purchase', { varietyID: chosenVariety });
+      dispatch('purchase', { varietyID: selectedVarietyID });
     } else {
       err = true;
       animation = true;
@@ -61,6 +61,7 @@
           values={productControl.colors}
           classname="radio-options"
           bind:value={selectedColor}
+          on:change={({ detail }) => dispatch('color-change', detail)}
           name="color"
         />
       </Labeled>
@@ -77,7 +78,7 @@
           name="sizes"
           classname="radio-options"
           chipclass="size"
-          bind:value={chosenVariety}
+          bind:value={selectedVarietyID}
         />
         <span class="not-selected">please, select a size</span>
       </Labeled>
@@ -100,7 +101,7 @@
     <div class="action{account != null ? ' purchaseable' : ''}">
       {#if account != null}
         <div class="purchases">
-          {productControl.product.purchases || 0} purchases
+          {productControl.totalPurchases || 0} purchases  <!-- item amount -->
         </div>
         {#if account.is_admin}
           <Button isFilled href="{$page.path}/edit">edit</Button>
