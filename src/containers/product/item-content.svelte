@@ -1,43 +1,28 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import { stores } from '@sapper/app';
   import Labeled from 'ui/labeled.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
   import RadioChipGroup from 'ui/radio-chip-group.svelte';
   import Button from 'ui/button.svelte';
-  import Snackbar from 'ui/snackbar.svelte';
+  import { login } from '@/utils/auth.js';
 
-  import {isAuthed, user} from '@/store/user';
-  // import {openModal} from '@/store/modal';
-  import {open as snackbarOpen, closeSnackbar} from '@/store/snackbar';
+  const { page } = stores();
 
-  export let name;
-  export let type;
-  export let description;
-  export let varieties;
-  export let variety;
-  export let inSizes;
-  export let price;
-  export let purchases;
+  const dispatch = createEventDispatcher();
 
-  let dispatch = createEventDispatcher();
+  export let productControl;
+  export let selectedColor;
+  export let account;
 
-  $: sizes = inSizes ? Object.keys(variety.sizes).map(size => ({
-    label: size,
-    disabled: variety.sizes[size] <= 0,
-  })) : null;
-  const changeVariety = e => {
-    chosenSize = null;
-    dispatch('change', e.detail);
-  };
-
-  let chosenSize = null;
+  let chosenVariety = null;
   let err = false;
   let animation = false;
-  const chooseSize = e => chosenSize = e.detail;
-  const purchase = () => {
-    if (!inSizes || chosenSize) {
+
+  function purchase() {
+    if (!productControl.productSized || chosenVariety != null) {
       err = false;
-      // openModal();
+      dispatch('purchase', { varietyID: chosenVariety });
     } else {
       err = true;
       animation = true;
@@ -45,51 +30,54 @@
         animation = false;
       }, 1000);
     }
-  };
+  }
 </script>
 
 <div class="content">
-  <Snackbar bind:value={$snackbarOpen}>
-    <div class="text">Purchase successful! Track its status in the <a href="/profile">profile</a>.</div>
-    <Button on:click={closeSnackbar}>dismiss</Button>
-  </Snackbar>
-
   <header>
     <div class="title">
-      {name}
+      {productControl.product.name}
     </div>
-    <div class="subtitle">
-      {type}
-    </div>
+    {#if productControl.product.type}
+      <div class="subtitle">
+        {productControl.product.type}
+      </div>
+    {/if}
   </header>
 
-  <Labeled label="description" classname="labeled text description">
-    {description}
-  </Labeled>
+  {#if productControl.product.description}
+    <Labeled label="description" classname="description">
+      <span class="text">
+        {productControl.product.description}
+      </span>
+    </Labeled>
+  {/if}
 
   <div class="parameters">
-    {#if varieties.length > 1}
-      <Labeled label="colors" classname="labeled text colors" customContent>
+    {#if productControl.colors.length > 1}
+      <Labeled label="colors" classname="colors">
         <RadioGroup
           isColor
-          name="variety-colors"
+          values={productControl.colors}
           classname="radio-options"
-          items={varieties}
-          value={variety}
-          uniqueKey="color"
-          on:change={changeVariety}
+          bind:value={selectedColor}
+          name="color"
         />
       </Labeled>
     {/if}
-    {#if sizes}
-      <Labeled label="sizes" classname="labeled text sizes{err ? ' wrong' : ''}{animation ? ' fire-animation' : ''}" customContent>
+    {#if productControl.productSized}
+      <Labeled
+        label="sizes"
+        classname="sizes{err ? ' wrong' : ''}{animation ? ' fire-animation' : ''}"
+      >
         <RadioChipGroup
-          values={sizes}
-          isSmall
+          labels={productControl.varietiesByColor.get(selectedColor).map(x => x.size)}
+          values={productControl.varietiesByColor.get(selectedColor).map(x => x.id)}
+          small
           name="sizes"
           classname="radio-options"
           chipclass="size"
-          on:change={chooseSize}
+          bind:value={chosenVariety}
         />
         <span class="not-selected">please, select a size</span>
       </Labeled>
@@ -102,25 +90,31 @@
         Price
       </span>
       <span class="price" title="Not enough innopoints">
-        {price}
+        {productControl.product.price}
         <svg src="/images/innopoint-sharp.svg" class="innopoint" />
-        {#if $isAuthed && $user.balance < price}
+        {#if account && account.balance < productControl.product.price && !account.is_admin}
           <svg src="/images/icons/frown.svg" class="frown" />
         {/if}
       </span>
     </div>
-    <div class="action">
-      {#if $isAuthed}
+    <div class="action{account != null ? ' purchaseable' : ''}">
+      {#if account != null}
         <div class="purchases">
-          {purchases || 0} purchases
+          {productControl.product.purchases || 0} purchases
         </div>
-        {#if $user.is_admin}
-          <Button isFilled>edit</Button>
+        {#if account.is_admin}
+          <Button isFilled href="{$page.path}/edit">edit</Button>
         {:else}
-          <Button isFilled on:click={purchase}>purchase</Button>
+          <Button
+            isFilled
+            on:click={purchase}
+            disabled={account.balance < productControl.product.price}
+          >
+            purchase
+          </Button>
         {/if}
       {:else}
-        <a href="/profile">Sign in</a> to purchase
+        <a on:click|preventDefault={login} href="/login">Sign in</a> to purchase
       {/if}
     </div>
   </div>

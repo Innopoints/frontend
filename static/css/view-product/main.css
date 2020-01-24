@@ -133,10 +133,10 @@
   margin-top: 1em;
 }
 
-.product .purchase-details .action {
+.product .purchase-details .action.purchaseable {
   display: flex;
-  flex-direction: column;
   align-items: flex-end;
+  flex-direction: column;
 }
 
 .product .purchase-details .price {
@@ -195,6 +195,7 @@
 
 .swiper-container .swiper-slide > img {
   height: 100%;
+  width: 100%;
 }
 
 .swiper-container .swiper-pagination {
@@ -243,11 +244,11 @@
   text-align: right;
 }
 
-.modal-overlay .purchase .quantity #quantity-inc {
+.modal-overlay .purchase .quantity .btn:last-child {
   margin-left: 5px;
 }
 
-.modal-overlay .purchase .quantity #quantity-dec {
+.modal-overlay .purchase .quantity .btn:first-child {
   margin-right: 5px;
 }
 
@@ -278,6 +279,8 @@
 .modal-overlay .options .color {
   padding: .75em;
   border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
 }
 
 .modal-overlay .actions {
@@ -317,35 +320,6 @@
   top: 50%;
   left: 0;
   background: #ab0303;
-}
-
-#popup {
-  position: fixed;
-  top: 20px;
-  right: 3%;
-  min-width: 16em;
-  padding: .2em .2em .2em 1em;
-  width: max-content;
-  max-width: 85%;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  visibility: hidden;
-}
-
-#popup .text {
-  padding-top: .7em;
-  padding-bottom: .7em;
-  flex: 1;
-  font-size: .95rem;
-}
-
-#popup .btn {
-  margin-left: .5em;
-}
-
-body.popup-open #popup {
-  visibility: visible;
 }
 
 @media only screen and (min-width: 360px) {
@@ -430,6 +404,7 @@ body.popup-open #popup {
   }
   .product .content {
     max-width: 28em;
+    min-width: 26em;
   }
   .btn.back > svg {
     stroke: #127800;

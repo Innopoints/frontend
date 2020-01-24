@@ -23,7 +23,7 @@
   } else {
     altText += name;
   }
-  let imageURL = (
+  $: imageURL = (
     varietiesByColor.get(selectedColor)[0].images.length !== 0 ?
       API_HOST + varietiesByColor.get(selectedColor)[0].images[0]
       : '/images/create-product/placeholder.svg'
