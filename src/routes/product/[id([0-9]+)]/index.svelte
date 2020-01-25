@@ -46,9 +46,10 @@
     colors: [],  // string array of all colors
     flatImages: [],  // flat array of images in form { url, color }
     coverImage(color) {
-      return this.varietiesByColor.get(color).images[0];
+      return this.varietiesByColor.get(color)[0].images[0];
     },
     productSized: product.varieties[0].size != null,
+    totalPurchases: product.varieties.reduce((acc, variety) => acc + variety.purchases, 0),
   };
   $: {
     productControl.colors = [...productControl.varietiesByColor.keys()];
@@ -63,6 +64,10 @@
   let purchaseModalOpen = false;
   let purchaseSuccess;
   let purchaseFailure;
+
+  function updateColor({ detail }) {
+    selectedColor = detail;
+  }
 
   function quantityDecrease() {
     if (selectedQuantity > 1) {
@@ -126,8 +131,14 @@
           <svg src="/images/innopoint-sharp.svg" class="innopoint" />
         {/if}
       </div>
-      <ImagePreviews {productControl} bind:selectedColor />
-      <ItemContent {productControl} bind:selectedColor {account} on:purchase={preparePurchase} />
+      <ImagePreviews {productControl} {selectedColor} on:color-change={updateColor} />
+      <ItemContent
+        {productControl}
+        {selectedColor}
+        {account}
+        on:color-change={updateColor}
+        on:purchase={preparePurchase}
+      />
     </main>
   </div>
   <Modal bind:isOpen={purchaseModalOpen}>
