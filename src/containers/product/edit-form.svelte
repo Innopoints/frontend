@@ -7,6 +7,7 @@
   import FormVariety from '@/components/product/form-variety.svelte';
 
   export let product;
+  $: formDisabled = product == null;
   export let colors;
   export let sizes;
   export let errors = {
@@ -30,7 +31,7 @@
       placeholder="I <3 Innopolis"
       maxlength={128}
       on:change={({detail}) => dispatch('change', { field: 'name', value: detail })}
-      disabled={!!product}
+      disabled={formDisabled}
       {...product && { value: product.name || '' }}
     />
   </FormField>
@@ -45,7 +46,7 @@
       placeholder="sweatshirt"
       maxlength={128}
       on:change={({detail}) => dispatch('change', { field: 'type', value: detail })}
-      disabled={!!product}
+      disabled={formDisabled}
       {...product && { value: product.type || '' }}
     />
   </FormField>
@@ -56,7 +57,7 @@
       placeholder="High-quality bulletproof fabric"
       maxlength={1024}
       on:change={({detail}) => dispatch('change', { field: 'description', value: detail })}
-      disabled={!!product}
+      disabled={formDisabled}
       {...product && { value: product.description || '' }}
     />
   </FormField>
@@ -78,14 +79,14 @@
       isWithItem
       isItemRight
       on:change={({detail}) => dispatch('change', { field: 'price', value: detail })}
-      disabled={!!product}
+      disabled={formDisabled}
       {...product && { value: product.price || '' }}
     >
       <svg src="/images/innopoint-sharp.svg" class="item innopoint" />
     </TextField>
   </FormField>
 
-  {#if product}
+  {#if !formDisabled}
     <header class="varieties">
       <h2>Varieties</h2>
       <Switch

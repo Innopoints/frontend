@@ -8,6 +8,7 @@
 
   export let productControl;
   export let selectedColor;
+  let displayedImage = productControl.flatImages[0];
 
   const dispatch = createEventDispatcher();
 
@@ -16,16 +17,17 @@
     if (productControl.flatImages.length > 1) {
       swiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
-        cssMode: true,
         pagination: {
           el: '.swiper-container > .swiper-pagination',
         },
         scrollbar: {
           el: null,
         },
+        grabCursor: true,
         on: {
-          slideChange() {
-            selectedColor = productControl.flatImages[this.realIndex].color;
+          transitionEnd() {
+            displayedImage = productControl.flatImages[this.realIndex];
+            selectedColor = displayedImage.color;
             dispatch('color-change', selectedColor);
           },
         },
@@ -33,18 +35,21 @@
     }
   });
 
-  $: swiper != null && showImageForColor(selectedColor);
-
-  function showImageForColor(color) {
-    if (selectedColor !== color) {
-      selectedColor = color;
-      dispatch('color-change', selectedColor);
+  function showImage(imageIndex) {
+    const newImage = productControl.flatImages[imageIndex];
+    if (displayedImage == null || displayedImage.color !== newImage.color) {
+      dispatch('color-change', newImage.color);
     }
-    for (let i = 0; i < productControl.flatImages.length; ++i) {
-      if (productControl.flatImages[i].color === color) {
-        swiper.slideTo(i);
-        break;
-      }
+    swiper.slideTo(imageIndex, 300, false);
+    displayedImage = newImage;
+    selectedColor = newImage.color;
+  }
+
+  $: {
+    if (selectedColor !== displayedImage.color) {
+      const coverIndex = productControl.flatImages.findIndex(img => img.color === selectedColor);
+      swiper.slideTo(coverIndex, 300, false);
+      displayedImage = productControl.flatImages[coverIndex];
     }
   }
 </script>
@@ -52,17 +57,14 @@
 <div class="showcase" class:no-previews={productControl.flatImages.length <= 1}>
   {#if productControl.flatImages.length > 1}
     <SimplebarList classname="previews">
-      {#each productControl.flatImages as image}
+      {#each productControl.flatImages as image, i}
         <label>
           <input
             type="radio"
             name="preview-images"
-            value={image.color}
-            checked={
-              image.color == selectedColor
-              && image.url == productControl.coverImage(image.color)
-            }
-            on:change={(evt) => showImageForColor(evt.target.value)}
+            value={i}
+            checked={image === displayedImage}
+            on:change={(evt) => showImage(evt.target.value)}
           />
           <div class="icon">
             <img
