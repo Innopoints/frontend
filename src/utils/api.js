@@ -2,7 +2,7 @@
    Inspired by Svelte RealWorld:
      https://github.com/sveltejs/realworld/blob/master/src/node_modules/api.js */
 
-export const API_HOST = process.env.SAPPER_APP_API_HOST;
+import { API_HOST } from '@/constants/env.js';
 if (API_HOST == null) {
   throw new Error('The API host is undefined.');
 }
@@ -17,7 +17,7 @@ function request(method, url, options) {
   };
 
   if (options && 'cookie' in options) {
-    actualOptions.headers['Cookie'] = options.cookie; 
+    actualOptions.headers['Cookie'] = options.cookie;
   }
 
   if (options && options.data instanceof formDataClass) {
