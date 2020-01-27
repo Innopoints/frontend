@@ -1,6 +1,9 @@
 <script>
+  import { stores } from '@sapper/app';
   import Header from '@/components/header.svelte';
   import Footer from '@/components/footer.svelte';
+
+  const { page } = stores();
 </script>
 
 <svelte:head>
@@ -9,7 +12,7 @@
   <link rel="stylesheet" href="/css/page-components/footer.css" />
 </svelte:head>
 
-<Header />
+<Header isProfile={(/^\/(?:profile|dashboard)/).test($page.path)} />
 
 <slot />
 
