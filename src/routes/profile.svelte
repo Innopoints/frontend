@@ -10,16 +10,25 @@
       timeline,
       statistics,
       notificationSettings,
+      competences,
     } = await getInitialData(this, session, new Map([
       ['account', '/account'],
       ['timeline', `/account/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
       ['statistics', '/account/statistics'],
       ['notificationSettings', '/account/notification_settings'],
+      ['competences', '/competences'],
     ]));
     if (account == null) {
       this.error(403, 'Profile');
     }
-    return { account, timeline, statistics, notificationSettings, timelineFetchedUntil };
+    return {
+      account,
+      timeline,
+      statistics,
+      notificationSettings,
+      timelineFetchedUntil,
+      competences,
+    };
   }
 </script>
 
@@ -29,7 +38,7 @@
   import Info from '@/containers/profile/info.svelte';
   import Tabs from 'ui/tabs.svelte';
   import Timeline from '@/containers/profile/timeline.svelte';
-  import Statistics from '@/containers/profile/stats.svelte';
+  import Statistics from '@/containers/profile/statistics.svelte';
   import Notifications from '@/containers/profile/notifications.svelte';
   import * as api from '@/utils/api.js';
   import tabs from '@/constants/profile/tabs.js';
@@ -41,6 +50,7 @@
   export let statistics;
   export let notificationSettings;
   export let timelineFetchedUntil;
+  export let competences;
   $session.user = account;
 
   let timelinePromises = (timeline.data.length ? [new Promise(resolve => resolve(timeline))] : []);
@@ -94,8 +104,12 @@
     timelinePromises = timelinePromises;
   }
 
-  function openLeaveFeedback({ payload: detail }) {
+  function openLeaveFeedback({ detail: payload }) {
     /* TODO: implement */
+  }
+
+  function updateStatistics({ detail: period }) {
+    console.log('period', period);
   }
 </script>
 
@@ -133,7 +147,11 @@
           on:leave-feedback={openLeaveFeedback}
         />
       {:else if activeTab === tabs.statistics}
-        <Statistics {account} {statistics} />
+        <Statistics
+          {statistics}
+          {competences}
+          on:period-change={updateStatistics}
+        />
       {:else if activeTab === tabs.notifications}
         <Notifications {account} {notificationSettings} />
       {/if}

@@ -7,6 +7,10 @@
   flex-direction: column;
   align-items: flex-start;
 
+  .period {
+    align-self: stretch;
+  }
+
   .relative-wrapper {
     padding: 1.5em;
 
