@@ -24,7 +24,7 @@
 </script>
 
 <script>
-  import { stores, goto } from '@sapper/app';
+  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Info from '@/containers/profile/info.svelte';
   import Tabs from 'ui/tabs.svelte';
@@ -34,7 +34,7 @@
   import * as api from '@/utils/api.js';
   import tabs from '@/constants/profile/tabs.js';
 
-  const { page, session } = stores();
+  const { session } = stores();
 
   export let account;
   export let timeline;
@@ -45,10 +45,9 @@
 
   let timelinePromises = (timeline.data.length ? [new Promise(resolve => resolve(timeline))] : []);
 
-  let activeTab = $page.query.tab || tabs.timeline;
+  let activeTab = tabs.timeline;
   function updateURL(target) {
     activeTab = target.detail;
-    goto(`/profile?tab=${target.detail}`, { replaceState: true });
   }
 
   function changeUsername({ detail }) {
