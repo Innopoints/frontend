@@ -19,8 +19,6 @@
     hour12: false,
   });
 
-  console.log(entry_time);
-
   const dispatch = createEventDispatcher();
 </script>
 

@@ -19,7 +19,6 @@
     if (account == null) {
       this.error(403, 'Profile');
     }
-    console.log(timeline);
     return { account, timeline, statistics, notificationSettings, timelineFetchedUntil };
   }
 </script>
@@ -45,7 +44,6 @@
   $session.user = account;
 
   let timelinePromises = (timeline.data.length ? [new Promise(resolve => resolve(timeline))] : []);
-
 
   let activeTab = $page.query.tab || tabs.timeline;
   function updateURL(target) {
@@ -79,11 +77,22 @@
     let queryString = '?end_date=' + isoForURL(timelineFetchedUntil);
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
     queryString += '&start_date=' + isoForURL(timelineFetchedUntil);
-    timelinePromises.push(api.get('/account/timeline' + queryString).error((error) => {
-      // Reset the month if the fetch failed
-      timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() + 3);
-      throw error;
-    }));
+    timelinePromises.push(
+      api.get('/account/timeline' + queryString)
+        .then(resp => resp.json())
+        .then(json => {
+          if (json.data.length === 0) {
+            fetchMoreTimeline();
+          }
+          return json;
+        })
+        .catch((error) => {
+          // Reset the month if the fetch failed
+          timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() + 3);
+          throw error;
+        }),
+    );
+    timelinePromises = timelinePromises;
   }
 
   function openLeaveFeedback({ payload: detail }) {

@@ -2,6 +2,10 @@
   margin: 1em .6em;
 }
 
+.timeline .loading {
+  justify-content: center;
+}
+
 .timeline .entry {
   display: flex;
   align-items: flex-start;

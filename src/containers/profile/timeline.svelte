@@ -5,7 +5,6 @@
 
   export let timelinePromises;
 
-  let loadMore = false;
   const dispatch = createEventDispatcher();
   const dateFormatter = new Intl.DateTimeFormat('en', {
     hour: '2-digit',
@@ -17,7 +16,6 @@
   });
 
   function requestMore() {
-    loadMore = false;
     dispatch('more-timeline');
   }
 </script>
@@ -25,8 +23,13 @@
 <div class="timeline">
   {#if timelinePromises.length}
     {#each timelinePromises as promise}
-      {#await promise.then(value => { loadMore = value.more; return value.data; })}
-        Just waiting chilling
+      {#await promise.then(value => value.data)}
+        <div class="loading">
+          <div class="icon">
+            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          </div>
+          <p>Loading...</p>
+        </div>
       {:then timelineFragment}
         {#each timelineFragment as entry}
           <TimelineEntry {...entry} {dateFormatter} on:leave-feedback />
@@ -34,12 +37,14 @@
       {/await}
     {/each}
 
-    {#if loadMore}
-      <Button classname="more" on:click={requestMore}>
-        <svg src="images/icons/more-horizontal.svg" class="icon mr-2" />
-        more
-      </Button>
-    {/if}
+    {#await Promise.all(timelinePromises).then(values => values[values.length - 1]) then lastValue}
+      {#if lastValue.more}
+        <Button classname="more" on:click={requestMore}>
+          <svg src="images/icons/more-horizontal.svg" class="icon mr-2" />
+          load more
+        </Button>
+      {/if}
+    {/await}
   {:else}
     <div class="empty small">
       <div class="icon">

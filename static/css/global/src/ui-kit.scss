@@ -1768,3 +1768,78 @@ input[type="checkbox"]:checked + .chip {
 .snackbar.open {
   visibility: visible;
 }
+
+/* Loading -------------------------------------- */
+
+.loading {
+  display: flex;
+  align-items: center;
+
+  .lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    margin-right: .8em;
+
+    div {
+      position: absolute;
+      top: 13px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: $main;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+      &:nth-child(1) {
+        left: 3px;
+        animation: lds-ellipsis1-small .6s infinite;
+      }
+
+      &:nth-child(2) {
+        left: 3px;
+        animation: lds-ellipsis2-small .6s infinite;
+      }
+
+      &:nth-child(3) {
+        left: 13px;
+        animation: lds-ellipsis2-small .6s infinite;
+      }
+
+      &:nth-child(4) {
+        left: 22px;
+        animation: lds-ellipsis3-small .6s infinite;
+      }
+    }
+
+    @keyframes lds-ellipsis1-small {
+      0% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes lds-ellipsis3-small {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(0);
+      }
+    }
+
+    @keyframes lds-ellipsis2-small {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(10px, 0);
+      }
+    }
+  }
+}
