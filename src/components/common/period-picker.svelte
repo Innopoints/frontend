@@ -5,7 +5,7 @@
   import datePeriods from '@/constants/date-periods.js';
 
   export let label;
-  export let selectedPeriod = datePeriods[0];
+  export let value = datePeriods[2];
 
   const dispatch = createEventDispatcher();
 </script>
@@ -19,14 +19,14 @@
 
 <Dropdown let:toggle={toggle}>
   <span slot="label">
-    {(selectedPeriod.name.startsWith('last') ? 'over the ' : 'for ') + selectedPeriod.name}
+    {(value.name.startsWith('last') ? 'over the ' : 'for ') + value.name}
   </span>
   <span class="label">{label}</span>
   <ul class="period-list">
     {#each datePeriods as period (period.name)}
       <li>
-        <Button 
-          on:click={() => { toggle(); selectedPeriod = period; dispatch('period-change', period); }}
+        <Button
+          on:click={() => { toggle(); value = period; dispatch('period-change', period); }}
         >
           {period.name}
         </Button>

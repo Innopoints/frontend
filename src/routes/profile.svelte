@@ -14,7 +14,7 @@
     } = await getInitialData(this, session, new Map([
       ['account', '/account'],
       ['timeline', `/account/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
-      ['statistics', '/account/statistics'],
+      ['statistics', `/account/statistics?start_date=${isoForURL(timelineFetchedUntil)}`],
       ['notificationSettings', '/account/notification_settings'],
       ['competences', '/competences'],
     ]));
@@ -108,8 +108,14 @@
     /* TODO: implement */
   }
 
+  function openCreateReport({ detail: period }) {
+    console.log(period);
+  }
+
   function updateStatistics({ detail: period }) {
-    console.log('period', period);
+    api.get('/account/statistics?start_date=' + isoForURL(period.getStart(new Date())))
+      .then(resp => resp.json())
+      .then(data => statistics = data);
   }
 </script>
 
@@ -151,6 +157,7 @@
           {statistics}
           {competences}
           on:period-change={updateStatistics}
+          on:create-report={openCreateReport}
         />
       {:else if activeTab === tabs.notifications}
         <Notifications {account} {notificationSettings} />
