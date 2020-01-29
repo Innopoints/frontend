@@ -30,6 +30,7 @@
         class={inputclass}
         bind:group={value}
         value={loopValue}
+        checked={loopValue === value}
         on:change={evt => dispatch('change', evt.target.value)}
       />
       <div class="icon {iconclass}">{labels === null ? loopValue : labels[i]}</div>
