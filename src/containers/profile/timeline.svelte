@@ -38,7 +38,7 @@
     {/each}
 
     {#await Promise.all(timelinePromises).then(values => values[values.length - 1]) then lastValue}
-      {#if lastValue.more}
+      {#if lastValue != null && lastValue.more}
         <Button classname="more" on:click={requestMore}>
           <svg src="images/icons/more-horizontal.svg" class="icon mr-2" />
           load more
