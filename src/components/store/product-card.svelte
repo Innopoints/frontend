@@ -40,7 +40,7 @@
       />
       <RadioGroup
         isColor
-        values={colors}
+        values={colors.map(val => ({ value: val }))}
         bind:value={selectedColor}
         classname="color-options"
         name="color-{id}"

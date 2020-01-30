@@ -53,7 +53,7 @@
       <RadioGroup
         isColor
         name="choose-color"
-        values={colors}
+        values={colors.map(val => ({ value: val }))}
         classname="color-choices"
         on:change={(e) => { changeField('color', e.detail); toggle(); }}
       />

@@ -125,7 +125,7 @@
       <span slot="label" class="tight">order</span>
       <span slot="label" class="regular">{orderLabel}</span>
       <RadioGroup
-        values={orderOptions}
+        values={orderOptions.map(val => ({ value: val }))}
         labels={orderLabels}
         name="order-options-mobile"
         bind:value={order}

@@ -6,7 +6,7 @@
   export let wrapperclass = '';
   export let radioclass = '';
   export let inputclass = '';
-  export let labelclass = null;
+  export let labelclass = '';
   export let iconclass = '';
   export let isColor = false;
 
@@ -43,44 +43,45 @@
       class={wrapperclass}
     >
       {#if !isColor && labelPosition === 'left'}
-        {#if labelclass !== null}
-          <span class={labelclass}>{labels === null ? loopValue : labels[i]}</span>
+        {#if labelclass !== ''}
+          <span class={labelclass}>{labels == null ? loopValue.value : labels[i]}</span>
         {:else}
-          {labels === null ? loopValue : labels[i]}
+          {labels == null ? loopValue.value : labels[i]}
         {/if}
       {/if}
       {#if !isColor}
         <div class="radio {radioclass}">
           <input
             bind:group={value}
-            value={loopValue}
+            value={loopValue.value}
             type="radio"
             name={name}
             class={inputclass}
+            disabled={loopValue.disabled}
             on:change={newSelection}
           >
           <div
-            style="{isColor ? getColorPickerStyles(loopValue) : ''}"
+            style="{isColor ? getColorPickerStyles(loopValue.value) : ''}"
             class="icon {iconclass}"></div>
         </div>
       {:else}
         <input
           bind:group={value}
-          value={loopValue}
+          value={loopValue.value}
           type="radio"
           name={name}
           class={inputclass}
           on:change={newSelection}
         >
         <div
-          style="{isColor ? getColorPickerStyles(loopValue) : ''}"
+          style="{isColor ? getColorPickerStyles(loopValue.value) : ''}"
           class="icon {iconclass}"></div>
       {/if}
       {#if !isColor && labelPosition === 'right'}
-        {#if labelclass !== null}
-          <span class={labelclass}>{labels === null ? loopValue : labels[i]}</span>
+        {#if labelclass !== ''}
+          <span class={labelclass}>{labels == null ? loopValue.value : labels[i]}</span>
         {:else}
-          {labels === null ? loopValue : labels[i]}
+          {labels == null ? loopValue.value : labels[i]}
         {/if}
       {/if}
     </label>
