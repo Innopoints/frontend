@@ -1,62 +1,113 @@
 <script>
-  import {onMount} from 'svelte';
+  import { onMount } from 'svelte';
   import Button from 'ui/button.svelte';
+  import Dialog from 'ui/dialog.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import notifications from '@/constants/profile/notifications';
+  import { categories, states } from '@/constants/profile/notification-settings.js';
+  import * as api from '@/utils/api.js';
 
-  const items = ['Push', 'Off', 'e-mail'];
+  export let notificationSettings;
+  export let account;
+  let pushPermission = null;
+  let initialSettings = Object.assign({}, notificationSettings);
+  $: changes = categories.some(
+    category => (
+      category.key != null
+      && (category.key !== 'administration' && !account.is_admin)
+      && notificationSettings[category.key] !== initialSettings[category.key]
+    ),
+  );
 
-  const selected = {};
+  let radioOptions = states.map(state => ({ value: state, disabled: state === 'push' }));
+
+  function requestPermission() {
+    Notification.requestPermission(updateNotificationPermission);
+  }
+
+  function updateNotificationPermission(permission) {
+    pushPermission = permission;
+    if (pushPermission === 'granted') {
+      radioOptions.forEach(option => {
+        if (option.value === 'push') {
+          option.disabled = false;
+        }
+      });
+      radioOptions = radioOptions;
+    }
+  }
+
   onMount(() => {
-    notifications.forEach(x => selected[x.name] = {});
+    updateNotificationPermission(Notification.permission);
   });
 
-  const changeAll = (e) => {
-    const item = e.detail;
-    notifications.forEach(x => selected[x.name] = item);
-  };
+  function updateSettings(key, value) {
+    if (key == null) {
+      categories.forEach(category => notificationSettings[category.key] = value);
+    } else {
+      notificationSettings[key] = value;
+    }
+  }
 
-  const changeOne = (name, e) => {
-    selected[name] = e.detail;
-    selected.all = {};
-  };
+  function saveChanges() {
+    delete notificationSettings[null];
+    api.patch('/account/notification_settings', { data: notificationSettings })
+      .then(() => changes = false)
+      .catch(() => notificationSettings = initialSettings);
+  }
 </script>
 
 <div class="notifications">
-  <header>
-    <div class="dialog notice">
-      <div class="message">
-        <svg src="images/icons/alert-triangle.svg" class="icon" />
-        <p>Push notifications require permission before they can be used.</p>
-      </div>
-      <div class="actions">
-        <Button>prompt for permissions</Button>
-      </div>
-    </div>
-  </header>
+  {#if pushPermission === 'default' || pushPermission === 'denied'}
+    <header>
+      <Dialog isNotice>
+        <div class="message" slot="content">
+          <svg src="images/icons/alert-triangle.svg" class="icon" />
+          <p>
+            Push notifications require permission before they can be used.
+            {#if pushPermission === 'denied'}
+              <br />
+              To allow notifications after they've been blocked, check the website settings.
+            {/if}
+          </p>
+        </div>
+        <div class="actions" slot="content">
+          {#if pushPermission !== 'denied'}
+            <Button on:click={requestPermission}>
+              prompt for permissions
+            </Button>
+          {/if}
+        </div>
+      </Dialog>
+    </header>
+  {/if}
 
   <ul>
-    {#each notifications as notification, i (notification.name)}
+    {#each categories.filter(category => account.is_admin || category.key !== 'administration')
+      as category (category.key)}
       <li class="section">
         <header>
           <div class="title">
-            {notification.title}
+            {category.title}
           </div>
-          {#if notification.subtitle}
-            <div class="subtitle">{notification.subtitle}</div>
+          {#if category.subtitle}
+            <div class="subtitle">{category.subtitle}</div>
           {/if}
         </header>
         <RadioGroup
-            classname="switches"
-            name={notification.name}
-            labelPosition="left"
-            isLabel
-            isLabelGreen
-            items={items}
-            value={selected[notification.name]}
-            on:change="{(e) => {i === 0 ? changeAll(e) : changeOne(notification.name, e);}}"
+          classname="switches"
+          name={category.key || 'all'}
+          labelPosition="left"
+          labelclass="label"
+          values={radioOptions}
+          value={notificationSettings[category.key]}
+          on:change={(evt) => updateSettings(category.key, evt.detail)}
         />
       </li>
     {/each}
+    {#if changes}
+      <div class="actions">
+        <Button isFilled on:click={saveChanges}>save changes</Button>
+      </div>
+    {/if}
   </ul>
 </div>

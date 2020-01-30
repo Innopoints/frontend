@@ -32,7 +32,7 @@
   }
 
   .section {
-    &:not(:last-child) {
+    &:not(:last-of-type) {
       border-bottom: 1px solid $light-gray;
     }
 
@@ -55,6 +55,12 @@
   & > ul {
     padding-bottom: 1em;
     align-self: stretch;
+  }
+
+  .actions {
+    margin-top: 1em;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
