@@ -546,6 +546,8 @@
 
     .btn.back, .balance {
       position: static;
+      top: 0;
+      left: 0;
     }
 
     .btn.back {
@@ -555,9 +557,5 @@
     .balance {
       justify-self: end;
     }
-  }
-
-  #popup {
-    right: 8%;
   }
 }
