@@ -28,10 +28,12 @@
       label="Period of statistics"
       on:period-change={(e) => { selectedPeriod = e.detail; dispatch('period-change', e.detail); }}
     />
-    <Button on:click={() => dispatch('create-report', selectedPeriod)}>
-      <svg src="images/icons/file-text.svg" class="mr" />
-      create a volunteer report
-    </Button>
+    {#if false}
+      <Button on:click={() => dispatch('create-report', selectedPeriod)}>
+        <svg src="images/icons/file-text.svg" class="mr" />
+        create a volunteer report
+      </Button>
+    {/if}
   </div>
   <div class="top-stats">
     <div class="stat">
