@@ -14,7 +14,6 @@
   function saveUsername() {
     if (tgUsername !== '' && tgUsername !== account.telegram_username) {
       dispatch('username-change', tgUsername);
-      console.log('setting', tgUsername);
     }
     tgChange = false;
   }
