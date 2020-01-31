@@ -47,7 +47,10 @@
   export let competences;
   $session.user = account;
 
-  let timelinePromises = (timeline.data.length ? [new Promise(resolve => resolve(timeline))] : []);
+  let timelinePromises = [];
+  if (timeline.data.length) {
+    timelinePromises.push(new Promise(resolve => resolve(timeline)));
+  }
 
   let activeTab = tabs.timeline;
   function updateURL(target) {
