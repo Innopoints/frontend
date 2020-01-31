@@ -1,8 +1,8 @@
-const entryTypes = Object.freeze({
-  application: 'application',
-  purchase: 'purchase',
-  promotion: 'promotion',
-  project: 'project',
+const EntryTypes = Object.freeze({
+  APPLICATION: 'application',
+  PURCHASE: 'purchase',
+  PROMOTION: 'promotion',
+  PROJECT: 'project',
 });
 
-export default entryTypes;
+export default EntryTypes;

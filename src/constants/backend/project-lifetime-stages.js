@@ -1,8 +1,8 @@
-const projectStages = Object.freeze({
-  draft: 'draft',
-  ongoing: 'ongoing',
-  finalizing: 'finalizing',
-  finished: 'finished',
+const ProjectStages = Object.freeze({
+  DRAFT: 'draft',
+  ONGOING: 'ongoing',
+  FINALIZING: 'finalizing',
+  FINISHED: 'finished',
 });
 
-export default projectStages;
+export default ProjectStages;

@@ -1,7 +1,7 @@
-const applicationStatuses = Object.freeze({
-  pending: 'pending',
-  approved: 'approved',
-  rejected: 'rejected',
+const ApplicationStatuses = Object.freeze({
+  PENDING: 'pending',
+  APPROVED: 'approved',
+  REJECTED: 'rejected',
 });
 
-export default applicationStatuses;
+export default ApplicationStatuses;

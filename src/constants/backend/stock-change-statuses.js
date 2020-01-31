@@ -1,8 +1,8 @@
-const stockChangeStatuses = Object.freeze({
-  carriedOut: 'carried_out',
-  pending: 'pending',
-  readyForPickup: 'ready_for_pickup',
-  rejected: 'rejected',
+const StockChangeStatuses = Object.freeze({
+  CARRIED_OUT: 'carried_out',
+  PENDING: 'pending',
+  READY_FOR_PICKUP: 'ready_for_pickup',
+  REJECTED: 'rejected',
 });
 
-export default stockChangeStatuses;
+export default StockChangeStatuses;

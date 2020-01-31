@@ -1,11 +1,11 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
-  import entryTypes from '@/constants/backend/timeline-entry-types.js';
-  import applicationStatuses from '@/constants/backend/application-statuses.js';
-  import projectStages from '@/constants/backend/project-lifetime-stages.js';
-  import reviewStatuses from '@/constants/backend/project-review-statuses.js';
-  import stockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
+  import EntryTypes from '@/constants/backend/timeline-entry-types.js';
+  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
+  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
+  import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
+  import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
 
   export let type;
   export let entry_time;
@@ -24,19 +24,19 @@
 
 <div class="entry">
   <div class="icon">
-    {#if type === entryTypes.application}
+    {#if type === EntryTypes.APPLICATION}
       <svg src="images/icons/file.svg" />
-    {:else if type === entryTypes.purchase}
+    {:else if type === EntryTypes.PURCHASE}
       <svg src="images/icons/shopping-bag.svg" />
-    {:else if type === entryTypes.promotion}
+    {:else if type === EntryTypes.PROMOTION}
       <svg src="images/icons/chevrons-up.svg" />
-    {:else if type === entryTypes.project}
+    {:else if type === EntryTypes.PROJECT}
       <svg src="images/icons/package.svg" />
     {/if}
   </div>
 
   <div class="content">
-    {#if type === entryTypes.application}
+    {#if type === EntryTypes.APPLICATION}
       <div class="lb">Applied for</div>
       <div class="lb">{payload.activity_name} on</div>
       <a href="/projects/{payload.project_id}" class="lb" rel="prefetch">
@@ -44,15 +44,15 @@
       </a>
       <div
         class="status"
-        class:bad="{payload.application_status === applicationStatuses.rejected}"
-        class:good="{payload.application_status === applicationStatuses.approved}"
+        class:bad="{payload.application_status === ApplicationStatuses.REJECTED}"
+        class:good="{payload.application_status === ApplicationStatuses.APPROVED}"
       >
-        {#if payload.application_status === applicationStatuses.pending}
+        {#if payload.application_status === ApplicationStatuses.PENDING}
           application awaiting approval
-        {:else if payload.application_status === applicationStatuses.rejected}
+        {:else if payload.application_status === ApplicationStatuses.REJECTED}
           application rejected
-        {:else if payload.application_status === applicationStatuses.approved}
-          {#if payload.project_stage === projectStages.finished}
+        {:else if payload.application_status === ApplicationStatuses.APPROVED}
+          {#if payload.project_stage === ProjectStages.FINISHED}
             {payload.reward} <svg src="images/innopoint-sharp.svg" class="innopoint" />
             gained{payload.feedback_id == null ? ', leave feedback to claim' : ''}
           {:else}
@@ -60,14 +60,14 @@
           {/if}
         {/if}
       </div>
-      {#if payload.application_status === applicationStatuses.approved
-        && payload.project_stage === projectStages.finished
+      {#if payload.application_status === ApplicationStatuses.APPROVED
+        && payload.project_stage === ProjectStages.FINISHED
         && payload.feedback_id == null}
         <Button isFilled classname="mt" on:click={() => dispatch('leave-feedback', payload)}>
           leave feedback
         </Button>
       {/if}
-    {:else if type === entryTypes.purchase}
+    {:else if type === EntryTypes.PURCHASE}
       <div class="lb">Purchased the</div>
       <a href="/products/{payload.product_id}" class="lb" rel="prefetch">
         {#if payload.product_type != null}
@@ -78,28 +78,28 @@
       </a>
       <div
         class="status"
-        class:bad="{payload.stock_change_status === stockChangeStatuses.rejected}"
+        class:bad="{payload.stock_change_status === StockChangeStatuses.REJECTED}"
         class:good="{
-          payload.stock_change_status === stockChangeStatuses.carriedOut
-          || payload.stock_change_status === stockChangeStatuses.readyForPickup
+          payload.stock_change_status === StockChangeStatuses.CARRIED_OUT
+          || payload.stock_change_status === StockChangeStatuses.READY_FOR_PICKUP
         }"
       >
-        {#if payload.stock_change_status === stockChangeStatuses.pending}
+        {#if payload.stock_change_status === StockChangeStatuses.PENDING}
           purchase is on its way to 319
-        {:else if payload.stock_change_status === stockChangeStatuses.rejected}
+        {:else if payload.stock_change_status === StockChangeStatuses.REJECTED}
           purchase rejected
-        {:else if payload.stock_change_status === stockChangeStatuses.readyForPickup}
+        {:else if payload.stock_change_status === StockChangeStatuses.READY_FOR_PICKUP}
           purchase ready for pickup at 319
-        {:else if payload.stock_change_status === stockChangeStatuses.carriedOut}
+        {:else if payload.stock_change_status === StockChangeStatuses.CARRIED_OUT}
           purchase delivered
         {/if}
       </div>
-    {:else if type === entryTypes.promotion}
+    {:else if type === EntryTypes.PROMOTION}
       <div class="lb">Granted moderator rights on</div>
       <a href="/projects/{payload.project_id}" class="lb" rel="prefetch">
         {payload.project_name}
       </a>
-    {:else if type === entryTypes.project}
+    {:else if type === EntryTypes.PROJECT}
       <div class="lb">Created the project</div>
       <a href="/projects/{payload.project_id}" class="lb" rel="prefetch">
         {payload.project_name}
@@ -107,19 +107,19 @@
       {#if payload.review_status != null}
         <div
           class="status"
-          class:bad="{payload.review_status === reviewStatuses.rejected}"
-          class:good="{payload.review_status === reviewStatuses.approved}"
+          class:bad="{payload.review_status === ReviewStatuses.REJECTED}"
+          class:good="{payload.review_status === ReviewStatuses.APPROVED}"
         >
-          {#if payload.review_status === reviewStatuses.pending}
+          {#if payload.review_status === ReviewStatuses.PENDING}
             project awaiting final review
-          {:else if payload.review_status === reviewStatuses.rejected}
+          {:else if payload.review_status === ReviewStatuses.REJECTED}
             activity statistics sent back for corrections
-          {:else if payload.review_status === reviewStatuses.approved}
+          {:else if payload.review_status === ReviewStatuses.APPROVED}
             activities reviewed & approved
           {/if}
         </div>
       {/if}
-      {#if payload.review_status === reviewStatuses.rejected}
+      {#if payload.review_status === ReviewStatuses.REJECTED}
         <Button isFilled href="/projects/{payload.project_id}" classname="mt">
           make corrections
         </Button>

@@ -1,7 +1,7 @@
-const reviewStatuses = Object.freeze({
-  approved: 'approved',
-  pending: 'pending',
-  rejected: 'rejected',
+const ReviewStatuses = Object.freeze({
+  APPROVED: 'approved',
+  PENDING: 'pending',
+  REJECTED: 'rejected',
 });
 
-export default reviewStatuses;
+export default ReviewStatuses;
