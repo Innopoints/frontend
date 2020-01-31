@@ -1,27 +1,55 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
-  import Entry from '@/components/profile/timeline-entry.svelte';
-  import timeline from '@/constants/profile/timeline';
+  import TimelineEntry from '@/components/profile/timeline-entry.svelte';
 
-  export let loadMore = false;
+  export let timelinePromises;
+
+  const dispatch = createEventDispatcher();
+  const dateFormatter = new Intl.DateTimeFormat('en', {
+    hour: '2-digit',
+    year: 'numeric',
+    minute: '2-digit',
+    day: '2-digit',
+    month: 'short',
+    hour12: false,
+  });
+
+  function requestMore() {
+    dispatch('more-timeline');
+  }
 </script>
 
 <div class="timeline">
-  <slot />
-  {#if timeline.length}
-    {#each timeline as entry, i (i)}
-      <Entry type={entry.type} action={entry.action} important={entry.important || false} />
+  {#if timelinePromises.length}
+    {#each timelinePromises as promise}
+      {#await promise.then(value => value.data)}
+        <div class="loading">
+          <div class="icon">
+            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          </div>
+          <p>Loading...</p>
+        </div>
+      {:then timelineFragment}
+        {#each timelineFragment as entry}
+          <TimelineEntry {...entry} {dateFormatter} on:leave-feedback />
+        {/each}
+      {/await}
     {/each}
 
-    {#if loadMore}
-      <Button classname="more btn">
-        <svg src="images/icons/more-horizontal.svg" class="icon mr-2" />
-        more
-      </Button>
-    {/if}
+    {#await Promise.all(timelinePromises).then(values => values[values.length - 1]) then lastValue}
+      {#if lastValue != null && lastValue.more}
+        <Button classname="more" on:click={requestMore}>
+          <svg src="images/icons/more-horizontal.svg" class="icon mr-2" />
+          load more
+        </Button>
+      {/if}
+    {/await}
   {:else}
     <div class="empty small">
-      <svg class="icon" src="/images/icons/list.svg" />
+      <div class="icon">
+        <svg src="/images/icons/list.svg" />
+      </div>
       <div class="title">No recent events</div>
       <div class="subtitle">How about some volunteering?</div>
     </div>

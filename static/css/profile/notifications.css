@@ -30,7 +30,7 @@
   align-items: center;
 }
 
-.notifications .section:not(:last-child) {
+.notifications .section:not(:last-of-type) {
   border-bottom: 1px solid #ddd;
 }
 
@@ -52,6 +52,12 @@
 .notifications > ul {
   padding-bottom: 1em;
   align-self: stretch;
+}
+
+.notifications .actions {
+  margin-top: 1em;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .switches {

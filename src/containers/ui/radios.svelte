@@ -13,14 +13,14 @@
   <div class="showcase">
     <RadioGroup
         name="radio0"
-        values={values}
+        values={values.map(val => ({ value: val }))}
         labels={labels}
         bind:value={currValue}
     />
     <hr />
     <RadioGroup
         name="radio1"
-        values={values}
+        values={values.map(val => ({ value: val }))}
         labelclass="label"
         labelPosition="left"
         bind:value={currValue}
@@ -30,7 +30,7 @@
     <RadioGroup
         isColor
         name="radio2"
-        values={colors}
+        values={colors.map(val => ({ value: val }))}
         classname="flex-wrap"
     />
   </div>

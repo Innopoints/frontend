@@ -64,7 +64,7 @@
               isColor
               name="variety-colors"
               classname="content"
-              values={colors}
+              values={colors.map(val => ({ value: val }))}
               value={selectedVariety.color}
               on:change={switchVariety}
             />
