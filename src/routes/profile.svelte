@@ -7,10 +7,7 @@
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
     const {
       account,
-      timeline,
-      statistics,
-      notificationSettings,
-      competences,
+      ...initialData
     } = await getInitialData(this, session, new Map([
       ['account', '/account'],
       ['timeline', `/account/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
@@ -23,11 +20,8 @@
     }
     return {
       account,
-      timeline,
-      statistics,
-      notificationSettings,
       timelineFetchedUntil,
-      competences,
+      ...initialData,
     };
   }
 </script>
