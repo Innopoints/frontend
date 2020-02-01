@@ -1815,3 +1815,131 @@ input[type="checkbox"]:checked + .chip::before {
     transform: translate(10px, 0);
   }
 }
+
+/* Date pickers -------------------------------------- */
+.date-picker .range-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: .5em 1em;
+}
+
+.date-picker .range-controls .btn {
+  padding: .5em .8em;
+}
+
+.date-picker .range-controls .btn.selected {
+  background-color: rgba(18, 120, 0, 0.12);
+}
+
+.date-picker .month-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1em;
+  border: 0 solid #ddd;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  padding: .3em 0;
+  color: #127800;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.date-picker .month-header .btn {
+  padding: .5rem;
+}
+
+.date-picker .month-header .btn .icon {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 3;
+}
+
+.date-picker .weekdays {
+  margin: 1em 1em .5em;
+  display: flex;
+}
+
+.date-picker .weekdays > .weekday {
+  color: #595959;
+  font-size: .8rem;
+  width: 14.285714285714286%;
+  text-align: center;
+}
+
+.date-picker .days {
+  display: flex;
+}
+
+.date-picker .days .day {
+  width: 14.285714285714286%;
+  /* 100% / 7 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.date-picker .days .day:last-child {
+  padding-right: 1em;
+}
+
+.date-picker .days .day:first-child {
+  padding-left: 1em;
+}
+
+.date-picker .days .day > .btn {
+  font-weight: 400;
+  font-size: .9rem;
+  color: black;
+  justify-content: center;
+  margin: 1px;
+  z-index: 2;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.date-picker .days .day.today > .btn {
+  color: #127800;
+}
+
+.date-picker .days .day.selected .btn {
+  background-color: #269a11;
+  color: white;
+}
+
+.date-picker .days .day.outside > .btn {
+  color: #888;
+}
+
+.date-picker .days .day.in-range::before {
+  background-color: rgba(18, 120, 0, 0.25);
+  content: "";
+  height: 2.25rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 1px;
+  z-index: 1;
+}
+
+.date-picker .days .day.outside.selected > .btn {
+  color: #fff;
+}
+
+.date-picker .days .day.start::before {
+  right: 0;
+  left: unset;
+  width: calc(1.125rem + 1px);
+}
+
+.date-picker .days .day.end::before {
+  left: 0;
+  right: unset;
+  width: calc(1.125rem + 1px);
+}
+
+.date-picker .days .day.start.end::before {
+  width: 0;
+}
+

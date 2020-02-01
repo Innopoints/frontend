@@ -1843,3 +1843,137 @@ input[type="checkbox"]:checked + .chip {
     }
   }
 }
+
+/* Date pickers -------------------------------------- */
+
+.date-picker {
+  .range-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: .5em 1em;
+
+    .btn {
+      padding: .5em .8em;
+
+      &.selected {
+        background-color: transparentize($main, .88);
+      }
+    }
+  }
+
+  .month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1em;
+    border: 0 solid $light-gray;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    padding: .3em 0;
+    color: $main;
+    font-weight: 500;
+    white-space: nowrap;
+
+    .btn {
+      padding: .5rem;
+
+      .icon {
+        width: 1rem;
+        height: 1rem;
+        stroke-width: 3;
+      }
+    }
+  }
+
+  .weekdays {
+    margin: 1em 1em .5em;
+    display: flex;
+
+    & > .weekday {
+      color: lighten($dark, 15%);
+      font-size: .8rem;
+      width: 14.285714285714286%;  // 100% / 7
+      text-align: center;
+    }
+  }
+
+  .days {
+    display: flex;
+
+    .day {
+      width: 14.285714285714286%;  /* 100% / 7 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      &:last-child {
+        padding-right: 1em;
+      }
+
+      &:first-child {
+        padding-left: 1em;
+      }
+
+      & > .btn {
+        font-weight: 400;
+        font-size: .9rem;
+        color: black;
+        justify-content: center;
+        margin: 1px;
+        z-index: 2;
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+
+      &.today > .btn {
+        color: $main;
+      }
+
+      &.selected .btn {
+        background-color: desaturate(lighten($main, 10%), 20%);
+        color: white;
+      }
+
+      &.outside > .btn {
+        color: $disabled;
+      }
+
+      &.in-range::before {
+        background-color: transparentize($main, .75);
+        content: "";
+        height: 2.25rem;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1px;
+        z-index: 1;
+      }
+
+      &.outside.selected > .btn {
+        color: #fff;
+      }
+
+      &.start {
+        &::before {
+          right: 0;
+          left: unset;
+          width: calc(1.125rem + 1px);
+        }
+      }
+
+      &.end {
+        &::before {
+          left: 0;
+          right: unset;
+          width: calc(1.125rem + 1px);
+        }
+      }
+
+      &.start.end::before {
+        width: 0;
+      }
+    }
+  }
+}
+
