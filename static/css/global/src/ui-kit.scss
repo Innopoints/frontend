@@ -1977,3 +1977,32 @@ input[type="checkbox"]:checked + .chip {
   }
 }
 
+/* Time pickers -------------------------------------- */
+
+.time-picker {
+  display: flex;
+  width: 6.25rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .text-field {
+    width: 3em;
+    margin: .25rem 0;
+
+    input {
+      text-align: center;
+    }
+  }
+
+  .btn {
+    padding: .35em .7em;
+  }
+
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: 3rem 3rem;
+    grid-template-rows: auto auto auto;
+    column-gap: .25rem;
+    justify-items: center;
+  }
+}

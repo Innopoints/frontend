@@ -1943,3 +1943,33 @@ input[type="checkbox"]:checked + .chip::before {
   width: 0;
 }
 
+/* Time pickers -------------------------------------- */
+.time-picker {
+  display: flex;
+  width: 6.25rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.time-picker .text-field {
+  width: 3em;
+  margin: .25rem 0;
+}
+
+.time-picker .text-field input {
+  text-align: center;
+}
+
+.time-picker .btn {
+  padding: .35em .7em;
+}
+
+@supports (display: grid) {
+  .time-picker {
+    display: grid;
+    grid-template-columns: 3rem 3rem;
+    grid-template-rows: auto auto auto;
+    column-gap: .25rem;
+    justify-items: center;
+  }
+}

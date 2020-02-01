@@ -18,6 +18,7 @@
   import Autocompletes from '@/containers/ui/autocompletes.svelte';
   import StarRatings from '@/containers/ui/star-ratings.svelte';
   import DatePickers from '@/containers/ui/date-pickers.svelte';
+  import TimePickers from '@/containers/ui/time-pickers.svelte';
 
   let m1 = false;
   let m2 = false;
@@ -52,6 +53,7 @@
     <Tabs />
     <Popovers />
     <StarRatings />
+    <TimePickers />
   </div>
   <Modals bind:m1={m1} bind:m2={m2} />
 </Layout>
