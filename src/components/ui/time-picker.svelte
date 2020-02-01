@@ -4,118 +4,66 @@
   import TextField from './text-field.svelte';
 
   export let value = { hours: null, minutes: null };
-  $: {
-    if (value == null) {
-      value = { hours: null, minutes: null };
-    }
+  if (value == null) {
+    value = { hours: null, minutes: null };
   }
   const minutesInHour = 60;
   const hoursInDay = 24;
 
   const dispatch = createEventDispatcher();
 
-  function incHours() {
-    if (value.hours == null) {
+  function setHours(hours) {
+    if (hours < 0) {
+      value.hours = hoursInDay - 1;
+    } else if (hours >= hoursInDay) {
       value.hours = 0;
     } else {
-      value.hours++;
-      if (value.hours > hoursInDay - 1) {
-        value.hours = 0;
-      }
-    }
-
-    if (value.hours != null && value.minutes != null) {
-      dispatch('change', value);
-    }
-  }
-
-  function decHours() {
-    if (value.hours == null) {
-      value.hours = 0;
-    } else {
-      value.hours--;
-      if (value.hours < 0) {
-        value.hours = hoursInDay - 1;
-      }
-    }
-
-    if (value.hours != null && value.minutes != null) {
-      dispatch('change', value);
-    }
-  }
-
-  function setHours({ detail: hours }) {
-    if (+hours >= 0 && +hours < hoursInDay) {
       value.hours = hours;
     }
 
-    if (value.hours != null && value.minutes != null) {
+    if (value.minutes != null) {
       dispatch('change', value);
     }
   }
 
-  function incMinutes() {
-    if (value.minutes == null) {
+  function setMinutes(minutes) {
+    if (minutes < 0) {
+      value.minutes = minutesInHour - 1;
+    } else if (minutes >= minutesInHour) {
       value.minutes = 0;
     } else {
-      value.minutes++;
-      if (value.minutes > minutesInHour - 1) {
-        value.minutes = 0;
-      }
-    }
-
-    if (value.hours != null && value.minutes != null) {
-      dispatch('change', value);
-    }
-  }
-
-  function decMinutes() {
-    if (value.minutes == null) {
-      value.minutes = 0;
-    } else {
-      value.minutes--;
-      if (value.minutes < 0) {
-        value.minutes = minutesInHour - 1;
-      }
-    }
-
-    if (value.hours != null && value.minutes != null) {
-      dispatch('change', value);
-    }
-  }
-
-  function setMinutes({ detail: minutes }) {
-    if (+minutes >= 0 && +minutes < minutesInHour) {
       value.minutes = minutes;
     }
 
-    if (value.hours != null && value.minutes != null) {
+    if (value.hours != null) {
       dispatch('change', value);
     }
   }
 </script>
 
 <div class="time-picker">
-  <Button isRound on:click={incHours}>
+  <Button isRound on:click={() => setHours(value.hours + 1)}>
     <svg class="icon" src="images/icons/chevron-up.svg" />
   </Button>
-  <Button isRound on:click={incMinutes}>
+  <Button isRound on:click={() => setMinutes(value.minutes + 1)}>
     <svg class="icon" src="images/icons/chevron-up.svg" />
   </Button>
   <TextField
-    type="number" isNoSpinner placeholder="23" max={23} min={0} maxlength={2}
+    type="number" isNoSpinner placeholder={hoursInDay - 1}
+    max={hoursInDay - 1} min={0} maxlength={2}
     value={value && value.hours != null ? ('' + value.hours).padStart(2, '0') : ''}
-    on:change={setHours}
+    on:change={({ detail: hours }) => setHours(+hours)}
   />
   <TextField
-    type="number" isNoSpinner placeholder="59" max={59} min={0} maxlength={2}
+    type="number" isNoSpinner placeholder={minutesInHour - 1}
+    max={minutesInHour - 1} min={0} maxlength={2}
     value={value && value.minutes != null ? ('' + value.minutes).padStart(2, '0') : ''}
-    on:change={setMinutes}
+    on:change={({ detail: minutes }) => setMinutes(+minutes)}
   />
-  <Button isRound on:click={decHours}>
+  <Button isRound on:click={() => setHours(value.hours - 1)}>
     <svg class="icon" src="images/icons/chevron-down.svg" />
   </Button>
-  <Button isRound on:click={decMinutes}>
+  <Button isRound on:click={() => setMinutes(value.minutes - 1)}>
     <svg class="icon" src="images/icons/chevron-down.svg" />
   </Button>
 </div>
