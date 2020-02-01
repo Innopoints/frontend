@@ -17,6 +17,7 @@
   import Popovers from '@/containers/ui/popovers.svelte';
   import Autocompletes from '@/containers/ui/autocompletes.svelte';
   import StarRatings from '@/containers/ui/star-ratings.svelte';
+  import DatePickers from '@/containers/ui/date-pickers.svelte';
 
   let m1 = false;
   let m2 = false;
@@ -36,6 +37,7 @@
   <div class="material">
     <Buttons />
     <TextFields />
+    <DatePickers />
     <Radios />
     <Checkboxes />
     <Switches />
