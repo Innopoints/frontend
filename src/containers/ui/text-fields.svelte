@@ -37,6 +37,7 @@
         title="Name"
         subtitle="This field is to write the name, so please do."
         required
+        error="Must be unique."
       >
         <TextField id="ff-1" />
       </FormField>

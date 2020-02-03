@@ -630,7 +630,11 @@ button.btn {
     color: $main;
   }
 
-  .text-field + .required {
+  .helper.error {
+    color: $danger;
+  }
+
+  .text-field + .helper {
     padding-left: 10px;
     margin: 5px 0 0 0;
     font-size: .8rem;
