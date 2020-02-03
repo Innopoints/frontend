@@ -1,5 +1,5 @@
 <script>
-  import rippleEffect from './utils/ripple';
+  import rippleEffect from './utils/ripple.js';
 
   export let classname = '';
   export let isFilled = false;
