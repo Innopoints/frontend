@@ -10,8 +10,8 @@
 </script>
 
 <label class="file-input">
-  <div class="handle" use:ripple>
   <input type="file" on:change {disabled} {...additionalProps} />
+  <div class="handle" use:ripple={{ disabled }}>
     <svg src="/images/icons/image.svg" class="icon mr" />
     upload cover image
   </div>
