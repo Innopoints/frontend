@@ -41,19 +41,27 @@ h2 {
   }
 }
 
+@keyframes height-increase {
+  from {
+    height: 3.125em;
+  }
+
+  to {
+    height: 13.5em;
+  }
+}
+
 .steps-navigation .dropdown {
   top: 1em;
   margin-top: 0;
-  height: 3.125em;
   width: 100% !important;
   box-shadow: $shadow-raised;
-  transition: height 200ms;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 100000;
 
   .btn {
-    width: 100%;
     border-radius: 0;
     padding-left: 1.5em;
     text-align: center;
@@ -75,7 +83,12 @@ h2 {
 }
 
 .steps-navigation.dropdown-shell.open .dropdown {
-  height: 13.5em;
+  // height: 13.5em;
+  animation-name: height-increase;
+  animation-duration: 150ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 form > .actions {
