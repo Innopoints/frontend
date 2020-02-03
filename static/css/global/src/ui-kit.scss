@@ -2006,3 +2006,43 @@ input[type="checkbox"]:checked + .chip {
     justify-items: center;
   }
 }
+
+/* File inputs -------------------------------------- */
+
+.file-input {
+  input {
+    @include hide-accessible;
+  }
+
+  .handle {
+    font-weight: 500;
+    color: $main;
+    padding: .8em 1.1em;
+    border-radius: 1.5625em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .ripple {
+      background: transparentize($main, .9);
+    }
+  }
+
+  input:not(:disabled) + .handle:hover {
+    background: transparentize($main, .95);
+  }
+
+  input:focus:not(:disabled) + .handle {
+    background-color: transparentize($main, .88);
+  }
+
+  input:disabled + .handle {
+    color: $disabled;
+    background-color: transparent;
+    cursor: default;
+
+    & > svg {
+      stroke: $disabled;
+    }
+  }
+}
