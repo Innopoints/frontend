@@ -1,92 +1,114 @@
 <script>
-  import { fade } from 'svelte/transition';
-  import { onMount } from 'svelte';
-
+  import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import DraftCard from '@/components/projects/new/draft-card.svelte';
-  import {drafts, getDrafts, createProject} from '@/store/new-project';
-  onMount(getDrafts);
+  import {
+    getBlankProject,
+    getOlympiad,
+    getStudentParty,
+  } from '@/constants/projects/project-templates.js';
 
-  const create = e => {
-    e.preventDefault();
-    createProject();
-  };
+  export let drafts;
+  let shownDraftIndex = 0;
+  $: {
+    shownDraftIndex = Math.min(shownDraftIndex, drafts.length - 1);
+  }
 
-  $: rangeLen = $drafts.length;
-  let range = {start: 0, end: 1};
-  const next = () => {
-    if (range.start + 1 >= rangeLen) range.start = 0;
-    else range.start++;
+  const dispatch = createEventDispatcher();
 
-    if (range.end + 1 >= rangeLen) range.end = 0;
-    else range.end++;
-  };
-  const prev = () => {
-    if (range.start - 1 < 0) range.start = rangeLen - 1;
-    else range.start--;
+  function showPrevDraft() {
+    if (shownDraftIndex > 0) {
+      shownDraftIndex--;
+    }
+  }
 
-    if (range.end - 1 < 0) range.end = rangeLen - 1;
-    else range.end--;
-  };
+  function showNextDraft() {
+    if (shownDraftIndex + 1 < drafts.length) {
+      shownDraftIndex++;
+    }
+  }
 </script>
 
-<div class="left" transition:fade={{duration:200}}>
+<div class="left">
   <h1>Create a Project</h1>
   <div class="subtitle">
     Unleash your creative genius — we're here to help you!
   </div>
-  <img class="illustration" src="/images/create-project/create-project.svg" alt="">
+  <img class="illustration" src="/images/create-project/create-project.svg" alt="" />
 </div>
 
-<div class="right" transition:fade={{duration:200}}>
+<div class="right">
   <h2>Starting Point</h2>
 
-  {#if $drafts.length > 0}
+  {#if drafts.length > 0}
     <section class="drafts">
       You could continue from one of your drafts:
       <div class="cards">
-        {#if $drafts.length > 2}
-          <Button classname="btn round tablet" on:click={prev}>
-            <svg src="/images/icons/chevron-left.svg" />
+        {#if drafts.length > 1}
+          <Button
+            isRound
+            classname="tablet"
+            on:click={showPrevDraft}
+            disabled={shownDraftIndex === 0}
+          >
+            <svg class="icon" src="/images/icons/chevron-left.svg" />
           </Button>
         {/if}
-        {#each $drafts as draft, i}
-          {#if i === range.start || i === range.end}
-            <DraftCard title={draft.name} date={draft.creationTime} />
-          {/if}
-        {/each}
-        {#if $drafts.length > 2}
-          <Button classname="btn round tablet" on:click={next}>
-            <svg src="/images/icons/chevron-right.svg" />
+        <DraftCard draft={drafts[shownDraftIndex]} on:delete-draft on:load-draft />
+        {#if drafts.length > 1}
+          <Button
+            isRound
+            classname="tablet"
+            on:click={showNextDraft}
+            disabled={shownDraftIndex + 1 === drafts.length}
+          >
+            <svg class="icon" src="/images/icons/chevron-right.svg" />
           </Button>
         {/if}
       </div>
-      <nav class="mobile">
-        <Button isRound on:click={prev}>
-          <svg src="/images/icons/chevron-left.svg" />
-        </Button>
-        <Button isRound on:click={next}>
-          <svg src="/images/icons/chevron-right.svg" />
-        </Button>
-      </nav>
+      {#if drafts.length > 1}
+        <nav class="mobile">
+          <Button
+            isRound
+            on:click={showPrevDraft}
+            disabled={shownDraftIndex === 0}
+          >
+            <svg class="icon" src="/images/icons/chevron-left.svg" />
+          </Button>
+          <Button
+            isRound
+            on:click={showNextDraft}
+            disabled={shownDraftIndex + 1 === drafts.length}
+          >
+            <svg class="icon" src="/images/icons/chevron-right.svg" />
+          </Button>
+        </nav>
+      {/if}
+    </section>
+  {:else}
+    <section class="no-drafts">
+      Your drafts will appear here.
+      <div class="clarification">
+        The projects are auto-saved so you may always continue your work.
+      </div>
     </section>
   {/if}
 
   <section class="templates">
     Jumpstart your project with a template:
     <div class="actions">
-      <Button on:click={create} href="/projects/new?step=1" isOutline isRectangle>
+      <Button on:click={() => dispatch('project-start', getOlympiad())} isOutline isRectangle>
         <svg src="/images/icons/award.svg" class="icon mr" />
         Olympiad
       </Button>
-      <Button on:click={create} href="/projects/new?step=1" isOutline isRectangle>
+      <Button on:click={() => dispatch('project-start', getStudentParty())} isOutline isRectangle>
         <svg src="/images/icons/speaker.svg" class="icon mr" />
         Student Party
       </Button>
     </div>
     Or start completely from scratch:
     <div class="actions">
-      <Button on:click={create} href="/projects/new?step=1" isOutline isRectangle>
+      <Button on:click={() => dispatch('project-start', getBlankProject())} isOutline isRectangle>
         <svg src="/images/icons/package.svg" class="icon mr" />
         Blank Project
       </Button>
