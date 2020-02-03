@@ -597,7 +597,11 @@ button.btn {
   color: #127800;
 }
 
-.form-field .text-field + .required {
+.form-field .helper.error {
+  color: #ab0303;
+}
+
+.form-field .text-field + .helper {
   padding-left: 10px;
   margin: 5px 0 0 0;
   font-size: .8rem;
