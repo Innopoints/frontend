@@ -23,6 +23,8 @@
   import StepTwo from '@/containers/projects/new/step-2.svelte';
   import StepThree from '@/containers/projects/new/step-3.svelte';
   import * as api from '@/utils/api.js';
+  import generateQueryString from '@/utils/generate-query-string.js';
+  import { filterProjectFields } from './_project-manipulation.js';
 
   const { page, session } = stores();
 
@@ -31,16 +33,13 @@
   $session.user = account;
 
   let project = writable(null);
+  let autosaved = writable(false);
+  let lastSyncedName = null;
   const unsubscribe = project.subscribe(saveProject);
   onDestroy(unsubscribe);
   let errors = {
     name: {
       duplicate: false,
-      tooShort: false,
-    },
-    image: {
-      inappropriateFile: false,
-      uploadFailed: false,
     },
   };
 
@@ -79,26 +78,58 @@
         return;
       }
 
-      $project = await resp.json();
+      const draftProject = await resp.json();
+      lastSyncedName = draftProject.name;
+      $project = draftProject;
       goToStep(1);
     } catch (e) {
       console.error(e);
     }
   }
 
-  function saveProject(project) {
+  async function saveProject(project) {
     if (project == null || project.name == null) {
       return;
     }
 
-    if (project.name === '') {
-      errors.nameTooShort = true;
+    if (project.name === '' || project.organizer === '') {
       return;
     }
-    errors.nameTooShort = false;
 
+    if (project.name !== lastSyncedName) {
+      const queryString = generateQueryString(new Map([['name', project.name]]));
+      const nameAvailable = await api.get('/projects/name_available?' + queryString);
+      if (!nameAvailable.ok) {
+        if (nameAvailable.status === 400) {
+          console.error(await nameAvailable.json());
+        } else {
+          console.error(await nameAvailable.text());
+        }
+        return;
+      }
 
-    console.log('saving', project);
+      if (!(await nameAvailable.json())) {
+        errors.name.duplicate = true;
+        return;
+      } else {
+        errors.name.duplicate = false;
+      }
+    }
+
+    lastSyncedName = project.name;
+
+    if (project.id != null) {
+      const resp = await api.patch('/projects/' + project.id, {
+        data: filterProjectFields(project, true),
+      });
+      if (resp.ok) {
+        autosaved.set(true);
+      } else if (resp.status === 400) {
+        console.error(await resp.json());
+      } else {
+        console.error(await resp.text());
+      }
+    }
   }
 </script>
 
@@ -127,12 +158,8 @@
         this={stepComponents[step]}
         {project}
         {errors}
+        {autosaved}
       />
     {/if}
   </div>
 </Layout>
-
-<!-- on:error={handleError}
-on:error-resolved={handleErrorResolved}
-on:sync-project={(e) => project = e.detail}
-on:field-change={handleFieldChange} -->

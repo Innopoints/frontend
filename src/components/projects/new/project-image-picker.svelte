@@ -6,7 +6,7 @@
 
   const maxSizeMB = 16;
 
-  export let value;
+  export let value = null;
   let promise = null;
   let dataURL = null;
   let error = null;
