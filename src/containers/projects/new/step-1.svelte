@@ -70,5 +70,5 @@
     />
   </FormField>
 
-  <BottomNavigation />
+  <BottomNavigation step={1} />
 </form>
