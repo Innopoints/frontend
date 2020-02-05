@@ -3,7 +3,7 @@
   export let titleclass = '';
   export let subtitleclass = '';
   export let requiredclass = '';
-  export let wrapperclass = '';
+  export let wrapperclass = 'text-field-wrapper';
   export let errorclass = '';
 
   export let title = '';
@@ -31,7 +31,7 @@
       {/if}
     </slot>
   </label>
-  <div class="text-field-wrapper {wrapperclass}">
+  <div class={wrapperclass}>
     <slot />
     {#if error}
       <span class="helper error {errorclass}">{error}</span>
