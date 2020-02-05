@@ -7,23 +7,19 @@
 
   export let name = '';
   export let disabled = false;
-  export let label;
+  export let label = null;
   export let value = false;
 </script>
 
-<style>
-  .switch {
-    margin-left: 1em;
-  }
-</style>
-
 <label class="switch-wrapper clickable {classname}">
-  {#if labelclass !== null}
-    <span class={labelclass}>
+  {#if label != null}
+    {#if labelclass !== null}
+      <span class={labelclass}>
+        {label}
+      </span>
+    {:else}
       {label}
-    </span>
-  {:else}
-    {label}
+    {/if}
   {/if}
 
   <input
@@ -36,7 +32,7 @@
     {disabled}
   />
 
-  <div class="switch {switchclass}">
+  <div class="switch {label == null ? switchclass : switchclass + ' ml-2'}">
     <div class="knob {knobclass}" />
   </div>
 </label>
