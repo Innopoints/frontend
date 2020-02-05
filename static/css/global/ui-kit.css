@@ -324,6 +324,14 @@ hr[data-text]::after {
   padding: .7em;
 }
 
+.btn.small {
+  padding: .5em .8em;
+}
+
+.btn.selected:not(.filled) {
+  background-color: rgba(18, 120, 0, 0.12);
+}
+
 .btn > svg {
   stroke: #127800;
 }
@@ -1825,14 +1833,6 @@ input[type="checkbox"]:checked + .chip::before {
   display: flex;
   justify-content: space-between;
   padding: .5em 1em;
-}
-
-.date-picker .range-controls .btn {
-  padding: .5em .8em;
-}
-
-.date-picker .range-controls .btn.selected {
-  background-color: rgba(18, 120, 0, 0.12);
 }
 
 .date-picker .month-header {

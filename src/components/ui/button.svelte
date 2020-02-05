@@ -8,6 +8,8 @@
   export let isRound = false;
   export let isNormal = false;
   export let isRectangle = false;
+  export let isSmall = false;
+  export let isSelected = false;
 
   if (isFilled + isOutline > 1) {
     throw new Error('A button may not be filled and outlined at the same time.');
@@ -15,6 +17,10 @@
 
   if (isDanger + isNormal > 1) {
     throw new Error('A button may not be danger and normal at the same time.');
+  }
+
+  if (isFilled + isSelected > 1) {
+    throw new Error('A button may not be filled and selected at the same time.');
   }
 
   export let disabled = false;
@@ -32,6 +38,8 @@
     isRound && 'round',
     isNormal && 'normal',
     isRectangle && 'rectangle',
+    isSmall && 'small',
+    isSelected && 'selected',
   ].filter(v => v !== false);
 </script>
 
