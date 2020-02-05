@@ -348,6 +348,14 @@ hr {
     padding: .7em;
   }
 
+  &.small {
+    padding: .5em .8em;
+  }
+
+  &.selected:not(.filled) {
+    background-color: transparentize($main, .88);
+  }
+
   & > svg {
     stroke: $main;
   }
@@ -1855,14 +1863,6 @@ input[type="checkbox"]:checked + .chip {
     display: flex;
     justify-content: space-between;
     padding: .5em 1em;
-
-    .btn {
-      padding: .5em .8em;
-
-      &.selected {
-        background-color: transparentize($main, .88);
-      }
-    }
   }
 
   .month-header {

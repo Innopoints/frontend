@@ -129,18 +129,20 @@
   {#if range}
     <div class="range-controls {rangecontrolsclass}">
       <Button
-        classname={selectingStart ? 'selected' : ''}
+        isSmall
+        isSelected={selectingStart}
         on:click={() => selectingStart = true}
       >
         start date
       </Button>
       <Button
-        classname={!selectingStart ? 'selected' : ''}
+        isSmall
+        isSelected={!selectingStart}
         on:click={() => selectingStart = false}
       >
         end date
       </Button>
-      <Button isDanger on:click={clearSelection}>clear</Button>
+      <Button isDanger isSmall on:click={clearSelection}>clear</Button>
     </div>
   {/if}
   <div class="calendar {calendarclass}">
