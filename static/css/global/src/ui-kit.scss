@@ -2011,6 +2011,33 @@ input[type="checkbox"]:checked + .chip {
   }
 }
 
+/* Datetime pickers -------------------------------------- */
+
+.date-time-picker {
+  .mode-switch {
+    display: flex;
+    justify-content: space-between;
+    margin: .5em 1em;
+  }
+
+  .time-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: .5em 1em .5em 1.5em;
+
+    & > .icon {
+      stroke: $main;
+      margin-right: 1em;
+    }
+
+    & > .btn {
+      align-self: center !important;
+      margin-left: .5em;
+    }
+  }
+}
+
 /* File inputs -------------------------------------- */
 
 .file-input {

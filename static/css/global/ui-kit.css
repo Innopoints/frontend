@@ -1978,6 +1978,30 @@ input[type="checkbox"]:checked + .chip::before {
   }
 }
 
+/* Datetime pickers -------------------------------------- */
+.date-time-picker .mode-switch {
+  display: flex;
+  justify-content: space-between;
+  margin: .5em 1em;
+}
+
+.date-time-picker .time-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: .5em 1em .5em 1.5em;
+}
+
+.date-time-picker .time-wrapper > .icon {
+  stroke: #127800;
+  margin-right: 1em;
+}
+
+.date-time-picker .time-wrapper > .btn {
+  align-self: center !important;
+  margin-left: .5em;
+}
+
 /* File inputs -------------------------------------- */
 .file-input input {
   clip: rect(0, 0, 0, 0);
