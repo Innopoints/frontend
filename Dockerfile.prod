@@ -1,0 +1,21 @@
+FROM node:12
+
+RUN mkdir -p /app
+WORKDIR /app
+
+# copy the project code
+COPY src /app/src
+COPY static /app/static
+COPY .env .eslintrc package.json package-lock.json rollup.config.js /app/
+
+# install our dependencies
+RUN npm install
+
+# Build the project
+RUN npm run build
+
+# expose the server port
+EXPOSE 3000
+
+# define the default command to run when starting the container
+CMD ["npm", "start"]
