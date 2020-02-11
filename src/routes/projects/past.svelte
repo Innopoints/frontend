@@ -6,6 +6,7 @@
       ['account', '/account?from_cache=true'],
       ['projects', `/projects/past`],
     ]));
+    if (projects == null) projects = { data: [], pages: 0};
     return { projects: projects.data, pages: projects.pages, account };
   }
 </script>
