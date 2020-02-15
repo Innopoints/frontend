@@ -6,7 +6,7 @@
   import TextField from 'ui/text-field.svelte';
 
   export let project;
-  export let errors;
+  export let duplicateName;
   export let autosaved;
 </script>
 
@@ -23,7 +23,7 @@
     id="name"
     required
     error={
-         (errors.name.duplicate && "The name must be unique.")
+         (duplicateName && "The name must be unique.")
       || ($project.name === '' && "The name must not be empty.")
       || null
     }
@@ -70,5 +70,5 @@
     />
   </FormField>
 
-  <BottomNavigation step={1} />
+  <BottomNavigation step={1} error={!($project.name && $project.organizer) ? 1 : null} />
 </form>

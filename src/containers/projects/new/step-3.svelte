@@ -8,6 +8,8 @@
   export let project;
   export let autosaved;
 
+  console.log($project.activities);
+
   function userToAutocompleteValue(user) {
     return {
       name: user.full_name,
@@ -89,5 +91,12 @@
   </p>
   <span class="label">Search for people</span>
   <Autocomplete values={values} getOptions={getUsers} on:change={recordChanges} />
-  <BottomNavigation step={3} />
+  <BottomNavigation
+    step={3}
+    error={
+      !($project.name && $project.organizer) ? 1 :
+        ($project.activities.filter(act => !act.internal).length === 0 ? 2 : null)
+    }
+    on:publish
+  />
 </form>
