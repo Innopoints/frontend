@@ -15,7 +15,7 @@
   </div>
   <div class="panel">
     <div class="user-selection">
-      <Autocomplete bind:values={users} getOptions={getUsers} />
+      <Autocomplete bind:selection={users} getOptions={getUsers} />
       <p>You may select several people for a certain operation.</p>
     </div>
     <div class="operations">

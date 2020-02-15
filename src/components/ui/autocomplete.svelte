@@ -16,7 +16,7 @@
   export let loadbuttonclass = '';
 
   export let getOptions;
-  export let values = [];
+  export let selection = [];
   export let minSearchLength = 3;
   export let maxOptions = null;
 
@@ -33,7 +33,7 @@
   let optionGen;
   let promises = [];
   let hasMoreOptions;
-  let selected = new Set(values.map(opt => opt.name));
+  let selected = new Set(selection.map(opt => opt.name));
 
   let dropdown;
   let input;
@@ -68,8 +68,8 @@
   }
 
   function selectValue(option) {
-    values.push(option);
-    values = values;
+    selection.push(option);
+    selection = selection;
     selected.add(option.name);
     promises = [];
     input.value = searchQuery = '';
@@ -77,7 +77,7 @@
   }
 
   function deleteValue(option) {
-    values = values.filter(x => x !== option);
+    selection = selection.filter(x => x !== option);
     selected.delete(option.name);
   }
 </script>
@@ -91,7 +91,7 @@
 </style>
 
 <div class:focus class="autocomplete-field {classname}">
-  {#each values as loopValue (loopValue.name)}
+  {#each selection as loopValue (loopValue.name)}
     <div class="chip {chipclass}">
       {loopValue.name}
       <Button isNormal isRound on:click={() => deleteValue(loopValue)}>
@@ -112,12 +112,12 @@
       bind:this={input}
       class={inputclass}
     />
-    {#if maxOptions !== null && values.length >= maxOptions}
+    {#if maxOptions !== null && selection.length >= maxOptions}
       <p class="limit-reached {toomanyclass}">
         At most {itemAmount(maxOptions, 'option')} can be selected.
       </p>
     {:else if searchQuery.length < minSearchLength}
-      {#if values.length === 0}
+      {#if selection.length === 0}
         <p class="not-enough-input {notenoughclass}">
           Type {itemAmount(minSearchLength, 'character')} to search
         </p>
