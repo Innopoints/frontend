@@ -21,7 +21,7 @@
             <svg slot="icon" src="/images/icons/user.svg" class="icon" />
             {review.organizer}
           </Labeled>
-          <Button href="/projects">
+          <Button href="/projects/{review.id}">
             review
             <svg src="/images/icons/arrow-right.svg" class="icon ml" />
           </Button>

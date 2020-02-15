@@ -2,14 +2,15 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, purchases } = await getInitialData(this, session, new Map([
+    const { account, purchases, reviews } = await getInitialData(this, session, new Map([
       ['account', '/account'],
       ['purchases', '/stock_changes/for_review'],
+      ['reviews', '/projects/for_review'],
     ]));
     if (account == null) {
       this.error(403, 'Dashboard');
     }
-    return { account, purchases };
+    return { account, purchases, reviews };
   }
 </script>
 
@@ -18,7 +19,7 @@
   import Reviews from '@/containers/dashboard/reviews.svelte';
   import Purchases from '@/containers/dashboard/purchases.svelte';
   import InnopointTransfer from '@/containers/dashboard/innopoint-transfer.svelte';
-  import reviews from '@/constants/dashboard/review';
+  export let reviews;
   export let account;
   export let purchases;
 </script>
