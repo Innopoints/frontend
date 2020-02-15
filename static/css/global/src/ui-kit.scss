@@ -638,14 +638,22 @@ button.btn {
     color: $main;
   }
 
-  .helper.error {
-    color: $danger;
+  .helper {
+    margin-top: 5px;
+    font-size: .8rem;
+    display: block;
+
+    &.error {
+      color: $danger;
+    }
   }
 
   .text-field + .helper {
-    padding-left: 10px;
-    margin: 5px 0 0 0;
-    font-size: .8rem;
+    margin-left: 10px;
+  }
+
+  .dropdown-shell + .helper {
+    margin-left: 1.1em;
   }
 
   .text-field-wrapper .text-field {

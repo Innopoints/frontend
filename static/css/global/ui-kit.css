@@ -605,14 +605,22 @@ button.btn {
   color: #127800;
 }
 
+.form-field .helper {
+  margin-top: 5px;
+  font-size: .8rem;
+  display: block;
+}
+
 .form-field .helper.error {
   color: #ab0303;
 }
 
 .form-field .text-field + .helper {
-  padding-left: 10px;
-  margin: 5px 0 0 0;
-  font-size: .8rem;
+  margin-left: 10px;
+}
+
+.form-field .dropdown-shell + .helper {
+  margin-left: 1.1em;
 }
 
 .form-field .text-field-wrapper .text-field {

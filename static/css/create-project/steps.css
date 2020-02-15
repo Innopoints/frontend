@@ -359,6 +359,10 @@ h2 {
   }
 }
 
+.step2 h2 {
+  margin-bottom: 1em;
+}
+
 .step2 nav.dropdown-shell {
   margin-bottom: 1em;
 }
