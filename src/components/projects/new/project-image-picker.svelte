@@ -24,7 +24,7 @@
     const formData = new FormData();
     formData.append('file', file);
 
-    promise = api.post('/file/project', {
+    promise = api.post('/file', {
       data: formData,
     });
 

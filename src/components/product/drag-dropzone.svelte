@@ -51,7 +51,7 @@
 
       const formData = new FormData();
       formData.append('file', file);
-      let promise = api.post('/file/product', {
+      let promise = api.post('/file', {
         data: formData,
       });
       let placementIndex = images.length;
