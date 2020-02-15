@@ -5,7 +5,6 @@
   import EditActivity from '@/components/projects/new/edit-activity.svelte';
   import ActivityCard from '@/components/projects/new/activity.svelte';
   import Button from 'ui/button.svelte';
-  // import { filterProjectFields } from '@/utils/project-manipulation.js';
   import getBlankActivity from '@/constants/projects/blank-activity.js';
   import activityTypes from '@/constants/projects/activity-internal-types.js';
   import { copyActivity, filterActivityFields } from '@/utils/project-manipulation.js';
@@ -126,11 +125,12 @@
   }
 
   function deleteActivity({ detail: activity }) {
-    if (activity.id != null) {
-      activityList = activityList.filter(act => act.id !== activity.id);
-      dispatch('delete-activity', activity.id);
-    } else {
-      activityList = activityList.filter(act => act.name !== activity.name);
+    activityList = activityList.filter(act => act.name !== activity.name);
+    dispatch('delete-activity', activity.id || activity.name);
+    if (activityList.length === 0) {
+      let activity = getBlankActivity();
+      activity._type = activityTypes.NEW;
+      activityList.push(activity);
     }
   }
 
@@ -187,5 +187,8 @@
     add another activity
   </Button>
 
-  <BottomNavigation step={2} />
+  <BottomNavigation
+    step={2}
+    error={$project.activities.filter(act => !act.internal).length === 0 ? 2 : null}
+  />
 </form>

@@ -40,11 +40,7 @@
   let lastSyncedName = null;
   const unsubscribe = project.subscribe(saveProject);
   onDestroy(unsubscribe);
-  let errors = {
-    name: {
-      duplicate: false,
-    },
-  };
+  let duplicateName = false;
 
   // Step management
   $: step = ($project != null ? +$page.query.step || 0 : 0);
@@ -125,11 +121,13 @@
       }
 
       if (!(await nameAvailable.json())) {
-        errors.name.duplicate = true;
+        duplicateName = true;
         return;
       } else {
-        errors.name.duplicate = false;
+        duplicateName = false;
       }
+    } else {
+      duplicateName = false;
     }
 
     lastSyncedName = projectObj.name;
@@ -157,6 +155,19 @@
       } else {
         console.error(await resp.text());
       }
+    }
+  }
+
+  async function publishProject() {
+    const resp = await api.patch(`/projects/${$project.id}/publish`);
+    if (!resp.ok) {
+      if (resp.status === 400) {
+        console.error(await resp.json());
+      } else {
+        console.error(await resp.text());
+      }
+    } else {
+      goto('/projects');
     }
   }
 
@@ -247,8 +258,10 @@
         // Do not delete the activity if the backend responded with an error
         return;
       }
+      $project.activities = $project.activities.filter(act => act.id !== activityID);
+    } else {
+      $project.activities = $project.activities.filter(act => act.name !== activityID);
     }
-    $project.activities = $project.activities.filter(act => act.id !== activityID);
   }
 </script>
 
@@ -275,7 +288,7 @@
     {:else if step === 1}
       <StepOne
         {project}
-        {errors}
+        {duplicateName}
         {autosaved}
       />
     {:else if step === 2}
@@ -290,6 +303,7 @@
       <StepThree
         {project}
         {autosaved}
+        on:publish={publishProject}
       />
     {/if}
   </div>

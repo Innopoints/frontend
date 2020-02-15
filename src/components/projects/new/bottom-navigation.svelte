@@ -1,13 +1,20 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
+
   export let step;
+  export let error = null;
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <div class="actions padded">
   <p class="error">
-    Some required fields are still empty :c
-    {#if step === 3}
-      <Button classname="ml" on:click={console.log('where?')}>where?</Button>
+    {#if error != null}
+      Some required fields are still empty :c
+      {#if step === 3}
+        <Button classname="ml" href="/projects/new?step={error}">where?</Button>
+      {/if}
     {/if}
   </p>
   {#if step > 1}
@@ -22,7 +29,7 @@
       next step
     </Button>
   {:else if step === 3}
-    <Button isFilled disabled>
+    <Button isFilled disabled={error != null} on:click={() => dispatch('publish')}>
       create project
     </Button>
   {/if}
