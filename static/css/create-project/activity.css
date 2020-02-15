@@ -3,17 +3,9 @@
   padding: 1em;
 }
 
-.activity .drag-handle {
-  stroke: #888;
-  cursor: move;
-  position: absolute;
-  top: 1em;
-  right: 1em;
-}
-
 .activity .title {
   font-weight: 500;
-  padding: .5em 2em .5em .5em;
+  padding: .5em;
 }
 
 .activity .parameters {
@@ -74,7 +66,6 @@
 
 @media only screen and (min-width: 640px) {
   .activity {
-    padding-left: 1.8em;
     padding-bottom: .6em;
   }
   .activity .drag-handle {
