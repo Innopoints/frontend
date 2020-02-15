@@ -1,10 +1,26 @@
+<script context="module">
+  import getInitialData from '@/utils/get-initial-data.js';
+
+  export async function preload(page, session) {
+    const { account, purchases } = await getInitialData(this, session, new Map([
+      ['account', '/account'],
+      ['purchases', '/stock_changes/for_review'],
+    ]));
+    if (account == null) {
+      this.error(403, 'Dashboard');
+    }
+    return { account, purchases };
+  }
+</script>
+
 <script>
-  import Layout from '@/layouts/auth.svelte';
+  import Layout from '@/layouts/default.svelte';
   import Reviews from '@/containers/dashboard/reviews.svelte';
   import Purchases from '@/containers/dashboard/purchases.svelte';
   import InnopointTransfer from '@/containers/dashboard/innopoint-transfer.svelte';
   import reviews from '@/constants/dashboard/review';
-  import purchases from '@/constants/dashboard/purchases';
+  export let account;
+  export let purchases;
 </script>
 
 <svelte:head>
@@ -16,7 +32,7 @@
   <link rel="stylesheet" href="/css/page-components/empty-state.css" />
 </svelte:head>
 
-<Layout title="Dashboard" adminsOnly>
+<Layout user={account}>
   <h1 class="padded">Dashboard</h1>
   <div class="cards padded">
     <Reviews {reviews} />

@@ -202,7 +202,7 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material">
     <h1 class="padded">Create a Product</h1>
     <main class="padded">

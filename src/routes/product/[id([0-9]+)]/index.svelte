@@ -118,7 +118,7 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material">
     <main class="product">
       <Button href="/store" classname="back">

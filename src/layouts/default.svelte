@@ -2,6 +2,7 @@
   import { stores } from '@sapper/app';
   import Header from '@/components/header.svelte';
   import Footer from '@/components/footer.svelte';
+  export let user = null;
 
   const { page } = stores();
 </script>
@@ -12,7 +13,7 @@
   <link rel="stylesheet" href="/css/page-components/footer.css" />
 </svelte:head>
 
-<Header isProfile={(/^\/(?:profile|dashboard)/).test($page.path)} />
+<Header {user} isProfile={(/^\/(?:profile|dashboard)/).test($page.path)} />
 
 <slot />
 

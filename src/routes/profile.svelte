@@ -132,7 +132,7 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material">
     <Info {account} on:username-change={changeUsername} />
     <section class="card">

@@ -1,11 +1,10 @@
 <script>
-  import { stores } from '@sapper/app';
   import Button from 'ui/button.svelte';
   import NotificationCenter from '@/components/common/notification-center.svelte';
   import { login, logout } from '@/utils/auth.js';
 
-  const { session } = stores();
   export let isProfile = false;
+  export let user = null;
 </script>
 
 <header class="top-level padded">
@@ -14,14 +13,14 @@
     <span class="hide-tb">Innopoints</span>
   </a>
   <div class="actions">
-    {#if $session.user == null}
+    {#if user == null}
       <Button isOutline on:click={login}>sign in</Button>
     {:else}
       <NotificationCenter />
       {#if isProfile}
-        <Button on:click={() => logout($session)}>sign out</Button>
+        <Button on:click={() => logout()}>sign out</Button>
       {:else}
-        {#if $session.user.is_admin}
+        {#if user.is_admin}
           <Button href="/dashboard" isRound>
             <svg src="images/icons/grid.svg" />
           </Button>

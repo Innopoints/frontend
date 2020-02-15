@@ -295,7 +295,7 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material">
     <h1 class="padded">Edit {product.type ? `"${product.name}" ${product.type}` : product.name}</h1>
     <main class="padded">

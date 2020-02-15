@@ -102,7 +102,7 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material">
     <Tagline isAdmin={$session.user != null && $session.user.is_admin} />
     <section class="shop padded">

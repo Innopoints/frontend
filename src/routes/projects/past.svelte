@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="css/projects/main.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material">
     <Tagline {account} />
 
