@@ -10,8 +10,8 @@
   const dispatch = createEventDispatcher();
 
   let datePickerShown = true;
-  let dateValue = null;
-  let timeValue = { hours: null, minutes: null };
+  let dateValue = value;
+  let timeValue = { hours: value && value.getHours(), minutes: value && value.getMinutes() };
 
   function combineValues() {
     if (dateValue != null && timeValue.hours != null) {
