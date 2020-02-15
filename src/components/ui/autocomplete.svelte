@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Dropdown from 'ui/dropdown.svelte';
   import Button from 'ui/button.svelte';
   import itemAmount from 'ui/utils/item-amount.js';
@@ -40,6 +41,8 @@
 
   let focus = false;
 
+  const dispatch = createEventDispatcher();
+
   function onInputFocus() {
     dropdown.toggle();
     focus = true;
@@ -70,6 +73,7 @@
   function selectValue(option) {
     values.push(option);
     values = values;
+    dispatch('change', values);
     selected.add(option.name);
     promises = [];
     input.value = searchQuery = '';
@@ -79,6 +83,7 @@
   function deleteValue(option) {
     values = values.filter(x => x !== option);
     selected.delete(option.name);
+    dispatch('change', values);
   }
 </script>
 
