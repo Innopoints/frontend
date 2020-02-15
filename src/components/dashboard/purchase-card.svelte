@@ -3,6 +3,7 @@
   import Button from 'ui/button.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
   import parseColor from '@/utils/optimal-color';
+  import { API_HOST } from '@/constants/env.js';
 
   export let purchase;
 
@@ -16,23 +17,23 @@
   };
   const copy = () => {
     if (!navigator.clipboard) alert('Browser does not support copying');
-    else navigator.clipboard.writeText(purchase.clientEmail);
+    else navigator.clipboard.writeText(purchase.account.email);
   };
 </script>
 
 <li>
   <div class="product">
     <div class="image" style={'background:' + parseColor(purchase.variety.color)}>
-      <img src={purchase.variety.image} alt="" />
+      <img src={API_HOST + purchase.variety.images[0]} alt="" />
     </div>
     <div class="product-info">
       <div class="title">
-        {purchase.name}
-        <span class="type">{purchase.type}</span>
+        {purchase.product.name}
+        <span class="type">{purchase.product.type || ''}</span>
       </div>
-      <time>{purchase.date}</time>
+      <time>{new Date(purchase.time).toLocaleString()}</time>
       <div class="purchaser">
-        Purchased by {purchase.client}
+        {(-purchase.amount)} item{purchase.amount < -1 && 's' || ''} purchased by {purchase.account.full_name}
         <span on:click={copy} class="copy-email">click to copy e-mail</span>
       </div>
       <div class="parameters">
