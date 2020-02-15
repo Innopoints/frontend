@@ -49,20 +49,12 @@
           activityListIdx++;
         }
 
-        // If the activityList cursor is on a displayed activity, there are two cases
+        // If the activityList cursor is on a displayed activity,
+        // don't change anything – it is already that same activity
         if (activityList[activityListIdx]._type === activityTypes.DISPLAY) {
-          // If the IDs of the backend activity and the activity under a cursor match,
-          // don't change anything – it is already that same activity
-          if (activity.id === activityList[activityListIdx].id) {
-            activityListIdx++;
-            activityProcessed = true;
-            break;
-          } else {
-            console.log('dont think this should ever happen');
-            activityListIdx++;
-            activityProcessed = true;
-            break;
-          }
+          activityListIdx++;
+          activityProcessed = true;
+          break;
         }
 
         // If the cursor is on a replacement marker, place the backend activity on that spot

@@ -22,7 +22,7 @@
   import StepZero from '@/containers/projects/new/step-0.svelte';
   import StepOne from '@/containers/projects/new/step-1.svelte';
   import StepTwo from '@/containers/projects/new/step-2.svelte';
-  // import StepThree from '@/containers/projects/new/step-3.svelte';
+  import StepThree from '@/containers/projects/new/step-3.svelte';
   import * as api from '@/utils/api.js';
   import generateQueryString from '@/utils/generate-query-string.js';
   import { filterProjectFields } from '@/utils/project-manipulation.js';
@@ -287,7 +287,10 @@
         on:delete-activity={processActivityDeletion}
       />
     {:else}
-      Not implemented.
+      <StepThree
+        {project}
+        {autosaved}
+      />
     {/if}
   </div>
 </Layout>

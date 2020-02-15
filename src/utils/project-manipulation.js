@@ -23,6 +23,7 @@ export function filterProjectFields(project, edit = false) {
     name: project.name,
     image_id: project.image_id,
     organizer: project.organizer,
+    moderators: project.moderators,
   };
   if (!edit) {
     filtered.activities = project.activities;
