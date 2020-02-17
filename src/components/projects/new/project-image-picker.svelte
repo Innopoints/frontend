@@ -3,8 +3,7 @@
   import FileInput from 'ui/file-input.svelte';
   import * as api from '@/utils/api.js';
   import { API_HOST } from '@/constants/env.js';
-
-  const maxSizeMB = 16;
+  import maxSizeMB from '@/constants/backend/file-upload-limit.js';
 
   export let value = null;
   let promise = null;
