@@ -170,7 +170,6 @@
           activityList[e.detail]._type = activityTypes.DISPLAY;
         }}
         on:change={(e) => {
-          console.log(JSON.parse(JSON.stringify(e.detail)));
           const copy = copyActivity(e.detail);
           e.detail._type = activityTypes.REPLACEMENT_MARKER;
           dispatch('change', {
