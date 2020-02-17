@@ -8,8 +8,6 @@
   export let project;
   export let autosaved;
 
-  console.log($project.activities);
-
   function userToAutocompleteValue(user) {
     return {
       name: user.full_name,
