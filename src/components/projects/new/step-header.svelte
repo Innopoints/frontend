@@ -9,17 +9,17 @@
   let savedTimeout = null;
 
   const unsubscribe = autosaved.subscribe(value => {
-    if (value) {
-      saved = true;
-      if (savedTimeout != null) {
-        clearTimeout(savedTimeout);
-      }
-      savedTimeout = setTimeout(() => {
-        saved = false;
-        savedTimeout = null;
-        autosaved.set(false);
-      }, 1500);
+    if (!value) {
+      return;
     }
+    
+    saved = true;
+    clearTimeout(savedTimeout);
+    savedTimeout = setTimeout(() => {
+      saved = false;
+      savedTimeout = null;
+      autosaved.set(false);
+    }, 1500);
   });
   onDestroy(unsubscribe);
 </script>
