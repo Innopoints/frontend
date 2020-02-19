@@ -12,7 +12,6 @@
 </script>
 
 <script>
-  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/projects/tagline.svelte';
   import Button from 'ui/button.svelte';
@@ -24,9 +23,6 @@
   export let account;
   export let pages;
   let currentPage = 1;
-
-  const { session } = stores();
-  $session.user = account;
 
   function filterProps(props) {
     let newProps = Object.assign({}, props);

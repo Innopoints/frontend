@@ -16,7 +16,7 @@
 
 <script>
   import { onMount } from 'svelte';
-  import { stores, prefetch, goto } from '@sapper/app';
+  import { prefetch, goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Form from '@/containers/product/edit-form.svelte';
   import PreviewCard from '@/components/product/preview-card.svelte';
@@ -26,12 +26,9 @@
   import * as api from '@/utils/api.js';
   import { getBlankProduct, getBlankVariety } from '@/constants/product/blank-product.js';
 
-  const { session } = stores();
-
   export let colors;
   export let sizes;
   export let account;
-  $session.user = account;
 
   let product = null;
   let errors = {

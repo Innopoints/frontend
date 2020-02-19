@@ -27,7 +27,6 @@
 </script>
 
 <script>
-  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Info from '@/containers/profile/info.svelte';
   import Tabs from 'ui/tabs.svelte';
@@ -37,15 +36,12 @@
   import * as api from '@/utils/api.js';
   import tabs from '@/constants/profile/tabs.js';
 
-  const { session } = stores();
-
   export let account;
   export let timeline;
   export let statistics;
   export let notificationSettings;
   export let timelineFetchedUntil;
   export let competences;
-  $session.user = account;
 
   let timelinePromises = [];
   if (timeline.data.length) {

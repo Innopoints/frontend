@@ -12,7 +12,6 @@
 </script>
 
 <script>
-  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/projects/tagline.svelte';
   import Button from 'ui/button.svelte';
@@ -25,9 +24,6 @@
   export let projects;
   export let competences;
   export let account;
-
-  const { session } = stores();
-  $session.user = account;
 
   let order = orderOptions[0];
   let orderLabel = orderLabels[0];

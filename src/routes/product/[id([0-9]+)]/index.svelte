@@ -14,7 +14,6 @@
 </script>
 
 <script>
-  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
@@ -29,11 +28,8 @@
   import { groupByColor, groupByID } from '@/utils/group-varieties.js';
   import * as api from '@/utils/api.js';
 
-  const { session } = stores();
-
   export let product;
   export let account;
-  $session.user = account;
 
   let selectedColor;
   let selectedVariety = null;
