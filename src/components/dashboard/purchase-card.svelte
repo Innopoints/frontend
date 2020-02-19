@@ -30,7 +30,7 @@
       <time>{new Date(purchase.time).toLocaleString()}</time>
       <div class="purchaser">
         {(-purchase.amount)} item{purchase.amount < -1 && 's' || ''} purchased by {purchase.account.full_name}
-        <span on:click={copy} class="copy-email">click to copy e-mail</span>
+        <a on:click={copy} href="# " class="copy-email">click to copy e-mail</a>
       </div>
       <div class="parameters">
         {#if purchase.variety.size}
