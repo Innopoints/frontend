@@ -33,7 +33,9 @@
     </ul>
   {:else}
     <div class="empty small">
-      <svg class="icon" src="/images/icons/smile.svg" />
+      <div class="icon">
+        <svg src="/images/icons/smile.svg" />
+      </div>
       <div class="title">No pending purchases!</div>
     </div>
   {/if}
