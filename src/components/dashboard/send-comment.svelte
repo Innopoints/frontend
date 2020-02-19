@@ -1,7 +1,7 @@
 <script>
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
-  import { post } from '@/utils/api';
+  import { post } from '@/utils/api.js';
 
   export let users = [];
   let success = false;
