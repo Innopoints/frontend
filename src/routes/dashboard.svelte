@@ -34,10 +34,12 @@
 </svelte:head>
 
 <Layout user={account}>
-  <h1 class="padded">Dashboard</h1>
-  <div class="cards padded material">
-    <Reviews {reviews} />
-    <Purchases {purchases} />
-    <InnopointTransfer />
+  <div class="material">
+    <h1 class="padded">Dashboard</h1>
+    <div class="cards padded">
+      <Reviews {reviews} />
+      <Purchases {purchases} />
+      <InnopointTransfer />
+    </div>
   </div>
 </Layout>
