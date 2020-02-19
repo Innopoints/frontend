@@ -6,15 +6,15 @@
   import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
 
   export let purchases = [];
-  async function setStatus(stock_change, status) {
-    await patch(`/stock_changes/${stock_change.id}/status`, {
+  async function setStatus(stockChange, status) {
+    await patch(`/stock_changes/${stockChange.id}/status`, {
       data: {
         status,
       },
     });
-    stock_change.status = status;
+    stockChange.status = status;
     if ([StockChangeStatuses.CARRIED_OUT, StockChangeStatuses.REJECTED].includes(status)) {
-      purchases = purchases.filter(purchase => purchase.id !== stock_change.id);
+      purchases = purchases.filter(purchase => purchase.id !== stockChange.id);
     }
     purchases = purchases;  // trigger an update anyways for the new status
   }
