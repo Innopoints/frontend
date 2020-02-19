@@ -12,28 +12,29 @@
   export let first = '';
   export let second = '';
   export let value = first;
+  $: value = (boolValue ? second : first);
+  export let boolValue = false;
 
-  let dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
   function onChange(evt) {
-    value = this.checked ? second : first;
+    boolValue = this.checked;
     dispatch('change', evt);
   }
 </script>
 
 <label class="clickable switch-wrapper {classname}">
   <input
-      on:change={onChange}
-      checked={value == second}
-      name={name}
-      on:focus
-      class="switch-ctl {inputclass}"
-      type="checkbox"
+    on:change={onChange}
+    checked={boolValue}
+    name={name}
+    on:focus
+    class="switch-ctl {inputclass}"
+    type="checkbox"
   />
 
   <slot name="first-state">
     <span class="state first {firstclass}">{first}</span>
   </slot>
-  <!--TODO: add scoped styles for .two-state and .ml-2 or a way to rewrite these classes -->
   <div class="two-state switch {switchclass}">
     <div class="knob {knobclass}" />
   </div>

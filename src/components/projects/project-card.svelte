@@ -7,7 +7,7 @@
 
   export let id;
   export let name;
-  export let image_url;
+  export let image_id;
   export let organizer;
   export let activities;
   $: exposedActivities = activities.filter(x => !x.internal);
@@ -17,7 +17,7 @@
 </script>
 
 <Card classname="with-image">
-  <img src={API_HOST + image_url} alt="" class="image" />
+  <img src="{API_HOST}/file/{image_id}" alt="" class="image" />
   <div class="content">
     <div class="title">{name}</div>
     <div class="compact">

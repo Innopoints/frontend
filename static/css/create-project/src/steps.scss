@@ -22,6 +22,11 @@ h2 {
     text-align: center;
   }
 
+  h2 {
+    margin-bottom: 1em;
+    margin-top: 0;
+  }
+
   .left {
     padding-left: 1em;
     padding-right: 1em;
@@ -182,6 +187,10 @@ h2 {
 }
 
 .step1 {
+  form {
+    width: 100%;
+  }
+
   .form-field {
     flex-direction: column;
     margin-top: 2em;
@@ -189,46 +198,134 @@ h2 {
     .text-field-wrapper {
       margin-top: 1em;
     }
-
-    .image-picker {
-      margin-top: 1em;
-      align-self: flex-start;
-    }
   }
 
   .image-picker {
+    margin-top: 1em;
+    align-self: flex-start;
     display: flex;
     flex-direction: column;
-  }
 
-  .image-picker:not(.selected) {
-    img, .btn.danger {
-      display: none;
-    }
-  }
-
-  .image-picker.selected {
     img {
-      border-radius: 10px;
-      width: 100%;
-      margin-bottom: .5em;
-    }
-
-    .btn.option {
-      display: none;
+      border-radius: .625rem;
+      width: calc(100% - 3em);
     }
 
     .btn.danger {
       align-self: flex-start;
+      margin-top: .5em;
 
       .icon {
         margin-right: .4em;
       }
     }
+
+    .error {
+      font-size: .85rem;
+      color: $danger;
+      text-align: center;
+    }
+  }
+
+  .lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 48px;
+    height: 48px;
+
+    div {
+      position: absolute;
+      top: 20px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+      &:nth-child(1) {
+        left: 5px;
+        animation: lds-ellipsis1 .6s infinite;
+      }
+
+      &:nth-child(2) {
+        left: 5px;
+        animation: lds-ellipsis2 .6s infinite;
+      }
+
+      &:nth-child(3) {
+        left: 19px;
+        animation: lds-ellipsis2 .6s infinite;
+      }
+
+      &:nth-child(4) {
+        left: 34px;
+        animation: lds-ellipsis3 .6s infinite;
+      }
+    }
+
+    @keyframes lds-ellipsis1 {
+      0% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes lds-ellipsis3 {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(0);
+      }
+    }
+
+    @keyframes lds-ellipsis2 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(14px, 0);
+      }
+    }
+  }
+
+  .loading-wrapper {
+    position: relative;
+    border-radius: .625rem;
+
+    img {
+      display: block;
+      height: 100%;
+    }
+  }
+
+  .status-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: transparentize(black, .5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   @media only screen and (min-width: 420px) {
-    .image-picker.selected {
+    .image-picker {
       flex-direction: row;
 
       .btn.danger {
@@ -266,11 +363,6 @@ h2 {
       .text-field-wrapper, .image-picker {
         flex-basis: 50%;
       }
-
-      .image-picker:not(.selected) {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
   }
 
@@ -283,6 +375,10 @@ h2 {
 }
 
 .step2 {
+  h2 {
+    margin-bottom: 1em;
+  }
+
   nav.dropdown-shell {
     margin-bottom: 1em;
   }
@@ -329,24 +425,24 @@ h2 {
   form {
     padding-left: 10px;
     padding-right: 10px;
-  }
 
-  p + .label {
-    margin: 1.5em 0 .5em 5px;
+    & > p {
+      font-size: .95rem;
+      line-height: 1.3rem;
+      margin-top: .5em;
+
+      &:first-of-type:not(.error) {
+        margin-top: 2em;
+      }
+    }
+
+    & > p + .label {
+      margin: 1.5em 0 .5em 5px;
+    }
   }
 
   .error > .btn {
     display: inline-flex;
-  }
-
-  p {
-    font-size: .95rem;
-    line-height: 1.3rem;
-    margin-top: .5em;
-  }
-
-  p:first-of-type:not(.error) {
-    margin-top: 2em;
   }
 
   .autocomplete-field {
@@ -391,10 +487,10 @@ h2 {
     form {
       padding-left: 8%;
       padding-right: 8%;
-    }
 
-    p + .label {
-      margin-top: 4em;
+      & > p + .label {
+        margin-top: 4em;
+      }
     }
 
     .autocomplete-field {

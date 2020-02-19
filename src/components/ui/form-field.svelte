@@ -3,13 +3,14 @@
   export let titleclass = '';
   export let subtitleclass = '';
   export let requiredclass = '';
-  export let wrapperclass = '';
+  export let wrapperclass = 'text-field-wrapper';
+  export let errorclass = '';
 
   export let title = '';
   export let subtitle = '';
   export let required = false;
   export let id = null;
-  export let error = false;
+  export let error = null;
 </script>
 
 <div class="form-field {classname}" class:error>
@@ -30,10 +31,12 @@
       {/if}
     </slot>
   </label>
-  <div class="text-field-wrapper {wrapperclass}">
+  <div class={wrapperclass}>
     <slot />
-    {#if required}
-      <span class="required {requiredclass}">* Required</span>
+    {#if error}
+      <span class="helper error {errorclass}">{error}</span>
+    {:else if required}
+      <span class="helper required {requiredclass}">* Required</span>
     {/if}
   </div>
 </div>

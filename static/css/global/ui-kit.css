@@ -324,6 +324,14 @@ hr[data-text]::after {
   padding: .7em;
 }
 
+.btn.small {
+  padding: .5em .8em;
+}
+
+.btn.selected:not(.filled) {
+  background-color: rgba(18, 120, 0, 0.12);
+}
+
 .btn > svg {
   stroke: #127800;
 }
@@ -597,10 +605,22 @@ button.btn {
   color: #127800;
 }
 
-.form-field .text-field + .required {
-  padding-left: 10px;
-  margin: 5px 0 0 0;
+.form-field .helper {
+  margin-top: 5px;
   font-size: .8rem;
+  display: block;
+}
+
+.form-field .helper.error {
+  color: #ab0303;
+}
+
+.form-field .text-field + .helper {
+  margin-left: 10px;
+}
+
+.form-field .dropdown-shell + .helper {
+  margin-left: 1.1em;
 }
 
 .form-field .text-field-wrapper .text-field {
@@ -1823,14 +1843,6 @@ input[type="checkbox"]:checked + .chip::before {
   padding: .5em 1em;
 }
 
-.date-picker .range-controls .btn {
-  padding: .5em .8em;
-}
-
-.date-picker .range-controls .btn.selected {
-  background-color: rgba(18, 120, 0, 0.12);
-}
-
 .date-picker .month-header {
   display: flex;
   justify-content: space-between;
@@ -1972,4 +1984,70 @@ input[type="checkbox"]:checked + .chip::before {
     column-gap: .25rem;
     justify-items: center;
   }
+}
+
+/* Datetime pickers -------------------------------------- */
+.date-time-picker .mode-switch {
+  display: flex;
+  justify-content: space-between;
+  margin: .5em 1em;
+}
+
+.date-time-picker .time-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: .5em 1em .5em 1.5em;
+}
+
+.date-time-picker .time-wrapper > .icon {
+  stroke: #127800;
+  margin-right: 1em;
+}
+
+.date-time-picker .time-wrapper > .btn {
+  align-self: center !important;
+  margin-left: .5em;
+}
+
+/* File inputs -------------------------------------- */
+.file-input input {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.file-input .handle {
+  font-weight: 500;
+  color: #127800;
+  padding: .8em 1.1em;
+  border-radius: 1.5625em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.file-input .handle .ripple {
+  background: rgba(18, 120, 0, 0.1);
+}
+
+.file-input input:not(:disabled) + .handle:hover {
+  background: rgba(18, 120, 0, 0.05);
+}
+
+.file-input input:focus:not(:disabled) + .handle {
+  background-color: rgba(18, 120, 0, 0.12);
+}
+
+.file-input input:disabled + .handle {
+  color: #888;
+  background-color: transparent;
+  cursor: default;
+}
+
+.file-input input:disabled + .handle > svg {
+  stroke: #888;
 }

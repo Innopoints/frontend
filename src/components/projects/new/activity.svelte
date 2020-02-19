@@ -1,41 +1,46 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
-  import {deleteActivity, duplicateActivity, editActivity} from '@/store/new-project';
+  import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
 
-  const HOURLY_RATE = 70;
   export let activity;
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <div class="card activity">
-  <svg src="/images/icons/drag-handle.svg" class="drag-handle" />
-
   <div class="title">{activity.name}</div>
   <div class="parameters">
     <div class="labeled text">
       <div class="label">Reward</div>
       <div class="content">
-        {activity.isHourly ? HOURLY_RATE * activity.hours : activity.reward}
-        <svg src="/images/innopoint-sharp.svg" class="innopoint" />
+        {activity.fixed_reward ? activity.reward_rate : HOURLY_RATE * activity.working_hours}
+        <svg src="images/innopoint-sharp.svg" class="innopoint" />
       </div>
     </div>
     <Labeled label="People required">
-      {activity.morePeople ? 'the more, the better' : activity.people + (parseInt(activity.people) === 1 ? ' person' : ' people')}
+      {#if activity.people_required === 0}
+        the more, the better
+      {:else if activity.people_required === 1}
+        1 person
+      {:else}
+        {activity.people_required} people
+      {/if}
     </Labeled>
   </div>
 
   <div class="actions">
-    <!-- TODO: add 'title' tooltip on hover -->
-    <Button title="Duplicate" on:click={() => duplicateActivity(activity.index)}>
-      <svg src="/images/icons/copy.svg" class="icon mr" />
+    <Button tooltip="Duplicate" on:click={() => dispatch('copy-activity', activity.id)}>
+      <svg src="images/icons/copy.svg" class="icon mr" />
       <span class="text">copy</span>
     </Button>
-    <Button title="Edit" on:click={() => editActivity(activity.index)}>
-      <svg src="/images/icons/edit.svg" class="icon mr" />
+    <Button tooltip="Edit" on:click={() => dispatch('edit-activity', activity.id)}>
+      <svg src="images/icons/edit.svg" class="icon mr" />
       <span class="text">edit</span>
     </Button>
-    <Button isDanger on:click={() => deleteActivity(activity.index)}>
-      <svg src="/images/icons/trash-2.svg" class="icon mr" />
+    <Button isDanger tooltip="Delete" on:click={() => dispatch('delete-activity', activity)}>
+      <svg src="images/icons/trash-2.svg" class="icon mr" />
       <span class="text">delete</span>
     </Button>
   </div>

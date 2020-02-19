@@ -348,6 +348,14 @@ hr {
     padding: .7em;
   }
 
+  &.small {
+    padding: .5em .8em;
+  }
+
+  &.selected:not(.filled) {
+    background-color: transparentize($main, .88);
+  }
+
   & > svg {
     stroke: $main;
   }
@@ -630,10 +638,22 @@ button.btn {
     color: $main;
   }
 
-  .text-field + .required {
-    padding-left: 10px;
-    margin: 5px 0 0 0;
+  .helper {
+    margin-top: 5px;
     font-size: .8rem;
+    display: block;
+
+    &.error {
+      color: $danger;
+    }
+  }
+
+  .text-field + .helper {
+    margin-left: 10px;
+  }
+
+  .dropdown-shell + .helper {
+    margin-left: 1.1em;
   }
 
   .text-field-wrapper .text-field {
@@ -1851,14 +1871,6 @@ input[type="checkbox"]:checked + .chip {
     display: flex;
     justify-content: space-between;
     padding: .5em 1em;
-
-    .btn {
-      padding: .5em .8em;
-
-      &.selected {
-        background-color: transparentize($main, .88);
-      }
-    }
   }
 
   .month-header {
@@ -2004,5 +2016,72 @@ input[type="checkbox"]:checked + .chip {
     grid-template-rows: auto auto auto;
     column-gap: .25rem;
     justify-items: center;
+  }
+}
+
+/* Datetime pickers -------------------------------------- */
+
+.date-time-picker {
+  .mode-switch {
+    display: flex;
+    justify-content: space-between;
+    margin: .5em 1em;
+  }
+
+  .time-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: .5em 1em .5em 1.5em;
+
+    & > .icon {
+      stroke: $main;
+      margin-right: 1em;
+    }
+
+    & > .btn {
+      align-self: center !important;
+      margin-left: .5em;
+    }
+  }
+}
+
+/* File inputs -------------------------------------- */
+
+.file-input {
+  input {
+    @include hide-accessible;
+  }
+
+  .handle {
+    font-weight: 500;
+    color: $main;
+    padding: .8em 1.1em;
+    border-radius: 1.5625em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .ripple {
+      background: transparentize($main, .9);
+    }
+  }
+
+  input:not(:disabled) + .handle:hover {
+    background: transparentize($main, .95);
+  }
+
+  input:focus:not(:disabled) + .handle {
+    background-color: transparentize($main, .88);
+  }
+
+  input:disabled + .handle {
+    color: $disabled;
+    background-color: transparent;
+    cursor: default;
+
+    & > svg {
+      stroke: $disabled;
+    }
   }
 }

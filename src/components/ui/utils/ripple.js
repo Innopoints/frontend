@@ -5,11 +5,14 @@ export default (node, options = {}) => {
     transition: options.transition || 150,
     zIndex: options.zIndex || '9999',
     bg: options.rippleColor || null,
+    disabled: options.disabled || false,
   };
 
-  node.addEventListener(props.event, function(event) {
-    rippler(event, node, props);
-  });
+  if (!props.disabled) {
+    node.addEventListener(props.event, function(event) {
+      rippler(event, node, props);
+    });
+  }
 
   const rippler = (event, el, {bg, zIndex, transition}) => {
     let target = el;

@@ -3,10 +3,10 @@
   import Sortable from 'sortablejs';
   import ImagePreviewCard from '@/components/product/image-preview-card.svelte';
   import * as api from '@/utils/api.js';
+  import maxSizeMB from '@/constants/backend/file-upload-limit.js';
 
   export let index;
   export let images;
-  export let maxSizeMB = 16;
   export let color;
   let error = null;
   let dragActive = false;
@@ -39,7 +39,7 @@
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       if (file.size > maxSizeMB * 1024 * 1024) {
-        error = 'Can only upload images under 16 MB. Allowed formats: JPG, PNG, WEBP.';
+        error = `Can only upload images under {maxSizeMB} MB. Allowed formats: JPG, PNG, WEBP.`;
         setTimeout(() => error = null, 4000);
         continue;
       }
