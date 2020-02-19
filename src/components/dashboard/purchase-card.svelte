@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
-  import parseColor from '@/utils/optimal-color';
+  import getBackground from '@/utils/optimal-color.js';
   import { API_HOST } from '@/constants/env.js';
   import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
 
@@ -19,7 +19,7 @@
 
 <li>
   <div class="product">
-    <div class="image" style={'background:' + parseColor(purchase.variety.color)}>
+    <div class="image" style={'background:' + getBackground(purchase.variety.color)}>
       <img src={API_HOST + purchase.variety.images[0]} alt="" />
     </div>
     <div class="product-info">
