@@ -20,6 +20,7 @@
       text = null;
       error = null;
       success = true;
+      setTimeout(() => success = false, 1500);
     } catch (e) {
       success = false;
       error = e;

@@ -20,6 +20,7 @@
       await Promise.all(promises);
       success = true;
       amount = null;
+      setTimeout(() => success = false, 1500);
     } catch (e) {
       console.error(e);
       success = false;
