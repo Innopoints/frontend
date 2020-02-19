@@ -27,7 +27,9 @@
         {purchase.product.name}
         <span class="type">{purchase.product.type || ''}</span>
       </div>
-      <time>{new Date(purchase.time).toLocaleString()}</time>
+      <time datetime={purchase.time} title={new Date(purchase.time).toLocaleString('ru')}>
+        {new Date(purchase.time).toLocaleString('ru', {month: '2-digit', day: '2-digit'})}
+      </time>
       <div class="purchaser">
         {(-purchase.amount)} item{purchase.amount < -1 && 's' || ''} purchased by {purchase.account.full_name}
         <a on:click={copy} href="# " class="copy-email">click to copy e-mail</a>
