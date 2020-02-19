@@ -27,7 +27,7 @@
   </div>
   {#if purchases.length}
     <ul class="purchases-list">
-      {#each purchases as purchase (purchase.name + purchase.type)}
+      {#each purchases as purchase (purchase.id)}
         <PurchaseCard {purchase} on:change-status={(e) => setStatus(purchase, e.detail)} />
       {/each}
     </ul>
