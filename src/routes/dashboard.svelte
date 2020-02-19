@@ -35,7 +35,7 @@
 
 <Layout user={account}>
   <h1 class="padded">Dashboard</h1>
-  <div class="cards padded">
+  <div class="cards padded material">
     <Reviews {reviews} />
     <Purchases {purchases} />
     <InnopointTransfer />
