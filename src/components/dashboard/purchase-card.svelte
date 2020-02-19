@@ -47,7 +47,7 @@
   <div class="actions">
     {#if !editing}
       Marked as ready for pickup
-      <Button classname="btn ml" on:click={() => editing = true}>
+      <Button classname="ml" on:click={() => editing = true}>
         <svg src="/images/icons/edit.svg" class="icon mr" />
         edit status
       </Button>
