@@ -9,14 +9,14 @@
   let error = null;
 
   async function send() {
-    if(!text) return;
+    if (!text) return;
     try {
       const responses = await Promise.all(users.map(user => post(`/accounts/${user.email}/notify`, {
         data: {
           message: text,
         },
       })));
-      if(!responses.every(res => res.ok)) throw 'Failed to send notifications';
+      if (!responses.every(res => res.ok)) throw 'Failed to send notifications';
       text = null;
       error = null;
       success = true;

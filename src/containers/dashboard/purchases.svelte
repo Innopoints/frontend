@@ -13,7 +13,7 @@
       },
     });
     stock_change.status = status;
-    if([StockChangeStatuses.CARRIED_OUT, StockChangeStatuses.REJECTED].includes(status)) {
+    if ([StockChangeStatuses.CARRIED_OUT, StockChangeStatuses.REJECTED].includes(status)) {
       purchases = purchases.filter(purchase => purchase.id !== stock_change.id);
     }
     purchases = purchases;  // trigger an update anyways for the new status
