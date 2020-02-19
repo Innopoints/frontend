@@ -9,7 +9,7 @@
   export let purchase;
 
   let dispatch = createEventDispatcher();
-  let editing = true;
+  let editing = purchase.status === StockChangeStatuses.PENDING;
 
   const copy = () => {
     if (!navigator.clipboard) alert('Browser does not support copying');
