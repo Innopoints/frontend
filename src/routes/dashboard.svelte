@@ -7,7 +7,7 @@
       ['purchases', '/stock_changes/for_review'],
       ['reviews', '/projects/for_review'],
     ]));
-    if (account == null) {
+    if (account == null || !account.is_admin) {
       this.error(403, 'Dashboard');
     }
     return { account, purchases, reviews };
