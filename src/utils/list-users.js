@@ -10,10 +10,10 @@ export default async function *getOptions(query) {
 
   do {
     const res = await get(`/accounts?page=${current_page}&limit=${limit}&q=${query}`);
-	const {data: accounts, pages: new_pages} = await res.json();
+    const { data: accounts, pages: newPages } = await res.json();
     yield accounts.map(account => ({name: account.full_name, details: account.email}));
     current_page++;
-    pages = new_pages;
+    pages = newPages;
   } while (current_page < pages);
 
   return [];
