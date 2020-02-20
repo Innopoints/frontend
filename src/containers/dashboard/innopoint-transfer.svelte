@@ -5,7 +5,8 @@
   import SendComment from '@/components/dashboard/send-comment.svelte';
   import SeeProfile from '@/components/dashboard/see-profile.svelte';
   import getUsers from '@/utils/list-users.js';
-  let users = [];
+  let selectedItems = [];
+  $: users = selectedItems.map(item => ({ full_name: item.name, email: item.details }));
 </script>
 
 <Card classname="card individual-ctls">
@@ -15,7 +16,7 @@
   </div>
   <div class="panel">
     <div class="user-selection">
-      <Autocomplete bind:selection={users} getOptions={getUsers} />
+      <Autocomplete bind:selection={selectedItems} getOptions={getUsers} />
       <p>You may select several people for a certain operation.</p>
     </div>
     <div class="operations">
