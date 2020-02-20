@@ -34,7 +34,7 @@
   let optionGen;
   let promises = [];
   let hasMoreOptions;
-  let selected = new Set(selection.map(opt => opt.full_name));
+  let selected = new Set(selection.map(opt => opt.name));
 
   let dropdown;
   let input;
@@ -57,7 +57,7 @@
 
   function checkDone(generatorValue) {
     hasMoreOptions = !generatorValue.done;
-    let newOptions = generatorValue.value.filter(opt => !selected.has(opt.full_name));
+    let newOptions = generatorValue.value.filter(opt => !selected.has(opt.name));
     return newOptions;
   }
 
@@ -74,7 +74,7 @@
     selection.push(option);
     selection = selection;
     dispatch('change', selection);
-    selected.add(option.full_name);
+    selected.add(option.name);
     promises = [];
     input.value = searchQuery = '';
     input.focus();
@@ -82,7 +82,7 @@
 
   function deleteValue(option) {
     selection = selection.filter(x => x !== option);
-    selected.delete(option.full_name);
+    selected.delete(option.name);
     dispatch('change', selected);
   }
 </script>
@@ -96,9 +96,9 @@
 </style>
 
 <div class:focus class="autocomplete-field {classname}">
-  {#each selection as loopValue (loopValue.full_name)}
+  {#each selection as loopValue (loopValue.name)}
     <div class="chip {chipclass}">
-      {loopValue.full_name}
+      {loopValue.name}
       <Button isNormal isRound on:click={() => deleteValue(loopValue)}>
         <svg src="/images/icons/x.svg" class="icon" />
       </Button>
@@ -141,15 +141,15 @@
               Loading...
             </li>
           {:then generatorValue}
-            {#each checkDone(generatorValue) as option (option.full_name)}
+            {#each checkDone(generatorValue) as option (option.name)}
               <li
                 on:click={(click) => { click.stopPropagation(); selectValue(option); }}
                 class={itemclass}
               >
-                {@html markMatch(searchQuery, option.full_name)}
-                {#if option.email}
+                {@html markMatch(searchQuery, option.name)}
+                {#if option.details}
                   <div class="subtext">
-                    {@html markMatch(searchQuery, option.email)}
+                    {@html markMatch(searchQuery, option.details)}
                   </div>
                 {/if}
               </li>
