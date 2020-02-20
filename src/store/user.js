@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import request from '@/utils/request';
 import generateQueryString from '@/utils/generate-query-string.js';
 import { goto } from '@sapper/app';
-import { AUTH_HOST, FRONTEND_BASE } from '@/constants/env';
+import { AUTH_HOST } from '@/constants/env';
 
 export const isAuthed = writable(false);
 const userTemplate = {
@@ -21,7 +21,7 @@ export const changeUserField = (field, value) => {
 export const login = () => {
   window.location.href = AUTH_HOST + '/login' + generateQueryString(new Map([
     ['final_redirect_location', window.location.pathname],
-    ['frontend_base', FRONTEND_BASE],
+    ['frontend_base', window.location.origin],
   ]));
 };
 

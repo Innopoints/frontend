@@ -31,6 +31,7 @@
                    || (filtering.minDate != null)
                    || (filtering.maxDate != null));
 
+  if (competences == null) competences = [];
   competences.forEach(compObject => { compObject.checked = true; });
 
   function clearCompetenceExclusion() {

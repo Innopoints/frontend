@@ -30,6 +30,7 @@
                    || (filtering.excludedColors.length !== 0)
                    || (filtering.colorlessExcluded));
 
+  if (colors == null) colors = [];
   colors.forEach(colorObject => { colorObject.checked = true; });
   let colorlessValues = [{ value: null, checked: !filtering.colorlessExcluded }];
 
