@@ -4,7 +4,7 @@
   import SendMoney from '@/components/dashboard/send-money.svelte';
   import SendComment from '@/components/dashboard/send-comment.svelte';
   import SeeProfile from '@/components/dashboard/see-profile.svelte';
-  import getUsers from '@/constants/autocomplete-options';
+  import getUsers from '@/utils/list-users.js';
   let users = [];
 </script>
 
@@ -15,7 +15,7 @@
   </div>
   <div class="panel">
     <div class="user-selection">
-      <Autocomplete bind:values={users} getOptions={getUsers} />
+      <Autocomplete bind:selection={users} getOptions={getUsers} />
       <p>You may select several people for a certain operation.</p>
     </div>
     <div class="operations">

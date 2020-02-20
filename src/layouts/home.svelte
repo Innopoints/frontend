@@ -1,6 +1,8 @@
 <script>
   import Header from '@/components/home/header.svelte';
   import Footer from '@/components/footer.svelte';
+
+  export let user = null;
 </script>
 
 <svelte:head>
@@ -9,7 +11,7 @@
 </svelte:head>
 
 <div class="material">
-  <Header />
+  <Header {user} />
   <slot />
 </div>
 

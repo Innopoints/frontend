@@ -17,7 +17,7 @@
 </script>
 
 <script>
-  import { stores, prefetch, goto } from '@sapper/app';
+  import { prefetch, goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Form from '@/containers/product/edit-form.svelte';
   import PreviewCard from '@/components/product/preview-card.svelte';
@@ -27,8 +27,6 @@
   import * as api from '@/utils/api.js';
   import arraysEqual from '@/utils/arrays-equal.js';
   import { getBlankVariety } from '@/constants/product/blank-product.js';
-
-  const { session } = stores();
 
   export let unmodifiedProduct;
   let product = Object.assign({}, unmodifiedProduct);
@@ -58,7 +56,6 @@
   export let colors;
   export let sizes;
   export let account;
-  $session.user = account;
 
   let errors = {
     name: false,
@@ -295,7 +292,7 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material">
     <h1 class="padded">Edit {product.type ? `"${product.name}" ${product.type}` : product.name}</h1>
     <main class="padded">

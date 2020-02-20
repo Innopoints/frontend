@@ -2,11 +2,22 @@
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
   import PurchaseCard from '@/components/dashboard/purchase-card.svelte';
+  import { patch } from '@/utils/api.js';
+  import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
 
   export let purchases = [];
-  // In real-case situation would be a bit different
-  const reject = e => purchases = purchases.filter(x => x.name !== e.detail.name);
-  const deliver = e => reject(e);
+  async function setStatus(stockChange, status) {
+    await patch(`/stock_changes/${stockChange.id}/status`, {
+      data: {
+        status,
+      },
+    });
+    stockChange.status = status;
+    if ([StockChangeStatuses.CARRIED_OUT, StockChangeStatuses.REJECTED].includes(status)) {
+      purchases = purchases.filter(purchase => purchase.id !== stockChange.id);
+    }
+    purchases = purchases;  // trigger an update anyways for the new status
+  }
 </script>
 
 <Card classname="card purchases">
@@ -16,13 +27,15 @@
   </div>
   {#if purchases.length}
     <ul class="purchases-list">
-      {#each purchases as purchase (purchase.name + purchase.type)}
-        <PurchaseCard {purchase} on:reject={reject} on:deliver={deliver} />
+      {#each purchases as purchase (purchase.id)}
+        <PurchaseCard {purchase} on:change-status={(e) => setStatus(purchase, e.detail)} />
       {/each}
     </ul>
   {:else}
     <div class="empty small">
-      <svg class="icon" src="/images/icons/smile.svg" />
+      <div class="icon">
+        <svg src="/images/icons/smile.svg" />
+      </div>
       <div class="title">No pending purchases!</div>
     </div>
   {/if}

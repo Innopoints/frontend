@@ -28,12 +28,11 @@
   import { filterProjectFields } from '@/utils/project-manipulation.js';
   import activityTypes from '@/constants/projects/activity-internal-types.js';
 
-  const { page, session } = stores();
+  const { page } = stores();
 
   export let drafts;
   export let account;
   export let competences;
-  $session.user = account;
 
   let project = writable(null);
   let autosaved = writable(false);
@@ -276,7 +275,7 @@
   <link rel="stylesheet" href="css/page-components/create-activity.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material step{step}">
     {#if step === 0}
       <StepZero

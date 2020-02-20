@@ -1,10 +1,9 @@
 <script>
-  import { stores } from '@sapper/app';
   import Button from 'ui/button.svelte';
   import NotificationCenter from '@/components/common/notification-center.svelte';
   import { login } from '@/utils/auth.js';
 
-  const { session } = stores();
+  export let user = null;
 </script>
 
 <header class="container">
@@ -12,12 +11,12 @@
     src="/images/innou-logo.svg"
     class="logo"
     alt="Innopolis University logo" />
-  {#if $session.user == null}
+  {#if user == null}
     <Button isOutline on:click={login}>sign in</Button>
   {:else}
     <div class="actions">
       <NotificationCenter />
-      {#if $session.user.is_admin}
+      {#if user.is_admin}
         <Button href="/dashboard" isRound>
           <svg src="images/icons/grid.svg" />
         </Button>

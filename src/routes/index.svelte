@@ -14,7 +14,6 @@
 </script>
 
 <script>
-  import { stores } from '@sapper/app';
   import Layout from '@/layouts/home.svelte';
   import Tagline from '@/containers/home/tagline.svelte';
   import HowTo from '@/containers/home/how-to.svelte';
@@ -22,11 +21,8 @@
   import Store from '@/containers/home/store.svelte';
   import Contacts from '../containers/home/contacts.svelte';
 
-  const { session } = stores();
-
   export let products;
   export let account;
-  $session.user = account;
 </script>
 
 <svelte:head>
@@ -44,7 +40,7 @@
 </svelte:head>
 
 <!--todo: add transitions (animation)-->
-<Layout>
+<Layout user={account}>
   <Tagline />
   <HowTo />
   <Options />

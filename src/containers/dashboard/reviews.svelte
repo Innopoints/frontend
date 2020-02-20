@@ -21,7 +21,7 @@
             <svg slot="icon" src="/images/icons/user.svg" class="icon" />
             {review.organizer}
           </Labeled>
-          <Button href="/projects">
+          <Button href="/projects/{review.id}">
             review
             <svg src="/images/icons/arrow-right.svg" class="icon ml" />
           </Button>
@@ -30,7 +30,9 @@
     </ul>
   {:else}
     <div class="empty small">
-      <svg class="icon" src="/images/icons/smile.svg" />
+      <div class="icon">
+        <svg src="/images/icons/smile.svg" />
+      </div>
       <div class="title">Everything reviewed!</div>
     </div>
   {/if}

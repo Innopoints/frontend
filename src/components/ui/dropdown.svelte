@@ -24,6 +24,7 @@
 
   let dropdownShell = null;
   const clickOutside = (event) => {
+    if (!dropdownShell) return;
     let isClickInside = dropdownShell.contains(event.target);
     if (!isClickInside) {
       if (isOpen) {

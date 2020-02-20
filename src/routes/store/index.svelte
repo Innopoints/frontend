@@ -17,7 +17,6 @@
 </script>
 
 <script>
-  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/store/tagline.svelte';
   import Balance from '@/components/store/balance.svelte';
@@ -28,13 +27,10 @@
   import { orderLabels, orderOptions } from '@/constants/store/order.js';
   import * as api from '@/utils/api.js';
 
-  const { session } = stores();
-
   export let products;
   export let pages;
   export let colors;
   export let account;
-  $session.user = account;
 
   let balance;
   let order = orderOptions[0];
@@ -43,8 +39,8 @@
 
   let filterElement;
 
-  if ($session.user != null) {
-    balance = $session.user.balance;
+  if (account != null) {
+    balance = account.balance;
   }
 
   function updateProducts(filtering) {
@@ -102,9 +98,9 @@
   <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
-<Layout>
+<Layout user={account}>
   <div class="material">
-    <Tagline isAdmin={$session.user != null && $session.user.is_admin} />
+    <Tagline isAdmin={account != null && account.is_admin} />
     <section class="shop padded">
       <Balance value={balance} />
       <Filters
