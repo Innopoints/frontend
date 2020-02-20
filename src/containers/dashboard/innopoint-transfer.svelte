@@ -4,7 +4,7 @@
   import SendMoney from '@/components/dashboard/send-money.svelte';
   import SendComment from '@/components/dashboard/send-comment.svelte';
   import SeeProfile from '@/components/dashboard/see-profile.svelte';
-  import getUsers from '@/constants/ui/autocomplete-options';
+  import getUsers from '@/utils/list-users.js';
   let users = [];
 </script>
 
