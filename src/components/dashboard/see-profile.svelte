@@ -4,7 +4,10 @@
   export let users = [];
   const open = () => {
     for (let user of users) {
-      window.open('/profile?user=' + user.email);
+      const otherWindow = window.open('/profile?user=' + user.email, '_blank');
+      if (otherWindow == null) {
+        console.warn('New tab blocked by pop-up blocker');
+      }
     }
   };
 </script>
