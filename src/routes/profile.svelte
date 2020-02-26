@@ -3,21 +3,39 @@
   import isoForURL from '@/utils/iso-for-url.js';
 
   export async function preload(page, session) {
+    let requestedEmail = page.query.user;
     let timelineFetchedUntil = new Date();
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
+    const { currentUser } = await getInitialData(this, session, new Map([
+      ['currentUser', '/account'],
+    ]));
+    if (currentUser == null) {
+      this.error(403, 'Profile');
+    }
+    const isMe = requestedEmail == currentUser.email;
+    const allowed = requestedEmail == null || isMe || currentUser.is_admin;
+    // non-admin requested a different profile
+    if (!allowed) {
+      this.redirect(302, `/profile`);
+    }
+    if (requestedEmail == null) {
+      requestedEmail = currentUser.email;
+    }
+
     const {
       account,
       ...initialData
     } = await getInitialData(this, session, new Map([
-      ['account', '/account'],
-      ['timeline', `/account/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
-      ['statistics', `/account/statistics?start_date=${isoForURL(timelineFetchedUntil)}`],
-      ['notificationSettings', '/account/notification_settings'],
+      ['account', `/accounts/${requestedEmail}`],
+      ['timeline', `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
+      ['statistics', `/accounts/${requestedEmail}/statistics?start_date=${isoForURL(timelineFetchedUntil)}`],
+      ['notificationSettings', `/accounts/${requestedEmail}/notification_settings`],
       ['competences', '/competences'],
     ]));
     if (account == null) {
-      this.error(403, 'Profile');
+      this.error(404, 'Profile');
     }
+
     return {
       account,
       timelineFetchedUntil,
@@ -54,7 +72,7 @@
   }
 
   function changeUsername({ detail }) {
-    api.patch('/account/telegram', {
+    api.patch(`/account/${account.email}/telegram`, {
       data: {
         telegram_username: detail,
       },
@@ -80,7 +98,7 @@
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
     queryString += '&start_date=' + isoForURL(timelineFetchedUntil);
     timelinePromises.push(
-      api.get('/account/timeline' + queryString)
+      api.get(`/account/${account.email}/timeline${queryString}`)
         .then(resp => resp.json())
         .then(json => {
           if (json.data.length === 0) {
@@ -106,7 +124,7 @@
   }
 
   function updateStatistics({ detail: period }) {
-    api.get('/account/statistics?start_date=' + isoForURL(period.getStart(new Date())))
+    api.get(`/account/${account.email}/statistics?start_date=${isoForURL(period.getStart(new Date()))}`)
       .then(resp => resp.json())
       .then(data => statistics = data);
   }
