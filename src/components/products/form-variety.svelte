@@ -4,7 +4,7 @@
   import TextField from 'ui/text-field.svelte';
   import Dropdown from 'ui/dropdown.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import DragDropzone from '@/components/product/drag-dropzone.svelte';
+  import DragDropzone from '@/components/products/drag-dropzone.svelte';
   import getColorPickerStyles from 'ui/utils/color-picker-styles.js';
   import { API_HOST } from '@/constants/env.js';
 

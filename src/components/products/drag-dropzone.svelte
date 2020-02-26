@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import Sortable from 'sortablejs';
-  import ImagePreviewCard from '@/components/product/image-preview-card.svelte';
+  import ImagePreviewCard from '@/components/products/image-preview-card.svelte';
   import * as api from '@/utils/api.js';
   import maxSizeMB from '@/constants/backend/file-upload-limit.js';
 
