@@ -7,7 +7,7 @@ export default function getNotificationContent({ type, payload }) {
         {
           text: (payload.product.type == null ?
             payload.product.name : `'${payload.product.name}' ${payload.product.type}`),
-          url: '/product/' + payload.product.id,
+          url: '/products/' + payload.product.id,
         },
         ' purchase ',
         (payload.stock_change.status === 'ready_for_pickup' ?
@@ -105,7 +105,7 @@ export default function getNotificationContent({ type, payload }) {
         {
           text: (payload.product.type == null ?
             payload.product.name : `'${payload.product.name}' ${payload.product.type}`),
-          url: '/product/' + payload.product.id,
+          url: '/products/' + payload.product.id,
         },
         ' was sold out',
       ];
@@ -122,7 +122,7 @@ export default function getNotificationContent({ type, payload }) {
         {
           text: (payload.product.type == null ?
             payload.product.name : `'${payload.product.name}' ${payload.product.type}`),
-          url: '/product/' + payload.product.id,
+          url: '/products/' + payload.product.id,
         },
       ];
       break;
