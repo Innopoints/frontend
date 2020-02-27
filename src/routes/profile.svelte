@@ -72,7 +72,7 @@
   }
 
   function changeUsername({ detail }) {
-    api.patch(`/account/${account.email}/telegram`, {
+    api.patch(`/accounts/${account.email}/telegram`, {
       data: {
         telegram_username: detail,
       },
@@ -98,7 +98,7 @@
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
     queryString += '&start_date=' + isoForURL(timelineFetchedUntil);
     timelinePromises.push(
-      api.get(`/account/${account.email}/timeline${queryString}`)
+      api.get(`/accounts/${account.email}/timeline${queryString}`)
         .then(resp => resp.json())
         .then(json => {
           if (json.data.length === 0) {
@@ -124,7 +124,7 @@
   }
 
   function updateStatistics({ detail: period }) {
-    api.get(`/account/${account.email}/statistics?start_date=${isoForURL(period.getStart(new Date()))}`)
+    api.get(`/accounts/${account.email}/statistics?start_date=${isoForURL(period.getStart(new Date()))}`)
       .then(resp => resp.json())
       .then(data => statistics = data);
   }
