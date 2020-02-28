@@ -96,7 +96,7 @@
               <div class="title">No projects found...</div>
               {#if account}
                 But you can
-                <a href="/project/new" rel="prefetch">create a project</a>
+                <a href="/projects/new" rel="prefetch">create a project</a>
                 right now!
               {/if}
             </figcaption>

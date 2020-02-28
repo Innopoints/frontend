@@ -21,8 +21,8 @@
   import Modal from 'ui/modal.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
   import Dialog from 'ui/dialog.svelte';
-  import ImagePreviews from '@/containers/product/image-previews.svelte';
-  import ItemContent from '@/containers/product/item-content.svelte';
+  import ImagePreviews from '@/containers/products/image-previews.svelte';
+  import ItemContent from '@/containers/products/item-content.svelte';
   import Snackbar from 'ui/snackbar.svelte';
   import getColorPickerStyles from 'ui/utils/color-picker-styles.js';
   import { groupByColor, groupByID } from '@/utils/group-varieties.js';

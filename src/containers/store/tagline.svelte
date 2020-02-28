@@ -15,7 +15,7 @@
     </div>
     {#if isAdmin}
       <div class="actions">
-        <Button isOutline classname="btn rectangle" href="/product/new">
+        <Button isOutline classname="btn rectangle" href="/products/new">
           <svg src="/images/icons/plus.svg" class="icon mr" />
           create new product
         </Button>

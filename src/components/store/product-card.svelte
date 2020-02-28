@@ -61,7 +61,7 @@
       <div class="subtitle">{type}</div>
     {/if}
     {#if short}
-      <Button href="/product/{id}" isOutline>view</Button>
+      <Button href="/products/{id}" isOutline>view</Button>
     {:else}
       <div class="card-row">
         <Labeled label="Price">
@@ -70,7 +70,7 @@
             <svg src="images/innopoint-sharp.svg" class="innopoint" />
           </span>
         </Labeled>
-        <Button href="/product/{id}" isOutline>view</Button>
+        <Button href="/products/{id}" isOutline>view</Button>
       </div>
     {/if}
   </div>

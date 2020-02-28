@@ -4,7 +4,7 @@
   import Switch from 'ui/switch.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
-  import FormVariety from '@/components/product/form-variety.svelte';
+  import FormVariety from '@/components/products/form-variety.svelte';
 
   export let product;
   $: formDisabled = product == null;

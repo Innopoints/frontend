@@ -74,7 +74,7 @@
               <div class="title">No past projects yet...</div>
               {#if account}
                 But you can
-                <a href="/project/new" rel="prefetch">create a project</a>
+                <a href="/projects/new" rel="prefetch">create a project</a>
                 right now!
               {/if}
             </figcaption>
