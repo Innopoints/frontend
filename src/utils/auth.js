@@ -1,6 +1,5 @@
 import { AUTH_HOST, USER_EMAIL } from '@/constants/env.js';
 import generateQueryString from '@/utils/generate-query-string.js';
-import * as api from '@/utils/api.js';
 import { goto } from '@sapper/app';
 
 
@@ -22,7 +21,7 @@ export const login = (process.env.NODE_ENV === 'development' ? loginCheat : logi
 
 export async function logout(session) {
   try {
-    await api.get('/logout');
+    await fetch(AUTH_HOST + '/logout');
     // It's not what it looks like, `session` will actually be `$session` on calls
     session = null;
     goto('/');
