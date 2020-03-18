@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "compression": "^1.7.1",
-    "polka": "next",
+    "polka": "^1.0.0-next.11",
     "sapper-environment": "^1.0.1",
     "simplebar": "^5.1.0",
     "sirv": "^0.4.0"
