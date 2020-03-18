@@ -8,6 +8,13 @@
 
   export let productControl;
   export let selectedColor;
+
+  if(productControl.flatImages.length === 0) {
+    productControl.flatImages.push({
+      url: '/images/create-product/placeholder.svg',
+      placeholder: true,
+    });
+  }
   let displayedImage = productControl.flatImages[0];
 
   const dispatch = createEventDispatcher();
@@ -83,7 +90,7 @@
       {#each productControl.flatImages as image}
         <div class="swiper-slide">
           <img
-            src={API_HOST + image.url}
+            src={(image.placeholder ? '' : API_HOST) + image.url}
             style="background: {getBackground(image.color)}"
             alt=""
           />
