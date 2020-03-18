@@ -56,6 +56,6 @@
       <svg src="images/icons/bar-chart-2.svg" class="icon" />
       Developed competences
     </header>
-    <CompetencesChart {competences} values={indexify(statistics.competences)} />
+    <CompetencesChart {competences} items={indexify(statistics.competences)} />
   </div>
 </section>

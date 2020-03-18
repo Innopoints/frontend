@@ -3,9 +3,9 @@
   import colors from '@/constants/profile/competence-colors.js';
 
   export let competences;
-  export let values;
+  export let items;
   $: maxCompetenceValue = Math.max(
-    ...competences.map(comp => values.get(comp.id) || 1),
+    ...competences.map(comp => items.get(comp.id) || 1),
   );
 </script>
 
@@ -14,10 +14,10 @@
     {#each competences as competence, i (competence.id)}
       <div class="bar">
         <div
-          style="flex-basis: {(values.get(competence.id) || 0) / maxCompetenceValue * 90}%;
+          style="flex-basis: {(items.get(competence.id) || 0) / maxCompetenceValue * 90}%;
                  background: rgb({colors[i]});"
           class="future"
-          title="{competence.name}: {values.get(competence.id) || 0}"
+          title="{competence.name}: {items.get(competence.id) || 0}"
         >
           <div style="flex-basis: 100%" class="present" />
         </div>
