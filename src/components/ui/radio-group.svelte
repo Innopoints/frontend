@@ -10,18 +10,18 @@
   export let iconclass = '';
   export let isColor = false;
 
-  export let values;
+  export let items;
   export let labels = null;
   export let value = null;
   export let name;
   export let labelPosition = 'right';
 
-  if (values.length === 0) {
+  if (items.length === 0) {
     console.error('Must have at least one item in the radio group.');
   }
 
-  if (labels !== null && values.length !== labels.length) {
-    console.error('Must have as many labels as there is values.');
+  if (labels !== null && items.length !== labels.length) {
+    console.error('Must have as many labels as there is items.');
   }
 
   if (labelPosition !== 'right' && labelPosition !== 'left') {
@@ -35,7 +35,7 @@
 </script>
 
 <div class:with-labels={!isColor} class={classname} role="group">
-  {#each values as loopValue, i (i)}
+  {#each items as loopValue, i (i)}
     <label
       class:colored={isColor}
       class:radio={isColor}

@@ -98,7 +98,7 @@
           name={category.key || 'all'}
           labelPosition="left"
           labelclass="label"
-          values={radioOptions}
+          items={radioOptions}
           value={notificationSettings[category.key]}
           on:change={(evt) => updateSettings(category.key, evt.detail)}
         />
