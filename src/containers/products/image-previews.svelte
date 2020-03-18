@@ -8,6 +8,13 @@
 
   export let productControl;
   export let selectedColor;
+
+  if (productControl.flatImages.length === 0) {
+    productControl.flatImages.push({
+      url: '/images/create-product/placeholder.svg',
+      placeholder: true,
+    });
+  }
   let displayedImage = productControl.flatImages[0];
 
   const dispatch = createEventDispatcher();
@@ -40,15 +47,15 @@
     if (displayedImage == null || displayedImage.color !== newImage.color) {
       dispatch('color-change', newImage.color);
     }
-    swiper.slideTo(imageIndex, 300, false);
+    swiper && swiper.slideTo(imageIndex, 300, false);
     displayedImage = newImage;
     selectedColor = newImage.color;
   }
 
   $: {
-    if (selectedColor !== displayedImage.color) {
+    if (displayedImage != null && selectedColor !== displayedImage.color) {
       const coverIndex = productControl.flatImages.findIndex(img => img.color === selectedColor);
-      swiper.slideTo(coverIndex, 300, false);
+      swiper && swiper.slideTo(coverIndex, 300, false);
       displayedImage = productControl.flatImages[coverIndex];
     }
   }
@@ -83,7 +90,7 @@
       {#each productControl.flatImages as image}
         <div class="swiper-slide">
           <img
-            src={API_HOST + image.url}
+            src={(image.placeholder ? '' : API_HOST) + image.url}
             style="background: {getBackground(image.color)}"
             alt=""
           />
