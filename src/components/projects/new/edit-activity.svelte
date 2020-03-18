@@ -218,7 +218,7 @@
         <CheckboxGroup
           name="competences"
           maxChecked={3}
-          values={competencesOptions}
+          items={competencesOptions}
           labels={competencesLabels}
           on:change={(e) => {
             modifyCompetences(e);
@@ -362,7 +362,7 @@
       <span class="divider">or</span>
       <CheckboxGroup
         name="the-more"
-        values={[morePeopleCheckbox]}
+        items={[morePeopleCheckbox]}
         labels={["the more, the better"]}
         on:change={(evt) => {
           toggleMorePeople(evt);

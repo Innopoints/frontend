@@ -126,7 +126,7 @@
       <span slot="label" class="tight">order</span>
       <span slot="label" class="regular">{orderLabel}</span>
       <RadioGroup
-        values={orderOptions.map(val => ({ value: val }))}
+        items={orderOptions.map(val => ({ value: val }))}
         labels={orderLabels}
         name="order-options-mobile"
         bind:value={order}
@@ -174,7 +174,7 @@
           <Button on:click={clearCompetenceExclusion}>select all</Button>
           <CheckboxGroup
             labels={competences.map(compObject => compObject.name.toLowerCase())}
-            values={competences}
+            items={competences}
             name="competences"
             on:change={(e) => changeCompetences(e.detail)}
           />
@@ -198,11 +198,10 @@
         </AccordionSection>
       </Accordion>
     </Dropdown>
-
   </div>
 </div>
 <RadioChipGroup
-  values={orderOptions}
+  items={orderOptions}
   labels={orderLabels}
   name="order-options"
   bind:value={order}

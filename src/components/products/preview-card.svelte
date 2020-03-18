@@ -64,7 +64,7 @@
               isColor
               name="variety-colors"
               classname="content"
-              values={colors.map(val => ({ value: val }))}
+              items={colors.map(val => ({ value: val }))}
               value={selectedVariety.color}
               on:change={switchVariety}
             />
@@ -73,7 +73,7 @@
         {#if sizes && product.sized && sizes.length > 1}
           <Labeled label="sizes" classname="mt-2">
             <RadioChipGroup
-              values={sizes}
+              items={sizes}
               small
               name="sizes"
               classname="content"

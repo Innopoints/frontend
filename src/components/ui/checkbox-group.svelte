@@ -12,20 +12,20 @@
   export let isColor = false;
   export let isRound = false;
 
-  export let values;
+  export let items;
   export let labels = null;
   export let name;
   export let labelPosition = 'right';
   export let maxChecked = null;
-  $: currentChecked = values.reduce((acc, elt) => acc + elt.checked, 0);
+  $: currentChecked = items.reduce((acc, elt) => acc + elt.checked, 0);
   const titleObj = { title: `Can only select ${itemAmount(maxChecked, 'value')}.` };
 
-  if (values.length === 0) {
+  if (items.length === 0) {
     console.error('Must have at least one value in the checkbox group.');
   }
 
-  if (labels !== null && values.length !== labels.length) {
-    console.error('Must have as many labels as there is values.');
+  if (labels !== null && items.length !== labels.length) {
+    console.error('Must have as many labels as there is items.');
   }
 
   if (labelPosition !== 'right' && labelPosition !== 'left') {
@@ -49,7 +49,7 @@
   class={classname}
   role="group"
 >
-  {#each values as loopValue, i (i)}
+  {#each items as loopValue, i (i)}
     <label class:clickable={!isColor} class={wrapperclass}>
       {#if !isColor && labelPosition === 'left'}
         {#if labelclass !== null}

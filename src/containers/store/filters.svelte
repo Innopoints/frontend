@@ -106,7 +106,7 @@
       <span slot="label" class="tight">order</span>
       <span slot="label" class="regular">{orderLabel}</span>
       <RadioGroup
-        values={orderOptions.map(val => ({ value: val }))}
+        items={orderOptions.map(val => ({ value: val }))}
         labels={orderLabels}
         name="order-options-mobile"
         bind:value={order}
@@ -157,13 +157,13 @@
               isColor
               isRound
               name="colors"
-              values={colors}
+              items={colors}
               classname="color-grid"
               on:change={(e) => changeColors(e.detail)}
             />
             <CheckboxGroup
               name="colorless"
-              values={colorlessValues}
+              items={colorlessValues}
               labels={['colorless']}
               on:change={(e) => changeColorless(e.detail)}
             />
@@ -174,7 +174,7 @@
   </div>
 </div>
 <RadioChipGroup
-  values={orderOptions}
+  items={orderOptions}
   labels={orderLabels}
   name="order-options"
   bind:value={order}

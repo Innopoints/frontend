@@ -88,7 +88,7 @@
     You are the creator, therefore, also a moderator.
   </p>
   <span class="label">Search for people</span>
-  <Autocomplete values={values} getOptions={getUsers} on:change={recordChanges} />
+  <Autocomplete selection={values} getOptions={getUsers} on:change={recordChanges} />
   <BottomNavigation
     step={3}
     error={

@@ -58,7 +58,7 @@
       <Labeled label="colors" classname="colors">
         <RadioGroup
           isColor
-          values={productControl.colors.map(val => ({ value: val }))}
+          items={productControl.colors.map(val => ({ value: val }))}
           classname="radio-options"
           bind:value={selectedColor}
           on:change={({ detail }) => dispatch('color-change', detail)}
@@ -73,7 +73,7 @@
       >
         <RadioChipGroup
           labels={productControl.varietiesByColor.get(selectedColor).map(x => x.size)}
-          values={productControl.varietiesByColor.get(selectedColor).map(x => x.id)}
+          items={productControl.varietiesByColor.get(selectedColor).map(x => x.id)}
           small
           name="sizes"
           classname="radio-options"

@@ -151,7 +151,7 @@
     <Info {account} on:username-change={changeUsername} />
     <section class="card">
       <Tabs
-        values={Object.keys(tabs)}
+        items={Object.keys(tabs)}
         labels={Object.keys(tabs).map(capitalize)}
         value={activeTab}
         name="nav-tabs"
