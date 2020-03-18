@@ -29,9 +29,9 @@
     {/each}
   </div>
   <hr />
-  <CheckChipGroup bind:values={checkValues} labels={labels} name="chip0" classname="flex-wrap" />
+  <CheckChipGroup bind:items={checkValues} labels={labels} name="chip0" classname="flex-wrap" />
   <hr />
-  <CheckChipGroup outline bind:values={checkValues} name="chip1" classname="flex-wrap" maxChecked={1} />
+  <CheckChipGroup outline bind:items={checkValues} name="chip1" classname="flex-wrap" maxChecked={1} />
   <hr />
   <RadioChipGroup bind:value={selectedValue} items={radioValues} labels={labels} name="chip2" classname="flex-wrap" />
   <hr />
