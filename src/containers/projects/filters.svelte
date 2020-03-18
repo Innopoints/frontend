@@ -174,7 +174,7 @@
           <Button on:click={clearCompetenceExclusion}>select all</Button>
           <CheckboxGroup
             labels={competences.map(compObject => compObject.name.toLowerCase())}
-            values={competences}
+            items={competences}
             name="competences"
             on:change={(e) => changeCompetences(e.detail)}
           />

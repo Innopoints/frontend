@@ -20,13 +20,13 @@
   <div class="showcase">
     <CheckboxGroup
         name="checkboxes0"
-        bind:values={values}
+        bind:items={values}
         labels={labels}
     />
     <hr />
     <CheckboxGroup
         name="checkboxes1"
-        bind:values={values}
+        bind:items={values}
         labelclass="label"
         labelPosition="left"
         classname="flex-wrap"
@@ -37,7 +37,7 @@
         name="checkboxes2"
         isColor
         isRound
-        bind:values={colors}
+        bind:items={colors}
         classname="flex-wrap"
     />
   </div>

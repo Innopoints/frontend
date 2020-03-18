@@ -157,13 +157,13 @@
               isColor
               isRound
               name="colors"
-              values={colors}
+              items={colors}
               classname="color-grid"
               on:change={(e) => changeColors(e.detail)}
             />
             <CheckboxGroup
               name="colorless"
-              values={colorlessValues}
+              items={colorlessValues}
               labels={['colorless']}
               on:change={(e) => changeColorless(e.detail)}
             />
