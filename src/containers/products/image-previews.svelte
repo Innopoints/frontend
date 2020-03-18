@@ -47,15 +47,15 @@
     if (displayedImage == null || displayedImage.color !== newImage.color) {
       dispatch('color-change', newImage.color);
     }
-    swiper.slideTo(imageIndex, 300, false);
+    swiper && swiper.slideTo(imageIndex, 300, false);
     displayedImage = newImage;
     selectedColor = newImage.color;
   }
 
   $: {
-    if (selectedColor !== displayedImage.color) {
+    if (displayedImage != null && selectedColor !== displayedImage.color) {
       const coverIndex = productControl.flatImages.findIndex(img => img.color === selectedColor);
-      swiper.slideTo(coverIndex, 300, false);
+      swiper && swiper.slideTo(coverIndex, 300, false);
       displayedImage = productControl.flatImages[coverIndex];
     }
   }
