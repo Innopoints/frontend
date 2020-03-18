@@ -28,7 +28,7 @@
   let order = orderOptions[0];
   let orderLabel = orderLabels[0];
 
-  function updateProjects(filtering) {
+  async function updateProjects(filtering) {
     let queryArgs = new Map();
 
     if (filtering.searchQuery) {
@@ -53,8 +53,9 @@
     queryArgs.set('order_by', filtering.order.orderBy);
     queryArgs.set('order', filtering.order.order);
     const queryString = generateQueryString(queryArgs);
-    api.get('/projects' + (queryString ? '?' + queryString : ''))
-      .then(newProjects => { projects = newProjects; });
+    const response = await api.get('/projects?' + queryString);
+    if (!response.ok) return;
+    projects = await response.json();
   }
 
   function filterProps(props) {
