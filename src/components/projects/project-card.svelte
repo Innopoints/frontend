@@ -14,10 +14,12 @@
   export let start_date;
   export let end_date;
   export let moderated = false;
+
+  const image_placeholder = '/images/create-product/placeholder.svg';
 </script>
 
 <Card classname="with-image">
-  <img src="{API_HOST}/file/{image_id}" alt="" class="image" />
+  <img src={image_id == null ? image_placeholder :`${API_HOST}/file/${image_id}`} alt="" class="image" />
   <div class="content">
     <div class="title">{name}</div>
     <div class="compact">
