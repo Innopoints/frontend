@@ -1,21 +1,21 @@
-FROM node:12
+FROM node:13-alpine
 
 RUN mkdir -p /app
 WORKDIR /app
 
+# install our dependencies
+COPY .env .eslintrc package.json yarn.lock rollup.config.js /app/
+RUN yarn
+
 # copy the project code
 COPY src /app/src
 COPY static /app/static
-COPY .env .eslintrc package.json package-lock.json rollup.config.js /app/
-
-# install our dependencies
-RUN npm install
 
 # Build the project
-RUN npm run build
+RUN yarn build
 
 # expose the server port
 EXPOSE 3000
 
 # define the default command to run when starting the container
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
