@@ -33,7 +33,7 @@
   <hr />
   <CheckChipGroup outline bind:values={checkValues} name="chip1" classname="flex-wrap" maxChecked={1} />
   <hr />
-  <RadioChipGroup bind:value={selectedValue} values={radioValues} labels={labels} name="chip2" classname="flex-wrap" />
+  <RadioChipGroup bind:value={selectedValue} items={radioValues} labels={labels} name="chip2" classname="flex-wrap" />
   <hr />
-  <RadioChipGroup small bind:value={selectedValue} values={radioValues} name="chip3" classname="flex-wrap" />
+  <RadioChipGroup small bind:value={selectedValue} items={radioValues} name="chip3" classname="flex-wrap" />
 </Card>

@@ -73,7 +73,7 @@
         {#if sizes && product.sized && sizes.length > 1}
           <Labeled label="sizes" classname="mt-2">
             <RadioChipGroup
-              values={sizes}
+              items={sizes}
               small
               name="sizes"
               classname="content"

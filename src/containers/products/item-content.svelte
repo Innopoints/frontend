@@ -73,7 +73,7 @@
       >
         <RadioChipGroup
           labels={productControl.varietiesByColor.get(selectedColor).map(x => x.size)}
-          values={productControl.varietiesByColor.get(selectedColor).map(x => x.id)}
+          items={productControl.varietiesByColor.get(selectedColor).map(x => x.id)}
           small
           name="sizes"
           classname="radio-options"

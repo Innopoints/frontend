@@ -202,7 +202,7 @@
   </div>
 </div>
 <RadioChipGroup
-  values={orderOptions}
+  items={orderOptions}
   labels={orderLabels}
   name="order-options"
   bind:value={order}
