@@ -6,6 +6,7 @@
   import RadioChipGroup from 'ui/radio-chip-group.svelte';
   import getBackground from '@/utils/optimal-color.js';
   import { API_HOST } from '@/constants/env.js';
+  import s from '@/utils/plural-s.js';
 
   export let product;
   let selectedIndex = 0;
@@ -88,11 +89,12 @@
       <Labeled label="Price">
         <span class="content">
           <span class:placeholder={!product || !product.price} class="price">
-            {product && product.price || ''}</span>
+            {product && product.price || ''}
+          </span>
           <svg
             src="/images/innopoint-sharp.svg"
             class="innopoint"
-            alt="innopoint{product && product.price == 1 ? '' : 's'}"
+            alt="innopoint{s(product && product.price)}"
           />
         </span>
       </Labeled>

@@ -109,7 +109,7 @@ export default (node, options = {}) => {
 
         let clearPosition = true;
         for (let i = 0; i < target.childNodes.length; i++) {
-          if(target.childNodes[i].className === 'ripple-container') {
+          if (target.childNodes[i].className === 'ripple-container') {
             clearPosition = false;
           }
         }
