@@ -14,7 +14,7 @@
   margin-top: .8em;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .activity .row > .labeled {
@@ -76,4 +76,21 @@
   flex-shrink: 0;
   stroke: #127800;
   margin-right: .3em;
+}
+
+.activity .warning {
+  background: #fff4e5;
+  padding: .5em .8em;
+  margin-top: .8em;
+  border-radius: .75em;
+  color: #995400;
+  display: flex;
+  align-items: center;
+}
+
+.activity .warning .icon {
+  stroke: #995400;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: .6em;
 }

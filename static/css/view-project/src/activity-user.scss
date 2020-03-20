@@ -42,12 +42,18 @@
 
     .description,
     .chips,
-    .volunteers {
+    .volunteers,
+    .spots {
       margin-top: .8em;
     }
 
-    .description .content {
+    .description .content,
+    .spots .content {
       font-size: .95rem;
+    }
+
+    .volunteers > div.text {
+      display: block;
     }
 
     .volunteers ul {
@@ -79,23 +85,6 @@
       font-weight: 300;
     }
   }
-
-  .warning {
-    background: #fff4e5;
-    padding: .5em .8em;
-    margin-top: .8em;
-    border-radius: .75em;
-    color: #995400;
-    display: flex;
-    align-items: center;
-
-    .icon {
-      stroke: #995400;
-      width: 1.2rem;
-      height: 1.2rem;
-      margin-right: .6em;
-    }
-  }
 }
 
 @media only screen and (max-width: 379px) {
@@ -104,6 +93,7 @@
   }
 }
 
+/* stylelint-disable indentation */
 @media screen and (min-width: 420px) and (max-width: 679px),
                   (min-width: 1024px) and (max-width: 1199px),
                   (min-width: 1400px) {
@@ -133,3 +123,4 @@
     }
   }
 }
+/* stylelint-enable indentation */
