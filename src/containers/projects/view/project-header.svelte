@@ -1,13 +1,14 @@
 <script>
   import Labeled from 'ui/labeled.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
-  
+  import { API_HOST } from '@/constants/env.js';
+
   export let project;
 
   const projectImageURL = (
     project.image_id == null ?
       '/images/create-project/placeholder.svg'
-    : `/file/{project.image_id}`
+    : `${API_HOST}/file/${project.image_id}`
   );
 </script>
 
