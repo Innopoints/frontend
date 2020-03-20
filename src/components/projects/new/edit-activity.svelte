@@ -11,7 +11,7 @@
   import Switch from 'ui/switch.svelte';
   import TwoStateSwitch from 'ui/two-state-switch.svelte';
   import ActivityQuestions from './activity-questions.svelte';
-  import formatDateRange from '@/utils/date-range.js';
+  import { formatDateRange } from '@/utils/date-time-format.js';
   import getBlankActivity from '@/constants/projects/blank-activity.js';
   import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
   import { copyActivity } from '@/utils/project-manipulation.js';
