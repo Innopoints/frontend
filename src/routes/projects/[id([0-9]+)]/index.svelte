@@ -74,7 +74,6 @@
       const application = await response.json();
       application.applicant = account;
       activity.existing_application = application;
-      activity.applications.push(application);
       project = project;
 
       if (remember) {
@@ -102,8 +101,8 @@
         throw response;
       }
 
-      activity.applications.filter(x => x.id != activity.existing_application.id);
       if (activity.existing_application.status === ApplicationStatuses.APPROVED) {
+        activity.applications.filter(x => x.id != activity.existing_application.id);
         activity.vacant_spots++;
       }
       activity.existing_application = null;
