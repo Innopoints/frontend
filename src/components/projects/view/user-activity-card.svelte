@@ -5,59 +5,15 @@
   import Labeled from 'ui/labeled.svelte';
   import Button from 'ui/button.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
-  import CheckboxGroup from 'ui/checkbox-group.svelte';
-  import TextField from 'ui/text-field.svelte';
-  import Modal from 'ui/modal.svelte';
-  import Dialog from 'ui/dialog.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import s from '@/utils/plural-s.js';
-  import * as api from '@/utils/api.js';
   import { formatDate, formatTimeRange } from '@/utils/date-time-format.js';
 
   export let activity;
   export let competences;
   export let account;
 
-  let applying = false;
-  let comment = '';
-  let telegram = account.telegram_username;
-  let remember = [{
-    value: 'remember',
-    checked: !!telegram,
-  }];
-
   const dispatch = createEventDispatcher();
-
-  async function apply() {
-    if (activity.telegram_required && !telegram) {
-      alert('Please provide your telegram'); // TODO: replace with real error reporting
-      return;
-    }
-
-    const response = await api.post(`/projects/${activity.project}/activities/${activity.id}/applications`, {
-      data: {
-        telegram,
-        comment,
-      },
-    });
-    if (!response.ok) {
-      return;
-    }
-
-    const application = await response.json();
-    console.log(application);
-
-    if (remember) {
-      const response = await api.patch('/account/telegram', {
-        data: {
-          telegram_username: telegram,
-        },
-      });
-      if (response.ok) {
-        console.log('Successfully updated telegram username');
-      }
-    }
-  }
 </script>
 
 <Card classname="activity user {activity.expanded ? 'expanded' : ''}">
@@ -188,39 +144,12 @@
           take back
         </Button>
       {:else}
-        <Modal bind:isOpen={applying}>
-          <Dialog title="Apply for {activity.name}" closeCallback={() => applying = false}>
-            <form slot="content">
-              <Labeled label="Comment (optional)">
-                <TextField multiline="true" bind:value={comment}>
-                </TextField>
-              </Labeled>
-              <Labeled label="Telegram username">
-                <TextField
-                  bind:value={telegram}
-                  isWithItem
-                  pattern="[A-Za-z0-9_]*"
-                  minlength={5}
-                  maxlength={32}
-                  error="A username should contain from 5 to 32 symbols: a–z, 0–9, _."
-                >
-                  <svg src="images/icons/at-sign.svg" class="item" />
-                </TextField>
-              </Labeled>
-               <CheckboxGroup
-                name="remember"
-                bind:items={remember}
-              />
-              <Button on:click={apply}>apply</Button>
-            </form>
-          </Dialog>
-        </Modal>
         <Button
           isFilled
           classname="additional"
           disabled={new Date(activity.application_deadline) < new Date()
                 || activity.vacant_spots === 0}
-          on:click={() => applying = true}
+          on:click={() => dispatch('apply', activity)}
         >
           apply
         </Button>
