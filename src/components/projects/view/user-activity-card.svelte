@@ -77,15 +77,23 @@
             <li>{application.applicant.full_name}</li>
           {/each}
           <strong>
-            {activity.vacant_spots || 'no more'} spots left
+            {#if activity.people_required !== 0}
+              {activity.vacant_spots || 'no more'} spot{s(activity.vacant_spots)} left
+            {:else}
+              the more, the better
+            {/if}
           </strong>
         </ul>
       </Labeled>
     {:else}
-      <Labeled icon classname="additional spots" label="Vacant Spots">
+      <Labeled icon classname="additional spots" label="Vacant spots">
         <svg slot="icon" class="icon" src="images/icons/users.svg" />
         <span class="content">
-          {activity.vacant_spots || 'no more'} spot{s(activity.vacant_spots)} left
+          {#if activity.people_required !== 0}
+            {activity.vacant_spots || 'no more'} spot{s(activity.vacant_spots)} left
+          {:else}
+            the more, the better
+          {/if}
         </span>
       </Labeled>
     {/if}
@@ -148,7 +156,7 @@
           isFilled
           classname="additional"
           disabled={new Date(activity.application_deadline) < new Date()
-                || activity.vacant_spots === 0}
+                || (activity.vacant_spots === 0 && activity.people_required !== 0)}
           on:click={() => dispatch('apply', activity)}
         >
           apply
