@@ -28,6 +28,7 @@
     ]
   },
   "dependencies": {
+    "clipboard-polyfill": "^2.8.6",
     "compression": "^1.7.1",
     "polka": "^1.0.0-next.11",
     "sapper-environment": "^1.0.1",
