@@ -1,15 +1,20 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+  import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
   import { API_HOST } from '@/constants/env.js';
 
   export let project;
+  export let account;
 
   const projectImageURL = (
     project.image_id == null ?
       '/images/create-project/placeholder.svg'
     : `${API_HOST}/file/${project.image_id}`
   );
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <header class="project-header" style="--image-url: url({projectImageURL})">
@@ -32,26 +37,27 @@
         -->
       </Labeled>
     </div>
-    <!--
-    TODO: show for creators
-    <div class="actions" style="display: none;">
-      <a href="create-project-step1.html" class="btn outline">
-        <svg class="icon mr" src="images/icons/edit.svg" />
-        edit
-      </a>
-      <button class="btn outline danger" type="button">
-        <svg class="icon mr" src="images/icons/trash-2.svg" />
-        delete
-      </button>
-      <button class="btn outline finalize" type="button">
-        <svg class="icon mr" src="images/icons/check-circle.svg" />
-        finalize
-      </button>
-      <a href="review-project.html" class="btn outline review" style="display: none;">
-        <svg class="icon mr" src="images/icons/clipboard.svg" />
-        review
-      </a>
-    </div>
-    -->
+    {#if project.creator === account.email || account.is_admin}
+      <div class="actions">
+        <Button isOutline>
+          <svg class="icon mr" src="images/icons/edit.svg" />
+          edit
+        </Button>
+        <Button isOutline isDanger on:click={() => dispatch('delete-project')}>
+          <svg class="icon mr" src="images/icons/trash-2.svg" />
+          delete
+        </Button>
+        <Button isOutline classname="finalize">
+          <svg class="icon mr" src="images/icons/check-circle.svg" />
+          finalize
+        </Button>
+        {#if account.is_admin}
+          <Button isOutline classname="review">
+            <svg class="icon mr" src="images/icons/clipboard.svg" />
+            review
+          </Button>
+        {/if}
+      </div>
+    {/if}
   </div>
 </header>

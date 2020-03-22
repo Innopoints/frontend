@@ -68,7 +68,7 @@ function toISOFormat(date) {
   return date.toISOString().slice(0, -1) + '+00:00';
 }
 
-/* Prepares an activity object to be sent to the backend
+/* Prepare an activity object to be sent to the backend
    by converting dates to ISO and ensuring certain invariants. */
 export function prepareForBackend(activity) {
   if (activity.fixed_reward) {
@@ -83,17 +83,99 @@ export function prepareForBackend(activity) {
   if (activity.application_deadline != null) {
     activity.application_deadline = toISOFormat(activity.application_deadline);
   }
+
+  delete activity.applications;
+  delete activity.existing_application;
 }
 
 /* Determine the index to insert the activity into the list
    knowing its position among non-internal activities. */
 export function determineInsertionIndex(activities, position) {
   let insertionIndex = 0;
-  while (position) {
+  while (position && insertionIndex < activities.length) {
     if (activities[insertionIndex].internal) {
       position--;
     }
     insertionIndex++;
   }
   return insertionIndex;
+}
+
+/* Synchronize the internal representation of the activities (with types)
+   with the activity list from the backend. */
+export function synchronizeActivityLists(internalList, backendActivities) {
+  let internalListIdx = 0;
+  for (let activity of backendActivities.filter(activity => !activity.internal)) {
+    let activityProcessed = false;
+    while (!activityProcessed) {
+      // If the internal list is over, copy the backend activity to the end
+      // Happens on the initial population of the activityList
+      if (internalListIdx >= internalList.length) {
+        let copy = filterActivityFields(copyActivity(activity));
+        copy._type = ActivityTypes.DISPLAY;
+        internalList.splice(
+          internalListIdx,
+          internalList[internalListIdx] != null,
+          copy,
+        );
+        internalListIdx++;
+        activityProcessed = true;
+        break;
+      }
+
+      // If the activityList cursor is on a new activity form, let it be
+      // Happens when there is an open form that hasn't been saved yet
+      if (internalList[internalListIdx]._type === ActivityTypes.NEW) {
+        internalListIdx++;
+      }
+
+      // If the activityList cursor is on a displayed activity,
+      // don't change anything – it is already that same activity
+      if (internalList[internalListIdx]._type === ActivityTypes.DISPLAY) {
+        internalListIdx++;
+        activityProcessed = true;
+        break;
+      }
+
+      // If the cursor is on a replacement marker, place the backend activity on that spot
+      // Happens upon creating a new activity or applying edits to an existing one
+      if (internalList[internalListIdx]._type === ActivityTypes.REPLACEMENT_MARKER) {
+        let copy = filterActivityFields(copyActivity(activity));
+        copy._type = ActivityTypes.DISPLAY;
+        internalList.splice(
+          internalListIdx,
+          internalList[internalListIdx] != null,
+          copy,
+        );
+        internalListIdx++;
+        activityProcessed = true;
+        break;
+      }
+
+      // If the cursor is on an edit form, accept it as the backend activity
+      if (internalList[internalListIdx]._type === ActivityTypes.EDIT) {
+        internalListIdx++;
+        activityProcessed = true;
+        break;
+      }
+    }
+  }
+
+  // Remove the deleted activities from the end
+  while (internalListIdx < internalList.length) {
+    if (internalList[internalListIdx]._type === ActivityTypes.DISPLAY) {
+      internalList.splice(internalListIdx, 1);
+    } else {
+      internalListIdx++;
+    }
+  }
+
+  // Have a new activity form if the activityList is empty
+  if (internalList.length === 0) {
+    let activity = getBlankActivity();
+    activity._type = ActivityTypes.NEW;
+    internalList.push(activity);
+  }
+
+  return internalList;
 }

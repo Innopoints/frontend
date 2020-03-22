@@ -11,23 +11,27 @@
 </script>
 
 <script>
+  import { goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserActivityCard from '@/components/projects/view/user-activity-card.svelte';
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
   import ReportDialog from '@/components/projects/view/report-dialog.svelte';
+  import ProjectDeletionWarning from '@/components/projects/view/project-deletion-warning.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import * as api from '@/utils/api.js';
 
   export let project;
   export let account;
   export let competences;
+
   let appliedActivity = null;
   let applicationDialogOpen = false;
   let applicationDialogError = null;
   let reportDialogOpen = false;
   let reportDialogProps = {};
+  let projectDeletionWarningOpen = false;
 
   const isModeratorView = (
     account != null
@@ -148,6 +152,15 @@
       console.error(e);
     }
   }
+
+  async function deleteProject() {
+    try {
+      await api.json(api.del(`/projects/${project.id}`));
+      goto('/projects');
+    } catch (e) {
+      console.error(e);
+    }
+  }
 </script>
 
 <svelte:head>
@@ -170,7 +183,6 @@
 
 <Layout user={account}>
   <div class="material">
-    <ProjectHeader {project} />
 
     <h2 class="padded">Activities</h2>
     {#if isModeratorView}
@@ -199,8 +211,14 @@
           />
         {/each}
       </div>
+    <ProjectHeader
+      {project}
+      {account}
+      on:delete-project={() => projectDeletionWarningOpen = true}
+    />
     {/if}
   </div>
+
   {#if isModeratorView}
     <ReportDialog bind:isOpen={reportDialogOpen} {project} {...reportDialogProps} />
   {:else}
@@ -212,4 +230,8 @@
       error={applicationDialogError}
     />
   {/if}
+  <ProjectDeletionWarning
+    bind:isOpen={projectDeletionWarningOpen}
+    on:confirm-deletion={deleteProject}
+  />
 </Layout>
