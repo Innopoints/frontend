@@ -37,6 +37,8 @@
       <ul>
         {#each exposedActivities.slice(0, 3) as activity (activity.id)}
           <li>{activity.name}</li>
+        {:else}
+          None
         {/each}
         {#if exposedActivities.length > 3}
           <li class="extra">+ {activities.length - 3} more</li>
