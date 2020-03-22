@@ -60,12 +60,8 @@
   // Form processsing
   async function deleteDraft({ detail: draftID }) {
     try {
-      const resp = await api.del('/projects/' + draftID);
-      if (!resp.ok) {
-        console.error(await resp.text());
-      } else {
-        drafts = drafts.filter(draft => draft.id !== draftID);
-      }
+      await api.json(api.del('/projects/' + draftID));
+      drafts = drafts.filter(draft => draft.id !== draftID);
     } catch (e) {
       console.error(e);
     }
@@ -73,13 +69,7 @@
 
   async function loadDraft({ detail: draftID }) {
     try {
-      const resp = await api.get('/projects/' + draftID);
-      if (!resp.ok) {
-        console.error(await resp.text());
-        return;
-      }
-
-      const draftProject = await resp.json();
+      const draftProject = await api.json(api.get('/projects/' + draftID));
       for (let activity of draftProject.activities) {
         activity.timeframe = {
           start: new Date(activity.timeframe.start),
@@ -107,66 +97,41 @@
       return;
     }
 
-    if (projectObj.name !== lastSyncedName) {
-      const queryString = generateQueryString(new Map([['name', projectObj.name]]));
-      const nameAvailable = await api.get('/projects/name_available?' + queryString);
-      if (!nameAvailable.ok) {
-        if (nameAvailable.status === 400) {
-          console.error(await nameAvailable.json());
-        } else {
-          console.error(await nameAvailable.text());
+    try {
+      if (projectObj.name !== lastSyncedName) {
+        const queryString = generateQueryString(new Map([['name', projectObj.name]]));
+        const nameAvailable = await api.json(api.get('/projects/name_available?' + queryString));
+
+        if (!nameAvailable) {
+          duplicateName = true;
+          return;
         }
-        return;
       }
 
-      if (!(await nameAvailable.json())) {
-        duplicateName = true;
-        return;
-      } else {
-        duplicateName = false;
-      }
-    } else {
       duplicateName = false;
-    }
+      lastSyncedName = projectObj.name;
 
-    lastSyncedName = projectObj.name;
-
-    if (projectObj.id != null) {
-      const resp = await api.patch('/projects/' + projectObj.id, {
-        data: filterProjectFields(projectObj, true),
-      });
-      if (resp.ok) {
-        autosaved.set(true);
-      } else if (resp.status === 400) {
-        console.error(await resp.json());
+      if (projectObj.id != null) {
+        await api.json(api.patch('/projects/' + projectObj.id, {
+          data: filterProjectFields(projectObj, true),
+        }));
       } else {
-        console.error(await resp.text());
+        project.set(await api.json(api.post('/projects', {
+          data: projectObj,
+        })));
       }
-    } else {
-      const resp = await api.post('/projects', {
-        data: projectObj,
-      });
-      if (resp.ok) {
-        project.set(await resp.json());
-        autosaved.set(true);
-      } else if (resp.status === 400) {
-        console.error(await resp.json());
-      } else {
-        console.error(await resp.text());
-      }
+      autosaved.set(true);
+    } catch (e) {
+      console.error(e);
     }
   }
 
   async function publishProject() {
-    const resp = await api.patch(`/projects/${$project.id}/publish`);
-    if (!resp.ok) {
-      if (resp.status === 400) {
-        console.error(await resp.json());
-      } else {
-        console.error(await resp.text());
-      }
-    } else {
+    try {
+      await api.json(api.patch(`/projects/${$project.id}/publish`));
       goto('/projects');
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -219,17 +184,12 @@
 
   async function processActivityDeletion({ detail: activityID }) {
     if ($project.id != null) {
-      const resp = await api.del(`/projects/${$project.id}/activities/${activityID}`);
-      if (!resp.ok) {
-        if (resp.status === 400) {
-          console.error(await resp.json());
-        } else {
-          console.error(await resp.text());
-        }
-        // Do not delete the activity if the backend responded with an error
-        return;
+      try {
+        await api.json(api.del(`/projects/${$project.id}/activities/${activityID}`));
+        $project.activities = $project.activities.filter(act => act.id !== activityID);
+      } catch (e) {
+        console.error(e);
       }
-      $project.activities = $project.activities.filter(act => act.id !== activityID);
     } else {
       $project.activities = $project.activities.filter(act => act.name !== activityID);
     }
