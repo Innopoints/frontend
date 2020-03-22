@@ -14,7 +14,9 @@
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserActivityCard from '@/components/projects/view/user-activity-card.svelte';
+  import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
+  import ReportDialog from '@/components/projects/view/report-dialog.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import * as api from '@/utils/api.js';
 
@@ -24,6 +26,8 @@
   let appliedActivity = null;
   let applicationDialogOpen = false;
   let applicationDialogError = null;
+  let reportDialogOpen = false;
+  let reportDialogProps = {};
 
   const isModeratorView = (
     account != null
@@ -36,7 +40,10 @@
       activityCards = (
         project.activities
           .filter(x => !x.internal)
-          .map(act => ({...act, expanded: false}))
+          .map(act => {
+            act.expanded = false;
+            return act;
+          })
       );
     } else {
       activityCards = (
@@ -55,7 +62,7 @@
     applicationDialogOpen = true;
   }
 
-  async function processApplication({ detail: { activity, comment, telegram, remember }}) {
+  async function processApplication({ detail: { activity, comment, telegram, remember } }) {
     try {
       const response = await api.post(
         `/projects/${activity.project}/activities/${activity.id}/applications`,
@@ -111,6 +118,36 @@
       console.error(e);
     }
   }
+
+  function showReportDialog({ detail: props }) {
+    reportDialogProps = props;
+    reportDialogOpen = true;
+  }
+
+  async function changeApplicationStatus(status, activity, application) {
+    try {
+      const response = await api.patch(
+        `/projects/${activity.project}/activities/${activity.id}`
+        + `/applications/${application.id}/status`,
+        { data: { status } },
+      );
+
+      if (!response.ok) {
+        throw response;
+      }
+
+      if (status === ApplicationStatuses.APPROVED) {
+        activity.vacant_spots--;
+      } else if (application.status === ApplicationStatuses.APPROVED) {
+        activity.vacant_spots++;
+      }
+
+      application.status = status;
+      project = project;
+    } catch (e) {
+      console.error(e);
+    }
+  }
 </script>
 
 <svelte:head>
@@ -136,19 +173,37 @@
     <ProjectHeader {project} />
 
     <h2 class="padded">Activities</h2>
-    <div class="activities user padded">
-      {#each activityCards as activity (activity.id)}
-        <UserActivityCard
-          {activity}
-          {competences}
-          {account}
-          on:apply={showApplicationDialog}
-          on:take-back-application={processTakeBack}
-        />
-      {/each}
-    </div>
+    {#if isModeratorView}
+      <div class="activities moderated padded">
+        {#each activityCards as activity (activity.id)}
+          <ModeratorActivityCard
+            {activity}
+            {competences}
+            on:view-reports={showReportDialog}
+            on:application-status-changed={
+              ({ detail: { status, activity, application } }) =>
+                changeApplicationStatus(status, activity, application)
+            }
+          />
+        {/each}
+      </div>
+    {:else}
+      <div class="activities user padded">
+        {#each activityCards as activity (activity.id)}
+          <UserActivityCard
+            {activity}
+            {competences}
+            {account}
+            on:apply={showApplicationDialog}
+            on:take-back-application={processTakeBack}
+          />
+        {/each}
+      </div>
+    {/if}
   </div>
-  {#if !isModeratorView}
+  {#if isModeratorView}
+    <ReportDialog bind:isOpen={reportDialogOpen} {project} {...reportDialogProps} />
+  {:else}
     <ApplicationDialog
       savedUsername={account.telegram_username}
       activity={appliedActivity}
