@@ -25,7 +25,11 @@
   import StepThree from '@/containers/projects/new/step-3.svelte';
   import * as api from '@/utils/api.js';
   import generateQueryString from '@/utils/generate-query-string.js';
-  import { filterProjectFields } from '@/utils/project-manipulation.js';
+  import {
+    determineInsertionIndex,
+    filterProjectFields,
+    prepareForBackend,
+  } from '@/utils/project-manipulation.js';
   import activityTypes from '@/constants/projects/activity-internal-types.js';
 
   const { page } = stores();
@@ -51,10 +55,6 @@
 
   function goToStep(stepIdx) {
     goto(`/projects/new?step=${stepIdx}`);
-  }
-
-  function toISOFormat(date) {
-    return date.toISOString().slice(0, -1) + '+00:00';
   }
 
   // Form processsing
@@ -173,74 +173,46 @@
   async function processActivityChange({ detail }) {
     const type = detail.activity._type;
     delete detail.activity._type;
+    prepareForBackend(detail.activity);
 
-    let insertionIndex = 0;
-    while (detail.position) {
-      if (!$project.activities[insertionIndex].internal) {
-        detail.position--;
-      }
-      insertionIndex++;
-    }
+    const index = determineInsertionIndex($project.activities, detail.position);
 
-    if (detail.activity.fixed_reward) {
-      detail.activity.working_hours = 1;
-    }
-
-    detail.activity.timeframe = {
-      start: toISOFormat(detail.activity.timeframe.start),
-      end: toISOFormat(detail.activity.timeframe.end),
-    };
-
-    if (detail.activity.application_deadline != null) {
-      detail.activity.application_deadline = toISOFormat(detail.activity.application_deadline);
-    }
-
-    if (type === activityTypes.NEW) {
-      if ($project.id == null) {
-        // If the project does not exist on the backend yet
-        $project.activities.splice(insertionIndex, 0, detail.activity);
-      } else {
-        const resp = await api.post(`/projects/${$project.id}/activities`, {
-          data: detail.activity,
-        });
-
-        if (!resp.ok) {
-          if (resp.status === 400) {
-            console.error(await resp.json());
-          } else {
-            console.error(await resp.text());
-          }
-        }
-
-        $project.activities.splice(insertionIndex, 0, await resp.json());
-      }
-    } else if (type === activityTypes.EDIT) {
-      if ($project.id == null) {
-        // If the project does not exist on the backend yet
-        $project.activities.splice(insertionIndex, 1, detail.activity);
-      } else {
-        const activityID = detail.activity.id;
-        delete detail.activity.id;
-        const resp = await api.patch(
-          `/projects/${$project.id}/activities/${activityID}`,
-          { data: detail.activity },
-        );
-
-        if (!resp.ok) {
-          if (resp.status === 400) {
-            console.error(await resp.json());
-          } else {
-            console.error(await resp.text());
-          }
+    let updatedActivity;
+    try {
+      if (type === activityTypes.NEW) {
+        if ($project.id == null) {
+          // The project does not exist on the backend yet
+          updatedActivity = detail.activity;
         } else {
-          detail.activity.id = activityID;
+          updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
+            data: detail.activity,
+          }));
+        }
+        $project.activities.splice(index, 0, updatedActivity);
+      } else if (type === activityTypes.EDIT) {
+        if ($project.id == null) {
+          // The project does not exist on the backend yet
+          updatedActivity = detail.activity;
+          $project.activities.splice(index, 1, updatedActivity);
+        } else {
+          const activityID = detail.activity.id;
+          delete detail.activity.id;
+
+          const updatedActivity = await api.json(api.patch(
+            `/projects/${$project.id}/activities/${activityID}`,
+            { data: detail.activity },
+          ));
+          updatedActivity.id = detail.activity.id = activityID;
+
           $project.activities.splice(
             $project.activities.findIndex(act => act.id === activityID),
             1,
-            detail.activity,
+            updatedActivity,
           );
         }
       }
+    } catch (e) {
+      console.error(e);
     }
     $project.activities = $project.activities;
   }
