@@ -39,6 +39,7 @@
       queryArgs.set('spots', filtering.vacantSpots.toString());
     }
 
+    // TODO: implement
     // if (filtering.minDate != null) {
     //   queryArgs.set('min', filtering.minPrice);
     // }
@@ -73,7 +74,6 @@
 
   <!-- Styles for Projects page -->
   <link rel="stylesheet" href="css/page-components/tagline.css" />
-  <link rel="stylesheet" href="css/page-components/empty-state.css" />
   <link rel="stylesheet" href="css/page-components/filters.css" />
   <link rel="stylesheet" href="css/projects/filters-spec.css" />
   <link rel="stylesheet" href="css/projects/main.css" />
