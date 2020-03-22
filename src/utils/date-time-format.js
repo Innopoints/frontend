@@ -68,7 +68,8 @@ export function formatDate(date) {
     // Jun 12
     return `${month} ${day}`;
   } else {
-    return `${month} ${day} ${year}`;
+    // 12 Jun 2019
+    return `${day} ${month} ${year}`;
   }
 }
 
