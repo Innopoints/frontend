@@ -63,5 +63,9 @@ export async function json(request) {
     }
   }
 
+  if (response.status === 204) {
+    return null;
+  }
+
   return await response.json();
 }
