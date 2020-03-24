@@ -20,16 +20,19 @@
   let animation = false;
 
   function purchase() {
-    if (!productControl.productSized || selectedVarietyID != null) {
-      err = false;
-      dispatch('purchase', { varietyID: selectedVarietyID });
-    } else {
+    // not in sizes, select variety automatically
+    if (!productControl.productSized) {
+      const selectedVariety = productControl.varietiesByColor.get(selectedColor);
+      selectedVarietyID = selectedVariety[0].id;
+    }
+    if (selectedVarietyID == null) {
       err = true;
       animation = true;
-      setTimeout(function() {
-        animation = false;
-      }, 1000);
+      setTimeout(() => animation = false, 1000);
+      return;
     }
+    err = false;
+    dispatch('purchase', { varietyID: selectedVarietyID });
   }
 </script>
 
