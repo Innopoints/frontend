@@ -4,7 +4,7 @@
   import DatePicker from 'ui/date-picker.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
 
-  export let value;
+  export let value = null;
   export let errorNotSpecified;
 
   const dispatch = createEventDispatcher();

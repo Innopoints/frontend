@@ -12,6 +12,7 @@
     copyActivity,
     filterActivityFields,
     countDisplayActivitiesBefore,
+    synchronizeActivityLists,
   } from '@/utils/project-manipulation.js';
 
   export let project;
@@ -27,97 +28,19 @@
   //   with the concept of internal activities on the backend. Moreover, internal
   //   activities are not in the activityList, since they are not displayed on the page.
 
-  function synchronizeActivityLists({ activities: backendActivities }) {
-    let activityListIdx = 0;
-    for (let activity of backendActivities.filter(activity => !activity.internal)) {
-      let activityProcessed = false;
-      while (!activityProcessed) {
-        // If the internal list is over, copy the backend activity to the end
-        // Happens on the initial population of the activityList
-        if (activityListIdx >= activityList.length) {
-          let copy = filterActivityFields(copyActivity(activity));
-          copy._type = ActivityTypes.DISPLAY;
-          activityList.splice(
-            activityListIdx,
-            activityList[activityListIdx] != null,
-            copy,
-          );
-          activityListIdx++;
-          activityProcessed = true;
-          break;
-        }
-
-        // If the activityList cursor is on a new activity form, let it be
-        // Happens when there is an open form that hasn't been saved yet
-        if (activityList[activityListIdx]._type === ActivityTypes.NEW) {
-          activityListIdx++;
-        }
-
-        // If the activityList cursor is on a displayed activity,
-        // don't change anything – it is already that same activity
-        if (activityList[activityListIdx]._type === ActivityTypes.DISPLAY) {
-          activityListIdx++;
-          activityProcessed = true;
-          break;
-        }
-
-        // If the cursor is on a replacement marker, place the backend activity on that spot
-        // Happens upon creating a new activity or applying edits to an existing one
-        if (activityList[activityListIdx]._type === ActivityTypes.REPLACEMENT_MARKER) {
-          let copy = filterActivityFields(copyActivity(activity));
-          copy._type = ActivityTypes.DISPLAY;
-          activityList.splice(
-            activityListIdx,
-            activityList[activityListIdx] != null,
-            copy,
-          );
-          activityListIdx++;
-          activityProcessed = true;
-          break;
-        }
-
-        // If the cursor is on an edit form, accept it as the backend activity
-        if (activityList[activityListIdx]._type === ActivityTypes.EDIT) {
-          activityListIdx++;
-          activityProcessed = true;
-          break;
-        }
-      }
-    }
-
-    // Remove the deleted activities from the end
-    while (activityListIdx < activityList.length) {
-      if (activityList[activityListIdx]._type === ActivityTypes.DISPLAY) {
-        activityList.splice(activityListIdx, 1);
-      } else {
-        activityListIdx++;
-      }
-    }
-
-    // Have a new activity form if the activityList is empty
-    if (activityList.length === 0) {
-      let activity = getBlankActivity();
-      activity._type = ActivityTypes.NEW;
-      activityList.push(activity);
-    }
-
-    activityList = activityList;
-  }
-
   const dispatch = createEventDispatcher();
-  const unsubscribe = project.subscribe(synchronizeActivityLists);
+  const unsubscribe = project.subscribe(
+    ({ activities: backendActivities }) => {
+      activityList = synchronizeActivityLists(activityList, backendActivities);
+    },
+  );
   onDestroy(unsubscribe);
 
-  function duplicateActivity({ detail: id }) {
-    for (let i = 0; i < activityList.length; ++i) {
-      if (activityList[i]._type === ActivityTypes.DISPLAY && activityList[i].id === id) {
-        const newActivity = filterActivityFields(copyActivity(activityList[i]));
-        delete newActivity.id;
-        newActivity._type = ActivityTypes.NEW;
-        activityList.push(newActivity);
-        break;
-      }
-    }
+  function duplicateActivity({ detail: activity }) {
+    const newActivity = filterActivityFields(copyActivity(activity));
+    delete newActivity.id;
+    newActivity._type = ActivityTypes.NEW;
+    activityList.push(newActivity);
     activityList = activityList;
   }
 
@@ -125,7 +48,7 @@
     activityList = activityList.filter(act => act.name !== activity.name);
     dispatch('delete-activity', activity.id || activity.name);
     if (activityList.length === 0) {
-      let activity = getBlankActivity();
+      const activity = getBlankActivity();
       activity._type = ActivityTypes.NEW;
       activityList.push(activity);
     }
@@ -139,24 +62,29 @@
     {#if activity._type === ActivityTypes.DISPLAY}
       <ActivityCard
         {activity}
-        on:edit-activity={(e) => activity._type = ActivityTypes.EDIT}
         on:copy-activity={duplicateActivity}
         on:delete-activity={deleteActivity}
+        on:edit-activity={(e) => activity._type = ActivityTypes.EDIT}
       />
     {:else if activity._type !== ActivityTypes.REPLACEMENT_MARKER}
       <EditActivity
         {competences}
-        {activity}
+        bind:activity
         {activityList}
         {index}
         on:discard-activity={(e) => {
+          // Dispatched for activities on backend-unsynced projects
+          // when the fields are back to empty to cancel creation.
           activityList.splice(e.detail, 1);
           activityList = activityList;
         }}
         on:discard-changes={(e) => {
+          // Dispatched for activities on backend-synced projects
+          // when the fields are back to initial to cancel editing.
           activityList[e.detail]._type = ActivityTypes.DISPLAY;
         }}
         on:change={(e) => {
+          // Dispatched when a VALID change occurs.
           const copy = copyActivity(e.detail);
           e.detail._type = ActivityTypes.REPLACEMENT_MARKER;
           dispatch('change', {

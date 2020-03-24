@@ -3,7 +3,7 @@
   import TextField from 'ui/text-field.svelte';
   import CheckboxGroup from 'ui/checkbox-group.svelte';
 
-  export let value;
+  export let value = null;
   export let activityIndex;
   export let errorNotSpecified;
   export let errorInvalid;

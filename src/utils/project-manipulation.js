@@ -88,6 +88,19 @@ export function prepareForBackend(activity) {
   delete activity.existing_application;
 }
 
+/* Prepare the activity object to be processed on the frontend
+   by converting dates to Date objects. */
+export function prepareAfterBackend(activity) {
+  activity.timeframe = {
+    start: new Date(activity.timeframe.start),
+    end: new Date(activity.timeframe.end),
+  };
+
+  if (activity.application_deadline != null) {
+    activity.application_deadline = new Date(activity.application_deadline);
+  }
+}
+
 /* Determine the index to insert the activity into the list
    knowing its position among non-internal activities. */
 export function determineInsertionIndex(activities, position) {

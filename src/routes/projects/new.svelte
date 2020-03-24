@@ -29,6 +29,7 @@
     determineInsertionIndex,
     filterProjectFields,
     prepareForBackend,
+    prepareAfterBackend,
   } from '@/utils/project-manipulation.js';
   import activityTypes from '@/constants/projects/activity-internal-types.js';
 
@@ -152,6 +153,7 @@
           updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
             data: detail.activity,
           }));
+          prepareAfterBackend(updatedActivity);
         }
         $project.activities.splice(index, 0, updatedActivity);
       } else if (type === activityTypes.EDIT) {
@@ -163,10 +165,11 @@
           const activityID = detail.activity.id;
           delete detail.activity.id;
 
-          const updatedActivity = await api.json(api.patch(
+          updatedActivity = await api.json(api.patch(
             `/projects/${$project.id}/activities/${activityID}`,
             { data: detail.activity },
           ));
+          prepareAfterBackend(updatedActivity);
           updatedActivity.id = detail.activity.id = activityID;
 
           $project.activities.splice(
@@ -183,6 +186,9 @@
   }
 
   async function processActivityDeletion({ detail: activityID }) {
+    // activityID may be:
+    //  - the actual ID of the activity on the backend, if the project exists on the backend;
+    //  - the name of the activity, if the project does not exist on the backend.
     if ($project.id != null) {
       try {
         await api.json(api.del(`/projects/${$project.id}/activities/${activityID}`));
