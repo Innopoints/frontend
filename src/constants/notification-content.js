@@ -121,7 +121,7 @@ export default function getNotificationContent({ type, payload }) {
       fragments = [
         {
           text: payload.account.full_name,
-          url: 'mailto:' + payload.account.email,
+          url: '/profile?user=' + payload.account.email,
         },
         ' has purchased the ',
         {
