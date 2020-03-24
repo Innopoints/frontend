@@ -58,11 +58,11 @@ export function formatDate(date) {
   const dateObject = new Date(date);
   const now = new Date();
 
-  let year = dateObject.getFullYear();
-  let month = months[dateObject.getMonth()];
-  let day = dateObject.getDate();
+  const year = dateObject.getFullYear();
+  const month = months[dateObject.getMonth()];
+  const day = dateObject.getDate();
 
-  let thisYear = year === now.getFullYear();
+  const thisYear = year === now.getFullYear();
 
   if (thisYear) {
     // Jun 12
@@ -84,14 +84,14 @@ export function formatTimeRange({start, end}) {
   const m1 = ('' + (startDate.getMonth() + 1)).padStart(2, '0');
   const m2 = ('' + (endDate.getMonth() + 1)).padStart(2, '0');
 
-  const d1 = startDate.getDate();
-  const d2 = endDate.getDate();
+  const d1 = ('' + startDate.getDate()).padStart(2, '0');
+  const d2 = ('' + endDate.getDate()).padStart(2, '0');
 
-  const h1 = startDate.getHours();
-  const h2 = endDate.getHours();
+  const h1 = ('' + startDate.getHours()).padStart(2, '0');
+  const h2 = ('' + endDate.getHours()).padStart(2, '0');
 
-  const mn1 = startDate.getMinutes();
-  const mn2 = endDate.getMinutes();
+  const mn1 = ('' + startDate.getMinutes()).padStart(2, '0');
+  const mn2 = ('' + endDate.getMinutes()).padStart(2, '0');
 
   const startThisYear = startDate.getFullYear() === now.getFullYear();
   const endThisYear = endDate.getFullYear() === now.getFullYear();
@@ -131,5 +131,26 @@ export function formatTimeRange({start, end}) {
   } else {
     // 12.06.20 - 15.07.21
     return `${d1}.${m1}.${y1} – ${d2}.${m2}.${y2}`;
+  }
+}
+
+export function formatTime(time) {
+  const timeObject = new Date(time);
+  const now = new Date();
+
+  const year = ('' + (timeObject.getFullYear() % 100)).padStart(2, '0');
+  const month = ('' + (timeObject.getMonth() + 1)).padStart(2, '0');
+  const day = ('' + timeObject.getDate()).padStart(2, '0');
+  const hour = ('' + timeObject.getHours()).padStart(2, '0');
+  const minute = ('' + timeObject.getMinutes()).padStart(2, '0');
+
+  const thisYear = year === now.getFullYear();
+
+  if (thisYear) {
+    // 13:37, 12.06
+    return `${hour}:${minute}, ${day}.${month}`;
+  } else {
+    // 13:37, 12.06.20
+    return `${hour}:${minute}, ${day}.${month}.${year}`;
   }
 }

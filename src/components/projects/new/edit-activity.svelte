@@ -5,13 +5,14 @@
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
   import Dropdown from 'ui/dropdown.svelte';
-  import DatePicker from 'ui/date-picker.svelte';
   import DateTimePicker from 'ui/date-time-picker.svelte';
-  import CheckboxGroup from 'ui/checkbox-group.svelte';
   import Switch from 'ui/switch.svelte';
   import TwoStateSwitch from 'ui/two-state-switch.svelte';
+  import TimeframePicker from './timeframe-picker.svelte';
+  import PeopleSelector from './people-selector.svelte';
+  import CompetencePicker from './competence-picker.svelte';
   import ActivityQuestions from './activity-questions.svelte';
-  import { formatDateRange } from '@/utils/date-time-format.js';
+  import { formatTime } from '@/utils/date-time-format.js';
   import getBlankActivity from '@/constants/projects/blank-activity.js';
   import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
   import { copyActivity } from '@/utils/project-manipulation.js';
@@ -23,11 +24,6 @@
   export let index;
   export let activityList;
 
-  let competencesOptions = competences.map(comp => ({
-    value: comp.id,
-    checked: activity.competences.includes(comp.id),
-  }));
-  const competencesLabels = competences.map(comp => comp.name);
   let fieldsAltered = false;
   const errors = {
     nameNotSpecified: false,
@@ -41,47 +37,8 @@
     peopleRequiredInvalid: false,
   };
 
-  let rememberedPeopleRequired = null;
-  const morePeopleCheckbox = { value: null, checked: activity.people_required === 0 };
-
-  const dispatch = createEventDispatcher();
-
-  function setTimeframe(timeframe, toggle) {
-    if (timeframe != null) {
-      setTimeout(toggle, 150);
-    }
-    activity.timeframe = timeframe;
-  }
-
-  function modifyCompetences({ detail: competence }) {
-    if (competence.checked) {
-      activity.competences.push(competence.value);
-      activity = activity;
-    } else {
-      activity.competences = activity.competences.filter(id => id !== competence.value);
-    }
-  }
-
-  function setPeopleRequired({ detail: peopleRequired }) {
-    activity.people_required = peopleRequired;
-    morePeopleCheckbox.checked = false;
-  }
-
-  function toggleMorePeople({ detail: checkValue }) {
-    if (checkValue.checked) {
-      rememberedPeopleRequired = activity.people_required;
-      activity.people_required = 0;
-    } else {
-      activity.people_required = rememberedPeopleRequired || 1;
-    }
-  }
-
   function discardChanges() {
     activity = initialCopy;
-    morePeopleCheckbox.checked = initialCopy === 0;
-    competencesOptions.forEach(opt => opt.checked = initialCopy.competences.includes(opt.value));
-    competencesOptions = competencesOptions;
-    rememberedPeopleRequired = null;
     fieldsAltered = false;
   }
 
@@ -130,12 +87,8 @@
       }
     }
 
-    if (activity.people_required == null || activity.people_required === '') {
+    if (activity.people_required == null) {
       errors.peopleRequiredNotSpecified = true;
-    } else if (activity.people_required === 0 && !morePeopleCheckbox.checked) {
-      errors.peopleRequiredInvalid = true;
-    } else if (activity.people_required < 0) {
-      errors.peopleRequiredInvalid = true;
     }
 
     if (!ensureNameUniqueness()) {
@@ -146,6 +99,8 @@
       dispatch('change', activity);
     }
   }
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <Card classname="create-activity">
@@ -189,21 +144,11 @@
       <span slot="title" class="name">
         Activity date&nbsp;<span class="required">*</span>
       </span>
-      <Dropdown noclose let:toggle>
-        <svg src="images/icons/calendar.svg" class="icon mr-2" slot="label" />
-        <span slot="label">
-          {activity.timeframe != null ? formatDateRange(activity.timeframe) : 'select date range'}
-        </span>
-        <DatePicker
-          range
-          value={activity.timeframe}
-          on:change={(e) => {
-            setTimeframe(e.detail, toggle);
-            errors.dateNotSpecified = false;
-            fieldsAltered = true;
-          }}
-        />
-      </Dropdown>
+      <TimeframePicker
+        bind:value={activity.timeframe}
+        bind:errorNotSpecified={errors.dateNotSpecified}
+        on:change={() => fieldsAltered = true}
+      />
     </FormField>
 
     <FormField
@@ -214,19 +159,13 @@
       <span slot="title" class="name">
         Competences, developed by this activity (no more than&nbsp;3)&nbsp;<span class="required">*</span>
       </span>
-      <Dropdown label="select competences" dropdownclass="btn-shift" noclose nowrap>
-        <CheckboxGroup
-          name="competences"
-          maxChecked={3}
-          items={competencesOptions}
-          labels={competencesLabels}
-          on:change={(e) => {
-            modifyCompetences(e);
-            errors.noCompetences = false;
-            fieldsAltered = true;
-          }}
-        />
-      </Dropdown>
+      <CompetencePicker
+        {competences}
+        activityIndex={index}
+        bind:value={activity.competences}
+        bind:errorNotSpecified={errors.noCompetences}
+        on:change={() => fieldsAltered = true}
+      />
     </FormField>
 
     <FormField
@@ -235,7 +174,10 @@
       classname="tg-username"
       id="tg-username{index}"
     >
-      <Switch bind:value={activity.telegram_required} on:change={() => fieldsAltered = true} />
+      <Switch
+        bind:value={activity.telegram_required}
+        on:change={() => fieldsAltered = true}
+      />
     </FormField>
   </div>
 
@@ -345,30 +287,12 @@
       <span slot="title" class="name">
         People required&nbsp;<span class="required">*</span>
       </span>
-      <TextField
-        id="people-required{index}"
-        type="number"
-        placeholder="1"
-        min={1}
-        isNoSpinner
-        value={activity.people_required || ''}
-        on:change={(evt) => {
-          setPeopleRequired(evt);
-          errors.peopleRequiredNotSpecified = false;
-          (+evt.detail >= 1) && (errors.peopleRequiredInvalid = false);
-          fieldsAltered = true;
-        }}
-      />
-      <span class="divider">or</span>
-      <CheckboxGroup
-        name="the-more"
-        items={[morePeopleCheckbox]}
-        labels={["the more, the better"]}
-        on:change={(evt) => {
-          toggleMorePeople(evt);
-          errors.peopleRequiredNotSpecified = false;
-          fieldsAltered = true;
-        }}
+      <PeopleSelector
+        activityIndex={index}
+        bind:value={activity.people_required}
+        bind:errorNotSpecified={errors.peopleRequiredNotSpecified}
+        bind:errorInvalid={errors.peopleRequiredInvalid}
+        on:change={() => fieldsAltered = true}
       />
     </FormField>
 
@@ -381,12 +305,7 @@
         <svg src="images/icons/calendar.svg" class="icon mr-2" slot="label" />
         <span slot="label">
           {activity.application_deadline ?
-            activity.application_deadline.toLocaleString('ru', {
-              hour: '2-digit',
-              minute: '2-digit',
-              day: '2-digit',
-              month: '2-digit',
-            })
+            formatTime(activity.application_deadline)
             : 'select date'}
         </span>
         <DateTimePicker
@@ -425,7 +344,7 @@
           classname="mr"
           isDanger
           on:click={cancelEdit}
-          disabled={index === 0}
+          disabled={index === 0 && !('id' in activity)}
         >
           {#if 'id' in activity}
             cancel editing
