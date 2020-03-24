@@ -22,8 +22,8 @@
   function purchase() {
     // not in sizes, select variety automatically
     if (!productControl.productSized) {
-      const selectedVariety = productControl.varietiesByColor.get(selectedColor);
-      selectedVarietyID = selectedVariety[0].id;
+      const varietiesOfSelectedColor = productControl.varietiesByColor.get(selectedColor);
+      selectedVarietyID = varietiesOfSelectedColor[0].id;
     }
     if (selectedVarietyID == null) {
       err = true;
