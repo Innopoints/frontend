@@ -116,17 +116,16 @@
   }
 
   async function createProduct() {
+    errorMessage = null;
     prefetch('/store');
     if (!product.name) {
       errors.name = true;
       errorMessage = 'Some fields are not filled out or filled out incorrectly.';
-      return;
     }
 
     if (!product.price || product.price < 1) {
       errors.price = true;
       errorMessage = 'Some fields are not filled out or filled out incorrectly.';
-      return;
     }
 
     const cleanVarieties = product.varieties.flatMap(variety => {
@@ -150,11 +149,13 @@
 
     if (cleanVarieties.length === 0) {
       errorMessage = 'The product must be in stock at creation.';
-      return;
     }
 
     if (cleanVarieties.some(variety => variety.color == null) && cleanVarieties.length > 1) {
       errorMessage = 'Cannot have more than one variety in a product without colors';
+    }
+
+    if (errorMessage) {
       return;
     }
 
