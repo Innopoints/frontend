@@ -22,6 +22,10 @@
     display: flex;
     flex-wrap: wrap;
 
+    .btn {
+      margin-bottom: .3em;
+    }
+
     .btn > .icon {
       width: 1.25rem;
       height: 1.25rem;
@@ -96,6 +100,10 @@
     color: $main;
     font-size: 1rem;
     text-decoration: underline;
+  }
+
+  .left .description {
+    white-space: pre-line;
   }
 }
 

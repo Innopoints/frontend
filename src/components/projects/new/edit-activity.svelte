@@ -98,6 +98,7 @@
 
     if (!Object.keys(errors).some(errorName => errors[errorName])) {
       dispatch('change', activity);
+      initialCopy = copyActivity(activity);
     }
   }
 

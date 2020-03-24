@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Accordion from 'ui/accordion.svelte';
   import Button from 'ui/button.svelte';
   import Card from 'ui/card.svelte';
@@ -14,11 +15,15 @@
   let pendingApplications;
 
   $: pendingApplications = (
-    activity.applications.filter(x => x.status === ApplicationStatuses.PENDING)
+    activity.applications == null ?
+    [] : activity.applications.filter(x => x.status === ApplicationStatuses.PENDING)
   );
   $: approvedApplications = (
-    activity.applications.filter(x => x.status === ApplicationStatuses.APPROVED)
+    activity.applications == null ?
+    [] : activity.applications.filter(x => x.status === ApplicationStatuses.APPROVED)
   );
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <Card classname="activity moderated">
@@ -34,15 +39,17 @@
       </Labeled>
       <Labeled icon label="Worktime">
         <svg slot="icon" class="icon" src="images/icons/clock.svg" />
-        <span class="content primary">
-          {#if activity.fixed_reward}
-            as needed
-          {:else}
-            {activity.working_hours} hour{s(activity.working_hours)}
-          {/if}
-        </span>
-        <span class="content secondary">
-          {formatTimeRange(activity.timeframe)}
+        <span class="content">
+          <span class="content primary">
+            {#if activity.fixed_reward}
+              as needed
+            {:else}
+              {activity.working_hours} hour{s(activity.working_hours)}
+            {/if}
+          </span>
+          <div class="content secondary">
+            {formatTimeRange(activity.timeframe)}
+          </div>
         </span>
       </Labeled>
     </div>
@@ -57,14 +64,12 @@
       </div>
     {/if}
     {#if activity.description}
-      <div class="additional description">
-        <Labeled icon label="Description">
-          <svg slot="icon" class="icon" src="images/icons/align-left.svg" />
-          <span class="content">
-            {activity.description}
-          </span>
-        </Labeled>
-      </div>
+      <Labeled icon label="Description">
+        <svg slot="icon" class="icon" src="images/icons/align-left.svg" />
+        <span class="description">
+          {activity.description}
+        </span>
+      </Labeled>
     {/if}
     <div class="additional chips">
       {#each activity.competences as compID (compID)}
@@ -75,11 +80,24 @@
       {/each}
     </div>
     <div class="actions">
-      <Button isOutline classname="mr">
+      <Button isOutline classname="mr" on:click={() => dispatch('edit-activity')}>
         <svg class="icon mr" src="images/icons/edit.svg" />
         edit
       </Button>
-      <Button isOutline isDanger classname="mr">
+      <Button
+        isOutline
+        classname="mr"
+        on:click={() => dispatch('duplicate-activity', activity)}
+      >
+        <svg class="icon mr" src="images/icons/copy.svg" />
+        copy
+      </Button>
+      <Button
+        isOutline
+        isDanger
+        classname="mr"
+        on:click={() => dispatch('delete-activity', activity)}
+      >
         <svg class="icon mr" src="images/icons/trash-2.svg" />
         delete
       </Button>

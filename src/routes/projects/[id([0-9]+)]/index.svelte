@@ -11,16 +11,23 @@
 </script>
 
 <script>
+  import { writable } from 'svelte/store';
   import { goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
-  import UserActivityCard from '@/components/projects/view/user-activity-card.svelte';
-  import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
+  import UserView from '@/containers/projects/view/user-view.svelte';
+  import ModeratorView from '@/containers/projects/view/moderator-view.svelte';
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
   import ReportDialog from '@/components/projects/view/report-dialog.svelte';
-  import ProjectDeletionWarning from '@/components/projects/view/project-deletion-warning.svelte';
+  import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
+  import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import * as api from '@/utils/api.js';
+  import {
+    determineInsertionIndex,
+    prepareForBackend,
+    prepareAfterBackend,
+  } from '@/utils/project-manipulation.js';
 
   export let project;
   export let account;
@@ -32,34 +39,14 @@
   let reportDialogOpen = false;
   let reportDialogProps = {};
   let projectDeletionWarningOpen = false;
+  let activityDeletionWarningOpen = false;
+  let activityPendingDeletion = null;
+  const projectStore = writable(project);
 
   const isModeratorView = (
     account != null
     && (account.is_admin || project.moderators.includes(account.email))
   );
-
-  let activityCards;
-  $: {
-    if (isModeratorView) {
-      activityCards = (
-        project.activities
-          .filter(x => !x.internal)
-          .map(act => {
-            act.expanded = false;
-            return act;
-          })
-      );
-    } else {
-      activityCards = (
-        project.activities
-          .filter(x => !x.internal)
-          .map(act => {
-            act.applications = act.applications.map(apl => ({...apl, expanded: false}));
-            return act;
-          })
-      );
-    }
-  }
 
   function showApplicationDialog({ detail: activity }) {
     appliedActivity = activity;
@@ -68,31 +55,17 @@
 
   async function processApplication({ detail: { activity, comment, telegram, remember } }) {
     try {
-      const response = await api.post(
+      const application = await api.json(api.post(
         `/projects/${activity.project}/activities/${activity.id}/applications`,
-        {
-          data: {
-            telegram,
-            comment,
-          },
-        },
-      );
-
-      if (!response.ok) {
-        throw response;
-      }
-
-      const application = await response.json();
+        { data: { telegram, comment } },
+      ));
       application.applicant = account;
       activity.existing_application = application;
       project = project;
+      projectStore.set(project);
 
       if (remember) {
-        api.patch('/account/telegram', {
-          data: {
-            telegram_username: telegram,
-          },
-        });
+        api.patch('/account/telegram', { data: { telegram_username: telegram } });
       }
       applicationDialogOpen = false;
       applicationDialogError = null;
@@ -104,13 +77,9 @@
 
   async function processTakeBack({ detail: activity }) {
     try {
-      const response = await api.del(
+      await api.json(api.del(
         `/projects/${activity.project}/activities/${activity.id}/applications`,
-      );
-
-      if (!response.ok) {
-        throw response;
-      }
+      ));
 
       if (activity.existing_application.status === ApplicationStatuses.APPROVED) {
         activity.applications.filter(x => x.id != activity.existing_application.id);
@@ -118,6 +87,7 @@
       }
       activity.existing_application = null;
       project = project;
+      projectStore.set(project);
     } catch (e) {
       console.error(e);
     }
@@ -128,17 +98,13 @@
     reportDialogOpen = true;
   }
 
-  async function changeApplicationStatus(status, activity, application) {
+  async function changeApplicationStatus({ detail: { status, activity, application } }) {
     try {
-      const response = await api.patch(
+      await api.json(api.patch(
         `/projects/${activity.project}/activities/${activity.id}`
         + `/applications/${application.id}/status`,
         { data: { status } },
-      );
-
-      if (!response.ok) {
-        throw response;
-      }
+      ));
 
       if (status === ApplicationStatuses.APPROVED) {
         activity.vacant_spots--;
@@ -148,9 +114,65 @@
 
       application.status = status;
       project = project;
+      projectStore.set(project);
     } catch (e) {
       console.error(e);
     }
+  }
+
+  async function processActivityChange({ detail }) {
+    const type = detail.activity._type;
+    delete detail.activity._type;
+    prepareForBackend(detail.activity);
+
+    const index = determineInsertionIndex(project.activities, detail.position);
+
+    let updatedActivity;
+    try {
+      if (type === ActivityTypes.NEW) {
+        updatedActivity = await api.json(api.post(`/projects/${project.id}/activities`, {
+          data: detail.activity,
+        }));
+        prepareAfterBackend(updatedActivity);
+        project.activities.splice(index, 0, updatedActivity);
+      } else if (type === ActivityTypes.EDIT) {
+        const activityID = detail.activity.id;
+        delete detail.activity.id;
+
+        updatedActivity = await api.json(api.patch(
+          `/projects/${project.id}/activities/${activityID}`,
+          { data: detail.activity },
+        ));
+        prepareAfterBackend(updatedActivity);
+        updatedActivity.id = detail.activity.id = activityID;
+
+        project.activities.splice(
+          project.activities.findIndex(act => act.id === activityID),
+          1,
+          updatedActivity,
+        );
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    project.activities = project.activities;
+    projectStore.set(project);
+  }
+
+  async function deleteActivity({ detail: activity }) {
+    activityDeletionWarningOpen = false;
+    try {
+      await api.json(api.del(`/projects/${activity.project}/activities/${activity.id}`));
+      project.activities = project.activities.filter(act => act.id !== activity.id);
+      projectStore.set(project);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function restoreActivity({ detail: activity }) {
+    activity._type = ActivityTypes.DISPLAY;
+    activityPendingDeletion = null;
   }
 
   async function deleteProject() {
@@ -177,45 +199,41 @@
   <link rel="stylesheet" href="css/view-project/proper-grid.css" />
   <link rel="stylesheet" href="css/view-project/report-performance-modal.css" />
   <link rel="stylesheet" href="css/view-project/apply-modal.css" />
-  <link rel="stylesheet" href="css/page-components/empty-state.css" />
   <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
 </svelte:head>
 
 <Layout user={account}>
   <div class="material">
-
-    <h2 class="padded">Activities</h2>
-    {#if isModeratorView}
-      <div class="activities moderated padded">
-        {#each activityCards as activity (activity.id)}
-          <ModeratorActivityCard
-            {activity}
-            {competences}
-            on:view-reports={showReportDialog}
-            on:application-status-changed={
-              ({ detail: { status, activity, application } }) =>
-                changeApplicationStatus(status, activity, application)
-            }
-          />
-        {/each}
-      </div>
-    {:else}
-      <div class="activities user padded">
-        {#each activityCards as activity (activity.id)}
-          <UserActivityCard
-            {activity}
-            {competences}
-            {account}
-            on:apply={showApplicationDialog}
-            on:take-back-application={processTakeBack}
-          />
-        {/each}
-      </div>
     <ProjectHeader
       {project}
       {account}
       on:delete-project={() => projectDeletionWarningOpen = true}
     />
+
+    {#if project.activities.find(x => !x.internal) != null}
+      <h2 class="padded">Activities</h2>
+      {#if isModeratorView}
+        <ModeratorView
+          activities={project.activities}
+          project={projectStore}
+          {competences}
+          on:view-reports={showReportDialog}
+          on:application-status-changed={changeApplicationStatus}
+          on:activity-changed={processActivityChange}
+          on:delete-activity={({ detail: activity }) => {
+            activityPendingDeletion = activity;
+            activityDeletionWarningOpen = true;
+          }}
+        />
+      {:else}
+        <UserView
+          activities={project.activities}
+          {competences}
+          {account}
+          on:apply={showApplicationDialog}
+          on:take-back-application={processTakeBack}
+        />
+      {/if}
     {/if}
   </div>
 
@@ -223,15 +241,32 @@
     <ReportDialog bind:isOpen={reportDialogOpen} {project} {...reportDialogProps} />
   {:else}
     <ApplicationDialog
-      savedUsername={account.telegram_username}
+      savedUsername={account && account.telegram_username}
       activity={appliedActivity}
       bind:isOpen={applicationDialogOpen}
       on:submit-application={processApplication}
       error={applicationDialogError}
     />
   {/if}
-  <ProjectDeletionWarning
+  <DangerConfirmDialog
+    textYes="yes, delete"
     bind:isOpen={projectDeletionWarningOpen}
-    on:confirm-deletion={deleteProject}
-  />
+    on:confirm={deleteProject}
+  >
+    Deleting a project is rarely desired. <br />
+    You may edit the project or delete individual activities instead. <br />
+    Think twice before proceeding.
+  </DangerConfirmDialog>
+  <DangerConfirmDialog
+    textYes="yes, delete"
+    bind:isOpen={activityDeletionWarningOpen}
+    eventDetail={activityPendingDeletion}
+    on:confirm={deleteActivity}
+    on:reject={restoreActivity}
+  >
+    Are you sure you want to delete this activity?
+    <em class="consequences">
+      All of the volunteering applications will be discarded.
+    </em>
+  </DangerConfirmDialog>
 </Layout>

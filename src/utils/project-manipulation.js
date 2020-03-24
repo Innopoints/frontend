@@ -39,7 +39,6 @@ export function filterProjectFields(project, edit = false) {
 export function filterActivityFields(activity) {
   delete activity.existing_application;
   delete activity.vacant_spots;
-  delete activity.project;
   delete activity.applications;
   delete activity.internal;
 
@@ -84,8 +83,11 @@ export function prepareForBackend(activity) {
     activity.application_deadline = toISOFormat(activity.application_deadline);
   }
 
+  delete activity.project;
   delete activity.applications;
   delete activity.existing_application;
+  delete activity.internal;
+  delete activity.vacant_spots;
 }
 
 /* Prepare the activity object to be processed on the frontend
@@ -106,7 +108,7 @@ export function prepareAfterBackend(activity) {
 export function determineInsertionIndex(activities, position) {
   let insertionIndex = 0;
   while (position && insertionIndex < activities.length) {
-    if (activities[insertionIndex].internal) {
+    if (!activities[insertionIndex].internal) {
       position--;
     }
     insertionIndex++;
@@ -136,13 +138,21 @@ export function synchronizeActivityLists(internalList, backendActivities) {
         break;
       }
 
-      // If the activityList cursor is on a new activity form, let it be
+      // If the internalList cursor is on a deletion marker, remove it from the list
+      // Happens when an activity deletion was confirmed by a dialog
+      if (internalList[internalListIdx]._type === ActivityTypes.DELETION_MARKER) {
+        internalList.splice(internalListIdx, 1);
+        continue;
+      }
+
+      // If the internalList cursor is on a new activity form, let it be
       // Happens when there is an open form that hasn't been saved yet
       if (internalList[internalListIdx]._type === ActivityTypes.NEW) {
         internalListIdx++;
+        continue;
       }
 
-      // If the activityList cursor is on a displayed activity,
+      // If the internalList cursor is on a displayed activity,
       // don't change anything – it is already that same activity
       if (internalList[internalListIdx]._type === ActivityTypes.DISPLAY) {
         internalListIdx++;
@@ -153,7 +163,7 @@ export function synchronizeActivityLists(internalList, backendActivities) {
       // If the cursor is on a replacement marker, place the backend activity on that spot
       // Happens upon creating a new activity or applying edits to an existing one
       if (internalList[internalListIdx]._type === ActivityTypes.REPLACEMENT_MARKER) {
-        let copy = filterActivityFields(copyActivity(activity));
+        const copy = filterActivityFields(copyActivity(activity));
         copy._type = ActivityTypes.DISPLAY;
         internalList.splice(
           internalListIdx,
@@ -176,7 +186,8 @@ export function synchronizeActivityLists(internalList, backendActivities) {
 
   // Remove the deleted activities from the end
   while (internalListIdx < internalList.length) {
-    if (internalList[internalListIdx]._type === ActivityTypes.DISPLAY) {
+    if (internalList[internalListIdx]._type === ActivityTypes.DISPLAY
+     || internalList[internalListIdx]._type === ActivityTypes.DELETION_MARKER) {
       internalList.splice(internalListIdx, 1);
     } else {
       internalListIdx++;
