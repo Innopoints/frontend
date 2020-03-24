@@ -1,12 +1,14 @@
+import StockChangeStatuses from '@/constants/backend/stock-change-statuses';
+
 export default function getNotificationContent({ type, payload }) {
   let fragments;
   switch (type) {
     case "purchase_status_changed": {
       const statuses = {
-        'ready_for_pickup': 'is ready to be picked up at 319 Office',
-        'pending': 'is not yet ready for pick up',
-        'carried_out': 'has been delivered to you',
-        'rejected': 'was rejected',
+        [StockChangeStatuses.READY_FOR_PICKUP]: 'is ready to be picked up at 319 Office',
+        [StockChangeStatuses.PENDING]: 'is not yet ready for pick up',
+        [StockChangeStatuses.CARRIED_OUT]: 'has been delivered to you',
+        [StockChangeStatuses.REJECTED]: 'was rejected',
       };
       fragments = [
         'Your ',
