@@ -2,6 +2,12 @@ export default function getNotificationContent({ type, payload }) {
   let fragments;
   switch (type) {
     case "purchase_status_changed": {
+      const statuses = {
+        'ready_for_pickup': 'is ready to be picked up at 319 Office',
+        'pending': 'is not yet ready for pick up',
+        'carried_out': 'has been delivered to you',
+        'rejected': 'was rejected',
+      };
       fragments = [
         'Your ',
         {
@@ -10,8 +16,7 @@ export default function getNotificationContent({ type, payload }) {
           url: '/products/' + payload.product.id,
         },
         ' purchase ',
-        (payload.stock_change.status === 'ready_for_pickup' ?
-          'is ready to be picked up at 319 Office' : 'was rejected'),
+        statuses[payload.stock_change.status] || '-- well, something happened to it',
       ];
       break;
     }
