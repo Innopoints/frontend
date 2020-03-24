@@ -1,7 +1,15 @@
+import StockChangeStatuses from '@/constants/backend/stock-change-statuses';
+
 export default function getNotificationContent({ type, payload }) {
   let fragments;
   switch (type) {
     case "purchase_status_changed": {
+      const statuses = {
+        [StockChangeStatuses.READY_FOR_PICKUP]: 'is ready to be picked up at 319 Office',
+        [StockChangeStatuses.PENDING]: 'is not yet ready for pick up',
+        [StockChangeStatuses.CARRIED_OUT]: 'has been delivered to you',
+        [StockChangeStatuses.REJECTED]: 'was rejected',
+      };
       fragments = [
         'Your ',
         {
@@ -10,8 +18,7 @@ export default function getNotificationContent({ type, payload }) {
           url: '/products/' + payload.product.id,
         },
         ' purchase ',
-        (payload.stock_change.status === 'ready_for_pickup' ?
-          'is ready to be picked up at 319 Office' : 'was rejected'),
+        statuses[payload.stock_change.status] || '-- well, something happened to it',
       ];
       break;
     }
@@ -116,7 +123,7 @@ export default function getNotificationContent({ type, payload }) {
       fragments = [
         {
           text: payload.account.full_name,
-          url: 'mailto:' + payload.account.email,
+          url: '/profile?user=' + payload.account.email,
         },
         ' has purchased the ',
         {
