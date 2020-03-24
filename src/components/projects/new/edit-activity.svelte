@@ -39,6 +39,7 @@
 
   function discardChanges() {
     activity = initialCopy;
+    initialCopy = copyActivity(activity);
     fieldsAltered = false;
   }
 
