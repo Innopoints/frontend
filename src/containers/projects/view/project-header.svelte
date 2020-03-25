@@ -4,6 +4,7 @@
   import Labeled from 'ui/labeled.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
   import { API_HOST } from '@/constants/env.js';
+  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
 
   export let project;
   export let account;
@@ -29,12 +30,11 @@
       <Labeled icon label="Organizer">
         <svg slot="icon" class="icon" src="images/icons/user.svg" />
         {project.organizer}
-        <!--
-        TODO: show for admins
-        <a href="admin-dashboard.html?users=creator@email.com" class="secondary" style="display: none;">
-          contact project creator
-        </a>
-        -->
+        {#if account.is_admin}
+          <a href="mailto:{project.creator}" class="secondary">
+            contact project creator
+          </a>
+        {/if}
       </Labeled>
     </div>
     {#if project.creator === account.email || account.is_admin}
@@ -47,11 +47,11 @@
           <svg class="icon mr" src="images/icons/trash-2.svg" />
           delete
         </Button>
-        <Button isOutline classname="finalize">
+        <Button isOutline classname="finalize" on:click={() => dispatch('finalize-project')}>
           <svg class="icon mr" src="images/icons/check-circle.svg" />
           finalize
         </Button>
-        {#if account.is_admin}
+        {#if account.is_admin && project.lifetime_stage === ProjectStages.FINALIZING}
           <Button isOutline classname="review">
             <svg class="icon mr" src="images/icons/clipboard.svg" />
             review
