@@ -4,12 +4,10 @@
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
   import EditActivity from '@/components/projects/new/edit-activity.svelte';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
-  import getBlankActivity from '@/constants/projects/blank-activity.js';
   import {
     addActivity,
     copyActivity,
     countDisplayActivitiesBefore,
-    filterActivityFields,
     prepareAfterBackend,
     synchronizeActivityLists,
   } from '@/utils/project-manipulation.js';
@@ -34,7 +32,6 @@
   // Somewhat counter-intuitive, but the activityCards have nothing to do
   //   with the concept of internal activities on the backend. Moreover, internal
   //   activities are not in the activityCards, since they are not displayed on the page.
-
   const unsubscribe = project.subscribe(
     ({ activities: backendActivities }) => {
       activityCards = synchronizeActivityLists(activityCards, backendActivities);
@@ -45,16 +42,12 @@
   function deleteActivity({ detail: activity }) {
     activity._type = ActivityTypes.DELETION_MARKER;
     dispatch('delete-activity', activity);
-    if (activityCards.length === 0) {
-      const activity = getBlankActivity();
-      activity._type = ActivityTypes.NEW;
-      activityCards.push(activity);
-    }
   }
 
   function duplicateActivity({ detail: activity }) {
-    const newActivity = filterActivityFields(copyActivity(activity));
+    const newActivity = copyActivity(activity);
     delete newActivity.id;
+    newActivity.applications = [];
     newActivity._type = ActivityTypes.NEW;
     activityCards.push(newActivity);
     activityCards = activityCards;
@@ -83,17 +76,22 @@
         activityList={activityCards}
         {index}
         on:discard-activity={(e) => {
+          // Dispatched for activities on backend-unsynced projects
+          // when the fields are back to empty to cancel creation.
           activityCards.splice(e.detail, 1);
           activityCards = activityCards;
         }}
         on:discard-changes={(e) => {
+          // Dispatched for activities on backend-synced projects
+          // when the fields are back to initial to cancel editing.
           activityCards[e.detail]._type = ActivityTypes.DISPLAY;
         }}
         on:change={(e) => {
+          // Dispatched when a VALID change occurs.
           const copy = copyActivity(e.detail);
           e.detail._type = ActivityTypes.REPLACEMENT_MARKER;
           dispatch('activity-changed', {
-            activity: copy,
+            activityCopy: copy,
             position: countDisplayActivitiesBefore(activityCards, index),
           });
         }}

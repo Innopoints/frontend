@@ -137,9 +137,9 @@
   }
 
   async function processActivityChange({ detail }) {
-    const type = detail.activity._type;
-    delete detail.activity._type;
-    prepareForBackend(detail.activity);
+    const type = detail.activityCopy._type;
+    delete detail.activityCopy._type;
+    prepareForBackend(detail.activityCopy);
 
     const index = determineInsertionIndex($project.activities, detail.position);
 
@@ -148,10 +148,10 @@
       if (type === activityTypes.NEW) {
         if ($project.id == null) {
           // The project does not exist on the backend yet
-          updatedActivity = detail.activity;
+          updatedActivity = detail.activityCopy;
         } else {
           updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
-            data: detail.activity,
+            data: detail.activityCopy,
           }));
           prepareAfterBackend(updatedActivity);
         }
@@ -159,18 +159,18 @@
       } else if (type === activityTypes.EDIT) {
         if ($project.id == null) {
           // The project does not exist on the backend yet
-          updatedActivity = detail.activity;
+          updatedActivity = detail.activityCopy;
           $project.activities.splice(index, 1, updatedActivity);
         } else {
-          const activityID = detail.activity.id;
-          delete detail.activity.id;
+          const activityID = detail.activityCopy.id;
+          delete detail.activityCopy.id;
 
           updatedActivity = await api.json(api.patch(
             `/projects/${$project.id}/activities/${activityID}`,
-            { data: detail.activity },
+            { data: detail.activityCopy },
           ));
           prepareAfterBackend(updatedActivity);
-          updatedActivity.id = detail.activity.id = activityID;
+          updatedActivity.id = activityID;
 
           $project.activities.splice(
             $project.activities.findIndex(act => act.id === activityID),

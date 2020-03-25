@@ -10,7 +10,6 @@
   import {
     addActivity,
     copyActivity,
-    filterActivityFields,
     countDisplayActivitiesBefore,
     synchronizeActivityLists,
   } from '@/utils/project-manipulation.js';
@@ -37,7 +36,7 @@
   onDestroy(unsubscribe);
 
   function duplicateActivity({ detail: activity }) {
-    const newActivity = filterActivityFields(copyActivity(activity));
+    const newActivity = copyActivity(activity);
     delete newActivity.id;
     newActivity._type = ActivityTypes.NEW;
     activityList.push(newActivity);
@@ -88,7 +87,7 @@
           const copy = copyActivity(e.detail);
           e.detail._type = ActivityTypes.REPLACEMENT_MARKER;
           dispatch('change', {
-            activity: copy,
+            activityCopy: copy,
             position: countDisplayActivitiesBefore(activityList, index),
           });
         }}

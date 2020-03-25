@@ -2,6 +2,8 @@ import ActivityTypes from '@/constants/projects/activity-internal-types.js';
 import getBlankActivity from '@/constants/projects/blank-activity.js';
 
 
+/* Copy ALL the fields from the given activity object,
+   deep-copying complex fields. */
 export function copyActivity(activity) {
   const newActivity = Object.assign({}, activity);
   if (activity.timeframe != null) {
@@ -34,15 +36,6 @@ export function filterProjectFields(project, edit = false) {
   }
 
   return filtered;
-}
-
-export function filterActivityFields(activity) {
-  delete activity.existing_application;
-  delete activity.vacant_spots;
-  delete activity.applications;
-  delete activity.internal;
-
-  return activity;
 }
 
 export function countDisplayActivitiesBefore(activityList, index) {
@@ -126,13 +119,10 @@ export function synchronizeActivityLists(internalList, backendActivities) {
       // If the internal list is over, copy the backend activity to the end
       // Happens on the initial population of the activityList
       if (internalListIdx >= internalList.length) {
-        let copy = filterActivityFields(copyActivity(activity));
+        let copy = copyActivity(activity);
         copy._type = ActivityTypes.DISPLAY;
-        internalList.splice(
-          internalListIdx,
-          internalList[internalListIdx] != null,
-          copy,
-        );
+        prepareAfterBackend(copy);
+        internalList.splice(internalListIdx, 0, copy);
         internalListIdx++;
         activityProcessed = true;
         break;
@@ -163,19 +153,16 @@ export function synchronizeActivityLists(internalList, backendActivities) {
       // If the cursor is on a replacement marker, place the backend activity on that spot
       // Happens upon creating a new activity or applying edits to an existing one
       if (internalList[internalListIdx]._type === ActivityTypes.REPLACEMENT_MARKER) {
-        const copy = filterActivityFields(copyActivity(activity));
+        const copy = copyActivity(activity);
         copy._type = ActivityTypes.DISPLAY;
-        internalList.splice(
-          internalListIdx,
-          internalList[internalListIdx] != null,
-          copy,
-        );
+        prepareAfterBackend(copy);
+        internalList.splice(internalListIdx, 1, copy);
         internalListIdx++;
         activityProcessed = true;
         break;
       }
 
-      // If the cursor is on an edit form, accept it as the backend activity
+      // If the cursor is on an edit form, accept it as a backend activity
       if (internalList[internalListIdx]._type === ActivityTypes.EDIT) {
         internalListIdx++;
         activityProcessed = true;
@@ -194,7 +181,7 @@ export function synchronizeActivityLists(internalList, backendActivities) {
     }
   }
 
-  // Have a new activity form if the activityList is empty
+  // Have a new activity form if the internalList is empty
   if (internalList.length === 0) {
     let activity = getBlankActivity();
     activity._type = ActivityTypes.NEW;

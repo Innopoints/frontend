@@ -56,7 +56,7 @@
     {#if activity.application_deadline != null}
       <div class="warning">
         <svg class="icon" src="images/icons/alert-circle.svg" />
-        {#if new Date(activity.application_deadline) > new Date()}
+        {#if activity.application_deadline > new Date()}
           Deadline: {formatDate(activity.application_deadline)}!
         {:else}
           No more applications accepted.

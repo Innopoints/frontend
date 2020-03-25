@@ -121,9 +121,9 @@
   }
 
   async function processActivityChange({ detail }) {
-    const type = detail.activity._type;
-    delete detail.activity._type;
-    prepareForBackend(detail.activity);
+    const type = detail.activityCopy._type;
+    delete detail.activityCopy._type;
+    prepareForBackend(detail.activityCopy);
 
     const index = determineInsertionIndex(project.activities, detail.position);
 
@@ -131,20 +131,20 @@
     try {
       if (type === ActivityTypes.NEW) {
         updatedActivity = await api.json(api.post(`/projects/${project.id}/activities`, {
-          data: detail.activity,
+          data: detail.activityCopy,
         }));
         prepareAfterBackend(updatedActivity);
         project.activities.splice(index, 0, updatedActivity);
       } else if (type === ActivityTypes.EDIT) {
-        const activityID = detail.activity.id;
-        delete detail.activity.id;
+        const activityID = detail.activityCopy.id;
+        delete detail.activityCopy.id;
 
         updatedActivity = await api.json(api.patch(
           `/projects/${project.id}/activities/${activityID}`,
-          { data: detail.activity },
+          { data: detail.activityCopy },
         ));
         prepareAfterBackend(updatedActivity);
-        updatedActivity.id = detail.activity.id = activityID;
+        updatedActivity.id = activityID;
 
         project.activities.splice(
           project.activities.findIndex(act => act.id === activityID),
@@ -210,7 +210,7 @@
       on:delete-project={() => projectDeletionWarningOpen = true}
     />
 
-    {#if project.activities.find(x => !x.internal) != null}
+    {#if project.activities.find(x => !x.internal) != null || isModeratorView}
       <h2 class="padded">Activities</h2>
       {#if isModeratorView}
         <ModeratorView
