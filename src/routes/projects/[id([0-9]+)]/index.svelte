@@ -12,7 +12,7 @@
 
 <script>
   import { writable } from 'svelte/store';
-  import { goto } from '@sapper/app';
+  import { goto, prefetch } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserView from '@/containers/projects/view/user-view.svelte';
@@ -33,47 +33,91 @@
   export let account;
   export let competences;
 
-  let appliedActivity = null;
-  let applicationDialogOpen = false;
-  let applicationDialogError = null;
-  let reportDialogOpen = false;
-  let reportDialogProps = {};
-  let projectDeletionWarningOpen = false;
-  let activityDeletionWarningOpen = false;
-  let activityPendingDeletion = null;
   const projectStore = writable(project);
-
   const isModeratorView = (
     account != null
     && (account.is_admin || project.moderators.includes(account.email))
   );
 
-  function showApplicationDialog({ detail: activity }) {
-    appliedActivity = activity;
-    applicationDialogOpen = true;
-  }
+  const applicationDialog = {
+    open: false,
+    error: null,
+    activity: null,
+    show({ detail: activity }) {
+      applicationDialog.activity = activity;
+      applicationDialog.open = true;
+    },
+    async processApplication({ detail }) {
+      const { activity, comment, telegram, remember } = detail;
+      try {
+        const application = await api.json(api.post(
+          `/projects/${activity.project}/activities/${activity.id}/applications`,
+          { data: { telegram, comment } },
+        ));
+        application.applicant = account;
+        activity.existing_application = application;
+        project = project;
+        projectStore.set(project);
 
-  async function processApplication({ detail: { activity, comment, telegram, remember } }) {
-    try {
-      const application = await api.json(api.post(
-        `/projects/${activity.project}/activities/${activity.id}/applications`,
-        { data: { telegram, comment } },
-      ));
-      application.applicant = account;
-      activity.existing_application = application;
-      project = project;
-      projectStore.set(project);
-
-      if (remember) {
-        api.patch('/account/telegram', { data: { telegram_username: telegram } });
+        if (remember) {
+          api.patch('/account/telegram', { data: { telegram_username: telegram } });
+        }
+        applicationDialog.open = false;
+        applicationDialog.error = null;
+      } catch (e) {
+        applicationDialog.error = "The application didn't go through. Please, try again.";
+        console.error(e);
       }
-      applicationDialogOpen = false;
-      applicationDialogError = null;
-    } catch (e) {
-      applicationDialogError = "The application didn't go through. Please, try again.";
-      console.error(e);
-    }
-  }
+    },
+  };
+
+  const activityDeletionDialog = {
+    open: false,
+    activity: null,
+    show({ detail: activity }) {
+      activityDeletionDialog.activity = activity;
+      activityDeletionDialog.open = true;
+    },
+    async deleteActivity({ detail: activity }) {
+      activityDeletionDialog.open = false;
+      try {
+        await api.json(api.del(`/projects/${activity.project}/activities/${activity.id}`));
+        project.activities = project.activities.filter(act => act.id !== activity.id);
+        projectStore.set(project);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    restoreActivity({ detail: activity }) {
+      activity._type = ActivityTypes.DISPLAY;
+      activityDeletionDialog.activity = null;
+    },
+  };
+
+  const reportDialog = {
+    open: false,
+    props: null,
+    show({ detail: props }) {
+      reportDialog.props = props;
+      reportDialog.open = true;
+    },
+  };
+
+  const projectDeletionDialog = {
+    open: false,
+    show() {
+      projectDeletionDialog.open = true;
+    },
+    async deleteProject() {
+      try {
+        prefetch('/projects');
+        await api.json(api.del(`/projects/${project.id}`));
+        goto('/projects');
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
 
   async function processTakeBack({ detail: activity }) {
     try {
@@ -91,11 +135,6 @@
     } catch (e) {
       console.error(e);
     }
-  }
-
-  function showReportDialog({ detail: props }) {
-    reportDialogProps = props;
-    reportDialogOpen = true;
   }
 
   async function changeApplicationStatus({ detail: { status, activity, application } }) {
@@ -158,31 +197,6 @@
     project.activities = project.activities;
     projectStore.set(project);
   }
-
-  async function deleteActivity({ detail: activity }) {
-    activityDeletionWarningOpen = false;
-    try {
-      await api.json(api.del(`/projects/${activity.project}/activities/${activity.id}`));
-      project.activities = project.activities.filter(act => act.id !== activity.id);
-      projectStore.set(project);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  function restoreActivity({ detail: activity }) {
-    activity._type = ActivityTypes.DISPLAY;
-    activityPendingDeletion = null;
-  }
-
-  async function deleteProject() {
-    try {
-      await api.json(api.del(`/projects/${project.id}`));
-      goto('/projects');
-    } catch (e) {
-      console.error(e);
-    }
-  }
 </script>
 
 <svelte:head>
@@ -207,7 +221,7 @@
     <ProjectHeader
       {project}
       {account}
-      on:delete-project={() => projectDeletionWarningOpen = true}
+      on:delete-project={projectDeletionDialog.show}
     />
 
     {#if project.activities.find(x => !x.internal) != null || isModeratorView}
@@ -217,20 +231,17 @@
           activities={project.activities}
           project={projectStore}
           {competences}
-          on:view-reports={showReportDialog}
+          on:view-reports={reportDialog.show}
           on:application-status-changed={changeApplicationStatus}
           on:activity-changed={processActivityChange}
-          on:delete-activity={({ detail: activity }) => {
-            activityPendingDeletion = activity;
-            activityDeletionWarningOpen = true;
-          }}
+          on:delete-activity={activityDeletionDialog.show}
         />
       {:else}
         <UserView
           activities={project.activities}
           {competences}
           {account}
-          on:apply={showApplicationDialog}
+          on:apply={applicationDialog.show}
           on:take-back-application={processTakeBack}
         />
       {/if}
@@ -238,20 +249,20 @@
   </div>
 
   {#if isModeratorView}
-    <ReportDialog bind:isOpen={reportDialogOpen} {project} {...reportDialogProps} />
+    <ReportDialog {project} bind:isOpen={reportDialog.open} {...reportDialog.props} />
   {:else}
     <ApplicationDialog
       savedUsername={account && account.telegram_username}
-      activity={appliedActivity}
-      bind:isOpen={applicationDialogOpen}
-      on:submit-application={processApplication}
-      error={applicationDialogError}
+      activity={applicationDialog.activity}
+      bind:isOpen={applicationDialog.open}
+      on:submit-application={applicationDialog.processApplication}
+      error={applicationDialog.error}
     />
   {/if}
   <DangerConfirmDialog
     textYes="yes, delete"
-    bind:isOpen={projectDeletionWarningOpen}
-    on:confirm={deleteProject}
+    bind:isOpen={projectDeletionDialog.open}
+    on:confirm={projectDeletionDialog.deleteProject}
   >
     Deleting a project is rarely desired. <br />
     You may edit the project or delete individual activities instead. <br />
@@ -259,10 +270,10 @@
   </DangerConfirmDialog>
   <DangerConfirmDialog
     textYes="yes, delete"
-    bind:isOpen={activityDeletionWarningOpen}
-    eventDetail={activityPendingDeletion}
-    on:confirm={deleteActivity}
-    on:reject={restoreActivity}
+    bind:isOpen={activityDeletionDialog.open}
+    eventDetail={activityDeletionDialog.activity}
+    on:confirm={activityDeletionDialog.deleteActivity}
+    on:reject={activityDeletionDialog.restoreActivity}
   >
     Are you sure you want to delete this activity?
     <em class="consequences">
