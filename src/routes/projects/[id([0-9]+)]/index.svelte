@@ -20,8 +20,10 @@
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
   import ReportDialog from '@/components/projects/view/report-dialog.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
+  import FinalizingDialog from '@/components/projects/view/finalizing-dialog.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
+  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import * as api from '@/utils/api.js';
   import {
     determineInsertionIndex,
@@ -113,6 +115,21 @@
         prefetch('/projects');
         await api.json(api.del(`/projects/${project.id}`));
         goto('/projects');
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
+
+  const finalizeDialog = {
+    open: false,
+    show() {
+      finalizeDialog.open = true;
+    },
+    async finalizeProject() {
+      try {
+        await api.json(api.patch(`/projects/${project.id}/finalize`));
+        project.lifetime_stage = ProjectStages.FINALIZING;
       } catch (e) {
         console.error(e);
       }
@@ -222,6 +239,7 @@
       {project}
       {account}
       on:delete-project={projectDeletionDialog.show}
+      on:finalize-project={finalizeDialog.show}
     />
 
     {#if project.activities.find(x => !x.internal) != null || isModeratorView}
@@ -280,4 +298,8 @@
       All of the volunteering applications will be discarded.
     </em>
   </DangerConfirmDialog>
+  <FinalizingDialog
+    bind:isOpen={finalizeDialog.open}
+    on:confirm={finalizeDialog.finalizeProject}
+  />
 </Layout>
