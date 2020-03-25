@@ -27,6 +27,7 @@
   let fieldsAltered = false;
   const errors = {
     nameNotSpecified: false,
+    nameReserved: false,
     dateNotSpecified: false,
     noCompetences: false,
     rewardRateNotSpecified: false,
@@ -64,6 +65,10 @@
   function validateAndSave() {
     if (!activity.name) {
       errors.nameNotSpecified = true;
+    }
+
+    if (activity.name === 'Moderation') {
+      errors.nameReserved = true;
     }
 
     if (!activity.timeframe) {
@@ -115,6 +120,7 @@
       error={
         (activity.name === '' && "The name must not be empty.")
         || (errors.nameNotSpecified && "The name must be specified.")
+        || (errors.nameReserved && "This name is reserved for internal use.")
         || (!ensureNameUniqueness() && "The name should be unique.")
       }
     >
