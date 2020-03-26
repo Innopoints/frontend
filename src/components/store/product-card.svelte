@@ -28,6 +28,8 @@
       API_HOST + varietiesByColor.get(selectedColor)[0].images[0]
       : '/images/create-product/placeholder.svg'
   );
+
+  $: outOfStock = varietiesByColor.get(selectedColor).reduce((sum, variety) => variety.amount + sum, 0) === 0;
 </script>
 
 <Card classname="with-image">
@@ -63,6 +65,9 @@
     {#if short}
       <Button href="/products/{id}" isOutline>view</Button>
     {:else}
+      {#if outOfStock}
+        <p style="color: #ab0303; text-align: end;">out of stock</p>
+      {/if}
       <div class="card-row">
         <Labeled label="Price">
           <span class="content">
