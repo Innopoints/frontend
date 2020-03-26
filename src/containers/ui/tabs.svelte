@@ -10,6 +10,6 @@
 <Card id="tabs">
   <h1>Tabs</h1>
   <div class="showcase">
-    <Tabs {values} labels={tabs} bind:value={value} name="tabs" />
+    <Tabs items={values} labels={tabs} bind:value={value} name="tabs" />
   </div>
 </Card>
