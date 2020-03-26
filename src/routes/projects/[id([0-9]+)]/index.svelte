@@ -259,6 +259,7 @@
 
     {#if (project.lifetime_stage === ProjectStages.FINALIZING
        || project.lifetime_stage === ProjectStages.FINISHED)
+       && account != null
        && (project.moderators.includes(account.email) || account.is_admin)}
        <h2 class="padded">Project Staff</h2>
        <ModeratorHourPanel {project} on:save-hours={updateHours} />

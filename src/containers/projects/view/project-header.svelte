@@ -39,7 +39,7 @@
       <Labeled icon label="Organizer">
         <svg slot="icon" class="icon" src="images/icons/user.svg" />
         {project.organizer}
-        {#if account.is_admin}
+        {#if account && account.is_admin}
           <a href="mailto:{project.creator}" class="secondary">
             contact project creator
           </a>
@@ -64,7 +64,7 @@
         {/if}
       {/if}
     </div>
-    {#if project.creator === account.email || account.is_admin}
+    {#if account != null && (project.creator === account.email || account.is_admin)}
       <div class="actions">
         {#if project.lifetime_stage === ProjectStages.ONGOING}
           <Button isOutline>
@@ -79,14 +79,14 @@
             <svg class="icon mr" src="images/icons/check-circle.svg" />
             finalize
           </Button>
-          {#if account.is_admin && project.lifetime_stage === ProjectStages.FINALIZING}
+          {#if account && account.is_admin && project.lifetime_stage === ProjectStages.FINALIZING}
             <Button isOutline classname="review">
               <svg class="icon mr" src="images/icons/clipboard.svg" />
               review
             </Button>
           {/if}
         {:else if project.lifetime_stage === ProjectStages.FINALIZING}
-          <!-- TODO: disable this button if some hours are not filled out --> 
+          <!-- TODO: disable this button if some hours are not filled out -->
           <Button isFilled on:click={() => dispatch('submit-for-review')}>
             <svg class="icon mr" src="images/icons/check-circle.svg" />
             submit for review

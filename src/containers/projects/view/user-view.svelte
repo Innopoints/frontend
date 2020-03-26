@@ -4,15 +4,8 @@
   export let activities;
   export let competences;
   export let account;
-  
-  $: activityCards = (
-    activities
-      .filter(x => !x.internal)
-      .map(act => {
-        act.applications = act.applications.map(apl => ({...apl, expanded: false}));
-        return act;
-      })
-  );
+
+  $: activityCards = activities.filter(x => !x.internal);
 </script>
 
 <div class="activities user padded">
