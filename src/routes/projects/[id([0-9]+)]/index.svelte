@@ -17,6 +17,7 @@
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserView from '@/containers/projects/view/user-view.svelte';
   import ModeratorView from '@/containers/projects/view/moderator-view.svelte';
+  import ModeratorHourPanel from '@/containers/projects/view/moderator-hour-panel.svelte';
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
   import ReportDialog from '@/components/projects/view/report-dialog.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
@@ -129,7 +130,9 @@
     async finalizeProject() {
       try {
         await api.json(api.patch(`/projects/${project.id}/finalize`));
-        project.lifetime_stage = ProjectStages.FINALIZING;
+        project = await api.json(api.get(`/projects/${project.id}`));
+        projectStore.set(project);
+        finalizeDialog.open = false;
       } catch (e) {
         console.error(e);
       }
@@ -157,8 +160,7 @@
   async function changeApplicationStatus({ detail: { status, activity, application } }) {
     try {
       await api.json(api.patch(
-        `/projects/${activity.project}/activities/${activity.id}`
-        + `/applications/${application.id}/status`,
+        `/projects/${activity.project}/activities/${activity.id}/applications/${application.id}`,
         { data: { status } },
       ));
 
@@ -214,6 +216,19 @@
     project.activities = project.activities;
     projectStore.set(project);
   }
+
+  async function updateHours({ detail }) {
+    try {
+      const { application, hours, activity } = detail;
+      await api.json(api.patch(
+        `/projects/${project.id}/activities/${activity.id}/applications/${application.id}`,
+        { data: { actual_hours: hours } },
+      ));
+      application.actual_hours = hours;
+    } catch (e) {
+      console.error(e);
+    }
+  }
 </script>
 
 <svelte:head>
@@ -242,6 +257,13 @@
       on:finalize-project={finalizeDialog.show}
     />
 
+    {#if (project.lifetime_stage === ProjectStages.FINALIZING
+       || project.lifetime_stage === ProjectStages.FINISHED)
+       && (project.moderators.includes(account.email) || account.is_admin)}
+       <h2 class="padded">Project Staff</h2>
+       <ModeratorHourPanel {project} on:save-hours={updateHours} />
+    {/if}
+
     {#if project.activities.find(x => !x.internal) != null || isModeratorView}
       <h2 class="padded">Activities</h2>
       {#if isModeratorView}
@@ -253,6 +275,7 @@
           on:application-status-changed={changeApplicationStatus}
           on:activity-changed={processActivityChange}
           on:delete-activity={activityDeletionDialog.show}
+          on:save-hours={updateHours}
         />
       {:else}
         <UserView

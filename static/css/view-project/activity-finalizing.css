@@ -20,6 +20,9 @@
 }
 
 @media only screen and (min-width: 320px) and (max-width: 1023px) {
+  .activity.finalizing .right {
+    padding-top: 0;
+  }
   .activity.finalizing .panel .btn.feedback, .activity.finalizing .panel .reward, .activity.finalizing .panel .hours {
     margin: 1em 0;
   }

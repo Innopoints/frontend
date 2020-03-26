@@ -2,8 +2,10 @@
   import { createEventDispatcher, onDestroy } from 'svelte';
   import Button from 'ui/button.svelte';
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
+  import HourActivityCard from '@/components/projects/view/hour-activity-card.svelte';
   import EditActivity from '@/components/projects/new/edit-activity.svelte';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
+  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import {
     addActivity,
     copyActivity,
@@ -57,47 +59,56 @@
 </script>
 
 <div class="activities moderated padded">
-  {#each activityCards as activity, index}
-    {#if activity._type === ActivityTypes.DISPLAY
-      || activity._type === ActivityTypes.DELETION_MARKER}
-      <ModeratorActivityCard
+  {#if $project.lifetime_stage === ProjectStages.ONGOING}
+    {#each activityCards as activity, index}
+      {#if activity._type === ActivityTypes.DISPLAY
+        || activity._type === ActivityTypes.DELETION_MARKER}
+        <ModeratorActivityCard
+          {activity}
+          {competences}
+          on:edit-activity={() => activity._type = ActivityTypes.EDIT}
+          on:delete-activity={deleteActivity}
+          on:duplicate-activity={duplicateActivity}
+          on:view-reports
+          on:application-status-changed
+        />
+      {:else if activity._type !== ActivityTypes.REPLACEMENT_MARKER}
+        <EditActivity
+          {competences}
+          bind:activity
+          activityList={activityCards}
+          {index}
+          on:discard-activity={(e) => {
+            // Dispatched for activities on backend-unsynced projects
+            // when the fields are back to empty to cancel creation.
+            activityCards.splice(e.detail, 1);
+            activityCards = activityCards;
+          }}
+          on:discard-changes={(e) => {
+            // Dispatched for activities on backend-synced projects
+            // when the fields are back to initial to cancel editing.
+            activityCards[e.detail]._type = ActivityTypes.DISPLAY;
+          }}
+          on:change={(e) => {
+            // Dispatched when a VALID change occurs.
+            const copy = copyActivity(e.detail);
+            e.detail._type = ActivityTypes.REPLACEMENT_MARKER;
+            dispatch('activity-changed', {
+              activityCopy: copy,
+              position: countDisplayActivitiesBefore(activityCards, index),
+            });
+          }}
+        />
+      {/if}
+    {/each}
+  {:else if $project.lifetime_stage === ProjectStages.FINALIZING}
+    {#each activityCards as activity}
+      <HourActivityCard
         {activity}
-        {competences}
-        on:edit-activity={() => activity._type = ActivityTypes.EDIT}
-        on:delete-activity={deleteActivity}
-        on:duplicate-activity={duplicateActivity}
-        on:view-reports
-        on:application-status-changed
+        on:save-hours
       />
-    {:else if activity._type !== ActivityTypes.REPLACEMENT_MARKER}
-      <EditActivity
-        {competences}
-        bind:activity
-        activityList={activityCards}
-        {index}
-        on:discard-activity={(e) => {
-          // Dispatched for activities on backend-unsynced projects
-          // when the fields are back to empty to cancel creation.
-          activityCards.splice(e.detail, 1);
-          activityCards = activityCards;
-        }}
-        on:discard-changes={(e) => {
-          // Dispatched for activities on backend-synced projects
-          // when the fields are back to initial to cancel editing.
-          activityCards[e.detail]._type = ActivityTypes.DISPLAY;
-        }}
-        on:change={(e) => {
-          // Dispatched when a VALID change occurs.
-          const copy = copyActivity(e.detail);
-          e.detail._type = ActivityTypes.REPLACEMENT_MARKER;
-          dispatch('activity-changed', {
-            activityCopy: copy,
-            position: countDisplayActivitiesBefore(activityCards, index),
-          });
-        }}
-      />
-    {/if}
-  {/each}
+    {/each}
+  {/if}
 </div>
 <Button on:click={() => activityCards = addActivity(activityCards)}>
   <svg src="/images/icons/plus.svg" class="icon mr" />
