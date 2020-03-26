@@ -30,6 +30,7 @@
       outOfStock = productControl.varietyMap.get(selectedVarietyID).amount === 0;
     }
   }
+
   function purchase() {
     if (selectedVarietyID == null) {
       err = true;
@@ -113,7 +114,7 @@
           {productControl.totalPurchases || 0} purchases  <!-- item amount -->
         </div>
         {#if outOfStock}
-          <p style="color: #ab0303; text-align: end;">out of stock</p>
+          <p class="out-of-stock">out of stock</p>
         {/if}
         {#if account.is_admin}
           <Button isFilled href="{$page.path}/edit">edit</Button>

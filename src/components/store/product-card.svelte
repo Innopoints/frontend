@@ -29,7 +29,7 @@
       : '/images/create-product/placeholder.svg'
   );
 
-  $: outOfStock = varietiesByColor.get(selectedColor).reduce((sum, variety) => variety.amount + sum, 0) === 0;
+  $: outOfStock = varieties.reduce((sum, variety) => variety.amount + sum, 0) === 0;
 </script>
 
 <Card classname="with-image">
@@ -58,16 +58,20 @@
   {/if}
 
   <div class="content">
-    <div class="title">{name}</div>
+    <div class="title">
+      <div class="main">{name}</div>
+      {#if outOfStock}
+        <div class="out-of-stock">
+          out of stock
+        </div>
+      {/if}
+    </div>
     {#if type}
       <div class="subtitle">{type}</div>
     {/if}
     {#if short}
       <Button href="/products/{id}" isOutline>view</Button>
     {:else}
-      {#if outOfStock}
-        <p style="color: #ab0303; text-align: end;">out of stock</p>
-      {/if}
       <div class="card-row">
         <Labeled label="Price">
           <span class="content">
