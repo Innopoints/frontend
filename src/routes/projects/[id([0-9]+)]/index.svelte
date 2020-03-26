@@ -75,6 +75,33 @@
     },
   };
 
+  const applicationTakeBackDialog = {
+    open: false,
+    activity: null,
+    show({ detail: activity }) {
+      applicationTakeBackDialog.activity = activity;
+      applicationTakeBackDialog.open = true;
+    },
+    async processTakeBack({ detail: activity }) {
+      try {
+        await api.json(api.del(
+          `/projects/${activity.project}/activities/${activity.id}/applications`,
+        ));
+
+        if (activity.existing_application.status === ApplicationStatuses.APPROVED) {
+          activity.applications.filter(x => x.id != activity.existing_application.id);
+          activity.vacant_spots++;
+        }
+        activity.existing_application = null;
+        project = project;
+        projectStore.set(project);
+        applicationTakeBackDialog.open = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
+
   const activityDeletionDialog = {
     open: false,
     activity: null,
@@ -139,24 +166,6 @@
       }
     },
   };
-
-  async function processTakeBack({ detail: activity }) {
-    try {
-      await api.json(api.del(
-        `/projects/${activity.project}/activities/${activity.id}/applications`,
-      ));
-
-      if (activity.existing_application.status === ApplicationStatuses.APPROVED) {
-        activity.applications.filter(x => x.id != activity.existing_application.id);
-        activity.vacant_spots++;
-      }
-      activity.existing_application = null;
-      project = project;
-      projectStore.set(project);
-    } catch (e) {
-      console.error(e);
-    }
-  }
 
   async function changeApplicationStatus({ detail: { status, activity, application } }) {
     try {
@@ -296,7 +305,7 @@
           {competences}
           {account}
           on:apply={applicationDialog.show}
-          on:take-back-application={processTakeBack}
+          on:take-back-application={applicationTakeBackDialog.show}
         />
       {/if}
     {/if}
@@ -321,6 +330,15 @@
     Deleting a project is rarely desired. <br />
     You may edit the project or delete individual activities instead. <br />
     Think twice before proceeding.
+  </DangerConfirmDialog>
+  <DangerConfirmDialog
+    textYes="yes, take back"
+    bind:isOpen={applicationTakeBackDialog.open}
+    eventDetail={applicationTakeBackDialog.activity}
+    on:confirm={applicationTakeBackDialog.processTakeBack}
+  >
+    Are you sure you want to take your application back?
+    <em class="consequences">You may place a new one afterwards.</em>
   </DangerConfirmDialog>
   <DangerConfirmDialog
     textYes="yes, delete"

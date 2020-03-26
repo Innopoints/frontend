@@ -13,6 +13,13 @@
   export let competences;
   export let account;
 
+  $: canApply = (
+    activity.application_deadline == null
+    || new Date(activity.application_deadline) >= new Date()
+    || activity.people_required === 0
+    || activity.vacant_spots !== 0
+  );
+
   const dispatch = createEventDispatcher();
 </script>
 
@@ -155,8 +162,7 @@
         <Button
           isFilled
           classname="additional"
-          disabled={new Date(activity.application_deadline) < new Date()
-                || (activity.vacant_spots === 0 && activity.people_required !== 0)}
+          disabled={!canApply}
           on:click={() => dispatch('apply', activity)}
         >
           apply
