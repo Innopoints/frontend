@@ -17,10 +17,22 @@
     : `${API_HOST}/file/${project.image_id}`
   );
 
+  $: reviewAllowed = project.activities.every(
+    activity =>
+      activity.applications != null && activity.applications.every(
+        application =>
+          application.actual_hours > 0,
+      ),
+  );
+
   const dispatch = createEventDispatcher();
 </script>
 
-<header class="project-header" style="--image-url: url({projectImageURL})">
+<header
+  class="project-header"
+  class:wrap={project.lifetime_stage === ProjectStages.FINALIZING}
+  style="--image-url: url({projectImageURL})"
+>
   <img src={projectImageURL} class="cover-image" alt="Project cover image" />
   <div class="info">
     <h1>
@@ -49,11 +61,13 @@
         {#if project.review_status != null}
           <Labeled icon label="Review status">
             <svg slot="icon" class="icon" src="images/icons/flag.svg" />
-            {#if project.review_status === ReviewStatuses.PENDING}
-              Pending <Dot pending small />
-            {:else if project.review_status === ReviewStatuses.REJECTED}
-              Rejected <Dot attention small />
-            {/if}
+            <div>
+              {#if project.review_status === ReviewStatuses.PENDING}
+                Pending <Dot pending small />
+              {:else if project.review_status === ReviewStatuses.REJECTED}
+                Rejected <Dot attention small />
+              {/if}
+            </div>
           </Labeled>
         {/if}
         {#if project.admin_feedback != null}
@@ -85,9 +99,14 @@
               review
             </Button>
           {/if}
-        {:else if project.lifetime_stage === ProjectStages.FINALIZING}
-          <!-- TODO: disable this button if some hours are not filled out -->
-          <Button isFilled on:click={() => dispatch('submit-for-review')}>
+        {:else if project.lifetime_stage === ProjectStages.FINALIZING
+               && project.review_status != ReviewStatuses.PENDING}
+          <Button
+            isFilled
+            disabled={!reviewAllowed}
+            tooltip={reviewAllowed ? '' : 'Fill out the hours for the project staff first.'}
+            on:click={() => dispatch('submit-for-review')}
+          >
             <svg class="icon mr" src="images/icons/check-circle.svg" />
             submit for review
           </Button>

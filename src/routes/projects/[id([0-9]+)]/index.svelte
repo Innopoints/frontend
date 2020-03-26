@@ -25,6 +25,7 @@
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
+  import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
   import * as api from '@/utils/api.js';
   import {
     determineInsertionIndex,
@@ -225,6 +226,16 @@
         { data: { actual_hours: hours } },
       ));
       application.actual_hours = hours;
+      project = project;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function submitForReview() {
+    try {
+      await api.json(api.patch(`/projects/${project.id}/request_review`));
+      project.review_status = ReviewStatuses.PENDING;
     } catch (e) {
       console.error(e);
     }
@@ -255,6 +266,7 @@
       {account}
       on:delete-project={projectDeletionDialog.show}
       on:finalize-project={finalizeDialog.show}
+      on:submit-for-review={submitForReview}
     />
 
     {#if (project.lifetime_stage === ProjectStages.FINALIZING

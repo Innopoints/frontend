@@ -12,7 +12,6 @@
 
   export let activity;
   export let competences;
-  let pendingApplications;
 
   $: pendingApplications = (
     activity.applications == null ?
