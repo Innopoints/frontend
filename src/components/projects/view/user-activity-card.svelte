@@ -7,7 +7,7 @@
   import UnclickableChip from 'ui/unclickable-chip.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import s from '@/utils/plural-s.js';
-  import { formatDate, formatTimeRange } from '@/utils/date-time-format.js';
+  import { formatDate, formatDateRange } from '@/utils/date-time-format.js';
 
   export let activity;
   export let competences;
@@ -36,7 +36,7 @@
         {/if}
       </span>
       <span class="content secondary">
-        {formatTimeRange(activity.timeframe)}
+        {formatDateRange(activity.timeframe)}
       </span>
     </Labeled>
   </div>
