@@ -105,6 +105,24 @@
     },
   };
 
+  const applicationRejectDialog = {
+    open: false,
+    detail: null,
+    show({ detail }) {
+      applicationRejectDialog.detail = detail;
+      applicationRejectDialog.open = true;
+    },
+  };
+
+  const applicationPendingDialog = {
+    open: false,
+    detail: null,
+    show({ detail }) {
+      applicationPendingDialog.detail = detail;
+      applicationPendingDialog.open = true;
+    },
+  };
+
   const activityDeletionDialog = {
     open: false,
     activity: null,
@@ -229,6 +247,16 @@
       }
     },
   };
+
+  function chooseApplicationStatusModal(evt) {
+    if (evt.detail.status === ApplicationStatuses.APPROVED) {
+      changeApplicationStatus(evt);
+    } else if (evt.detail.status === ApplicationStatuses.REJECTED) {
+      applicationRejectDialog.show(evt);
+    } else {
+      applicationPendingDialog.show(evt);
+    }
+  }
 
   async function changeApplicationStatus({ detail: { status, activity, application } }) {
     try {
@@ -361,7 +389,7 @@
           project={projectStore}
           {competences}
           on:view-reports={reportDialog.show}
-          on:application-status-changed={changeApplicationStatus}
+          on:application-status-changed={chooseApplicationStatusModal}
           on:activity-changed={processActivityChange}
           on:delete-activity={activityDeletionDialog.show}
           on:save-hours={updateHours}
@@ -440,6 +468,32 @@
       Are you sure you want to take your application back?
       <em class="consequences">You may place a new one afterwards.</em>
     </DangerConfirmDialog>
+    <!-- confirm-application-rejection -->
+    <DangerConfirmDialog
+      textYes="yes, reject"
+      bind:isOpen={applicationRejectDialog.open}
+      eventDetail={applicationRejectDialog.detail}
+      on:confirm={changeApplicationStatus}
+    >
+      Are you sure you want to reject this application?
+      <em class="consequences">
+        It will disappear from the list.
+        The rejected volunteer can take this application back
+        and place a new one, with a different comment, for example.
+      </em>
+    </DangerConfirmDialog>
+    <!-- confirm-application-pending -->
+    <DangerConfirmDialog
+      textYes="yes, move"
+      bind:isOpen={applicationPendingDialog.open}
+      eventDetail={applicationPendingDialog.detail}
+      on:confirm={changeApplicationStatus}
+    >
+      Are you sure you want to move this application back to pending?
+      <em class="consequences">
+        Make sure that the volunteer in question is aware of this action.
+      </em>
+    </DangerConfirmDialog>
   {/if}
   <!-- read-feedback -->
   <FeedbackModal
@@ -458,5 +512,3 @@
   />
 </Layout>
 <!-- view past reports* -->
-<!-- confirm application rejection -->
-<!-- confirm application pending -->
