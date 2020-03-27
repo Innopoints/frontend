@@ -23,6 +23,7 @@
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
   import FinalizingDialog from '@/components/projects/view/finalizing-dialog.svelte';
   import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
+  import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -181,6 +182,29 @@
     },
   };
 
+  const leaveFeedbackModal = {
+    open: false,
+    show({ detail: activity }) {
+      leaveFeedbackModal.activity = activity;
+      leaveFeedbackModal.open = true;
+    },
+    async submitFeedback({ detail }) {
+      try {
+        const { value, activity, application } = detail;
+        value.answers = value.answers.map(answer => answer || '');
+        application.feedback = await api.json(api.post(
+          `/projects/${activity.project}/activities/${activity.id}`
+          + `/applications/${application.id}/feedback`,
+          { data: value },
+        ));
+        project = project;
+        leaveFeedbackModal.open = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
+
   async function changeApplicationStatus({ detail: { status, activity, application } }) {
     try {
       await api.json(api.patch(
@@ -280,6 +304,7 @@
   <link rel="stylesheet" href="css/view-project/proper-grid.css" />
   <link rel="stylesheet" href="css/view-project/report-performance-modal.css" />
   <link rel="stylesheet" href="css/view-project/read-feedback-modal.css" />
+  <link rel="stylesheet" href="css/profile/leave-feedback-modal.css" />
   <link rel="stylesheet" href="css/view-project/apply-modal.css" />
   <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
 </svelte:head>
@@ -325,13 +350,16 @@
           on:apply={applicationDialog.show}
           on:take-back-application={applicationTakeBackDialog.show}
           on:read-feedback={feedbackModal.show}
+          on:leave-feedback={leaveFeedbackModal.show}
         />
       {/if}
     {/if}
   </div>
 
   {#if isModeratorView}
+    <!-- view past reports* -->
     <ReportDialog {project} bind:isOpen={reportDialog.open} {...reportDialog.props} />
+    <!-- confirm-project-deletion -->
     <DangerConfirmDialog
       textYes="yes, delete"
       bind:isOpen={projectDeletionDialog.open}
@@ -341,6 +369,7 @@
       You may edit the project or delete individual activities instead. <br />
       Think twice before proceeding.
     </DangerConfirmDialog>
+    <!-- confirm-activity-deletion -->
     <DangerConfirmDialog
       textYes="yes, delete"
       bind:isOpen={activityDeletionDialog.open}
@@ -353,11 +382,13 @@
         All of the volunteering applications will be discarded.
       </em>
     </DangerConfirmDialog>
+    <!-- confirm-project-finish -->
     <FinalizingDialog
       bind:isOpen={finalizeDialog.open}
       on:confirm={finalizeDialog.finalizeProject}
     />
   {:else}
+    <!-- apply -->
     <ApplicationDialog
       savedUsername={account && account.telegram_username}
       activity={applicationDialog.activity}
@@ -365,6 +396,7 @@
       on:submit-application={applicationDialog.processApplication}
       error={applicationDialog.error}
     />
+    <!-- confirm-application-takeback -->
     <DangerConfirmDialog
       textYes="yes, take back"
       bind:isOpen={applicationTakeBackDialog.open}
@@ -375,6 +407,7 @@
       <em class="consequences">You may place a new one afterwards.</em>
     </DangerConfirmDialog>
   {/if}
+  <!-- read-feedback -->
   <FeedbackModal
     bind:isOpen={feedbackModal.open}
     activity={feedbackModal.activity}
@@ -382,4 +415,15 @@
     from={feedbackModal.from}
     {competences}
   />
+  <!-- leave-feedback -->
+  <LeaveFeedbackModal
+    bind:isOpen={leaveFeedbackModal.open}
+    activity={leaveFeedbackModal.activity}
+    {competences}
+    on:submit={leaveFeedbackModal.submitFeedback}
+  />
 </Layout>
+<!-- view past reports* -->
+<!-- confirm application rejection -->
+<!-- confirm application pending -->
+<!-- report performance -->

@@ -18,7 +18,7 @@
       {projectStage}
       on:apply
       on:take-back-application
-      on:leave-feeback
+      on:leave-feedback
       on:read-feedback
     />
   {/each}
