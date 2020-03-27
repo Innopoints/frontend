@@ -14,6 +14,11 @@
   export let colors;
   export let sizes;
   export let showSizes;
+  $: {
+    if (showSizes && variety.sizes == null) {
+      variety.sizes = {};
+    }
+  }
 
   const dispatch = createEventDispatcher();
 

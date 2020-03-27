@@ -43,6 +43,25 @@
   flex-direction: column;
 }
 
+.cards .card .title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cards .card .title .main {
+  margin-bottom: .1em;
+}
+
+.cards .card .title .out-of-stock {
+  font-size: .8rem;
+  padding: .3em .5em;
+  background: #ab0303;
+  color: #fff;
+  border-radius: 1em;
+}
+
 .cards .card .title + .subtitle {
   margin-top: .2em;
 }
