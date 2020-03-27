@@ -24,5 +24,10 @@
     border-left: 3px solid $light-gray;
     color: $dark;
     line-height: 1.25rem;
+
+    .no-answer {
+      font-style: italic;
+      font-weight: 300;
+    }
   }
 }

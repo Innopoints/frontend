@@ -14,9 +14,10 @@
   }
 </script>
 
-<Modal bind:isOpen classname="read-feedback">
+<Modal bind:isOpen>
   {#if activity != null}
     <Dialog
+      classname="read-feedback"
       title="Feedback{from != null ? ' from ' + from.full_name : ''}"
       closeCallback={() => isOpen = false}
     >
@@ -29,7 +30,13 @@
         </div>
         {#each activity.feedback_questions as question, index}
           <p class="question">{question}</p>
-          <blockquote class="answer constrain-width">{feedback.answers[index]}</blockquote>
+          <blockquote class="answer constrain-width">
+            {#if feedback.answers[index] !== ''}
+              {feedback.answers[index]}
+            {:else}
+              <em class="no-answer">No answer.</em>
+            {/if}
+          </blockquote>
         {/each}
       </article>
     </Dialog>
