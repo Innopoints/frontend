@@ -99,7 +99,8 @@
   text-decoration: underline;
 }
 
-.activity.moderated .left .description {
+.activity.moderated .left .description,
+.activity.moderated .with-icon .text {
   white-space: pre-line;
 }
 

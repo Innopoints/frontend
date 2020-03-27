@@ -85,6 +85,7 @@
 
 .activity.user.expanded .application .with-icon {
   margin-top: .5em;
+  white-space: pre-line;
 }
 
 .activity.user.expanded .not-logged-in {
