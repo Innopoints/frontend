@@ -93,12 +93,6 @@
   font-size: .9rem;
 }
 
-.activity.moderated .username-link {
-  color: #127800;
-  font-size: 1rem;
-  text-decoration: underline;
-}
-
 .activity.moderated .left .description,
 .activity.moderated .with-icon .text {
   white-space: pre-line;

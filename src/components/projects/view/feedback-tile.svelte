@@ -25,9 +25,9 @@
   </div>
   <span class="telegram popover-container">
     {#if application.telegram}
-      <span class="username-link">
+      <a href="https://t.me/{application.telegram}">
         @{application.telegram}
-      </span>
+      </a>
       <CopyButton text={application.telegram} />
     {:else}
       No Telegram username specified.
