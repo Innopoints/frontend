@@ -24,6 +24,7 @@
   import FinalizingDialog from '@/components/projects/view/finalizing-dialog.svelte';
   import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
+  import ReportPerformanceModal from '@/components/projects/view/report-performance-modal.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -205,6 +206,30 @@
     },
   };
 
+  const reportPerformanceModal = {
+    open: false,
+    show({ detail }) {
+      reportPerformanceModal.activity = detail.activity;
+      reportPerformanceModal.application = detail.application;
+      reportPerformanceModal.open = true;
+    },
+    async submitReport({ detail }) {
+      try {
+        const { value, activity, application } = detail;
+        application.reports.push(await api.json(api.post(
+          `/projects/${activity.project}/activities/${activity.id}`
+          + `/applications/${application.id}/report`,
+          { data: value },
+        )));
+        project = project;
+        projectStore.set(project);
+        reportPerformanceModal.open = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
+
   async function changeApplicationStatus({ detail: { status, activity, application } }) {
     try {
       await api.json(api.patch(
@@ -331,6 +356,7 @@
       <h2 class="padded">Activities</h2>
       {#if isModeratorView}
         <ModeratorView
+          {account}
           activities={project.activities}
           project={projectStore}
           {competences}
@@ -340,6 +366,7 @@
           on:delete-activity={activityDeletionDialog.show}
           on:save-hours={updateHours}
           on:read-feedback={feedbackModal.show}
+          on:report-performance={reportPerformanceModal.show}
         />
       {:else}
         <UserView
@@ -387,6 +414,13 @@
       bind:isOpen={finalizeDialog.open}
       on:confirm={finalizeDialog.finalizeProject}
     />
+    <!-- report-performance -->
+    <ReportPerformanceModal
+      bind:isOpen={reportPerformanceModal.open}
+      activity={reportPerformanceModal.activity}
+      application={reportPerformanceModal.application}
+      on:submit={reportPerformanceModal.submitReport}
+    />
   {:else}
     <!-- apply -->
     <ApplicationDialog
@@ -426,4 +460,3 @@
 <!-- view past reports* -->
 <!-- confirm application rejection -->
 <!-- confirm application pending -->
-<!-- report performance -->

@@ -15,6 +15,7 @@
     synchronizeActivityLists,
   } from '@/utils/project-manipulation.js';
 
+  export let account;
   export let activities;
   export let competences;
   export let project;
@@ -105,8 +106,10 @@
   {:else if $project.lifetime_stage === ProjectStages.FINALIZING}
     {#each activityCards as activity}
       <HourActivityCard
+        {account}
         {activity}
         on:save-hours
+        on:report-performance
       />
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINISHED}

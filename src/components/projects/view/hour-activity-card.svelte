@@ -8,6 +8,7 @@
   import s from '@/utils/plural-s.js';
   import { formatTimeRange } from '@/utils/date-time-format.js';
 
+  export let account;
   export let activity;
   let hourChanges = new Map();
 
@@ -83,10 +84,12 @@
       <Accordion let:panelController>
         {#each activity.applications as application (application.id)}
           <ApplicationHourTile
+            {account}
             {activity}
             {application}
             handlePanelOpen={panelController}
             on:hours-changed={recordHourChange}
+            on:report-performance
           />
         {/each}
       </Accordion>

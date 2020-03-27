@@ -5,6 +5,7 @@
   import TextField from 'ui/text-field.svelte';
   import CopyButton from '@/components/projects/view/copy-button.svelte';
 
+  export let account;
   export let activity;
   export let application;
   export let handlePanelOpen;
@@ -53,8 +54,14 @@
       </div>
     </div>
   {/if}
-  <Button isOutline classname="report">
-    <svg class="icon mr" src="images/icons/edit-3.svg" />
-    report performance
-  </Button>
+  {#if application.reports.find(report => report.reporter_email === account.email) == null}
+    <Button
+      isOutline
+      classname="report"
+      on:click={() => dispatch('report-performance', { activity, application })}
+    >
+      <svg class="icon mr" src="images/icons/edit-3.svg" />
+      report performance
+    </Button>
+  {/if}
 </AccordionSection>
