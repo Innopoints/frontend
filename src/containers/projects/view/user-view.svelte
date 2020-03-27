@@ -1,6 +1,7 @@
 <script>
   import UserActivityCard from '@/components/projects/view/user-activity-card.svelte';
 
+  export let projectStage;
   export let activities;
   export let competences;
   export let account;
@@ -14,8 +15,11 @@
       {activity}
       {competences}
       {account}
+      {projectStage}
       on:apply
       on:take-back-application
+      on:leave-feeback
+      on:read-feedback
     />
   {/each}
 </div>

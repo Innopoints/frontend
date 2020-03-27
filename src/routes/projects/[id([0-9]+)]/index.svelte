@@ -22,6 +22,7 @@
   import ReportDialog from '@/components/projects/view/report-dialog.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
   import FinalizingDialog from '@/components/projects/view/finalizing-dialog.svelte';
+  import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -167,6 +168,19 @@
     },
   };
 
+  const feedbackModal = {
+    open: false,
+    activity: null,
+    feedback: null,
+    from: null,
+    show({ detail }) {
+      feedbackModal.activity = detail.activity;
+      feedbackModal.feedback = detail.feedback;
+      feedbackModal.from = detail.from;
+      feedbackModal.open = true;
+    },
+  };
+
   async function changeApplicationStatus({ detail: { status, activity, application } }) {
     try {
       await api.json(api.patch(
@@ -260,10 +274,12 @@
   <link rel="stylesheet" href="css/view-project/activity-user.css" />
   <link rel="stylesheet" href="css/view-project/activity-moderated.css" />
   <link rel="stylesheet" href="css/view-project/activity-finalizing.css" />
+  <link rel="stylesheet" href="css/review-project/main.css" />
   <link rel="stylesheet" href="css/page-components/create-activity.css" />
   <link rel="stylesheet" href="css/view-project/moderators.css" />
   <link rel="stylesheet" href="css/view-project/proper-grid.css" />
   <link rel="stylesheet" href="css/view-project/report-performance-modal.css" />
+  <link rel="stylesheet" href="css/view-project/read-feedback-modal.css" />
   <link rel="stylesheet" href="css/view-project/apply-modal.css" />
   <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
 </svelte:head>
@@ -298,14 +314,17 @@
           on:activity-changed={processActivityChange}
           on:delete-activity={activityDeletionDialog.show}
           on:save-hours={updateHours}
+          on:read-feedback={feedbackModal.show}
         />
       {:else}
         <UserView
           activities={project.activities}
           {competences}
           {account}
+          projectStage={project.lifetime_stage}
           on:apply={applicationDialog.show}
           on:take-back-application={applicationTakeBackDialog.show}
+          on:read-feedback={feedbackModal.show}
         />
       {/if}
     {/if}
@@ -313,6 +332,31 @@
 
   {#if isModeratorView}
     <ReportDialog {project} bind:isOpen={reportDialog.open} {...reportDialog.props} />
+    <DangerConfirmDialog
+      textYes="yes, delete"
+      bind:isOpen={projectDeletionDialog.open}
+      on:confirm={projectDeletionDialog.deleteProject}
+    >
+      Deleting a project is rarely desired. <br />
+      You may edit the project or delete individual activities instead. <br />
+      Think twice before proceeding.
+    </DangerConfirmDialog>
+    <DangerConfirmDialog
+      textYes="yes, delete"
+      bind:isOpen={activityDeletionDialog.open}
+      eventDetail={activityDeletionDialog.activity}
+      on:confirm={activityDeletionDialog.deleteActivity}
+      on:reject={activityDeletionDialog.restoreActivity}
+    >
+      Are you sure you want to delete this activity?
+      <em class="consequences">
+        All of the volunteering applications will be discarded.
+      </em>
+    </DangerConfirmDialog>
+    <FinalizingDialog
+      bind:isOpen={finalizeDialog.open}
+      on:confirm={finalizeDialog.finalizeProject}
+    />
   {:else}
     <ApplicationDialog
       savedUsername={account && account.telegram_username}
@@ -321,39 +365,21 @@
       on:submit-application={applicationDialog.processApplication}
       error={applicationDialog.error}
     />
+    <DangerConfirmDialog
+      textYes="yes, take back"
+      bind:isOpen={applicationTakeBackDialog.open}
+      eventDetail={applicationTakeBackDialog.activity}
+      on:confirm={applicationTakeBackDialog.processTakeBack}
+    >
+      Are you sure you want to take your application back?
+      <em class="consequences">You may place a new one afterwards.</em>
+    </DangerConfirmDialog>
   {/if}
-  <DangerConfirmDialog
-    textYes="yes, delete"
-    bind:isOpen={projectDeletionDialog.open}
-    on:confirm={projectDeletionDialog.deleteProject}
-  >
-    Deleting a project is rarely desired. <br />
-    You may edit the project or delete individual activities instead. <br />
-    Think twice before proceeding.
-  </DangerConfirmDialog>
-  <DangerConfirmDialog
-    textYes="yes, take back"
-    bind:isOpen={applicationTakeBackDialog.open}
-    eventDetail={applicationTakeBackDialog.activity}
-    on:confirm={applicationTakeBackDialog.processTakeBack}
-  >
-    Are you sure you want to take your application back?
-    <em class="consequences">You may place a new one afterwards.</em>
-  </DangerConfirmDialog>
-  <DangerConfirmDialog
-    textYes="yes, delete"
-    bind:isOpen={activityDeletionDialog.open}
-    eventDetail={activityDeletionDialog.activity}
-    on:confirm={activityDeletionDialog.deleteActivity}
-    on:reject={activityDeletionDialog.restoreActivity}
-  >
-    Are you sure you want to delete this activity?
-    <em class="consequences">
-      All of the volunteering applications will be discarded.
-    </em>
-  </DangerConfirmDialog>
-  <FinalizingDialog
-    bind:isOpen={finalizeDialog.open}
-    on:confirm={finalizeDialog.finalizeProject}
+  <FeedbackModal
+    bind:isOpen={feedbackModal.open}
+    activity={feedbackModal.activity}
+    feedback={feedbackModal.feedback}
+    from={feedbackModal.from}
+    {competences}
   />
 </Layout>

@@ -3,6 +3,7 @@
   import Button from 'ui/button.svelte';
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
   import HourActivityCard from '@/components/projects/view/hour-activity-card.svelte';
+  import FeedbackActivityCard from '@/components/projects/view/feedback-activity-card.svelte';
   import EditActivity from '@/components/projects/new/edit-activity.svelte';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -108,9 +109,18 @@
         on:save-hours
       />
     {/each}
+  {:else if $project.lifetime_stage === ProjectStages.FINISHED}
+    {#each activityCards as activity}
+      <FeedbackActivityCard
+        {activity}
+        on:read-feedback
+      />
+    {/each}
   {/if}
 </div>
-<Button on:click={() => activityCards = addActivity(activityCards)}>
-  <svg src="/images/icons/plus.svg" class="icon mr" />
-  add another activity
-</Button>
+{#if $project.lifetime_stage === ProjectStages.ONGOING}
+  <Button on:click={() => activityCards = addActivity(activityCards)}>
+    <svg src="/images/icons/plus.svg" class="icon mr" />
+    add another activity
+  </Button>
+{/if}

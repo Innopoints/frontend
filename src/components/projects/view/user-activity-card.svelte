@@ -6,18 +6,24 @@
   import Button from 'ui/button.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
+  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import s from '@/utils/plural-s.js';
   import { formatDate, formatDateRange } from '@/utils/date-time-format.js';
 
+  export let projectStage;
   export let activity;
   export let competences;
   export let account;
 
   $: canApply = (
-    activity.application_deadline == null
-    || new Date(activity.application_deadline) >= new Date()
-    || activity.people_required === 0
-    || activity.vacant_spots !== 0
+    projectStage === ProjectStages.ONGOING
+    && (
+      activity.application_deadline == null
+      || new Date(activity.application_deadline) >= new Date()
+    ) && (
+      activity.people_required === 0
+      || activity.vacant_spots !== 0
+    )
   );
 
   const dispatch = createEventDispatcher();
@@ -150,23 +156,47 @@
       {/if}
     </Button>
     {#if account != null}
-      {#if activity.existing_application != null}
-        <Button
-          isDanger
-          classname="additional"
-          on:click={() => dispatch('take-back-application', activity)}
-        >
-          take back
-        </Button>
+      {#if projectStage === ProjectStages.FINISHED}
+        {#if activity.existing_application != null
+          && activity.existing_application.feedback == null}
+          <Button
+            isFilled
+            classname="additional"
+            on:click={() => dispatch('leave-feedback', activity)}
+          >
+            claim innopoints
+          </Button>
+        {:else if activity.existing_application != null}
+          <Button
+            isOutline
+            classname="additional"
+            on:click={() => dispatch('read-feedback', {
+              feedback: activity.existing_application.feedback,
+              activity,
+            })}
+          >
+            read feedback
+          </Button>
+        {/if}
       {:else}
-        <Button
-          isFilled
-          classname="additional"
-          disabled={!canApply}
-          on:click={() => dispatch('apply', activity)}
-        >
-          apply
-        </Button>
+        {#if activity.existing_application != null}
+          <Button
+            isDanger
+            classname="additional"
+            on:click={() => dispatch('take-back-application', activity)}
+          >
+            take back
+          </Button>
+        {:else}
+          <Button
+            isFilled
+            classname="additional"
+            disabled={!canApply}
+            on:click={() => dispatch('apply', activity)}
+          >
+            apply
+          </Button>
+        {/if}
       {/if}
     {:else}
       <p class="additional not-logged-in">
