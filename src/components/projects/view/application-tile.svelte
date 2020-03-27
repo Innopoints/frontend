@@ -4,7 +4,6 @@
   import Button from 'ui/button.svelte';
   import CopyButton from '@/components/projects/view/copy-button.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import range from '@/utils/range.js';
   import * as api from '@/utils/api.js';
 
   export let activity;
@@ -42,18 +41,18 @@
   {#if report != null}
     {#await report then reportData}
       <div class="stars">
-        {#each [...range(reportData.average_rating)] as _}
-          <svg class="star" src="images/icons/star.svg" />
-        {/each}
-        {#each [...range(5 - reportData.average_rating)] as _}
-          <svg class="star off" src="images/icons/star.svg" />
+        {#each [0, 1, 2, 3, 4] as i}
+          {#if i < reportData.average_rating}
+            <svg class="star" src="images/icons/star.svg" />
+          {:else}
+            <svg class="star off" src="images/icons/star.svg" />
+          {/if}
         {/each}
       </div>
       {#if reportData.reports.length !== 0}
         <Button
           on:click={() => dispatch('view-reports', {
             reports: reportData.reports,
-            activity: activity,
             applicant: application.applicant,
           })}
         >

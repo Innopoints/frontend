@@ -2,13 +2,10 @@
   import Dialog from 'ui/dialog.svelte';
   import Labeled from 'ui/labeled.svelte';
   import Modal from 'ui/modal.svelte';
-  import range from '@/utils/range.js';
   import { formatDate } from '@/utils/date-time-format.js';
 
   export let reports = null;
   export let applicant = null;
-  export let project;
-  export let activity = null;
   export let isOpen = false;
 </script>
 
@@ -25,17 +22,23 @@
               </Labeled>
               <Labeled icon label="Volunteering activity">
                 <svg slot="icon" class="icon" src="images/icons/zap.svg" />
-                <p>{activity.name} on <a href="/projects/{project.id}">{project.name}</a></p>
+                <p>
+                  {report.application_on.activity.name} on
+                  <a href="/projects/{report.application_on.activity.project.id}">
+                    {report.application_on.activity.project.name}
+                  </a>
+                </p>
               </Labeled>
             </div>
             <div class="feedback">
               <p>{report.content}</p>
               <div class="stars">
-                {#each [...range(report.rating)] as _}
-                  <svg class="star" src="images/icons/star.svg" />
-                {/each}
-                {#each [...range(5 - report.rating)] as _}
-                  <svg class="star off" src="images/icons/star.svg" />
+                {#each [0, 1, 2, 3, 4] as i}
+                  {#if i < report.rating}
+                    <svg class="star" src="images/icons/star.svg" />
+                  {:else}
+                    <svg class="star off" src="images/icons/star.svg" />
+                  {/if}
                 {/each}
               </div>
             </div>

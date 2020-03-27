@@ -136,6 +136,7 @@ h2.padded {
   flex-direction: column-reverse;
   justify-content: space-between;
   margin-top: 1em;
+  white-space: pre-line;
 }
 
 .reports .feedback .stars {
@@ -230,11 +231,17 @@ h2.padded {
 }
 
 @media only screen and (min-width: 1024px) {
+  .reports {
+    min-width: 25em;
+  }
   .reports .data-points, .reports .feedback {
     flex-direction: row;
   }
   .reports .data-points .labeled:first-child {
     margin-right: 10%;
+  }
+  .reports .label {
+    white-space: nowrap;
   }
   .reports .feedback .stars {
     margin-left: 1em;
