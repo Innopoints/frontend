@@ -14,6 +14,16 @@
   let telegram = savedUsername || '';
   let remember = [{ value: 'remember', checked: false }];
 
+  function submitApplication() {
+    dispatch('submit-application', {
+      activity,
+      comment,
+      telegram,
+      remember: remember[0].checked,
+    });
+    comment = '';
+  }
+
   const dispatch = createEventDispatcher();
 </script>
 
@@ -59,12 +69,7 @@
         <div class="actions">
           <Button
             isFilled
-            on:click={() => dispatch('submit-application', {
-              activity,
-              comment,
-              telegram,
-              remember: remember[0].checked,
-            })}
+            on:click={submitApplication}
             disabled={activity.telegram_required && !/[A-Za-z0-9_]{5,32}/.test(telegram)}
           >
             apply
