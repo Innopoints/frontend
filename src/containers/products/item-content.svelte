@@ -6,6 +6,7 @@
   import RadioChipGroup from 'ui/radio-chip-group.svelte';
   import Button from 'ui/button.svelte';
   import { login } from '@/utils/auth.js';
+  import s from '@/utils/plural-s.js';
 
   const { page } = stores();
 
@@ -111,7 +112,7 @@
     <div class="action{account != null ? ' purchaseable' : ''}">
       {#if account != null}
         <div class="purchases">
-          {productControl.totalPurchases || 0} purchases  <!-- item amount -->
+          {productControl.totalPurchases || 0} purchase{s(productControl.totalPurchases)}
         </div>
         {#if outOfStock}
           <p class="out-of-stock">out of stock</p>
