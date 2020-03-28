@@ -14,7 +14,6 @@
   margin-top: .8em;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .activity .row > .labeled {
