@@ -17,7 +17,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
-  import { stores, goto } from '@sapper/app';
+  import { stores, goto, prefetch } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import StepZero from '@/containers/projects/new/step-0.svelte';
   import StepOne from '@/containers/projects/new/step-1.svelte';
@@ -129,6 +129,7 @@
 
   async function publishProject() {
     try {
+      prefetch('/projects');
       await api.json(api.patch(`/projects/${$project.id}/publish`));
       goto('/projects');
     } catch (e) {
