@@ -102,7 +102,7 @@
       <Balance value={balance} />
       <Filters
         {order} {orderLabel} {colors} {orderOptions} {orderLabels} {balance}
-        on:change-filters={(event) => updateProducts(event.detail)}
+        on:change-filters={(event) => { currentPage = 1; updateProducts(event.detail); }}
         bind:this={filterElement}
       />
       {#if !products || products.length === 0}
