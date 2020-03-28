@@ -1,22 +1,22 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import SearchBar from '@/components/common/search-bar.svelte';
-  import TextField from 'ui/text-field.svelte';
+  // import TextField from 'ui/text-field.svelte';
   import Dropdown from 'ui/dropdown.svelte';
-  import Dot from 'ui/dot.svelte';
-  import Button from 'ui/button.svelte';
+  // import Dot from 'ui/dot.svelte';
+  // import Button from 'ui/button.svelte';
   import RadioGroup from 'ui/radio-group.svelte';
-  import CheckboxGroup from 'ui/checkbox-group.svelte';
+  // import CheckboxGroup from 'ui/checkbox-group.svelte';
   import RadioChipGroup from 'ui/radio-chip-group.svelte';
-  import Accordion from 'ui/accordion.svelte';
-  import AccordionSection from 'ui/accordion-section.svelte';
+  // import Accordion from 'ui/accordion.svelte';
+  // import AccordionSection from 'ui/accordion-section.svelte';
 
   export let orderOptions;
   export let orderLabels;
   export let competences;
   export let order;
   export let orderLabel;
-  const initialOrder = order;
+  // const initialOrder = order;
 
   let filtering = {
     searchQuery: '',
@@ -34,10 +34,10 @@
   if (competences == null) competences = [];
   competences.forEach(compObject => { compObject.checked = true; });
 
-  function clearCompetenceExclusion() {
-    competences.forEach(compObject => { compObject.checked = true; });
-    competences = competences;
-  }
+  // function clearCompetenceExclusion() {
+  //   competences.forEach(compObject => { compObject.checked = true; });
+  //   competences = competences;
+  // }
 
   const dispatch = createEventDispatcher();
 
@@ -59,59 +59,53 @@
     dispatch('change-filters', filtering);
   }
 
-  function decrementSpots() {
-    if (filtering.vacantSpots == null || filtering.vacantSpots <= 1) {
-      filtering.vacantSpots = 1;
-    } else {
-      filtering.vacantSpots--;
-    }
-    dispatch('change-filters', filtering);
-  }
-
-  function changeSpots(event) {
-    if (event.detail && !isNaN(+event.detail) && +event.detail > 1) {
-      filtering.vacantSpots = event.detail;
-      dispatch('change-filters', filtering);
-    }
-  }
-
-  function incrementSpots() {
-    if (filtering.vacantSpots == null || filtering.vacantSpots < 1) {
-      filtering.vacantSpots = 1;
-    } else {
-      filtering.vacantSpots++;
-    }
-    dispatch('change-filters', filtering);
-  }
-
-  // function changeDates(event) {
-  //   filtering.minDate = event.detail.left;
-  //   filtering.maxDate = event.detail.right;
+  // function decrementSpots() {
+  //   if (filtering.vacantSpots == null || filtering.vacantSpots <= 1) {
+  //     filtering.vacantSpots = 1;
+  //   } else {
+  //     filtering.vacantSpots--;
+  //   }
   //   dispatch('change-filters', filtering);
   // }
 
-  function changeCompetences(item) {
-    if (!item.checked) {
-      filtering.excludedCompetences.push(item.id);
-      filtering.excludedCompetences = filtering.excludedCompetences;
-    } else {
-      filtering.excludedCompetences = filtering.excludedCompetences.filter(x => x !== item.id);
-    }
-    dispatch('change-filters', filtering);
-  }
+  // function changeSpots(event) {
+  //   if (event.detail && !isNaN(+event.detail) && +event.detail > 1) {
+  //     filtering.vacantSpots = event.detail;
+  //     dispatch('change-filters', filtering);
+  //   }
+  // }
 
-  function clearFilters(event) {
-    filtering.searchQuery = '';
-    filtering.vacantSpots = null;
-    filtering.minDate = null;
-    filtering.maxDate = null;
-    filtering.excludedCompetences = [];
-    filtering.order = initialOrder;
+  // function incrementSpots() {
+  //   if (filtering.vacantSpots == null || filtering.vacantSpots < 1) {
+  //     filtering.vacantSpots = 1;
+  //   } else {
+  //     filtering.vacantSpots++;
+  //   }
+  //   dispatch('change-filters', filtering);
+  // }
 
-    competences.forEach(compObject => { compObject.checked = true; });
-    competences = competences;
-    dispatch('change-filters', filtering);
-  }
+  // function changeCompetences(item) {
+  //   if (!item.checked) {
+  //     filtering.excludedCompetences.push(item.id);
+  //     filtering.excludedCompetences = filtering.excludedCompetences;
+  //   } else {
+  //     filtering.excludedCompetences = filtering.excludedCompetences.filter(x => x !== item.id);
+  //   }
+  //   dispatch('change-filters', filtering);
+  // }
+
+  // function clearFilters(event) {
+  //   filtering.searchQuery = '';
+  //   filtering.vacantSpots = null;
+  //   filtering.minDate = null;
+  //   filtering.maxDate = null;
+  //   filtering.excludedCompetences = [];
+  //   filtering.order = initialOrder;
+  //
+  //   competences.forEach(compObject => { compObject.checked = true; });
+  //   competences = competences;
+  //   dispatch('change-filters', filtering);
+  // }
 
   export function getLastFiltering() {
     return filtering;
@@ -133,7 +127,7 @@
         on:change="{changeOrder}"
       />
     </Dropdown>
-    <Dropdown chevron={false} isRight>
+    <!-- <Dropdown chevron={false} isRight>
       <svg slot="label" src="/images/icons/filter.svg" class="icon mr" />
       <span slot="label">filters</span>
       <span slot="label">
@@ -197,7 +191,7 @@
           someday we will add a date picker
         </AccordionSection>
       </Accordion>
-    </Dropdown>
+    </Dropdown> -->
   </div>
 </div>
 <RadioChipGroup
