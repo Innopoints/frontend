@@ -2,19 +2,16 @@
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
-  import getBackground from '@/utils/optimal-color.js';
-  import { API_HOST } from '@/constants/env.js';
   import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
+  import { writeText as copyToClipboard } from 'clipboard-polyfill';
+  import getBackground from '@/utils/optimal-color.js';
+  import s from '@/utils/plural-s.js';
+  import { API_HOST } from '@/constants/env.js';
 
   export let purchase;
 
   let dispatch = createEventDispatcher();
   let editing = purchase.status === StockChangeStatuses.PENDING;
-
-  const copy = () => {
-    if (!navigator.clipboard) alert('Browser does not support copying');
-    else navigator.clipboard.writeText(purchase.account.email);
-  };
 </script>
 
 <li>
@@ -31,8 +28,10 @@
         {new Date(purchase.time).toLocaleString('ru', {month: '2-digit', day: '2-digit'})}
       </time>
       <div class="purchaser">
-        {(-purchase.amount)} item{purchase.amount < -1 && 's' || ''} purchased by {purchase.account.full_name}
-        <span on:click={copy} class="copy-email">click to copy e-mail</span>
+        {(-purchase.amount)} item{s(-purchase.amount)} purchased by {purchase.account.full_name}
+        <span on:click={() => copyToClipboard(purchase.account.email)} class="copy-email">
+          click to copy e-mail
+        </span>
       </div>
       <div class="parameters">
         {#if purchase.variety.size}

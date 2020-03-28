@@ -47,12 +47,19 @@
 
 .activity.user.expanded .description,
 .activity.user.expanded .chips,
-.activity.user.expanded .volunteers {
+.activity.user.expanded .volunteers,
+.activity.user.expanded .spots {
   margin-top: .8em;
 }
 
-.activity.user.expanded .description .content {
+.activity.user.expanded .description .content,
+.activity.user.expanded .spots .content {
   font-size: .95rem;
+  white-space: pre-line;
+}
+
+.activity.user.expanded .volunteers > div.text {
+  display: block;
 }
 
 .activity.user.expanded .volunteers ul {
@@ -72,33 +79,18 @@
 .activity.user.expanded .application {
   border-top: 1px solid #ddd;
   padding-top: .8em;
+  margin-top: .8em;
   font-weight: 300;
 }
 
 .activity.user.expanded .application .with-icon {
   margin-top: .5em;
+  white-space: pre-line;
 }
 
 .activity.user.expanded .not-logged-in {
   align-self: center;
   font-weight: 300;
-}
-
-.activity.user .warning {
-  background: #fff4e5;
-  padding: .5em .8em;
-  margin-top: .8em;
-  border-radius: .75em;
-  color: #995400;
-  display: flex;
-  align-items: center;
-}
-
-.activity.user .warning .icon {
-  stroke: #995400;
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-right: .6em;
 }
 
 @media only screen and (max-width: 379px) {
@@ -107,6 +99,7 @@
   }
 }
 
+/* stylelint-disable indentation */
 @media screen and (min-width: 420px) and (max-width: 679px), (min-width: 1024px) and (max-width: 1199px), (min-width: 1400px) {
   .activity.user .row > .labeled:first-child {
     flex-basis: 40%;
@@ -129,3 +122,5 @@
     margin-top: 0;
   }
 }
+
+/* stylelint-enable indentation */

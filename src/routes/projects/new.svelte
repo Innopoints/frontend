@@ -25,7 +25,12 @@
   import StepThree from '@/containers/projects/new/step-3.svelte';
   import * as api from '@/utils/api.js';
   import generateQueryString from '@/utils/generate-query-string.js';
-  import { filterProjectFields } from '@/utils/project-manipulation.js';
+  import {
+    determineInsertionIndex,
+    filterProjectFields,
+    prepareForBackend,
+    prepareAfterBackend,
+  } from '@/utils/project-manipulation.js';
   import activityTypes from '@/constants/projects/activity-internal-types.js';
 
   const { page } = stores();
@@ -53,19 +58,11 @@
     goto(`/projects/new?step=${stepIdx}`);
   }
 
-  function toISOFormat(date) {
-    return date.toISOString().slice(0, -1) + '+00:00';
-  }
-
   // Form processsing
   async function deleteDraft({ detail: draftID }) {
     try {
-      const resp = await api.del('/projects/' + draftID);
-      if (!resp.ok) {
-        console.error(await resp.text());
-      } else {
-        drafts = drafts.filter(draft => draft.id !== draftID);
-      }
+      await api.json(api.del('/projects/' + draftID));
+      drafts = drafts.filter(draft => draft.id !== draftID);
     } catch (e) {
       console.error(e);
     }
@@ -73,13 +70,7 @@
 
   async function loadDraft({ detail: draftID }) {
     try {
-      const resp = await api.get('/projects/' + draftID);
-      if (!resp.ok) {
-        console.error(await resp.text());
-        return;
-      }
-
-      const draftProject = await resp.json();
+      const draftProject = await api.json(api.get('/projects/' + draftID));
       for (let activity of draftProject.activities) {
         activity.timeframe = {
           start: new Date(activity.timeframe.start),
@@ -107,157 +98,104 @@
       return;
     }
 
-    if (projectObj.name !== lastSyncedName) {
-      const queryString = generateQueryString(new Map([['name', projectObj.name]]));
-      const nameAvailable = await api.get('/projects/name_available?' + queryString);
-      if (!nameAvailable.ok) {
-        if (nameAvailable.status === 400) {
-          console.error(await nameAvailable.json());
-        } else {
-          console.error(await nameAvailable.text());
+    try {
+      if (projectObj.name !== lastSyncedName) {
+        const queryString = generateQueryString(new Map([['name', projectObj.name]]));
+        const nameAvailable = await api.json(api.get('/projects/name_available?' + queryString));
+
+        if (!nameAvailable) {
+          duplicateName = true;
+          return;
         }
-        return;
       }
 
-      if (!(await nameAvailable.json())) {
-        duplicateName = true;
-        return;
-      } else {
-        duplicateName = false;
-      }
-    } else {
       duplicateName = false;
-    }
+      lastSyncedName = projectObj.name;
 
-    lastSyncedName = projectObj.name;
-
-    if (projectObj.id != null) {
-      const resp = await api.patch('/projects/' + projectObj.id, {
-        data: filterProjectFields(projectObj, true),
-      });
-      if (resp.ok) {
-        autosaved.set(true);
-      } else if (resp.status === 400) {
-        console.error(await resp.json());
+      if (projectObj.id != null) {
+        await api.json(api.patch('/projects/' + projectObj.id, {
+          data: filterProjectFields(projectObj, true),
+        }));
       } else {
-        console.error(await resp.text());
+        project.set(await api.json(api.post('/projects', {
+          data: projectObj,
+        })));
       }
-    } else {
-      const resp = await api.post('/projects', {
-        data: projectObj,
-      });
-      if (resp.ok) {
-        project.set(await resp.json());
-        autosaved.set(true);
-      } else if (resp.status === 400) {
-        console.error(await resp.json());
-      } else {
-        console.error(await resp.text());
-      }
+      autosaved.set(true);
+    } catch (e) {
+      console.error(e);
     }
   }
 
   async function publishProject() {
-    const resp = await api.patch(`/projects/${$project.id}/publish`);
-    if (!resp.ok) {
-      if (resp.status === 400) {
-        console.error(await resp.json());
-      } else {
-        console.error(await resp.text());
-      }
-    } else {
+    try {
+      await api.json(api.patch(`/projects/${$project.id}/publish`));
       goto('/projects');
+    } catch (e) {
+      console.error(e);
     }
   }
 
   async function processActivityChange({ detail }) {
-    const type = detail.activity._type;
-    delete detail.activity._type;
+    const type = detail.activityCopy._type;
+    delete detail.activityCopy._type;
+    prepareForBackend(detail.activityCopy);
 
-    let insertionIndex = 0;
-    while (detail.position) {
-      if (!$project.activities[insertionIndex].internal) {
-        detail.position--;
-      }
-      insertionIndex++;
-    }
+    const index = determineInsertionIndex($project.activities, detail.position);
 
-    if (detail.activity.fixed_reward) {
-      detail.activity.working_hours = 1;
-    }
-
-    detail.activity.timeframe = {
-      start: toISOFormat(detail.activity.timeframe.start),
-      end: toISOFormat(detail.activity.timeframe.end),
-    };
-
-    if (detail.activity.application_deadline != null) {
-      detail.activity.application_deadline = toISOFormat(detail.activity.application_deadline);
-    }
-
-    if (type === activityTypes.NEW) {
-      if ($project.id == null) {
-        // If the project does not exist on the backend yet
-        $project.activities.splice(insertionIndex, 0, detail.activity);
-      } else {
-        const resp = await api.post(`/projects/${$project.id}/activities`, {
-          data: detail.activity,
-        });
-
-        if (!resp.ok) {
-          if (resp.status === 400) {
-            console.error(await resp.json());
-          } else {
-            console.error(await resp.text());
-          }
-        }
-
-        $project.activities.splice(insertionIndex, 0, await resp.json());
-      }
-    } else if (type === activityTypes.EDIT) {
-      if ($project.id == null) {
-        // If the project does not exist on the backend yet
-        $project.activities.splice(insertionIndex, 1, detail.activity);
-      } else {
-        const activityID = detail.activity.id;
-        delete detail.activity.id;
-        const resp = await api.patch(
-          `/projects/${$project.id}/activities/${activityID}`,
-          { data: detail.activity },
-        );
-
-        if (!resp.ok) {
-          if (resp.status === 400) {
-            console.error(await resp.json());
-          } else {
-            console.error(await resp.text());
-          }
+    let updatedActivity;
+    try {
+      if (type === activityTypes.NEW) {
+        if ($project.id == null) {
+          // The project does not exist on the backend yet
+          updatedActivity = detail.activityCopy;
         } else {
-          detail.activity.id = activityID;
+          updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
+            data: detail.activityCopy,
+          }));
+          prepareAfterBackend(updatedActivity);
+        }
+        $project.activities.splice(index, 0, updatedActivity);
+      } else if (type === activityTypes.EDIT) {
+        if ($project.id == null) {
+          // The project does not exist on the backend yet
+          updatedActivity = detail.activityCopy;
+          $project.activities.splice(index, 1, updatedActivity);
+        } else {
+          const activityID = detail.activityCopy.id;
+          delete detail.activityCopy.id;
+
+          updatedActivity = await api.json(api.patch(
+            `/projects/${$project.id}/activities/${activityID}`,
+            { data: detail.activityCopy },
+          ));
+          prepareAfterBackend(updatedActivity);
+          updatedActivity.id = activityID;
+
           $project.activities.splice(
             $project.activities.findIndex(act => act.id === activityID),
             1,
-            detail.activity,
+            updatedActivity,
           );
         }
       }
+    } catch (e) {
+      console.error(e);
     }
     $project.activities = $project.activities;
   }
 
   async function processActivityDeletion({ detail: activityID }) {
+    // activityID may be:
+    //  - the actual ID of the activity on the backend, if the project exists on the backend;
+    //  - the name of the activity, if the project does not exist on the backend.
     if ($project.id != null) {
-      const resp = await api.del(`/projects/${$project.id}/activities/${activityID}`);
-      if (!resp.ok) {
-        if (resp.status === 400) {
-          console.error(await resp.json());
-        } else {
-          console.error(await resp.text());
-        }
-        // Do not delete the activity if the backend responded with an error
-        return;
+      try {
+        await api.json(api.del(`/projects/${$project.id}/activities/${activityID}`));
+        $project.activities = $project.activities.filter(act => act.id !== activityID);
+      } catch (e) {
+        console.error(e);
       }
-      $project.activities = $project.activities.filter(act => act.id !== activityID);
     } else {
       $project.activities = $project.activities.filter(act => act.name !== activityID);
     }

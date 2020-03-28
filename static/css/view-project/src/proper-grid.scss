@@ -1,0 +1,24 @@
+@media only screen and (min-width: 700px) {
+  // Two columns
+  .activities.user {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+    align-items: center;
+
+    .activity {
+      grid-row: span 2;
+
+      &.expanded {
+        grid-row: span 5;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  // Three columns
+  .activities.user {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

@@ -31,11 +31,11 @@
   </div>
 
   <div class="actions">
-    <Button tooltip="Duplicate" on:click={() => dispatch('copy-activity', activity.id)}>
+    <Button tooltip="Duplicate" on:click={() => dispatch('copy-activity', activity)}>
       <svg src="images/icons/copy.svg" class="icon mr" />
       <span class="text">copy</span>
     </Button>
-    <Button tooltip="Edit" on:click={() => dispatch('edit-activity', activity.id)}>
+    <Button tooltip="Edit" on:click={() => dispatch('edit-activity', activity)}>
       <svg src="images/icons/edit.svg" class="icon mr" />
       <span class="text">edit</span>
     </Button>

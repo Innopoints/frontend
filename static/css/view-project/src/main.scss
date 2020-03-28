@@ -46,6 +46,7 @@ h2.padded {
     margin-top: 1em;
     margin-right: 2.5em;
     font-size: 1.05rem;
+    white-space: pre-line;
 
     .secondary {
       display: block;
@@ -78,13 +79,16 @@ h2.padded {
       margin-top: 1em;
       margin-right: .5em;
     }
+
+    .btn.review {
+      margin-left: .5em;
+    }
   }
 
   &.wrap .data-points {
     display: flex;
     flex-wrap: wrap;
   }
-
 }
 
 .activities {
@@ -141,6 +145,7 @@ h2.padded {
     flex-direction: column-reverse;
     justify-content: space-between;
     margin-top: 1em;
+    white-space: pre-line;
 
     .stars {
       margin-bottom: .5em;
@@ -209,12 +214,13 @@ h2.padded {
 
     .info {
       width: 60%;
-      background: linear-gradient(
-        to left,
-        #fff 0%,
-        rgba(255, 255, 255, 1) 90%,
-        rgba(255, 255, 255, 0) 100%
-      );
+      background:
+        linear-gradient(
+          to left,
+          #fff 0%,
+          rgba(255, 255, 255, 1) 90%,
+          rgba(255, 255, 255, 0) 100%
+        );
       margin: 0;
       padding-left: 4em;
       padding-right: 1em;
@@ -250,12 +256,18 @@ h2.padded {
 
 @media only screen and (min-width: 1024px) {
   .reports {
+    min-width: 25em;
+
     .data-points, .feedback {
       flex-direction: row;
     }
 
     .data-points .labeled:first-child {
       margin-right: 10%;
+    }
+
+    .label {
+      white-space: nowrap;
     }
 
     .feedback .stars {

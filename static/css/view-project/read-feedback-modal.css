@@ -22,3 +22,8 @@
   color: #333;
   line-height: 1.25rem;
 }
+
+.read-feedback .answer .no-answer {
+  font-style: italic;
+  font-weight: 300;
+}

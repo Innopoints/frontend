@@ -49,3 +49,23 @@ export function patch(path, options) {
 export function del(path, options) {
   return request.call(this, 'DELETE', API_HOST + path, options);
 }
+
+/* Returns the JSON-decoded response on request success,
+   throws the appropriate type of error on request failure. */
+export async function json(request) {
+  const response = await request;
+
+  if (!response.ok) {
+    if (response.status === 400) {
+      throw await response.json();
+    } else {
+      throw await response.text();
+    }
+  }
+
+  if (response.status === 204) {
+    return null;
+  }
+
+  return await response.json();
+}

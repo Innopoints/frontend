@@ -107,11 +107,8 @@
 <svelte:head>
   <title>{fullName} – Innopoints</title>
 
-  <link rel="stylesheet" href="css/page-components/header.css" />
   <link rel="stylesheet" href="css/view-product/main.css" />
-  <link rel="stylesheet" href="css/page-components/empty-state.css" />
   <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
-  <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
 <Layout user={account}>

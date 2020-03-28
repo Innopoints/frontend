@@ -88,14 +88,11 @@
   <title>Store – Innopoints</title>
 
   <!-- Store styles -->
-  <link rel="stylesheet" href="css/page-components/header.css" />
   <link rel="stylesheet" href="css/page-components/tagline.css" />
   <link rel="stylesheet" href="css/page-components/filters.css" />
-  <link rel="stylesheet" href="css/page-components/empty-state.css" />
   <link rel="stylesheet" href="css/store/filters-spec.css" />
   <link rel="stylesheet" href="css/store/main.css" />
   <link rel="stylesheet" href="css/page-components/pagination.css" />
-  <link rel="stylesheet" href="css/page-components/footer.css" />
 </svelte:head>
 
 <Layout user={account}>

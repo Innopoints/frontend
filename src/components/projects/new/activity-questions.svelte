@@ -5,7 +5,6 @@
   import TextField from 'ui/text-field.svelte';
 
   export let value = [];
-  const dispatch = createEventDispatcher();
 
   function changeValue(index, event) {
     value[index] = event.detail;
@@ -21,27 +20,29 @@
     value = [...value, ''];
     dispatch('change', value);
   }
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <Dropdown dropdownclass="btn-shift" noclose let:toggle>
-  <svg src="/images/icons/message-circle.svg" class="icon mr" slot="label" />
+  <svg src="images/icons/message-circle.svg" class="icon mr" slot="label" />
   <span slot="label">customize</span>
   <span class="label">Feedback questions</span>
-  {#each value as val, i (i)}
+  {#each value as val, i}
     <div class="row">
       <TextField value={val} on:change={(e) => changeValue(i, e)} />
-      <Button isDanger isRound on:click={() => removeValue(i)}>
-        <svg src="/images/icons/trash-2.svg" />
+      <Button isDanger isRound on:click={(e) => { e.stopPropagation(); removeValue(i); }}>
+        <svg class="icon" src="images/icons/trash-2.svg" />
       </Button>
     </div>
   {/each}
   <div class="actions">
     <Button on:click={addValue}>
-      <svg src="/images/icons/plus.svg" class="icon mr" />
+      <svg src="images/icons/plus.svg" class="icon mr" />
       add
     </Button>
     <Button on:click={toggle} isFilled>
-      <svg src="/images/icons/check.svg" class="icon mr" />
+      <svg src="images/icons/check.svg" class="icon mr" />
       save
     </Button>
   </div>

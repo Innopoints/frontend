@@ -2,7 +2,7 @@
   import Card from 'ui/card.svelte';
   import Labeled from 'ui/labeled.svelte';
   import Button from 'ui/button.svelte';
-  import formatDateRange from '@/utils/date-range.js';
+  import { formatDateRange } from '@/utils/date-time-format.js';
   import { API_HOST } from '@/constants/env.js';
 
   export let id;
@@ -15,7 +15,7 @@
   export let end_date;
   export let moderated = false;
 
-  const imagePlaceholder = '/images/create-product/placeholder.svg';
+  const imagePlaceholder = '/images/create-project/placeholder.svg';
 </script>
 
 <Card classname="with-image">
@@ -37,6 +37,8 @@
       <ul>
         {#each exposedActivities.slice(0, 3) as activity (activity.id)}
           <li>{activity.name}</li>
+        {:else}
+          None
         {/each}
         {#if exposedActivities.length > 3}
           <li class="extra">+ {activities.length - 3} more</li>

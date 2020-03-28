@@ -77,9 +77,9 @@
       </div>
       {#if !isColor && labelPosition === 'right'}
         {#if labelclass !== null}
-          <span class={labelclass}>{labels === null ? loopValue : labels[i]}</span>
+          <span class={labelclass}>{labels === null ? loopValue.value : labels[i]}</span>
         {:else}
-          {labels === null ? loopValue : labels[i]}
+          {labels === null ? loopValue.value : labels[i]}
         {/if}
       {/if}
     </label>
