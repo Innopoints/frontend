@@ -93,6 +93,11 @@
     dispatch('change-filters', filtering);
   }
 
+  function showAffordable() {
+    changeMaxPrice({ detail: balance });
+    changeMinPrice({ detail: 0 });
+  }
+
   export function getLastFiltering() {
     return filtering;
   }
@@ -144,7 +149,7 @@
             </div>
           </div>
           {#if balance != null}
-            <Button on:click={() => changeMaxPrice({ detail: balance })} classname="mt">
+            <Button on:click={showAffordable} classname="mt">
               <svg src="images/icons/tag.svg" class="icon mr" />
               show affordable
             </Button>

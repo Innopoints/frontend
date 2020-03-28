@@ -1,4 +1,5 @@
 <script>
+  import Button from 'ui/button.svelte';
   import Card from 'ui/card.svelte';
 </script>
 
@@ -12,19 +13,18 @@
       <a href="mailto:319@innopolis.ru" class="mr-2">
         <img class="icon" src="/images/home/mail-us.svg" alt="write to 319" />
       </a>
-      <div>
-        <p style="padding-top: 1em;">319@innopolis.ru</p>
-        <a class="btn" href="mailto:319@innopolis.ru">send us an email</a>
-      </div>
+      <p>
+        319@innopolis.ru
+        <Button href="mailto:319@innopolis.ru">send us an email</Button>
+      </p>
     </Card>
     <Card>
-      <a href="tel:+7 (843) 203-92-53">
-        <img class="icon" src="/images/home/call-us.svg" alt="call to 319" />
+      <a href="https://t.me/andrejsblakunovs" class="mr-2">
+        <img class="icon" src="/images/home/text-us.svg" alt="call to 319" />
       </a>
-      <p style="padding: 0 1em;">
-        +7 (843) 203-92-53
-        <br />
-        (ext. 176)
+      <p>
+        @andrejsblakunovs
+        <Button href="https://t.me/andrejsblakunovs">text the admin</Button>
       </p>
     </Card>
   </div>
