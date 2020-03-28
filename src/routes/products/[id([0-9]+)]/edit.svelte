@@ -182,7 +182,6 @@
   }
 
   function saveChanges() {
-    prefetch(`/products/${product.id}`);
     if (!product.name) {
       errors.name = true;
       errorMessage = 'Some fields are not filled out or filled out incorrectly.';
