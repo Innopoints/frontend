@@ -51,6 +51,7 @@
   import Timeline from '@/containers/profile/timeline.svelte';
   import Statistics from '@/containers/profile/statistics.svelte';
   import Notifications from '@/containers/profile/notifications.svelte';
+  import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
   import * as api from '@/utils/api.js';
   import tabs from '@/constants/profile/tabs.js';
 
@@ -60,6 +61,45 @@
   export let notificationSettings;
   export let timelineFetchedUntil;
   export let competences;
+
+  const leaveFeedbackModal = {
+    open: false,
+    activity: null,
+    application: null,
+    payload: null,
+    async show({ detail: timelinePayload }) {
+      try {
+        leaveFeedbackModal.payload = timelinePayload;
+        const project = await api.json(api.get(`/projects/${timelinePayload.project_id}`));
+        leaveFeedbackModal.activity = project.activities.find(
+          act => act.id === timelinePayload.activity_id,
+        );
+        leaveFeedbackModal.application = leaveFeedbackModal.activity.applications.find(
+          apl => apl.id === timelinePayload.application_id,
+        );
+        leaveFeedbackModal.open = true;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async submitFeedback({ detail }) {
+      try {
+        const { value, activity, application } = detail;
+        value.answers = value.answers.map(answer => answer || '');
+        application.feedback = await api.json(api.post(
+          `/projects/${activity.project}/activities/${activity.id}`
+          + `/applications/${application.id}/feedback`,
+          { data: value },
+        ));
+        leaveFeedbackModal.payload.feedback_id = application.id;
+        timelinePromises = timelinePromises;
+        account.balance += leaveFeedbackModal.payload.reward;
+        leaveFeedbackModal.open = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
 
   let timelinePromises = [];
   if (timeline.data.length) {
@@ -115,10 +155,6 @@
     timelinePromises = timelinePromises;
   }
 
-  function openLeaveFeedback({ detail: payload }) {
-    /* TODO: implement */
-  }
-
   function openCreateReport({ detail: period }) {
     console.log(period);
   }
@@ -141,6 +177,7 @@
   <link rel="stylesheet" href="css/profile/statistics.css" />
   <link rel="stylesheet" href="css/profile/bar-colors.css" />
   <link rel="stylesheet" href="css/profile/notifications.css" />
+  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
 </svelte:head>
 
 <Layout user={account}>
@@ -158,7 +195,7 @@
         <Timeline
           {timelinePromises}
           on:more-timeline={fetchMoreTimeline}
-          on:leave-feedback={openLeaveFeedback}
+          on:leave-feedback={leaveFeedbackModal.show}
         />
       {:else if activeTab === tabs.statistics}
         <Statistics
@@ -172,4 +209,11 @@
       {/if}
     </section>
   </div>
+  <LeaveFeedbackModal
+    bind:isOpen={leaveFeedbackModal.open}
+    activity={leaveFeedbackModal.activity}
+    application={leaveFeedbackModal.application}
+    {competences}
+    on:submit={leaveFeedbackModal.submitFeedback}
+  />
 </Layout>
