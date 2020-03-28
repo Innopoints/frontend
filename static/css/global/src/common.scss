@@ -1,3 +1,13 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.material {
+  flex-grow: 1;
+}
+
 .space-between {
   display: flex;
   justify-content: space-between;
