@@ -43,7 +43,10 @@
   const projectStore = writable(project);
   const isModeratorView = (
     account != null
-    && (account.is_admin || project.moderators.includes(account.email))
+    && (account.is_admin || project.moderators.find(
+      moderator =>
+        moderator.email === account.email,
+    ))
   );
 
   const applicationDialog = {
