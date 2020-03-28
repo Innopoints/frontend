@@ -203,8 +203,11 @@
 
   const leaveFeedbackModal = {
     open: false,
-    show({ detail: activity }) {
-      leaveFeedbackModal.activity = activity;
+    activity: null,
+    application: null,
+    show({ detail }) {
+      leaveFeedbackModal.activity = detail.activity;
+      leaveFeedbackModal.application = detail.application;
       leaveFeedbackModal.open = true;
     },
     async submitFeedback({ detail }) {
@@ -376,8 +379,14 @@
        || project.lifetime_stage === ProjectStages.FINISHED)
        && account != null
        && (project.moderators.includes(account.email) || account.is_admin)}
-       <h2 class="padded">Project Staff</h2>
-       <ModeratorHourPanel {project} on:save-hours={updateHours} />
+      <h2 class="padded">Project Staff</h2>
+      <ModeratorHourPanel
+        {project}
+        {account}
+        on:save-hours={updateHours}
+        on:leave-feedback={leaveFeedbackModal.show}
+        on:read-feedback={feedbackModal.show}
+      />
     {/if}
 
     {#if project.activities.find(x => !x.internal) != null || isModeratorView}
@@ -507,6 +516,7 @@
   <LeaveFeedbackModal
     bind:isOpen={leaveFeedbackModal.open}
     activity={leaveFeedbackModal.activity}
+    application={leaveFeedbackModal.application}
     {competences}
     on:submit={leaveFeedbackModal.submitFeedback}
   />

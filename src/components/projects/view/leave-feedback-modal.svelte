@@ -7,6 +7,7 @@
 
   export let isOpen = false;
   export let activity;
+  export let application;
   export let competences;
 
   let value = {
@@ -75,11 +76,7 @@
             class="btn filled"
             type="button"
             disabled={value.competences.length === 0}
-            on:click={() => dispatch('submit', {
-              activity,
-              application: activity.existing_application,
-              value,
-            })}
+            on:click={() => dispatch('submit', { activity, application, value })}
           >
             submit & claim innopoints
           </button>

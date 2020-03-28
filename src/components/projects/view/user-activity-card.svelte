@@ -162,7 +162,12 @@
           <Button
             isFilled
             classname="additional"
-            on:click={() => dispatch('leave-feedback', activity)}
+            on:click={
+              () => dispatch('leave-feedback', {
+                activity,
+                application: activity.existing_application,
+              })
+            }
           >
             claim innopoints
           </Button>

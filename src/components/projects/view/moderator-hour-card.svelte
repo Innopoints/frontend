@@ -7,6 +7,7 @@
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import s from '@/utils/plural-s.js';
 
+  export let account;
   export let moderator;
   export let projectStage;
   export let application;
@@ -31,8 +32,8 @@
       <svg class="star" src="images/icons/star.svg" />
     {/if}
   </div>
-  <Labeled classname="mt" label="Working hours">
-    {#if projectStage === ProjectStages.FINALIZING}
+  {#if projectStage === ProjectStages.FINALIZING}
+    <Labeled classname="mt" label="Working hours">
       <form class="edit-hours">
         <TextField
           type="number"
@@ -50,8 +51,23 @@
           </Button>
         {/if}
       </form>
-    {:else}
+    </Labeled>
+  {:else}
+    <Labeled classname="mt" label="Working hours">
       {application.actual_hours} hour{s(application.actual_hours)}
+    </Labeled>
+    {#if application.feedback != null}
+      <Button
+        isOutline
+        classname="mt"
+        on:click={() => dispatch('read-feedback', application.feedback)}
+      >
+        read feedback
+      </Button>
+    {:else if application.applicant.email === account.email}
+      <Button isFilled classname="mt" on:click={() => dispatch('leave-feedback', application)}>
+        leave feedback
+      </Button>
     {/if}
-  </Labeled>
+  {/if}
 </Card>
