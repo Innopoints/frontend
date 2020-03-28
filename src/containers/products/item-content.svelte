@@ -18,18 +18,28 @@
   let selectedVarietyID = null;
   let err = false;
   let animation = false;
+  let outOfStock = false;
+
+  $: {
+   // not in sizes, select variety automatically
+   if (!productControl.productSized) {
+      const varietiesOfSelectedColor = productControl.varietiesByColor.get(selectedColor);
+      selectedVarietyID = varietiesOfSelectedColor[0].id;
+    }
+    if (selectedVarietyID != null) {
+      outOfStock = productControl.varietyMap.get(selectedVarietyID).amount === 0;
+    }
+  }
 
   function purchase() {
-    if (!productControl.productSized || selectedVarietyID != null) {
-      err = false;
-      dispatch('purchase', { varietyID: selectedVarietyID });
-    } else {
+    if (selectedVarietyID == null) {
       err = true;
       animation = true;
-      setTimeout(function() {
-        animation = false;
-      }, 1000);
+      setTimeout(() => animation = false, 1000);
+      return;
     }
+    err = false;
+    dispatch('purchase', { varietyID: selectedVarietyID });
   }
 </script>
 
@@ -103,13 +113,16 @@
         <div class="purchases">
           {productControl.totalPurchases || 0} purchases  <!-- item amount -->
         </div>
+        {#if outOfStock}
+          <p class="out-of-stock">out of stock</p>
+        {/if}
         {#if account.is_admin}
           <Button isFilled href="{$page.path}/edit">edit</Button>
         {:else}
           <Button
             isFilled
             on:click={purchase}
-            disabled={account.balance < productControl.product.price}
+            disabled={account.balance < productControl.product.price || outOfStock}
           >
             purchase
           </Button>

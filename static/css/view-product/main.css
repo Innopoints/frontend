@@ -139,6 +139,11 @@
   flex-direction: column;
 }
 
+.product .purchase-details .action.purchaseable .out-of-stock {
+  color: #ab0303;
+  align-self: center;
+}
+
 .product .purchase-details .price {
   font-size: 1.25rem;
   position: relative;

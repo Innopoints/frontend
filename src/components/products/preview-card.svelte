@@ -17,7 +17,7 @@
     : '/images/create-product/placeholder.svg'
   );
   $: colors = product && product.varieties.map(x => x.color).filter(x => x != null);
-  $: sizes = selectedVariety && Object.keys(selectedVariety.sizes).filter(size => selectedVariety.sizes[size] > 0);
+  $: sizes = selectedVariety && selectedVariety.sizes && Object.keys(selectedVariety.sizes).filter(size => selectedVariety.sizes[size] > 0);
   let altText = '';
   if (product) {
     altText = 'Product image: ';
