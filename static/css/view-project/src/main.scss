@@ -79,13 +79,16 @@ h2.padded {
       margin-top: 1em;
       margin-right: .5em;
     }
+
+    .btn.review {
+      margin-left: .5em;
+    }
   }
 
   &.wrap .data-points {
     display: flex;
     flex-wrap: wrap;
   }
-
 }
 
 .activities {

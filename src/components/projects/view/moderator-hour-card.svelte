@@ -12,6 +12,7 @@
   export let projectStage;
   export let application;
   export let isCreator;
+  export let review = false;
 
   let enteredHours = application.actual_hours;
 
@@ -32,7 +33,7 @@
       <svg class="star" src="images/icons/star.svg" />
     {/if}
   </div>
-  {#if projectStage === ProjectStages.FINALIZING}
+  {#if projectStage === ProjectStages.FINALIZING && !review}
     <Labeled classname="mt" label="Working hours">
       <form class="edit-hours">
         <TextField
@@ -56,7 +57,7 @@
     <Labeled classname="mt" label="Working hours">
       {application.actual_hours} hour{s(application.actual_hours)}
     </Labeled>
-    {#if application.feedback != null}
+    {#if application.feedback != null && !review}
       <Button
         isOutline
         classname="mt"
@@ -64,7 +65,7 @@
       >
         read feedback
       </Button>
-    {:else if application.applicant.email === account.email}
+    {:else if application.applicant.email === account.email && !review}
       <Button isFilled classname="mt" on:click={() => dispatch('leave-feedback', application)}>
         leave feedback
       </Button>

@@ -19,6 +19,7 @@
   export let activities;
   export let competences;
   export let project;
+  export let review = false;
 
   let activityCards = (
     activities
@@ -103,11 +104,21 @@
         />
       {/if}
     {/each}
+  {:else if review}
+    {#each activityCards as activity}
+      <FeedbackActivityCard
+        review
+        {activity}
+        {competences}
+        on:read-feedback
+      />
+    {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINALIZING}
     {#each activityCards as activity}
       <HourActivityCard
         {account}
         {activity}
+        {review}
         on:save-hours
         on:report-performance
       />
@@ -116,6 +127,7 @@
     {#each activityCards as activity}
       <FeedbackActivityCard
         {activity}
+        {competences}
         on:read-feedback
       />
     {/each}

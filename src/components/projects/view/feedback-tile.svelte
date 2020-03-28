@@ -7,6 +7,7 @@
 
   export let activity;
   export let application;
+  export let review = false;
 
   function readFeedback() {
     dispatch('read-feedback', {
@@ -33,7 +34,7 @@
       No Telegram username specified.
     {/if}
   </span>
-  {#if application.feedback != null}
+  {#if !review && application.feedback != null}
     <Button isOutline classname="feedback" on:click={readFeedback}>
       read feedback
     </Button>

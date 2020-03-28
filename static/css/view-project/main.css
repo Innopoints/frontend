@@ -79,6 +79,10 @@ h2.padded {
   margin-right: .5em;
 }
 
+.project-header .actions .btn.review {
+  margin-left: .5em;
+}
+
 .project-header.wrap .data-points {
   display: flex;
   flex-wrap: wrap;

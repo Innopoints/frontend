@@ -1,11 +1,14 @@
 <script>
   import Card from 'ui/card.svelte';
   import Labeled from 'ui/labeled.svelte';
+  import UnclickableChip from 'ui/unclickable-chip.svelte';
   import FeedbackTile from '@/components/projects/view/feedback-tile.svelte';
   import s from '@/utils/plural-s.js';
   import { formatTimeRange } from '@/utils/date-time-format.js';
 
   export let activity;
+  export let competences;
+  export let review = false;
 </script>
 
 <Card classname="activity moderated finalizing finished">
@@ -43,6 +46,14 @@
         </span>
       </Labeled>
     {/if}
+    <div class="additional chips">
+      {#each activity.competences as compID (compID)}
+        <UnclickableChip
+          outline
+          value={competences.find(x => x.id === compID).name.toLowerCase()}
+        />
+      {/each}
+    </div>
   </div>
   <div class="right long">
     <header>
@@ -51,7 +62,7 @@
     {#if activity.applications.length !== 0}
       <ul>
         {#each activity.applications as application (application.id)}
-          <FeedbackTile {activity} {application} on:read-feedback />
+          <FeedbackTile {review} {activity} {application} on:read-feedback />
         {/each}
       </ul>
     {:else}

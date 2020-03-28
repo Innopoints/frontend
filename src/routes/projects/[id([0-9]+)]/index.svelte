@@ -421,7 +421,7 @@
   </div>
 
   {#if isModeratorView}
-    <!-- view past reports* -->
+    <!-- view past reports -->
     <ReportDialog {project} bind:isOpen={reportDialog.open} {...reportDialog.props} />
     <!-- confirm-project-deletion -->
     <DangerConfirmDialog
@@ -521,4 +521,3 @@
     on:submit={leaveFeedbackModal.submitFeedback}
   />
 </Layout>
-<!-- view past reports* -->
