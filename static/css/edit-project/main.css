@@ -1,0 +1,16 @@
+.material .actions {
+  flex-direction: row;
+}
+
+.step3 > p {
+  margin-bottom: 1.5em;
+  font-size: .95rem;
+}
+
+.step3 .label {
+  margin-bottom: .5em;
+}
+
+hr {
+  margin: 3em 0;
+}

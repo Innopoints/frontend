@@ -85,7 +85,7 @@
     {#if account != null && (project.creator === account.email || account.is_admin) && !review}
       <div class="actions">
         {#if project.lifetime_stage === ProjectStages.ONGOING}
-          <Button isOutline>
+          <Button isOutline href="/projects/{project.id}/edit">
             <svg class="icon mr" src="images/icons/edit.svg" />
             edit
           </Button>
