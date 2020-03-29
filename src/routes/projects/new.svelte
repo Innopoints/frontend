@@ -207,6 +207,13 @@
   <title>Create Project – Innopoints</title>
 
   <link rel="stylesheet" href="/css/bundles/projects-new.min.css" />
+  {#if account}
+    {#if account.is_admin}
+      <link rel="preload" as="style" href="/css/bundles/dashboard.min.css" />
+    {:else}
+      <link rel="preload" as="style" href="/css/bundles/profile.min.css" />
+    {/if}
+  {/if}
 </svelte:head>
 
 <Layout user={account}>

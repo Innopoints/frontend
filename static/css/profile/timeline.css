@@ -59,6 +59,7 @@
 .timeline .content .btn {
   font-size: .9rem;
   margin-top: .8em;
+  display: inline-flex;
 }
 
 .timeline .status, .timeline time {

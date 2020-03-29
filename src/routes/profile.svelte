@@ -170,6 +170,8 @@
   <title>Profile – Innopoints</title>
 
   <link rel="stylesheet" href="/css/bundles/profile.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/store.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/project-id.min.css" />
 </svelte:head>
 
 <Layout user={account}>

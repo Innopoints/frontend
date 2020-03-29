@@ -27,6 +27,16 @@
 
 <svelte:head>
   <title>Home – Innopoints</title>
+  <link rel="stylesheet" href="/css/bundles/home.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/store.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/projects.min.css" />
+  {#if account}
+    {#if account.is_admin}
+      <link rel="preload" as="style" href="/css/bundles/dashboard.min.css" />
+    {:else}
+      <link rel="preload" as="style" href="/css/bundles/profile.min.css" />
+    {/if}
+  {/if}
 </svelte:head>
 
 <!--todo: add transitions (animation)-->
