@@ -57,7 +57,7 @@
 </script>
 
 <div class="notifications">
-  {#if pushPermission === 'default' || pushPermission === 'denied'}
+  {#if false && (pushPermission === 'default' || pushPermission === 'denied')}
     <header>
       <Dialog isNotice>
         <div class="message" slot="content">
