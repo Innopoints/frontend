@@ -187,12 +187,12 @@
   <title>Create a Product – Innopoints</title>
 
   <link rel="stylesheet" href="/css/bundles/products-new.min.css" />
-  <link rel="preload" as="style" href="/css/bundles/products-id.min.css" />
+  <link rel="prefetch" as="style" href="/css/bundles/products-id.min.css" />
   {#if account}
     {#if account.is_admin}
-      <link rel="preload" as="style" href="/css/bundles/dashboard.min.css" />
+      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
     {:else}
-      <link rel="preload" as="style" href="/css/bundles/profile.min.css" />
+      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
     {/if}
   {/if}
 </svelte:head>

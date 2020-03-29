@@ -28,8 +28,8 @@
   <title>Admin Dashboard</title>
 
   <link rel="stylesheet" href="/css/bundles/dashboard.min.css" />
-  <link rel="preload" as="style" href="/css/bundles/projects.min.css" />
-  <link rel="preload" as="style" href="/css/bundles/store.min.css" />
+  <link rel="prefetch" as="style" href="/css/bundles/projects.min.css" />
+  <link rel="prefetch" as="style" href="/css/bundles/store.min.css" />
 </svelte:head>
 
 <Layout user={account}>

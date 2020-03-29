@@ -18,7 +18,7 @@
     <title>Something went wrong...</title>
   {/if}
   <link rel="stylesheet" href="/css/bundles/-error.min.css" />
-  <link rel="preload" as="style" href="/css/bundles/home.min.css" />
+  <link rel="prefetch" as="style" href="/css/bundles/home.min.css" />
 </svelte:head>
 
 <Layout>
