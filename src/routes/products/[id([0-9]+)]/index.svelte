@@ -107,8 +107,7 @@
 <svelte:head>
   <title>{fullName} – Innopoints</title>
 
-  <link rel="stylesheet" href="css/view-product/main.css" />
-  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
+  <link rel="stylesheet" href="/css/bundles/products-id.min.css" />
 </svelte:head>
 
 <Layout user={account}>

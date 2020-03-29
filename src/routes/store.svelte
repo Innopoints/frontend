@@ -87,12 +87,7 @@
 <svelte:head>
   <title>Store – Innopoints</title>
 
-  <!-- Store styles -->
-  <link rel="stylesheet" href="css/page-components/tagline.css" />
-  <link rel="stylesheet" href="css/page-components/filters.css" />
-  <link rel="stylesheet" href="css/store/filters-spec.css" />
-  <link rel="stylesheet" href="css/store/main.css" />
-  <link rel="stylesheet" href="css/page-components/pagination.css" />
+  <link rel="stylesheet" href="/css/bundles/store.min.css" />
 </svelte:head>
 
 <Layout user={account}>

@@ -50,13 +50,7 @@
   <title>Review {project.name} – Innopoints</title>
 
   <!-- Styles for Review Project page -->
-  <link rel="stylesheet" href="css/view-project/main.css" />
-  <link rel="stylesheet" href="css/view-project/activity.css" />
-  <link rel="stylesheet" href="css/view-project/activity-moderated.css" />
-  <link rel="stylesheet" href="css/view-project/activity-finalizing.css" />
-  <link rel="stylesheet" href="css/review-project/main.css" />
-  <link rel="stylesheet" href="css/view-project/moderators.css" />
-  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
+  <link rel="stylesheet" href="/css/bundles/projects-id-review.min.css" />
 </svelte:head>
 
 <Layout user={account}>

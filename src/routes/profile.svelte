@@ -169,15 +169,7 @@
 <svelte:head>
   <title>Profile – Innopoints</title>
 
-  <link rel="stylesheet" href="css/profile/quick-info.css" />
-  <link rel="stylesheet" href="css/profile/main-card.css" />
-  <link rel="stylesheet" href="css/profile/timeline.css" />
-  <link rel="stylesheet" href="css/profile/leave-feedback-modal.css"/>
-  <link rel="stylesheet" href="css/profile/export-data-modal.css"/>
-  <link rel="stylesheet" href="css/profile/statistics.css" />
-  <link rel="stylesheet" href="css/profile/bar-colors.css" />
-  <link rel="stylesheet" href="css/profile/notifications.css" />
-  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
+  <link rel="stylesheet" href="/css/bundles/profile.min.css" />
 </svelte:head>
 
 <Layout user={account}>

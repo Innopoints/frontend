@@ -206,12 +206,7 @@
 <svelte:head>
   <title>Create Project – Innopoints</title>
 
-  <link rel="stylesheet" href="css/create-project/steps.css">
-  <link rel="stylesheet" href="css/create-project/main.css">
-  <link rel="stylesheet" href="css/create-project/general.css">
-  <link rel="stylesheet" href="css/create-project/activity.css">
-  <link rel="stylesheet" href="css/create-project/actions.css">
-  <link rel="stylesheet" href="css/page-components/create-activity.css" />
+  <link rel="stylesheet" href="/css/bundles/projects-new.min.css" />
 </svelte:head>
 
 <Layout user={account}>

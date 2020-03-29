@@ -186,9 +186,7 @@
 <svelte:head>
   <title>Create a Product – Innopoints</title>
 
-  <link rel="stylesheet" href="css/create-product/main.css" />
-  <link rel="stylesheet" href="css/create-product/preview-card.css" />
-  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
+  <link rel="stylesheet" href="/css/bundles/products-new.min.css" />
 </svelte:head>
 
 <Layout user={account}>

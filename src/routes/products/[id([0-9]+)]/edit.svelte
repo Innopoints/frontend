@@ -284,11 +284,7 @@
     Edit {product.type ? `"${product.name}" ${product.type}` : product.name} – Innopoints
   </title>
 
-  <link rel="stylesheet" href="css/page-components/header.css" />
-  <link rel="stylesheet" href="css/create-product/main.css" />
-  <link rel="stylesheet" href="css/create-product/preview-card.css" />
-  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
-  <link rel="stylesheet" href="css/page-components/footer.css" />
+  <link rel="stylesheet" href="/css/bundles/products-id-edit.min.css" />
 </svelte:head>
 
 <Layout user={account}>

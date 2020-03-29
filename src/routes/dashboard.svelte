@@ -27,7 +27,7 @@
 <svelte:head>
   <title>Admin Dashboard</title>
 
-  <link rel="stylesheet" href="/css/admin-dashboard/main.css" />
+  <link rel="stylesheet" href="/css/bundles/dashboard.min.css" />
 </svelte:head>
 
 <Layout user={account}>

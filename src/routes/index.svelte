@@ -27,16 +27,6 @@
 
 <svelte:head>
   <title>Home – Innopoints</title>
-
-  <!-- Styles for Home page -->
-  <link rel="stylesheet" href="css/home/header.css" />
-  <link rel="stylesheet" href="css/home/main.css" />
-  <link rel="stylesheet" href="css/home/tagline.css" />
-  <link rel="stylesheet" href="css/home/how-to.css" />
-  <link rel="stylesheet" href="css/home/contacts.css" />
-  <link rel="stylesheet" href="css/home/options.css" />
-  <link rel="stylesheet" href="css/home/store.css" />
-  <link rel="stylesheet" href="css/page-components/empty-state.css" />
 </svelte:head>
 
 <!--todo: add transitions (animation)-->

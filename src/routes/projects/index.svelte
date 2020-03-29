@@ -73,10 +73,7 @@
   <title>Projects – Innopoints</title>
 
   <!-- Styles for Projects page -->
-  <link rel="stylesheet" href="css/page-components/tagline.css" />
-  <link rel="stylesheet" href="css/page-components/filters.css" />
-  <link rel="stylesheet" href="css/projects/filters-spec.css" />
-  <link rel="stylesheet" href="css/projects/main.css" />
+  <link rel="stylesheet" href="/css/bundles/projects.min.css" />
 </svelte:head>
 
 <Layout user={account}>
