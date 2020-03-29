@@ -352,20 +352,15 @@
   <title>{project.name} – Innopoints</title>
 
   <!-- Styles for View Project page -->
-  <link rel="stylesheet" href="css/view-project/main.css" />
-  <link rel="stylesheet" href="css/view-project/activity.css" />
-  <link rel="stylesheet" href="css/view-project/activity-user.css" />
-  <link rel="stylesheet" href="css/view-project/activity-moderated.css" />
-  <link rel="stylesheet" href="css/view-project/activity-finalizing.css" />
-  <link rel="stylesheet" href="css/review-project/main.css" />
-  <link rel="stylesheet" href="css/page-components/create-activity.css" />
-  <link rel="stylesheet" href="css/view-project/moderators.css" />
-  <link rel="stylesheet" href="css/view-project/proper-grid.css" />
-  <link rel="stylesheet" href="css/view-project/report-performance-modal.css" />
-  <link rel="stylesheet" href="css/view-project/read-feedback-modal.css" />
-  <link rel="stylesheet" href="css/profile/leave-feedback-modal.css" />
-  <link rel="stylesheet" href="css/view-project/apply-modal.css" />
-  <link rel="stylesheet" href="css/page-components/modal-dialog.css" />
+  <link rel="stylesheet" href="/css/bundles/projects-id.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/projects-edit.min.css" />
+  {#if account}
+    {#if account.is_admin}
+      <link rel="preload" as="style" href="/css/bundles/dashboard.min.css" />
+    {:else}
+      <link rel="preload" as="style" href="/css/bundles/profile.min.css" />
+    {/if}
+  {/if}
 </svelte:head>
 
 <Layout user={account}>

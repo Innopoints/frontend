@@ -432,6 +432,9 @@ button.btn {
 
 .text-field.with-item > .item {
   color: #7a7a7a;
+  height: 1.1rem;
+  position: absolute;
+  top: .85rem;
 }
 
 .text-field.with-item > input:focus + .item {
@@ -454,12 +457,6 @@ button.btn {
 .text-field.with-item input[type="number"]::-webkit-outer-spin-button, .text-field.with-item input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-.text-field.with-item > .item {
-  height: 1.1rem;
-  position: absolute;
-  top: .85rem;
 }
 
 .text-field.with-item > svg.item {

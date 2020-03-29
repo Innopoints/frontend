@@ -87,12 +87,16 @@
 <svelte:head>
   <title>Store – Innopoints</title>
 
-  <!-- Store styles -->
-  <link rel="stylesheet" href="css/page-components/tagline.css" />
-  <link rel="stylesheet" href="css/page-components/filters.css" />
-  <link rel="stylesheet" href="css/store/filters-spec.css" />
-  <link rel="stylesheet" href="css/store/main.css" />
-  <link rel="stylesheet" href="css/page-components/pagination.css" />
+  <link rel="stylesheet" href="/css/bundles/store.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/products-new.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/products-id.min.css" />
+  {#if account}
+    {#if account.is_admin}
+      <link rel="preload" as="style" href="/css/bundles/dashboard.min.css" />
+    {:else}
+      <link rel="preload" as="style" href="/css/bundles/profile.min.css" />
+    {/if}
+  {/if}
 </svelte:head>
 
 <Layout user={account}>

@@ -17,10 +17,8 @@
   {:else}
     <title>Something went wrong...</title>
   {/if}
-  <link rel="stylesheet" href="/css/page-components/header.css">
-  <link rel="stylesheet" href="/css/page-components/404.css">
-  <link rel="stylesheet" href="/css/page-components/403.css">
-  <link rel="stylesheet" href="/css/page-components/footer.css">
+  <link rel="stylesheet" href="/css/bundles/-error.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/home.min.css" />
 </svelte:head>
 
 <Layout>

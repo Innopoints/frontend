@@ -73,10 +73,16 @@
   <title>Projects – Innopoints</title>
 
   <!-- Styles for Projects page -->
-  <link rel="stylesheet" href="css/page-components/tagline.css" />
-  <link rel="stylesheet" href="css/page-components/filters.css" />
-  <link rel="stylesheet" href="css/projects/filters-spec.css" />
-  <link rel="stylesheet" href="css/projects/main.css" />
+  <link rel="stylesheet" href="/css/bundles/projects.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/projects-id.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/projects-new.min.css" />
+  {#if account}
+    {#if account.is_admin}
+      <link rel="preload" as="style" href="/css/bundles/dashboard.min.css" />
+    {:else}
+      <link rel="preload" as="style" href="/css/bundles/profile.min.css" />
+    {/if}
+  {/if}
 </svelte:head>
 
 <Layout user={account}>
