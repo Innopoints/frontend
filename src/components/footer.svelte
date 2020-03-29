@@ -1,5 +1,6 @@
 <script>
   import Button from 'ui/button.svelte';
+  import Card from 'ui/card.svelte';
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -49,20 +50,13 @@
     </div>
     <div class="right">
       <img src="images/footer/pointer.svg" class="pointer" alt="" />
-      <nav>
-        <div class="search shadow-1">
-          search
-          <svg src="images/icons/search.svg" />
-        </div>
-        <ul>
-          <li>
-            <a class="white" href="/projects">browse the projects</a>
-          </li>
-          <li>
-            <a class="white" href="/store">see the InnoStore</a>
-          </li>
-        </ul>
-      </nav>
+      <Card>
+        <p>The new Innopoints website is finally here! Exciting.</p>
+        <p>
+          If you encounter any technical issues with the website, please, report them to
+          <a href="mailto:innopoints@innopolis.university">innopoints@innopolis.university</a>.
+        </p>
+      </Card>
     </div>
   </div>
 </footer>
