@@ -3,6 +3,11 @@
   overflow: visible;
 }
 
+.create-activity .date-picker {
+  margin-bottom: 1.25rem;
+  clear: both;
+}
+
 .create-activity .form-field {
   flex-direction: column;
   margin-bottom: 2em;
@@ -20,7 +25,7 @@
   align-self: flex-start;
 }
 
-.create-activity .dropdown.with-labels label {
+.create-activity .dropdown .with-labels label {
   flex-direction: row;
   align-items: center;
   padding: 1em 1em .2em;
@@ -28,7 +33,7 @@
   white-space: nowrap;
 }
 
-.create-activity .dropdown.with-labels label:last-child {
+.create-activity .dropdown .with-labels label:last-child {
   padding: 1em;
 }
 
@@ -95,10 +100,16 @@
   margin-right: .5em;
 }
 
-.create-activity .deadline .dropdown,
-.create-activity .questions .dropdown {
-  bottom: 100%;
-  margin-bottom: 5px;
+.create-activity .people.error .group {
+  flex-wrap: wrap;
+}
+
+.create-activity .people.error .group .helper {
+  width: 100%;
+}
+
+.create-activity .deadline .date-picker {
+  margin-top: 1.25rem;
 }
 
 .create-activity .questions > label {
@@ -108,6 +119,8 @@
 .create-activity .questions .dropdown {
   padding: 1em;
   width: 100%;
+  bottom: 100%;
+  margin-bottom: 5px;
 }
 
 .create-activity .questions .dropdown .row {

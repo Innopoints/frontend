@@ -1,88 +1,81 @@
+@import "../../global/src/_variables.scss";
+
 .contacts {
   padding: 3em 0 2.5em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(18, 120, 0, .07);
+  background: transparentize($main, .93);
   border-top-left-radius: 250% 25%;
   border-top-right-radius: 250% 25%;
-}
 
-.contacts > header {
-  flex-direction: column;
-  padding: 0;
-  margin: 0 0 1.5em;
-}
+  & > header {
+    flex-direction: column;
+    padding: 0;
+    margin: 0 0 1.5em;
+  }
 
-.contacts .subtitle {
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 300;
-}
+  .subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
 
-.contacts .card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: .8em 1.6em;
-  margin: 1em 0;
-}
+  .card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: .8em 1.6em;
+    margin: 1em 0;
 
-.contacts .icon {
-  width: 3.6em;
-  height: 3.6em;
-}
+    p {
+      font-weight: 300;
+      text-align: center;
+      margin-top: 1em;
+    }
+  }
 
-.contacts .card p {
-  font-weight: 300;
-  text-align: center;
+  .icon {
+    width: 3.6em;
+    height: 3.6em;
+  }
 }
 
 @media only screen and (min-width: 640px) {
-  .contacts .subtitle {
-    font-size: 1.2em;
-  }
-
-  .contacts .card p {
-    font-size: 1.2em;
-  }
-
-  .contacts .card .btn {
-    font-size: 1.2em;
+  .contacts {
+    .subtitle {
+      font-size: 1.2em;
+    }
   }
 }
 
 @media only screen and (min-width: 805px) {
   .contacts {
     padding-bottom: 3em;
-  }
 
-  .contacts > div {
-    display: flex;
-    flex-direction: row;
-  }
+    & > div {
+      display: flex;
+      flex-direction: row;
+    }
 
-  .contacts .card {
-    margin: 0 1rem;
+    .card {
+      margin: 0 1rem;
+      font-size: 1.2rem;
+
+      .btn {
+        font-size: 1em;
+      }
+    }
   }
 }
 
 @media only screen and (min-width: 1024px) {
   .contacts {
     padding-bottom: 5em;
-  }
 
-  .contacts .card {
-    padding: .8rem 2rem;
-    margin: 0 3rem;
-  }
-
-  .contacts .card p {
-    font-size: 1.3em;
-    line-height: 1.4em;
-  }
-
-  .contacts .card .btn {
-    font-size: 1.3em;
+    .card {
+      padding: .8rem 2rem;
+      margin: 0 3rem;
+    }
   }
 }

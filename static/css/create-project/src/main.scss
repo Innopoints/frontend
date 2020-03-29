@@ -41,19 +41,27 @@ h2 {
   }
 }
 
+@keyframes height-increase {
+  from {
+    height: 3.125em;
+  }
+
+  to {
+    height: 13.5em;
+  }
+}
+
 .steps-navigation .dropdown {
   top: 1em;
   margin-top: 0;
-  height: 3.125em;
   width: 100% !important;
   box-shadow: $shadow-raised;
-  transition: height 200ms;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 100000;
 
   .btn {
-    width: 100%;
     border-radius: 0;
     padding-left: 1.5em;
     text-align: center;
@@ -75,7 +83,12 @@ h2 {
 }
 
 .steps-navigation.dropdown-shell.open .dropdown {
-  height: 13.5em;
+  // height: 13.5em;
+  animation-name: height-increase;
+  animation-duration: 150ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 form > .actions {
@@ -99,6 +112,8 @@ form > .actions {
     text-align: center;
     width: 100%;
     margin-bottom: 1em;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -127,6 +142,7 @@ form > .actions {
 
     .autosave.visible {
       @include show-accessible;
+
       height: 100%;
       margin-left: .5em;
     }
@@ -134,6 +150,7 @@ form > .actions {
 
   h2 {
     @include show-accessible;
+
     font-size: 1.2rem;
     margin-top: 1.5em;
   }
@@ -187,6 +204,10 @@ form > .actions {
 }
 
 @media only screen and (min-width: 1200px) {
+  .material.step0 {
+    flex-direction: row;
+  }
+
   .material form {
     margin-left: 12%;
     margin-right: 12%;
@@ -199,5 +220,10 @@ form > .actions {
 
   .steps-navigation.dropdown-shell {
     right: 12%;
+  }
+
+  form > .actions {
+    padding-left: 8%;
+    padding-right: 8%;
   }
 }

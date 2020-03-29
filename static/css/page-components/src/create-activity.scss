@@ -2,6 +2,11 @@
   margin-bottom: 1em;
   overflow: visible;
 
+  .date-picker {
+    margin-bottom: 1.25rem;
+    clear: both;
+  }
+
   .form-field {
     flex-direction: column;
     margin-bottom: 2em;
@@ -19,7 +24,7 @@
     }
   }
 
-  .dropdown.with-labels label {
+  .dropdown .with-labels label {
     flex-direction: row;
     align-items: center;
     padding: 1em 1em .2em;
@@ -96,12 +101,20 @@
     .checkbox {
       margin-right: .5em;
     }
+
+    &.error {
+      .group {
+        flex-wrap: wrap;
+
+        .helper {
+          width: 100%;
+        }
+      }
+    }
   }
 
-  .deadline .dropdown,
-  .questions .dropdown {
-    bottom: 100%;
-    margin-bottom: 5px;
+  .deadline .date-picker {
+    margin-top: 1.25rem;
   }
 
   .questions {
@@ -112,6 +125,8 @@
     .dropdown {
       padding: 1em;
       width: 100%;
+      bottom: 100%;
+      margin-bottom: 5px;
 
       .row {
         margin-top: .5em;

@@ -6,11 +6,16 @@ import * as sapper from '@sapper/server';
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
+
 polka()
   .use(
     compression({ threshold: 0 }),
     sirv('static', { dev }),
-    sapper.middleware()
+    sapper.middleware({
+      session: (req, res) => ({
+        cookies: req.headers.cookie,
+      }),
+    }),
   )
   .listen(PORT, err => {
     if (err) console.log('error', err);

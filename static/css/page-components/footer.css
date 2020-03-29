@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .material {
   background-color: #fff;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
@@ -82,58 +81,34 @@ footer .credits {
 footer .right {
   display: flex;
   justify-content: center;
+  margin-bottom: 1em;
 }
 
-footer .right > img {
+footer .right > .pointer {
   display: none;
 }
 
-footer .right > nav {
-  width: 90%;
+footer .right .card {
+  width: 80%;
+  color: #000;
 }
 
-footer .search {
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  color: #585858;
+footer .right .card a {
+  color: #127800;
+}
+
+footer .right .card p {
+  margin-bottom: .5em;
   font-weight: 300;
-  padding: .7em 1.3em;
-  margin-top: 1em;
-}
-
-footer ul {
-  font-size: 1.1rem;
-  font-weight: 300;
-  padding-left: 1em !important;
-  margin: 1em 0 !important;
-}
-
-footer ul li {
-  line-height: 2rem;
-}
-
-footer ul li::before {
-  content: "‣";
-  padding-right: .5em;
-  color: #fff;
 }
 
 @media only screen and (min-width: 385px) {
   footer {
     padding: 20px 3em 0;
   }
-  footer .right > nav {
-    width: 95%;
-  }
 }
 
 @media only screen and (min-width: 640px) {
-  footer ul {
-    font-size: 1.2rem;
-  }
   footer .credits {
     font-size: 1.1rem;
   }
@@ -160,35 +135,32 @@ footer ul li::before {
   }
   footer .right {
     justify-content: flex-start;
+    margin-bottom: 0;
   }
   footer .right > .pointer {
     display: block;
     margin-right: 1em;
-    max-width: 30%;
+    max-width: 6em;
     align-self: flex-end;
   }
-  footer .search {
-    font-size: 1.1rem;
+  footer .right .card {
+    width: 14em;
+    align-self: flex-start;
   }
 }
 
 @media only screen and (min-width: 900px) {
-  footer .search {
-    width: 16em;
-  }
   footer .right > .pointer {
-    max-width: 22%;
     margin-right: 2em;
+  }
+  footer .right .card {
+    width: 20em;
   }
 }
 
 @media only screen and (min-width: 1024px) {
   footer .title {
     font-size: 2rem;
-  }
-  footer .search {
-    font-size: 1.2rem;
-    width: 14em;
   }
 }
 

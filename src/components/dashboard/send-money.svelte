@@ -1,16 +1,32 @@
 <script>
   import TextField from 'ui/text-field.svelte';
   import Button from 'ui/button.svelte';
+  import { patch } from '@/utils/api.js';
   export let users = [];
-  $: {
-    if (users.length) success = false;
-  }
+
   let amount = null;
   let success = false;
-  const send = () => {
-    amount = null;
-    success = true;
-  };
+  let error = null;
+
+  async function send() {
+    error = null;
+    try {
+      const emails = users.map(user => user.email);
+      const promises = emails.map(email => patch(`/accounts/${email}/balance`, {
+        data: {
+          change: amount,
+        },
+      }));
+      await Promise.all(promises);
+      success = true;
+      amount = null;
+      setTimeout(() => success = false, 1500);
+    } catch (e) {
+      console.error(e);
+      success = false;
+      error = e;
+    }
+  }
 </script>
 
 <div class="amend-balance">
@@ -35,7 +51,8 @@
     </Button>
     {#if success}
       <span class="status good">success!</span>
+    {:else if error}
+      <span class="status bad">failed, please, retry :(</span>
     {/if}
-    <span class="status bad" style="display: none;">failed, please, retry :(</span>
   </form>
 </div>

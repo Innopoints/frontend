@@ -1,86 +1,87 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import parseItems from './utils/parse-items-array';
-  import parseValues from './utils/parse-values';
+  import getColorPickerStyles from './utils/color-picker-styles.js';
+  import itemAmount from 'ui/utils/item-amount.js';
 
-  export let name = '';
   export let classname = '';
-  export let labelclass = '';
+  export let wrapperclass = '';
   export let checkboxclass = '';
-  export let labeled = false;
-  export let colored = false;
-  export let items = [];
-  export let value = [];
-  export let uniqueKey = null;
-  export let max = null;
+  export let inputclass = '';
+  export let labelclass = null;
+  export let iconclass = '';
+  export let isColor = false;
+  export let isRound = false;
 
-  $: parsedItems = parseItems(items);
-  $: selected = parseValues(value, parsedItems, {uniqueKey, multiple: true});
+  export let items;
+  export let labels = null;
+  export let name;
+  export let labelPosition = 'right';
+  export let maxChecked = null;
+  $: currentChecked = items.reduce((acc, elt) => acc + elt.checked, 0);
+  const titleObj = { title: `Can only select ${itemAmount(maxChecked, 'value')}.` };
 
-  let dispatch = createEventDispatcher();
-  const changeCheckbox = (item, e) => {
-    if (selected.some(x => x.id === item.id)) selected = selected.filter(x => x.id !== item.id);
-    else {
-      if (!max || selected.length < max) selected.push(item);
-      else e.target.checked = false;
+  if (items.length === 0) {
+    console.error('Must have at least one value in the checkbox group.');
+  }
+
+  if (labels !== null && items.length !== labels.length) {
+    console.error('Must have as many labels as there is items.');
+  }
+
+  if (labelPosition !== 'right' && labelPosition !== 'left') {
+    console.error('Label position must be either left or right.');
+  }
+
+  const dispatch = createEventDispatcher();
+  function checkLimit(evt, value) {
+    if (maxChecked !== null && currentChecked + evt.target.checked > maxChecked) {
+      evt.preventDefault();
+    } else {
+      value.checked = !value.checked;
+      dispatch('change', value);
     }
-    dispatch('change', selected);
-  };
-
-  const isWhite = item => {
-    if (!item.color || !colored) return false;
-    return item.color.toUpperCase() === '#FFF' || item.color.toUpperCase() === '#FFFFFF';
-  };
-  const style = item => {
-    if (!colored || !item.color || isWhite(item)) return '';
-
-    // Parse HEX colors
-    let outline = '';
-    let match = item.color.toUpperCase().match(/#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})/);
-    if(match) {
-      outline = `
-            --r: ${parseInt(match[1], 16)};
-            --g: ${parseInt(match[2], 16)};
-            --b: ${parseInt(match[3], 16)};
-          `;
-    }
-
-    return `
-          background-color: ${item.color};
-          border-color: ${item.color};
-          ${outline}
-        `;
-  };
+  }
 </script>
 
-<style>
-  .checkbox .icon.white {
-    background-color: #fff !important;
-    border-color: #999 !important;
-    --r: 153;
-    --g: 153;
-    --b: 153;
-  }
-
-  .checkbox .icon.white::before {
-    border-color: #999 !important;
-  }
-</style>
-
-<div role="group" class:with-labels={labeled} class={classname}>
-  {#each parsedItems as item (item.id)}
-    <label class:clickable={labeled} class={labelclass}>
-      <div class:colored={colored} class:round={colored} class="checkbox {checkboxclass}">
+<div
+  class:with-labels={!isColor}
+  class:max-reached={currentChecked === maxChecked}
+  class={classname}
+  role="group"
+>
+  {#each items as loopValue, i (i)}
+    <label class:clickable={!isColor} class={wrapperclass}>
+      {#if !isColor && labelPosition === 'left'}
+        {#if labelclass !== null}
+          <span class={labelclass}>{labels === null ? loopValue.value : labels[i]}</span>
+        {:else}
+          {labels === null ? loopValue.value : labels[i]}
+        {/if}
+      {/if}
+      <div class:colored={isColor} class:round={isRound} class="checkbox {checkboxclass}">
         <input
-            on:change={(e) => changeCheckbox(item, e)}
-            type="checkbox"
-            checked={selected.some(x => x.id === item.id)}
-            name={name}
+          bind:checked={loopValue.checked}
+          value={loopValue.value}
+          type="checkbox"
+          name={name}
+          class={inputclass}
+          on:click={(evt) => checkLimit(evt, loopValue)}
         >
-        <div class:white={isWhite(item)} style="{style(item)}" class="icon" />
+        <div
+          style="{isColor ? getColorPickerStyles(loopValue.value) : ''}"
+          class="icon {iconclass}"
+          {...(currentChecked === maxChecked
+            && !loopValue.checked
+            && !loopValue.disabled ? titleObj : {})}
+        ></div>
       </div>
-      {(labeled && item.label) ? item.label : ''}
+      {#if !isColor && labelPosition === 'right'}
+        {#if labelclass !== null}
+          <span class={labelclass}>{labels === null ? loopValue.value : labels[i]}</span>
+        {:else}
+          {labels === null ? loopValue.value : labels[i]}
+        {/if}
+      {/if}
     </label>
   {/each}
-  <slot />
 </div>

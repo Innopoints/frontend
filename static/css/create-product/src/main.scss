@@ -50,10 +50,16 @@
   border-bottom: 1px solid $light-gray;
 
   .selected-color {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.25em;
+    height: 1.25em;
     border-radius: 50%;
     margin-left: 1em;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .new-color-picker {
+    @include hide-accessible;
   }
 
   .sizes {
@@ -79,11 +85,128 @@
   margin-top: .7em;
 }
 
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 48px;
+  height: 48px;
+
+  div {
+    position: absolute;
+    top: 20px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+    &:nth-child(1) {
+      left: 5px;
+      animation: lds-ellipsis1 .6s infinite;
+    }
+
+    &:nth-child(2) {
+      left: 5px;
+      animation: lds-ellipsis2 .6s infinite;
+    }
+
+    &:nth-child(3) {
+      left: 19px;
+      animation: lds-ellipsis2 .6s infinite;
+    }
+
+    &:nth-child(4) {
+      left: 34px;
+      animation: lds-ellipsis3 .6s infinite;
+    }
+  }
+
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+
+    100% {
+      transform: translate(14px, 0);
+    }
+  }
+}
+
 .image-platform {
+  display: block;
   border: 2px dashed $main;
-  border-radius: 25px;
-  padding: 1.5em;
   margin: 2em 0 .5em;
+  width: 100%;
+  position: relative;
+  border-radius: 1.5625rem;
+
+  input[type="file"] {
+    @include hide-accessible;
+  }
+
+  .icon {
+    stroke: $main;
+  }
+
+  .empty-layer {
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: .25em;
+    grid-template-columns: auto 1fr;
+    padding: 2em 1em;
+
+    .icon {
+      grid-row: 1 / 3;
+      stroke: $main;
+    }
+
+    .title {
+      font-weight: 500;
+      color: $main;
+      text-align: center;
+    }
+
+    small {
+      font-weight: 300;
+      font-size: .9rem;
+      text-align: center;
+      display: block;
+    }
+  }
+
+  .dropzone-layer {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5625rem;
+
+    &.accepting {
+      background: transparentize($main, .95);
+    }
+  }
 
   &.has-content {
     display: flex;
@@ -91,18 +214,25 @@
     align-items: center;
     justify-content: space-between;
 
+    .empty-layer {
+      display: none;
+    }
+
     .images {
+      padding: 1.5em 1em 1em;
       display: flex;
       flex-wrap: wrap;
+      z-index: 10;
     }
 
     .image {
-      margin: 0 10px 10px 0;
-      border-radius: 10px;
+      margin: 0 .625rem .625rem 0;
+      border-radius: .625rem;
       overflow: visible;
       position: relative;
       display: flex;
       flex-direction: column;
+      width: 7.5rem;
 
       &:first-child::before {
         content: "cover image";
@@ -129,7 +259,7 @@
         align-items: center;
         justify-content: center;
         display: none;
-        padding: 0 1em;
+        padding: 1.4em 1em;
         font-weight: 300;
         font-size: .9rem;
 
@@ -150,9 +280,9 @@
 
       .image-wrapper,
       .status-overlay {
-        height: 120px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        height: 7.5rem;
+        border-top-left-radius: .625rem;
+        border-top-right-radius: .625rem;
       }
 
       .status-overlay {
@@ -167,7 +297,7 @@
         align-items: center;
         visibility: hidden;
 
-        .lds-default, .retry {
+        .lds-ellipsis, .retry {
           display: none;
         }
 
@@ -195,7 +325,7 @@
       }
 
       &.loading {
-        .lds-default {
+        .lds-ellipsis {
           display: block;
         }
 
@@ -216,8 +346,8 @@
 
       .drag-handle {
         position: absolute;
-        width: 24px;
-        height: 24px;
+        width: 1.5rem;
+        height: 1.5rem;
         top: 50%;
         right: 3px;
         stroke: #888;
@@ -226,27 +356,12 @@
       }
     }
   }
+}
 
-  .icon {
-    stroke: $main;
-  }
-
-  .title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: $main;
-  }
-
-  small {
-    font-weight: 300;
-    font-size: .9rem;
-    text-align: center;
-    display: block;
-  }
-
-  input[type="file"] {
-    @include hide-accessible;
-  }
+.image-platform + .error {
+  font-size: .95rem;
+  text-align: center;
+  color: $danger;
 }
 
 .color-picker {
@@ -277,39 +392,6 @@
   }
 }
 
-@supports (display: grid) {
-  .image-platform {
-    &:not(.has-content) {
-      display: grid;
-      grid-template-columns: 24px 1fr;
-      grid-template-rows: 24px 1fr;
-      row-gap: 1.3em;
-      column-gap: 1em;
-      align-items: center;
-    }
-
-    input[type="file"] {
-      grid-row-start: 1;
-      grid-row-end: 1;
-    }
-
-    .icon {
-      grid-row-start: 1;
-      grid-row-end: 2;
-    }
-
-    .title {
-      grid-column-start: 2;
-      grid-column-end: 3;
-    }
-
-    small {
-      grid-column-start: 1;
-      grid-column-end: 3;
-    }
-  }
-}
-
 .more {
   margin: .5em 0;
 }
@@ -327,14 +409,14 @@
       grid-template-rows: auto auto;
       grid-template-columns: 1fr auto;
 
-      .image-platform, .btn.danger {
-        grid-column-start: 1;
-        grid-column-end: 3;
-      }
+      // .image-platform, .btn.danger {
+      //   grid-column-start: 1;
+      //   grid-column-end: 3;
+      // }
     }
 
     .quantity .text-field {
-      margin-top: 0;
+      margin-top: .7em;
       margin-left: 1.5em;
       max-width: 6em;
     }
@@ -372,26 +454,26 @@
     width: 15.5%;
   }
 
-  .image-platform label,
-  .image-platform small {
-    text-align: center;
-  }
+  // .image-platform label,
+  // .image-platform small {
+  //   text-align: center;
+  // }
 
-  @supports (display: grid) {
-    .image-platform {
-      row-gap: .3em;
-
-      small {
-        grid-column-start: 2;
-        align-content: center;
-      }
-
-      .icon {
-        grid-row-start: 1;
-        grid-row-end: 3;
-      }
-    }
-  }
+  // @supports (display: grid) {
+  //   .image-platform {
+  //     row-gap: .3em;
+  //
+  //     small {
+  //       grid-column-start: 2;
+  //       align-content: center;
+  //     }
+  //
+  //     .icon {
+  //       grid-row-start: 1;
+  //       grid-row-end: 3;
+  //     }
+  //   }
+  // }
 }
 
 @media only screen and (min-width: 750px) {

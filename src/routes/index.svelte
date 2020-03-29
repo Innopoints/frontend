@@ -1,3 +1,18 @@
+<script context="module">
+  import getInitialData from '@/utils/get-initial-data.js';
+  const productLimit = 3;
+
+  export async function preload(page, session) {
+    return await getInitialData(this, session, new Map([
+      ['account', '/account?from_cache=true'],
+      ['products', {
+        url: `/products?limit=${productLimit}`,
+        transform: (resp) => resp.data,
+      }],
+    ]));
+  }
+</script>
+
 <script>
   import Layout from '@/layouts/home.svelte';
   import Tagline from '@/containers/home/tagline.svelte';
@@ -5,28 +20,30 @@
   import Options from '@/containers/home/options.svelte';
   import Store from '@/containers/home/store.svelte';
   import Contacts from '../containers/home/contacts.svelte';
+
+  export let products;
+  export let account;
 </script>
 
 <svelte:head>
   <title>Home – Innopoints</title>
-
-  <!-- Styles for Home page -->
-  <link rel="stylesheet" href="css/page-components/footer.css" />
-  <link rel="stylesheet" href="css/home/header.css" />
-  <link rel="stylesheet" href="css/home/main.css" />
-  <link rel="stylesheet" href="css/home/tagline.css" />
-  <link rel="stylesheet" href="css/home/how-to.css" />
-  <link rel="stylesheet" href="css/home/contacts.css" />
-  <link rel="stylesheet" href="css/home/options.css" />
-  <link rel="stylesheet" href="css/home/store.css" />
-  <link rel="stylesheet" href="css/page-components/empty-state.css" />
+  <link rel="stylesheet" href="/css/bundles/home.min.css" />
+  <link rel="prefetch" as="style" href="/css/bundles/store.min.css" />
+  <link rel="prefetch" as="style" href="/css/bundles/projects.min.css" />
+  {#if account}
+    {#if account.is_admin}
+      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
+    {:else}
+      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
+    {/if}
+  {/if}
 </svelte:head>
 
 <!--todo: add transitions (animation)-->
-<Layout>
+<Layout user={account}>
   <Tagline />
   <HowTo />
   <Options />
-  <Store />
+  <Store {products} />
   <Contacts />
 </Layout>

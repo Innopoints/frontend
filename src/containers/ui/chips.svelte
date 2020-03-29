@@ -1,53 +1,39 @@
 <script>
   import Card from 'ui/card.svelte';
 
-  import Chip from 'ui/chip.svelte';
-  import ChipGroup from 'ui/chip-group.svelte';
+  import UnclickableChip from 'ui/unclickable-chip.svelte';
+  import CheckChipGroup from 'ui/check-chip-group.svelte';
+  import RadioChipGroup from 'ui/radio-chip-group.svelte';
 
-  const chips = [
-    'one',
-    'two',
-    'three',
+  let checkValues = [
+    { value: 1, checked: true },
+    { value: 2, checked: false, disabled: true },
+    { value: 3, checked: false },
   ];
+  let radioValues = [1, 2, 3];
+  const labels = ['one', 'two', 'three'];
+  let selectedValue = radioValues[2];
 </script>
 
 <Card id="chips">
   <h1>Chips</h1>
-  <div class="showcase">
-    <div style="display: flex; flex-wrap: wrap;">
-      <Chip disabled>most first</Chip>
-      <Chip disabled>least first</Chip>
-      <Chip disabled isOutline>least last</Chip>
-      <Chip disabled isOutline>most last</Chip>
-    </div>
+  <div role="group" class="flex-wrap">
+    {#each ['most first', 'least first'] as value (value)}
+      <UnclickableChip {value} />
+    {/each}
   </div>
-
   <hr />
-  <ChipGroup items={chips} value={chips[0]} name="chip-11" classname="flex-wrap" />
-
-  <hr />
-  <ChipGroup items={chips} value={chips} name="chip-12" multiple classname="flex-wrap" />
-
-  <hr />
-
-  <div class="showcase">
-    <div role="group" style="display: flex; flex-wrap: wrap;">
-      <Chip name="chip-2" isSmall>XS</Chip>
-      <Chip name="chip-2" isSmall value={true}>S</Chip>
-      <Chip name="chip-2" isSmall disabled>M</Chip>
-      <Chip name="chip-2" isSmall isOutline>L</Chip>
-      <Chip name="chip-2" isSmall isOutline>XL</Chip>
-    </div>
+  <div role="group" class="flex-wrap">
+    {#each ['most last', 'least last'] as value (value)}
+      <UnclickableChip {value} small outline />
+    {/each}
   </div>
-
   <hr />
-
-  <div class="showcase">
-    <div role="group" style="display: flex; flex-wrap: wrap;">
-      <Chip name="chip-2" multiple>most first</Chip>
-      <Chip name="chip-2" multiple>least first</Chip>
-      <Chip name="chip-2" multiple>least first</Chip>
-      <Chip name="chip-2" multiple>most last</Chip>
-    </div>
-  </div>
+  <CheckChipGroup bind:items={checkValues} labels={labels} name="chip0" classname="flex-wrap" />
+  <hr />
+  <CheckChipGroup outline bind:items={checkValues} name="chip1" classname="flex-wrap" maxChecked={1} />
+  <hr />
+  <RadioChipGroup bind:value={selectedValue} items={radioValues} labels={labels} name="chip2" classname="flex-wrap" />
+  <hr />
+  <RadioChipGroup small bind:value={selectedValue} items={radioValues} name="chip3" classname="flex-wrap" />
 </Card>

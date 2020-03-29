@@ -3,7 +3,7 @@
 
 /* Badges -------------------------------------- */
 
-$badge-bg: #ff5757;
+$badge-bg: lighten($danger, 25%);
 
 .badge {
   position: relative;
@@ -16,11 +16,12 @@ $badge-bg: #ff5757;
     height: 10px;
     border-radius: 50%;
     background-color: $badge-bg;
-    box-shadow:
-      0 2px 4px -1px rgba(0, 0, 0, .2),
-      0 4px 5px 0    rgba(0, 0, 0, .14),
-      0 1px 10px 0   rgba(0, 0, 0, .12);
+    box-shadow: $shadow-raised;
     content: "";
+  }
+
+  &.hidden::after {
+    display: none;
   }
 
   .icon {
@@ -79,10 +80,10 @@ strong {
   color: $main;
   font-weight: 500;
   font-size: .8rem;
-}
 
-.label.small {
-  font-size: .7rem;
+  &.small {
+    font-size: .7rem;
+  }
 }
 
 a {
@@ -201,6 +202,10 @@ hr {
   align-items: center;
   cursor: pointer;
 
+  .ripple {
+    background: transparentize($main, .9);
+  }
+
   &::-moz-focus-inner {
     border: 0;
   }
@@ -215,6 +220,10 @@ hr {
     & > svg {
       stroke: black;
     }
+
+    .ripple {
+      background: transparentize(black, .9);
+    }
   }
 
   &.danger {
@@ -222,6 +231,10 @@ hr {
 
     & > svg {
       stroke: $danger;
+    }
+
+    .ripple {
+      background: transparentize($danger, .9);
     }
   }
 
@@ -271,6 +284,10 @@ hr {
     & > svg {
       stroke: white;
     }
+
+    .ripple {
+      background: transparentize(#fff, .75);
+    }
   }
 
   &.outline {
@@ -285,7 +302,7 @@ hr {
     }
 
     &:disabled {
-      border-color: #d7d7d7;
+      border-color: $disabled-bg;
     }
   }
 
@@ -331,6 +348,14 @@ hr {
     padding: .7em;
   }
 
+  &.small {
+    padding: .5em .8em;
+  }
+
+  &.selected:not(.filled) {
+    background-color: transparentize($main, .88);
+  }
+
   & > svg {
     stroke: $main;
   }
@@ -356,14 +381,14 @@ button.btn {
     border-radius: 50%;
 
     &:hover {
-      background-color: rgba(0, 0, 0, .1);
+      background-color: transparentize(black, .9);
     }
   }
 
   input, textarea {
     outline: none;
     padding: 0 10px 1px;
-    font-family: "Ubuntu", sans-serif;
+    font-family: $font-face;
     font-size: 1rem;
     font-weight: 300;
     box-sizing: border-box;
@@ -391,14 +416,14 @@ button.btn {
     }
   }
 
-  input:disabled {
+  input:disabled, textarea:disabled {
     background-color: lighten($textfield-bg, 1%);
     border-color: transparentize(black, .8);
     color: $disabled;
   }
 
   textarea {
-    padding: 12px 10px 1px;
+    padding: .75rem .625rem .0625rem;
     height: 6em;
   }
 
@@ -420,14 +445,6 @@ button.btn {
         left: 10px;
         font-weight: 500;
       }
-
-      & > .item:not(svg) {
-        color: rgba(0, 0, 0, .5);
-      }
-
-      & > input:focus + .item {
-        color: $main;
-      }
     }
 
     &.right {
@@ -439,8 +456,20 @@ button.btn {
       & > .item {
         right: 10px;
       }
+    }
 
-      & > input:focus + .item svg {
+    & > .item {
+      color: #7a7a7a;
+      height: 1.1rem;
+      position: absolute;
+      top: .85rem;
+    }
+
+    & > input:focus + .item {
+      color: $main;
+      stroke: $main;
+
+      svg {
         stroke: $main;
       }
     }
@@ -457,12 +486,6 @@ button.btn {
         -webkit-appearance: none;
         margin: 0;
       }
-    }
-
-    & > .item {
-      height: 1.1rem;
-      position: absolute;
-      top: .85rem;
     }
 
     & > svg.item {
@@ -612,10 +635,22 @@ button.btn {
     color: $main;
   }
 
-  .text-field + .required {
-    padding-left: 10px;
-    margin: 5px 0 0 0;
+  .helper {
+    margin-top: 5px;
     font-size: .8rem;
+    display: block;
+
+    &.error {
+      color: $danger;
+    }
+  }
+
+  .text-field + .helper {
+    margin-left: 10px;
+  }
+
+  .dropdown-shell + .helper {
+    margin-left: 1.1em;
   }
 
   .text-field-wrapper .text-field {
@@ -668,77 +703,79 @@ button.btn {
 
 .radio {
   position: relative;
+
+  & > input[type="radio"] {
+    @include hide-accessible;
+  }
+
+  & > .icon {
+    border-radius: 50%;
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    border: 2px solid $light-gray;
+
+    &::after {
+      content: "";
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  & > input:disabled + .icon {
+    cursor: not-allowed;
+    background-color: lighten($light-gray, 6%);
+  }
+
+  & > input:checked + .icon {
+    background-color: $main;
+    border-color: $main;
+
+    &::before {
+      content: "";
+      width: .5rem;
+      height: .5rem;
+      background-color: #fff;
+      border-radius: 50%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  & > input:disabled:checked + .icon {
+    background-color: $disabled;
+    border-color: lighten($disabled, 4%);
+  }
+
+  &:hover {
+    & > input:not(:disabled) + .icon::after {
+      background-color: transparentize(black, .95);
+    }
+
+    & > input:checked + .icon::after {
+      background-color: transparentize($main, .95);
+    }
+  }
+
+  & > input:focus + .icon::after {
+    background-color: transparentize(black, .875);
+  }
+
+  & > input:focus:checked + .icon::after {
+    background-color: transparentize($main, .875);
+  }
 }
 
-.radio > input[type="radio"] {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
-}
-
-.radio > .icon {
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  border: 2px solid #ddd;
-}
-
-.radio > input:disabled + .icon {
-  cursor: not-allowed;
-  background-color: #eee;
-}
-
-.radio > input:checked + .icon {
-  background-color: #127800;
-  border-color: #127800;
-}
-
-.radio > input:disabled:checked + .icon {
-  background-color: #999;
-  border-color: #959595;
-}
-
-.radio > input:checked + .icon::before {
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
-  border-radius: 50%;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.radio > .icon::after {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.radio:hover > :not(:disabled) + .icon::after {
-  background-color: rgba(0, 0, 0, .05);
-}
-
-.radio:hover > input:checked + .icon::after {
-  background-color: rgba(18, 120, 0, .05);
-}
-
-.radio > input:focus + .icon::after {
-  background-color: rgba(0, 0, 0, .125);
-}
-
-.radio > input:focus:checked + .icon::after {
-  background-color: rgba(18, 120, 0, .125);
+.radio.colored > input + .icon::before {
+  border-color: lightgray;
+  border-color: rgb(var(--before-r), var(--before-g), var(--before-b));
 }
 
 .radio.colored:hover > input + .icon::after,
@@ -758,78 +795,73 @@ label:hover .radio.colored > input:focus + .icon::after {
 .checkbox {
   position: relative;
   display: inline-block;
-}
 
-.checkbox > input[type="checkbox"] {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
-}
+  & > input[type="checkbox"] {
+    @include hide-accessible;
+  }
 
-.checkbox > .icon {
-  border-radius: 4px;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #ddd;
-  cursor: pointer;
-}
+  & > .icon {
+    border-radius: .25rem;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid $light-gray;
+    cursor: pointer;
 
-.checkbox.round > .icon {
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-}
+    &::after {
+      content: "";
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
-.checkbox > input:checked + .icon {
-  background-color: #127800;
-  border-color: #127800;
-}
+  &.round > .icon {
+    border-radius: 50%;
+    width: 1.375rem;
+    height: 1.375rem;
+  }
 
-.checkbox > input:checked + .icon::before {
-  width: 9px;
-  height: 6px;
-  border: 0 solid #fff;
-  border-bottom-width: 2px;
-  border-left-width: 2px;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 45%;
-  transform: translate(-50%, -50%) rotate(-57deg) skew(-11deg);
-  border-bottom-left-radius: 2px;
-}
+  & > input:checked + .icon {
+    background-color: $main;
+    border-color: $main;
 
-.checkbox > .icon::after {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+    &::before {
+      content: "";
+      width: 9px;
+      height: 6px;
+      border: 0 solid white;
+      border-bottom-width: 2px;
+      border-left-width: 2px;
+      left: 50%;
+      position: absolute;
+      top: 45%;
+      transform: translate(-50%, -50%) rotate(-57deg) skew(-11deg);
+      border-bottom-left-radius: 2px;
+    }
+  }
 }
 
 .checkbox:hover > .icon::after,
 label:hover .checkbox > .icon::after {
-  background-color: rgba(0, 0, 0, .05);
+  background-color: transparentize(black, .95);
 }
 
 .checkbox:hover > input:checked + .icon::after,
 label:hover .checkbox > input:checked + .icon::after {
-  background-color: rgba(18, 120, 0, .05);
+  background-color: transparentize($main, .95);
 }
 
 .checkbox > input:focus + .icon::after {
-  background-color: rgba(0, 0, 0, .125);
+  background-color: transparentize(black, .875);
 }
 
 .checkbox > input:focus:checked + .icon::after,
 label:hover .checkbox > input:focus:checked + .icon::after {
-  background-color: rgba(18, 120, 0, .125);
+  background-color: transparentize($main, .875);
 }
 
 .clickable {
@@ -839,7 +871,12 @@ label:hover .checkbox > input:focus:checked + .icon::after {
 }
 
 .with-labels .checkbox {
-  margin-right: 12px;
+  margin-right: .75rem;
+}
+
+.checkbox.colored > input + .icon::before {
+  border-color: lightgray;
+  border-color: rgb(var(--before-r), var(--before-g), var(--before-b));
 }
 
 .checkbox.colored:hover > input + .icon::after,
@@ -854,108 +891,106 @@ label:hover .checkbox.colored > input:focus + .icon::after {
   background-color: rgba(var(--r), var(--g), var(--b), .125);
 }
 
+.max-reached input:not(:checked) + .icon {
+  cursor: not-allowed;
+}
+
 /* Switches -------------------------------------- */
 
 .switch {
   position: relative;
-  width: 32px;
-  height: 18px;
-  border-radius: 12px;
-  border: 2px solid #999;
+  width: 2rem;
+  height: 1.125rem;
+  border-radius: .75rem;
+  border: 2px solid $off-state;
   cursor: pointer;
-}
 
-.switch.two-state {
-  border-color: #127800;
-}
+  &::before {
+    content: "";
+    width: 3.25rem;
+    height: 2.375rem;
+    border-radius: 1.125rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-input.switch-ctl {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
-}
+  &.two-state {
+    border-color: $main;
 
-.switch > .knob {
-  border-radius: 50%;
-  width: 12px;
-  height: 12px;
-  background-color: #999;
-  position: absolute;
-  top: 50%;
-  left: 4px;
-  transform: translateY(-50%);
-  transition: transform 100ms;
-}
+    & > .knob {
+      background-color: $main;
+    }
+  }
 
-.switch.two-state > .knob {
-  background-color: #127800;
+  & > .knob {
+    border-radius: 50%;
+    width: .75rem;
+    height: .75rem;
+    background-color: $off-state;
+    position: absolute;
+    top: 50%;
+    left: .25rem;
+    transform: translateY(-50%);
+    transition: transform 100ms;
+  }
 }
 
 input:checked ~ .switch {
-  border-color: #127800;
+  border-color: $main;
+
+  & > .knob {
+    background-color: $main;
+    transform: translateY(-50%) translateX(100%);
+  }
 }
 
-input:checked ~ .switch > .knob {
-  background-color: #127800;
-  transform: translateY(-50%) translateX(100%);
-}
-
-.switch::before {
-  width: 52px;
-  height: 38px;
-  border-radius: 18px;
-  content: "";
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+input.switch-ctl {
+  @include hide-accessible;
 }
 
 .switch:hover::before,
 label:hover .switch::before {
-  background-color: rgba(0, 0, 0, .05);
+  background-color: transparentize(black, .95);
 }
 
 input:checked ~ .switch:hover::before,
 label:hover input:checked ~ .switch::before,
 .switch.two-state:hover::before,
 label:hover .switch.two-state::before {
-  background-color: rgba(18, 120, 0, .05);
+  background-color: transparentize($main, .95);
 }
 
 input:focus ~ .switch::before {
-  background-color: rgba(0, 0, 0, .1);
+  background-color: transparentize(black, .9);
 }
 
 input:focus:checked ~ .switch::before,
 label:hover input:focus:checked ~ .switch::before,
 input:focus ~ .switch.two-state::before,
 label:hover input:focus ~ .switch.two-state::before {
-  background-color: rgba(18, 120, 0, .1);
+  background-color: transparentize($main, .9);
 }
 
-.switch-wrapper .state {
-  color: #999;
-  font-weight: 500;
-}
+.switch-wrapper {
+  .state {
+    color: $off-state;
+    font-weight: 500;
 
-.switch-wrapper .state.first {
-  margin-right: .8em;
-}
+    &.first {
+      margin-right: .8em;
+    }
 
-.switch-wrapper .state.second {
-  margin-left: .8em;
-}
+    &.second {
+      margin-left: .8em;
+    }
+  }
 
-.switch-wrapper input:not(:checked) ~ .first {
-  color: #127800;
-}
-
-.switch-wrapper input:checked ~ .second {
-  color: #127800;
+  input:not(:checked) ~ .first,
+  input:checked ~ .second {
+    color: $main;
+  }
 }
 
 /* Cards -------------------------------------- */
@@ -963,31 +998,31 @@ label:hover input:focus ~ .switch.two-state::before {
 .card {
   box-shadow: $shadow-0;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   padding: 1.5em;
   overflow: hidden;
-}
 
-.card.with-image {
-  padding: 0;
-}
+  &.with-image {
+    padding: 0;
 
-.card.with-image > .image {
-  width: 100%;
-}
+    & > .image {
+      width: 100%;
+    }
 
-.card.with-image > .content {
-  padding: .8em 1.3em;
-}
+    & > .content {
+      padding: .8em 1.3em;
+    }
 
-.card.with-image .title {
-  font-size: 1.15rem;
-  font-weight: 400;
-}
+    .title {
+      font-size: 1.15rem;
+      font-weight: 400;
+    }
 
-.card.with-image .subtitle {
-  font-size: .95rem;
-  font-weight: 300;
+    .subtitle {
+      font-size: .95rem;
+      font-weight: 300;
+    }
+  }
 }
 
 /* Chips -------------------------------------- */
@@ -1007,97 +1042,111 @@ label:hover input:focus ~ .switch.two-state::before {
   color: #656565;
   padding: .6em .9em;
   font-weight: 500;
+
+  &:not(.unclickable) {
+    cursor: pointer;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  &.small {
+    padding: .5em;
+    font-size: .9rem;
+    min-width: .9rem;
+    text-align: center;
+  }
+
+  .ripple {
+    background: transparentize($main, .9);
+  }
+
+  &.outline {
+    border: 1px solid transparentize(black, .8);
+    background-color: transparent;
+
+    &.unclickable {
+      border-color: $main;
+    }
+
+    .ripple {
+      background: transparentize($main, .9);
+    }
+  }
 }
 
-.chip:not(.unclickable) {
-  cursor: pointer;
-  user-select: none;
-  -webkit-touch-callout: none;
-}
+input + .chip {
+  &:hover {
+    background-color: transparentize(black, .87);
+  }
 
-.chip.small {
-  padding: .5em;
-  font-size: .9rem;
-  min-width: .9rem;
-  text-align: center;
-}
-
-.chip.outline {
-  border: 1px solid rgba(0, 0, 0, .2);
-  background-color: transparent;
-}
-
-.chip.unclickable.outline {
-  border-color: #127800;
+  &.outline:hover {
+    background-color: transparentize(black, .94);
+  }
 }
 
 input:disabled + .chip {
-  background-color: rgba(0, 0, 0, .03);
+  background-color: transparentize(black, .97);
   color: #aaa;
-  cursor: default;
-}
+  cursor: not-allowed;
 
-input:disabled + .chip:hover {
-  background-color: rgba(0, 0, 0, .03);
-}
-
-input + .chip:hover {
-  background-color: rgba(0, 0, 0, .13);
-}
-
-input + .chip.outline:hover {
-  background-color: rgba(0, 0, 0, .06);
+  &:hover {
+    background-color: transparentize(black, .97);
+  }
 }
 
 input:focus + .chip {
-  background-color: rgba(0, 0, 0, .18);
-}
+  background-color: transparentize(black, .82);
 
-input:focus + .chip.outline {
-  background-color: rgba(0, 0, 0, .1);
+  &.outline {
+    background-color: transparentize(black, .9);
+  }
 }
 
 input:checked + .chip {
-  background-color: rgba(18, 120, 0, .12);
-  color: #127800;
-}
+  background-color: transparentize($main, .88);
+  color: $main;
 
-input:checked + .chip.outline {
-  background-color: rgba(18, 120, 0, .06);
-  color: #127800;
-  border-color: #127800;
+  &.outline {
+    background-color: transparentize($main, .94);
+    color: $main;
+    border-color: $main;
+  }
 }
 
 input:focus:checked + .chip {
-  background-color: rgba(18, 120, 0, .25);
+  background-color: transparentize($main, .75);
+
+  &.outline {
+    background-color: transparentize($main, .88);
+  }
 }
 
-input:focus:checked + .chip.outline {
-  background-color: rgba(18, 120, 0, .12);
+.max-reached input:not(:checked) + .chip:not(.unclickable) {
+  cursor: not-allowed;
 }
 
 input[type="checkbox"] + .chip {
   position: relative;
+
+  &::before {
+    border: 0 solid $main;
+    content: "";
+  }
 }
 
 input[type="checkbox"]:checked + .chip {
   padding-left: 2em;
-}
 
-input[type="checkbox"] + .chip::before {
-  border: 0 solid #127800;
-  content: "";
-}
-
-input[type="checkbox"]:checked + .chip::before {
-  width: 5px;
-  height: 9px;
-  border-bottom-width: 2px;
-  border-right-width: 2px;
-  transform: translateY(-50%) rotate(45deg);
-  position: absolute;
-  left: .9em;
-  top: 45%;
+  &::before {
+    width: 5px;
+    height: 9px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    transform: translateY(-50%) rotate(45deg);
+    position: absolute;
+    left: .9em;
+    top: 45%;
+  }
 }
 
 /* Dialogs -------------------------------------- */
@@ -1177,7 +1226,7 @@ input[type="checkbox"]:checked + .chip::before {
 
   &.notice {
     box-shadow: none;
-    border: 1px solid #127800;
+    border: 1px solid $main;
     padding: 1em 1.5em .6em;
 
     p {
@@ -1215,12 +1264,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .carousel .slide > input {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
+  @include hide-accessible;
 }
 
 .carousel .slide > .icon {
@@ -1327,16 +1371,10 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dropdown {
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  position: absolute;
+  @include hide-accessible;
+
   background-color: white;
-  box-shadow:
-    0 3px 1px -2px rgba(0, 0, 0, .2),
-    0 2px 2px 0    rgba(0, 0, 0, .14),
-    0 1px 5px 0    rgba(0, 0, 0, .12);
+  box-shadow: $shadow-raised;
   border-radius: 20px;
   z-index: 1001;
   margin-top: 5px;
@@ -1349,9 +1387,9 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dropdown-shell.open .dropdown {
-  clip: auto;
-  height: auto;
-  width: auto;
+  @include show-accessible;
+
+  position: absolute;
 }
 
 .dropdown.right-edge {
@@ -1359,11 +1397,11 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dropdown-shell.open > .handle {
-  background-color: rgba(18, 120, 0, .12);
-}
+  background-color: transparentize($main, .88);
 
-.dropdown-shell.open > .handle > .chevron {
-  transform: rotate(180deg);
+  & > .chevron {
+    transform: rotate(180deg);
+  }
 }
 
 .dropdown .btn.close {
@@ -1374,21 +1412,11 @@ input[type="checkbox"]:checked + .chip::before {
 /* Accordions -------------------------------------- */
 
 .accordion > section {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
+  @include hide-accessible;
 }
 
 .accordion > .panel.open + section {
-  clip: auto;
-  width: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
+  @include show-accessible;
 }
 
 .accordion > .panel .chevron {
@@ -1420,7 +1448,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .dot.attention {
-  background-color: #ffb359;
+  background-color: $attention;
 }
 
 .dot.active {
@@ -1431,67 +1459,6 @@ input[type="checkbox"]:checked + .chip::before {
   background-color: transparentize($info, .5);
 }
 
-/* Choice Buttons -------------------------------------- */
-
-.choice-btn > input[type="radio"] {
-  @include hide-accessible;
-}
-
-.choice-btn > .repr {
-  border: 1px solid $main;
-  border-radius: 15px;
-  padding: 1.2em;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  color: $main;
-  font-weight: 500;
-  font-size: 1.1rem;
-}
-
-.choice-btn:hover > .repr {
-  background-color: transparentize($main, .95);
-}
-
-.choice-btn > input:checked + .repr {
-  background-color: transparentize($main, .9);
-}
-
-.choice-btn > input:focus + .repr {
-  background-color: transparentize($main, .88);
-}
-
-.choice-btn .icon {
-  margin-right: .8em;
-  stroke: $main;
-}
-
-@media only screen and (min-width: 480px) {
-  .choice-btn > .repr {
-    padding: 1.5em 1em;
-    flex-direction: column;
-  }
-
-  .choice-btn .icon {
-    margin-right: 0;
-    margin-bottom: .5em;
-    width: 30px;
-    height: 30px;
-    stroke-width: 1.5;
-  }
-}
-
-@media only screen and (min-width: 840px) {
-  .choice-btn > .repr {
-    font-size: 1.2rem;
-  }
-
-  .choice-btn .icon {
-    width: 48px;
-    height: 48px;
-  }
-}
-
 /* Tabs -------------------------------------- */
 
 .tabs {
@@ -1500,18 +1467,13 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .tab > input[type="radio"] {
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  position: absolute;
+  @include hide-accessible;
 }
 
 .tab > .icon {
   border-bottom: 2px solid rgba(196, 196, 196, .6);
   font-weight: 500;
-  color: #127800;
+  color: $main;
   padding: .8em .3em .5em;
   cursor: pointer;
   border-top-left-radius: 5px;
@@ -1528,7 +1490,7 @@ input[type="checkbox"]:checked + .chip::before {
 }
 
 .tab > input:checked + .icon {
-  border-color: rgba(18, 120, 0, .6);
+  border-color: transparentize($main, .4);
 }
 
 /* Popovers -------------------------------------- */
@@ -1601,7 +1563,7 @@ input[type="checkbox"]:checked + .chip::before {
   }
 
   input {
-    font-family: "Ubuntu", sans-serif;
+    font-family: $font-face;
     font-size: 1rem;
     font-weight: 300;
     border: none;
@@ -1636,18 +1598,110 @@ input[type="checkbox"]:checked + .chip::before {
     border-radius: .5em;
     margin-left: -1.5em;
     box-shadow: $shadow-raised;
+    overflow-y: auto !important;
 
     li {
       padding: .8em 2.5em .8em 1.5em;
       cursor: pointer;
 
-      &:hover {
+      &:hover:not(.loading) {
         background: transparentize($main, .92);
       }
 
       mark {
         background: none;
         color: $main;
+        font-weight: 500;
+      }
+
+      .subtext {
+        font-size: .9rem;
+        font-weight: 300;
+        margin-top: .2em;
+      }
+
+      &.load-more {
+        font-weight: 500;
+        color: $main;
+        display: flex;
+        align-items: center;
+      }
+
+      &.loading {
+        padding-top: .5em;
+        padding-bottom: .5em;
+        display: flex;
+        align-items: center;
+        font-size: .9rem;
+        cursor: wait;
+
+        .lds-ellipsis {
+          display: inline-block;
+          position: relative;
+          width: 32px;
+          height: 32px;
+          margin-right: .8em;
+
+          div {
+            position: absolute;
+            top: 13px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: $main;
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+            &:nth-child(1) {
+              left: 3px;
+              animation: lds-ellipsis1 .6s infinite;
+            }
+
+            &:nth-child(2) {
+              left: 3px;
+              animation: lds-ellipsis2 .6s infinite;
+            }
+
+            &:nth-child(3) {
+              left: 13px;
+              animation: lds-ellipsis2 .6s infinite;
+            }
+
+            &:nth-child(4) {
+              left: 22px;
+              animation: lds-ellipsis3 .6s infinite;
+            }
+          }
+
+          @keyframes lds-ellipsis1 {
+            0% {
+              transform: scale(0);
+            }
+
+            100% {
+              transform: scale(1);
+            }
+          }
+
+          @keyframes lds-ellipsis3 {
+            0% {
+              transform: scale(1);
+            }
+
+            100% {
+              transform: scale(0);
+            }
+          }
+
+          @keyframes lds-ellipsis2 {
+            0% {
+              transform: translate(0, 0);
+            }
+
+            100% {
+              transform: translate(10px, 0);
+            }
+          }
+        }
       }
     }
   }
@@ -1692,5 +1746,339 @@ input[type="checkbox"]:checked + .chip::before {
   input:checked + label .star,
   input:checked ~ input + label .star {
     stroke: $main;
+  }
+}
+
+/* Snackbar -------------------------------------- */
+
+.snackbar {
+  position: fixed;
+  z-index: 100;
+  bottom: 3em;
+  left: 5%;
+  min-width: 16em;
+  padding: .375em;
+  width: max-content;
+  max-width: 85%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  visibility: hidden;
+  background: lighten($dark, 5%);
+  box-shadow: $shadow-raised;
+
+  .text {
+    padding-top: .8em;
+    padding-bottom: .8em;
+    margin-left: .625em;
+    margin-right: .625em;
+    color: white;
+    flex: 1;
+    font-size: .95rem;
+  }
+
+  .btn {
+    color: lighten($main, 17%);
+  }
+}
+
+.snackbar.open {
+  visibility: visible;
+}
+
+/* Loading -------------------------------------- */
+
+.loading {
+  display: flex;
+  align-items: center;
+
+  .lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    margin-right: .8em;
+
+    div {
+      position: absolute;
+      top: 13px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: $main;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+      &:nth-child(1) {
+        left: 3px;
+        animation: lds-ellipsis1-small .6s infinite;
+      }
+
+      &:nth-child(2) {
+        left: 3px;
+        animation: lds-ellipsis2-small .6s infinite;
+      }
+
+      &:nth-child(3) {
+        left: 13px;
+        animation: lds-ellipsis2-small .6s infinite;
+      }
+
+      &:nth-child(4) {
+        left: 22px;
+        animation: lds-ellipsis3-small .6s infinite;
+      }
+    }
+
+    @keyframes lds-ellipsis1-small {
+      0% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes lds-ellipsis3-small {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(0);
+      }
+    }
+
+    @keyframes lds-ellipsis2-small {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(10px, 0);
+      }
+    }
+  }
+}
+
+/* Date pickers -------------------------------------- */
+
+.date-picker {
+  .range-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: .5em 1em;
+  }
+
+  .month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1em;
+    border: 0 solid $light-gray;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    padding: .3em 0;
+    color: $main;
+    font-weight: 500;
+    white-space: nowrap;
+
+    .btn {
+      padding: .5rem;
+
+      .icon {
+        width: 1rem;
+        height: 1rem;
+        stroke-width: 3;
+      }
+    }
+  }
+
+  .weekdays {
+    margin: 1em 1em .5em;
+    display: flex;
+
+    & > .weekday {
+      color: lighten($dark, 15%);
+      font-size: .8rem;
+      width: 14.285714285714286%;  // 100% / 7
+      text-align: center;
+    }
+  }
+
+  .days {
+    display: flex;
+
+    .day {
+      width: 14.285714285714286%;  /* 100% / 7 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      &:last-child {
+        padding-right: 1em;
+      }
+
+      &:first-child {
+        padding-left: 1em;
+      }
+
+      & > .btn {
+        font-weight: 400;
+        font-size: .9rem;
+        color: black;
+        justify-content: center;
+        margin: 1px;
+        z-index: 2;
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+
+      &.today > .btn {
+        color: $main;
+      }
+
+      &.selected .btn {
+        background-color: desaturate(lighten($main, 10%), 20%);
+        color: white;
+      }
+
+      &.outside > .btn {
+        color: $disabled;
+      }
+
+      &.in-range::before {
+        background-color: transparentize($main, .75);
+        content: "";
+        height: 2.25rem;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1px;
+        z-index: 1;
+      }
+
+      &.outside.selected > .btn {
+        color: #fff;
+      }
+
+      &.start {
+        &::before {
+          right: 0;
+          left: unset;
+          width: calc(1.125rem + 1px);
+        }
+      }
+
+      &.end {
+        &::before {
+          left: 0;
+          right: unset;
+          width: calc(1.125rem + 1px);
+        }
+      }
+
+      &.start.end::before {
+        width: 0;
+      }
+    }
+  }
+}
+
+/* Time pickers -------------------------------------- */
+
+.time-picker {
+  display: flex;
+  width: 6.25rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .text-field {
+    width: 3em;
+    margin: .25rem 0;
+
+    input {
+      text-align: center;
+    }
+  }
+
+  .btn {
+    padding: .35em .7em;
+  }
+
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: 3rem 3rem;
+    grid-template-rows: auto auto auto;
+    column-gap: .25rem;
+    justify-items: center;
+  }
+}
+
+/* Datetime pickers -------------------------------------- */
+
+.date-time-picker {
+  .mode-switch {
+    display: flex;
+    justify-content: space-between;
+    margin: .5em 1em;
+  }
+
+  .time-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: .5em 1em .5em 1.5em;
+
+    & > .icon {
+      stroke: $main;
+      margin-right: 1em;
+    }
+
+    & > .btn {
+      align-self: center !important;
+      margin-left: .5em;
+    }
+  }
+}
+
+/* File inputs -------------------------------------- */
+
+.file-input {
+  input {
+    @include hide-accessible;
+  }
+
+  .handle {
+    font-weight: 500;
+    color: $main;
+    padding: .8em 1.1em;
+    border-radius: 1.5625em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .ripple {
+      background: transparentize($main, .9);
+    }
+  }
+
+  input:not(:disabled) + .handle:hover {
+    background: transparentize($main, .95);
+  }
+
+  input:focus:not(:disabled) + .handle {
+    background-color: transparentize($main, .88);
+  }
+
+  input:disabled + .handle {
+    color: $disabled;
+    background-color: transparent;
+    cursor: default;
+
+    & > svg {
+      stroke: $disabled;
+    }
   }
 }

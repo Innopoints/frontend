@@ -11,7 +11,7 @@
   </div>
   <div class="showcase half">
     <TextField placeholder="Price" isWithItem isItemRight>
-      <svg src="/images/innopoint-sharp.svg" class="item" />
+      <svg src="/images/innopoint-sharp.svg" class="item innopoint" />
     </TextField>
     <TextField type="number" isWithItem>
       <span class="item">XXL</span>
@@ -22,24 +22,22 @@
   </div>
   <div class="showcase">
     <TextField
-        id="description"
-        placeholder="High-quality bulletproof fabric"
-        type="number"
-        multiline
+      id="description"
+      placeholder="High-quality bulletproof fabric"
+      multiline
     />
   </div>
-</Card>
 
-<Card id="forms">
-  <h1>Form fields</h1>
+  <hr />
 
   <div class="showcase">
     <form>
       <FormField
-          id="ff-1"
-          title="Name"
-          subtitle="This field is to write the name, so please do."
-          required
+        id="ff-1"
+        title="Name"
+        subtitle="This field is to write the name, so please do."
+        required
+        error="Must be unique."
       >
         <TextField id="ff-1" />
       </FormField>
@@ -67,13 +65,15 @@
   <div class="showcase">
     <TextField id="nothing" isOutline label="Label" />
     <TextField
-        id="username"
-        isOutline
-        isWithItem
-        label="Telegram"
-        pattern="[A-Za-z0-9_](5, 32)"
-        error="A username should contain from 5 to 32 symbols: a–z, 0–9, _.">
-      <img alt="" src="/images/icons/at-sign.svg" class="item" />
+      id="username"
+      isOutline
+      isWithItem
+      label="Telegram"
+      pattern="[A-Za-z0-9_]+"
+      minlength={5}
+      maxlength={32}
+      error="A username should contain from 5 to 32 symbols: a–z, 0–9, _.">
+      <svg src="/images/icons/at-sign.svg" class="item" />
     </TextField>
   </div>
 </Card>

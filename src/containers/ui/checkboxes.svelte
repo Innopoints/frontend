@@ -2,21 +2,16 @@
   import CheckboxGroup from 'ui/checkbox-group.svelte';
   import Card from 'ui/card.svelte';
 
-  const checkboxes0 = ['one', 'two', 'three', 'four'];
-
-  const checkboxes = [
-    {
-      color: '#FF00FF',
-      label: 'one checkbox',
-    },
-    {
-      color: '#FFFFFF',
-      label: 'two checkbox',
-    },
-    {
-      color: '#000000',
-      label: 'three checkbox',
-    },
+  let values = [
+    { value: 1, checked: false },
+    { value: 2, checked: false },
+    { value: 3, checked: false },
+  ];
+  const labels = ['one', 'two', 'three'];
+  let colors = [
+    { value: '#ff3333', checked: false },
+    { value: '#33ff33', checked: false },
+    { value: '#3333ff', checked: false },
   ];
 </script>
 
@@ -24,28 +19,26 @@
   <h1>Checkboxes</h1>
   <div class="showcase">
     <CheckboxGroup
-        items={checkboxes0}
-        name="checkbox-1"
+        name="checkboxes0"
+        bind:items={values}
+        labels={labels}
     />
-  </div>
-  <div class="showcase">
-
     <hr />
-
     <CheckboxGroup
-        colored
-        items={checkboxes}
-        value={[checkboxes[1]]}
-        name="checkbox-2"
+        name="checkboxes1"
+        bind:items={values}
+        labelclass="label"
+        labelPosition="left"
+        classname="flex-wrap"
+        maxChecked={2}
     />
-
     <hr />
-
     <CheckboxGroup
-        labeled
-        items={checkboxes}
-        value={checkboxes}
-        name="checkbox-3"
+        name="checkboxes2"
+        isColor
+        isRound
+        bind:items={colors}
+        classname="flex-wrap"
     />
   </div>
 </Card>

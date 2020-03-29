@@ -46,6 +46,15 @@ h2.padded {
   font-size: 1.05rem;
 }
 
+.project-header .labeled .admin-feedback {
+  white-space: pre-line;
+}
+
+.project-header .labeled .secondary {
+  display: block;
+  margin-top: .2em;
+}
+
 .project-header .icon {
   width: 1.75rem;
   height: 1.75rem;
@@ -71,6 +80,10 @@ h2.padded {
 .project-header .actions .btn.outline {
   margin-top: 1em;
   margin-right: .5em;
+}
+
+.project-header .actions .btn.review {
+  margin-left: .5em;
 }
 
 .project-header.wrap .data-points {
@@ -131,6 +144,7 @@ h2.padded {
   flex-direction: column-reverse;
   justify-content: space-between;
   margin-top: 1em;
+  white-space: pre-line;
 }
 
 .reports .feedback .stars {
@@ -225,11 +239,17 @@ h2.padded {
 }
 
 @media only screen and (min-width: 1024px) {
+  .reports {
+    min-width: 25em;
+  }
   .reports .data-points, .reports .feedback {
     flex-direction: row;
   }
   .reports .data-points .labeled:first-child {
     margin-right: 10%;
+  }
+  .reports .label {
+    white-space: nowrap;
   }
   .reports .feedback .stars {
     margin-left: 1em;

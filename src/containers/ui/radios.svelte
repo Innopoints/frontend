@@ -2,57 +2,36 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import Card from 'ui/card.svelte';
 
-  const radioItems0 = ['one', 'two', 'three', 'four'];
-  const radioItems1 = [
-    {
-      label: 'one label',
-      color: '#FF0000',
-    },
-    {
-      label: 'two label',
-      color: '#000000',
-    },
-    {
-      label: 'three label',
-      color: '#FFFFFF',
-    },
-  ];
+  const labels = ['one', 'two', 'three'];
+  const values = [1, 2, 3];
+  const colors = ['#ff3333', '#33ff33', '#3333ff'];
+  let currValue = values[1];
 </script>
 
 <Card id="radios">
   <h1>Radio Buttons</h1>
   <div class="showcase">
     <RadioGroup
-        labelclass="radio"
         name="radio0"
-        items={radioItems0}
+        items={values.map(val => ({ value: val }))}
+        labels={labels}
+        bind:value={currValue}
     />
     <hr />
-
     <RadioGroup
         name="radio1"
-        isLabel
-        items={radioItems1}
-        value={radioItems1[2]}
-    />
-    <hr />
-
-    <RadioGroup
-        classname="switches"
-        name="radio2"
+        items={values.map(val => ({ value: val }))}
+        labelclass="label"
         labelPosition="left"
-        isLabel
-        isLabelGreen
-        items={radioItems1}
+        bind:value={currValue}
+        classname="flex-wrap"
     />
     <hr />
-
     <RadioGroup
         isColor
-        labelclass="radio"
-        name="radio3"
-        items={radioItems1}
-        value={radioItems1[0]}
+        name="radio2"
+        items={colors.map(val => ({ value: val }))}
+        classname="flex-wrap"
     />
   </div>
 </Card>

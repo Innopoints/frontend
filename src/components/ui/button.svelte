@@ -1,24 +1,36 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import rippleEffect from './utils/ripple';
+  import rippleEffect from './utils/ripple.js';
 
-  export let classname = null;
+  export let classname = '';
   export let isFilled = false;
   export let isOutline = false;
   export let isDanger = false;
   export let isRound = false;
   export let isNormal = false;
   export let isRectangle = false;
-  export let ripple = true;
+  export let isSmall = false;
+  export let isSelected = false;
+
+  if (isFilled + isOutline > 1) {
+    throw new Error('A button may not be filled and outlined at the same time.');
+  }
+
+  if (isDanger + isNormal > 1) {
+    throw new Error('A button may not be danger and normal at the same time.');
+  }
+
+  if (isFilled + isSelected > 1) {
+    throw new Error('A button may not be filled and selected at the same time.');
+  }
 
   export let disabled = false;
   export let label = '';
   export let away = null;
-  export let href = '';
+  export let href = null;
   export let chevron = false;
   export let badge = false;
+  export let tooltip = '';
 
-  $: rippleColor = getRippleColor();
   $: classes = [
     isFilled && 'filled',
     isOutline && 'outline',
@@ -26,30 +38,20 @@
     isRound && 'round',
     isNormal && 'normal',
     isRectangle && 'rectangle',
-    classname ? classname : 'btn',
+    isSmall && 'small',
+    isSelected && 'selected',
   ].filter(v => v !== false);
-
-  const getRippleColor = () => {
-    if (ripple) {
-      if (isFilled) {
-        return 'rgba(255, 255, 255, .35)';
-      } else {
-        if (isDanger) return 'rgba(186, 3, 3, .25)';
-        else return 'rgba(56, 120, 0, .25)';
-      }
-    }
-    return null;
-  };
-
-  let dispatch = createEventDispatcher();
 </script>
 
 {#if href}
   <a
-      {href}
-      target={away && '_blank'}
-      class={classes.join(' ')}
-      on:click={() => dispatch('click')}
+    {href}
+    target={away && '_blank'}
+    class="btn {classes.join(' ')} {classname}"
+    on:click
+    use:rippleEffect
+    title="{tooltip}"
+    rel="prefetch"
   >
     <slot />
     {#if away}
@@ -60,11 +62,10 @@
   <button
     type="button"
     {disabled}
-    class={classes.join(' ')}
-    on:click={(e) => dispatch('click', e)}
-    on:mousedown={(e) => dispatch('mousedown', e)}
-    on:mouseup={(e) => dispatch('mouseup', e)}
-    use:rippleEffect={rippleColor}
+    class="btn {classes.join(' ')} {classname}"
+    on:click on:mousedown on:mouseup
+    title="{tooltip}"
+    use:rippleEffect
   >
     {#if badge}
       <div class="badge">

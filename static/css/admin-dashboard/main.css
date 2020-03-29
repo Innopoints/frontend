@@ -130,6 +130,7 @@ h1 {
   text-decoration: underline;
   font-size: .95em;
   cursor: pointer;
+  color: #127800;
 }
 
 .purchases .parameters {

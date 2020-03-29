@@ -1,13 +1,18 @@
 <script>
+  import { stores } from '@sapper/app';
   import Header from '@/components/header.svelte';
   import Footer from '@/components/footer.svelte';
+  export let user = null;
 
-  export let classname = '';
+  const { page } = stores();
 </script>
 
-<Header />
-<div class="material {classname}">
-  <slot />
-</div>
+<svelte:head>
+  <link rel="stylesheet" href="/css/bundles/layout-default.min.css" />
+</svelte:head>
+
+<Header {user} isProfile={(/^\/(?:profile|dashboard)/).test($page.path)} />
+
+<slot />
 
 <Footer />

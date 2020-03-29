@@ -23,13 +23,13 @@
     <strong>Bold text</strong>
     <span class="label">Label</span>
     <span class="label small">Small Label</span>
-    <a href="nowhere">Link</a>
-    <a href="##">Visited</a>
+    <a href="/nowhere">Link</a>
+    <a href="/ui">Visited</a>
   </div>
 </Card>
 
 <Card id="carousels">
-  <h1 class="todo">Image Carousel</h1>
+  <h1>Image Carousel</h1>
   <div class="showcase">
     <div class="carousel">
       <div class="curr-slide">
@@ -67,38 +67,13 @@
   <h1>Cards</h1>
   <div class="showcase vertical">
     <Card>This is a small card, nothing special.</Card>
-    <Card img="/images/store/sweatshirt.png">
-      <div class="title">Write clean code</div>
-      <div class="subtitle">subtitle</div>
+    <Card classname="with-image">
+      <img src="/images/store/sweatshirt.png" class="image" alt="sweatshirt" />
+      <div class="content">
+        <div class="title">Write clean code</div>
+        <div class="subtitle">subtitle</div>
+      </div>
     </Card>
-  </div>
-</Card>
-
-<!--todo: choice button-->
-<Card id="choice-btns">
-  <h1 class="todo">Choice buttons</h1>
-  <div class="showcase">
-    <label class="choice-btn">
-      <input type="radio" name="large-choices" />
-      <div class="repr">
-        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
-        Title
-      </div>
-    </label>
-    <label class="choice-btn">
-      <input type="radio" name="large-choices" />
-      <div class="repr">
-        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
-        Title 2
-      </div>
-    </label>
-    <label class="choice-btn">
-      <input type="radio" name="large-choices" />
-      <div class="repr">
-        <img alt="" src="/images/icons/at-sign.svg" class="icon" />
-        Title 3
-      </div>
-    </label>
   </div>
 </Card>
 
@@ -109,49 +84,5 @@
     <hr />
     Divider with text
     <hr data-text="some text" />
-  </div>
-</Card>
-
-<Card id="tabs">
-  <h1 class="todo">Tabs</h1>
-  <div class="showcase">
-    <nav class="tabs">
-      <label class="tab">
-        <input type="radio" name="tabs" />
-        <div class="icon">Tab 1</div>
-      </label>
-      <label class="tab">
-        <input type="radio" name="tabs" />
-        <div class="icon">Tab 2</div>
-      </label>
-    </nav>
-  </div>
-</Card>
-
-<!--todo: popover-->
-<Card id="popovers">
-  <h2 class="todo">Popovers</h2>
-  <div class="showcase">
-    <div class="popover-container">
-      <a href="##">simple link</a>
-      <button class="popover btn shadow-1" type="button">
-        <!-- copy -->
-        <svg
-            class="icon mr feather feather-copy"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-        </svg>
-        copy
-      </button>
-    </div>
   </div>
 </Card>

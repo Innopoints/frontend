@@ -3,88 +3,86 @@
   margin-bottom: .5em;
 }
 
-.dropdowns {
+.filters .dropdowns {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.dropdowns .dropdown-shell {
+.filters .dropdowns .dropdown-shell {
   margin-top: .5em;
 }
 
-.handle .regular {
+.filters .handle .regular {
   display: none;
 }
 
-.handle .mr {
-  width: 20px;
-  height: 20px;
+.filters .handle .mr {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
-.relative-wrapper {
+.filters .relative-wrapper {
   width: calc(90vw - 1em);
   max-width: 22em;
   padding: 1em 0;
 }
 
-.order-options {
-  max-width: 18em;
-}
-
-.relative-wrapper > .btn.danger {
+.filters .relative-wrapper > .btn.danger {
   margin: 0 1em;
 }
 
-.filter {
+.filters .order-options {
+  max-width: 15em;
+}
+
+.filters .order-options .with-labels {
+  display: flex;
+  flex-direction: column;
+  margin-left: .5em;
+}
+
+.filters .order-options .with-labels label {
+  display: flex;
+  align-items: center;
+}
+
+.filters .order-options .with-labels .radio {
+  margin: .5em 12px;
+}
+
+.filters .filter {
   display: flex;
   align-items: center;
   margin-top: .5em;
   padding: 0 1em;
 }
 
-.filter .name {
+.filters .filter .name {
   padding: 0 .5em 0 1em;
   flex-shrink: 0;
 }
 
-.filter .icon {
+.filters .filter .icon {
   stroke: #127800;
 }
 
-.order-options .with-labels {
-  display: flex;
-  flex-direction: column;
-  margin-left: .5em;
-}
-
-.order-options .with-labels label {
-  display: flex;
-  align-items: center;
-}
-
-.order-options .with-labels .radio {
-  margin: .5em 12px;
-}
-
-.hide-mb {
-  display: none;
-}
-
 @media only screen and (min-width: 370px) {
-  .handle .tight {
+  .filters .handle .tight {
     display: none;
   }
-  .handle .regular {
+  .filters .handle .regular {
     display: inline;
   }
 }
 
-@media only screen and (min-width: 380px) {
-  .filter > .icon,
-  .filter > .align-center > .icon {
-    margin-left: .8em;
-  }
+.filters .filter > .icon,
+.filters .filter > .align-center > .icon {
+  margin-left: .8em;
+}
+
+.hide-mb {
+  display: none;
 }
 
 @media only screen and (min-width: 640px) {
@@ -106,13 +104,16 @@
   .filters .text-field {
     flex: 1;
   }
-  .dropdown-shell:first-child {
+  .filters .dropdown-shell:first-child {
     display: none;
   }
-  .dropdown-shell:last-child {
+  .filters .dropdown-shell:last-child {
     flex: 0;
     margin-top: 0;
     margin-left: .5em;
+  }
+  .ordering {
+    margin: .5em 0 1em;
   }
   .hide-mb {
     display: flex;
@@ -124,8 +125,5 @@
   }
   .hide-mb .chip {
     font-size: .9rem;
-  }
-  .ordering {
-    margin: .5em 0 1em;
   }
 }

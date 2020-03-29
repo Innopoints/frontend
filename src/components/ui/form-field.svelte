@@ -1,10 +1,10 @@
 <script>
-  export let classname = 'form-field';
-  export let titleclass = 'name';
-  export let subtitleclass = 'desc';
-  export let requiredclass = 'required';
+  export let classname = '';
+  export let titleclass = '';
+  export let subtitleclass = '';
+  export let requiredclass = '';
   export let wrapperclass = 'text-field-wrapper';
-  export let errorclass = 'error';
+  export let errorclass = '';
 
   export let title = '';
   export let subtitle = '';
@@ -13,19 +13,19 @@
   export let error = null;
 </script>
 
-<div class="{classname}{error ? ' ' + errorclass : ''}">
+<div class="form-field {classname}" class:error>
   <label for={id}>
     <slot name="title">
-      <span class={titleclass}>
+      <span class="name {titleclass}">
         {title}
         {#if required}
-          <span class={requiredclass}>*</span>
+          <span class="required {requiredclass}">*</span>
         {/if}
       </span>
     </slot>
     <slot name="subtitle">
       {#if subtitle}
-        <span class={subtitleclass}>
+        <span class="desc {subtitleclass}">
           {subtitle}
         </span>
       {/if}
@@ -33,8 +33,10 @@
   </label>
   <div class={wrapperclass}>
     <slot />
-    {#if required}
-      <span class={requiredclass}>* Required</span>
+    {#if error}
+      <span class="helper error {errorclass}">{error}</span>
+    {:else if required}
+      <span class="helper required {requiredclass}">* Required</span>
     {/if}
   </div>
 </div>

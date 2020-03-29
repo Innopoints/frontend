@@ -20,6 +20,11 @@ h2 {
   text-align: center;
 }
 
+.step0 h2 {
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
 .step0 .left {
   padding-left: 1em;
   padding-right: 1em;
@@ -172,6 +177,10 @@ h2 {
   }
 }
 
+.step1 form {
+  width: 100%;
+}
+
 .step1 .form-field {
   flex-direction: column;
   margin-top: 2em;
@@ -181,46 +190,135 @@ h2 {
   margin-top: 1em;
 }
 
-.step1 .form-field .image-picker {
+.step1 .image-picker {
   margin-top: 1em;
   align-self: flex-start;
-}
-
-.step1 .image-picker {
   display: flex;
   flex-direction: column;
 }
 
-.step1 .image-picker:not(.selected) img, .step1 .image-picker:not(.selected) .btn.danger {
-  display: none;
+.step1 .image-picker img {
+  border-radius: .625rem;
+  width: calc(100% - 3em);
 }
 
-.step1 .image-picker.selected img {
-  border-radius: 10px;
-  width: 100%;
-  margin-bottom: .5em;
-}
-
-.step1 .image-picker.selected .btn.option {
-  display: none;
-}
-
-.step1 .image-picker.selected .btn.danger {
+.step1 .image-picker .btn.danger {
   align-self: flex-start;
+  margin-top: .5em;
 }
 
-.step1 .image-picker.selected .btn.danger .icon {
+.step1 .image-picker .btn.danger .icon {
   margin-right: .4em;
 }
 
+.step1 .image-picker .error {
+  font-size: .85rem;
+  color: #ab0303;
+  text-align: center;
+}
+
+.step1 .lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.step1 .lds-ellipsis div {
+  position: absolute;
+  top: 20px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.step1 .lds-ellipsis div:nth-child(1) {
+  left: 5px;
+  animation: lds-ellipsis1 .6s infinite;
+}
+
+.step1 .lds-ellipsis div:nth-child(2) {
+  left: 5px;
+  animation: lds-ellipsis2 .6s infinite;
+}
+
+.step1 .lds-ellipsis div:nth-child(3) {
+  left: 19px;
+  animation: lds-ellipsis2 .6s infinite;
+}
+
+.step1 .lds-ellipsis div:nth-child(4) {
+  left: 34px;
+  animation: lds-ellipsis3 .6s infinite;
+}
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(14px, 0);
+  }
+}
+
+.step1 .loading-wrapper {
+  position: relative;
+  border-radius: .625rem;
+}
+
+.step1 .loading-wrapper img {
+  display: block;
+  height: 100%;
+}
+
+.step1 .status-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.step1 .options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 @media only screen and (min-width: 420px) {
-  .step1 .image-picker.selected {
+  .step1 .image-picker {
     flex-direction: row;
   }
-  .step1 .image-picker.selected .btn.danger {
+  .step1 .image-picker .btn.danger {
     padding: .7em;
   }
-  .step1 .image-picker.selected .btn.danger .text {
+  .step1 .image-picker .btn.danger .text {
     clip: rect(0, 0, 0, 0);
     width: 1px;
     height: 1px;
@@ -228,7 +326,7 @@ h2 {
     overflow: hidden;
     position: absolute;
   }
-  .step1 .image-picker.selected .btn.danger .icon {
+  .step1 .image-picker .btn.danger .icon {
     margin-right: 0;
   }
 }
@@ -252,10 +350,6 @@ h2 {
   .step1 .form-field .text-field-wrapper, .step1 .form-field .image-picker {
     flex-basis: 50%;
   }
-  .step1 .form-field .image-picker:not(.selected) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -263,6 +357,10 @@ h2 {
     flex-basis: 45%;
     margin-right: 2em;
   }
+}
+
+.step2 h2 {
+  margin-bottom: 1em;
 }
 
 .step2 nav.dropdown-shell {
@@ -315,7 +413,17 @@ h2 {
   padding-right: 10px;
 }
 
-.step3 p + .label {
+.step3 form > p {
+  font-size: .95rem;
+  line-height: 1.3rem;
+  margin-top: .5em;
+}
+
+.step3 form > p:first-of-type:not(.error) {
+  margin-top: 2em;
+}
+
+.step3 form > p + .label {
   margin: 1.5em 0 .5em 5px;
 }
 
@@ -323,14 +431,13 @@ h2 {
   display: inline-flex;
 }
 
-.step3 p {
-  font-size: .95rem;
-  line-height: 1.3rem;
-  margin-top: .5em;
+.step3 .autocomplete-field {
+  margin-bottom: 1em;
 }
 
-.step3 p:first-of-type:not(.error) {
-  margin-top: 2em;
+.step3 .autocomplete-field .dropdown {
+  max-height: 12em;
+  overflow-y: auto;
 }
 
 @media only screen and (max-width: 479px) {
@@ -364,10 +471,10 @@ h2 {
     padding-left: 8%;
     padding-right: 8%;
   }
-  .step3 p + .label {
+  .step3 form > p + .label {
     margin-top: 4em;
   }
   .step3 .autocomplete-field {
-    margin-bottom: 3em;
+    margin-bottom: 6em;
   }
 }

@@ -1,48 +1,73 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import Button from 'ui/button.svelte';
+  import Card from 'ui/card.svelte';
+  import { login } from '@/utils/auth.js';
+
+  export let error;
+  export let status;
+  const dev = process.env.NODE_ENV === 'development';
 </script>
 
 <svelte:head>
-  <title>Page not found – Innopoints</title>
-
-  <link rel="stylesheet" href="/css/page-components/header.css">
-  <link rel="stylesheet" href="/css/page-components/404.css">
-  <link rel="stylesheet" href="/css/page-components/footer.css">
-
-  <!-- Home styles -->
-  <link rel="preload" href="/css/home/main.css" as="style" />
-  <link rel="preload" href="/css/home/header.css" as="style" />
-  <link rel="preload" href="/css/home/tagline.css" as="style" />
-  <link rel="preload" href="/css/home/how-to.css" as="style" />
-  <link rel="preload" href="/css/home/options.css" as="style" />
-  <link rel="preload" href="/css/home/store.css" as="style" />
-  <link rel="preload" href="/css/home/contacts.css" as="style" />
+  {#if status == 404}
+    <title>Page not found – Innopoints</title>
+  {:else if status == 403}
+    <title>{error.message} – Innopoints</title>
+  {:else}
+    <title>Something went wrong...</title>
+  {/if}
+  <link rel="stylesheet" href="/css/bundles/-error.min.css" />
+  <link rel="prefetch" as="style" href="/css/bundles/home.min.css" />
 </svelte:head>
 
 <Layout>
-  <div class="material container-404 padded">
-    <div class="text">
-      <h1>Nothing here</h1>
-      <p class="subtitle">That rabbit must have given you the wrong lead.</p>
-      <Button href="/" isFilled>
-        <svg src="/images/icons/home.svg" class="icon mr" />
-        take me home
-      </Button>
+  {#if status == 404}
+    <div class="material container-404 padded">
+      <div class="text">
+        <h1>Nothing here</h1>
+        <p class="subtitle">That rabbit must have given you the wrong lead.</p>
+        <Button href="/" isFilled>
+          <svg src="/images/icons/home.svg" class="icon mr" />
+          take me home
+        </Button>
+      </div>
+      <img src="/images/404/web-traveller.svg" width="240" height="387" class="picture" alt="">
+      <h2>Feeling lucky?</h2>
+      <a href="/profile" class="destination">
+        <img src="images/404/profile.svg" width="212" height="137" class="repr" alt="Go to the profile">
+      </a>
+      <a href="/projects" class="destination">
+        <img src="images/404/browser.svg" width="212" height="137" class="repr" alt="Go to the projects">
+      </a>
+      <a href="/store" class="destination">
+        <img src="images/404/browser.svg" width="212" height="137" class="repr" alt="Go to a product page">
+      </a>
+      <a href="/" class="destination">
+        <img src="images/404/random.svg" width="212" height="137" class="repr" alt="Go somewhere random">
+      </a>
     </div>
-    <img src="/images/404/web-traveller.svg" width="240" height="387" class="picture" alt="">
-    <h2>Feeling lucky?</h2>
-    <a href="/profile" class="destination">
-      <img src="images/404/profile.svg" width="212" height="137" class="repr" alt="Go to the profile">
-    </a>
-    <a href="/projects" class="destination">
-      <img src="images/404/browser.svg" width="212" height="137" class="repr" alt="Go to the projects">
-    </a>
-    <a href="/store" class="destination">
-      <img src="images/404/browser.svg" width="212" height="137" class="repr" alt="Go to a product page">
-    </a>
-    <a href="/" class="destination">
-      <img src="images/404/random.svg" width="212" height="137" class="repr" alt="Go somewhere random">
-    </a>
-  </div>
+  {:else if status == 403}
+    <div class="material">
+      <h1 class="padded header-403">{error.message}</h1>
+      <main class="padded container-403">
+        <img src="/images/who-are-you.svg" class="picture" alt="" />
+        <Card>
+          <div class="title">What to do?</div>
+          <div class="subtitle">It seems like you are not authorized to access this page.</div>
+          <div class="actions">
+            <Button isFilled on:click={login}>sign in</Button>
+            <Button isOutline href="/">run to homepage</Button>
+          </div>
+        </Card>
+      </main>
+    </div>
+  {:else}
+    <div class="material">
+      <h1>Alright, so here's what happened</h1>
+      {#if dev && error.stack}
+        <pre>{error.stack}</pre>
+      {/if}
+    </div>
+  {/if}
 </Layout>

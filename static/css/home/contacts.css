@@ -28,24 +28,19 @@
   margin: 1em 0;
 }
 
+.contacts .card p {
+  font-weight: 300;
+  text-align: center;
+  margin-top: 1em;
+}
+
 .contacts .icon {
   width: 3.6em;
   height: 3.6em;
 }
 
-.contacts .card p {
-  font-weight: 300;
-  text-align: center;
-}
-
 @media only screen and (min-width: 640px) {
   .contacts .subtitle {
-    font-size: 1.2em;
-  }
-  .contacts .card p {
-    font-size: 1.2em;
-  }
-  .contacts .card .btn {
     font-size: 1.2em;
   }
 }
@@ -60,6 +55,10 @@
   }
   .contacts .card {
     margin: 0 1rem;
+    font-size: 1.2rem;
+  }
+  .contacts .card .btn {
+    font-size: 1em;
   }
 }
 
@@ -70,12 +69,5 @@
   .contacts .card {
     padding: .8rem 2rem;
     margin: 0 3rem;
-  }
-  .contacts .card p {
-    font-size: 1.3em;
-    line-height: 1.4em;
-  }
-  .contacts .card .btn {
-    font-size: 1.3em;
   }
 }

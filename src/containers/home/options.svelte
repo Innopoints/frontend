@@ -1,5 +1,5 @@
 <script>
-  import options from '@/constants/home/options';
+  import options from '@/constants/home/options.js';
   import Step from '@/components/home/option-step.svelte';
 </script>
 

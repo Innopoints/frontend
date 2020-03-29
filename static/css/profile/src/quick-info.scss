@@ -31,13 +31,14 @@
 
   .telegram {
     display: flex;
+    align-items: center;
 
     &.input {
       flex-direction: column;
+      align-items: stretch;
     }
 
     &.exists {
-      align-items: center;
       font-size: 1.2rem;
     }
 
@@ -68,7 +69,8 @@
 }
 
 .personal .info-bubble {
-  min-width: 14em;
+  min-width: 16em;
+  margin-top: .5em !important;
 }
 
 @media only screen and (min-width: 380px) {
@@ -80,7 +82,6 @@
     }
 
     .info-bubble {
-      right: -3em;
       min-width: 17em;
     }
   }

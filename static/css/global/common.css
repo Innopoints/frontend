@@ -1,3 +1,13 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.material {
+  flex-grow: 1;
+}
+
 .space-between {
   display: flex;
   justify-content: space-between;
@@ -27,8 +37,15 @@
 }
 
 .innopoint {
-  stroke: #000;
+  stroke: black;
   stroke-width: 5;
+  margin-bottom: -1px;
+}
+
+.text-field.with-item .item.innopoint {
+  stroke: #545454;
+  stroke-width: 6;
+  top: .8rem;
 }
 
 @media only screen and (min-width: 640px) {

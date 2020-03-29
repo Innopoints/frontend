@@ -5,10 +5,6 @@ form > .actions {
   justify-content: flex-end;
   flex-wrap: wrap;
 
-  & > .btn {
-    margin-bottom: .5em;
-  }
-
   & > .btn:not(:first-child) {
     margin-left: 1em;
   }

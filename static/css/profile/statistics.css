@@ -6,6 +6,10 @@
   align-items: flex-start;
 }
 
+.statistics .period {
+  align-self: stretch;
+}
+
 .statistics .relative-wrapper {
   padding: 1.5em;
 }

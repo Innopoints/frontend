@@ -1,51 +1,38 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-
-  export let classname = 'clickable switch-wrapper';
-  export let inputclass = 'switch-ctl';
+  export let classname = '';
+  export let labelclass = null;
+  export let inputclass = '';
   export let knobclass = 'knob';
-  export let switchclass = 'switch';
-  export let firstclass = 'state first';
-  export let secondclass = 'state second';
-  export let isTwoState = false;
+  export let switchclass = '';
 
-  export let id = '';
   export let name = '';
-  export let first = '';
-  export let second = '';
+  export let disabled = false;
+  export let label = null;
   export let value = false;
-
-  let dispatch = createEventDispatcher();
 </script>
 
-<label class={classname} for={id}>
-  {#if !isTwoState}
-    <slot />
+<label class="switch-wrapper clickable {classname}">
+  {#if label != null}
+    {#if labelclass !== null}
+      <span class={labelclass}>
+        {label}
+      </span>
+    {:else}
+      {label}
+    {/if}
   {/if}
 
   <input
-      {id}
-      checked={value}
-      name={name}
-      on:change="{(e) => dispatch('change', e.target.checked)}"
-      on:focus="{(e) => dispatch('focus', e)}"
-      class:first={isTwoState}
-      class={inputclass}
-      type="checkbox"
+    bind:checked={value}
+    name={name}
+    on:change
+    on:focus
+    class="switch-ctl {inputclass}"
+    type="checkbox"
+    {disabled}
   />
 
-  {#if isTwoState}
-    <slot name="first-state">
-      <span class={firstclass}>{first}</span>
-    </slot>
-  {/if}
-  <!--TODO: add scoped styles for .two-state and .ml-2 or a way to rewrite these classes -->
-  <div class="{(isTwoState ? 'two-state' : 'ml-2')} {switchclass}">
-    <div class={knobclass} />
+  <div class="switch {label == null ? switchclass : switchclass + ' ml-2'}">
+    <div class="knob {knobclass}" />
   </div>
-  {#if isTwoState}
-    <slot name="second-state">
-      <span class={secondclass}>{second}</span>
-    </slot>
-  {/if}
 </label>

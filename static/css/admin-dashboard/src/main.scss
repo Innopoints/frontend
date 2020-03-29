@@ -134,6 +134,7 @@ h1 {
     text-decoration: underline;
     font-size: .95em;
     cursor: pointer;
+    color: $main;
   }
 
   .parameters {
@@ -254,7 +255,7 @@ h1 {
   .purchases .product-info {
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto
+    grid-template-rows: auto auto;
   }
 }
 

@@ -1,21 +1,21 @@
-import resolve from 'rollup-plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
-import commonjs from 'rollup-plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
+import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
-import alias from 'rollup-plugin-alias';
+import alias from '@rollup/plugin-alias';
 import { eslint } from 'rollup-plugin-eslint';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
-import preprocess from './src/utils/preprocess';
+import substituteSvgs from './src/utils/substitute-svgs.js';
 import sapperEnv from 'sapper-environment';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-const onwarn = (warning, onwarn) => onwarn(warning);
+const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/');
@@ -34,8 +34,7 @@ export default {
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
-          markup: data => preprocess(data, false, {}),
-          style: ({ content }) => ({code: content}),
+          markup: substituteSvgs,
         },
         dev,
         hydratable: true,
@@ -97,7 +96,7 @@ export default {
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
         preprocess: {
-          markup: data => preprocess(data, false, {}),
+          markup: substituteSvgs,
         },
         generate: 'ssr',
         dev,

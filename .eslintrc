@@ -32,6 +32,7 @@
     "brace-style": 0,
     "no-return-assign": 0,
     "no-trailing-spaces": 0,
+    "no-constant-condition": "off",
     "curly": [0, "multi"],
     "indent": "off",
     "comma-dangle": ["warn", "always-multiline"],
@@ -40,6 +41,7 @@
       { "vars": "all", "args": "none", "ignoreRestSiblings": true }
     ],
     "jsx-a11y/anchor-has-content": "off",
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "keyword-spacing": "error"
   }
 }

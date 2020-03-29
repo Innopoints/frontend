@@ -43,6 +43,25 @@
       flex-direction: column;
     }
 
+    .title {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .main {
+        margin-bottom: .1em;
+      }
+
+      .out-of-stock {
+        font-size: .8rem;
+        padding: .3em .5em;
+        background: $danger;
+        color: #fff;
+        border-radius: 1em;
+      }
+    }
+
     .title + .subtitle {
       margin-top: .2em;
     }

@@ -111,10 +111,15 @@
     font-size: 1.4rem;
   }
   @supports (display: grid) {
+    .card {
+      display: flex;
+      flex-direction: column;
+    }
     .card > .content {
       display: grid;
+      flex: 1;
       grid-template-columns: 1fr auto;
-      grid-template-rows: auto auto auto;
+      grid-template-rows: auto auto 1fr;
     }
     .card .title, .card .compact {
       grid-column-start: 1;

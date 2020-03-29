@@ -1,24 +1,26 @@
 <script>
   import Button from 'ui/button.svelte';
-  import NotificationCenter from '@/components/profile/notification-center.svelte';
-  import {isAuthed, signOut, login, user} from '@/store/user';
+  import NotificationCenter from '@/components/common/notification-center.svelte';
+  import { login, logout } from '@/utils/auth.js';
+
   export let isProfile = false;
+  export let user = null;
 </script>
 
 <header class="top-level padded">
-  <a class="logo" href="/">
+  <a class="logo" href="/" rel="prefetch">
     <img src="/images/innou-icon.svg" alt="Go to the home page" />
     <span class="hide-tb">Innopoints</span>
   </a>
   <div class="actions">
-    {#if !$isAuthed}
+    {#if user == null}
       <Button isOutline on:click={login}>sign in</Button>
     {:else}
       <NotificationCenter />
       {#if isProfile}
-        <Button on:click={signOut}>sign out</Button>
+        <Button on:click={() => logout()}>sign out</Button>
       {:else}
-        {#if $user.is_admin}
+        {#if user.is_admin}
           <Button href="/dashboard" isRound>
             <svg src="images/icons/grid.svg" />
           </Button>

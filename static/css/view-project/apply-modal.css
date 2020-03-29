@@ -8,8 +8,14 @@
   display: block;
 }
 
-.apply-modal .with-item.left {
+.apply-modal .text-field-wrapper {
   margin-bottom: .6em;
+}
+
+.apply-modal .text-field-wrapper .required {
+  margin-left: 10px;
+  color: #127800;
+  font-size: .8rem;
 }
 
 .apply-modal .with-item.left input {
@@ -33,6 +39,11 @@
   margin-right: .5em;
 }
 
+.apply-modal .error {
+  color: #ab0303;
+  font-size: .9rem;
+}
+
 @media only screen and (min-width: 520px) {
   @supports (display: grid) {
     .apply-modal form {
@@ -45,6 +56,9 @@
     }
     .apply-modal form .title, .apply-modal form .label, .apply-modal form .comment-field {
       grid-column: 1 / 4;
+    }
+    .apply-modal form label.clickable {
+      margin: 0 2em;
     }
     .apply-modal form .actions {
       margin-top: 0;

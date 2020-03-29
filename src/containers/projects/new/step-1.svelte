@@ -1,44 +1,32 @@
 <script>
-  import { fade } from 'svelte/transition';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import StepHeader from '@/components/projects/new/step-header.svelte';
+  import ProjectImagePicker from '@/components/projects/new/project-image-picker.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
-  import Button from 'ui/button.svelte';
-  import Dropzone from 'ui/dropzone.svelte';
-  import {project, changeField, save, errors} from '@/store/new-project';
-  import {readFileAsync} from '@/utils/read-files';
 
-  $: file = $project.image;
-  let image = null;
-  $: (async() => image = file && file.name ? await readFileAsync(file) : null)();
-
-  const addImage = e => changeImageAndSave(e.detail[0]);
-  const removeImage = () => changeImageAndSave(null);
-  const changeImageAndSave = (val) => {
-    changeField('image', val);
-    save();
-  };
+  export let project;
+  export let duplicateName;
+  export let autosaved;
 </script>
 
-<style>
-  :global(.image-picker) {
-    margin-top: 0;
-  }
-  :global(.image-platform input) {
-    display: none;
-  }
-</style>
-
-<form transition:fade={{duration:200}}>
-  <StepHeader subtitle="Step 1. Fill out the general information about the project" />
+<form>
+  <StepHeader
+    step={1}
+    subtitle="Step 1. Fill out the general information about the project"
+    {autosaved}
+  />
 
   <FormField
     title="Project name"
-    classname="form-field padded"
-    id="title"
+    classname="padded"
+    id="name"
     required
-    error={$errors.includes('name')}
+    error={
+         (duplicateName && "The name must be unique.")
+      || ($project.name === '' && "The name must not be empty.")
+      || null
+    }
   >
     <span slot="subtitle" class="desc">
       <span class="lb">This has to be different from other projects.</span>
@@ -48,49 +36,29 @@
     <TextField
       id="title"
       value={$project.name || ''}
-      on:input={(e) => changeField('name', e.detail)}
-      on:delayedChange={save}
+      on:change={(event) => $project.name = event.detail}
     />
   </FormField>
 
   <FormField
     title="Cover image"
-    classname="form-field padded"
+    classname="padded"
     id="image"
-    wrapperclass="image-picker{image ? ' selected' : ''}"
+    wrapperclass="image-picker"
   >
     <span slot="subtitle" class="desc">
       <span class="lb">This is shown on the project card to catch attention.</span>
       <span class="lb">Best to use 16:9 photos.</span>
     </span>
-
-    {#if image}
-      <img src={image} alt="" class="shadow-1 mr" />
-      <Button isDanger on:click={removeImage}>
-        <svg src="/images/icons/trash-2.svg" class="icon" />
-        <span class="text">delete</span>
-      </Button>
-    {:else}
-      <Dropzone
-        multiple={false}
-        id="file-input"
-        classname="image-platform"
-        on:change={addImage}
-      >
-        <Button classname="btn option">
-          <svg src="/images/icons/image.svg" class="icon mr" />
-          upload cover image
-        </Button>
-      </Dropzone>
-    {/if}
+    <ProjectImagePicker bind:value={$project.image_id} />
   </FormField>
 
   <FormField
     title="Organizer"
-    classname="form-field padded"
+    classname="padded"
     id="organizer"
     required
-    error={$errors.includes('organizer')}
+    error={($project.organizer === '' && "The organizer field must not be empty.") || null}
   >
     <span slot="subtitle" class="desc">
       Name of the organizing department or individual.
@@ -98,10 +66,9 @@
     <TextField
       id="organizer"
       value={$project.organizer || ''}
-      on:input={(e) => changeField('organizer', e.detail)}
-      on:delayedChange={save}
+      on:change={(event) => $project.organizer = event.detail}
     />
   </FormField>
 
-  <BottomNavigation />
+  <BottomNavigation step={1} error={!($project.name && $project.organizer) ? 1 : null} />
 </form>

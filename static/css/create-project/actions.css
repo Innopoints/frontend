@@ -6,10 +6,6 @@ form > .actions {
   flex-wrap: wrap;
 }
 
-form > .actions > .btn {
-  margin-bottom: .5em;
-}
-
 form > .actions > .btn:not(:first-child) {
   margin-left: 1em;
 }

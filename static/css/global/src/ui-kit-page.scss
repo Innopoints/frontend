@@ -1,7 +1,13 @@
-body {
+.material {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+  padding-bottom: 3em;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -79,7 +85,7 @@ body {
   margin: 8px;
 }
 
-#radios .with-labels {
+#radios .with-labels:not(.flex-wrap) {
   flex-direction: column;
 }
 
@@ -141,7 +147,7 @@ body {
   margin: 8px;
 }
 
-#checkboxes .with-labels {
+#checkboxes .with-labels:not(.flex-wrap) {
   flex-direction: column;
 }
 
@@ -258,6 +264,10 @@ hr {
   max-width: 30em;
 }
 
-body > .card {
+#autocomplete .dropdown {
+  max-height: 11em;
+}
+
+body .card {
   overflow: visible;
 }

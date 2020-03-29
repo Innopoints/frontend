@@ -1,13 +1,14 @@
-export default (node, ripple, options = {}) => {
-  if (ripple) {
-    // Default values.
-    let props = {
-      event: options.event || 'mousedown',
-      transition: options.transition || 600,
-      zIndex: options.zIndex || '9999',
-      bg: ripple || 'rgba(0, 0, 0, 0.35)',
-    };
+export default (node, options = {}) => {
+  // Default values.
+  let props = {
+    event: options.event || 'mousedown',
+    transition: options.transition || 150,
+    zIndex: options.zIndex || '9999',
+    bg: options.rippleColor || null,
+    disabled: options.disabled || false,
+  };
 
+  if (!props.disabled) {
     node.addEventListener(props.event, function(event) {
       rippler(event, node, props);
     });
@@ -38,20 +39,22 @@ export default (node, ripple, options = {}) => {
     rippleContainer.className = 'ripple-container';
     ripple.className = 'ripple';
 
-    //Styles for ripple
-    ripple.style.marginTop= '0px';
-    ripple.style.marginLeft= '0px';
-    ripple.style.width= '1px';
-    ripple.style.height= '1px';
-    ripple.style.transition= 'all ' + transition + 'ms cubic-bezier(0.4, 0, 0.2, 1)';
-    ripple.style.borderRadius= '50%';
-    ripple.style.pointerEvents= 'none';
-    ripple.style.position= 'relative';
-    ripple.style.zIndex= zIndex;
-    ripple.style.backgroundColor  = bg;
+    // Styles for the ripple
+    ripple.style.marginTop = '0px';
+    ripple.style.marginLeft = '0px';
+    ripple.style.width = '1px';
+    ripple.style.height = '1px';
+    ripple.style.transition = 'all ' + transition + 'ms cubic-bezier(0.4, 0, 0.2, 1)';
+    ripple.style.borderRadius = '50%';
+    ripple.style.pointerEvents = 'none';
+    ripple.style.position = 'relative';
+    ripple.style.zIndex = zIndex;
+    if (bg !== null) {
+      ripple.style.backgroundColor = bg;
+    }
 
-    //Styles for rippleContainer
-    rippleContainer.style.position= 'absolute';
+    // Styles for the rippleContainer
+    rippleContainer.style.position = 'absolute';
     rippleContainer.style.left = 0 - border + 'px';
     rippleContainer.style.top = 0 - border + 'px';
     rippleContainer.style.height = '0';
@@ -62,12 +65,14 @@ export default (node, ripple, options = {}) => {
     // Store target position to change it after
     let storedTargetPosition = ((target.style.position).length > 0) ? target.style.position : getComputedStyle(target).position;
     // Change target position to relative to guarantee ripples correct positioning
-    if (storedTargetPosition !== 'relative') target.style.position = 'relative';
+    if (storedTargetPosition !== 'relative' && storedTargetPosition !== 'absolute') {
+      target.style.position = 'relative';
+    }
 
     rippleContainer.appendChild(ripple);
     target.appendChild(rippleContainer);
 
-    ripple.style.marginLeft = dx +'px';
+    ripple.style.marginLeft = dx + 'px';
     ripple.style.marginTop = dy + 'px';
 
     // No need to set positioning because ripple should be child of target and to it's relative position.
@@ -103,14 +108,14 @@ export default (node, ripple, options = {}) => {
       setTimeout(function () {
 
         let clearPosition = true;
-        for(let i = 0; i < target.childNodes.length; i++) {
-          if(target.childNodes[i].className === 'ripple-container') {
+        for (let i = 0; i < target.childNodes.length; i++) {
+          if (target.childNodes[i].className === 'ripple-container') {
             clearPosition = false;
           }
         }
 
-        if(clearPosition) {
-          if(storedTargetPosition !== 'static') {
+        if (clearPosition) {
+          if (storedTargetPosition !== 'static') {
             target.style.position = storedTargetPosition;
           } else {
             target.style.position = '';
@@ -120,7 +125,7 @@ export default (node, ripple, options = {}) => {
       }, transition + 250);
     }
 
-    if(event.type === 'mousedown') {
+    if (event.type === 'mousedown') {
       el.addEventListener('mouseup', clearRipple, false);
     } else {
       clearRipple();
