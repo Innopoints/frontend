@@ -112,6 +112,8 @@ form > .actions {
     text-align: center;
     width: 100%;
     margin-bottom: 1em;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -218,5 +220,10 @@ form > .actions {
 
   .steps-navigation.dropdown-shell {
     right: 12%;
+  }
+
+  form > .actions {
+    padding-left: 8%;
+    padding-right: 8%;
   }
 }

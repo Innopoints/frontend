@@ -118,6 +118,8 @@ form > .actions .error {
   text-align: center;
   width: 100%;
   margin-bottom: 1em;
+  display: flex;
+  align-items: center;
 }
 
 @media only screen and (min-width: 640px) {
@@ -220,5 +222,9 @@ form > .actions .error {
   }
   .steps-navigation.dropdown-shell {
     right: 12%;
+  }
+  form > .actions {
+    padding-left: 8%;
+    padding-right: 8%;
   }
 }
