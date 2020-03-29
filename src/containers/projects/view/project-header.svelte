@@ -75,7 +75,7 @@
           </Labeled>
         {/if}
         {#if project.admin_feedback != null}
-          <Labeled icon label="Administrator's feedback">
+          <Labeled icon label="Administrator's feedback" textclass="admin-feedback">
             <svg slot="icon" class="icon" src="images/icons/message-square.svg" />
             {project.admin_feedback}
           </Labeled>
