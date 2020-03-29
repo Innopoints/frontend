@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Button from 'ui/button.svelte';
   import FileInput from 'ui/file-input.svelte';
   import * as api from '@/utils/api.js';
@@ -9,8 +10,11 @@
   let promise = null;
   let dataURL = null;
   let error = null;
-  let fileReader = new FileReader();
-  fileReader.onloadend = () => dataURL = fileReader.result;
+  let fileReader;
+  onMount(() => {
+    fileReader = new FileReader();
+    fileReader.onloadend = () => dataURL = fileReader.result;
+  });
 
   async function handleImageUpload(event) {
     let file = event.target.files[0];

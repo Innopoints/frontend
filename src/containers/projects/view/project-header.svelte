@@ -75,7 +75,7 @@
           </Labeled>
         {/if}
         {#if project.admin_feedback != null}
-          <Labeled icon label="Administrator's feedback">
+          <Labeled icon label="Administrator's feedback" textclass="admin-feedback">
             <svg slot="icon" class="icon" src="images/icons/message-square.svg" />
             {project.admin_feedback}
           </Labeled>
@@ -85,7 +85,7 @@
     {#if account != null && (project.creator === account.email || account.is_admin) && !review}
       <div class="actions">
         {#if project.lifetime_stage === ProjectStages.ONGOING}
-          <Button isOutline>
+          <Button isOutline href="/projects/{project.id}/edit">
             <svg class="icon mr" src="images/icons/edit.svg" />
             edit
           </Button>
@@ -98,7 +98,7 @@
             finalize
           </Button>
         {:else if project.lifetime_stage === ProjectStages.FINALIZING
-               && project.review_status != ReviewStatuses.PENDING}
+               && project.review_status !== ReviewStatuses.PENDING}
           <Button
             isFilled
             disabled={!reviewAllowed}
@@ -109,8 +109,15 @@
             submit for review
           </Button>
         {/if}
-        {#if account && account.is_admin && project.lifetime_stage === ProjectStages.FINALIZING}
-          <Button isOutline classname="review" href="/projects/{project.id}/review">
+        {#if account
+          && account.is_admin
+          && project.lifetime_stage === ProjectStages.FINALIZING
+          && project.review_status != null}
+          <Button
+            isOutline
+            classname="review"
+            href="/projects/{project.id}/review"
+          >
             <svg class="icon mr" src="images/icons/clipboard.svg" />
             review
           </Button>

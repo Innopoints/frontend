@@ -44,6 +44,9 @@ h2.padded {
   margin-top: 1em;
   margin-right: 2.5em;
   font-size: 1.05rem;
+}
+
+.project-header .labeled .admin-feedback {
   white-space: pre-line;
 }
 
