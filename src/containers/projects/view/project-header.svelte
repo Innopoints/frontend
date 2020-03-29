@@ -98,7 +98,7 @@
             finalize
           </Button>
         {:else if project.lifetime_stage === ProjectStages.FINALIZING
-               && project.review_status != ReviewStatuses.PENDING}
+               && project.review_status !== ReviewStatuses.PENDING}
           <Button
             isFilled
             disabled={!reviewAllowed}
@@ -109,8 +109,15 @@
             submit for review
           </Button>
         {/if}
-        {#if account && account.is_admin && project.lifetime_stage === ProjectStages.FINALIZING}
-          <Button isOutline classname="review" href="/projects/{project.id}/review">
+        {#if account
+          && account.is_admin
+          && project.lifetime_stage === ProjectStages.FINALIZING
+          && project.review_status != null}
+          <Button
+            isOutline
+            classname="review"
+            href="/projects/{project.id}/review"
+          >
             <svg class="icon mr" src="images/icons/clipboard.svg" />
             review
           </Button>
