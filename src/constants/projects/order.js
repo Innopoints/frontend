@@ -1,6 +1,6 @@
 export const orderOptions = [
-  { orderBy: 'creation_time', order: 'asc' },
   { orderBy: 'creation_time', order: 'desc' },
+  { orderBy: 'creation_time', order: 'asc' },
   { orderBy: 'proximity', order: 'asc' },
   { orderBy: 'proximity', order: 'desc' },
 ];
