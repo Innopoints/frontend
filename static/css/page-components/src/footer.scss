@@ -1,3 +1,5 @@
+@import "../../global/src/_variables.scss";
+
 .material {
   background-color: #fff;
   clip-path:
@@ -89,58 +91,32 @@ footer {
   .right {
     display: flex;
     justify-content: center;
+    margin-bottom: 1em;
 
-    & > img {
+    & > .pointer {
       display: none;
     }
 
-    & > nav {
-      width: 90%;
-    }
-  }
+    .card {
+      width: 80%;
+      color: #000;
 
-  .search {
-    border-radius: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    color: #585858;
-    font-weight: 300;
-    padding: .7em 1.3em;
-    margin-top: 1em;
-  }
+      a {
+        color: $main;
+      }
 
-  ul {
-    font-size: 1.1rem;
-    font-weight: 300;
-    padding-left: 1em !important;
-    margin: 1em 0 !important;
-
-    li {
-      line-height: 2rem;
-
-      &::before {
-        content: "‣";
-        padding-right: .5em;
-        color: #fff;
+      p {
+        margin-bottom: .5em;
+        font-weight: 300;
       }
     }
   }
 
   @media only screen and (min-width: 385px) {
     padding: 20px 3em 0;
-
-    .right > nav {
-      width: 95%;
-    }
   }
 
   @media only screen and (min-width: 640px) {
-    ul {
-      font-size: 1.2rem;
-    }
-
     .credits {
       font-size: 1.1rem;
     }
@@ -172,39 +148,35 @@ footer {
 
     .right {
       justify-content: flex-start;
+      margin-bottom: 0;
 
       & > .pointer {
         display: block;
         margin-right: 1em;
-        max-width: 30%;
+        max-width: 6em;
         align-self: flex-end;
       }
-    }
 
-    .search {
-      font-size: 1.1rem;
+      .card {
+        width: 14em;
+        align-self: flex-start;
+      }
     }
   }
 
   @media only screen and (min-width: 900px) {
-    .search {
-      width: 16em;
+    .right > .pointer {
+      margin-right: 2em;
     }
 
-    .right > .pointer {
-      max-width: 22%;
-      margin-right: 2em;
+    .right .card {
+      width: 20em;
     }
   }
 
   @media only screen and (min-width: 1024px) {
     .title {
       font-size: 2rem;
-    }
-
-    .search {
-      font-size: 1.2rem;
-      width: 14em;
     }
   }
 

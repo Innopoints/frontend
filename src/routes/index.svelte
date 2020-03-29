@@ -28,6 +28,7 @@
 <svelte:head>
   <title>Home – Innopoints</title>
   <link rel="stylesheet" href="/css/bundles/home.min.css" />
+  <link rel="stylesheet" href="/css/page-components/footer.css" />
   <link rel="prefetch" as="style" href="/css/bundles/store.min.css" />
   <link rel="prefetch" as="style" href="/css/bundles/projects.min.css" />
   {#if account}
