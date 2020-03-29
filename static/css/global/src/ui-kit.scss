@@ -460,6 +460,9 @@ button.btn {
 
     & > .item {
       color: #7a7a7a;
+      height: 1.1rem;
+      position: absolute;
+      top: .85rem;
     }
 
     & > input:focus + .item {
@@ -483,12 +486,6 @@ button.btn {
         -webkit-appearance: none;
         margin: 0;
       }
-    }
-
-    & > .item {
-      height: 1.1rem;
-      position: absolute;
-      top: .85rem;
     }
 
     & > svg.item {
