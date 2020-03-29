@@ -21,55 +21,55 @@
 }
 
 .lds-default div:nth-child(2) {
-  animation-delay: -0.1s;
+  animation-delay: -.1s;
   top: 22px;
   left: 62px;
 }
 
 .lds-default div:nth-child(3) {
-  animation-delay: -0.2s;
+  animation-delay: -.2s;
   top: 11px;
   left: 52px;
 }
 
 .lds-default div:nth-child(4) {
-  animation-delay: -0.3s;
+  animation-delay: -.3s;
   top: 7px;
   left: 37px;
 }
 
 .lds-default div:nth-child(5) {
-  animation-delay: -0.4s;
+  animation-delay: -.4s;
   top: 11px;
   left: 22px;
 }
 
 .lds-default div:nth-child(6) {
-  animation-delay: -0.5s;
+  animation-delay: -.5s;
   top: 22px;
   left: 11px;
 }
 
 .lds-default div:nth-child(7) {
-  animation-delay: -0.6s;
+  animation-delay: -.6s;
   top: 37px;
   left: 7px;
 }
 
 .lds-default div:nth-child(8) {
-  animation-delay: -0.7s;
+  animation-delay: -.7s;
   top: 52px;
   left: 11px;
 }
 
 .lds-default div:nth-child(9) {
-  animation-delay: -0.8s;
+  animation-delay: -.8s;
   top: 62px;
   left: 22px;
 }
 
 .lds-default div:nth-child(10) {
-  animation-delay: -0.9s;
+  animation-delay: -.9s;
   top: 66px;
   left: 37px;
 }

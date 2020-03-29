@@ -116,13 +116,15 @@
 <svelte:head>
   <title>Edit {project.name} – Innopoints</title>
 
-  <link rel="stylesheet" href="css/create-project/steps.css">
-  <link rel="stylesheet" href="css/create-project/main.css">
-  <link rel="stylesheet" href="css/create-project/general.css">
-  <link rel="stylesheet" href="css/create-project/activity.css">
-  <link rel="stylesheet" href="css/create-project/actions.css">
-  <link rel="stylesheet" href="css/edit-project/main.css">
-  <link rel="stylesheet" href="css/page-components/create-activity.css" />
+  <link rel="stylesheet" href="/css/bundles/projects-id-edit.min.css" />
+  <link rel="preload" as="style" href="/css/bundles/projects-id.min.css" />
+  {#if account}
+    {#if account.is_admin}
+      <link rel="preload" as="style" href="/css/bundles/dashboard.min.css" />
+    {:else}
+      <link rel="preload" as="style" href="/css/bundles/profile.min.css" />
+    {/if}
+  {/if}
 </svelte:head>
 
 <Layout user={account}>

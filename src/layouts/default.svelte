@@ -8,10 +8,7 @@
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="css/page-components/header.css" />
-  <link rel="stylesheet" href="css/page-components/notification-center.css" />
-  <link rel="stylesheet" href="css/page-components/empty-state.css" />
-  <link rel="stylesheet" href="css/page-components/footer.css" />
+  <link rel="stylesheet" href="/css/bundles/layout-default.min.css" />
 </svelte:head>
 
 <Header {user} isProfile={(/^\/(?:profile|dashboard)/).test($page.path)} />
