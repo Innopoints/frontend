@@ -5,11 +5,13 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import { categories, states } from '@/constants/profile/notification-settings.js';
   import * as api from '@/utils/api.js';
+  import subscribeToPush from '@/utils/notifications-subscribe.js';
 
   export let notificationSettings;
   export let account;
   let pushPermission = null;
   let initialSettings = Object.assign({}, notificationSettings);
+  const supportsPush = 'PushManager' in window;
   $: changes = categories.some(
     category => (
       category.key != null
@@ -21,23 +23,31 @@
   let radioOptions = states.map(state => ({ value: state, disabled: state === 'push' }));
 
   function requestPermission() {
-    Notification.requestPermission(updateNotificationPermission);
+    // Crazy promise wrapper to handle both: old API that accepted a callback,
+    //   and new API that returns a promise.
+    new Promise(function(resolve, reject) {
+      const promise = Notification.requestPermission(resolve);
+      if (promise) {
+        promise.then(resolve, reject);
+      }
+    }).then(updateNotificationPermission);
   }
 
   function updateNotificationPermission(permission) {
     pushPermission = permission;
-    if (pushPermission === 'granted') {
-      radioOptions.forEach(option => {
-        if (option.value === 'push') {
-          option.disabled = false;
-        }
-      });
-      radioOptions = radioOptions;
+    if (pushPermission !== 'granted') {
+      return;
     }
+    radioOptions = radioOptions
+      .filter(option => option.value === 'push')
+      .forEach(option => option.disabled = false);
+    subscribeToPush();
   }
 
   onMount(() => {
-    updateNotificationPermission(Notification.permission);
+    if (supportsPush) {
+      updateNotificationPermission(Notification.permission);
+    }
   });
 
   function updateSettings(key, value) {
