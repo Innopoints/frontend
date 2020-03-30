@@ -29,6 +29,7 @@ export default {
         ...sapperEnv(),
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.VAPID_PUBLIC_KEY': process.env.VAPID_PUBLIC_KEY,
       }),
       eslint(),
       svelte({
@@ -92,6 +93,7 @@ export default {
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.VAPID_PUBLIC_KEY': process.env.VAPID_PUBLIC_KEY,
       }),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
