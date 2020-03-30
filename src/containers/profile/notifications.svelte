@@ -38,9 +38,10 @@
     if (pushPermission !== 'granted') {
       return;
     }
-    radioOptions = radioOptions
+    radioOptions
       .filter(option => option.value === 'push')
       .forEach(option => option.disabled = false);
+    radioOptions = radioOptions;
     subscribeToPush();
   }
 
