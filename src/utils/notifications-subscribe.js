@@ -18,8 +18,6 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-let unsub;
-
 export default async function subscribe() {
   if (!('serviceWorker' in navigator)) {
     return;
@@ -36,7 +34,6 @@ export default async function subscribe() {
   });
 
   console.log('Received notification subscription:', pushSubscription);
-  unsub = pushSubscription.unsubscribe.bind(pushSubscription);
   const response = await api.post('/notifications/subscribe', {
     data: pushSubscription.toJSON(),
   });
@@ -47,12 +44,4 @@ export default async function subscribe() {
       response: await response.json(),
     };
   }
-}
-
-export function unsubscribe() {
-  if (!unsub) {
-    console.error('No subscription to remove');
-    return;
-  }
-  unsub();
 }
