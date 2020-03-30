@@ -125,18 +125,19 @@ export default {
   },
 
   serviceworker: {
-		input: config.serviceworker.input(),
-		output: config.serviceworker.output(),
-		plugins: [
-			resolve(),
-			replace({
-				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-			}),
-			commonjs(),
-			!dev && terser(),
-		],
+    input: config.serviceworker.input(),
+    output: config.serviceworker.output(),
+    plugins: [
+      resolve(),
+      replace({
+        'process.browser': true,
+        'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.API_HOST': process.env.SAPPER_APP_API_HOST_BROWSER,
+      }),
+      commonjs(),
+      !dev && terser(),
+    ],
 
-		onwarn,
-	},
+    onwarn,
+  },
 };
