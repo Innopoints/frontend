@@ -12,7 +12,7 @@ export default [
     subtitle:
       'A little bored from studies? Throw a party for the whole university to enjoy and have your efforts rewarded!',
     img: 'images/home/event.png',
-    buttonLink: '#',
+    buttonLink: '/projects/new',
     buttonText: 'propose an event',
   },
   {

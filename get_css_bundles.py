@@ -3,6 +3,8 @@ from subprocess import run
 
 
 SASS_PATH = 'sass'
+POSTCSS_PATH = 'postcss'
+
 
 common = [
     'global/normalize',
@@ -140,11 +142,14 @@ def build_bundle(contents, output):
         + sass_bundled
     )
 
-
     run([SASS_PATH, '--stdin', output, '-s', 'compressed', '--no-source-map'],
         input=sass_bundled,
         text=True,
         check=True)
+
+    run([POSTCSS_PATH, output, '--use', 'autoprefixer', '--no-map', '-r'],
+        input=sass_bundled,
+        text=True)
 
 
 def get_all_bundles():
