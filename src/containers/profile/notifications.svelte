@@ -33,6 +33,14 @@
     }).then(updateNotificationPermission);
   }
 
+  function updateRadioOptions() {
+    if (notificationPermission !== 'granted') {
+      return;
+    }
+    radioOptions.find(option => option.value === 'push').disabled = false;
+    radioOptions = radioOptions;
+  }
+
   async function updateNotificationPermission(permission) {
     notificationPermission = permission;
     if (notificationPermission !== 'granted') {
@@ -40,9 +48,8 @@
     }
 
     try {
-      subscribeToPush();
-      radioOptions.find(option => option.value === 'push').disabled = false;
-      radioOptions = radioOptions;
+      await subscribeToPush();
+      updateRadioOptions();
     } catch (e) {
       console.error(e);
     }
@@ -50,7 +57,8 @@
 
   onMount(() => {
     if (supportsPush) {
-      updateNotificationPermission(Notification.permission);
+      notificationPermission = Notification.permission;
+      updateRadioOptions();
     }
   });
 
