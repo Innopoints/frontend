@@ -8,6 +8,7 @@ const to_cache = shell.concat(files);
 const cached = new Set(to_cache);
 
 self.addEventListener('install', event => {
+  console.log('[Service Worker] installing');
   event.waitUntil(
     caches
       .open(ASSETS)
@@ -19,6 +20,7 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
+  console.log('[Service Worker] activating');
   event.waitUntil(
     caches.keys().then(async keys => {
       // delete old caches
@@ -79,4 +81,32 @@ self.addEventListener('fetch', event => {
         }
       }),
   );
+});
+
+self.addEventListener('push', event => {
+  console.log('[Service Worker] received push notification:', event);
+  const data = event.data.json();
+  const title = data.title;
+  const options = {
+    body: data.body,
+    data: {
+      link: data.link,
+    },
+    // icon: 'images/icon.png',
+    // badge: 'images/badge.png'
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', function(event) {
+  console.log('[Service Worker] Notification click Received:', event);
+  event.notification.close();
+  event.waitUntil(self.clients.openWindow(event.notification.data.link));
+});
+
+// TODO: check why the following event does not fire
+self.addEventListener('pushsubscriptionchange', function(event) {
+  console.log('[Service Worker]: "pushsubscriptionchange" event fired.');
+  console.log(event);
+  // TODO: Move the notification (un)subscription here
 });
