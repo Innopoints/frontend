@@ -92,8 +92,8 @@ self.addEventListener('push', event => {
     data: {
       link: data.link,
     },
-    // icon: 'images/icon.png',
-    // badge: 'images/badge.png'
+    icon: '/favicon.png',
+    badge: '/favicon.png',
   };
   event.waitUntil(self.registration.showNotification(title, options));
 });
@@ -101,7 +101,10 @@ self.addEventListener('push', event => {
 self.addEventListener('notificationclick', function(event) {
   console.log('[Service Worker] Notification click Received:', event);
   event.notification.close();
-  event.waitUntil(self.clients.openWindow(event.notification.data.link));
+  const href = event.notification.data.link;
+  if (href) { 
+    event.waitUntil(self.clients.openWindow(href));
+  }
 });
 
 // TODO: check why the following event does not fire
