@@ -89,12 +89,13 @@ self.addEventListener('push', event => {
   const title = data.title;
   const options = {
     body: data.body,
-    data: {
-      link: data.link,
-    },
+    data,
     icon: '/favicon.png',
     badge: '/favicon.png',
   };
+  if (data.image) {
+    options.image = 'process.env.API_HOST' + data.image;
+  }
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
