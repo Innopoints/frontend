@@ -9,7 +9,7 @@
 
   export let notificationSettings;
   export let account;
-  let pushPermission = null;
+  let notificationPermission = null;
   let initialSettings = Object.assign({}, notificationSettings);
   const supportsPush = 'PushManager' in window;
   $: changes = categories.some(
@@ -33,16 +33,19 @@
     }).then(updateNotificationPermission);
   }
 
-  function updateNotificationPermission(permission) {
-    pushPermission = permission;
-    if (pushPermission !== 'granted') {
+  async function updateNotificationPermission(permission) {
+    notificationPermission = permission;
+    if (notificationPermission !== 'granted') {
       return;
     }
-    radioOptions
-      .filter(option => option.value === 'push')
-      .forEach(option => option.disabled = false);
-    radioOptions = radioOptions;
-    subscribeToPush();
+
+    try {
+      subscribeToPush();
+      radioOptions.find(option => option.value === 'push').disabled = false;
+      radioOptions = radioOptions;
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   onMount(() => {
@@ -68,21 +71,21 @@
 </script>
 
 <div class="notifications">
-  {#if pushPermission === 'default' || pushPermission === 'denied'}
+  {#if notificationPermission === 'default' || notificationPermission === 'denied'}
     <header>
       <Dialog isNotice>
         <div class="message" slot="content">
           <svg src="images/icons/alert-triangle.svg" class="icon" />
           <p>
             Push notifications require permission before they can be used.
-            {#if pushPermission === 'denied'}
+            {#if notificationPermission === 'denied'}
               <br />
               To allow notifications after they've been blocked, check the website settings.
             {/if}
           </p>
         </div>
         <div class="actions" slot="content">
-          {#if pushPermission !== 'denied'}
+          {#if notificationPermission !== 'denied'}
             <Button on:click={requestPermission}>
               prompt for permissions
             </Button>
