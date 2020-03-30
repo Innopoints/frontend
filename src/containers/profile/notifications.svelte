@@ -15,7 +15,7 @@
   $: changes = categories.some(
     category => (
       category.key != null
-      && (category.key !== 'administration' && !account.is_admin)
+      && (category.key !== 'administration' || account.is_admin)
       && notificationSettings[category.key] !== initialSettings[category.key]
     ),
   );
