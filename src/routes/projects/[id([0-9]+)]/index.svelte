@@ -353,7 +353,7 @@
 
   <!-- Styles for View Project page -->
   <link rel="stylesheet" href="/css/bundles/projects-id.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects-edit.min.css" />
+  <link rel="prefetch" as="style" href="/css/bundles/projects-id-edit.min.css" />
   {#if account}
     {#if account.is_admin}
       <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
