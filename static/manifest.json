@@ -1,0 +1,29 @@
+{
+	"background_color": "#ffffff",
+	"theme_color": "#127800",
+	"name": "Innopoints",
+	"short_name": "Innopoints",
+	"display": "minimal-ui",
+	"start_url": "/",
+	"scope": "/",
+	"icons": [
+		{
+			"src": "/images/favicon192_square.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "/images/favicon512_square.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "/images/favicon.svg",
+			"sizes": "512x512",
+			"type": "image/svg",
+			"purpose": "any maskable"
+		}
+	]
+}
