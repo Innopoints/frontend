@@ -25,14 +25,15 @@ export default async function subscribe() {
   if (registration == undefined) {
     return;
   }
+  // TODO: move the following code to service worker
   const pushSubscription = await registration.pushManager.subscribe({
     userVisibleOnly: true,
     applicationServerKey: urlBase64ToUint8Array('BLHdmxCmBlgSj8NHRwRs7IqWD1ucN_aZuk2aEdFGjGLDAreYnlNUi-MGxuMvvdrYKSLNESQHN5dxo2isFxfdfp4'),
   });
   console.log('Received notification subscription:', pushSubscription);
   unsub = pushSubscription.unsubscribe.bind(pushSubscription);
-  api.post('/notifications/subscribe', {
-    data: pushSubscription,
+  await api.post('/notifications/subscribe', {
+    data: pushSubscription.toJSON(),
   });
 }
 
