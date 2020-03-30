@@ -14,6 +14,10 @@ header.top-level .logo {
   font-size: 1.3rem;
 }
 
+header.top-level .logo img {
+  width: 2em;
+}
+
 header.top-level .actions {
   display: flex;
 }

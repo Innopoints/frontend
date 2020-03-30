@@ -18,7 +18,7 @@
     <div class="left space-between">
       <div>
         <a href="/" class="title-container">
-          <svg src="images/innou-icon.svg" class="logo" />
+          <svg src="images/innou-icon-white.svg" class="logo" />
           <span class="title">Innopoints</span>
         </a>
 
