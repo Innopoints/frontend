@@ -85,6 +85,9 @@
 
 .activity.user.expanded .application .with-icon {
   margin-top: .5em;
+}
+
+.activity.user.expanded .application .with-icon.comment {
   white-space: pre-line;
 }
 
