@@ -1,5 +1,1 @@
-<svg class="innopoint" height="16" viewBox="0 0 50 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M14.1101 47.624L14.1101 69.624" stroke-linecap="square"/>
-  <path d="M5 18.4839L14.107 30.9678L23.214 18.4839L14.107 6L5 18.4839Z" stroke-linecap="square"/>
-  <path d="M5 45.5328H30.0435C51 45.5328 51 18.4844 30.0435 18.4844H24.5" stroke-linecap="square"/>
-</svg>
+<svg class="innopoint" height="16" viewBox="0 0 50 74" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.11 47.624v22M5 18.484l9.107 12.484 9.107-12.484L14.107 6 5 18.484zM5 45.533h25.044c20.956 0 20.956-27.049 0-27.049H24.5"/></svg>
