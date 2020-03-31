@@ -29,6 +29,7 @@ export default {
         ...sapperEnv(),
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.VAPID_PUBLIC_KEY': process.env.VAPID_PUBLIC_KEY,
       }),
       eslint(),
       svelte({
@@ -92,6 +93,7 @@ export default {
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.VAPID_PUBLIC_KEY': process.env.VAPID_PUBLIC_KEY,
       }),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
@@ -118,6 +120,23 @@ export default {
       require('module').builtinModules ||
         Object.keys(process.binding('natives')),
     ),
+
+    onwarn,
+  },
+
+  serviceworker: {
+    input: config.serviceworker.input(),
+    output: config.serviceworker.output(),
+    plugins: [
+      resolve(),
+      replace({
+        'process.browser': true,
+        'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.API_HOST': process.env.SAPPER_APP_API_HOST_BROWSER,
+      }),
+      commonjs(),
+      !dev && terser(),
+    ],
 
     onwarn,
   },
