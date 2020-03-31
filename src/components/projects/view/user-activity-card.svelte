@@ -114,7 +114,7 @@
   {#if activity.existing_application != null}
     <div class="additional application" style="display: block;">
       <div class="label">My Application</div>
-      <div class="with-icon">
+      <div class="with-icon comment">
         <svg class="icon" src="images/icons/message-square.svg" />
         <div class="text">
           {activity.existing_application.comment || 'No comment.'}

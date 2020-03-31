@@ -79,7 +79,10 @@
 
       .with-icon {
         margin-top: .5em;
-        white-space: pre-line;
+
+        &.comment {
+          white-space: pre-line;
+        }
       }
     }
 
