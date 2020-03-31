@@ -1,0 +1,123 @@
+@import "../global/_variables.scss";
+
+.tagline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 .3em;
+  color: $main;
+  margin-bottom: 5em;
+
+  & > .picture {
+    margin-top: 1.5em;
+    max-height: 15em;
+    margin-bottom: 2.5em;
+
+    &.desktop {
+      display: none;
+    }
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .motto {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1em;
+  }
+
+  .btn {
+    margin: 1em .5em 0;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .tagline {
+    padding: 0 10%;
+
+    h1 {
+      font-size: 2.6rem;
+    }
+
+    .motto {
+      font-size: 1.5rem;
+    }
+
+    .btn {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tagline > .picture {
+    &.mobile {
+      display: none;
+    }
+
+    &.desktop {
+      display: block;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .tagline {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    & > .picture {
+      max-height: 20em;
+      margin-bottom: 0;
+      margin-right: 2em;
+    }
+
+    h1, .motto {
+      text-align: left;
+    }
+
+    .btn {
+      margin: 1em 0 0;
+
+      &:first-child {
+        margin-right: .8em;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .tagline {
+    & > .picture {
+      margin-top: 3em;
+      margin-right: 2.5em;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+    }
+
+    .motto {
+      font-size: 1.6rem;
+    }
+
+    nav {
+      margin-top: 1.5em;
+    }
+
+    .btn {
+      padding: .8em 1.3em;
+    }
+  }
+}
