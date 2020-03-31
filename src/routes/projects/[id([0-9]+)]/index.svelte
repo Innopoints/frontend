@@ -41,12 +41,10 @@
   export let competences;
 
   const projectStore = writable(project);
+  const moderatorsEmails = project.moderators.map(moderator => moderator.email);
   const isModeratorView = (
     account != null
-    && (account.is_admin || project.moderators.find(
-      moderator =>
-        moderator.email === account.email,
-    ))
+    && (account.is_admin || moderatorsEmails.includes(account.email))
   );
 
   const applicationDialog = {
@@ -376,7 +374,7 @@
     {#if (project.lifetime_stage === ProjectStages.FINALIZING
        || project.lifetime_stage === ProjectStages.FINISHED)
        && account != null
-       && (project.moderators.includes(account.email) || account.is_admin)}
+       && (moderatorsEmails.includes(account.email) || account.is_admin)}
       <h2 class="padded">Project Staff</h2>
       <ModeratorHourPanel
         {project}
