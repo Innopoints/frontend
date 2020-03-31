@@ -131,14 +131,13 @@ def build_bundle(contents, output):
     '''Build a minified CSS bundle at path `output` from the files listed in `contents`.'''
     sass_bundled = ''
     for file in contents:
-        directory, name = file.split('/')
-        with open(f'static/css/{directory}/src/{name}.scss') as sass_file:
+        with open(f'static/css/{file}.scss') as sass_file:
             sass_bundled += sass_file.read() + '\n'
 
     sass_bundled = re.sub('@import "[^"]+";', '', sass_bundled)
     sass_bundled = (
-        '@import "static/css/global/src/_mixins.scss";\n'
-        + '@import "static/css/global/src/_variables.scss";\n'
+        '@import "static/css/global/_mixins.scss";\n'
+        + '@import "static/css/global/_variables.scss";\n'
         + sass_bundled
     )
 

@@ -1,0 +1,144 @@
+@import "../global/_variables.scss";
+
+.filters {
+  margin-top: .5em;
+  margin-bottom: .5em;
+
+  .dropdowns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .dropdown-shell {
+      margin-top: .5em;
+    }
+  }
+
+  .handle {
+    .regular {
+      display: none;
+    }
+
+    .mr {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .relative-wrapper {
+    width: calc(90vw - 1em);
+    max-width: 22em;
+    padding: 1em 0;
+
+    & > .btn.danger {
+      margin: 0 1em;
+    }
+  }
+
+  .order-options {
+    max-width: 15em;
+
+    .with-labels {
+      display: flex;
+      flex-direction: column;
+      margin-left: .5em;
+
+      label {
+        display: flex;
+        align-items: center;
+      }
+
+      .radio {
+        margin: .5em 12px;
+      }
+    }
+  }
+
+  .filter {
+    display: flex;
+    align-items: center;
+    margin-top: .5em;
+    padding: 0 1em;
+
+    .name {
+      padding: 0 .5em 0 1em;
+      flex-shrink: 0;
+    }
+
+    .icon {
+      stroke: $main;
+    }
+  }
+
+  @media only screen and (min-width: 370px) {
+    .handle .tight {
+      display: none;
+    }
+
+    .handle .regular {
+      display: inline;
+    }
+  }
+
+  .filter > .icon,
+  .filter > .align-center > .icon {
+    margin-left: .8em;
+  }
+}
+
+.hide-mb {
+  display: none;
+}
+
+@media only screen and (min-width: 640px) {
+  .filters {
+    width: 36em;
+    align-self: center;
+  }
+
+  .ordering {
+    width: 38em;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .filters {
+    display: flex;
+    width: 38em;
+    align-items: center;
+
+    .text-field {
+      flex: 1;
+    }
+
+    .dropdown-shell {
+      &:first-child {
+        display: none;
+      }
+
+      &:last-child {
+        flex: 0;
+        margin-top: 0;
+        margin-left: .5em;
+      }
+    }
+  }
+
+  .ordering {
+    margin: .5em 0 1em;
+  }
+
+  .hide-mb {
+    display: flex;
+    align-items: center;
+    align-self: center;
+
+    & > .chip-wrapper:not(:last-child) {
+      margin-right: .5em;
+    }
+
+    .chip {
+      font-size: .9rem;
+    }
+  }
+}
