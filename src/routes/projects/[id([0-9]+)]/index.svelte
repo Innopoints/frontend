@@ -41,7 +41,10 @@
   export let competences;
 
   const projectStore = writable(project);
-  const moderatorsEmails = project.moderators.map(moderator => moderator.email);
+  let moderatorsEmails = [];
+  if (Array.isArray(project.moderators)) {
+    moderatorsEmails = project.moderators.map(moderator => moderator.email);
+  }
   const isModeratorView = (
     account != null
     && (account.is_admin || moderatorsEmails.includes(account.email))
