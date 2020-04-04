@@ -152,9 +152,11 @@
 
   const reportDialog = {
     open: false,
-    props: null,
-    show({ detail: props }) {
-      reportDialog.props = props;
+    reports: null,
+    applicant: null,
+    show({ detail }) {
+      reportDialog.applicant = detail.applicant;
+      reportDialog.reports = detail.reports;
       reportDialog.open = true;
     },
   };
@@ -422,8 +424,12 @@
   </div>
 
   {#if isModeratorView}
-    <!-- view past reports -->
-    <ReportDialog {project} bind:isOpen={reportDialog.open} {...reportDialog.props} />
+    <!-- view-past-reports -->
+    <ReportDialog
+      bind:isOpen={reportDialog.open}
+      applicant={reportDialog.applicant}
+      reports={reportDialog.reports}
+    />
     <!-- confirm-project-deletion -->
     <DangerConfirmDialog
       textYes="yes, delete"
