@@ -9,12 +9,19 @@
   export let activity;
   export let application;
   export let handlePanelOpen;
+  $: report = application.reports.find(report => report.reporter_email === account.email);
 
   const dispatch = createEventDispatcher();
 </script>
 
 <AccordionSection on:panel-open={handlePanelOpen} let:toggle>
-  <button slot="handle" class="btn handle round" type="button" on:click={toggle}>
+  <button
+    slot="handle"
+    class="btn handle round"
+    type="button"
+    on:click={toggle}
+    disabled={!application.comment && report != null}
+  >
     <svg class="chevron" src="images/icons/chevron-down.svg" />
   </button>
   <div slot="handle" class="name">
@@ -54,7 +61,7 @@
       </div>
     </div>
   {/if}
-  {#if application.reports.find(report => report.reporter_email === account.email) == null}
+  {#if report == null}
     <Button
       isOutline
       classname="report"
