@@ -18,7 +18,7 @@
     closeCallback={() => isOpen = false}
   >
     <svg slot="icon" src="images/icons/alert-triangle.svg" class="icon" />
-    <p slot="content">
+    <p slot="content" class="constrain-width">
       <slot />
     </p>
     <div slot="content" class="actions">
