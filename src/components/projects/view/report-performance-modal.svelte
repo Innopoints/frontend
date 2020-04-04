@@ -13,10 +13,18 @@
   export let application;
   export let isOpen = false;
 
-  const value = {
+  let value = {
     rating: null,
     content: '',
   };
+
+  function submit() {
+    dispatch('submit', { value, application, activity });
+    value = {
+      rating: null,
+      content: '',
+    };
+  }
 
   const dispatch = createEventDispatcher();
 </script>
@@ -70,7 +78,7 @@
         <div class="actions">
           <Button
             isFilled
-            on:click={() => dispatch('submit', { value, application, activity })}
+            on:click={submit}
             disabled={value.rating == null}
           >
             submit
