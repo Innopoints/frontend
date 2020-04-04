@@ -5,6 +5,7 @@
   import * as api from '@/utils/api.js';
   import SimplebarList from 'ui/simplebar-list.svelte';
   import getNotificationContent from '@/constants/notification-content.js';
+  import { formatTime } from '@/utils/date-time-format.js';
 
   export let notifications = null;
   $: unread = notifications != null && notifications.some(notification => !notification.is_read);
@@ -79,14 +80,7 @@
           >
             <svg src="images/icons/check.svg" class="icon" />
           </Button>
-          <time datetime={notification.timestamp}>
-            {new Date(notification.timestamp).toLocaleString('ru', {
-              hour: '2-digit',
-              minute: '2-digit',
-              day: '2-digit',
-              month: '2-digit',
-            })}
-          </time>
+          <time datetime={notification.timestamp}>{formatTime(notification.timestamp)}</time>
         </li>
       {/each}
     </SimplebarList>

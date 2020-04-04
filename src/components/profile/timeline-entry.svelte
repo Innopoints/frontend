@@ -6,18 +6,11 @@
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
   import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
+  import { formatTime } from '@/utils/date-time-format.js';
 
   export let type;
   export let entry_time;
   export let payload;
-  export let dateFormatter = new Intl.DateTimeFormat('en', {
-    hour: '2-digit',
-    year: 'numeric',
-    minute: '2-digit',
-    day: '2-digit',
-    month: 'short',
-    hour12: false,
-  });
 
   const dispatch = createEventDispatcher();
 </script>
@@ -126,7 +119,7 @@
       {/if}
     {/if}
     <time datetime={entry_time}>
-      {dateFormatter.format(new Date(entry_time))}
+      {formatTime(entry_time)}
     </time>
   </div>
 </div>
