@@ -127,6 +127,7 @@
       <TextField
         id="activity-name{index}"
         bind:value={activity.name}
+        autocomplete={false}
         on:change={() => { errors.nameNotSpecified = false; fieldsAltered = true; }}
       />
     </FormField>

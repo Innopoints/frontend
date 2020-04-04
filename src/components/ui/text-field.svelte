@@ -28,6 +28,7 @@
   export let cols = 5;
   export let changeTimeout = 400;
   export let autofocus = false;
+  export let autocomplete = true;
 
   const dispatch = createEventDispatcher();
   let timeout = null;
@@ -64,6 +65,7 @@
       {cols}
       class={inputclass}
       {disabled}
+      autocomplete={autocomplete ? 'on' : 'off'}
       on:focus={() => dispatch('focus', value)}
       on:blur={() => dispatch('blur', value)}
       on:input={() => dispatch('input', value)}
@@ -85,6 +87,7 @@
         {maxlength}
         class={inputclass}
         {disabled}
+        autocomplete={autocomplete ? 'on' : 'off'}
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}
         on:input={(e) => dispatch('input', e.target.value)}
@@ -103,6 +106,7 @@
         {maxlength}
         class={inputclass}
         {disabled}
+        autocomplete={autocomplete ? 'on' : 'off'}
         on:focus={(e) => dispatch('focus', e.target.value)}
         on:blur={(e) => dispatch('blur', e.target.value)}
         on:input={(e) => { value = e.target.value; dispatch('input', e.target.value); }}
