@@ -41,7 +41,7 @@
           None
         {/each}
         {#if exposedActivities.length > 3}
-          <li class="extra">+ {activities.length - 3} more</li>
+          <li class="extra">+ {exposedActivities.length - 3} more</li>
         {/if}
       </ul>
     </Labeled>
