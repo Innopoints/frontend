@@ -5,7 +5,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import RadioChipGroup from 'ui/radio-chip-group.svelte';
   import getBackground from '@/utils/optimal-color.js';
-  import { API_HOST } from '@/constants/env.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
   import s from '@/utils/plural-s.js';
 
   export let product;
@@ -13,7 +13,7 @@
   $: selectedVariety = product && product.varieties[selectedIndex];
   $: imageUrl = (
     selectedVariety && selectedVariety.images && selectedVariety.images.length > 0 ?
-      API_HOST + selectedVariety.images[0]
+      API_HOST_BROWSER + selectedVariety.images[0]
     : '/images/create-product/placeholder.svg'
   );
   $: colors = product && product.varieties.map(x => x.color).filter(x => x != null);

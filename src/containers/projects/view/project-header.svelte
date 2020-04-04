@@ -5,7 +5,7 @@
   import Dot from 'ui/dot.svelte';
   import Labeled from 'ui/labeled.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
-  import { API_HOST } from '@/constants/env.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
 
@@ -18,7 +18,7 @@
   const projectImageURL = (
     project.image_id == null ?
       '/images/create-project/placeholder.svg'
-    : `${API_HOST}/file/${project.image_id}`
+    : `${API_HOST_BROWSER}/file/${project.image_id}`
   );
 
   const dispatch = createEventDispatcher();

@@ -94,7 +94,7 @@ self.addEventListener('push', event => {
     badge: '/favicon.png',
   };
   if (data.image) {
-    options.image = 'process.env.API_HOST' + data.image;
+    options.image = 'process.env.API_HOST_BROWSER' + data.image;
   }
   event.waitUntil(self.registration.showNotification(title, options));
 });

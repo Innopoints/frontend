@@ -6,7 +6,7 @@
   import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
   import getBackground from '@/utils/optimal-color.js';
   import s from '@/utils/plural-s.js';
-  import { API_HOST } from '@/constants/env.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
   import { formatTime } from '@/utils/date-time-format.js';
 
   export let purchase;
@@ -18,7 +18,7 @@
 <li>
   <div class="product">
     <div class="image" style={'background:' + getBackground(purchase.variety.color)}>
-      <img src={API_HOST + purchase.variety.images[0]} alt="" />
+      <img src={API_HOST_BROWSER + purchase.variety.images[0]} alt="" />
     </div>
     <div class="product-info">
       <div class="title">
