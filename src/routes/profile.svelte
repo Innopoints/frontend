@@ -4,13 +4,12 @@
 
   export async function preload(page, session) {
     let requestedEmail = page.query.user;
-    let timelineFetchedUntil = new Date();
-    timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
     const { currentUser } = await getInitialData(this, session, new Map([
       ['currentUser', '/account'],
     ]));
     if (currentUser == null) {
       this.error(403, 'Profile');
+      return;
     }
     const isMe = requestedEmail == currentUser.email;
     const allowed = requestedEmail == null || isMe || currentUser.is_admin;
@@ -22,6 +21,8 @@
       requestedEmail = currentUser.email;
     }
 
+    let timelineFetchedUntil = new Date();
+    timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
     const {
       account,
       ...initialData
@@ -33,7 +34,7 @@
       ['competences', '/competences'],
     ]));
     if (account == null) {
-      this.error(404, 'Profile');
+      this.error(403, 'Profile');
     }
 
     return {
