@@ -2,8 +2,8 @@
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
+  import CopyButton from '@/components/projects/view/copy-button.svelte';
   import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
-  import { writeText as copyToClipboard } from 'clipboard-polyfill';
   import getBackground from '@/utils/optimal-color.js';
   import s from '@/utils/plural-s.js';
   import { API_HOST } from '@/constants/env.js';
@@ -28,8 +28,9 @@
       <time datetime={purchase.time}>{formatTime(purchase.time)}</time>
       <div class="purchaser">
         {(-purchase.amount)} item{s(-purchase.amount)} purchased by {purchase.account.full_name}
-        <span on:click={() => copyToClipboard(purchase.account.email)} class="copy-email">
-          click to copy e-mail
+        <span class="popover-container">
+          <a href="mailto:{purchase.account.email}">{purchase.account.email}</a>
+          <CopyButton text={purchase.account.email} />
         </span>
       </div>
       <div class="parameters">
