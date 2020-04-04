@@ -60,7 +60,7 @@ export default function getNotificationContent({ type, payload }) {
         fragments = [
           'Leave feedback on ',
           {
-            text: 'your volunteering work',
+            text: `your ${payload.activity.internal ? 'organizational' : 'volunteering'} work`,
             url: '/projects/' + payload.project.id,
           },
           ' to claim ',
