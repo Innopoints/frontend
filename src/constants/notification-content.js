@@ -63,10 +63,14 @@ export default function getNotificationContent({ type, payload }) {
             text: `your ${payload.activity.internal ? 'organizational' : 'volunteering'} work`,
             url: '/projects/' + payload.project.id,
           },
-          ' to claim ',
-          (payload.application.actual_hours * payload.activity.reward_rate).toString(),
-          ' innopoints',
         ];
+        if (payload.application.actual_hours !== 0) {
+          fragments = fragments.concat([
+            ' to claim ',
+            (payload.application.actual_hours * payload.activity.reward_rate).toString(),
+            ' innopoints',
+          ]);
+        }
         break;
       }
 

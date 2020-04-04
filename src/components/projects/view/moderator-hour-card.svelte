@@ -39,13 +39,13 @@
         <TextField
           type="number"
           placeholder="1"
-          min={1}
+          min={0}
           bind:value={enteredHours}
         />
         {#if enteredHours !== application.actual_hours}
           <Button
             isRound
-            disabled={enteredHours < 1}
+            disabled={enteredHours < 0}
             on:click={dispatchHourChange}
           >
             <svg class="icon" src="images/icons/check.svg" />

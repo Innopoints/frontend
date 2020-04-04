@@ -21,14 +21,6 @@
     : `${API_HOST}/file/${project.image_id}`
   );
 
-  $: reviewAllowed = project.activities.every(
-    activity =>
-      activity.applications != null && activity.applications.every(
-        application =>
-          application.actual_hours > 0,
-      ),
-  );
-
   const dispatch = createEventDispatcher();
 </script>
 
@@ -101,8 +93,6 @@
                && project.review_status !== ReviewStatuses.PENDING}
           <Button
             isFilled
-            disabled={!reviewAllowed}
-            tooltip={reviewAllowed ? '' : 'Fill out the hours for the project staff first.'}
             on:click={() => dispatch('submit-for-review')}
           >
             <svg class="icon mr" src="images/icons/check-circle.svg" />

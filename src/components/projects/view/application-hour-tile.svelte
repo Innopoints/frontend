@@ -36,10 +36,10 @@
       <TextField
         type="number"
         placeholder="1"
-        min={1}
+        min={0}
         value={application.actual_hours}
         on:change={(evt) => {
-          if (+evt.detail >= 1) {
+          if (+evt.detail >= 0) {
             dispatch('hours-changed', { application, hours: +evt.detail });
           }
         }}
