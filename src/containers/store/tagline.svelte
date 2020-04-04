@@ -1,8 +1,23 @@
 <script>
+  import { onMount } from 'svelte';
   import Button from 'ui/button.svelte';
   import Dot from 'ui/dot.svelte';
+  import * as api from '@/utils/api.js';
 
   export let isAdmin;
+  let dotShown = false;
+  
+  onMount(async () => {
+    if (isAdmin) {
+      try {
+        const purchases = await api.json(api.get('/stock_changes/for_review'));
+        dotShown = purchases.length !== 0;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  });
+
 </script>
 
 <section class="tagline padded">
@@ -22,7 +37,9 @@
         <Button isOutline classname="btn rectangle" href="/dashboard">
           <svg src="/images/icons/shopping-bag.svg" class="icon mr" />
           manage purchases
-          <Dot active small />
+          {#if dotShown}
+            <Dot active small />
+          {/if}
         </Button>
       </div>
     {/if}
