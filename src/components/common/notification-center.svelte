@@ -67,9 +67,7 @@
               {:else if fragment.bold}
                 <strong>{fragment.text}</strong>
               {:else}
-                <a href="{fragment.url}" rel="prefetch">
-                  {fragment.text}
-                </a>
+                <a href="{fragment.url}" rel="prefetch">{fragment.text}</a>
               {/if}
             {/each}
           </span>
