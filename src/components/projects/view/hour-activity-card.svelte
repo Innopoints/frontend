@@ -5,12 +5,17 @@
   import Card from 'ui/card.svelte';
   import Labeled from 'ui/labeled.svelte';
   import ApplicationHourTile from '@/components/projects/view/application-hour-tile.svelte';
+  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import s from '@/utils/plural-s.js';
   import { formatTimeRange } from '@/utils/date-time-format.js';
 
   export let account;
   export let activity;
   let hourChanges = new Map();
+  // Reactive to trigger a re-render when reports come in
+  $: approvedApplications = activity.applications.filter(
+    apl => apl.status === ApplicationStatuses.APPROVED,
+  );
 
   function recordHourChange({ detail: { application, hours } }) {
     if (application.actual_hours === hours) {
@@ -80,9 +85,9 @@
     <header>
       <span class="label">accepted volunteers</span>
     </header>
-    {#if activity.applications.length !== 0}
+    {#if approvedApplications.length !== 0}
       <Accordion let:panelController>
-        {#each activity.applications as application (application.id)}
+        {#each approvedApplications as application (application.id)}
           <ApplicationHourTile
             {account}
             {activity}
