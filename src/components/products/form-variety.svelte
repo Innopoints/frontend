@@ -6,7 +6,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import DragDropzone from '@/components/products/drag-dropzone.svelte';
   import getColorPickerStyles from 'ui/utils/color-picker-styles.js';
-  import { API_HOST } from '@/constants/env.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
 
   export let variety;
   export let index;
@@ -112,7 +112,7 @@
   {/if}
 
   <DragDropzone
-    images={variety.images.map(image => ({ url: API_HOST + image, file: { name: image } }))}
+    images={variety.images.map(image => ({ url: API_HOST_BROWSER + image, file: { name: image } }))}
     {index}
     color={variety.color}
     on:new-file

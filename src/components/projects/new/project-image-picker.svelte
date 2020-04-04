@@ -3,7 +3,7 @@
   import Button from 'ui/button.svelte';
   import FileInput from 'ui/file-input.svelte';
   import * as api from '@/utils/api.js';
-  import { API_HOST } from '@/constants/env.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
   import maxSizeMB from '@/constants/backend/file-upload-limit.js';
 
   export let value = null;
@@ -55,7 +55,7 @@
 </script>
 
 {#if value != null}
-  <img src="{API_HOST}/file/{value}" alt="Project image" class="shadow-1 mr" />
+  <img src="{API_HOST_BROWSER}/file/{value}" alt="Project image" class="shadow-1 mr" />
   <Button isDanger on:click={clearValue} tooltip="Delete image">
     <svg src="images/icons/trash-2.svg" class="icon" />
     <span class="text">delete</span>
@@ -74,7 +74,7 @@
       </div>
     </div>
   {:then image}
-    <img src="{API_HOST}/file/{image.id}" alt="Project image" class="shadow-1 mr" />
+    <img src="{API_HOST_BROWSER}/file/{image.id}" alt="Project image" class="shadow-1 mr" />
     <Button isDanger on:click={clearValue} tooltip="Delete image">
       <svg src="images/icons/trash-2.svg" class="icon" />
       <span class="text">delete</span>

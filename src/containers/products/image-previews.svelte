@@ -4,7 +4,7 @@
   import Swiper from 'swiper';
   import 'swiper/css/swiper.min.css';
   import getBackground from '@/utils/optimal-color.js';
-  import { API_HOST } from '@/constants/env.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
 
   export let productControl;
   export let selectedColor;
@@ -75,7 +75,7 @@
           />
           <div class="icon">
             <img
-              src={API_HOST + image.url}
+              src={API_HOST_BROWSER + image.url}
               style="background: {getBackground(image.color)}"
               alt=""
             />
@@ -90,7 +90,7 @@
       {#each productControl.flatImages as image}
         <div class="swiper-slide">
           <img
-            src={(image.placeholder ? '' : API_HOST) + image.url}
+            src={(image.placeholder ? '' : API_HOST_BROWSER) + image.url}
             style="background: {getBackground(image.color)}"
             alt=""
           />
