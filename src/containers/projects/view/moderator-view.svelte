@@ -118,7 +118,6 @@
       <HourActivityCard
         {account}
         {activity}
-        {review}
         on:save-hours
         on:report-performance
       />
@@ -128,6 +127,7 @@
       <FeedbackActivityCard
         {activity}
         {competences}
+        {review}
         on:read-feedback
       />
     {/each}
