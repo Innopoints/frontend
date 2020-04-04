@@ -3,12 +3,16 @@
   import Labeled from 'ui/labeled.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
   import FeedbackTile from '@/components/projects/view/feedback-tile.svelte';
+  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import s from '@/utils/plural-s.js';
   import { formatTimeRange } from '@/utils/date-time-format.js';
 
   export let activity;
   export let competences;
   export let review = false;
+  let approvedApplications = activity.applications.filter(
+    apl => apl.status === ApplicationStatuses.APPROVED,
+  );
 </script>
 
 <Card classname="activity moderated finalizing finished">
@@ -59,9 +63,9 @@
     <header>
       <span class="label">accepted volunteers</span>
     </header>
-    {#if activity.applications.length !== 0}
+    {#if approvedApplications.length !== 0}
       <ul>
-        {#each activity.applications as application (application.id)}
+        {#each approvedApplications as application (application.id)}
           <FeedbackTile {review} {activity} {application} on:read-feedback />
         {/each}
       </ul>
