@@ -126,15 +126,13 @@ h1 {
   .purchaser {
     font-weight: 300;
     font-size: .9em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .copy-email {
-    display: block;
+  .popover-container {
     margin-top: .2em;
-    text-decoration: underline;
-    font-size: .95em;
-    cursor: pointer;
-    color: $main;
   }
 
   .parameters {
