@@ -30,6 +30,7 @@
       id="name"
       placeholder="I <3 Innopolis"
       maxlength={128}
+      autocomplete={false}
       on:change={({detail}) => dispatch('change', { field: 'name', value: detail })}
       disabled={formDisabled}
       {...product && { value: product.name || '' }}
@@ -78,6 +79,7 @@
       maxlength="6"
       isWithItem
       isItemRight
+      autocomplete={false}
       on:change={({detail}) => dispatch('change', { field: 'price', value: detail })}
       disabled={formDisabled}
       {...product && { value: product.price || '' }}

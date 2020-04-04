@@ -35,6 +35,7 @@
     </span>
     <TextField
       id="title"
+      autocomplete={false}
       value={$project.name || ''}
       on:change={(event) => $project.name = event.detail}
     />
@@ -65,6 +66,7 @@
     </span>
     <TextField
       id="organizer"
+      autocomplete={false}
       value={$project.organizer || ''}
       on:change={(event) => $project.organizer = event.detail}
     />
