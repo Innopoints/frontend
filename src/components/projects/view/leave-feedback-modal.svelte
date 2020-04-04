@@ -27,6 +27,15 @@
     }
   }
 
+  function submit() {
+    dispatch('submit', { activity, application, value });
+    value = {
+      competences: [],
+      answers: new Array(activity.feedback_questions.length).fill(''),
+    };
+    competenceItems.forEach(item => item.checked = false);
+  }
+
   const dispatch = createEventDispatcher();
 </script>
 
@@ -76,7 +85,7 @@
             class="btn filled"
             type="button"
             disabled={value.competences.length === 0}
-            on:click={() => dispatch('submit', { activity, application, value })}
+            on:click={submit}
           >
             submit & claim innopoints
           </button>

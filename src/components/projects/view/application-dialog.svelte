@@ -22,6 +22,10 @@
       remember: remember[0].checked,
     });
     comment = '';
+    if (!remember[0].checked) {
+      telegram = savedUsername || '';
+    }
+    remember[0].checked = false;
   }
 
   const dispatch = createEventDispatcher();
