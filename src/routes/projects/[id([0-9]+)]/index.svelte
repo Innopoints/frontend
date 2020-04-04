@@ -279,6 +279,8 @@
       }
 
       application.status = status;
+      applicationRejectDialog.open = false;
+      applicationPendingDialog.open = false;
       project = project;
       projectStore.set(project);
     } catch (e) {
@@ -457,25 +459,6 @@
       application={reportPerformanceModal.application}
       on:submit={reportPerformanceModal.submitReport}
     />
-  {:else}
-    <!-- apply -->
-    <ApplicationDialog
-      savedUsername={account && account.telegram_username}
-      activity={applicationDialog.activity}
-      bind:isOpen={applicationDialog.open}
-      on:submit-application={applicationDialog.processApplication}
-      error={applicationDialog.error}
-    />
-    <!-- confirm-application-takeback -->
-    <DangerConfirmDialog
-      textYes="yes, take back"
-      bind:isOpen={applicationTakeBackDialog.open}
-      eventDetail={applicationTakeBackDialog.activity}
-      on:confirm={applicationTakeBackDialog.processTakeBack}
-    >
-      Are you sure you want to take your application back?
-      <em class="consequences">You may place a new one afterwards.</em>
-    </DangerConfirmDialog>
     <!-- confirm-application-rejection -->
     <DangerConfirmDialog
       textYes="yes, reject"
@@ -501,6 +484,25 @@
       <em class="consequences">
         Make sure that the volunteer in question is aware of this action.
       </em>
+    </DangerConfirmDialog>
+  {:else}
+    <!-- apply -->
+    <ApplicationDialog
+      savedUsername={account && account.telegram_username}
+      activity={applicationDialog.activity}
+      bind:isOpen={applicationDialog.open}
+      on:submit-application={applicationDialog.processApplication}
+      error={applicationDialog.error}
+    />
+    <!-- confirm-application-takeback -->
+    <DangerConfirmDialog
+      textYes="yes, take back"
+      bind:isOpen={applicationTakeBackDialog.open}
+      eventDetail={applicationTakeBackDialog.activity}
+      on:confirm={applicationTakeBackDialog.processTakeBack}
+    >
+      Are you sure you want to take your application back?
+      <em class="consequences">You may place a new one afterwards.</em>
     </DangerConfirmDialog>
   {/if}
   <!-- read-feedback -->
