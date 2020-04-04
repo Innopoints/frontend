@@ -64,7 +64,7 @@ export default function getNotificationContent({ type, payload }) {
             url: '/projects/' + payload.project.id,
           },
           ' to claim ',
-          payload.application.actual_hours * payload.activity.reward_rate,
+          (payload.application.actual_hours * payload.activity.reward_rate).toString(),
           ' innopoints',
         ];
         break;
