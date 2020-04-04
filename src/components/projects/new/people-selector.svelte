@@ -43,6 +43,7 @@
   type="number"
   placeholder="1"
   min={1}
+  max={99999}
   isNoSpinner
   value={value != null && value != 0 ? value : ''}
   on:change={processTextFieldChange}

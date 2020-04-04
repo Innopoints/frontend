@@ -73,6 +73,7 @@
         <TextField
           id="text-feedback"
           multiline
+          maxlength={1024}
           bind:value={value.content}
         />
         <div class="actions">

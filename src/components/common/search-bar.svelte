@@ -5,6 +5,6 @@
   export let placeholder = 'Type to search';
 </script>
 
-<TextField on:input {placeholder} isWithItem {value} type="search">
+<TextField on:input {placeholder} isWithItem {value} type="search" maxlength={256}>
   <svg src="images/icons/search.svg" class="item" />
 </TextField>

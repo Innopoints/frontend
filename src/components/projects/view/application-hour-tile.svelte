@@ -44,6 +44,7 @@
         type="number"
         placeholder="1"
         min={0}
+        max={99999}
         value={application.actual_hours}
         on:change={(evt) => {
           if (+evt.detail >= 0) {

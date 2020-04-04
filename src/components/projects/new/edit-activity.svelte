@@ -128,6 +128,7 @@
         id="activity-name{index}"
         bind:value={activity.name}
         autocomplete={false}
+        maxlength={128}
         on:change={() => { errors.nameNotSpecified = false; fieldsAltered = true; }}
       />
     </FormField>
@@ -141,6 +142,7 @@
         multiline
         id="activity-description{index}"
         bind:value={activity.description}
+        maxlength={1024}
         on:change={() => fieldsAltered = true}
       />
     </FormField>
@@ -225,13 +227,14 @@
           id="work-hours{index}"
           type="number"
           placeholder="1"
+          min={1}
+          max={99999}
           bind:value={activity.working_hours}
           on:change={(evt) => {
             errors.workingHoursNotSpecified = false;
             (+evt.detail >= 1) && (errors.workingHoursInvalid = false);
             fieldsAltered = true;
           }}
-          min={1}
         />
       </FormField>
     {:else}
@@ -249,14 +252,15 @@
             isItemRight
             id="reward-amt-fixed{index}"
             type="number"
+            min={1}
+            max={99999}
+            placeholder={HOURLY_RATE}
             bind:value={activity.reward_rate}
             on:change={(evt) => {
               errors.rewardRateNotSpecified = false;
               (+evt.detail >= 1) && (errors.rewardRateInvalid = false);
               fieldsAltered = true;
             }}
-            placeholder={HOURLY_RATE}
-            min={1}
           >
             <svg src="images/innopoint-sharp.svg" class="innopoint item" />
           </TextField>
