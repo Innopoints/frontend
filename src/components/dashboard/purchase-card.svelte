@@ -7,6 +7,7 @@
   import getBackground from '@/utils/optimal-color.js';
   import s from '@/utils/plural-s.js';
   import { API_HOST } from '@/constants/env.js';
+  import { formatTime } from '@/utils/date-time-format.js';
 
   export let purchase;
 
@@ -24,9 +25,7 @@
         {purchase.product.name}
         <span class="type">{purchase.product.type || ''}</span>
       </div>
-      <time datetime={purchase.time} title={new Date(purchase.time).toLocaleString('ru')}>
-        {new Date(purchase.time).toLocaleString('ru', {month: '2-digit', day: '2-digit'})}
-      </time>
+      <time datetime={purchase.time}>{formatTime(purchase.time)}</time>
       <div class="purchaser">
         {(-purchase.amount)} item{s(-purchase.amount)} purchased by {purchase.account.full_name}
         <span on:click={() => copyToClipboard(purchase.account.email)} class="copy-email">

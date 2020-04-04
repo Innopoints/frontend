@@ -6,14 +6,6 @@
   export let timelinePromises;
 
   const dispatch = createEventDispatcher();
-  const dateFormatter = new Intl.DateTimeFormat('en', {
-    hour: '2-digit',
-    year: 'numeric',
-    minute: '2-digit',
-    day: '2-digit',
-    month: 'short',
-    hour12: false,
-  });
 
   function requestMore() {
     dispatch('more-timeline');
@@ -32,7 +24,7 @@
         </div>
       {:then timelineFragment}
         {#each timelineFragment as entry}
-          <TimelineEntry {...entry} {dateFormatter} on:leave-feedback />
+          <TimelineEntry {...entry} on:leave-feedback />
         {/each}
       {/await}
     {/each}
