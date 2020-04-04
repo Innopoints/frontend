@@ -5,7 +5,7 @@
   import RadioGroup from 'ui/radio-group.svelte';
   import getBackground from '@/utils/optimal-color.js';
   import { groupByColor } from '@/utils/group-varieties.js';
-  import { API_HOST } from '@/constants/env.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
 
   export let id;
   export let name;
@@ -25,7 +25,7 @@
   }
   $: imageURL = (
     varietiesByColor.get(selectedColor)[0].images.length !== 0 ?
-      API_HOST + varietiesByColor.get(selectedColor)[0].images[0]
+      API_HOST_BROWSER + varietiesByColor.get(selectedColor)[0].images[0]
       : '/images/create-product/placeholder.svg'
   );
 

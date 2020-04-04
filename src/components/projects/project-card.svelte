@@ -3,7 +3,7 @@
   import Labeled from 'ui/labeled.svelte';
   import Button from 'ui/button.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
-  import { API_HOST } from '@/constants/env.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
 
   export let id;
   export let name;
@@ -19,7 +19,7 @@
 </script>
 
 <Card classname="with-image">
-  <img src={image_id == null ? imagePlaceholder : `${API_HOST}/file/${image_id}`} alt="" class="image" />
+  <img src={image_id == null ? imagePlaceholder : `${API_HOST_BROWSER}/file/${image_id}`} alt="" class="image" />
   <div class="content">
     <div class="title">{name}</div>
     <div class="compact">
