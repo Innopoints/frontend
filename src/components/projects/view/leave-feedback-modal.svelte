@@ -75,6 +75,7 @@
               <TextField
                 multiline
                 id="question{index}"
+                maxlength={1024}
                 bind:value={value.answers[index]}
               />
             </div>

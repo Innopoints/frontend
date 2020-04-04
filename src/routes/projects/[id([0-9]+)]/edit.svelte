@@ -150,6 +150,7 @@
         </span>
         <TextField
           id="title"
+          maxlength={128}
           value={project.name || ''}
           on:change={(event) => project.name = event.detail}
         />
@@ -178,6 +179,7 @@
         </span>
         <TextField
           id="organizer"
+          maxlength={128}
           value={project.organizer || ''}
           on:change={(event) => project.organizer = event.detail}
         />

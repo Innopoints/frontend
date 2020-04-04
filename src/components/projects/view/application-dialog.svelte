@@ -46,6 +46,7 @@
         <TextField
           classname="comment-field"
           multiline="true"
+          maxlength={1024}
           bind:value={comment}
           id="comment"
         />

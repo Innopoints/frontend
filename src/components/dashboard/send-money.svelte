@@ -42,6 +42,7 @@
       type="number"
       isWithItem
       isItemRight
+      maxlength={8}
       on:input={() => success = false}
     >
       <svg src="/images/innopoint-sharp.svg" class="item innopoint" />

@@ -30,7 +30,7 @@
   <span class="label">Feedback questions</span>
   {#each value as val, i}
     <div class="row">
-      <TextField value={val} on:change={(e) => changeValue(i, e)} />
+      <TextField value={val} maxlength={1024} on:change={(e) => changeValue(i, e)} />
       <Button isDanger isRound on:click={(e) => { e.stopPropagation(); removeValue(i); }}>
         <svg class="icon" src="images/icons/trash-2.svg" />
       </Button>

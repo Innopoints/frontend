@@ -37,8 +37,9 @@
     <TextField
       bind:value={text}
       multiline
+      maxlength={512}
       cols="5"
-      on:input={() => {success = false; error = null;}}
+      on:input={() => { success = false; error = null; }}
     />
     <div class="actions">
       <Button disabled={!text} on:click={send}>

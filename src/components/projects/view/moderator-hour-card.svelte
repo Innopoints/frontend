@@ -40,6 +40,7 @@
           type="number"
           placeholder="1"
           min={0}
+          max={99999}
           bind:value={enteredHours}
         />
         {#if enteredHours !== application.actual_hours}

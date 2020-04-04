@@ -123,6 +123,7 @@
           <div class="title">Review verdict</div>
           <TextField
             multiline
+            maxlength={1024}
             bind:value={reviewComment}
             placeholder="Leave feedback on the project"
           />

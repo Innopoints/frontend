@@ -49,12 +49,12 @@
 </script>
 
 <div
-    class="text-field {classname}"
-    class:outline={isOutline}
-    class:with-item={isWithItem}
-    class:left={isWithItem && !isItemRight}
-    class:right={isWithItem && isItemRight}
-    class:no-spinner={isNoSpinner}
+  class="text-field {classname}"
+  class:outline={isOutline}
+  class:with-item={isWithItem}
+  class:left={isWithItem && !isItemRight}
+  class:right={isWithItem && isItemRight}
+  class:no-spinner={isNoSpinner}
 >
   {#if multiline}
     <textarea
@@ -63,6 +63,8 @@
       {name}
       bind:value={value}
       {cols}
+      {minlength}
+      {maxlength}
       class={inputclass}
       {disabled}
       autocomplete={autocomplete ? 'on' : 'off'}

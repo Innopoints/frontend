@@ -83,6 +83,7 @@
           min={0}
           placeholder="0"
           type="number"
+          max={99999}
           value={variety.quantity || ''}
           on:change={(e) => changeField('quantity', +e.detail)}
         />
@@ -101,6 +102,7 @@
             classname="right-align"
             placeholder="0"
             min={0}
+            max={99999}
             value={variety.sizes[size] || ''}
             on:change={(e) => changeSizeAmount(size, +e.detail)}
           >
