@@ -36,6 +36,10 @@
     }
   }
 
+  .date-range .dropdown {
+    left: -1.5em;
+  }
+
   .tg-username {
     flex-direction: row;
     justify-content: flex-start;
@@ -113,8 +117,14 @@
     }
   }
 
-  .deadline .date-picker {
-    margin-top: 1.25rem;
+  .deadline {
+    .dropdown {
+      left: -1.5em;
+    }
+
+    .date-picker {
+      margin-top: 1.25rem;
+    }
   }
 
   .questions {
@@ -182,6 +192,11 @@
     .date-range, .competences, .reward-type, .reward-amt, .work-hours, .deadline, .questions {
       flex-direction: row;
       align-items: center;
+    }
+
+    .date-range .dropdown,
+    .deadline .dropdown {
+      left: auto;
     }
 
     .competences {
