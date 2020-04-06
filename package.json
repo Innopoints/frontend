@@ -30,10 +30,12 @@
   "dependencies": {
     "clipboard-polyfill": "^2.8.6",
     "compression": "^1.7.1",
-    "polka": "^1.0.0-next.11",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
     "sapper-environment": "^1.0.1",
     "simplebar": "^5.1.0",
-    "sirv": "^0.4.0"
+    "sirv": "^0.4.0",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
