@@ -23,7 +23,7 @@ app()
           styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
           fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
           frameAncestors: ["'none'"],
-          connectSrc: (dev ? ['*'] : ["'self'"]),
+          connectSrc: (dev ? ['*'] : ["'self'", 'https://fonts.googleapis.com']),
           reportUri: '/report-csp-violation',
         },
         reportOnly: true,  // This is for testing in a production environment, to be removed
