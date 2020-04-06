@@ -60,7 +60,6 @@
     classname="padded"
     id="organizer"
     required
-    maxlength={128}
     error={($project.organizer === '' && "The organizer field must not be empty.") || null}
   >
     <span slot="subtitle" class="desc">
@@ -69,6 +68,7 @@
     <TextField
       id="organizer"
       autocomplete={false}
+      maxlength={128}
       value={$project.organizer || ''}
       on:change={(event) => $project.organizer = event.detail}
     />
