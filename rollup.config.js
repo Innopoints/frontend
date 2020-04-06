@@ -94,6 +94,8 @@ export default {
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
         'process.env.VAPID_PUBLIC_KEY': process.env.VAPID_PUBLIC_KEY,
+        'process.env.BOT_API_TOKEN': process.env.BOT_API_TOKEN,
+        'process.env.BOT_REPORT_CHAT_ID': process.env.BOT_REPORT_CHAT_ID,
       }),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
