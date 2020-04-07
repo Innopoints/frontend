@@ -5,7 +5,7 @@ import { goto } from '@sapper/app';
 
 function loginOAuth() {
   window.location.href = AUTH_HOST + '/login?' + generateQueryString(new Map([
-    ['final_redirect_location', window.location.pathname],
+    ['final_redirect_location', '/profile'],
     ['frontend_base', window.location.origin],
   ]));
 }
