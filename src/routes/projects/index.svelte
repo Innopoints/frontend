@@ -71,6 +71,9 @@
 
 <svelte:head>
   <title>Projects – Innopoints</title>
+  <meta name="og:title" content="Projects" />
+  <meta name="og:url" content="https://ipts.innopolis.university/projects" />
+  <meta name="og:description" content="If you’re seeking an opportunity to contribute to the wonderful world of Innopolis projects, you’re in the right place" />
 
   <!-- Styles for Projects page -->
   <link rel="stylesheet" href="/css/bundles/projects.min.css" />
