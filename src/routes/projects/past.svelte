@@ -43,6 +43,9 @@
 
 <svelte:head>
   <title>Projects – Innopoints</title>
+  <meta name="og:title" content="Past Projects" />
+  <meta name="og:url" content="https://ipts.innopolis.university/projects/past" />
+  <meta name="og:description" content="Volunteering opportunities that are already over" />
 
   <!-- Styles for Projects page -->
   <link rel="stylesheet" href="/css/bundles/projects.min.css" />

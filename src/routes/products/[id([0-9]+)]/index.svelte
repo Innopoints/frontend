@@ -26,6 +26,7 @@
   import Snackbar from 'ui/snackbar.svelte';
   import getColorPickerStyles from 'ui/utils/color-picker-styles.js';
   import { groupByColor, groupByID } from '@/utils/group-varieties.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
   import * as api from '@/utils/api.js';
 
   export let product;
@@ -106,6 +107,12 @@
 
 <svelte:head>
   <title>{fullName} – Innopoints</title>
+  <meta name="og:title" content={fullName} />
+  <meta name="og:url" content="https://ipts.innopolis.university/products/{product.id}" />
+  <meta name="og:description" content={product.description} />
+  {#if productControl.flatImages.length > 0}
+    <meta name="og:image" content="{API_HOST_BROWSER + productControl.flatImages[0].url}" />
+  {/if}
 
   <link rel="stylesheet" href="/css/bundles/products-id.min.css" />
   <link rel="prefetch" as="style" href="/css/bundles/store.min.css" />
