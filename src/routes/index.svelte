@@ -29,8 +29,8 @@
   <title>Home – Innopoints</title>
   <meta name="og:title" content="Home" />
   <meta name="og:url" content="https://ipts.innopolis.university" />
-  <meta name="og:description" content="Motivating the great beginnings" />
-  
+  <meta name="og:description" content="Innopoints is a system that encourages extracurricular participation. It helps to manage volunteers, track soft skills, obtain feedback and get branded Innopolis University merchandise as a reward!" />
+
   <link rel="stylesheet" href="/css/bundles/home.min.css" />
   <link rel="prefetch" as="style" href="/css/bundles/store.min.css" />
   <link rel="prefetch" as="style" href="/css/bundles/projects.min.css" />
