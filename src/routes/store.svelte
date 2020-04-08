@@ -86,6 +86,9 @@
 
 <svelte:head>
   <title>Store – Innopoints</title>
+  <meta name="og:title" content="InnoStore" />
+  <meta name="og:url" content="https://ipts.innopolis.university/store" />
+  <meta name="og:description" content="The place where your hard work and proactivity turns into cool merch of Innopolis University" />
 
   <link rel="stylesheet" href="/css/bundles/store.min.css" />
   <link rel="prefetch" as="style" href="/css/bundles/products-new.min.css" />

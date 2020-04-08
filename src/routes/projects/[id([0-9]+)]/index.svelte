@@ -30,6 +30,7 @@
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
   import * as api from '@/utils/api.js';
+  import { API_HOST_BROWSER } from '@/constants/env.js';
   import {
     determineInsertionIndex,
     prepareForBackend,
@@ -355,6 +356,12 @@
 
 <svelte:head>
   <title>{project.name} – Innopoints</title>
+  <meta name="og:title" content={project.name} />
+  <meta name="og:url" content="https://ipts.innopolis.university/projects/{project.id}" />
+  <meta name="og:description" content="Organized by {project.organizer}. Available activities: {project.activities.slice(0, 3).filter(activity => !activity.internal).map(activity => activity.name).join(', ')}{project.activities.length > 3 ? ', ...' : '.'}" />
+  {#if project.image_id}
+    <meta name="og:image" content="{API_HOST_BROWSER}/file/{project.image_id}" />
+  {/if}
 
   <!-- Styles for View Project page -->
   <link rel="stylesheet" href="/css/bundles/projects-id.min.css" />
