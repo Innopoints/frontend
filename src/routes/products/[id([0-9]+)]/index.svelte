@@ -109,7 +109,7 @@
   <title>{fullName} – Innopoints</title>
   <meta name="og:title" content={fullName} />
   <meta name="og:url" content="https://ipts.innopolis.university/products/{product.id}" />
-  <meta name="og:description" content={product.description} />
+  <meta name="og:description" content={product.description || "Yet another cool item that could be yours!"} />
   {#if productControl.flatImages.length > 0}
     <meta name="og:image" content="{API_HOST_BROWSER + productControl.flatImages[0].url}" />
   {/if}
