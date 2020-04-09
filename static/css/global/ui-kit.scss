@@ -1969,6 +1969,10 @@ input[type="checkbox"]:checked + .chip {
           left: unset;
           width: calc(1.125rem + 1px);
         }
+
+        &:last-child::before {
+          width: calc(1.125rem + 1em + 1px);
+        }
       }
 
       &.end {
@@ -1976,6 +1980,13 @@ input[type="checkbox"]:checked + .chip {
           left: 0;
           right: unset;
           width: calc(1.125rem + 1px);
+        }
+      }
+
+      &.start:last-child,
+      &.end:first-child {
+        &::before {
+          width: calc(1.125rem + 1em + 1px);
         }
       }
 
