@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
   import Button from 'ui/button.svelte';
   import FileInput from 'ui/file-input.svelte';
   import * as api from '@/utils/api.js';
@@ -8,13 +7,8 @@
 
   export let value = null;
   let promise = null;
-  let dataURL = null;
+  let blobURL = null;
   let error = null;
-  let fileReader;
-  onMount(() => {
-    fileReader = new FileReader();
-    fileReader.onloadend = () => dataURL = fileReader.result;
-  });
 
   async function handleImageUpload(event) {
     let file = event.target.files[0];
@@ -23,7 +17,7 @@
       return;
     }
 
-    fileReader.readAsDataURL(file);
+    blobURL = URL.createObjectURL(file, { type: file.type });
     const formData = new FormData();
     formData.append('file', file);
 
@@ -49,7 +43,7 @@
   function clearValue() {
     value = null;
     promise = null;
-    dataURL = null;
+    blobURL = null;
     error = null;
   }
 </script>
@@ -64,7 +58,7 @@
   {#await promise.then(resp => resp.json()).catch(() => promise = null)}
     <div class="loading-wrapper shadow-1">
       <img
-        src={dataURL || '/images/create-project/placeholder.svg'}
+        src={blobURL || '/images/create-project/placeholder.svg'}
         alt="Project image"
       />
       <div class="status-overlay">
