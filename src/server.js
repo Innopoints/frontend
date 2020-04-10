@@ -22,6 +22,7 @@ app()
           scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.nonce}'`, "'unsafe-eval'"],
           styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
           fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
+          imgSrc: ["'self'", 'blob:'],
           frameAncestors: ["'none'"],
           connectSrc: (dev ? ['*'] : ["'self'", 'https://fonts.googleapis.com']),
           reportUri: '/report-csp-violation',
