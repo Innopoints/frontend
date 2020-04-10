@@ -19,10 +19,17 @@ app()
       contentSecurityPolicy: {
         directives: {
           defaultSrc: ["'self'"],
-          scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.nonce}'`, "'unsafe-eval'"],
+          scriptSrc: [
+            "'self'",
+            (req, res) => `'nonce-${res.locals.nonce}'`,
+            "'unsafe-eval'",
+            "'unsafe-inline'",
+          ],
           styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
           fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
           imgSrc: ["'self'", 'blob:'],
+          objectSrc: ["'none'"],
+          baseUri: ["'self'"],
           frameAncestors: ["'none'"],
           connectSrc: (dev ? ['*'] : ["'self'", 'https://fonts.googleapis.com']),
           reportUri: '/report-csp-violation',
