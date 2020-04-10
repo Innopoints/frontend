@@ -32,7 +32,7 @@ export function filterProjectFields(project, edit = false) {
     moderators: project.moderators,
   };
   if (!edit) {
-    filtered.activities = project.activities;
+    filtered.activities = project.activities.filter(act => act._type != ActivityTypes.TEMPLATE);
   }
 
   return filtered;
@@ -41,7 +41,8 @@ export function filterProjectFields(project, edit = false) {
 export function countDisplayActivitiesBefore(activityList, index) {
   let result = 0;
   for (let i = 0; i < index; ++i) {
-    if (activityList[i]._type === ActivityTypes.DISPLAY) {
+    if (activityList[i]._type === ActivityTypes.DISPLAY
+        || activityList[i]._type === ActivityTypes.TEMPLATE) {
       result++;
     }
   }
@@ -120,8 +121,11 @@ export function synchronizeActivityLists(internalList, backendActivities) {
       // Happens on the initial population of the activityList
       if (internalListIdx >= internalList.length) {
         let copy = copyActivity(activity);
-        copy._type = ActivityTypes.DISPLAY;
-        prepareAfterBackend(copy);
+        if (copy._type == null) {
+          copy._type = ActivityTypes.DISPLAY;
+          prepareAfterBackend(copy);
+        }
+
         internalList.splice(internalListIdx, 0, copy);
         internalListIdx++;
         activityProcessed = true;
@@ -168,6 +172,12 @@ export function synchronizeActivityLists(internalList, backendActivities) {
         activityProcessed = true;
         break;
       }
+
+      if (internalList[internalListIdx]._type === ActivityTypes.TEMPLATE) {
+        internalListIdx++;
+        activityProcessed = true;
+        break;
+      }
     }
   }
 
@@ -189,4 +199,9 @@ export function synchronizeActivityLists(internalList, backendActivities) {
   }
 
   return internalList;
+}
+
+/* Filter the non-internal non-template activities. */
+export function visibleActivities(project) {
+  return project.activities.filter(act => !act.internal && act._type !== ActivityTypes.TEMPLATE);
 }

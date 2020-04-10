@@ -4,6 +4,7 @@ const ActivityTypes = Object.freeze({
   DISPLAY: 'display',
   REPLACEMENT_MARKER: 'replacement_marker',
   DELETION_MARKER: 'deletion_marker',
+  TEMPLATE: 'template',
 });
 
 export default ActivityTypes;

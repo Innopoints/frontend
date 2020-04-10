@@ -31,7 +31,7 @@
     prepareForBackend,
     prepareAfterBackend,
   } from '@/utils/project-manipulation.js';
-  import activityTypes from '@/constants/projects/activity-internal-types.js';
+  import ActivityTypes from '@/constants/projects/activity-internal-types.js';
 
   const { page } = stores();
 
@@ -117,9 +117,13 @@
           data: filterProjectFields(projectObj, true),
         }));
       } else {
-        project.set(await api.json(api.post('/projects', {
-          data: projectObj,
-        })));
+        const uploadedProject = await api.json(api.post('/projects', {
+          data: filterProjectFields(projectObj),
+        }));
+        uploadedProject.activities = uploadedProject.activities.concat(
+          projectObj.activities.filter(act => act._type === ActivityTypes.TEMPLATE),
+        );
+        project.set(uploadedProject);
       }
       autosaved.set(true);
     } catch (e) {
@@ -142,10 +146,13 @@
     prepareForBackend(detail.activityCopy);
 
     const index = determineInsertionIndex($project.activities, detail.position);
-
     let updatedActivity;
     try {
-      if (type === activityTypes.NEW) {
+      if (type === ActivityTypes.NEW
+          || (type === ActivityTypes.EDIT && detail.activityCopy.id == null)) {
+        const replacedTemplateIdx = $project.activities.findIndex(
+          act => act._type === ActivityTypes.TEMPLATE && act.name === detail.activityCopy.name,
+        );
         if ($project.id == null) {
           // The project does not exist on the backend yet
           updatedActivity = detail.activityCopy;
@@ -155,8 +162,12 @@
           }));
           prepareAfterBackend(updatedActivity);
         }
-        $project.activities.splice(index, 0, updatedActivity);
-      } else if (type === activityTypes.EDIT) {
+        if (replacedTemplateIdx !== -1) {
+          $project.activities.splice(replacedTemplateIdx, 1, updatedActivity);
+        } else {
+          $project.activities.splice(index, 0, updatedActivity);
+        }
+      } else if (type === ActivityTypes.EDIT) {
         if ($project.id == null) {
           // The project does not exist on the backend yet
           updatedActivity = detail.activityCopy;
@@ -189,6 +200,10 @@
     // activityID may be:
     //  - the actual ID of the activity on the backend, if the project exists on the backend;
     //  - the name of the activity, if the project does not exist on the backend.
+    if (activityID == null) {
+      return;
+    }
+
     if ($project.id != null) {
       try {
         await api.json(api.del(`/projects/${$project.id}/activities/${activityID}`));
