@@ -22,6 +22,5 @@ export async function post(req, res, next) {
   const rep = https.request(options);
   rep.write(postData);
   rep.end();
-  console.log(req.body);
 	res.status(204).send();
 }

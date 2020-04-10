@@ -8,16 +8,12 @@
   export let color;
   export let index;
   export let url = null;
-  let dataURL;
+  let blobURL;
   let loading = true;
   let error = false;
 
   if (url == null) {
-    let fileReader = new FileReader();
-    fileReader.readAsDataURL(image.file);
-    fileReader.onloadend = () => {
-      dataURL = fileReader.result;
-    };
+    blobURL = URL.createObjectURL(image.file, { type: image.file.type });
 
     image.promise.then(resp => {
       loading = false;
@@ -35,7 +31,7 @@
 <Card classname="image with-image {loading ? 'loading': ''} {error ? 'error' : ''}">
   <div class="image-wrapper">
     <img
-      src={url || dataURL || '/images/create-product/placeholder.svg'}
+      src={url || blobURL || '/images/create-product/placeholder.svg'}
       style="background: {getBackground(color)}"
       alt={url || image.file.name}
     />
