@@ -3,6 +3,7 @@
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import Autocomplete from 'ui/autocomplete.svelte';
   import generateQueryString from '@/utils/generate-query-string.js';
+  import { visibleActivities } from '@/utils/project-manipulation.js';
   import * as api from '@/utils/api.js';
 
   export let project;
@@ -93,7 +94,7 @@
     step={3}
     error={
       !($project.name && $project.organizer) ? 1 :
-        ($project.activities.filter(act => !act.internal).length === 0 ? 2 : null)
+        (visibleActivities($project).length === 0 ? 2 : null)
     }
     on:publish
   />
