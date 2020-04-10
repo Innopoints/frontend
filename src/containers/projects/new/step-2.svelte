@@ -11,6 +11,7 @@
     addActivity,
     copyActivity,
     countDisplayActivitiesBefore,
+    visibleActivities,
     synchronizeActivityLists,
   } from '@/utils/project-manipulation.js';
 
@@ -58,7 +59,7 @@
   <StepHeader step={2} {autosaved} subtitle="Step 2. Add volunteering activities" />
 
   {#each activityList as activity, index}
-    {#if activity._type === ActivityTypes.DISPLAY}
+    {#if activity._type === ActivityTypes.DISPLAY || activity._type === ActivityTypes.TEMPLATE}
       <ActivityCard
         {activity}
         on:copy-activity={duplicateActivity}
@@ -102,6 +103,6 @@
 
   <BottomNavigation
     step={2}
-    error={$project.activities.filter(act => !act.internal).length === 0 ? 2 : null}
+    error={visibleActivities($project).length === 0 ? 2 : null}
   />
 </form>

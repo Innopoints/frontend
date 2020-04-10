@@ -8,6 +8,14 @@
   .title {
     font-weight: 500;
     padding: .5em;
+    display: flex;
+    align-items: center;
+
+    .error {
+      color: $danger;
+      stroke: $danger;
+      margin: 0 .5em;
+    }
   }
 
   .parameters {

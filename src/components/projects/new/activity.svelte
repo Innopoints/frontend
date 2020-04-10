@@ -10,7 +10,16 @@
 </script>
 
 <div class="card activity">
-  <div class="title">{activity.name}</div>
+  <div class="title">
+    {activity.name}
+    {#if activity.people_required == null}
+      <svg
+        class="icon error"
+        alt="This activity must be completed or removed."
+        src="images/icons/alert-circle.svg"
+      />
+    {/if}
+  </div>
   <div class="parameters">
     <div class="labeled text">
       <div class="label">Reward</div>
@@ -20,7 +29,9 @@
       </div>
     </div>
     <Labeled label="People required">
-      {#if activity.people_required === 0}
+      {#if activity.people_required == null}
+        unset
+      {:else if activity.people_required === 0}
         the more, the better
       {:else if activity.people_required === 1}
         1 person
