@@ -99,8 +99,7 @@ h2.padded {
 }
 
 .activities.moderated + .btn {
-  margin-left: .5em;
-  margin-top: 1em;
+  margin: 1em 0 4em .5em;
 }
 
 .dialog {
@@ -199,6 +198,18 @@ h2.padded {
   }
 }
 
+@media only screen and (min-width: 429px) {
+  .activities.moderated + .btn {
+    margin-bottom: 6em;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .activities.moderated + .btn {
+    margin-bottom: 8em;
+  }
+}
+
 @media only screen and (min-width: 480px) and (max-width: 699px) {
   .project-header {
     background: var(--image-url);
@@ -257,6 +268,12 @@ h2.padded {
   }
 }
 
+@media only screen and (min-width: 840px) {
+  .activities.moderated + .btn {
+    margin-bottom: 4em;
+  }
+}
+
 @media only screen and (min-width: 1024px) {
   .reports {
     min-width: 25em;
@@ -279,6 +296,12 @@ h2.padded {
   }
 }
 
+@media only screen and (min-width: 1097px) {
+  .activities.moderated + .btn {
+    margin-bottom: 5em;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
   .project-header {
     padding-left: 8%;
@@ -287,5 +310,11 @@ h2.padded {
 
   .material > .moderated + .btn {
     margin-left: 8%;
+  }
+}
+
+@media only screen and (min-width: 1383px) {
+  .activities.moderated + .btn {
+    margin-bottom: 6em;
   }
 }
