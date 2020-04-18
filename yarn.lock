@@ -4519,6 +4519,11 @@ supports-hyperlinks@^2.0.0:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
 
+svelte-easy-crop@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/svelte-easy-crop/-/svelte-easy-crop-1.0.3.tgz#3a5bd36320b5316b9ccf36c78b251a4f6fbb44a1"
+  integrity sha512-Jo0pZdnR43PVVldf28+MT50DD7LVY4rtnPNRF4Xuy5uiHgz+ixq9cqTK+/u5xbHs4cObzCbEbibzSRbAWObnJA==
+
 svelte@^3.18.0:
   version "3.20.1"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.20.1.tgz#8417fcd883a2f534b642a0737368272e651cf3ac"
