@@ -68,6 +68,7 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-scss": "^3.16.1",
     "svelte": "^3.18.0",
+    "svelte-easy-crop": "^1.0.3",
     "swiper": "^5.3.7"
   },
   "repository": {
