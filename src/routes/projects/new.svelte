@@ -23,6 +23,7 @@
   import StepOne from '@/containers/projects/new/step-1.svelte';
   import StepTwo from '@/containers/projects/new/step-2.svelte';
   import StepThree from '@/containers/projects/new/step-3.svelte';
+  import ImageResizer from '@/components/common/image-resizer.svelte';
   import * as api from '@/utils/api.js';
   import generateQueryString from '@/utils/generate-query-string.js';
   import {
@@ -53,6 +54,39 @@
       goto('/projects/new');
     }
   });
+
+  const imageResizer = {
+    open: false,
+    image: null,
+    file: null,
+    error: null,
+    show({ detail: file }) {
+      imageResizer.open = true;
+      imageResizer.file = file;
+      imageResizer.image = URL.createObjectURL(file, { type: file.type });
+    },
+    async uploadImage({ detail: pixels }) {
+      const formData = new FormData();
+      formData.append('file', imageResizer.file);
+      formData.append('x', pixels.x);
+      formData.append('y', pixels.y);
+      formData.append('width', pixels.width);
+      formData.append('height', pixels.height);
+
+      try {
+        const resp = await api.json(api.post('/file', {
+          data: formData,
+        }));
+
+        $project.image_id = resp.id;
+        imageResizer.error = null;
+        imageResizer.open = false;
+      } catch (e) {
+        console.error(e);
+        imageResizer.error = 'Upload failed. Try again.';
+      }
+    },
+  };
 
   function goToStep(stepIdx) {
     goto(`/projects/new?step=${stepIdx}`);
@@ -244,6 +278,7 @@
         {project}
         {duplicateName}
         {autosaved}
+        on:resize-image={imageResizer.show}
       />
     {:else if step === 2}
       <StepTwo
@@ -261,4 +296,11 @@
       />
     {/if}
   </div>
+  <ImageResizer
+    aspectRatio={16/9}
+    image={imageResizer.image}
+    error={imageResizer.error}
+    bind:isOpen={imageResizer.open}
+    on:image-cropped={imageResizer.uploadImage}
+  />
 </Layout>
