@@ -52,7 +52,7 @@
       <span class="lb">This is shown on the project card to catch attention.</span>
       <span class="lb">Best to use 16:9 photos.</span>
     </span>
-    <ProjectImagePicker bind:value={$project.image_id} />
+    <ProjectImagePicker bind:value={$project.image_id} on:resize-image />
   </FormField>
 
   <FormField
