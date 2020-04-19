@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
+  import Dropdown from 'ui/dropdown.svelte';
   import DraftCard from '@/components/projects/new/draft-card.svelte';
   import {
     getBlankProject,
@@ -33,6 +34,12 @@
   <h1>Create a Project</h1>
   <div class="subtitle">
     Unleash your creative genius — we're here to help you!
+  </div>
+  <div class="advice">
+    <Dropdown label="what is a project?">
+      A project could be an event, an olympiad or any other volunteering opportunity. <br />
+      Create some activities and have volunteers apply to them.
+    </Dropdown>
   </div>
   <img class="illustration" src="/images/create-project/create-project.svg" alt="" />
 </div>

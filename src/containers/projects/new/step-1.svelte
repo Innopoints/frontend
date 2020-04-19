@@ -63,7 +63,7 @@
     error={($project.organizer === '' && "The organizer field must not be empty.") || null}
   >
     <span slot="subtitle" class="desc">
-      Name of the organizing department or individual.
+      Give the volunteers a brief idea of who's behind this project (department or individual).
     </span>
     <TextField
       id="organizer"
