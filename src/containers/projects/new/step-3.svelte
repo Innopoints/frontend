@@ -77,19 +77,22 @@
 </script>
 
 <form>
-  <StepHeader step={3} {autosaved} subtitle="Step 3. Assign moderators for the project" />
+  <StepHeader step={3} {autosaved} subtitle="Step 3. Assign additional moderators for the project" />
   <p>
     Moderators can process applications from volunteers and edit activities.
-    Feedback on volunteers is also shared between all moderators.
+    Reports and ratings on volunteers are also shared between all moderators.
+  </p>
+  <p>
+    You are the creator, therefore, already a moderator, but you can add some more people to help you out.
   </p>
   <p>
     This step is <strong>optional</strong>.
   </p>
-  <p>
-    You are the creator, therefore, also a moderator.
-  </p>
-  <span class="label">Search for people</span>
+  <span class="label">Search for other people</span>
   <Autocomplete selection={values} getOptions={getUsers} on:change={recordChanges} />
+  <p>
+    Can't find who you're looking for? Make sure they have logged into this website at least once.
+  </p>
   <BottomNavigation
     step={3}
     error={
