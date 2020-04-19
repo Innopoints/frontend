@@ -216,7 +216,7 @@
         classname="work-hours"
         id="work-hours{index}"
         title="Work hours"
-        subtitle="Reward rate: {HOURLY_RATE} ipts/hour"
+        subtitle="Estimated time of work, rewarded {HOURLY_RATE} ipts/hour"
         error={
           (errors.workingHoursNotSpecified && "Working hours must be specified.")
           || (errors.workingHoursInvalid && "Must be positive.")

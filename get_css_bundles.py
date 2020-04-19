@@ -84,6 +84,7 @@ styles = {
         'create-project/activity',
         'create-project/actions',
         'page-components/create-activity',
+        'page-components/modal-dialog',
     ],
     'projects_past': [
         'page-components/tagline',
