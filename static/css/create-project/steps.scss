@@ -47,6 +47,17 @@ h2 {
     font-size: .9rem;
   }
 
+  .advice {
+    margin-left: -1em;
+    margin-top: .5em;
+
+    .relative-wrapper {
+      padding: 1em;
+      max-width: 20em;
+      font-weight: 300;
+    }
+  }
+
   .tablet {
     display: none;
   }
