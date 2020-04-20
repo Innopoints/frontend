@@ -116,6 +116,7 @@
       on:focus={onInputFocus}
       bind:this={input}
       class={inputclass}
+      {...$$restProps}
     />
     {#if maxOptions !== null && selection.length >= maxOptions}
       <p class="limit-reached {toomanyclass}">
