@@ -1745,7 +1745,8 @@ input[type="checkbox"]:checked + .chip {
 
   input:checked + label .star,
   input:checked ~ input + label .star {
-    stroke: $main;
+    stroke: transparentize($main, .4);
+    fill: transparentize($main, .3);
   }
 }
 

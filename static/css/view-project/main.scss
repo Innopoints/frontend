@@ -166,10 +166,12 @@ h2.padded {
 }
 
 .star {
-  stroke: $main;
+  stroke: transparentize($main, .4);
+  fill: transparentize($main, .3);
 
   &.off {
     stroke: $light-gray;
+    fill: none;
   }
 }
 
