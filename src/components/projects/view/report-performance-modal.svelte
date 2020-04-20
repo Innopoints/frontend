@@ -51,7 +51,7 @@
               {application.applicant.full_name}
               {#if application.telegram}
                 <span class="telegram popover-container">
-                  <a href="https://t.me/{application.telegram}">
+                  <a href="https://t.me/{application.telegram}" target="_blank">
                     @{application.telegram}
                   </a>
                   <CopyButton text={application.telegram} />

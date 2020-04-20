@@ -19,7 +19,7 @@
       </p>
     </Card>
     <Card>
-      <a href="https://t.me/andrejsblakunovs" class="mr-2">
+      <a href="https://t.me/andrejsblakunovs" class="mr-2" target="_blank">
         <img class="icon" src="/images/home/text-us.svg" alt="call to 319" />
       </a>
       <p>
