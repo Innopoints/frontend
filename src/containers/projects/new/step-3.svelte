@@ -89,7 +89,12 @@
     This step is <strong>optional</strong>.
   </p>
   <span class="label">Search for other people</span>
-  <Autocomplete selection={values} getOptions={getUsers} on:change={recordChanges} />
+  <Autocomplete
+    selection={values}
+    getOptions={getUsers}
+    placeholder="Start typing a name or an e-mail..."
+    on:change={recordChanges}
+  />
   <p>
     Can't find who you're looking for? Make sure they have logged into this website at least once.
   </p>

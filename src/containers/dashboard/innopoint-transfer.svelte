@@ -16,7 +16,11 @@
   </div>
   <div class="panel">
     <div class="user-selection">
-      <Autocomplete bind:selection={selectedItems} getOptions={getUsers} />
+      <Autocomplete
+        bind:selection={selectedItems}
+        getOptions={getUsers}
+        placeholder="Start typing a name or an e-mail..."
+      />
       <p>You may select several people for a certain operation.</p>
     </div>
     <div class="operations">
