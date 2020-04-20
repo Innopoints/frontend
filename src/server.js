@@ -31,7 +31,9 @@ app()
           objectSrc: ["'none'"],
           baseUri: ["'self'"],
           frameAncestors: ["'none'"],
-          connectSrc: (dev ? ['*'] : ["'self'", 'https://fonts.googleapis.com']),
+          connectSrc: (dev ? ['*'] : [
+            "'self'", 'https://fonts.googleapis.com', 'fonts.gstatic.com',
+          ]),
           reportUri: '/report-csp-violation',
         },
         reportOnly: true,  // This is for testing in a production environment, to be removed
