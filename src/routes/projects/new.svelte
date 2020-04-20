@@ -238,7 +238,7 @@
       return;
     }
 
-    if ($project.id != null) {
+    if ($project.id != null && typeof activityID == 'number') {
       try {
         await api.json(api.del(`/projects/${$project.id}/activities/${activityID}`));
         $project.activities = $project.activities.filter(act => act.id !== activityID);
