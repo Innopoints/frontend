@@ -1,7 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
-  import CheckboxGroup from 'ui/checkbox-group.svelte';
   import Dialog from 'ui/dialog.svelte';
   import Modal from 'ui/modal.svelte';
   import TextField from 'ui/text-field.svelte';
@@ -12,20 +11,14 @@
   export let error = null;
   let comment = '';
   let telegram = savedUsername || '';
-  let remember = [{ value: 'remember', checked: false }];
 
   function submitApplication() {
     dispatch('submit-application', {
       activity,
       comment,
       telegram,
-      remember: remember[0].checked,
     });
     comment = '';
-    if (!remember[0].checked) {
-      telegram = savedUsername || '';
-    }
-    remember[0].checked = false;
   }
 
   const dispatch = createEventDispatcher();
@@ -67,10 +60,6 @@
             <span class="helper required ">* Required</span>
           {/if}
         </div>
-        <CheckboxGroup
-          name="remember"
-          bind:items={remember}
-        />
         <div class="actions">
           <Button
             isFilled
