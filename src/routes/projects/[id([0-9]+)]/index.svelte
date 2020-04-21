@@ -60,7 +60,7 @@
       applicationDialog.open = true;
     },
     async processApplication({ detail }) {
-      const { activity, comment, telegram, remember } = detail;
+      const { activity, comment, telegram } = detail;
       try {
         const application = await api.json(api.post(
           `/projects/${activity.project}/activities/${activity.id}/applications`,
@@ -71,7 +71,7 @@
         project = project;
         projectStore.set(project);
 
-        if (remember) {
+        if (telegram && telegram != account.telegram) {
           api.patch('/account/telegram', { data: { telegram_username: telegram } });
         }
         applicationDialog.open = false;
