@@ -54,7 +54,8 @@
   @supports (display: grid) {
     .apply-modal form {
       display: grid;
-      grid-template-columns: auto auto auto;
+      grid-template-columns: auto auto;
+      column-gap: 2em;
       align-items: center;
 
       .with-item.left {
@@ -62,11 +63,7 @@
       }
 
       .title, .label, .comment-field {
-        grid-column: 1 / 4;
-      }
-
-      label.clickable {
-        margin: 0 2em;
+        grid-column: 1 / 3;
       }
 
       .actions {
