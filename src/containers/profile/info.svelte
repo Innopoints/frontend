@@ -17,6 +17,8 @@
     }
     tgChange = false;
   }
+
+  $: usernameValid = /[A-Za-z0-9_]{5,32}/.test(tgUsername);
 </script>
 
 <section class="quick-info padded">
@@ -42,7 +44,7 @@
           <Button on:click="{() => tgChange = false}" classname="mr btn">
             cancel
           </Button>
-          <Button on:click={saveUsername} isFilled>save</Button>
+          <Button on:click={saveUsername} isFilled disabled={!usernameValid}>save</Button>
         </div>
       </div>
     {:else if account.telegram_username}
