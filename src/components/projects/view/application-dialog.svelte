@@ -21,6 +21,7 @@
     comment = '';
   }
 
+  $: usernameValid = /[A-Za-z0-9_]{5,32}/.test(telegram);
   const dispatch = createEventDispatcher();
 </script>
 
@@ -64,7 +65,7 @@
           <Button
             isFilled
             on:click={submitApplication}
-            disabled={activity.telegram_required && !/[A-Za-z0-9_]{5,32}/.test(telegram)}
+            disabled={!usernameValid && (telegram !== '' || activity.telegram_required)}
           >
             apply
           </Button>
