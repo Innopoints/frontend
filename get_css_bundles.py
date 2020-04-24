@@ -103,6 +103,7 @@ styles = {
         'view-project/moderators',
         'view-project/proper-grid',
         'view-project/report-performance-modal',
+        'view-project/view-reports-modal',
         'view-project/read-feedback-modal',
         'profile/leave-feedback-modal',
         'view-project/apply-modal',
