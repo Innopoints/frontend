@@ -67,7 +67,7 @@
           }}
           disabled={uploading}
         >
-          { uploading ? 'uploading...' : 'upload' }
+          {uploading ? 'uploading...' : 'upload'}
         </Button>
       </div>
     </Dialog>
