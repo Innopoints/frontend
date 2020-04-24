@@ -46,11 +46,12 @@
         {#if enteredHours !== application.actual_hours}
           <Button
             isFilled
+            isRound
+            tooltip="Save hours"
             disabled={enteredHours < 0}
             on:click={dispatchHourChange}
           >
-            <svg class="icon mr" src="images/icons/save.svg" />
-            save
+            <svg class="icon" src="images/icons/check.svg" />
           </Button>
         {/if}
       </form>
