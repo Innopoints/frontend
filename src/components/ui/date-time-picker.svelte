@@ -11,12 +11,10 @@
 
   let datePickerShown = true;
   let dateValue = value;
-  let timeValue = { hours: value && value.getHours(), minutes: value && value.getMinutes() };
+  $: timeValue = { hours: value && value.getHours(), minutes: value && value.getMinutes() };
 
-  function combineValues() {
+  function combineValues({ detail }) {
     if (dateValue != null && timeValue.hours != null) {
-      dateValue.setHours(timeValue.hours);
-      dateValue.setMinutes(timeValue.minutes);
       value = dateValue;
       dispatch('change', value);
     } else {
@@ -26,7 +24,6 @@
 
   function clear() {
     dateValue = null;
-    timeValue = { hours: null, minutes: null };
     value = null;
     datePickerShown = true;
   }
@@ -46,11 +43,25 @@
   </div>
 
   {#if datePickerShown}
-    <DatePicker bind:value={dateValue} on:change={combineValues} />
+    <DatePicker on:change={({ detail }) => {
+      if (dateValue == null) {
+        dateValue = detail;
+      }
+      dateValue.setFullYear(detail.getFullYear(), detail.getMonth(), detail.getDate());
+      dispatch('change-date', dateValue);
+      setTimeout(() => datePickerShown = false, 10);
+    }} />
   {:else}
     <div class="time-wrapper">
       <svg class="icon" src="images/icons/clock.svg" />
-      <TimePicker bind:value={timeValue} />
+      <TimePicker
+        value={timeValue}
+        on:change={({ detail }) => {
+          if (dateValue == null)
+            dateValue = new Date();
+          dateValue.setHours(detail.hours, detail.minutes);
+        }}
+      />
       <Button on:click={combineValues}>
         <svg class="icon mr" src="images/icons/check.svg" />
         select
