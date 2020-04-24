@@ -45,11 +45,12 @@
         />
         {#if enteredHours !== application.actual_hours}
           <Button
-            isRound
+            isFilled
             disabled={enteredHours < 0}
             on:click={dispatchHourChange}
           >
-            <svg class="icon" src="images/icons/check.svg" />
+            <svg class="icon" src="images/icons/save.svg" />
+            save hours
           </Button>
         {/if}
       </form>
