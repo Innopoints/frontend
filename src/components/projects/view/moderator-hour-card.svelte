@@ -49,8 +49,8 @@
             disabled={enteredHours < 0}
             on:click={dispatchHourChange}
           >
-            <svg class="icon" src="images/icons/save.svg" />
-            save hours
+            <svg class="icon mr" src="images/icons/save.svg" />
+            save
           </Button>
         {/if}
       </form>
