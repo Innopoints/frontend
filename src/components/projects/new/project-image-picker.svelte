@@ -18,6 +18,7 @@
       return;
     }
     dispatch('resize-image', file);
+    event.target.value = '';
   }
 
   function clearValue() {
