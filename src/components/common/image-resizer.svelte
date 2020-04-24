@@ -11,7 +11,12 @@
   export let aspectRatio = 1;
   export let isOpen = false;
   export let error = null;
-
+  let uploading = false;
+  $: {
+    if (error) {
+      uploading = false;
+    }
+  }
   function saveBounds(event) {
     pixels = event.detail.pixels;
   }
@@ -59,9 +64,13 @@
         <Button isDanger on:click={() => isOpen = false}>cancel</Button>
         <Button
           isFilled
-          on:click={() => dispatch('image-cropped', pixels)}
+          on:click={() => {
+            uploading = true;
+            dispatch('image-cropped', pixels);
+          }}
+          disabled={uploading}
         >
-          upload
+          { uploading ? 'uploading...' : 'upload' }
         </Button>
       </div>
     </Dialog>
