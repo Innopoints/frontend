@@ -86,6 +86,7 @@
         console.error(e);
         imageResizer.error = 'Upload failed. Try again.';
       }
+      isUploading = false;
     },
   };
 
