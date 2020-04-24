@@ -13,7 +13,7 @@
   export let error = null;
   let uploading = false;
   $: {
-    if (error) {
+    if (error || isOpen) {
       uploading = false;
     }
   }
