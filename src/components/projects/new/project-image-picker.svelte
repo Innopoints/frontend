@@ -6,15 +6,15 @@
   import maxSizeMB from '@/constants/backend/file-upload-limit.js';
 
   export let value = null;
-  export let uploading = false;
+  export let isUploading = false;
   let error = null;
 
   function validateUpload(event) {
     const file = event.target.files[0];
     if (file.size > maxSizeMB * 1024 * 1024) {
       error = `Selected file is too large (${maxSizeMB} MB max).`;
-      uploading = false;
-      dispatch('uploading', uploading);
+      isUploading = false;
+      dispatch('uploading', isUploading);
       return;
     }
     dispatch('resize-image', file);
@@ -23,8 +23,8 @@
   function clearValue() {
     value = null;
     error = null;
-    uploading = false;
-    dispatch('uploading', uploading);
+    isUploading = false;
+    dispatch('uploading', isUploading);
   }
 
   const dispatch = createEventDispatcher();
@@ -36,7 +36,7 @@
     <svg src="images/icons/trash-2.svg" class="icon" />
     <span class="text">delete</span>
   </Button>
-{:else if uploading}
+{:else if isUploading}
   <p>uploading...</p>
 {:else}
   <div class="options">

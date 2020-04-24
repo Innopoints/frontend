@@ -46,7 +46,7 @@
   const unsubscribe = project.subscribe(saveProject);
   onDestroy(unsubscribe);
   let duplicateName = false;
-  let uploading = false;
+  let isUploading = false;
 
   // Step management
   $: step = ($project != null ? +$page.query.step || 0 : 0);
@@ -280,8 +280,8 @@
         {duplicateName}
         {autosaved}
         on:resize-image={imageResizer.show}
-        {uploading}
-        on:uploading={(e) => uploading = e.detail}
+        {isUploading}
+        on:uploading={(e) => isUploading = e.detail}
       />
     {:else if step === 2}
       <StepTwo
@@ -305,7 +305,7 @@
     error={imageResizer.error}
     bind:isOpen={imageResizer.open}
     on:image-cropped={imageResizer.uploadImage}
-    on:uploading={(e) => uploading = e.detail}
-    {uploading}
+    on:uploading={(e) => isUploading = e.detail}
+    {isUploading}
   />
 </Layout>
