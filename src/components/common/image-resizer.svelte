@@ -11,12 +11,8 @@
   export let aspectRatio = 1;
   export let isOpen = false;
   export let error = null;
-  let uploading = false;
-  $: {
-    if (error || isOpen) {
-      uploading = false;
-    }
-  }
+  export let uploading = false;
+
   function saveBounds(event) {
     pixels = event.detail.pixels;
   }
@@ -66,6 +62,7 @@
           isFilled
           on:click={() => {
             uploading = true;
+            dispatch('uploading', uploading);
             dispatch('image-cropped', pixels);
           }}
           disabled={uploading}
