@@ -13,6 +13,9 @@
   {#if reports != null}
     <Dialog title="Reports on {applicant.full_name}" closeCallback={() => isOpen = false}>
       <ul slot="content" class="content reports">
+        {#if reports.length === 0}
+          No reports yet. Be sure to leave reports after the project is over.
+        {/if}
         {#each reports as report}
           <li class="report">
             <div class="data-points">
