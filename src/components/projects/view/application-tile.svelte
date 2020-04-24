@@ -49,16 +49,14 @@
           {/if}
         {/each}
       </div>
-      {#if reportData.reports.length !== 0}
-        <Button
-          on:click={() => dispatch('view-reports', {
-            reports: reportData.reports,
-            applicant: application.applicant,
-          })}
-        >
-          view past reports
-        </Button>
-      {/if}
+      <Button
+        on:click={() => dispatch('view-reports', {
+          reports: reportData.reports,
+          applicant: application.applicant,
+        })}
+      >
+        performance reports
+      </Button>
     {/await}
   {/if}
   {#if application.comment}
