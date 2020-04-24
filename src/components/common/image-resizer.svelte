@@ -57,7 +57,7 @@
         {#if error != null}
           {error}
         {/if}
-        <Button isDanger on:click={() => isOpen = false}>cancel</Button>
+        <Button isDanger on:click={() => isOpen = false} disabled={uploading}>cancel</Button>
         <Button
           isFilled
           on:click={() => {
