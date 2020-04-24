@@ -306,5 +306,6 @@
     bind:isOpen={imageResizer.open}
     on:image-cropped={imageResizer.uploadImage}
     on:uploading={(e) => uploading = e.detail}
+    {uploading}
   />
 </Layout>
