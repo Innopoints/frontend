@@ -14,6 +14,7 @@
     if (file.size > maxSizeMB * 1024 * 1024) {
       error = `Selected file is too large (${maxSizeMB} MB max).`;
       uploading = false;
+      dispatch('uploading', uploading);
       return;
     }
     dispatch('resize-image', file);
@@ -23,6 +24,7 @@
     value = null;
     error = null;
     uploading = false;
+    dispatch('uploading', uploading);
   }
 
   const dispatch = createEventDispatcher();

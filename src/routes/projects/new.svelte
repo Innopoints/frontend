@@ -281,6 +281,7 @@
         {autosaved}
         on:resize-image={imageResizer.show}
         {uploading}
+        on:uploading={(e) => uploading = e.detail}
       />
     {:else if step === 2}
       <StepTwo
