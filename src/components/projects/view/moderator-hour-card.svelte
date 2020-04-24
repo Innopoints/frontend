@@ -45,7 +45,9 @@
         />
         {#if enteredHours !== application.actual_hours}
           <Button
+            isFilled
             isRound
+            tooltip="Save hours"
             disabled={enteredHours < 0}
             on:click={dispatchHourChange}
           >

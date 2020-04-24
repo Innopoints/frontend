@@ -46,6 +46,7 @@
   const unsubscribe = project.subscribe(saveProject);
   onDestroy(unsubscribe);
   let duplicateName = false;
+  let isUploading = false;
 
   // Step management
   $: step = ($project != null ? +$page.query.step || 0 : 0);
@@ -85,6 +86,7 @@
         console.error(e);
         imageResizer.error = 'Upload failed. Try again.';
       }
+      isUploading = false;
     },
   };
 
@@ -279,6 +281,8 @@
         {duplicateName}
         {autosaved}
         on:resize-image={imageResizer.show}
+        {isUploading}
+        on:uploading={(e) => isUploading = e.detail}
       />
     {:else if step === 2}
       <StepTwo
@@ -302,5 +306,7 @@
     error={imageResizer.error}
     bind:isOpen={imageResizer.open}
     on:image-cropped={imageResizer.uploadImage}
+    on:uploading={(e) => isUploading = e.detail}
+    {isUploading}
   />
 </Layout>
