@@ -327,7 +327,7 @@
             toggle(e);
             fieldsAltered = true;
           }}
-          on:change-date={({detail}) => {
+          on:change-date={({ detail }) => {
             if (activity.application_deadline != null) return;
             activity.application_deadline = detail;
             activity.application_deadline.setHours(23, 59);

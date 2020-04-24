@@ -56,7 +56,7 @@
       <svg class="icon" src="images/icons/clock.svg" />
       <TimePicker
         value={timeValue}
-        on:change={({detail}) => {
+        on:change={({ detail }) => {
           if (dateValue == null)
             dateValue = new Date();
           dateValue.setHours(detail.hours, detail.minutes);
