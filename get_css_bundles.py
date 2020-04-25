@@ -6,20 +6,18 @@ SASS_PATH = 'sass'
 POSTCSS_PATH = 'postcss'
 
 
-common = [
-    'global/normalize',
-    'global/common',
-    'global/ui-kit',
-]
-
-layout_default = [
-    'page-components/header',
-    'page-components/notification-center',
-    'page-components/empty-state',
-    'page-components/footer',
-]
-
 styles = {
+    'common': [
+        'global/normalize',
+        'global/common',
+        'global/ui-kit',
+    ],
+    'layout_default': [
+        'page-components/header',
+        'page-components/notification-center',
+        'page-components/empty-state',
+        'page-components/footer',
+    ],
     'home': [
         'home/header',
         'home/main',
@@ -150,18 +148,14 @@ def build_bundle(contents, output):
 
     run([POSTCSS_PATH, output, '--use', 'autoprefixer', '--no-map', '-r'],
         input=sass_bundled,
-        text=True)
+        text=True,
+        check=True)
 
 
-def get_all_bundles():
+def get_bundles(*bundles):
     bundle_fmt = 'static/css/bundles/{}.min.css'
-
-    build_bundle(common, bundle_fmt.format('common'))
-
-    build_bundle(layout_default, bundle_fmt.format('layout-default'))
-
-    for page in styles:
-        build_bundle(styles[page], bundle_fmt.format(page.replace('_', '-')))
+    for bundle in bundles or styles:
+        build_bundle(styles[bundle], bundle_fmt.format(bundle.replace('_', '-')))
 
 if __name__ == '__main__':
-    get_all_bundles()
+    get_bundles()
