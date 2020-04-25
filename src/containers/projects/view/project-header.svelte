@@ -2,7 +2,6 @@
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
-  import Dot from 'ui/dot.svelte';
   import Labeled from 'ui/labeled.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
@@ -39,6 +38,22 @@
         </div>
       {/if}
     </h1>
+    {#if project.lifetime_stage === ProjectStages.FINALIZING
+      && !review
+      && project.review_status != null}
+      <div class="warning">
+        <svg class="icon" src="images/icons/alert-circle.svg" />
+        <p class="review-notice">
+          {#if project.review_status === ReviewStatuses.PENDING}
+            The project is now awaiting the administrator's review. <br />
+            <a href="/profile" prefetch>Enable notifications in the profile</a> to be up-to-date!
+          {:else if project.review_status === ReviewStatuses.REJECTED}
+            <strong>The administrator rejected the project.</strong> <br/>
+            Make corrections and then submit for review again.
+          {/if}
+        </p>
+      </div>
+    {/if}
     <div class="data-points">
       <Labeled icon label="When">
         <svg slot="icon" class="icon" src="images/icons/calendar.svg" />
@@ -53,25 +68,13 @@
           </a>
         {/if}
       </Labeled>
-      {#if project.lifetime_stage === ProjectStages.FINALIZING && !review}
-        {#if project.review_status != null}
-          <Labeled icon label="Review status">
-            <svg slot="icon" class="icon" src="images/icons/flag.svg" />
-            <div>
-              {#if project.review_status === ReviewStatuses.PENDING}
-                Pending <Dot pending small />
-              {:else if project.review_status === ReviewStatuses.REJECTED}
-                Rejected <Dot attention small />
-              {/if}
-            </div>
-          </Labeled>
-        {/if}
-        {#if project.admin_feedback != null}
-          <Labeled icon label="Administrator's feedback" textclass="admin-feedback">
-            <svg slot="icon" class="icon" src="images/icons/message-square.svg" />
-            {project.admin_feedback}
-          </Labeled>
-        {/if}
+      {#if project.lifetime_stage === ProjectStages.FINALIZING
+        && !review
+        && project.admin_feedback != null}
+        <Labeled icon label="Administrator's feedback" textclass="admin-feedback">
+          <svg slot="icon" class="icon" src="images/icons/message-square.svg" />
+          {project.admin_feedback}
+        </Labeled>
       {/if}
     </div>
     {#if account != null && (project.creator === account.email || account.is_admin) && !review}

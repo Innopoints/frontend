@@ -92,6 +92,15 @@ h2.padded {
     display: flex;
     flex-wrap: wrap;
   }
+
+  .warning {
+    margin-top: 1em;
+  }
+
+  .review-notice {
+    font-size: .9rem;
+    width: 100%;
+  }
 }
 
 .activities {
