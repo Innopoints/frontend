@@ -22,7 +22,13 @@
     on:click={toggle}
     disabled={!application.comment && report != null}
   >
-    <svg class="chevron" src="images/icons/chevron-down.svg" />
+    {#if report == null}
+      <div class="badge">
+        <svg class="chevron" src="images/icons/chevron-down.svg" />
+      </div>
+    {:else}
+      <svg class="chevron" src="images/icons/chevron-down.svg" />
+    {/if}
   </button>
   <div slot="handle" class="name">
     {application.applicant.full_name}
