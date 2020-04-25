@@ -174,6 +174,9 @@ export function synchronizeActivityLists(internalList, backendActivities) {
       }
 
       if (internalList[internalListIdx]._type === ActivityTypes.TEMPLATE) {
+        if (activity.timeframe != null && internalList[internalListIdx].timeframe == null) {
+          internalList[internalListIdx].timeframe = activity.timeframe;
+        }
         internalListIdx++;
         activityProcessed = true;
         break;
