@@ -196,7 +196,6 @@
           updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
             data: detail.activityCopy,
           }));
-          prepareAfterBackend(updatedActivity);
         }
         if (replacedTemplateIdx !== -1) {
           $project.activities.splice(replacedTemplateIdx, 1, updatedActivity);
@@ -216,7 +215,6 @@
             `/projects/${$project.id}/activities/${activityID}`,
             { data: detail.activityCopy },
           ));
-          prepareAfterBackend(updatedActivity);
           updatedActivity.id = activityID;
 
           $project.activities.splice(
@@ -229,6 +227,17 @@
     } catch (e) {
       console.error(e);
     }
+
+    prepareAfterBackend(updatedActivity);
+    for (let activity of $project.activities) {
+      if (activity._type === ActivityTypes.TEMPLATE && activity.timeframe == null) {
+        activity.timeframe = {
+          start: updatedActivity.timeframe.start,
+          end: updatedActivity.timeframe.end,
+        };
+      }
+    }
+
     $project.activities = $project.activities;
   }
 
