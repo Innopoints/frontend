@@ -20,7 +20,6 @@
     class="btn handle round"
     type="button"
     on:click={toggle}
-    disabled={!application.comment && report != null}
   >
     {#if report == null}
       <div class="badge">
@@ -72,10 +71,28 @@
     <Button
       isOutline
       classname="report"
-      on:click={() => dispatch('report-performance', { activity, application })}
+      on:click={() => dispatch('create-report', { activity, application })}
     >
       <svg class="icon mr" src="images/icons/edit-3.svg" />
       report performance
+    </Button>
+  {:else}
+    <Button
+      isOutline
+      classname="report"
+      on:click={() => dispatch('create-report', { activity, application, report })}
+    >
+      <svg class="icon mr" src="images/icons/edit-3.svg" />
+      edit report
+    </Button>
+    <Button
+      isOutline
+      isDanger
+      classname="report"
+      on:click={() => dispatch('delete-report', { activity, application })}
+    >
+      <svg class="icon mr" src="images/icons/edit-3.svg" />
+      delete report
     </Button>
   {/if}
 </AccordionSection>

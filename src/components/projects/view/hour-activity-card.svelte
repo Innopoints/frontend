@@ -94,7 +94,8 @@
             {application}
             handlePanelOpen={panelController}
             on:hours-changed={recordHourChange}
-            on:report-performance
+            on:create-report
+            on:delete-report
           />
         {/each}
       </Accordion>
