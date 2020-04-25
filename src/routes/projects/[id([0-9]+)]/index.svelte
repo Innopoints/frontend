@@ -348,6 +348,7 @@
     try {
       await api.json(api.patch(`/projects/${project.id}/request_review`));
       project.review_status = ReviewStatuses.PENDING;
+      projectStore.set(project);
     } catch (e) {
       console.error(e);
     }
