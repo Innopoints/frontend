@@ -131,7 +131,8 @@
         {account}
         {activity}
         on:save-hours
-        on:report-performance
+        on:create-report
+        on:delete-report
       />
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINISHED}

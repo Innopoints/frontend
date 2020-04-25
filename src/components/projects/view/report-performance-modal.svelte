@@ -11,15 +11,20 @@
 
   export let activity;
   export let application;
+  export let report;
   export let isOpen = false;
 
-  let value = {
+  $: value = report || {
     rating: null,
     content: '',
   };
 
   function submit() {
-    dispatch('submit', { value, application, activity });
+    value = {
+      rating: value.rating,
+      content: value.content,
+    };
+    dispatch('submit', { value, application, activity, report });
     value = {
       rating: null,
       content: '',
@@ -32,7 +37,7 @@
 <Modal bind:isOpen>
   {#if application != null}
     <Dialog
-      title="Create a report on {application.applicant.full_name}"
+      title="{report == null ? 'Create a' : 'Edit the'} report on {application.applicant.full_name}"
       classname="report-performance"
       closeCallback={() => isOpen = false}
     >
@@ -61,7 +66,11 @@
           </Labeled>
           <Labeled icon label="Actual worktime">
             <svg class="icon" slot="icon" src="images/icons/clock.svg" />
-            {application.actual_hours} hour{s(application.actual_hours)}
+            {#if activity.fixed_reward}
+              as needed
+            {:else}
+              {application.actual_hours} hour{s(application.actual_hours)}
+            {/if}
           </Labeled>
         </div>
         <label for="rating">
@@ -82,7 +91,7 @@
             on:click={submit}
             disabled={value.rating == null}
           >
-            submit
+            save
           </Button>
         </div>
       </form>
