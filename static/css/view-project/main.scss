@@ -165,16 +165,6 @@ h2.padded {
   }
 }
 
-.star {
-  stroke: transparentize($main, .4);
-  fill: transparentize($main, .3);
-
-  &.off {
-    stroke: $light-gray;
-    fill: none;
-  }
-}
-
 .report-form {
   & > label {
     margin-top: 1em;
