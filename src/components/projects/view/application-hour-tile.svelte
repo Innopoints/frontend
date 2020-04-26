@@ -3,6 +3,7 @@
   import AccordionSection from 'ui/accordion-section.svelte';
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
+  import CheckboxGroup from 'ui/checkbox-group.svelte';
   import CopyButton from '@/components/projects/view/copy-button.svelte';
 
   export let account;
@@ -56,6 +57,15 @@
             dispatch('hours-changed', { application, hours: +evt.detail });
           }
         }}
+      />
+    {:else}
+      <CheckboxGroup
+        name="did-work"
+        items={[{checked: application.actual_hours === 1}]}
+        labelPosition="left"
+        labelclass="label"
+        labels={["Completed the task"]}
+        on:change={evt => dispatch('hours-changed', { application, hours: +evt.detail.checked })}
       />
     {/if}
   </div>

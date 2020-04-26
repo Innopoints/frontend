@@ -76,7 +76,7 @@
       <div class="actions">
         <Button isFilled classname="mr" on:click={saveChanges}>
           <svg class="icon mr" src="images/icons/save.svg" />
-          save hours
+          save {activity.fixed_reward ? 'work' : 'hours'}
         </Button>
       </div>
     {/if}
