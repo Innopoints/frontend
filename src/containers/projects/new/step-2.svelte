@@ -58,7 +58,9 @@
   }
 
   function deleteActivity({ detail: activity }) {
-    activityList = activityList.filter(act => act.name !== activity.name);
+    activityList = activityList.filter(
+      act => act.name !== activity.name || (act._type !== ActivityTypes.DISPLAY && act._type !== ActivityTypes.TEMPLATE),
+    );
     dispatch('delete-activity', activity.id || activity.name);
     if (activityList.length === 0) {
       const activity = getBlankActivity();

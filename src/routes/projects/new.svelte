@@ -187,7 +187,7 @@
       if (type === ActivityTypes.NEW
           || (type === ActivityTypes.EDIT && detail.activityCopy.id == null)) {
         const replacedTemplateIdx = $project.activities.findIndex(
-          act => act._type === ActivityTypes.TEMPLATE && act.name === detail.activityCopy.name,
+          act => act.name === detail.activityCopy.name,
         );
         if ($project.id == null) {
           // The project does not exist on the backend yet
