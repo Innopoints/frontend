@@ -62,6 +62,8 @@
       <CheckboxGroup
         name="did-work"
         items={[{checked: application.actual_hours === 1}]}
+        labelPosition="left"
+        labelclass="label"
         labels={["Completed the task"]}
         on:change={evt => dispatch('hours-changed', { application, hours: +evt.detail.checked })}
       />
