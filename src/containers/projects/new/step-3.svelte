@@ -17,7 +17,7 @@
   }
 
   function notCreator(moderator) {
-    return moderator.email !== $project.creator;
+    return moderator.email !== $project.creator.email;
   }
 
   const values = $project.moderators.filter(notCreator).map(userToAutocompleteValue);
@@ -100,10 +100,7 @@
   </p>
   <BottomNavigation
     step={3}
-    error={
-      !($project.name && $project.organizer) ? 1 :
-        (visibleActivities($project).length === 0 ? 2 : null)
-    }
+    error={!$project.name ? 1 : (visibleActivities($project).length === 0 ? 2 : null)}
     on:publish
   />
 </form>

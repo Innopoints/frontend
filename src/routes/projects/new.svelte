@@ -130,7 +130,7 @@
       return;
     }
 
-    if (projectObj.name === '' || projectObj.organizer === '') {
+    if (projectObj.name === '') {
       return;
     }
 

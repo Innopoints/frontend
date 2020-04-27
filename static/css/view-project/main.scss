@@ -42,10 +42,14 @@ h2.padded {
   }
 
   .labeled {
-    align-items: flex-end;
+    align-items: flex-start;
     margin-top: 1em;
     margin-right: 2.5em;
     font-size: 1.05rem;
+
+    .label {
+      margin-bottom: .4em;
+    }
 
     .admin-feedback {
       white-space: pre-line;
@@ -100,6 +104,16 @@ h2.padded {
   .review-notice {
     font-size: .9rem;
     width: 100%;
+  }
+
+  .staff {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      display: block;
+      margin-bottom: .2em;
+    }
   }
 }
 

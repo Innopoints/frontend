@@ -17,9 +17,9 @@
           <div class="title">
             {review.name}
           </div>
-          <Labeled label="Organizer" icon>
+          <Labeled label="Creator" icon>
             <svg slot="icon" src="/images/icons/user.svg" class="icon" />
-            {review.organizer}
+            {review.creator.full_name}
           </Labeled>
           <Button href="/projects/{review.id}">
             review

@@ -42,7 +42,11 @@
       && !review
       && project.review_status != null}
       <div class="warning">
-        <svg class="icon" src="images/icons/alert-circle.svg" />
+        {#if project.review_status === ReviewStatuses.PENDING}
+          <svg class="icon" src="images/icons/info.svg" />
+        {:else if project.review_status === ReviewStatuses.REJECTED}
+          <svg class="icon" src="images/icons/alert-circle.svg" />
+        {/if}
         <p class="review-notice">
           {#if project.review_status === ReviewStatuses.PENDING}
             The project is now awaiting the administrator's review. <br />
@@ -59,14 +63,15 @@
         <svg slot="icon" class="icon" src="images/icons/calendar.svg" />
         {formatDateRange({ start: project.start_date, end: project.end_date })}
       </Labeled>
-      <Labeled icon label="Organizer">
+      <Labeled icon label="Staff">
         <svg slot="icon" class="icon" src="images/icons/user.svg" />
-        {project.organizer}
-        {#if account && account.is_admin}
-          <a href="mailto:{project.creator}" class="secondary">
-            contact project creator
-          </a>
-        {/if}
+        <div class="staff">
+          {#each project.moderators as moderator (moderator.email)}
+            <a href="mailto:{moderator.email}">
+              {moderator.full_name}
+            </a>
+          {/each}
+        </div>
       </Labeled>
       {#if project.lifetime_stage === ProjectStages.FINALIZING
         && !review
@@ -77,7 +82,9 @@
         </Labeled>
       {/if}
     </div>
-    {#if account != null && (project.creator === account.email || account.is_admin) && !review}
+    {#if account != null
+      && (project.creator.email === account.email || account.is_admin)
+      && !review}
       <div class="actions">
         {#if project.lifetime_stage === ProjectStages.ONGOING}
           <Button isOutline href="/projects/{project.id}/edit">
