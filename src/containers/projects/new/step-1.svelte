@@ -56,24 +56,5 @@
     <ProjectImagePicker bind:value={$project.image_id} {isUploading} on:uploading on:resize-image />
   </FormField>
 
-  <FormField
-    title="Organizer"
-    classname="padded"
-    id="organizer"
-    required
-    error={($project.organizer === '' && "The organizer field must not be empty.") || null}
-  >
-    <span slot="subtitle" class="desc">
-      Give the volunteers a brief idea of who's behind this project (department or individual).
-    </span>
-    <TextField
-      id="organizer"
-      autocomplete={false}
-      maxlength={128}
-      value={$project.organizer || ''}
-      on:change={(event) => $project.organizer = event.detail}
-    />
-  </FormField>
-
-  <BottomNavigation step={1} error={!($project.name && $project.organizer) ? 1 : null} />
+  <BottomNavigation step={1} error={!$project.name ? 1 : null} />
 </form>

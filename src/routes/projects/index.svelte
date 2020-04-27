@@ -63,7 +63,6 @@
     let newProps = Object.assign({}, props);
     delete newProps.creation_time;
     delete newProps.moderators;
-    delete newProps.creator;
     delete newProps.review_status;
     return newProps;
   }

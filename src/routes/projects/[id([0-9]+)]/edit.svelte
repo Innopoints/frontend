@@ -6,7 +6,7 @@
       ['account', '/account?from_cache=true'],
       ['project', `/projects/${page.params.id}`],
     ]));
-    if (account == null || (account.email !== project.creator && account.is_admin)) {
+    if (account == null || (account.email !== project.creator.email && account.is_admin)) {
       this.error(403, 'Edit a Project');
     }
     return { account, project };
@@ -37,7 +37,7 @@
   }
 
   function notCreator(moderator) {
-    return moderator.email !== project.creator;
+    return moderator.email !== project.creator.email;
   }
 
   project.moderators = project.moderators.filter(notCreator);
@@ -102,7 +102,6 @@
         data: {
           name: project.name,
           image_id: project.image_id,
-          organizer: project.organizer,
           moderators: project.moderators,
         },
       }));
@@ -166,23 +165,6 @@
           <span class="lb">Best to use 16:9 photos.</span>
         </span>
         <ProjectImagePicker bind:value={project.image_id} />
-      </FormField>
-
-      <FormField
-        title="Organizer"
-        id="organizer"
-        required
-        error={(project.organizer === '' && "The organizer field must not be empty.") || null}
-      >
-        <span slot="subtitle" class="desc">
-          Name of the organizing department or individual.
-        </span>
-        <TextField
-          id="organizer"
-          maxlength={128}
-          value={project.organizer || ''}
-          on:change={(event) => project.organizer = event.detail}
-        />
       </FormField>
 
       <hr />

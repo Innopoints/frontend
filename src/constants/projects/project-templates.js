@@ -5,7 +5,6 @@ import ActivityTypes from '@/constants/projects/activity-internal-types.js';
 export function getBlankProject() {
   return {
     name: null,
-    organizer: null,
     activities: [],
     moderators: [],
   };
