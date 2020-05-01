@@ -18,7 +18,6 @@ async function populateSession(req, res, next) {
         `${SAPPER_APP_API_HOST}/account`,
         {
           headers: { 'Cookie': req.headers.cookie },
-          credentials: 'include',
         },
       );
       if (accountResp.ok) {
