@@ -9,9 +9,10 @@
 
   export let notificationSettings;
   export let account;
+
   let notificationPermission = null;
   let initialSettings = Object.assign({}, notificationSettings);
-  const supportsPush = 'PushManager' in window;
+
   $: changes = categories.some(
     category => (
       category.key != null
@@ -56,6 +57,7 @@
   }
 
   onMount(() => {
+    const supportsPush = 'PushManager' in window;
     if (supportsPush) {
       notificationPermission = Notification.permission;
       updateRadioOptions();
