@@ -112,7 +112,7 @@
         {#if account
           && account.is_admin
           && project.lifetime_stage === ProjectStages.FINALIZING
-          && project.review_status != null}
+          && project.review_status == ReviewStatuses.PENDING}
           <Button
             isOutline
             classname="review"
