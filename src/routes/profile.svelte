@@ -7,10 +7,9 @@
 
     if (session.account == null) {
       this.error(403, 'Profile');
-      return;
     }
 
-    const isMe = requestedEmail == session.account.email;
+    const isMe = requestedEmail === session.account.email;
     const allowed = requestedEmail == null || isMe || session.account.is_admin;
 
     // non-admin requested a different profile
@@ -34,7 +33,7 @@
 
     data.timelineFetchedUntil = timelineFetchedUntil;
 
-    if (account == null) {
+    if (data.account == null) {
       this.error(404, 'Profile');
     }
 
