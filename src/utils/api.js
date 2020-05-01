@@ -11,7 +11,6 @@ function request(method, url, options) {
   const formDataClass = process.browser ? FormData : require('url').URLSearchParams;
 
   let actualOptions = {
-    credentials: 'include',
     method,
     headers: options && options.headers || {},
   };
