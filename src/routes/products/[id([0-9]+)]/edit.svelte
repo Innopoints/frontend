@@ -66,13 +66,23 @@
   let errorMessage = null;
   let warningDialogOpen = false;
 
-  async function addColor(color) {
-    let resp = await api.post('/colors', { data: { value: color } });
-    if (resp.status == 200) {
+  let colorDebounce = false;
+  async function addColor({ detail: color }) {
+    if (colorDebounce || colors.include(color)) {
+      return;
+    }
+
+    try {
+      await api.json(api.post(
+        '/colors',
+        { data: { value: color }, csrfToken: account.csrf_token },
+      ));
       colors.push({ value: color });
       colors = colors;
-    } else {
-      console.error(`Color creation failed (${resp.status})`);
+      colorDebounce = true;
+      setTimeout(() => colorDebounce = false, 200);
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -305,7 +315,7 @@
         {product} {errors}
         colors={colors.map(unwrapValue)}
         sizes={sizes.map(unwrapValue)}
-        on:new-color={(e) => addColor(e.detail)}
+        on:new-color={addColor}
         on:create-variety={createVariety}
         on:remove-variety={removeVariety}
         on:change-variety={changeVariety}
