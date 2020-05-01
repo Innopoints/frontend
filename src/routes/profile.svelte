@@ -53,6 +53,7 @@
   import Statistics from '@/containers/profile/statistics.svelte';
   import Notifications from '@/containers/profile/notifications.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
+  import ReclaimInnopointsModal from '@/components/profile/reclaim-innopoints-modal.svelte';
   import * as api from '@/utils/api.js';
   import tabs from '@/constants/profile/tabs.js';
 
@@ -102,15 +103,41 @@
     },
   };
 
+  const reclaimInnopointsModal = {
+    open: false,
+    error: null,
+    show() {
+      reclaimInnopointsModal.open = true;
+    },
+    async reclaimInnopoints({ detail }) {
+      try {
+        const resp = await api.post('/reclaim-innopoints', { data: {
+          email: detail.email,
+          password: detail.password,
+        }});
+
+        if (resp.status === 403) {
+          reclaimInnopointsModal.error = 'Incorrect username or password.';
+        } else if (!resp.ok) {
+          console.log(resp.status);
+          reclaimInnopointsModal.error = 'Something went wrong.';
+        } else {
+          account.balance += await resp.json();
+          reclaimInnopointsModal.error = null;
+          reclaimInnopointsModal.open = false;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
+
   let timelinePromises = [];
   if (timeline.data.length) {
     timelinePromises.push(new Promise(resolve => resolve(timeline)));
   }
 
   let activeTab = tabs.timeline;
-  function updateURL(target) {
-    activeTab = target.detail;
-  }
 
   function changeUsername({ detail }) {
     api.patch(`/accounts/${account.email}/telegram`, {
@@ -177,14 +204,18 @@
 
 <Layout user={account}>
   <div class="material">
-    <Info {account} on:username-change={changeUsername} />
+    <Info
+      {account}
+      on:username-change={changeUsername}
+      on:reclaim-opened={reclaimInnopointsModal.show}
+    />
     <section class="card">
       <Tabs
         items={Object.keys(tabs)}
         labels={Object.keys(tabs).map(capitalize)}
         value={activeTab}
         name="nav-tabs"
-        on:change={updateURL}
+        on:change={(e) => activeTab = e.detail}
       />
       {#if activeTab === tabs.timeline}
         <Timeline
@@ -210,5 +241,10 @@
     application={leaveFeedbackModal.application}
     {competences}
     on:submit={leaveFeedbackModal.submitFeedback}
+  />
+  <ReclaimInnopointsModal
+    bind:isOpen={reclaimInnopointsModal.open}
+    error={reclaimInnopointsModal.error}
+    on:submit={reclaimInnopointsModal.reclaimInnopoints}
   />
 </Layout>
