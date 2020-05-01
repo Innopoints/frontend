@@ -9,8 +9,6 @@
   let tgChange = false;
   let tgUsername = account.telegram_username || '';
 
-  const dispatch = createEventDispatcher();
-
   function saveUsername() {
     if (tgUsername !== '' && tgUsername !== account.telegram_username) {
       dispatch('username-change', tgUsername);
@@ -19,6 +17,8 @@
   }
 
   $: usernameValid = /[A-Za-z0-9_]{5,32}/.test(tgUsername);
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <section class="quick-info padded">
@@ -81,6 +81,10 @@
       <Button href="/store">
         <svg src="images/icons/shopping-bag.svg" class="icon mr" />
         go to the InnoStore
+      </Button>
+      <Button on:click={() => dispatch('reclaim-opened')}>
+        <svg src="images/icons/gift.svg" class="icon mr" />
+        reclaim old innopoints
       </Button>
     </nav>
   </div>
