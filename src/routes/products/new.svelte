@@ -2,15 +2,17 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, colors, sizes } = await getInitialData(this, session, new Map([
-      ['account', '/account'],
+    const data = await getInitialData(this, session, new Map([
       ['colors', '/colors'],
       ['sizes', '/sizes'],
     ]));
-    if (account == null || !account.is_admin) {
+
+    if (session.account == null || !session.account.is_admin) {
       this.error(403, 'Create a Product');
     }
-    return { account, colors, sizes };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 

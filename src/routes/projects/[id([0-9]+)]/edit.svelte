@@ -2,14 +2,18 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, project } = await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
+    const data = await getInitialData(this, session, new Map([
       ['project', `/projects/${page.params.id}`],
     ]));
-    if (account == null || (account.email !== project.creator.email && account.is_admin)) {
-      this.error(403, 'Edit a Project');
+
+    if (session.account == null
+        || (session.account.email !== data.project.creator.email
+            && session.account.is_admin)) {
+      this.error(403, 'Edit the Project');
     }
-    return { account, project };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 

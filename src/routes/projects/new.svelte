@@ -3,13 +3,15 @@
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
       ['drafts', '/projects/drafts'],
       ['competences', '/competences'],
     ]));
-    if (data.account == null) {
+
+    if (session.account == null) {
       this.error(403, 'Create a Project');
     }
+
+    data.account = session.account;
     return data;
   }
 </script>

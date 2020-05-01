@@ -2,15 +2,17 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, purchases, reviews } = await getInitialData(this, session, new Map([
-      ['account', '/account'],
+    const data = await getInitialData(this, session, new Map([
       ['purchases', '/stock_changes/for_review'],
       ['reviews', '/projects/for_review'],
     ]));
-    if (account == null || !account.is_admin) {
+
+    if (session.account == null || !session.account.is_admin) {
       this.error(403, 'Dashboard');
     }
-    return { account, purchases, reviews };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 

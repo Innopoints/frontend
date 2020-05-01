@@ -3,15 +3,15 @@
   const productLimit = 24;
 
   export async function preload(page, session) {
-    let { account, products, colors } = await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
+    let { products, colors } = await getInitialData(this, session, new Map([
       ['products', `/products?limit=${productLimit}`],
       ['colors', `/colors`],
     ]));
     return {
+      account: session.account,
       products: products != null ? products.data : [],
       pages: products != null ? products.pages : 0,
-      colors, account,
+      colors,
     };
   }
 </script>

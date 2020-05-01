@@ -3,16 +3,18 @@
   import { groupByColor } from '@/utils/group-varieties.js';
 
   export async function preload(page, session) {
-    const { unmodifiedProduct, account, colors, sizes } = await getInitialData(this, session, new Map([
+    const data = await getInitialData(this, session, new Map([
       ['unmodifiedProduct', `/products/${page.params.id}`],
-      ['account', '/account'],
       ['colors', '/colors'],
       ['sizes', '/sizes'],
     ]));
-    if (account == null || !account.is_admin) {
+
+    if (session.account == null || !session.account.is_admin) {
       this.error(403, 'Edit the Product');
     }
-    return { unmodifiedProduct, account, colors, sizes };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 
