@@ -111,15 +111,11 @@
     },
     async reclaimInnopoints({ detail }) {
       try {
-        const resp = await api.post('/reclaim-innopoints', { data: {
-          email: detail.email,
-          password: detail.password,
-        }});
+        const resp = await api.post('/reclaim-innopoints', { data: detail });
 
         if (resp.status === 403) {
           reclaimInnopointsModal.error = 'Incorrect username or password.';
         } else if (!resp.ok) {
-          console.log(resp.status);
           reclaimInnopointsModal.error = 'Something went wrong.';
         } else {
           account.balance += await resp.json();
