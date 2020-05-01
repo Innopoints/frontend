@@ -2,11 +2,12 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    return await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
+    const data = await getInitialData(this, session, new Map([
       ['project', `/projects/${page.params.id}`],
       ['competences', '/competences'],
     ]));
+    data.account = session.account;
+    return data;
   }
 </script>
 

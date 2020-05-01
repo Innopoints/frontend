@@ -3,13 +3,15 @@
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
       ['project', `/projects/${page.params.id}`],
       ['competences', '/competences'],
     ]));
-    if (data.account == null || !data.account.is_admin) {
-      this.error(403, 'Dashboard');
+
+    if (session.account == null || !session.account.is_admin) {
+      this.error(403, 'Project Review');
     }
+
+    data.account = session.account;
     return data;
   }
 </script>

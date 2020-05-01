@@ -2,14 +2,16 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, product } = await getInitialData(this, session, new Map([
-      ['account', '/account'],
+    const data = await getInitialData(this, session, new Map([
       ['product', `/products/${page.params.id}`],
     ]));
-    if (product == null) {
-      this.redirect(302, 'store');
+
+    if (data.product == null) {
+      this.redirect(302, '/store');
     }
-    return { account, product };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 

@@ -4,44 +4,41 @@
 
   export async function preload(page, session) {
     let requestedEmail = page.query.user;
-    const { currentUser } = await getInitialData(this, session, new Map([
-      ['currentUser', '/account'],
-    ]));
-    if (currentUser == null) {
+
+    if (session.account == null) {
       this.error(403, 'Profile');
       return;
     }
-    const isMe = requestedEmail == currentUser.email;
-    const allowed = requestedEmail == null || isMe || currentUser.is_admin;
+
+    const isMe = requestedEmail == session.account.email;
+    const allowed = requestedEmail == null || isMe || session.account.is_admin;
+
     // non-admin requested a different profile
     if (!allowed) {
       this.redirect(302, `/profile`);
     }
+
     if (requestedEmail == null) {
-      requestedEmail = currentUser.email;
+      requestedEmail = session.account.email;
     }
 
     let timelineFetchedUntil = new Date();
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
-    const {
-      account,
-      ...initialData
-    } = await getInitialData(this, session, new Map([
+    const data = await getInitialData(this, session, new Map([
       ['account', `/accounts/${requestedEmail}`],
       ['timeline', `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
       ['statistics', `/accounts/${requestedEmail}/statistics?start_date=${isoForURL(timelineFetchedUntil)}`],
       ['notificationSettings', `/accounts/${requestedEmail}/notification_settings`],
       ['competences', '/competences'],
     ]));
+
+    data.timelineFetchedUntil = timelineFetchedUntil;
+
     if (account == null) {
-      this.error(403, 'Profile');
+      this.error(404, 'Profile');
     }
 
-    return {
-      account,
-      timelineFetchedUntil,
-      ...initialData,
-    };
+    return data;
   }
 </script>
 
