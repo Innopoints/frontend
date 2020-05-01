@@ -4,9 +4,32 @@ import helmet from 'helmet';
 import { v4 as uuidv4 } from 'uuid';
 import compression from 'compression';
 import * as sapper from '@sapper/server';
+import fetch from 'node-fetch';
 
-const { PORT, NODE_ENV } = process.env;
+const { PORT, NODE_ENV, SAPPER_APP_API_HOST } = process.env;
 const dev = NODE_ENV === 'development';
+
+
+/* If the request asks for a full page, retrieve the account data. */
+async function populateSession(req, res, next) {
+  if (!/^(\/client\/|\/service-worker.js)/.test(req.url) && req.headers.cookie) {
+    try {
+      const accountResp = await fetch(
+        `${SAPPER_APP_API_HOST}/account`,
+        {
+          headers: { 'Cookie': req.headers.cookie },
+          credentials: 'include',
+        },
+      );
+      if (accountResp.ok) {
+        req._accountObject = await accountResp.json();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  next();
+}
 
 
 app()
@@ -49,8 +72,10 @@ app()
     app.json({ type: 'application/csp-report' }),
     compression({ threshold: 0 }),
     sirv('static', { dev }),
+    populateSession,
     sapper.middleware({
       session: (req, res) => ({
+        account: req._accountObject,
         cookies: req.headers.cookie,
       }),
     }),
