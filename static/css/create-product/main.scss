@@ -262,11 +262,6 @@
         padding: 1.4em 1em;
         font-weight: 300;
         font-size: .9rem;
-
-        &.error {
-          color: $danger;
-          font-weight: 500;
-        }
       }
 
       .image-wrapper {
@@ -359,9 +354,7 @@
 }
 
 .image-platform + .error {
-  font-size: .95rem;
   text-align: center;
-  color: $danger;
 }
 
 .color-picker {
