@@ -40,6 +40,7 @@
           admin_feedback: detail.comment,
           review_status: detail.accept ? ReviewStatuses.APPROVED : ReviewStatuses.REJECTED,
         },
+        csrfToken: account.csrf_token,
       }));
       goto(`/projects/${project.id}`);
     } catch (e) {

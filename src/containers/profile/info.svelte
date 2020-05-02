@@ -64,8 +64,6 @@
         <Dropdown dropdownclass="info-bubble" handleclass="round" chevron={false} isRight>
           <svg slot="label" src="images/icons/help-circle.svg" class="icon" />
           Some event organizers prefer to collect those to ease communication.
-          Adding one here will save you the typing for those
-          occasions (you will still be able to control what you send).
         </Dropdown>
       </div>
     {/if}

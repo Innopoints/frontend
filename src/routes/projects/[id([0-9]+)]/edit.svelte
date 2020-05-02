@@ -108,6 +108,7 @@
           image_id: project.image_id,
           moderators: project.moderators,
         },
+        csrfToken: account.csrf_token,
       }));
       goto(`/projects/${project.id}`);
     } catch (e) {

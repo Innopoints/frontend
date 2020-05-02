@@ -1,22 +1,29 @@
 <script>
+  import { stores } from '@sapper/app';
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
   import PurchaseCard from '@/components/dashboard/purchase-card.svelte';
-  import { patch } from '@/utils/api.js';
+  import * as api from '@/utils/api.js';
   import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
 
+  const { session } = stores();
+
   export let purchases = [];
+
   async function setStatus(stockChange, status) {
-    await patch(`/stock_changes/${stockChange.id}/status`, {
-      data: {
-        status,
-      },
-    });
-    stockChange.status = status;
-    if ([StockChangeStatuses.CARRIED_OUT, StockChangeStatuses.REJECTED].includes(status)) {
-      purchases = purchases.filter(purchase => purchase.id !== stockChange.id);
+    try {
+      await api.json(api.patch(`/stock_changes/${stockChange.id}/status`, {
+        data: { status },
+        csrfToken: $session.account.csrf_token,
+      }));
+      stockChange.status = status;
+      if ([StockChangeStatuses.CARRIED_OUT, StockChangeStatuses.REJECTED].includes(status)) {
+        purchases = purchases.filter(purchase => purchase.id !== stockChange.id);
+      }
+      purchases = purchases;  // trigger an update anyways for the new status
+    } catch (e) {
+      console.error(e);
     }
-    purchases = purchases;  // trigger an update anyways for the new status
   }
 </script>
 

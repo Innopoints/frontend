@@ -32,6 +32,7 @@
     ]));
 
     data.timelineFetchedUntil = timelineFetchedUntil;
+    data.account.csrf_token = session.account.csrf_token;
 
     if (data.account == null) {
       this.error(404, 'Profile');
@@ -42,6 +43,7 @@
 </script>
 
 <script>
+  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Info from '@/containers/profile/info.svelte';
   import Tabs from 'ui/tabs.svelte';
@@ -52,6 +54,8 @@
   import ReclaimInnopointsModal from '@/components/profile/reclaim-innopoints-modal.svelte';
   import * as api from '@/utils/api.js';
   import tabs from '@/constants/profile/tabs.js';
+
+  const { session } = stores();
 
   export let account;
   export let timeline;
@@ -87,7 +91,7 @@
         application.feedback = await api.json(api.post(
           `/projects/${activity.project}/activities/${activity.id}`
           + `/applications/${application.id}/feedback`,
-          { data: value },
+          { data: value, csrfToken: account.csrf_token },
         ));
         leaveFeedbackModal.payload.feedback_id = application.id;
         timelinePromises = timelinePromises;
@@ -107,7 +111,10 @@
     },
     async reclaimInnopoints({ detail }) {
       try {
-        const resp = await api.post('/reclaim-innopoints', { data: detail });
+        const resp = await api.post(
+          '/reclaim-innopoints',
+          { data: detail, csrfToken: account.csrf_token },
+        );
 
         if (resp.status === 403) {
           reclaimInnopointsModal.error = 'Incorrect username or password.';
@@ -131,22 +138,17 @@
 
   let activeTab = tabs.timeline;
 
-  function changeUsername({ detail }) {
-    api.patch(`/accounts/${account.email}/telegram`, {
-      data: {
-        telegram_username: detail,
-      },
-    }).then((resp) => {
-      if (resp.ok) {
-        account.telegram_username = detail;
-      } else {
-        if (resp.status === 400) {
-          resp.json().then((error) => console.error(error.message));
-        } else {
-          resp.text().then(console.error);
-        }
-      }
-    });
+  async function changeUsername({ detail }) {
+    try {
+      await api.json(api.patch(`/accounts/${account.email}/telegram`, {
+        data: { telegram_username: detail },
+        csrfToken: account.csrf_token,
+      }));
+      account.telegram_username = detail;
+      $session.account = account;
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   function capitalize(name) {

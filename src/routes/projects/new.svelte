@@ -79,6 +79,7 @@
       try {
         const resp = await api.json(api.post('/file', {
           data: formData,
+          csrfToken: account.csrf_token,
         }));
 
         $project.image_id = resp.id;
@@ -99,7 +100,7 @@
   // Form processsing
   async function deleteDraft({ detail: draftID }) {
     try {
-      await api.json(api.del('/projects/' + draftID));
+      await api.json(api.del('/projects/' + draftID, { csrfToken: account.csrf_token }));
       drafts = drafts.filter(draft => draft.id !== draftID);
     } catch (e) {
       console.error(e);
@@ -153,10 +154,12 @@
       if (projectObj.id != null) {
         await api.json(api.patch('/projects/' + projectObj.id, {
           data: filterProjectFields(projectObj, true),
+          csrfToken: account.csrf_token,
         }));
       } else {
         const uploadedProject = await api.json(api.post('/projects', {
           data: filterProjectFields(projectObj),
+          csrfToken: account.csrf_token,
         }));
         uploadedProject.activities = uploadedProject.activities.concat(
           projectObj.activities.filter(act => act._type === ActivityTypes.TEMPLATE),
@@ -171,7 +174,10 @@
 
   async function publishProject() {
     try {
-      await api.json(api.patch(`/projects/${$project.id}/publish`));
+      await api.json(api.patch(
+        `/projects/${$project.id}/publish`,
+        { csrfToken: account.csrf_token },
+      ));
       goto(`/projects/${$project.id}`);
     } catch (e) {
       console.error(e);
@@ -197,6 +203,7 @@
         } else {
           updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
             data: detail.activityCopy,
+            csrfToken: account.csrf_token,
           }));
         }
         if (replacedTemplateIdx !== -1) {
@@ -215,7 +222,7 @@
 
           updatedActivity = await api.json(api.patch(
             `/projects/${$project.id}/activities/${activityID}`,
-            { data: detail.activityCopy },
+            { data: detail.activityCopy, csrfToken: account.csrf_token },
           ));
           updatedActivity.id = activityID;
 
@@ -253,7 +260,10 @@
 
     if ($project.id != null && typeof activityID == 'number') {
       try {
-        await api.json(api.del(`/projects/${$project.id}/activities/${activityID}`));
+        await api.json(api.del(
+          `/projects/${$project.id}/activities/${activityID}`,
+          { csrfToken: account.csrf_token },
+        ));
         $project.activities = $project.activities.filter(act => act.id !== activityID);
       } catch (e) {
         console.error(e);

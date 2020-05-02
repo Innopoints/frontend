@@ -93,28 +93,19 @@
     }
   }
 
-  function deleteProduct() {
+  async function deleteProduct() {
     prefetch('/store');
     warningDialogOpen = false;
-    api.del(`/products/${unmodifiedProduct.id}`).then(resp => {
-      if (resp.ok) {
-        return goto('/store');
-      }
-
-      if (resp.status === 400) {
-        resp.json().then(message => {
-          if ('message' in message) {
-            errorMessage = JSON.stringify(message.message);
-          } else {
-            errorMessage = JSON.stringify(message);
-          }
-          console.error(message);
-        });
-      } else {
-        errorMessage = 'The universe really wants this product. Try deleting again later.';
-        resp.text().then(console.error);
-      }
-    });
+    try {
+      await api.json(api.del(
+        `/products/${unmodifiedProduct.id}`,
+        { csrfToken: account.csrf_token },
+      ));
+      goto('/store');
+    } catch (e) {
+      errorMessage = 'The universe really wants this product. Try deleting again later.';
+      console.error(e);
+    }
   }
 
   const unwrapValue = (obj) => obj.value;
@@ -177,7 +168,7 @@
         candidate => candidate.color === variety.color && candidate.size === variety.size,
       );
 
-      if (corresponding != -1) {
+      if (corresponding !== -1) {
         if (!arraysEqual(variety.images, old.varieties[corresponding].images)
          || variety.amount !== old.varieties[corresponding].amount) {
            variety.id = old.varieties[corresponding].id;
@@ -193,7 +184,7 @@
     return diffs;
   }
 
-  function saveChanges() {
+  async function saveChanges() {
     if (!product.name) {
       errors.name = true;
       errorMessage = 'Some fields are not filled out or filled out incorrectly.';
@@ -238,55 +229,42 @@
       const requests = [];
       const diffs = computeDiffs(modifiedProduct, unmodifiedProduct);
       if (diffs.fields != null) {
-        requests.push(api.patch(`/products/${unmodifiedProduct.id}`, { data: diffs.fields }));
+        requests.push(api.json(api.patch(
+          `/products/${unmodifiedProduct.id}`,
+          { data: diffs.fields, csrfToken: account.csrf_token },
+        )));
       }
 
       for (let variety of diffs.varieties) {
         if ('id' in variety) {
           let id = variety.id;
           delete variety.id;
-          requests.push(api.patch(`/products/${unmodifiedProduct.id}/varieties/${id}`, {
-            data: variety,
-          }));
+          requests.push(api.json(api.patch(
+            `/products/${unmodifiedProduct.id}/varieties/${id}`,
+            { data: variety, csrfToken: account.csrf_token },
+          )));
         } else {
-          requests.push(api.post(`/products/${unmodifiedProduct.id}/varieties`, {
-            data: variety,
-          }));
+          requests.push(api.json(api.post(
+            `/products/${unmodifiedProduct.id}/varieties`,
+            { data: variety, csrfToken: account.csrf_token },
+          )));
         }
       }
 
       for (let variety of diffs.deletedVarieties) {
-        requests.push(api.del(`/products/${unmodifiedProduct.id}/varieties/${variety.id}`));
+        requests.push(api.json(api.del(
+          `/products/${unmodifiedProduct.id}/varieties/${variety.id}`,
+          { csrfToken: account.csrf_token },
+        )));
       }
 
-      Promise.all(requests).then(responses => {
-        let failedRequest = false;
-        for (let resp of responses) {
-          if (resp.ok) {
-            continue;
-          }
-
-          if (resp.status === 400) {
-            failedRequest = true;
-            resp.json().then(message => {
-              if ('message' in message) {
-                errorMessage = JSON.stringify(message.message);
-              } else {
-                errorMessage = JSON.stringify(message);
-              }
-              console.error(message);
-            });
-          } else {
-            failedRequest = true;
-            errorMessage = 'The universe just doesn\'t want this product. Try again later.';
-            resp.text().then(console.error);
-          }
-        }
-
-        if (!failedRequest) {
-          goto(`/products/${product.id}`);
-        }
-      });
+      try {
+        await Promise.all(requests);
+        goto(`/products/${product.id}`);
+      } catch (e) {
+        errorMessage = JSON.stringify(e.message || e);
+        console.log(e);
+      }
     }
   }
 </script>
