@@ -774,8 +774,8 @@ button.btn {
 }
 
 .radio.colored > input + .icon::before {
-  border-color: lightgray;
-  border-color: rgb(var(--before-r), var(--before-g), var(--before-b));
+  background-color: lightgray;
+  background-color: rgb(var(--before-r), var(--before-g), var(--before-b));
 }
 
 .radio.colored:hover > input + .icon::after,
