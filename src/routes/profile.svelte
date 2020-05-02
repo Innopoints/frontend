@@ -32,12 +32,12 @@
     ]));
 
     data.timelineFetchedUntil = timelineFetchedUntil;
-    data.account.csrf_token = session.account.csrf_token;
 
     if (data.account == null) {
       this.error(404, 'Profile');
     }
 
+    data.account.csrf_token = session.account.csrf_token;
     return data;
   }
 </script>
