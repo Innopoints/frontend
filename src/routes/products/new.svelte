@@ -45,24 +45,29 @@
     product = storedDraft || getBlankProduct();
   });
 
-  let colorThrottle = false;
-  async function addColor({ detail: color }) {
-    if (colorThrottle || colors.includes(color)) {
+  let colorDebounce = null;
+  function addColor({ detail: color }) {
+    if (colors.includes(color)) {
       return;
     }
 
-    try {
-      await api.json(api.post(
-        '/colors',
-        { data: { value: color }, csrfToken: account.csrf_token },
-      ));
-      colors.push({ value: color });
-      colors = colors;
-      colorThrottle = true;
-      setTimeout(() => colorThrottle = false, 200);
-    } catch (e) {
-      console.error(e);
+    if (colorDebounce != null) {
+      clearTimeout(colorDebounce);
     }
+
+    colorDebounce = setTimeout(async () => {
+      try {
+        await api.json(api.post(
+          '/colors',
+          { data: { value: color }, csrfToken: account.csrf_token },
+        ));
+        colors.push({ value: color });
+        colors = colors;
+        colorDebounce = null;
+      } catch (e) {
+        console.error(e);
+      }
+    }, 200);
   }
 
   function persistToStorage() {
