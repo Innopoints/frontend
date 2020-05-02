@@ -47,7 +47,7 @@
 
   let colorDebounce = false;
   async function addColor({ detail: color }) {
-    if (colorDebounce || colors.include(color)) {
+    if (colorDebounce || colors.includes(color)) {
       return;
     }
 
