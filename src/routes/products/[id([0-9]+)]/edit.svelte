@@ -66,9 +66,9 @@
   let errorMessage = null;
   let warningDialogOpen = false;
 
-  let colorDebounce = false;
+  let colorThrottle = false;
   async function addColor({ detail: color }) {
-    if (colorDebounce || colors.includes(color)) {
+    if (colorThrottle || colors.includes(color)) {
       return;
     }
 
@@ -79,8 +79,8 @@
       ));
       colors.push({ value: color });
       colors = colors;
-      colorDebounce = true;
-      setTimeout(() => colorDebounce = false, 200);
+      colorThrottle = true;
+      setTimeout(() => colorThrottle = false, 200);
     } catch (e) {
       console.error(e);
     }
