@@ -145,7 +145,9 @@
         csrfToken: account.csrf_token,
       }));
       account.telegram_username = detail;
-      $session.account = account;
+      if ($session.account.email === account.email) {
+        $session.account = account;
+      }
     } catch (e) {
       console.error(e);
     }
