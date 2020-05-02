@@ -392,6 +392,10 @@
 .preview {
   .labeled {
     white-space: pre;
+
+    .radio.colored {
+      white-space: normal;
+    }
   }
 
   .actions {
