@@ -223,6 +223,12 @@
         errorMessage = 'The product must be in stock at creation.';
         return;
       }
+
+      if (cleanVarieties.some(variety => variety.color == null) && cleanVarieties.length > 1) {
+        errorMessage = 'Colorless products cannot come in sizes and have more than 1 variety.';
+        return;
+      }
+
       const modifiedProduct = Object.assign({}, product);
       modifiedProduct.varieties = cleanVarieties;
 
