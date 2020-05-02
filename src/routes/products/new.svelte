@@ -164,7 +164,7 @@
     }
 
     if (cleanVarieties.some(variety => variety.color == null) && cleanVarieties.length > 1) {
-      errorMessage = 'Cannot have more than one variety in a product without colors';
+      errorMessage = 'Colorless products cannot come in sizes and have more than 1 variety.';
     }
 
     if (errorMessage) {
