@@ -13,7 +13,7 @@
 
 <script>
   import { writable } from 'svelte/store';
-  import { goto, prefetch } from '@sapper/app';
+  import { goto, prefetch, stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserView from '@/containers/projects/view/user-view.svelte';
@@ -37,6 +37,8 @@
     prepareForBackend,
     prepareAfterBackend,
   } from '@/utils/project-manipulation.js';
+
+  const { session } = stores();
 
   export let project;
   export let account;
@@ -65,7 +67,7 @@
       try {
         const application = await api.json(api.post(
           `/projects/${activity.project}/activities/${activity.id}/applications`,
-          { data: { telegram, comment } },
+          { data: { telegram, comment }, csrfToken: account.csrf_token },
         ));
         application.applicant = account;
         activity.existing_application = application;
@@ -73,7 +75,16 @@
         projectStore.set(project);
 
         if (telegram && telegram != account.telegram) {
-          api.patch('/account/telegram', { data: { telegram_username: telegram } });
+          try {
+            await api.json(api.patch(
+              '/account/telegram',
+              { data: { telegram_username: telegram }, csrfToken: account.csrf_token },
+            ));
+            account.telegram = telegram;
+            $session.account = account;
+          } catch (e) {
+            console.error(e);
+          }
         }
         applicationDialog.open = false;
         applicationDialog.error = null;
@@ -95,6 +106,7 @@
       try {
         await api.json(api.del(
           `/projects/${activity.project}/activities/${activity.id}/applications`,
+          { csrfToken: account.csrf_token },
         ));
 
         if (activity.existing_application.status === ApplicationStatuses.APPROVED) {
@@ -139,7 +151,10 @@
     async deleteActivity({ detail: activity }) {
       activityDeletionDialog.open = false;
       try {
-        await api.json(api.del(`/projects/${activity.project}/activities/${activity.id}`));
+        await api.json(api.del(
+          `/projects/${activity.project}/activities/${activity.id}`,
+          { csrfToken: account.csrf_token },
+        ));
         project.activities = project.activities.filter(act => act.id !== activity.id);
         projectStore.set(project);
       } catch (e) {
@@ -171,7 +186,7 @@
     async deleteProject() {
       try {
         prefetch('/projects');
-        await api.json(api.del(`/projects/${project.id}`));
+        await api.json(api.del(`/projects/${project.id}`, { csrfToken: account.csrf_token }));
         goto('/projects');
       } catch (e) {
         console.error(e);
@@ -186,7 +201,10 @@
     },
     async finalizeProject() {
       try {
-        await api.json(api.patch(`/projects/${project.id}/finalize`));
+        await api.json(api.patch(
+          `/projects/${project.id}/finalize`,
+          { csrfToken: account.csrf_token },
+        ));
         project = await api.json(api.get(`/projects/${project.id}`));
         projectStore.set(project);
         finalizeDialog.open = false;
@@ -225,7 +243,7 @@
         application.feedback = await api.json(api.post(
           `/projects/${activity.project}/activities/${activity.id}`
           + `/applications/${application.id}/feedback`,
-          { data: value },
+          { data: value, csrfToken: account.csrf_token },
         ));
         project = project;
         leaveFeedbackModal.open = false;
@@ -253,7 +271,7 @@
         application.reports.push(await api.json(apiCall(
           `/projects/${activity.project}/activities/${activity.id}`
           + `/applications/${application.id}/report`,
-          { data: value },
+          { data: value, csrfToken: account.csrf_token },
         )));
         project = project;
         projectStore.set(project);
@@ -276,9 +294,11 @@
     },
     async deleteReport({ detail }) {
       try {
-        await api.json(api.del(`/projects/${detail.activity.project}`
-                               + `/activities/${detail.activity.id}`
-                               + `/applications/${detail.application.id}/report`));
+        await api.json(api.del(
+          `/projects/${detail.activity.project}/activities/${detail.activity.id}`
+          + `/applications/${detail.application.id}/report`,
+          { csrfToken: account.csrf_token },
+        ));
         detail.application.reports = detail.application.reports.filter(
           report => report.reporter_email !== account.email,
         );
@@ -304,7 +324,7 @@
     try {
       await api.json(api.patch(
         `/projects/${activity.project}/activities/${activity.id}/applications/${application.id}`,
-        { data: { status } },
+        { data: { status }, csrfToken: account.csrf_token },
       ));
 
       if (status === ApplicationStatuses.APPROVED) {
@@ -335,6 +355,7 @@
       if (type === ActivityTypes.NEW) {
         updatedActivity = await api.json(api.post(`/projects/${project.id}/activities`, {
           data: detail.activityCopy,
+          csrfToken: account.csrf_token,
         }));
         prepareAfterBackend(updatedActivity);
         project.activities.splice(index, 0, updatedActivity);
@@ -344,7 +365,7 @@
 
         updatedActivity = await api.json(api.patch(
           `/projects/${project.id}/activities/${activityID}`,
-          { data: detail.activityCopy },
+          { data: detail.activityCopy, csrfToken: account.csrf_token },
         ));
         prepareAfterBackend(updatedActivity);
         updatedActivity.id = activityID;
@@ -367,7 +388,7 @@
       const { application, hours, activity } = detail;
       await api.json(api.patch(
         `/projects/${project.id}/activities/${activity.id}/applications/${application.id}`,
-        { data: { actual_hours: hours } },
+        { data: { actual_hours: hours }, csrfToken: account.csrf_token },
       ));
       application.actual_hours = hours;
       project = project;
@@ -378,7 +399,10 @@
 
   async function submitForReview() {
     try {
-      await api.json(api.patch(`/projects/${project.id}/request_review`));
+      await api.json(api.patch(
+        `/projects/${project.id}/request_review`,
+        { csrfToken: account.csrf_token },
+      ));
       project.review_status = ReviewStatuses.PENDING;
       projectStore.set(project);
     } catch (e) {

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { stores } from '@sapper/app';
   import Dropdown from 'ui/dropdown.svelte';
   import Button from 'ui/button.svelte';
   import * as api from '@/utils/api.js';
@@ -7,25 +8,32 @@
   import getNotificationContent from '@/constants/notification-content.js';
   import { formatTime } from '@/utils/date-time-format.js';
 
-  export let notifications = null;
-  $: unread = notifications != null && notifications.some(notification => !notification.is_read);
+  const { session } = stores();
+
+  $: unread = (
+    $session.account != null
+    && $session.account.notifications != null
+    && $session.account.notifications.some(notification => !notification.is_read)
+  );
 
   onMount(async () => {
     try {
-      let resp = await api.get('/notifications?unread');
-      if (resp.status === 200) {
-        notifications = await resp.json();
-      }
-    } catch (e) { console.error(e); }
+      $session.account.notifications = await api.json(api.get('/notifications?unread'));
+    } catch (e) {
+      console.error(e);
+    }
   });
 
   async function readNotification(id) {
     try {
-      let resp = await api.patch(`/notifications/${id}/read`);
-      if (resp.status === 204) {
-        notifications = notifications.filter(x => x.id !== id);
-      }
-    } catch (e) { console.error(e); }
+      await api.json(api.patch(
+        `/notifications/${id}/read`,
+        { csrfToken: $session.account.csrf_token },
+      ));
+      $session.account.notifications = $session.account.notifications.filter(x => x.id !== id);
+    } catch (e) {
+      console.error(e);
+    }
   }
 </script>
 
@@ -43,14 +51,14 @@
     <svg src="images/icons/x.svg" class="icon" />
   </Button>
   <div class="title">Notifications</div>
-  {#if notifications == null}
+  {#if $session.account == null || $session.account.notifications == null}
     <div class="empty small">
       <div class="icon">
         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
       </div>
       <p>Loading...</p>
     </div>
-  {:else if notifications.length === 0}
+  {:else if $session.account.notifications.length === 0}
     <div class="empty small">
       <div class="icon">
         <svg src="images/icons/bell-off.svg" />
@@ -59,7 +67,7 @@
     </div>
   {:else}
     <SimplebarList classname="notification-list">
-      {#each notifications as notification (notification.id)}
+      {#each $session.account.notifications as notification (notification.id)}
         <li class="notification">
           <span class="content">
             {#each getNotificationContent(notification) as fragment}
@@ -84,7 +92,7 @@
         </li>
       {/each}
     </SimplebarList>
-    <Button on:click={() => notifications.forEach(x => readNotification(x.id))}>
+    <Button on:click={() => $session.account.notifications.forEach(x => readNotification(x.id))}>
       <svg src="images/icons/check.svg" class="icon mr" />
       mark all as read
     </Button>

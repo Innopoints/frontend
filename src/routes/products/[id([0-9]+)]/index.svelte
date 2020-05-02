@@ -89,18 +89,18 @@
 
   async function confirmPurchase() {
     purchaseModalOpen = false;
-    const resp = await api.post(
-      `/products/${product.id}/varieties/${selectedVariety.id}/purchase`,
-      { data: { amount: selectedQuantity } },
-    );
-    if (resp.ok) {
+    try {
+      await api.json(api.post(
+        `/products/${product.id}/varieties/${selectedVariety.id}/purchase`,
+        { data: { amount: selectedQuantity }, csrfToken: account.csrf_token },
+      ));
       purchaseSuccess.open();
       account.balance -= productControl.product.price * selectedQuantity;
       selectedVariety.amount -= selectedQuantity;
       product = product;
-    } else {
+    } catch (e) {
       purchaseFailure.open();
-      console.error(await resp.json());
+      console.error(e);
     }
   }
 

@@ -18,7 +18,7 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-export default async function subscribe() {
+export default async function subscribe(csrfToken) {
   if (!('serviceWorker' in navigator)) {
     return;
   }
@@ -36,6 +36,7 @@ export default async function subscribe() {
   console.log('Received notification subscription:', pushSubscription);
   const response = await api.post('/notifications/subscribe', {
     data: pushSubscription.toJSON(),
+    csrfToken,
   });
 
   if (!response.ok) {

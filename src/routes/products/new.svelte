@@ -171,26 +171,22 @@
       return;
     }
 
-    const resp = await api.post('/products', {
-      data: {
-        name: product.name,
-        type: product.type || null,
-        description: product.description || '',
-        price: product.price,
-        varieties: cleanVarieties,
-      },
-    });
-    if (resp.ok) {
+    try {
+      await api.json(api.post('/products', {
+        data: {
+          name: product.name,
+          type: product.type || null,
+          description: product.description || '',
+          price: product.price,
+          varieties: cleanVarieties,
+        },
+        csrfToken: account.csrf_token,
+      }));
       localStorage.removeItem('product-draft');
-      return goto('/store');
-    }
-    if (resp.status === 400) {
-      const message = await resp.json();
-      errorMessage = JSON.stringify(message.message || message);
-      console.error(message);
-    } else {
-      errorMessage = 'The universe just doesn\'t want this product. Try again later.';
-      console.error(await resp.text());
+      goto('/store');
+    } catch (e) {
+      errorMessage = JSON.stringify(e.message || e);
+      console.error(e);
     }
   }
 </script>

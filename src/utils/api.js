@@ -19,6 +19,10 @@ function request(method, url, options) {
     actualOptions.headers['Cookie'] = options.cookie;
   }
 
+  if (options && 'csrfToken' in options) {
+    actualOptions.headers['X-CSRF-Token'] = options.csrfToken;
+  }
+
   if (options && options.data instanceof formDataClass) {
     actualOptions.body = options.data;
   } else if (options && options.data != null) {

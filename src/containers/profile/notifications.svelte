@@ -49,7 +49,7 @@
     }
 
     try {
-      await subscribeToPush();
+      await subscribeToPush(account.csrf_token);
       updateRadioOptions();
     } catch (e) {
       console.error(e);
@@ -72,11 +72,18 @@
     }
   }
 
-  function saveChanges() {
+  async function saveChanges() {
     delete notificationSettings[null];
-    api.patch('/account/notification_settings', { data: notificationSettings })
-      .then(() => changes = false)
-      .catch(() => notificationSettings = initialSettings);
+    try {
+      await api.json(api.patch(
+        '/account/notification_settings',
+        { data: notificationSettings, csrfToken: account.csrf_token },
+      ));
+      changes = false;
+    } catch (e) {
+      console.error(e);
+      notificationSettings = initialSettings;
+    }
   }
 </script>
 
