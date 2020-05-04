@@ -67,7 +67,7 @@
       errors.nameNotSpecified = true;
     }
 
-    if (activity.name === 'Moderation') {
+    if (activity.name === '[[Moderation]]') {
       errors.nameReserved = true;
     }
 
