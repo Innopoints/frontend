@@ -27,6 +27,7 @@
   import Autocomplete from 'ui/autocomplete.svelte';
   import generateQueryString from '@/utils/generate-query-string.js';
   import * as api from '@/utils/api.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let account;
   export let project;
@@ -143,7 +144,7 @@
         required
         error={
              (duplicateName && "The name must be unique.")
-          || (/^\s*$/.test(project.name) && "The name must not be empty.")
+          || (spaceOnly(project.name) && "The name must not be empty.")
           || null
         }
       >

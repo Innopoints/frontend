@@ -4,6 +4,7 @@
   import ProjectImagePicker from '@/components/projects/new/project-image-picker.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let project;
   export let duplicateName;
@@ -25,7 +26,7 @@
     required
     error={
          (duplicateName && "The name must be unique.")
-      || (/^\s*$/.test($project.name) && "The name must not be empty.")
+      || (spaceOnly($project.name) && "The name must not be empty.")
       || null
     }
   >

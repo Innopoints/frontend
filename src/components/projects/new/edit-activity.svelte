@@ -16,6 +16,7 @@
   import getBlankActivity from '@/constants/projects/blank-activity.js';
   import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
   import { copyActivity } from '@/utils/project-manipulation.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let activity = getBlankActivity();
   let initialCopy = copyActivity(activity);
@@ -63,7 +64,7 @@
   }
 
   function validateAndSave() {
-    if (!activity.name || /^\s*$/.test(activity.name)) {
+    if (!activity.name || spaceOnly(activity.name)) {
       errors.nameNotSpecified = true;
     }
 
@@ -118,7 +119,7 @@
       title="Activity name"
       required
       error={
-        (/^\s*$/.test(activity.name) && "The name must not be empty.")
+        (spaceOnly(activity.name) && "The name must not be empty.")
         || (errors.nameNotSpecified && "The name must be specified.")
         || (errors.nameReserved && "This name is reserved for internal use.")
         || (!ensureNameUniqueness() && "The name should be unique.")

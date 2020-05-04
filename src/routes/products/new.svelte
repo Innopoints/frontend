@@ -27,6 +27,7 @@
   import Dialog from 'ui/dialog.svelte';
   import * as api from '@/utils/api.js';
   import { getBlankProduct, getBlankVariety } from '@/constants/products/blank-product.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let colors;
   export let sizes;
@@ -135,7 +136,7 @@
   async function createProduct() {
     errorMessage = null;
     prefetch('/store');
-    if (!product.name || /^\s*$/.test(product.name)) {
+    if (!product.name || spaceOnly(product.name)) {
       errors.name = true;
       errorMessage = 'The product needs a non-empty name.';
     }
