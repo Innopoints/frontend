@@ -5,7 +5,7 @@
   export let project;
   export let account;
   export let review = false;
-  const moderation = project.activities.find(act => act.internal && act.name === 'Moderation');
+  const moderation = project.activities.find(act => act.internal && act.name === '[[Moderation]]');
 
   function getModerationApplication(moderator) {
     return moderation.applications.find(appl => appl.applicant.email === moderator.email);
