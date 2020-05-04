@@ -192,12 +192,12 @@
   async function saveChanges() {
     if (!product.name || /^\s*$/.test(product.name)) {
       errors.name = true;
-      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+      errorMessage = 'The product needs a non-empty name.';
     }
 
     if (!product.price || product.price < 1) {
       errors.price = true;
-      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+      errorMessage = 'The product needs a valid price.';
     }
 
     if (!errors.name && !errors.price) {
@@ -274,7 +274,7 @@
         goto(`/products/${product.id}`);
       } catch (e) {
         errorMessage = JSON.stringify(e.message || e);
-        console.log(e);
+        console.error(e);
       }
     }
   }
