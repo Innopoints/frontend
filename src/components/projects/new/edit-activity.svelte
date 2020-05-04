@@ -63,7 +63,7 @@
   }
 
   function validateAndSave() {
-    if (!activity.name || /^\s*$/.test(name)) {
+    if (!activity.name || /^\s*$/.test(activity.name)) {
       errors.nameNotSpecified = true;
     }
 
@@ -118,7 +118,7 @@
       title="Activity name"
       required
       error={
-        (activity.name === '' && "The name must not be empty.")
+        (/^\s*$/.test(activity.name) && "The name must not be empty.")
         || (errors.nameNotSpecified && "The name must be specified.")
         || (errors.nameReserved && "This name is reserved for internal use.")
         || (!ensureNameUniqueness() && "The name should be unique.")
