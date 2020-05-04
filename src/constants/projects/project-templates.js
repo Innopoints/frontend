@@ -59,7 +59,7 @@ export function getOlympiad() {
       competences: [3, 4],  // communication, digital grammar
     },
     {
-      name: 'Event reporter',
+      name: 'Event Reporter',
       description: (
         'To run the event’s diary: collecting and publishing information about what’s going on, '
         + 'taking photos, making videos, taking interviews '
@@ -124,7 +124,7 @@ export function getStudentParty() {
       reward_rate: 300,
     },
     {
-      name: 'Event reporter',
+      name: 'Event Reporter',
       description: (
         'To run the event’s diary: collecting and publishing information about what’s going on, '
         + 'taking photos, making videos, taking interviews '
