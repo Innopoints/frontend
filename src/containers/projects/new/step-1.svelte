@@ -25,7 +25,7 @@
     required
     error={
          (duplicateName && "The name must be unique.")
-      || ($project.name === '' && "The name must not be empty.")
+      || (/^\s*$/.test($project.name) && "The name must not be empty.")
       || null
     }
   >

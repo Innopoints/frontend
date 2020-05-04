@@ -129,11 +129,7 @@
 
   /* A subscriber to the $project store, receives an actual project object. */
   async function saveProject(projectObj) {
-    if (projectObj == null || projectObj.name == null) {
-      return;
-    }
-
-    if (projectObj.name === '') {
+    if (projectObj == null || projectObj.name == null || /^\s*$/.test(projectObj.name)) {
       return;
     }
 

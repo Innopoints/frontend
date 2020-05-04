@@ -63,7 +63,7 @@
   }
 
   function validateAndSave() {
-    if (!activity.name) {
+    if (!activity.name || /^\s*$/.test(name)) {
       errors.nameNotSpecified = true;
     }
 
