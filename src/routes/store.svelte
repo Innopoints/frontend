@@ -17,15 +17,19 @@
 </script>
 
 <script>
+  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/store/tagline.svelte';
   import Balance from '@/components/store/balance.svelte';
   import Filters from '@/containers/store/filters.svelte';
   import ProductCard from '@/components/store/product-card.svelte';
   import Pagination from '@/components/common/pagination.svelte';
+  import NotificationTypes from '@/constants/backend/notification-types.js';
   import generateQueryString from '@/utils/generate-query-string.js';
   import { orderLabels, orderOptions } from '@/constants/store/order.js';
   import * as api from '@/utils/api.js';
+
+  const { session } = stores();
 
   export let products;
   export let pages;
@@ -36,6 +40,28 @@
   let order = orderOptions[0];
   let orderLabel = orderLabels[0];
   let currentPage = 1;
+
+  let newArrivals = null;
+  $: {
+    if (currentPage === 1 && $session.notifications != null) {
+      const newArrivalsNotification = $session.notifications.find(
+        notification => notification.type === NotificationTypes.NEW_ARRIVALS,
+      );
+
+      if (newArrivalsNotification != null) {
+        api.json(api.patch(
+          `/notifications/${newArrivalsNotification.id}/read`,
+          { csrfToken: $session.account.csrf_token },
+        )).catch(console.error);
+
+        const threshold = new Date(newArrivalsNotification.timestamp);
+        threshold.setDate(threshold.getDate() - 1);
+        newArrivals = products.filter(product => new Date(product.addition_time) > threshold);
+      }
+    } else {
+      newArrivals = null;
+    }
+  }
 
   let filterElement;
 
@@ -124,6 +150,12 @@
         </div>
       {:else}
         <div class="cards">
+          {#if newArrivals != null}
+            <hr data-text="New arrivals" />
+            {#each newArrivals as product (product.id)}
+              <ProductCard {...filterProps(product)} />
+            {/each}
+          {/if}
           <hr data-text="All items" />
           {#each products as product (product.id)}
             <ProductCard {...filterProps(product)} />
