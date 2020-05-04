@@ -18,6 +18,7 @@
 
 <script>
   import Layout from '@/layouts/default.svelte';
+  import Header from '@/containers/dashboard/header.svelte';
   import Reviews from '@/containers/dashboard/reviews.svelte';
   import Purchases from '@/containers/dashboard/purchases.svelte';
   import InnopointTransfer from '@/containers/dashboard/innopoint-transfer.svelte';
@@ -36,7 +37,7 @@
 
 <Layout user={account}>
   <div class="material">
-    <h1 class="padded">Dashboard</h1>
+    <Header />
     <div class="cards padded">
       <Reviews {reviews} />
       <Purchases {purchases} />
