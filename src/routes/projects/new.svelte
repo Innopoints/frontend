@@ -35,6 +35,7 @@
     prepareAfterBackend,
   } from '@/utils/project-manipulation.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   const { page } = stores();
 
@@ -129,7 +130,7 @@
 
   /* A subscriber to the $project store, receives an actual project object. */
   async function saveProject(projectObj) {
-    if (projectObj == null || projectObj.name == null || /^\s*$/.test(projectObj.name)) {
+    if (projectObj == null || !projectObj.name || spaceOnly(projectObj.name)) {
       return;
     }
 

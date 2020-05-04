@@ -29,6 +29,7 @@
   import * as api from '@/utils/api.js';
   import arraysEqual from '@/utils/arrays-equal.js';
   import { getBlankVariety } from '@/constants/products/blank-product.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let unmodifiedProduct;
   let product = Object.assign({}, unmodifiedProduct);
@@ -190,7 +191,7 @@
   }
 
   async function saveChanges() {
-    if (!product.name || /^\s*$/.test(product.name)) {
+    if (!product.name || spaceOnly(product.name)) {
       errors.name = true;
       errorMessage = 'The product needs a non-empty name.';
     }
