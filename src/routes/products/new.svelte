@@ -135,7 +135,7 @@
   async function createProduct() {
     errorMessage = null;
     prefetch('/store');
-    if (!product.name) {
+    if (!product.name || /^\s*$/.test(product.name)) {
       errors.name = true;
       errorMessage = 'Some fields are not filled out or filled out incorrectly.';
     }

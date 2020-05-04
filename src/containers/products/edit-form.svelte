@@ -24,7 +24,7 @@
     title="Display Name"
     subtitle="If the product has a print, make that the name. Short names work best."
     required
-    error={errors.name}
+    error={errors.name && 'The name cannot be empty.'}
   >
     <TextField
       id="name"
@@ -68,7 +68,7 @@
     title="Price"
     classname="horizontal"
     required
-    error={errors.price}
+    error={errors.price && 'The price must be positive.'}
   >
     <TextField
       id="price"
