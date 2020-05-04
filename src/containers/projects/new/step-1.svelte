@@ -38,7 +38,7 @@
       id="title"
       autocomplete={false}
       maxlength={128}
-      value={$project.name || ''}
+      value={$project.name}
       on:change={(event) => $project.name = event.detail}
     />
   </FormField>
