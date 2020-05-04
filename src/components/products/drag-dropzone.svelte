@@ -31,11 +31,13 @@
 
   function handleFileDrop(e) {
     upload(e.dataTransfer.files);
+    e.target.value = '';
     dragActive = false;
   }
 
   function handleFileUpload(e) {
     upload(e.target.files);
+    e.target.value = '';
   }
 
   function upload(files) {
