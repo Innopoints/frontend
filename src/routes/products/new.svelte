@@ -137,12 +137,12 @@
     prefetch('/store');
     if (!product.name || /^\s*$/.test(product.name)) {
       errors.name = true;
-      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+      errorMessage = 'The product needs a non-empty name.';
     }
 
     if (!product.price || product.price < 1) {
       errors.price = true;
-      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+      errorMessage = 'The product needs a valid price.';
     }
 
     const cleanVarieties = product.varieties.flatMap(variety => {
