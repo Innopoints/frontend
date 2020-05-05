@@ -52,7 +52,10 @@
         api.json(api.patch(
           `/notifications/${newArrivalsNotification.id}/read`,
           { csrfToken: $session.account.csrf_token },
-        )).catch(console.error);
+        )).then(() => {
+          newArrivalsNotification.is_read = true;
+          $session = $session;
+        }).catch(console.error);
 
         const threshold = new Date(newArrivalsNotification.timestamp);
         threshold.setDate(threshold.getDate() - 1);
