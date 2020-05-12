@@ -76,5 +76,8 @@
     "type": "git",
     "url": "git+https://github.com/VanishMax/innopoints-frontend.git"
   },
+  "browserslist": [
+    "last 2 versions, not dead, > 0.1%"
+  ],
   "license": "MIT"
 }
