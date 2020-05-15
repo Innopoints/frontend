@@ -117,7 +117,7 @@
         );
 
         if (resp.status === 403) {
-          reclaimInnopointsModal.error = 'Incorrect username or password.';
+          reclaimInnopointsModal.error = 'Incorrect e-mail, username or password.';
         } else if (!resp.ok) {
           reclaimInnopointsModal.error = 'Something went wrong.';
         } else {
