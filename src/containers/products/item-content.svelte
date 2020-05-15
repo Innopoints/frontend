@@ -22,13 +22,15 @@
   let outOfStock = false;
 
   $: {
-   // not in sizes, select variety automatically
-   if (!productControl.productSized) {
+    // not in sizes, select variety automatically
+    if (!productControl.productSized) {
       const varietiesOfSelectedColor = productControl.varietiesByColor.get(selectedColor);
       selectedVarietyID = varietiesOfSelectedColor[0].id;
     }
     if (selectedVarietyID != null) {
       outOfStock = productControl.varietyMap.get(selectedVarietyID).amount === 0;
+    } else {
+      outOfStock = false;
     }
   }
 
@@ -41,6 +43,21 @@
     }
     err = false;
     dispatch('purchase', { varietyID: selectedVarietyID });
+  }
+
+  function changeColor({ detail }) {
+    // if the new color has a variety of the same size, select it. Otherwise, invalidate selected size
+    if (productControl.productSized && selectedVarietyID != null) {
+      const oldSize = productControl.varietyMap.get(selectedVarietyID).size;
+      const varietiesOfNewColor = productControl.varietiesByColor.get(detail);
+      const varietyOfNewColorOldSize = varietiesOfNewColor.find(variety => variety.size === oldSize);
+      if (varietyOfNewColorOldSize != null) {
+        selectedVarietyID = varietyOfNewColorOldSize.id;
+      } else {
+        selectedVarietyID = null;
+      }
+    }
+    dispatch('color-change', detail);
   }
 </script>
 
@@ -72,7 +89,7 @@
           items={productControl.colors.map(val => ({ value: val }))}
           classname="radio-options"
           bind:value={selectedColor}
-          on:change={({ detail }) => dispatch('color-change', detail)}
+          on:change={changeColor}
           name="color"
         />
       </Labeled>
