@@ -31,12 +31,12 @@
         Fear not, you can have them here.
       </p>
       <p class="mb-2">
-        Enter the e-mail and password of the account you used. <br />
+        Enter the e-mail or username and password of the account you used. <br />
         You can do this for all your accounts, if you have several.
       </p>
 
       <label for="email" class="label">
-        E-mail
+        E-mail or username
       </label>
       <TextField bind:value={email} id="email" classname="mb-2" />
 
