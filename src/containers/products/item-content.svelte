@@ -51,7 +51,7 @@
       const oldSize = productControl.varietyMap.get(selectedVarietyID).size;
       const varietiesOfNewColor = productControl.varietiesByColor.get(detail);
       const varietyOfNewColorOldSize = varietiesOfNewColor.find(variety => variety.size === oldSize);
-      if (varietyOfNewColorOldSize != null) {
+      if (varietyOfNewColorOldSize != null && varietyOfNewColorOldSize.amount > 0) {
         selectedVarietyID = varietyOfNewColorOldSize.id;
       } else {
         selectedVarietyID = null;
