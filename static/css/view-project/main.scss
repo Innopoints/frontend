@@ -115,6 +115,30 @@ h2.padded {
       margin-bottom: .2em;
     }
   }
+
+  .tag-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .dropdown-shell {
+      position: relative;
+
+      .dropdown {
+        left: 0;
+        top: unset;
+      }
+    }
+
+    .tags {
+      display: flex;
+    }
+
+    .tags .chip,
+    .autocomplete-field {
+      margin-right: .5em;
+    }
+  }
 }
 
 .activities {
