@@ -39,7 +39,7 @@ header.container .notification-center {
   }
 
   .notification {
-    padding: 1em 0 0;
+    padding: 1em 0 .25em;
     border-bottom: 1px solid $disabled-bg;
     overflow: auto;
 
