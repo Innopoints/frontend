@@ -5,6 +5,7 @@
     const data = await getInitialData(this, session, new Map([
       ['purchases', '/stock_changes/for_review'],
       ['reviews', '/projects/for_review'],
+      ['tags', '/tags'],
     ]));
 
     if (session.account == null || !session.account.is_admin) {
@@ -22,9 +23,12 @@
   import Reviews from '@/containers/dashboard/reviews.svelte';
   import Purchases from '@/containers/dashboard/purchases.svelte';
   import InnopointTransfer from '@/containers/dashboard/innopoint-transfer.svelte';
+  import TagEditor from '@/containers/dashboard/tag-editor.svelte';
+  
   export let reviews;
   export let account;
   export let purchases;
+  export let tags;
 </script>
 
 <svelte:head>
@@ -42,6 +46,7 @@
       <Reviews {reviews} />
       <Purchases {purchases} />
       <InnopointTransfer />
+      <TagEditor {tags} />
     </div>
   </div>
 </Layout>
