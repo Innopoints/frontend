@@ -5,6 +5,7 @@
     const data = await getInitialData(this, session, new Map([
       ['project', `/projects/${page.params.id}`],
       ['competences', '/competences'],
+      ['tags', '/tags'],
     ]));
     data.account = session.account;
     return data;
@@ -43,6 +44,7 @@
   export let project;
   export let account;
   export let competences;
+  export let tags;
 
   const projectStore = writable(project);
   let moderatorsEmails = [];
@@ -409,6 +411,19 @@
       console.error(e);
     }
   }
+
+  async function saveTags({ detail: tagIDs }) {
+    try {
+      await api.json(api.patch(`/projects/${project.id}/tags`, {
+        csrfToken: account.csrf_token,
+        data: tagIDs,
+      }));
+      project.tags = tagIDs;
+      projectStore.set(project);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 </script>
 
 <svelte:head>
@@ -437,9 +452,11 @@
     <ProjectHeader
       {project}
       {account}
+      {tags}
       on:delete-project={projectDeletionDialog.show}
       on:finalize-project={finalizeDialog.show}
       on:submit-for-review={submitForReview}
+      on:update-tags={saveTags}
     />
 
     {#if (project.lifetime_stage === ProjectStages.FINALIZING

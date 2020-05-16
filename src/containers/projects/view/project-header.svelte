@@ -3,6 +3,7 @@
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
   import Labeled from 'ui/labeled.svelte';
+  import TagSelector from '@/components/projects/view/tag-selector.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -10,7 +11,12 @@
 
   export let project;
   export let account;
+  export let tags;
   export let review = false;
+
+  $: isModerator = (
+    account && project.moderators.find(moderator => moderator.email === account.email)
+  ) != null;
 
   let reviewComment = null;
 
@@ -24,8 +30,7 @@
 </script>
 
 <header
-  class="project-header"
-  class:wrap={project.lifetime_stage === ProjectStages.FINALIZING || review}
+  class="project-header wrap"
   style="--image-url: url({projectImageURL})"
 >
   <img src={projectImageURL} class="cover-image" alt="Project cover image" />
@@ -40,6 +45,7 @@
     </h1>
     {#if project.lifetime_stage === ProjectStages.FINALIZING
       && !review
+      && isModerator
       && project.review_status != null}
       <div class="warning">
         {#if project.review_status === ReviewStatuses.PENDING}
@@ -58,6 +64,13 @@
         </p>
       </div>
     {/if}
+    {#if project.lifetime_stage !== ProjectStages.FINISHED && isModerator}
+      <TagSelector
+        {tags}
+        value={project.tags}
+        on:change={({ detail }) => dispatch('update-tags', detail)}
+      />
+    {/if}
     <div class="data-points">
       <Labeled icon label="When">
         <svg slot="icon" class="icon" src="images/icons/calendar.svg" />
@@ -75,6 +88,7 @@
       </Labeled>
       {#if project.lifetime_stage === ProjectStages.FINALIZING
         && !review
+        && isModerator
         && project.admin_feedback != null}
         <Labeled icon label="Administrator's feedback" textclass="admin-feedback">
           <svg slot="icon" class="icon" src="images/icons/message-square.svg" />
