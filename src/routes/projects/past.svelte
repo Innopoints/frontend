@@ -34,6 +34,7 @@
     delete newProps.creation_time;
     delete newProps.moderators;
     delete newProps.review_status;
+    delete newProps.tags;
     return newProps;
   }
 
