@@ -42,7 +42,6 @@
     ],
     "jsx-a11y/anchor-has-content": "off",
     "jsx-a11y/anchor-is-valid": "off",
-    "keyword-spacing": "error",
-    "require-yield": "off"
+    "keyword-spacing": "error"
   }
 }

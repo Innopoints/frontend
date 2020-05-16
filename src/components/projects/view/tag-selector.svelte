@@ -10,9 +10,10 @@
   let valueTags = value.map(id => tags.find(tag => tag.id === id));
   let editing = false;
 
+  // eslint-disable-next-line require-yield
   async function *getOptions(query) {
     if (query) {
-      return tags.filter(tag => tag.name.toLowerCase().startsWith(query.toLowerCase()));
+      return tags.filter(tag => tag.name.toLowerCase().includes(query.toLowerCase()));
     }
     return tags;
   }

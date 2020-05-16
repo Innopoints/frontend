@@ -26,12 +26,8 @@
       return [{ content: string, marked: false }];
     }
 
-    const result = [];
     const partition = string.split(new RegExp(`(${match})`, 'ig'));
-    for (let i = 0; i < partition.length; ++i) {
-      result.push({ content: partition[i], marked: i % 2 !== 0 });
-    }
-    return result;
+    return partition.map((content, idx) => ({ content, marked: idx % 2 !== 0 }));
   }
 
   let searchQuery = '';
