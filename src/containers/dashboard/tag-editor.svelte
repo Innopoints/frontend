@@ -15,10 +15,6 @@
   let success = false;
   let error = null;
 
-  $: console.log('cr', toCreate);
-  $: console.log('dl', toDelete);
-  $: console.log('ed', toEdit);
-
   $: isChanged = (
     toCreate.filter(thatTag => !thatTag.forDeletion).length
     || toDelete.filter(thatTag => thatTag.id != null).length
@@ -45,9 +41,6 @@
   }
 
   async function saveTags() {
-    console.log('5cr', toCreate);
-    console.log('5dl', toDelete);
-    console.log('5ed', toEdit);
     if (toCreate.some(tag => tags.find(thatTag => thatTag.name === tag.name))) {
       error = 'no duplicates allowed';
       return;
