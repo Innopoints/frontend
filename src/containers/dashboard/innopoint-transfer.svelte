@@ -9,7 +9,7 @@
   $: users = selectedItems.map(item => ({ full_name: item.name, email: item.details }));
 </script>
 
-<Card classname="card individual-ctls">
+<Card classname="individual-ctls">
   <div class="title">
     <svg src="/images/icons/user.svg" class="icon" />
     Individual user controls

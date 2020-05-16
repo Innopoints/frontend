@@ -5,7 +5,7 @@
   export let reviews = [];
 </script>
 
-<Card classname="card projects-review">
+<Card classname="projects-review">
   <div class="title">
     <svg src="/images/icons/check-square.svg" class="icon" />
     Projects for review

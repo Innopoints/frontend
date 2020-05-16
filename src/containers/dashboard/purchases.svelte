@@ -23,7 +23,7 @@
   }
 </script>
 
-<Card classname="card purchases">
+<Card classname="purchases">
   <div class="title">
     <svg src="/images/icons/shopping-bag.svg" class="icon" />
     InnoStore purchases
