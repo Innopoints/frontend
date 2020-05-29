@@ -1,12 +1,11 @@
 <script>
   import { onMount } from 'svelte';
   import { stores } from '@sapper/app';
-  import Dropdown from 'ui/dropdown.svelte';
-  import Button from 'ui/button.svelte';
+  import { DropdownShell, Dropdown, Button, Loading } from 'attractions';
+  import Badge from 'ui/badge.svelte';
+  import Notification from './notification.svelte';
+  import EmptyState from './empty-state.svelte';
   import * as api from '@/utils/api.js';
-  import SimplebarList from 'ui/simplebar-list.svelte';
-  import getNotificationContent from '@/constants/notification-content.js';
-  import { formatTime } from '@/utils/date-time-format.js';
 
   const { session } = stores();
 
@@ -35,64 +34,39 @@
   }
 </script>
 
-<Dropdown
-  dropdownclass="notification-center"
-  handleclass="round"
-  chevron={false}
-  nowrap
-  let:toggle={toggle}
->
-  <div slot="label" class="badge" class:hidden={!unread}>
-    <svg src="images/icons/bell.svg" class="icon" />
-  </div>
-  <Button isNormal isRound classname="close" on:click={toggle}>
-    <svg src="images/icons/x.svg" class="icon" />
-  </Button>
-  <div class="title">Notifications</div>
-  {#if $session.notifications == null}
-    <div class="empty small">
-      <div class="icon">
-        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-      </div>
-      <p>Loading...</p>
-    </div>
-  {:else if $session.notifications.length === 0}
-    <div class="empty small">
-      <div class="icon">
-        <svg src="images/icons/bell-off.svg" />
-      </div>
-      <div class="title">No notifications</div>
-    </div>
-  {:else}
-    <SimplebarList classname="notification-list">
-      {#each $session.notifications as notification (notification.id)}
-        <li class="notification">
-          <span class="content">
-            {#each getNotificationContent(notification) as fragment}
-              {#if typeof fragment === 'string'}
-                {fragment}
-              {:else if fragment.bold}
-                <strong>{fragment.text}</strong>
-              {:else}
-                <a href="{fragment.url}" rel="prefetch">{fragment.text}</a>
-              {/if}
-            {/each}
-          </span>
-          <Button
-            isRound
-            tooltip="Mark as read"
-            classname="mt"
-            on:click={() => readNotification(notification.id)}
-          >
-            <svg src="images/icons/check.svg" class="icon" />
-          </Button>
-          <time datetime={notification.timestamp}>{formatTime(notification.timestamp)}</time>
-        </li>
-      {/each}
-    </SimplebarList>
-    <Button on:click={() => $session.notifications.forEach(x => readNotification(x.id))}>
-      <svg src="images/icons/check.svg" class="icon mr" />
-      mark all as read
+<div class="notification-center">
+  <DropdownShell let:toggle>
+    <Button round on:click={toggle}>
+      <Badge hidden={!unread}>
+        <svg src="images/icons/bell.svg" class="icon" />
+      </Badge>
     </Button>
-  {/if}
-</Dropdown>
+    <Dropdown right>
+      <Button neutral round class="close" on:click={toggle}>
+        <svg src="images/icons/x.svg" class="icon" />
+      </Button>
+      <div class="title">Notifications</div>
+      {#if $session.notifications == null}
+        <EmptyState small text="Loading...">
+          <Loading class="icon" />
+        </EmptyState>
+      {:else if $session.notifications.length === 0}
+        <EmptyState small text="No notifications">
+          <svg src="images/icons/bell-off.svg" class="icon" />
+        </EmptyState>
+      {:else}
+        <ul class="notification-list">
+          {#each $session.notifications as notification (notification.id)}
+            <Notification {notification} on:read={() => readNotification(notification.id)} />
+          {/each}
+        </ul>
+        <Button on:click={() => $session.notifications.forEach(x => readNotification(x.id))}>
+          <svg src="images/icons/check.svg" class="icon mr" />
+          mark all as read
+        </Button>
+      {/if}
+    </Dropdown>
+  </DropdownShell>
+</div>
+
+<style src="../../../static/css/components/common/notification-center.scss"></style>

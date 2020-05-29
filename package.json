@@ -16,7 +16,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "[^.]*.js": [
       "eslint --format=pretty",
       "eslint --max-warnings 0 --fix",
       "git add"

@@ -1,4 +1,4 @@
-{
+module.exports = {
   "root": true,
   "env": {
     "node": true,
@@ -22,7 +22,10 @@
   "globals": {
     "__DEBUG__": false,
     "__DEV__": false,
-    "__HOT__": false
+    "__HOT__": false,
+  },
+  "settings": {
+    "svelte3/ignore-styles": function(attrs) { return attrs.lang === 'scss'; },
   },
   "rules": {
     "semi": [2, "always"],
@@ -42,6 +45,6 @@
     ],
     "jsx-a11y/anchor-has-content": "off",
     "jsx-a11y/anchor-is-valid": "off",
-    "keyword-spacing": "error"
+    "keyword-spacing": "error",
   }
 }

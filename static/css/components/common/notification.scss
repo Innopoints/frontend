@@ -1,0 +1,23 @@
+@import "_attractions-theme.scss";
+
+.notification {
+  padding: 1em 0 .25em;
+  border-bottom: 1px solid $light-contrast;
+  overflow: auto;
+
+  .content {
+    font-weight: 300;
+    font-size: .95rem;
+  }
+
+  time {
+    color: lighten($dark, 20%);
+    margin-top: .5em;
+    display: block;
+    font-size: .9rem;
+  }
+
+  :global(.btn) {
+    float: right;
+  }
+}
