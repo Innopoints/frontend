@@ -5,9 +5,9 @@
 
 <section class="options">
   <h2>How to get innopoints?</h2>
-  {#each options as option, i (option.title)}
-    <div class="step">
-      <Step {...option} />
-    </div>
+  {#each options as option (option.title)}
+    <Step {...option} />
   {/each}
 </section>
+
+<style src="../../../static/css/containers/home/options.scss"></style>

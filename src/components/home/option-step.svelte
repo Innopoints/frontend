@@ -1,23 +1,32 @@
 <script>
-  import Button from 'ui/button.svelte';
+  import { Button } from 'attractions';
 
-  export let title = '';
-  export let subtitle = '';
-  export let img = '';
-  export let buttonText = '';
-  export let buttonLink = null;
+  export let title;
+  export let subtitle;
+  export let imageURL = '';
+  export let actionText = '';
+  export let actionLink = null;
   export let external = null;
 </script>
 
-<div class="container">
-  <img src={img} class="picture" alt={title} />
-  <div class="description">
-    <span class="title">{title}</span>
-    <span class="subtitle">{subtitle}</span>
-    {#if buttonLink}
-      <Button href={buttonLink} away={external} isFilled>{buttonText}</Button>
-    {:else}
-      <strong>{buttonText}</strong>
-    {/if}
+<div class="step">
+  <div class="container">
+    <img src={imageURL} class="picture" alt={title} />
+    <div class="description">
+      <span class="title">{title}</span>
+      <span class="subtitle">{subtitle}</span>
+      {#if actionLink != null}
+        <Button href={actionLink} filled>
+          {actionText}
+          {#if external}
+            <svg src="images/icons/external-link.svg" class="icon ml" />
+          {/if}
+        </Button>
+      {:else}
+        <strong>{actionText}</strong>
+      {/if}
+    </div>
   </div>
 </div>
+
+<style src="../../../static/css/components/home/option-step.scss"></style>

@@ -1,4 +1,4 @@
-@import "../global/_variables.scss";
+@import "_attractions-theme.scss";
 
 .tagline {
   display: flex;
@@ -18,15 +18,15 @@
     }
   }
 
-  h1 {
-    font-size: 1.9rem;
+  :global(h1) {
+    font-size: 1.9em;
     font-weight: 500;
     margin-bottom: 8px;
     text-align: center;
   }
 
   .motto {
-    font-size: 1.2rem;
+    font-size: 1.2em;
     text-align: center;
   }
 
@@ -37,7 +37,7 @@
     margin-top: 1em;
   }
 
-  .btn {
+  :global(.btn) {
     margin: 1em .5em 0;
   }
 }
@@ -46,7 +46,7 @@
   .tagline {
     padding: 0 10%;
 
-    h1 {
+    :global(h1) {
       font-size: 2.6rem;
     }
 
@@ -54,7 +54,7 @@
       font-size: 1.5rem;
     }
 
-    .btn {
+    :global(.btn) {
       font-size: 1.1rem;
     }
   }
@@ -83,11 +83,11 @@
       margin-right: 2em;
     }
 
-    h1, .motto {
+    :global(h1), .motto {
       text-align: left;
     }
 
-    .btn {
+    :global(.btn) {
       margin: 1em 0 0;
 
       &:first-child {
@@ -104,7 +104,7 @@
       margin-right: 2.5em;
     }
 
-    h1 {
+    :global(h1) {
       font-size: 2.8rem;
     }
 
@@ -116,7 +116,7 @@
       margin-top: 1.5em;
     }
 
-    .btn {
+    :global(.btn) {
       padding: .8em 1.3em;
     }
   }
