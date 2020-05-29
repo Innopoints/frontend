@@ -1,8 +1,6 @@
 <script>
-  import Card from 'ui/card.svelte';
-  import Button from 'ui/button.svelte';
+  import { Card, Button, RadioGroup } from 'attractions';
   import Labeled from 'ui/labeled.svelte';
-  import RadioGroup from 'ui/radio-group.svelte';
   import getBackground from '@/utils/optimal-color.js';
   import { groupByColor } from '@/utils/group-varieties.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
@@ -17,12 +15,6 @@
   let varietiesByColor = groupByColor(varieties);
   let colors = [...varietiesByColor.keys()];
   let selectedColor = colors[0];
-  let altText = 'Product image: ';
-  if (type) {
-    altText += `"${name}" ${type}`;
-  } else {
-    altText += name;
-  }
   $: imageURL = (
     varietiesByColor.get(selectedColor)[0].images.length !== 0 ?
       API_HOST_BROWSER + varietiesByColor.get(selectedColor)[0].images[0]
@@ -32,55 +24,59 @@
   $: outOfStock = varieties.reduce((sum, variety) => variety.amount + sum, 0) === 0;
 </script>
 
-<Card classname="with-image">
-  {#if colors.length > 1 && !short}
-    <div class="image">
+<div class="product-card">
+  <Card tight>
+    {#if colors.length > 1 && !short}
+      <div class="image">
+        <img
+          src={imageURL}
+          style="background: {getBackground(selectedColor)}"
+          alt="Product cover"
+        />
+        <RadioGroup
+          color
+          bind:value={selectedColor}
+          class="color-options"
+          name="color-{id}"
+          items={colors.map(val => ({ value: val }))}
+        />
+      </div>
+    {:else}
       <img
         src={imageURL}
         style="background: {getBackground(selectedColor)}"
-        alt={altText}
+        alt="Product cover"
+        class="image"
       />
-      <RadioGroup
-        isColor
-        items={colors.map(val => ({ value: val }))}
-        bind:value={selectedColor}
-        classname="color-options"
-        name="color-{id}"
-      />
-    </div>
-  {:else}
-    <img
-      src={imageURL}
-      style="background: {getBackground(selectedColor)}"
-      alt={altText}
-      class="image"
-    />
-  {/if}
+    {/if}
 
-  <div class="content">
-    <div class="title">
-      <div class="main">{name}</div>
-      {#if outOfStock}
-        <div class="out-of-stock">
-          out of stock
+    <div class="content">
+      <div class="title">
+        <div class="main">{name}</div>
+        {#if outOfStock}
+          <div class="out-of-stock">
+            out of stock
+          </div>
+        {/if}
+      </div>
+      {#if type}
+        <div class="subtitle">{type}</div>
+      {/if}
+      {#if short}
+        <Button href="/products/{id}" outline>view</Button>
+      {:else}
+        <div class="card-row">
+          <Labeled label="Price">
+            <span class="content">
+              <span class="price">{price}</span>
+              <svg src="images/innopoint-sharp.svg" class="innopoint" />
+            </span>
+          </Labeled>
+          <Button href="/products/{id}" outline>view</Button>
         </div>
       {/if}
     </div>
-    {#if type}
-      <div class="subtitle">{type}</div>
-    {/if}
-    {#if short}
-      <Button href="/products/{id}" isOutline>view</Button>
-    {:else}
-      <div class="card-row">
-        <Labeled label="Price">
-          <span class="content">
-            <span class="price">{price}</span>
-            <svg src="images/innopoint-sharp.svg" class="innopoint" />
-          </span>
-        </Labeled>
-        <Button href="/products/{id}" isOutline>view</Button>
-      </div>
-    {/if}
-  </div>
-</Card>
+  </Card>
+</div>
+
+<style src="../../../static/css/components/store/product-card.scss"></style>

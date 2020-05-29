@@ -1,0 +1,98 @@
+@import "_attractions-theme.scss";
+
+.product-card {
+  :global(.card) {
+    max-width: 18em;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .image {
+    position: relative;
+    display: block;
+      width: 100%;
+
+    & > img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: .8em 1.3em;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 1.15rem;
+
+    .main {
+      margin-bottom: .1em;
+    }
+
+    .out-of-stock {
+      font-size: .8rem;
+      padding: .3em .5em;
+      background: $danger;
+      color: #fff;
+      border-radius: 1em;
+    }
+  }
+
+  .title + .subtitle {
+    margin-top: .2em;
+    font-size: .95rem;
+    font-weight: 300;
+  }
+
+  .card-row {
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: .5rem;
+  }
+
+  :global(.labeled .content) {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .title + .card-row {
+    margin-top: 1.5rem;
+  }
+
+  .innopoint {
+    height: 1.05rem;
+    margin-left: .3em;
+  }
+
+  .color-options {
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    bottom: .5em;
+    right: 1em;
+
+    & > label {
+      margin-bottom: .5em;
+    }
+  }
+
+  .card-row .price {
+    font-size: 1.2rem;
+  }
+
+  @media only screen and (min-width: 600px) {
+    :global(.card) {
+      margin: .5em;
+    }
+  }
+}
