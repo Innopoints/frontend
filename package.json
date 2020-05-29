@@ -33,9 +33,11 @@
     "express": "^4.17.1",
     "helmet": "^3.22.0",
     "node-fetch": "^2.6.0",
+    "node-sass": "^4.14.1",
     "sapper-environment": "^1.0.1",
     "simplebar": "^5.1.0",
     "sirv": "^0.4.0",
+    "svelte-preprocess": "^3.7.4",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
@@ -49,6 +51,7 @@
     "@rollup/plugin-commonjs": "^12.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-replace": "^2.3.0",
+    "attractions": "^1.0.0-alpha",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",

@@ -10,6 +10,7 @@ import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import substituteSvgs from './src/utils/substitute-svgs.js';
 import sapperEnv from 'sapper-environment';
+import autoPreprocess from 'svelte-preprocess';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -34,9 +35,14 @@ export default {
       eslint(),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
-        preprocess: {
-          markup: substituteSvgs,
-        },
+        preprocess: [
+          {
+            markup: substituteSvgs,
+          },
+          autoPreprocess({
+            scss: { includePaths: ['./static/css'] },
+          }),
+        ],
         dev,
         hydratable: true,
       }),
@@ -99,9 +105,14 @@ export default {
       }),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
-        preprocess: {
-          markup: substituteSvgs,
-        },
+        preprocess: [
+          {
+            markup: substituteSvgs,
+          },
+          autoPreprocess({
+            scss: { includePaths: ['./static/css'] },
+          }),
+        ],
         generate: 'ssr',
         dev,
       }),
