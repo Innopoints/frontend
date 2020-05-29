@@ -33,7 +33,7 @@
   class="project-header wrap"
   style="--image-url: url({projectImageURL})"
 >
-  <img src={projectImageURL} class="cover-image" alt="Project cover image" />
+  <img src={projectImageURL} class="cover-image" alt="Project cover" />
   <div class="info">
     <h1>
       {project.name}

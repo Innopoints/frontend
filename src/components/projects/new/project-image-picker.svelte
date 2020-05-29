@@ -32,7 +32,7 @@
 </script>
 
 {#if value != null}
-  <img src="{API_HOST_BROWSER}/file/{value}" alt="Project image" class="shadow-1 mr" />
+  <img src="{API_HOST_BROWSER}/file/{value}" alt="Project cover" class="shadow-1 mr" />
   <Button isDanger on:click={clearValue} tooltip="Delete image">
     <svg src="images/icons/trash-2.svg" class="icon" />
     <span class="text">delete</span>

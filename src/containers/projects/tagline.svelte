@@ -10,7 +10,8 @@
   <img
     src="images/projects/voxel-volunteering.png"
     class="hide-tb picture"
-    alt="projects image" />
+    alt=""
+  />
   <div>
     <div class="headline">Become a volunteer</div>
     <div class="subhead">
