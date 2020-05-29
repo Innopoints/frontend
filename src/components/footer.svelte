@@ -1,15 +1,14 @@
 <script>
-  import Button from 'ui/button.svelte';
-  import Card from 'ui/card.svelte';
+  import { Button, Card } from 'attractions';
 
-  const scrollToTop = () => {
+  function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }
 </script>
 
 <footer>
   <div class="to-top">
-    <Button isFilled on:click={scrollToTop}>
+    <Button filled on:click={scrollToTop}>
       <svg src="images/icons/arrow-up.svg" class="mr" />
       back to top
     </Button>
@@ -53,10 +52,12 @@
       <Card>
         <p>The new Innopoints website is finally here! Exciting.</p>
         <p>
-          If you encounter any technical issues with the website, please, report them to
+          If you encounter any issues with the website, please, report them to
           <a href="mailto:innopoints@innopolis.university">innopoints@innopolis.university</a>.
         </p>
       </Card>
     </div>
   </div>
 </footer>
+
+<style src="../../static/css/components/footer.scss"></style>

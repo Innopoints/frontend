@@ -1,23 +1,10 @@
-@import "../global/_variables.scss";
-
-.material {
-  background-color: #fff;
-  clip-path:
-    polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - 20px),
-      calc(100% - 20px) 100%,
-      0 100%
-    );
-  overflow: visible;
-}
+@import "_attractions-theme.scss";
 
 footer {
   background-color: #5c5c5c;
-  padding: 20px 1em 0;
+  padding: 1.25em 1em 0;
   color: #fff;
-  margin-top: -20px;
+  margin-top: -1.25em;
 
   &.low-page {
     & > .container {
@@ -43,36 +30,6 @@ footer {
     flex-direction: column;
   }
 
-  .left {
-    flex-direction: column;
-    margin-bottom: 2em;
-  }
-
-  .logo {
-    width: 3em;
-    height: 3em;
-    stroke: #fff;
-  }
-
-  .title {
-    font-weight: 500;
-    color: #fff;
-    font-size: 1.7rem;
-    margin: 0 .5em;
-  }
-
-  .title-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-  }
-
-  .socials {
-    padding: 0 10%;
-    margin-top: .8em;
-  }
-
   a {
     color: #fff;
 
@@ -81,11 +38,41 @@ footer {
     }
   }
 
-  .credits {
-    font-weight: 300;
-    font-size: 1rem;
-    text-align: center;
-    margin-top: 2em;
+  .left {
+    flex-direction: column;
+    margin-bottom: 2em;
+
+    .logo {
+      width: 3em;
+      height: 3em;
+      stroke: #fff;
+    }
+
+    .title {
+      font-weight: 500;
+      color: #fff;
+      font-size: 1.7rem;
+      margin: 0 .5em;
+    }
+
+    .title-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .socials {
+      padding: 0 10%;
+      margin-top: .8em;
+    }
+
+    .credits {
+      font-weight: 300;
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 2em;
+    }
   }
 
   .right {
@@ -97,15 +84,15 @@ footer {
       display: none;
     }
 
-    .card {
+    :global(.card) {
       width: 80%;
       color: #000;
 
-      a {
+      :global(a) {
         color: $main;
       }
 
-      p {
+      :global(p) {
         margin-bottom: .5em;
         font-weight: 300;
       }
@@ -129,21 +116,21 @@ footer {
 
     .left {
       margin-bottom: 4rem;
-    }
 
-    .socials {
-      margin-bottom: 3em;
-      padding: 0;
-      margin-top: 0;
-    }
+      .socials {
+        margin-bottom: 3em;
+        padding: 0;
+        margin-top: 0;
+      }
 
-    .title-container {
-      justify-content: flex-start;
-    }
+      .title-container {
+        justify-content: flex-start;
+      }
 
-    .credits {
-      text-align: left;
-      margin-top: 0;
+      .credits {
+        text-align: left;
+        margin-top: 0;
+      }
     }
 
     .right {
@@ -157,7 +144,7 @@ footer {
         align-self: flex-end;
       }
 
-      .card {
+      :global(.card) {
         width: 14em;
         align-self: flex-start;
       }
@@ -169,7 +156,7 @@ footer {
       margin-right: 2em;
     }
 
-    .right .card {
+    .right :global(.card) {
       width: 20em;
     }
   }
@@ -182,11 +169,5 @@ footer {
 
   @media only screen and (min-width: 1200px) {
     padding: 20px 10% 0;
-  }
-
-  @media only screen and (min-width: 1600px) {
-    .search {
-      width: 18em;
-    }
   }
 }

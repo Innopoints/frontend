@@ -1,17 +1,16 @@
 <script>
-  import Button from 'ui/button.svelte';
-  import Card from 'ui/card.svelte';
+  import { Button, Card, H2 } from 'attractions';
 </script>
 
 <section class="contacts">
   <header>
-    <h2>Any questions?</h2>
+    <H2>Any questions?</H2>
     <div class="subtitle">Don’t hesitate to contact us!</div>
   </header>
   <div>
     <Card>
       <a href="mailto:319@innopolis.ru" class="mr-2">
-        <img class="icon" src="/images/home/mail-us.svg" alt="write to 319" />
+        <img class="icon" src="images/home/mail-us.svg" alt="write to 319" />
       </a>
       <p>
         319@innopolis.ru
@@ -20,7 +19,7 @@
     </Card>
     <Card>
       <a href="https://t.me/andrejsblakunovs" class="mr-2" target="_blank">
-        <img class="icon" src="/images/home/text-us.svg" alt="call to 319" />
+        <img class="icon" src="images/home/text-us.svg" alt="text the admin" />
       </a>
       <p>
         @andrejsblakunovs
@@ -29,3 +28,5 @@
     </Card>
   </div>
 </section>
+
+<style src="../../../static/css/containers/home/contacts.scss"></style>

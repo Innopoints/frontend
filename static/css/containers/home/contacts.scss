@@ -1,4 +1,4 @@
-@import "../global/_variables.scss";
+@import "_attractions-theme.scss";
 
 .contacts {
   padding: 3em 0 2.5em;
@@ -21,14 +21,14 @@
     font-weight: 300;
   }
 
-  .card {
+  :global(.card) {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: .8em 1.6em;
     margin: 1em 0;
 
-    p {
+    :global(p) {
       font-weight: 300;
       text-align: center;
       margin-top: 1em;
@@ -39,18 +39,14 @@
     width: 3.6em;
     height: 3.6em;
   }
-}
 
-@media only screen and (min-width: 640px) {
-  .contacts {
+  @media only screen and (min-width: 640px) {
     .subtitle {
       font-size: 1.2em;
     }
   }
-}
 
-@media only screen and (min-width: 805px) {
-  .contacts {
+  @media only screen and (min-width: 805px) {
     padding-bottom: 3em;
 
     & > div {
@@ -58,22 +54,20 @@
       flex-direction: row;
     }
 
-    .card {
+    :global(.card) {
       margin: 0 1rem;
       font-size: 1.2rem;
 
-      .btn {
+      :global(.btn) {
         font-size: 1em;
       }
     }
   }
-}
 
-@media only screen and (min-width: 1024px) {
-  .contacts {
+  @media only screen and (min-width: 1024px) {
     padding-bottom: 5em;
 
-    .card {
+    :global(.card) {
       padding: .8rem 2rem;
       margin: 0 3rem;
     }
