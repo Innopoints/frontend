@@ -2,17 +2,19 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    return await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
+    const data = await getInitialData(this, session, new Map([
       ['project', `/projects/${page.params.id}`],
       ['competences', '/competences'],
+      ['tags', '/tags'],
     ]));
+    data.account = session.account;
+    return data;
   }
 </script>
 
 <script>
   import { writable } from 'svelte/store';
-  import { goto, prefetch } from '@sapper/app';
+  import { goto, prefetch, stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserView from '@/containers/projects/view/user-view.svelte';
@@ -37,9 +39,12 @@
     prepareAfterBackend,
   } from '@/utils/project-manipulation.js';
 
+  const { session } = stores();
+
   export let project;
   export let account;
   export let competences;
+  export let tags;
 
   const projectStore = writable(project);
   let moderatorsEmails = [];
@@ -60,19 +65,28 @@
       applicationDialog.open = true;
     },
     async processApplication({ detail }) {
-      const { activity, comment, telegram, remember } = detail;
+      const { activity, comment, telegram } = detail;
       try {
         const application = await api.json(api.post(
           `/projects/${activity.project}/activities/${activity.id}/applications`,
-          { data: { telegram, comment } },
+          { data: { telegram, comment }, csrfToken: account.csrf_token },
         ));
         application.applicant = account;
         activity.existing_application = application;
         project = project;
         projectStore.set(project);
 
-        if (remember) {
-          api.patch('/account/telegram', { data: { telegram_username: telegram } });
+        if (telegram && telegram != account.telegram) {
+          try {
+            await api.json(api.patch(
+              '/account/telegram',
+              { data: { telegram_username: telegram }, csrfToken: account.csrf_token },
+            ));
+            account.telegram = telegram;
+            $session.account = account;
+          } catch (e) {
+            console.error(e);
+          }
         }
         applicationDialog.open = false;
         applicationDialog.error = null;
@@ -94,6 +108,7 @@
       try {
         await api.json(api.del(
           `/projects/${activity.project}/activities/${activity.id}/applications`,
+          { csrfToken: account.csrf_token },
         ));
 
         if (activity.existing_application.status === ApplicationStatuses.APPROVED) {
@@ -138,7 +153,10 @@
     async deleteActivity({ detail: activity }) {
       activityDeletionDialog.open = false;
       try {
-        await api.json(api.del(`/projects/${activity.project}/activities/${activity.id}`));
+        await api.json(api.del(
+          `/projects/${activity.project}/activities/${activity.id}`,
+          { csrfToken: account.csrf_token },
+        ));
         project.activities = project.activities.filter(act => act.id !== activity.id);
         projectStore.set(project);
       } catch (e) {
@@ -170,7 +188,7 @@
     async deleteProject() {
       try {
         prefetch('/projects');
-        await api.json(api.del(`/projects/${project.id}`));
+        await api.json(api.del(`/projects/${project.id}`, { csrfToken: account.csrf_token }));
         goto('/projects');
       } catch (e) {
         console.error(e);
@@ -185,7 +203,10 @@
     },
     async finalizeProject() {
       try {
-        await api.json(api.patch(`/projects/${project.id}/finalize`));
+        await api.json(api.patch(
+          `/projects/${project.id}/finalize`,
+          { csrfToken: account.csrf_token },
+        ));
         project = await api.json(api.get(`/projects/${project.id}`));
         projectStore.set(project);
         finalizeDialog.open = false;
@@ -224,7 +245,7 @@
         application.feedback = await api.json(api.post(
           `/projects/${activity.project}/activities/${activity.id}`
           + `/applications/${application.id}/feedback`,
-          { data: value },
+          { data: value, csrfToken: account.csrf_token },
         ));
         project = project;
         leaveFeedbackModal.open = false;
@@ -236,22 +257,55 @@
 
   const reportPerformanceModal = {
     open: false,
+    activity: null,
+    application: null,
+    report: null,
     show({ detail }) {
       reportPerformanceModal.activity = detail.activity;
       reportPerformanceModal.application = detail.application;
+      reportPerformanceModal.report = detail.report;
       reportPerformanceModal.open = true;
     },
     async submitReport({ detail }) {
       try {
-        const { value, activity, application } = detail;
-        application.reports.push(await api.json(api.post(
+        const { value, activity, application, report } = detail;
+        const apiCall = report == null ? api.post : api.patch;
+        application.reports.push(await api.json(apiCall(
           `/projects/${activity.project}/activities/${activity.id}`
           + `/applications/${application.id}/report`,
-          { data: value },
+          { data: value, csrfToken: account.csrf_token },
         )));
         project = project;
         projectStore.set(project);
         reportPerformanceModal.open = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
+
+  const reportDeletionDialog = {
+    open: false,
+    detail: null,
+    show({ detail }) {
+      reportDeletionDialog.detail = {
+        activity: detail.activity,
+        application: detail.application,
+      };
+      reportDeletionDialog.open = true;
+    },
+    async deleteReport({ detail }) {
+      try {
+        await api.json(api.del(
+          `/projects/${detail.activity.project}/activities/${detail.activity.id}`
+          + `/applications/${detail.application.id}/report`,
+          { csrfToken: account.csrf_token },
+        ));
+        detail.application.reports = detail.application.reports.filter(
+          report => report.reporter_email !== account.email,
+        );
+        projectStore.set(project);
+        reportDeletionDialog.open = false;
       } catch (e) {
         console.error(e);
       }
@@ -272,7 +326,7 @@
     try {
       await api.json(api.patch(
         `/projects/${activity.project}/activities/${activity.id}/applications/${application.id}`,
-        { data: { status } },
+        { data: { status }, csrfToken: account.csrf_token },
       ));
 
       if (status === ApplicationStatuses.APPROVED) {
@@ -303,6 +357,7 @@
       if (type === ActivityTypes.NEW) {
         updatedActivity = await api.json(api.post(`/projects/${project.id}/activities`, {
           data: detail.activityCopy,
+          csrfToken: account.csrf_token,
         }));
         prepareAfterBackend(updatedActivity);
         project.activities.splice(index, 0, updatedActivity);
@@ -312,7 +367,7 @@
 
         updatedActivity = await api.json(api.patch(
           `/projects/${project.id}/activities/${activityID}`,
-          { data: detail.activityCopy },
+          { data: detail.activityCopy, csrfToken: account.csrf_token },
         ));
         prepareAfterBackend(updatedActivity);
         updatedActivity.id = activityID;
@@ -335,7 +390,7 @@
       const { application, hours, activity } = detail;
       await api.json(api.patch(
         `/projects/${project.id}/activities/${activity.id}/applications/${application.id}`,
-        { data: { actual_hours: hours } },
+        { data: { actual_hours: hours }, csrfToken: account.csrf_token },
       ));
       application.actual_hours = hours;
       project = project;
@@ -346,8 +401,25 @@
 
   async function submitForReview() {
     try {
-      await api.json(api.patch(`/projects/${project.id}/request_review`));
+      await api.json(api.patch(
+        `/projects/${project.id}/request_review`,
+        { csrfToken: account.csrf_token },
+      ));
       project.review_status = ReviewStatuses.PENDING;
+      projectStore.set(project);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function saveTags({ detail: tagIDs }) {
+    try {
+      await api.json(api.patch(`/projects/${project.id}/tags`, {
+        csrfToken: account.csrf_token,
+        data: tagIDs,
+      }));
+      project.tags = tagIDs;
+      projectStore.set(project);
     } catch (e) {
       console.error(e);
     }
@@ -358,7 +430,7 @@
   <title>{project.name} – Innopoints</title>
   <meta name="og:title" content={project.name} />
   <meta name="og:url" content="https://ipts.innopolis.university/projects/{project.id}" />
-  <meta name="og:description" content="Organized by {project.organizer}. Available activities: {project.activities.slice(0, 3).filter(activity => !activity.internal).map(activity => activity.name).join(', ')}{project.activities.length > 3 ? ', ...' : '.'}" />
+  <meta name="og:description" content="Available activities: {project.activities.slice(0, 3).filter(activity => !activity.internal).map(activity => activity.name).join(', ')}{project.activities.length > 3 ? ', ...' : '.'}" />
   {#if project.image_id}
     <meta name="og:image" content="{API_HOST_BROWSER}/file/{project.image_id}" />
   {/if}
@@ -380,9 +452,11 @@
     <ProjectHeader
       {project}
       {account}
+      {tags}
       on:delete-project={projectDeletionDialog.show}
       on:finalize-project={finalizeDialog.show}
       on:submit-for-review={submitForReview}
+      on:update-tags={saveTags}
     />
 
     {#if (project.lifetime_stage === ProjectStages.FINALIZING
@@ -413,7 +487,8 @@
           on:delete-activity={activityDeletionDialog.show}
           on:save-hours={updateHours}
           on:read-feedback={feedbackModal.show}
-          on:report-performance={reportPerformanceModal.show}
+          on:create-report={reportPerformanceModal.show}
+          on:delete-report={reportDeletionDialog.show}
         />
       {:else}
         <UserView
@@ -470,8 +545,18 @@
       bind:isOpen={reportPerformanceModal.open}
       activity={reportPerformanceModal.activity}
       application={reportPerformanceModal.application}
+      report={reportPerformanceModal.report}
       on:submit={reportPerformanceModal.submitReport}
     />
+    <!-- confirm-delete-report -->
+    <DangerConfirmDialog
+      textYes="yes, delete"
+      bind:isOpen={reportDeletionDialog.open}
+      eventDetail={reportDeletionDialog.detail}
+      on:confirm={reportDeletionDialog.deleteReport}
+    >
+      Are you sure you want to delete this report?
+    </DangerConfirmDialog>
     <!-- confirm-application-rejection -->
     <DangerConfirmDialog
       textYes="yes, reject"

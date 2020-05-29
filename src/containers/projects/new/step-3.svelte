@@ -17,7 +17,7 @@
   }
 
   function notCreator(moderator) {
-    return moderator.email !== $project.creator;
+    return moderator.email !== $project.creator.email;
   }
 
   const values = $project.moderators.filter(notCreator).map(userToAutocompleteValue);
@@ -89,16 +89,18 @@
     This step is <strong>optional</strong>.
   </p>
   <span class="label">Search for other people</span>
-  <Autocomplete selection={values} getOptions={getUsers} on:change={recordChanges} />
+  <Autocomplete
+    selection={values}
+    getOptions={getUsers}
+    placeholder="Start typing a name or an e-mail..."
+    on:change={recordChanges}
+  />
   <p>
     Can't find who you're looking for? Make sure they have logged into this website at least once.
   </p>
   <BottomNavigation
     step={3}
-    error={
-      !($project.name && $project.organizer) ? 1 :
-        (visibleActivities($project).length === 0 ? 2 : null)
-    }
+    error={!$project.name ? 1 : (visibleActivities($project).length === 0 ? 2 : null)}
     on:publish
   />
 </form>

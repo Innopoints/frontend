@@ -1,10 +1,11 @@
-import StockChangeStatuses from '@/constants/backend/stock-change-statuses';
+import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
+import NotificationTypes from '@/constants/backend/notification-types.js';
 
 export default function getNotificationContent({ type, payload }) {
   let fragments;
   try {
     switch (type) {
-      case "purchase_status_changed": {
+      case NotificationTypes.PURCHASE_STATUS_CHANGED: {
         const statuses = {
           [StockChangeStatuses.READY_FOR_PICKUP]: 'is ready to be picked up at 319 Office',
           [StockChangeStatuses.PENDING]: 'is not yet ready for pick up',
@@ -24,7 +25,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "new_arrivals": {
+      case NotificationTypes.NEW_ARRIVALS: {
         fragments = [
           'New products have arrived at ',
           {
@@ -35,7 +36,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "application_status_changed": {
+      case NotificationTypes.APPLICATION_STATUS_CHANGED: {
         fragments = [
           'Your volunteering application for ',
           {
@@ -56,7 +57,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "claim_innopoints": {
+      case NotificationTypes.CLAIM_INNOPOINTS: {
         fragments = [
           'Leave feedback on ',
           {
@@ -74,7 +75,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "project_review_status_changed": {
+      case NotificationTypes.PROJECT_REVIEW_STATUS_CHANGED: {
         fragments = [
           'The project ',
           {
@@ -88,7 +89,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "added_as_moderator": {
+      case NotificationTypes.ADDED_AS_MODERATOR: {
         fragments = [
           'You have been promoted to moderate ',
           {
@@ -99,7 +100,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "all_feedback_in": {
+      case NotificationTypes.ALL_FEEDBACK_IN: {
         fragments = [
           'All volunteers of ',
           {
@@ -111,7 +112,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "out_of_stock": {
+      case NotificationTypes.OUT_OF_STOCK: {
         fragments = [
           'The ',
           {
@@ -124,7 +125,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "new_purchase": {
+      case NotificationTypes.NEW_PURCHASE: {
         fragments = [
           {
             text: payload.account.full_name,
@@ -140,7 +141,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "project_review_requested": {
+      case NotificationTypes.PROJECT_REVIEW_REQUESTED: {
         fragments = [
           'The project ',
           {
@@ -152,7 +153,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "service": {
+      case NotificationTypes.SERVICE: {
         fragments = [
           {
             text: 'Administrator\'s message: ',
@@ -163,7 +164,7 @@ export default function getNotificationContent({ type, payload }) {
         break;
       }
 
-      case "manual_transaction": {
+      case NotificationTypes.MANUAL_TRANSACTION: {
         fragments = [
           'The administrator ',
         ];

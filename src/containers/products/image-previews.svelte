@@ -9,11 +9,13 @@
   export let productControl;
   export let selectedColor;
 
-  if (productControl.flatImages.length === 0) {
-    productControl.flatImages.push({
-      url: '/images/create-product/placeholder.svg',
-      placeholder: true,
-    });
+  $: {
+    if (productControl.flatImages.length === 0) {
+      productControl.flatImages.push({
+        url: '/images/create-product/placeholder.svg',
+        placeholder: true,
+      });
+    }
   }
   let displayedImage = productControl.flatImages[0];
 

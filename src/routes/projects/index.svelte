@@ -2,12 +2,12 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    let { account, projects, competences } = await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
+    const data = await getInitialData(this, session, new Map([
       ['projects', `/projects`],
       ['competences', `/competences`],
     ]));
-    return { projects, competences, account };
+    data.account = session.account;
+    return data;
   }
 </script>
 
@@ -63,8 +63,8 @@
     let newProps = Object.assign({}, props);
     delete newProps.creation_time;
     delete newProps.moderators;
-    delete newProps.creator;
     delete newProps.review_status;
+    delete newProps.tags;
     return newProps;
   }
 </script>

@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onDestroy } from 'svelte';
+  import { createEventDispatcher, onDestroy, afterUpdate } from 'svelte';
   import Button from 'ui/button.svelte';
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
   import HourActivityCard from '@/components/projects/view/hour-activity-card.svelte';
@@ -20,6 +20,17 @@
   export let competences;
   export let project;
   export let review = false;
+
+  let activityListElement;
+  let scrollToLast = false;
+
+  afterUpdate(() => {
+    if (scrollToLast) {
+      const lastCardIndex = activityListElement.children.length - 1;
+      activityListElement.children[lastCardIndex].scrollIntoView({ behavior: 'smooth' });
+      scrollToLast = false;
+    }
+  });
 
   let activityCards = (
     activities
@@ -55,13 +66,14 @@
     newActivity.applications = [];
     newActivity._type = ActivityTypes.NEW;
     activityCards.push(newActivity);
+    scrollToLast = true;
     activityCards = activityCards;
   }
 
   const dispatch = createEventDispatcher();
 </script>
 
-<div class="activities moderated padded">
+<div class="activities moderated padded" bind:this={activityListElement}>
   {#if $project.lifetime_stage === ProjectStages.ONGOING}
     {#each activityCards as activity, index}
       {#if activity._type === ActivityTypes.DISPLAY
@@ -119,7 +131,8 @@
         {account}
         {activity}
         on:save-hours
-        on:report-performance
+        on:create-report
+        on:delete-report
       />
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINISHED}

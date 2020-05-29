@@ -2,15 +2,17 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, colors, sizes } = await getInitialData(this, session, new Map([
-      ['account', '/account'],
+    const data = await getInitialData(this, session, new Map([
       ['colors', '/colors'],
       ['sizes', '/sizes'],
     ]));
-    if (account == null || !account.is_admin) {
+
+    if (session.account == null || !session.account.is_admin) {
       this.error(403, 'Create a Product');
     }
-    return { account, colors, sizes };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 
@@ -25,6 +27,7 @@
   import Dialog from 'ui/dialog.svelte';
   import * as api from '@/utils/api.js';
   import { getBlankProduct, getBlankVariety } from '@/constants/products/blank-product.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let colors;
   export let sizes;
@@ -43,14 +46,29 @@
     product = storedDraft || getBlankProduct();
   });
 
-  async function addColor(color) {
-    let resp = await api.post('/colors', { data: { value: color } });
-    if (resp.status == 200) {
-      colors.push({ value: color });
-      colors = colors;
-    } else {
-      console.error(`Color creation failed (${resp.status})`);
+  let colorDebounce = null;
+  function addColor({ detail: color }) {
+    if (colors.includes(color)) {
+      return;
     }
+
+    if (colorDebounce != null) {
+      clearTimeout(colorDebounce);
+    }
+
+    colorDebounce = setTimeout(async () => {
+      try {
+        await api.json(api.post(
+          '/colors',
+          { data: { value: color }, csrfToken: account.csrf_token },
+        ));
+        colors.push({ value: color });
+        colors = colors;
+        colorDebounce = null;
+      } catch (e) {
+        console.error(e);
+      }
+    }, 200);
   }
 
   function persistToStorage() {
@@ -118,14 +136,14 @@
   async function createProduct() {
     errorMessage = null;
     prefetch('/store');
-    if (!product.name) {
+    if (!product.name || spaceOnly(product.name)) {
       errors.name = true;
-      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+      errorMessage = 'The product needs a non-empty name.';
     }
 
     if (!product.price || product.price < 1) {
       errors.price = true;
-      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+      errorMessage = 'The product needs a valid price.';
     }
 
     const cleanVarieties = product.varieties.flatMap(variety => {
@@ -152,33 +170,29 @@
     }
 
     if (cleanVarieties.some(variety => variety.color == null) && cleanVarieties.length > 1) {
-      errorMessage = 'Cannot have more than one variety in a product without colors';
+      errorMessage = 'Colorless products cannot come in sizes and have more than 1 variety.';
     }
 
     if (errorMessage) {
       return;
     }
 
-    const resp = await api.post('/products', {
-      data: {
-        name: product.name,
-        type: product.type || null,
-        description: product.description || '',
-        price: product.price,
-        varieties: cleanVarieties,
-      },
-    });
-    if (resp.ok) {
+    try {
+      await api.json(api.post('/products', {
+        data: {
+          name: product.name,
+          type: product.type || null,
+          description: product.description || '',
+          price: product.price,
+          varieties: cleanVarieties,
+        },
+        csrfToken: account.csrf_token,
+      }));
       localStorage.removeItem('product-draft');
-      return goto('/store');
-    }
-    if (resp.status === 400) {
-      const message = await resp.json();
-      errorMessage = JSON.stringify(message.message || message);
-      console.error(message);
-    } else {
-      errorMessage = 'The universe just doesn\'t want this product. Try again later.';
-      console.error(await resp.text());
+      goto('/store');
+    } catch (e) {
+      errorMessage = JSON.stringify(e.message || e);
+      console.error(e);
     }
   }
 </script>
@@ -205,7 +219,7 @@
         {product} {errors}
         colors={colors.map(unwrapValue)}
         sizes={sizes.map(unwrapValue)}
-        on:new-color={(e) => addColor(e.detail)}
+        on:new-color={addColor}
         on:create-variety={createVariety}
         on:remove-variety={removeVariety}
         on:change-variety={changeVariety}

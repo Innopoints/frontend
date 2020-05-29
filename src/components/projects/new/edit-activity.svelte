@@ -16,6 +16,7 @@
   import getBlankActivity from '@/constants/projects/blank-activity.js';
   import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
   import { copyActivity } from '@/utils/project-manipulation.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let activity = getBlankActivity();
   let initialCopy = copyActivity(activity);
@@ -63,11 +64,11 @@
   }
 
   function validateAndSave() {
-    if (!activity.name) {
+    if (!activity.name || spaceOnly(activity.name)) {
       errors.nameNotSpecified = true;
     }
 
-    if (activity.name === 'Moderation') {
+    if (activity.name === '[[Moderation]]') {
       errors.nameReserved = true;
     }
 
@@ -118,7 +119,7 @@
       title="Activity name"
       required
       error={
-        (activity.name === '' && "The name must not be empty.")
+        (spaceOnly(activity.name) && "The name must not be empty.")
         || (errors.nameNotSpecified && "The name must be specified.")
         || (errors.nameReserved && "This name is reserved for internal use.")
         || (!ensureNameUniqueness() && "The name should be unique.")
@@ -326,6 +327,11 @@
           on:change={(e) => {
             toggle(e);
             fieldsAltered = true;
+          }}
+          on:change-date={({ detail }) => {
+            if (activity.application_deadline != null) return;
+            activity.application_deadline = detail;
+            activity.application_deadline.setHours(23, 59);
           }}
         />
       </Dropdown>

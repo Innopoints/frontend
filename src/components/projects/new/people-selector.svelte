@@ -9,7 +9,7 @@
   export let errorInvalid;
 
   let rememberedPeopleRequired = null;
-  const morePeopleCheckbox = { value: null, checked: value === 0 };
+  $: morePeopleCheckbox = { value: null, checked: value === 0 };
 
   function processTextFieldChange({ detail: fieldValue }) {
     morePeopleCheckbox.checked = false;

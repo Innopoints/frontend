@@ -2,8 +2,8 @@
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
-  import Dot from 'ui/dot.svelte';
   import Labeled from 'ui/labeled.svelte';
+  import TagSelector from '@/components/projects/view/tag-selector.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -11,7 +11,12 @@
 
   export let project;
   export let account;
+  export let tags;
   export let review = false;
+
+  $: isModerator = (
+    account && project.moderators.find(moderator => moderator.email === account.email)
+  ) != null;
 
   let reviewComment = null;
 
@@ -25,11 +30,10 @@
 </script>
 
 <header
-  class="project-header"
-  class:wrap={project.lifetime_stage === ProjectStages.FINALIZING || review}
+  class="project-header wrap"
   style="--image-url: url({projectImageURL})"
 >
-  <img src={projectImageURL} class="cover-image" alt="Project cover image" />
+  <img src={projectImageURL} class="cover-image" alt="Project cover" />
   <div class="info">
     <h1>
       {project.name}
@@ -39,42 +43,62 @@
         </div>
       {/if}
     </h1>
+    {#if project.lifetime_stage === ProjectStages.FINALIZING
+      && !review
+      && isModerator
+      && project.review_status != null}
+      <div class="warning">
+        {#if project.review_status === ReviewStatuses.PENDING}
+          <svg class="icon" src="images/icons/info.svg" />
+        {:else if project.review_status === ReviewStatuses.REJECTED}
+          <svg class="icon" src="images/icons/alert-circle.svg" />
+        {/if}
+        <p class="review-notice">
+          {#if project.review_status === ReviewStatuses.PENDING}
+            The project is now awaiting the administrator's review. <br />
+            <a href="/profile" prefetch>Enable notifications in the profile</a> to be up-to-date!
+          {:else if project.review_status === ReviewStatuses.REJECTED}
+            <strong>The administrator rejected the project.</strong> <br/>
+            Make corrections and then submit for review again.
+          {/if}
+        </p>
+      </div>
+    {/if}
+    {#if project.lifetime_stage !== ProjectStages.FINISHED && isModerator}
+      <TagSelector
+        {tags}
+        value={project.tags}
+        on:change={({ detail }) => dispatch('update-tags', detail)}
+      />
+    {/if}
     <div class="data-points">
       <Labeled icon label="When">
         <svg slot="icon" class="icon" src="images/icons/calendar.svg" />
         {formatDateRange({ start: project.start_date, end: project.end_date })}
       </Labeled>
-      <Labeled icon label="Organizer">
+      <Labeled icon label="Staff">
         <svg slot="icon" class="icon" src="images/icons/user.svg" />
-        {project.organizer}
-        {#if account && account.is_admin}
-          <a href="mailto:{project.creator}" class="secondary">
-            contact project creator
-          </a>
-        {/if}
+        <div class="staff">
+          {#each project.moderators as moderator (moderator.email)}
+            <a href="mailto:{moderator.email}">
+              {moderator.full_name}
+            </a>
+          {/each}
+        </div>
       </Labeled>
-      {#if project.lifetime_stage === ProjectStages.FINALIZING && !review}
-        {#if project.review_status != null}
-          <Labeled icon label="Review status">
-            <svg slot="icon" class="icon" src="images/icons/flag.svg" />
-            <div>
-              {#if project.review_status === ReviewStatuses.PENDING}
-                Pending <Dot pending small />
-              {:else if project.review_status === ReviewStatuses.REJECTED}
-                Rejected <Dot attention small />
-              {/if}
-            </div>
-          </Labeled>
-        {/if}
-        {#if project.admin_feedback != null}
-          <Labeled icon label="Administrator's feedback" textclass="admin-feedback">
-            <svg slot="icon" class="icon" src="images/icons/message-square.svg" />
-            {project.admin_feedback}
-          </Labeled>
-        {/if}
+      {#if project.lifetime_stage === ProjectStages.FINALIZING
+        && !review
+        && isModerator
+        && project.admin_feedback != null}
+        <Labeled icon label="Administrator's feedback" textclass="admin-feedback">
+          <svg slot="icon" class="icon" src="images/icons/message-square.svg" />
+          {project.admin_feedback}
+        </Labeled>
       {/if}
     </div>
-    {#if account != null && (project.creator === account.email || account.is_admin) && !review}
+    {#if account != null
+      && (project.creator.email === account.email || account.is_admin)
+      && !review}
       <div class="actions">
         {#if project.lifetime_stage === ProjectStages.ONGOING}
           <Button isOutline href="/projects/{project.id}/edit">
@@ -102,7 +126,7 @@
         {#if account
           && account.is_admin
           && project.lifetime_stage === ProjectStages.FINALIZING
-          && project.review_status != null}
+          && project.review_status === ReviewStatuses.PENDING}
           <Button
             isOutline
             classname="review"

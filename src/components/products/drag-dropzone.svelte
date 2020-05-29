@@ -1,9 +1,12 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import { stores } from '@sapper/app';
   import Sortable from 'sortablejs';
   import ImagePreviewCard from '@/components/products/image-preview-card.svelte';
   import * as api from '@/utils/api.js';
   import maxSizeMB from '@/constants/backend/file-upload-limit.js';
+
+  const { session } = stores();
 
   export let index;
   export let images;
@@ -28,11 +31,13 @@
 
   function handleFileDrop(e) {
     upload(e.dataTransfer.files);
+    e.target.value = '';
     dragActive = false;
   }
 
   function handleFileUpload(e) {
     upload(e.target.files);
+    e.target.value = '';
   }
 
   function upload(files) {
@@ -53,6 +58,7 @@
       formData.append('file', file);
       let promise = api.post('/file', {
         data: formData,
+        csrfToken: $session.account.csrf_token,
       });
       let placementIndex = images.length;
       images.push({ file, promise });

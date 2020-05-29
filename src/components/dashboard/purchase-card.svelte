@@ -10,15 +10,33 @@
   import { formatTime } from '@/utils/date-time-format.js';
 
   export let purchase;
+  $: coverURL = (
+    purchase.variety.images.length ?
+      API_HOST_BROWSER + purchase.variety.images[0]
+      : 'images/create-product/placeholder.svg'
+  );
 
-  let dispatch = createEventDispatcher();
-  let editing = purchase.status === StockChangeStatuses.PENDING;
+  let markedStatus = null;
+  const statusTexts = new Map([
+    [StockChangeStatuses.REJECTED, 'rejected'],
+    [StockChangeStatuses.READY_FOR_PICKUP, 'ready for pickup'],
+    [StockChangeStatuses.CARRIED_OUT, 'delivered'],
+  ]);
+
+  function setStatus(status) {
+    dispatch('change-status', status);
+    if (status !== StockChangeStatuses.PENDING) {
+      markedStatus = statusTexts.get(status);
+    }
+  }
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <li>
   <div class="product">
-    <div class="image" style={'background:' + getBackground(purchase.variety.color)}>
-      <img src={API_HOST_BROWSER + purchase.variety.images[0]} alt="" />
+    <div class="image" style="background: {getBackground(purchase.variety.color)}">
+      <img src={coverURL} alt="Product cover" />
     </div>
     <div class="product-info">
       <div class="title">
@@ -44,33 +62,36 @@
     </div>
   </div>
   <div class="actions">
-    {#if !editing}
-      Marked as ready for pickup
-      <Button classname="ml" on:click={() => editing = true}>
-        <svg src="/images/icons/edit.svg" class="icon mr" />
-        edit status
-      </Button>
-    {:else}
-      <Button isDanger on:click={() => dispatch('change-status', StockChangeStatuses.REJECTED)}>
-        <svg src="/images/icons/x.svg" class="icon mr" />
-        reject
-      </Button>
-
-      {#if purchase.status == StockChangeStatuses.READY_FOR_PICKUP}
-        <Button on:click={() => {dispatch('change-status', StockChangeStatuses.PENDING);}}>
+    {#if markedStatus == null}
+      {#if purchase.status !== StockChangeStatuses.REJECTED}
+        <Button isDanger on:click={() => setStatus(StockChangeStatuses.REJECTED)}>
+          <svg src="/images/icons/x.svg" class="icon mr" />
+          reject
+        </Button>
+      {/if}
+      {#if purchase.status !== StockChangeStatuses.PENDING}
+        <Button on:click={() => setStatus(StockChangeStatuses.PENDING)}>
           <svg src="/images/icons/archive.svg" class="icon mr" />
           pending
         </Button>
-      {:else}
-        <Button on:click={() => {editing = false; dispatch('change-status', StockChangeStatuses.READY_FOR_PICKUP);}}>
+      {/if}
+      {#if purchase.status !== StockChangeStatuses.READY_FOR_PICKUP}
+        <Button on:click={() => setStatus(StockChangeStatuses.READY_FOR_PICKUP)}>
           <svg src="/images/icons/package.svg" class="icon mr" />
           ready for pickup
         </Button>
       {/if}
-
-      <Button on:click={() => dispatch('change-status', StockChangeStatuses.CARRIED_OUT)}>
-        <svg src="/images/icons/smile.svg" class="icon mr" />
-        delivered
+      {#if purchase.status !== StockChangeStatuses.CARRIED_OUT}
+        <Button on:click={() => setStatus(StockChangeStatuses.CARRIED_OUT)}>
+          <svg src="/images/icons/smile.svg" class="icon mr" />
+          delivered
+        </Button>
+      {/if}
+    {:else}
+      Marked as {markedStatus}
+      <Button classname="ml" on:click={() => markedStatus = null}>
+        <svg src="/images/icons/edit.svg" class="icon mr" />
+        edit status
       </Button>
     {/if}
   </div>

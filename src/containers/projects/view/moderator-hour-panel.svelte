@@ -5,7 +5,7 @@
   export let project;
   export let account;
   export let review = false;
-  const moderation = project.activities.find(act => act.internal && act.name === 'Moderation');
+  const moderation = project.activities.find(act => act.internal && act.name === '[[Moderation]]');
 
   function getModerationApplication(moderator) {
     return moderation.applications.find(appl => appl.applicant.email === moderator.email);
@@ -27,7 +27,7 @@
       {review}
       projectStage={project.lifetime_stage}
       application={getModerationApplication(moderator)}
-      isCreator={moderator.email === project.creator}
+      isCreator={moderator.email === project.creator.email}
       on:hours-changed={saveHours}
       on:leave-feedback={
         ({ detail: application }) =>

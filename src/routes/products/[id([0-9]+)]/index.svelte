@@ -2,14 +2,16 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, product } = await getInitialData(this, session, new Map([
-      ['account', '/account'],
+    const data = await getInitialData(this, session, new Map([
       ['product', `/products/${page.params.id}`],
     ]));
-    if (product == null) {
-      this.redirect(302, 'store');
+
+    if (data.product == null) {
+      this.redirect(302, '/store');
     }
-    return { account, product };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 
@@ -87,18 +89,18 @@
 
   async function confirmPurchase() {
     purchaseModalOpen = false;
-    const resp = await api.post(
-      `/products/${product.id}/varieties/${selectedVariety.id}/purchase`,
-      { data: { amount: selectedQuantity } },
-    );
-    if (resp.ok) {
+    try {
+      await api.json(api.post(
+        `/products/${product.id}/varieties/${selectedVariety.id}/purchase`,
+        { data: { amount: selectedQuantity }, csrfToken: account.csrf_token },
+      ));
       purchaseSuccess.open();
       account.balance -= productControl.product.price * selectedQuantity;
       selectedVariety.amount -= selectedQuantity;
       product = product;
-    } else {
+    } catch (e) {
       purchaseFailure.open();
-      console.error(await resp.json());
+      console.error(e);
     }
   }
 

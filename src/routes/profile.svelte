@@ -4,48 +4,46 @@
 
   export async function preload(page, session) {
     let requestedEmail = page.query.user;
-    const { currentUser } = await getInitialData(this, session, new Map([
-      ['currentUser', '/account'],
-    ]));
-    if (currentUser == null) {
+
+    if (session.account == null) {
       this.error(403, 'Profile');
-      return;
     }
-    const isMe = requestedEmail == currentUser.email;
-    const allowed = requestedEmail == null || isMe || currentUser.is_admin;
+
+    const isMe = requestedEmail === session.account.email;
+    const allowed = requestedEmail == null || isMe || session.account.is_admin;
+
     // non-admin requested a different profile
     if (!allowed) {
       this.redirect(302, `/profile`);
     }
+
     if (requestedEmail == null) {
-      requestedEmail = currentUser.email;
+      requestedEmail = session.account.email;
     }
 
     let timelineFetchedUntil = new Date();
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - 3);
-    const {
-      account,
-      ...initialData
-    } = await getInitialData(this, session, new Map([
+    const data = await getInitialData(this, session, new Map([
       ['account', `/accounts/${requestedEmail}`],
       ['timeline', `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
       ['statistics', `/accounts/${requestedEmail}/statistics?start_date=${isoForURL(timelineFetchedUntil)}`],
       ['notificationSettings', `/accounts/${requestedEmail}/notification_settings`],
       ['competences', '/competences'],
     ]));
-    if (account == null) {
-      this.error(403, 'Profile');
+
+    data.timelineFetchedUntil = timelineFetchedUntil;
+
+    if (data.account == null) {
+      this.error(404, 'Profile');
     }
 
-    return {
-      account,
-      timelineFetchedUntil,
-      ...initialData,
-    };
+    data.account.csrf_token = session.account.csrf_token;
+    return data;
   }
 </script>
 
 <script>
+  import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import Info from '@/containers/profile/info.svelte';
   import Tabs from 'ui/tabs.svelte';
@@ -53,8 +51,11 @@
   import Statistics from '@/containers/profile/statistics.svelte';
   import Notifications from '@/containers/profile/notifications.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
+  import ReclaimInnopointsModal from '@/components/profile/reclaim-innopoints-modal.svelte';
   import * as api from '@/utils/api.js';
   import tabs from '@/constants/profile/tabs.js';
+
+  const { session } = stores();
 
   export let account;
   export let timeline;
@@ -90,12 +91,40 @@
         application.feedback = await api.json(api.post(
           `/projects/${activity.project}/activities/${activity.id}`
           + `/applications/${application.id}/feedback`,
-          { data: value },
+          { data: value, csrfToken: account.csrf_token },
         ));
         leaveFeedbackModal.payload.feedback_id = application.id;
         timelinePromises = timelinePromises;
         account.balance += leaveFeedbackModal.payload.reward;
         leaveFeedbackModal.open = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
+
+  const reclaimInnopointsModal = {
+    open: false,
+    error: null,
+    show() {
+      reclaimInnopointsModal.open = true;
+    },
+    async reclaimInnopoints({ detail }) {
+      try {
+        const resp = await api.post(
+          '/reclaim-innopoints',
+          { data: detail, csrfToken: account.csrf_token },
+        );
+
+        if (resp.status === 403) {
+          reclaimInnopointsModal.error = 'Incorrect e-mail, username or password.';
+        } else if (!resp.ok) {
+          reclaimInnopointsModal.error = 'Something went wrong.';
+        } else {
+          account.balance += await resp.json();
+          reclaimInnopointsModal.error = null;
+          reclaimInnopointsModal.open = false;
+        }
       } catch (e) {
         console.error(e);
       }
@@ -108,26 +137,20 @@
   }
 
   let activeTab = tabs.timeline;
-  function updateURL(target) {
-    activeTab = target.detail;
-  }
 
-  function changeUsername({ detail }) {
-    api.patch(`/accounts/${account.email}/telegram`, {
-      data: {
-        telegram_username: detail,
-      },
-    }).then((resp) => {
-      if (resp.ok) {
-        account.telegram_username = detail;
-      } else {
-        if (resp.status === 400) {
-          resp.json().then((error) => console.error(error.message));
-        } else {
-          resp.text().then(console.error);
-        }
+  async function changeUsername({ detail }) {
+    try {
+      await api.json(api.patch(`/accounts/${account.email}/telegram`, {
+        data: { telegram_username: detail },
+        csrfToken: account.csrf_token,
+      }));
+      account.telegram_username = detail;
+      if ($session.account.email === account.email) {
+        $session.account = account;
       }
-    });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   function capitalize(name) {
@@ -177,14 +200,18 @@
 
 <Layout user={account}>
   <div class="material">
-    <Info {account} on:username-change={changeUsername} />
+    <Info
+      {account}
+      on:username-change={changeUsername}
+      on:reclaim-opened={reclaimInnopointsModal.show}
+    />
     <section class="card">
       <Tabs
         items={Object.keys(tabs)}
         labels={Object.keys(tabs).map(capitalize)}
         value={activeTab}
         name="nav-tabs"
-        on:change={updateURL}
+        on:change={(e) => activeTab = e.detail}
       />
       {#if activeTab === tabs.timeline}
         <Timeline
@@ -210,5 +237,10 @@
     application={leaveFeedbackModal.application}
     {competences}
     on:submit={leaveFeedbackModal.submitFeedback}
+  />
+  <ReclaimInnopointsModal
+    bind:isOpen={reclaimInnopointsModal.open}
+    error={reclaimInnopointsModal.error}
+    on:submit={reclaimInnopointsModal.reclaimInnopoints}
   />
 </Layout>

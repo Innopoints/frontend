@@ -21,14 +21,14 @@
   export let minSearchLength = 3;
   export let maxOptions = null;
 
-  export let markMatch = (match, string) => {
+  function markMatch(match, string) {
     if (match.length === 0) {
-      return string;
+      return [{ content: string, marked: false }];
     }
 
-    const queryRegex = new RegExp(match, 'i');
-    return string.replace(queryRegex, '<mark>$&</mark>');
-  };
+    const partition = string.split(new RegExp(`(${match})`, 'ig'));
+    return partition.map((content, idx) => ({ content, marked: idx % 2 !== 0 }));
+  }
 
   let searchQuery = '';
   let optionGen;
@@ -45,11 +45,14 @@
 
   function onInputFocus() {
     dropdown.toggle();
+    if (minSearchLength === 0) {
+      handleInput(this.value);
+    }
     focus = true;
   }
 
-  function handleInput() {
-    searchQuery = this.value;
+  function handleInput(passedValue) {
+    searchQuery = (typeof passedValue === 'string' ? passedValue : this.value);
     optionGen = getOptions(searchQuery);
     promises = [];
     promises.push(optionGen.next());
@@ -77,6 +80,7 @@
     selected.add(option.name);
     promises = [];
     input.value = searchQuery = '';
+    handleInput('');
     input.focus();
   }
 
@@ -116,6 +120,7 @@
       on:focus={onInputFocus}
       bind:this={input}
       class={inputclass}
+      {...$$restProps}
     />
     {#if maxOptions !== null && selection.length >= maxOptions}
       <p class="limit-reached {toomanyclass}">
@@ -146,10 +151,14 @@
                 on:click={(click) => { click.stopPropagation(); selectValue(option); }}
                 class={itemclass}
               >
-                {@html markMatch(searchQuery, option.name)}
+                {#each markMatch(searchQuery, option.name) as part}
+                  {#if part.marked}<mark>{part.content}</mark>{:else}{part.content}{/if}
+                {/each}
                 {#if option.details}
                   <div class="subtext">
-                    {@html markMatch(searchQuery, option.details)}
+                    {#each markMatch(searchQuery, option.details) as part}
+                      {#if part.marked}<mark>{part.content}</mark>{:else}{part.content}{/if}
+                    {/each}
                   </div>
                 {/if}
               </li>

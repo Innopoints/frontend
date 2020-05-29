@@ -11,13 +11,16 @@ function request(method, url, options) {
   const formDataClass = process.browser ? FormData : require('url').URLSearchParams;
 
   let actualOptions = {
-    credentials: 'include',
     method,
     headers: options && options.headers || {},
   };
 
   if (options && 'cookie' in options) {
     actualOptions.headers['Cookie'] = options.cookie;
+  }
+
+  if (options && 'csrfToken' in options) {
+    actualOptions.headers['X-CSRF-Token'] = options.csrfToken;
   }
 
   if (options && options.data instanceof formDataClass) {

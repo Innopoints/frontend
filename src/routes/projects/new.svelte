@@ -3,13 +3,15 @@
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
       ['drafts', '/projects/drafts'],
       ['competences', '/competences'],
     ]));
-    if (data.account == null) {
+
+    if (session.account == null) {
       this.error(403, 'Create a Project');
     }
+
+    data.account = session.account;
     return data;
   }
 </script>
@@ -33,6 +35,7 @@
     prepareAfterBackend,
   } from '@/utils/project-manipulation.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   const { page } = stores();
 
@@ -46,6 +49,7 @@
   const unsubscribe = project.subscribe(saveProject);
   onDestroy(unsubscribe);
   let duplicateName = false;
+  let isUploading = false;
 
   // Step management
   $: step = ($project != null ? +$page.query.step || 0 : 0);
@@ -76,6 +80,7 @@
       try {
         const resp = await api.json(api.post('/file', {
           data: formData,
+          csrfToken: account.csrf_token,
         }));
 
         $project.image_id = resp.id;
@@ -85,6 +90,7 @@
         console.error(e);
         imageResizer.error = 'Upload failed. Try again.';
       }
+      isUploading = false;
     },
   };
 
@@ -95,7 +101,7 @@
   // Form processsing
   async function deleteDraft({ detail: draftID }) {
     try {
-      await api.json(api.del('/projects/' + draftID));
+      await api.json(api.del('/projects/' + draftID, { csrfToken: account.csrf_token }));
       drafts = drafts.filter(draft => draft.id !== draftID);
     } catch (e) {
       console.error(e);
@@ -124,11 +130,7 @@
 
   /* A subscriber to the $project store, receives an actual project object. */
   async function saveProject(projectObj) {
-    if (projectObj == null || projectObj.name == null) {
-      return;
-    }
-
-    if (projectObj.name === '' || projectObj.organizer === '') {
+    if (projectObj == null || !projectObj.name || spaceOnly(projectObj.name)) {
       return;
     }
 
@@ -149,10 +151,12 @@
       if (projectObj.id != null) {
         await api.json(api.patch('/projects/' + projectObj.id, {
           data: filterProjectFields(projectObj, true),
+          csrfToken: account.csrf_token,
         }));
       } else {
         const uploadedProject = await api.json(api.post('/projects', {
           data: filterProjectFields(projectObj),
+          csrfToken: account.csrf_token,
         }));
         uploadedProject.activities = uploadedProject.activities.concat(
           projectObj.activities.filter(act => act._type === ActivityTypes.TEMPLATE),
@@ -167,7 +171,10 @@
 
   async function publishProject() {
     try {
-      await api.json(api.patch(`/projects/${$project.id}/publish`));
+      await api.json(api.patch(
+        `/projects/${$project.id}/publish`,
+        { csrfToken: account.csrf_token },
+      ));
       goto(`/projects/${$project.id}`);
     } catch (e) {
       console.error(e);
@@ -185,7 +192,7 @@
       if (type === ActivityTypes.NEW
           || (type === ActivityTypes.EDIT && detail.activityCopy.id == null)) {
         const replacedTemplateIdx = $project.activities.findIndex(
-          act => act._type === ActivityTypes.TEMPLATE && act.name === detail.activityCopy.name,
+          act => act.name === detail.activityCopy.name,
         );
         if ($project.id == null) {
           // The project does not exist on the backend yet
@@ -193,8 +200,8 @@
         } else {
           updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
             data: detail.activityCopy,
+            csrfToken: account.csrf_token,
           }));
-          prepareAfterBackend(updatedActivity);
         }
         if (replacedTemplateIdx !== -1) {
           $project.activities.splice(replacedTemplateIdx, 1, updatedActivity);
@@ -212,9 +219,8 @@
 
           updatedActivity = await api.json(api.patch(
             `/projects/${$project.id}/activities/${activityID}`,
-            { data: detail.activityCopy },
+            { data: detail.activityCopy, csrfToken: account.csrf_token },
           ));
-          prepareAfterBackend(updatedActivity);
           updatedActivity.id = activityID;
 
           $project.activities.splice(
@@ -227,6 +233,17 @@
     } catch (e) {
       console.error(e);
     }
+
+    prepareAfterBackend(updatedActivity);
+    for (let activity of $project.activities) {
+      if (activity._type === ActivityTypes.TEMPLATE && activity.timeframe == null) {
+        activity.timeframe = {
+          start: updatedActivity.timeframe.start,
+          end: updatedActivity.timeframe.end,
+        };
+      }
+    }
+
     $project.activities = $project.activities;
   }
 
@@ -238,9 +255,12 @@
       return;
     }
 
-    if ($project.id != null) {
+    if ($project.id != null && typeof activityID == 'number') {
       try {
-        await api.json(api.del(`/projects/${$project.id}/activities/${activityID}`));
+        await api.json(api.del(
+          `/projects/${$project.id}/activities/${activityID}`,
+          { csrfToken: account.csrf_token },
+        ));
         $project.activities = $project.activities.filter(act => act.id !== activityID);
       } catch (e) {
         console.error(e);
@@ -279,6 +299,8 @@
         {duplicateName}
         {autosaved}
         on:resize-image={imageResizer.show}
+        {isUploading}
+        on:uploading={(e) => isUploading = e.detail}
       />
     {:else if step === 2}
       <StepTwo
@@ -302,5 +324,7 @@
     error={imageResizer.error}
     bind:isOpen={imageResizer.open}
     on:image-cropped={imageResizer.uploadImage}
+    on:uploading={(e) => isUploading = e.detail}
+    {isUploading}
   />
 </Layout>

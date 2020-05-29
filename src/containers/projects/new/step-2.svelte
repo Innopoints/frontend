@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher, onDestroy } from 'svelte';
+  import { createEventDispatcher, onDestroy, afterUpdate } from 'svelte';
   import StepHeader from '@/components/projects/new/step-header.svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import EditActivity from '@/components/projects/new/edit-activity.svelte';
@@ -18,6 +18,18 @@
   export let project;
   export let autosaved;
   export let competences;
+
+  let formElement;
+  let scrollToLast = false;
+
+  afterUpdate(() => {
+    if (scrollToLast) {
+      // The two last elements are the button for new activities and the actions
+      const lastCardIndex = formElement.children.length - 1 - 2;
+      formElement.children[lastCardIndex].scrollIntoView({ behavior: 'smooth' });
+      scrollToLast = false;
+    }
+  });
 
   let activityList = [];
 
@@ -41,11 +53,14 @@
     delete newActivity.id;
     newActivity._type = ActivityTypes.NEW;
     activityList.push(newActivity);
+    scrollToLast = true;
     activityList = activityList;
   }
 
   function deleteActivity({ detail: activity }) {
-    activityList = activityList.filter(act => act.name !== activity.name);
+    activityList = activityList.filter(
+      act => act.name !== activity.name || (act._type !== ActivityTypes.DISPLAY && act._type !== ActivityTypes.TEMPLATE),
+    );
     dispatch('delete-activity', activity.id || activity.name);
     if (activityList.length === 0) {
       const activity = getBlankActivity();
@@ -55,7 +70,7 @@
   }
 </script>
 
-<form>
+<form bind:this={formElement}>
   <StepHeader step={2} {autosaved} subtitle="Step 2. Add volunteering activities" />
 
   {#each activityList as activity, index}

@@ -262,11 +262,6 @@
         padding: 1.4em 1em;
         font-weight: 300;
         font-size: .9rem;
-
-        &.error {
-          color: $danger;
-          font-weight: 500;
-        }
       }
 
       .image-wrapper {
@@ -359,9 +354,7 @@
 }
 
 .image-platform + .error {
-  font-size: .95rem;
   text-align: center;
-  color: $danger;
 }
 
 .color-picker {
@@ -396,10 +389,20 @@
   margin: .5em 0;
 }
 
-.preview .actions {
-  margin-top: 1em;
-  display: flex;
-  align-self: center;
+.preview {
+  .labeled {
+    white-space: pre;
+
+    .radio.colored {
+      white-space: normal;
+    }
+  }
+
+  .actions {
+    margin-top: 1em;
+    display: flex;
+    align-self: center;
+  }
 }
 
 @media only screen and (min-width: 500px) {
@@ -408,11 +411,6 @@
       display: grid;
       grid-template-rows: auto auto;
       grid-template-columns: 1fr auto;
-
-      // .image-platform, .btn.danger {
-      //   grid-column-start: 1;
-      //   grid-column-end: 3;
-      // }
     }
 
     .quantity .text-field {
@@ -453,27 +451,6 @@
   .sizes .text-field {
     width: 15.5%;
   }
-
-  // .image-platform label,
-  // .image-platform small {
-  //   text-align: center;
-  // }
-
-  // @supports (display: grid) {
-  //   .image-platform {
-  //     row-gap: .3em;
-  //
-  //     small {
-  //       grid-column-start: 2;
-  //       align-content: center;
-  //     }
-  //
-  //     .icon {
-  //       grid-row-start: 1;
-  //       grid-row-end: 3;
-  //     }
-  //   }
-  // }
 }
 
 @media only screen and (min-width: 750px) {

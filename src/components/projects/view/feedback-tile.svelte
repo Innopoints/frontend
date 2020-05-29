@@ -26,7 +26,7 @@
   </div>
   <span class="telegram popover-container">
     {#if application.telegram}
-      <a href="https://t.me/{application.telegram}">
+      <a href="https://t.me/{application.telegram}" target="_blank">
         @{application.telegram}
       </a>
       <CopyButton text={application.telegram} />

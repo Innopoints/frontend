@@ -2,12 +2,17 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    let { account, projects } = await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
+    let { projects } = await getInitialData(this, session, new Map([
       ['projects', `/projects/past`],
     ]));
-    if (projects == null) projects = { data: [], pages: 0};
-    return { projects: projects.data, pages: projects.pages, account };
+    if (projects == null) {
+      projects = { data: [], pages: 0 };
+    }
+    return {
+      projects: projects.data,
+      pages: projects.pages,
+      account: session.account,
+    };
   }
 </script>
 
@@ -28,8 +33,8 @@
     let newProps = Object.assign({}, props);
     delete newProps.creation_time;
     delete newProps.moderators;
-    delete newProps.creator;
     delete newProps.review_status;
+    delete newProps.tags;
     return newProps;
   }
 

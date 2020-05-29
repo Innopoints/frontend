@@ -2,7 +2,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
-import babel from 'rollup-plugin-babel';
+import babel from '@rollup/plugin-babel';
 import alias from '@rollup/plugin-alias';
 import { eslint } from 'rollup-plugin-eslint';
 import { terser } from 'rollup-plugin-terser';
@@ -82,7 +82,7 @@ export default {
           module: true,
         }),
     ],
-
+    preserveEntrySignatures: 'strict',
     onwarn,
   },
 
@@ -122,7 +122,7 @@ export default {
       require('module').builtinModules ||
         Object.keys(process.binding('natives')),
     ),
-
+    preserveEntrySignatures: 'strict',
     onwarn,
   },
 
@@ -139,7 +139,7 @@ export default {
       commonjs(),
       !dev && terser(),
     ],
-
+    preserveEntrySignatures: 'strict',
     onwarn,
   },
 };

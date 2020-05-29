@@ -4,10 +4,12 @@
   import ProjectImagePicker from '@/components/projects/new/project-image-picker.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let project;
   export let duplicateName;
   export let autosaved;
+  export let isUploading = false;
 </script>
 
 <form>
@@ -24,7 +26,7 @@
     required
     error={
          (duplicateName && "The name must be unique.")
-      || ($project.name === '' && "The name must not be empty.")
+      || (spaceOnly($project.name) && "The name must not be empty.")
       || null
     }
   >
@@ -37,7 +39,7 @@
       id="title"
       autocomplete={false}
       maxlength={128}
-      value={$project.name || ''}
+      value={$project.name}
       on:change={(event) => $project.name = event.detail}
     />
   </FormField>
@@ -52,27 +54,8 @@
       <span class="lb">This is shown on the project card to catch attention.</span>
       <span class="lb">Best to use 16:9 photos.</span>
     </span>
-    <ProjectImagePicker bind:value={$project.image_id} on:resize-image />
+    <ProjectImagePicker bind:value={$project.image_id} {isUploading} on:uploading on:resize-image />
   </FormField>
 
-  <FormField
-    title="Organizer"
-    classname="padded"
-    id="organizer"
-    required
-    error={($project.organizer === '' && "The organizer field must not be empty.") || null}
-  >
-    <span slot="subtitle" class="desc">
-      Give the volunteers a brief idea of who's behind this project (department or individual).
-    </span>
-    <TextField
-      id="organizer"
-      autocomplete={false}
-      maxlength={128}
-      value={$project.organizer || ''}
-      on:change={(event) => $project.organizer = event.detail}
-    />
-  </FormField>
-
-  <BottomNavigation step={1} error={!($project.name && $project.organizer) ? 1 : null} />
+  <BottomNavigation step={1} error={!$project.name ? 1 : null} />
 </form>

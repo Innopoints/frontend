@@ -28,7 +28,6 @@ export function filterProjectFields(project, edit = false) {
   const filtered = {
     name: project.name,
     image_id: project.image_id,
-    organizer: project.organizer,
     moderators: project.moderators,
   };
   if (!edit) {
@@ -174,6 +173,9 @@ export function synchronizeActivityLists(internalList, backendActivities) {
       }
 
       if (internalList[internalListIdx]._type === ActivityTypes.TEMPLATE) {
+        if (activity.timeframe != null && internalList[internalListIdx].timeframe == null) {
+          internalList[internalListIdx].timeframe = activity.timeframe;
+        }
         internalListIdx++;
         activityProcessed = true;
         break;

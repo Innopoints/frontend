@@ -18,7 +18,7 @@
     {:else}
       <NotificationCenter />
       {#if isProfile}
-        <Button on:click={() => logout()}>sign out</Button>
+        <Button on:click={logout}>sign out</Button>
       {:else}
         {#if user.is_admin}
           <Button href="/dashboard" isRound>

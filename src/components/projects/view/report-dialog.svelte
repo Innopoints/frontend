@@ -9,7 +9,7 @@
   export let isOpen = false;
 </script>
 
-<Modal bind:isOpen>
+<Modal bind:isOpen classname="view-reports">
   {#if reports != null}
     <Dialog title="Reports on {applicant.full_name}" closeCallback={() => isOpen = false}>
       <ul slot="content" class="content reports">
@@ -43,6 +43,14 @@
               </div>
             </div>
           </li>
+        {:else}
+          <div class="empty">
+            <div class="icon">
+              <img src="images/view-project/no-applications.svg" alt="" />
+            </div>
+            <div class="title">No reports yet</div>
+            <div class="subtitle">Be sure to leave one when finalizing the project!</div>
+          </div>
         {/each}
       </ul>
     </Dialog>

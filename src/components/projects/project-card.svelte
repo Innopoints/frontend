@@ -8,7 +8,7 @@
   export let id;
   export let name;
   export let image_id;
-  export let organizer;
+  export let creator;
   export let activities;
   $: exposedActivities = activities.filter(x => !x.internal);
   export let start_date;
@@ -27,9 +27,9 @@
         <svg src="images/icons/calendar.svg" class="icon mr" slot="icon" />
         {formatDateRange({ start: start_date, end: end_date })}
       </Labeled>
-      <Labeled icon label="Organizer">
+      <Labeled icon label="Creator">
         <svg src="images/icons/user.svg" class="icon mr" slot="icon" />
-        {organizer}
+        {creator.full_name}
       </Labeled>
     </div>
     <Labeled icon label="Activities">

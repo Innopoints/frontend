@@ -30,7 +30,7 @@
   </div>
   <span slot="handle" class="telegram popover-container">
     {#if application.telegram}
-      <a href="https://t.me/{application.telegram}">
+      <a href="https://t.me/{application.telegram}" target="_blank">
         @{application.telegram}
       </a>
       <CopyButton text={application.telegram} />
@@ -49,16 +49,14 @@
           {/if}
         {/each}
       </div>
-      {#if reportData.reports.length !== 0}
-        <Button
-          on:click={() => dispatch('view-reports', {
-            reports: reportData.reports,
-            applicant: application.applicant,
-          })}
-        >
-          view past reports
-        </Button>
-      {/if}
+      <Button
+        on:click={() => dispatch('view-reports', {
+          reports: reportData.reports,
+          applicant: application.applicant,
+        })}
+      >
+        performance reports
+      </Button>
     {/await}
   {/if}
   {#if application.comment}

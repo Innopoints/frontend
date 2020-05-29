@@ -4,7 +4,7 @@ export default function getBlankActivity() {
     description: null,
     working_hours: null,
     fixed_reward: false,
-    telegram_required: false,
+    telegram_required: true,
     application_deadline: null,
     competences: [],
     feedback_questions: [

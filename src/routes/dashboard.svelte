@@ -2,26 +2,33 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, purchases, reviews } = await getInitialData(this, session, new Map([
-      ['account', '/account'],
+    const data = await getInitialData(this, session, new Map([
       ['purchases', '/stock_changes/for_review'],
       ['reviews', '/projects/for_review'],
+      ['tags', '/tags'],
     ]));
-    if (account == null || !account.is_admin) {
+
+    if (session.account == null || !session.account.is_admin) {
       this.error(403, 'Dashboard');
     }
-    return { account, purchases, reviews };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 
 <script>
   import Layout from '@/layouts/default.svelte';
+  import Header from '@/containers/dashboard/header.svelte';
   import Reviews from '@/containers/dashboard/reviews.svelte';
   import Purchases from '@/containers/dashboard/purchases.svelte';
   import InnopointTransfer from '@/containers/dashboard/innopoint-transfer.svelte';
+  import TagEditor from '@/containers/dashboard/tag-editor.svelte';
+  
   export let reviews;
   export let account;
   export let purchases;
+  export let tags;
 </script>
 
 <svelte:head>
@@ -34,11 +41,12 @@
 
 <Layout user={account}>
   <div class="material">
-    <h1 class="padded">Dashboard</h1>
+    <Header />
     <div class="cards padded">
       <Reviews {reviews} />
       <Purchases {purchases} />
       <InnopointTransfer />
+      <TagEditor {tags} />
     </div>
   </div>
 </Layout>

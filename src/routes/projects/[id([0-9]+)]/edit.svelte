@@ -2,14 +2,18 @@
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
-    const { account, project } = await getInitialData(this, session, new Map([
-      ['account', '/account?from_cache=true'],
+    const data = await getInitialData(this, session, new Map([
       ['project', `/projects/${page.params.id}`],
     ]));
-    if (account == null || (account.email !== project.creator && account.is_admin)) {
-      this.error(403, 'Edit a Project');
+
+    if (session.account == null
+        || (session.account.email !== data.project.creator.email
+            && session.account.is_admin)) {
+      this.error(403, 'Edit the Project');
     }
-    return { account, project };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 
@@ -23,6 +27,7 @@
   import Autocomplete from 'ui/autocomplete.svelte';
   import generateQueryString from '@/utils/generate-query-string.js';
   import * as api from '@/utils/api.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let account;
   export let project;
@@ -37,7 +42,7 @@
   }
 
   function notCreator(moderator) {
-    return moderator.email !== project.creator;
+    return moderator.email !== project.creator.email;
   }
 
   project.moderators = project.moderators.filter(notCreator);
@@ -102,9 +107,9 @@
         data: {
           name: project.name,
           image_id: project.image_id,
-          organizer: project.organizer,
           moderators: project.moderators,
         },
+        csrfToken: account.csrf_token,
       }));
       goto(`/projects/${project.id}`);
     } catch (e) {
@@ -139,7 +144,7 @@
         required
         error={
              (duplicateName && "The name must be unique.")
-          || (project.name === '' && "The name must not be empty.")
+          || (spaceOnly(project.name) && "The name must not be empty.")
           || null
         }
       >
@@ -151,7 +156,7 @@
         <TextField
           id="title"
           maxlength={128}
-          value={project.name || ''}
+          value={project.name}
           on:change={(event) => project.name = event.detail}
         />
       </FormField>
@@ -166,23 +171,6 @@
           <span class="lb">Best to use 16:9 photos.</span>
         </span>
         <ProjectImagePicker bind:value={project.image_id} />
-      </FormField>
-
-      <FormField
-        title="Organizer"
-        id="organizer"
-        required
-        error={(project.organizer === '' && "The organizer field must not be empty.") || null}
-      >
-        <span slot="subtitle" class="desc">
-          Name of the organizing department or individual.
-        </span>
-        <TextField
-          id="organizer"
-          maxlength={128}
-          value={project.organizer || ''}
-          on:change={(event) => project.organizer = event.detail}
-        />
       </FormField>
 
       <hr />

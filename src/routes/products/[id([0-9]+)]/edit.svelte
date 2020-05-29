@@ -3,16 +3,18 @@
   import { groupByColor } from '@/utils/group-varieties.js';
 
   export async function preload(page, session) {
-    const { unmodifiedProduct, account, colors, sizes } = await getInitialData(this, session, new Map([
+    const data = await getInitialData(this, session, new Map([
       ['unmodifiedProduct', `/products/${page.params.id}`],
-      ['account', '/account'],
       ['colors', '/colors'],
       ['sizes', '/sizes'],
     ]));
-    if (account == null || !account.is_admin) {
+
+    if (session.account == null || !session.account.is_admin) {
       this.error(403, 'Edit the Product');
     }
-    return { unmodifiedProduct, account, colors, sizes };
+
+    data.account = session.account;
+    return data;
   }
 </script>
 
@@ -27,6 +29,7 @@
   import * as api from '@/utils/api.js';
   import arraysEqual from '@/utils/arrays-equal.js';
   import { getBlankVariety } from '@/constants/products/blank-product.js';
+  import spaceOnly from '@/utils/space-only.js';
 
   export let unmodifiedProduct;
   let product = Object.assign({}, unmodifiedProduct);
@@ -64,14 +67,29 @@
   let errorMessage = null;
   let warningDialogOpen = false;
 
-  async function addColor(color) {
-    let resp = await api.post('/colors', { data: { value: color } });
-    if (resp.status == 200) {
-      colors.push({ value: color });
-      colors = colors;
-    } else {
-      console.error(`Color creation failed (${resp.status})`);
+  let colorDebounce = null;
+  function addColor({ detail: color }) {
+    if (colors.includes(color)) {
+      return;
     }
+
+    if (colorDebounce != null) {
+      clearTimeout(colorDebounce);
+    }
+
+    colorDebounce = setTimeout(async () => {
+      try {
+        await api.json(api.post(
+          '/colors',
+          { data: { value: color }, csrfToken: account.csrf_token },
+        ));
+        colors.push({ value: color });
+        colors = colors;
+        colorDebounce = null;
+      } catch (e) {
+        console.error(e);
+      }
+    }, 200);
   }
 
   function changeProductField({ field, value }) {
@@ -81,28 +99,19 @@
     }
   }
 
-  function deleteProduct() {
+  async function deleteProduct() {
     prefetch('/store');
     warningDialogOpen = false;
-    api.del(`/products/${unmodifiedProduct.id}`).then(resp => {
-      if (resp.ok) {
-        return goto('/store');
-      }
-
-      if (resp.status === 400) {
-        resp.json().then(message => {
-          if ('message' in message) {
-            errorMessage = JSON.stringify(message.message);
-          } else {
-            errorMessage = JSON.stringify(message);
-          }
-          console.error(message);
-        });
-      } else {
-        errorMessage = 'The universe really wants this product. Try deleting again later.';
-        resp.text().then(console.error);
-      }
-    });
+    try {
+      await api.json(api.del(
+        `/products/${unmodifiedProduct.id}`,
+        { csrfToken: account.csrf_token },
+      ));
+      goto('/store');
+    } catch (e) {
+      errorMessage = 'The universe really wants this product. Try deleting again later.';
+      console.error(e);
+    }
   }
 
   const unwrapValue = (obj) => obj.value;
@@ -165,7 +174,7 @@
         candidate => candidate.color === variety.color && candidate.size === variety.size,
       );
 
-      if (corresponding != -1) {
+      if (corresponding !== -1) {
         if (!arraysEqual(variety.images, old.varieties[corresponding].images)
          || variety.amount !== old.varieties[corresponding].amount) {
            variety.id = old.varieties[corresponding].id;
@@ -181,15 +190,15 @@
     return diffs;
   }
 
-  function saveChanges() {
-    if (!product.name) {
+  async function saveChanges() {
+    if (!product.name || spaceOnly(product.name)) {
       errors.name = true;
-      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+      errorMessage = 'The product needs a non-empty name.';
     }
 
     if (!product.price || product.price < 1) {
       errors.price = true;
-      errorMessage = 'Some fields are not filled out or filled out incorrectly.';
+      errorMessage = 'The product needs a valid price.';
     }
 
     if (!errors.name && !errors.price) {
@@ -220,61 +229,54 @@
         errorMessage = 'The product must be in stock at creation.';
         return;
       }
+
+      if (cleanVarieties.some(variety => variety.color == null) && cleanVarieties.length > 1) {
+        errorMessage = 'Colorless products cannot come in sizes and have more than 1 variety.';
+        return;
+      }
+
       const modifiedProduct = Object.assign({}, product);
       modifiedProduct.varieties = cleanVarieties;
 
       const requests = [];
       const diffs = computeDiffs(modifiedProduct, unmodifiedProduct);
       if (diffs.fields != null) {
-        requests.push(api.patch(`/products/${unmodifiedProduct.id}`, { data: diffs.fields }));
+        requests.push(api.json(api.patch(
+          `/products/${unmodifiedProduct.id}`,
+          { data: diffs.fields, csrfToken: account.csrf_token },
+        )));
       }
 
       for (let variety of diffs.varieties) {
         if ('id' in variety) {
           let id = variety.id;
           delete variety.id;
-          requests.push(api.patch(`/products/${unmodifiedProduct.id}/varieties/${id}`, {
-            data: variety,
-          }));
+          requests.push(api.json(api.patch(
+            `/products/${unmodifiedProduct.id}/varieties/${id}`,
+            { data: variety, csrfToken: account.csrf_token },
+          )));
         } else {
-          requests.push(api.post(`/products/${unmodifiedProduct.id}/varieties`, {
-            data: variety,
-          }));
+          requests.push(api.json(api.post(
+            `/products/${unmodifiedProduct.id}/varieties`,
+            { data: variety, csrfToken: account.csrf_token },
+          )));
         }
       }
 
       for (let variety of diffs.deletedVarieties) {
-        requests.push(api.del(`/products/${unmodifiedProduct.id}/varieties/${variety.id}`));
+        requests.push(api.json(api.del(
+          `/products/${unmodifiedProduct.id}/varieties/${variety.id}`,
+          { csrfToken: account.csrf_token },
+        )));
       }
 
-      Promise.all(requests).then(responses => {
-        let failedRequest = false;
-        for (let resp of responses) {
-          if (resp.ok) {
-            continue;
-          }
-
-          if (resp.status === 400) {
-            failedRequest = true;
-            resp.json().then(message => {
-              if ('message' in message) {
-                errorMessage = JSON.stringify(message.message);
-              } else {
-                errorMessage = JSON.stringify(message);
-              }
-              console.error(message);
-            });
-          } else {
-            failedRequest = true;
-            errorMessage = 'The universe just doesn\'t want this product. Try again later.';
-            resp.text().then(console.error);
-          }
-        }
-
-        if (!failedRequest) {
-          goto(`/products/${product.id}`);
-        }
-      });
+      try {
+        await Promise.all(requests);
+        goto(`/products/${product.id}`);
+      } catch (e) {
+        errorMessage = JSON.stringify(e.message || e);
+        console.error(e);
+      }
     }
   }
 </script>
@@ -303,7 +305,7 @@
         {product} {errors}
         colors={colors.map(unwrapValue)}
         sizes={sizes.map(unwrapValue)}
-        on:new-color={(e) => addColor(e.detail)}
+        on:new-color={addColor}
         on:create-variety={createVariety}
         on:remove-variety={removeVariety}
         on:change-variety={changeVariety}

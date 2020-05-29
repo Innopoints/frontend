@@ -9,9 +9,10 @@
 
   export let notificationSettings;
   export let account;
+
   let notificationPermission = null;
   let initialSettings = Object.assign({}, notificationSettings);
-  const supportsPush = 'PushManager' in window;
+
   $: changes = categories.some(
     category => (
       category.key != null
@@ -48,7 +49,7 @@
     }
 
     try {
-      await subscribeToPush();
+      await subscribeToPush(account.csrf_token);
       updateRadioOptions();
     } catch (e) {
       console.error(e);
@@ -56,6 +57,7 @@
   }
 
   onMount(() => {
+    const supportsPush = 'PushManager' in window;
     if (supportsPush) {
       notificationPermission = Notification.permission;
       updateRadioOptions();
@@ -70,11 +72,18 @@
     }
   }
 
-  function saveChanges() {
+  async function saveChanges() {
     delete notificationSettings[null];
-    api.patch('/account/notification_settings', { data: notificationSettings })
-      .then(() => changes = false)
-      .catch(() => notificationSettings = initialSettings);
+    try {
+      await api.json(api.patch(
+        '/account/notification_settings',
+        { data: notificationSettings, csrfToken: account.csrf_token },
+      ));
+      changes = false;
+    } catch (e) {
+      console.error(e);
+      notificationSettings = initialSettings;
+    }
   }
 </script>
 
