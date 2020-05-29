@@ -38,7 +38,7 @@ h2.padded {
   .info {
     margin: 0 calc(1em - 2px);
     padding: 0 4px 1.5em;
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid $light-contrast;
   }
 
   .labeled {
@@ -168,7 +168,7 @@ h2.padded {
 
     &:not(:last-child) {
       padding-bottom: 1em;
-      border-bottom: 1px solid $light-gray;
+      border-bottom: 1px solid $light-contrast;
     }
   }
 

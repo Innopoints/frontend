@@ -13,7 +13,7 @@
     fill: transparentize($main, .3);
 
     &.off {
-      stroke: $light-gray;
+      stroke: $light-contrast;
       fill: none;
     }
   }

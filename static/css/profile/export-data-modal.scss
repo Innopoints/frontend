@@ -52,7 +52,7 @@
   }
 
   .activity-selection {
-    border: 0 solid $light-gray;
+    border: 0 solid $light-contrast;
     border-width: 1px 0;
     margin-top: .3em;
     margin-bottom: 1em;
@@ -62,7 +62,7 @@
       margin-left: .5em;
 
       &:not(:last-child) {
-        border-bottom: 1px solid $light-gray;
+        border-bottom: 1px solid $light-contrast;
       }
     }
 

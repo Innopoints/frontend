@@ -2,7 +2,7 @@
 
 .activity.moderated {
   .left, .middle {
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid $light-contrast;
     padding-bottom: 1em;
   }
 
@@ -68,7 +68,7 @@
     margin: 0 1px;
 
     &.off {
-      stroke: $light-gray;
+      stroke: $light-contrast;
       fill: none;
     }
   }
@@ -123,7 +123,7 @@
         grid-row-start: 1;
         grid-row-end: 3;
         border-bottom-width: 0 !important;
-        border-right: 1px solid $light-gray;
+        border-right: 1px solid $light-contrast;
         padding-right: 1em;
       }
 

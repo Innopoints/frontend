@@ -48,7 +48,7 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid $light-contrast;
 
     @supports (display: grid) {
       display: grid;
@@ -81,7 +81,7 @@ h1 {
 .purchases {
   li {
     padding: 1em 0;
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid $light-contrast;
   }
 
   .product {
@@ -153,7 +153,7 @@ h1 {
 .user-selection {
   margin: 1em 0;
   padding-bottom: 2em;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid $light-contrast;
 
   p {
     font-weight: 300;
@@ -205,7 +205,7 @@ h1 {
 .amend-balance {
   margin-bottom: 1.5em;
   padding-bottom: 1.5em;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid $light-contrast;
 
   form {
     display: flex;
@@ -224,7 +224,7 @@ h1 {
 .send-message {
   margin-bottom: 1.5em;
   padding-bottom: .5em;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid $light-contrast;
 
   form {
     margin-top: 1em;
@@ -336,7 +336,7 @@ h1 {
     margin-right: 1em;
     padding-right: 1em;
     border-bottom-width: 0;
-    border-right: 1px solid $light-gray;
+    border-right: 1px solid $light-contrast;
   }
 
   .see-profile {
@@ -370,7 +370,7 @@ h1 {
       padding-bottom: 0;
       border-bottom: none;
       padding-right: 2em;
-      border-right: 1px solid $light-gray;
+      border-right: 1px solid $light-contrast;
     }
 
     .operations {
