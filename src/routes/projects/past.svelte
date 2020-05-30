@@ -19,8 +19,9 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/projects/tagline.svelte';
-  import Button from 'ui/button.svelte';
+  import { H1, Button } from 'attractions';
   import ProjectCard from '@/components/projects/project-card.svelte';
+  import EmptyState from '@/components/common/empty-state.svelte';
   import Pagination from '@/components/common/pagination.svelte';
   import * as api from '@/utils/api.js';
 
@@ -38,11 +39,12 @@
     return newProps;
   }
 
-  function handlePageSwitch(evt) {
-    currentPage = evt.detail;
-    api.get('/projects/past?page={currentPage}')
-      .then(resp => resp.json())
-      .then((newProjects) => projects = newProjects.data);
+  async function handlePageSwitch({ detail: currentPage }) {
+    try {
+      ({ pages, data: projects } = await api.json(api.get(`/projects/past?page=${currentPage}`)));
+    } catch (e) {
+      console.error(e);
+    }
   }
 </script>
 
@@ -51,18 +53,6 @@
   <meta name="og:title" content="Past Projects" />
   <meta name="og:url" content="https://ipts.innopolis.university/projects/past" />
   <meta name="og:description" content="A history of volunteering opportunities at Innopolis University" />
-
-  <!-- Styles for Projects page -->
-  <link rel="stylesheet" href="/css/bundles/projects.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects-id.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects-new.min.css" />
-  {#if account}
-    {#if account.is_admin}
-      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
-    {:else}
-      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
-    {/if}
-  {/if}
 </svelte:head>
 
 <Layout user={account}>
@@ -70,15 +60,15 @@
     <Tagline {account} />
 
     <section class="projects padded">
-      <h1>
+      <H1>
         <Button href="/projects">
-          <svg src="images/icons/arrow-left.svg" class="icon mr" />
+          <svg src="images/icons/arrow-left.svg" class="mr" />
           to ongoing projects
         </Button>
         <span class="text">Past Projects</span>
-      </h1>
+      </H1>
       {#if !projects || projects.length === 0}
-        <div class="empty">
+        <EmptyState>
           <figure>
             <img class="picture" src="images/projects/no-projects.svg" alt="" />
             <figcaption>
@@ -90,7 +80,7 @@
               {/if}
             </figcaption>
           </figure>
-        </div>
+        </EmptyState>
       {:else}
         <div class="cards">
           {#each projects as project (project.id)}
@@ -113,3 +103,5 @@
     </p>
   </div>
 </Layout>
+
+<style src="../../../static/css/routes/projects/index.scss"></style>

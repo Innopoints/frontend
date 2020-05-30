@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import TextField from 'ui/text-field.svelte';
+  import { Button, TextField } from 'attractions';
+  import classes from '@/utils/classes.js';
 
   export let pages;
   export let currentPage = 1;
@@ -17,7 +17,7 @@
   const rightEllipsisKey = {};
 
   function generateButtonList() {
-    let list = [];
+    const list = [];
     if (currentPage !== 1) {
       list.push(1);
     }
@@ -51,11 +51,11 @@
     return list;
   }
 
-  const dispatch = createEventDispatcher();
   function goTo(page) {
     if (page >= 1 && page <= pages) {
       leftInputActive = false;
       rightInputActive = false;
+      currentPage = page;
       dispatch('page-switch', page);
     }
   }
@@ -69,6 +69,8 @@
     leftInputActive = false;
     rightInputActive = true;
   }
+
+  const dispatch = createEventDispatcher();
 </script>
 
 {#if pages > 1}
@@ -80,12 +82,12 @@
             type="number"
             min={1}
             max={pages}
-            isNoSpinner
+            spinner={false}
             autofocus
-            on:change={(evt) => goTo(+evt.detail)}
+            on:change={({ detail }) => goTo(detail.value)}
           />
         {:else}
-          <Button classname="page" isNormal on:click={activateLeftInput}>...</Button>
+          <Button class="page" neutral on:click={activateLeftInput}>...</Button>
         {/if}
       {:else if buttonValue === rightEllipsisKey}
         {#if rightInputActive}
@@ -93,17 +95,17 @@
             type="number"
             min={1}
             max={pages}
-            isNoSpinner
+            spinner={false}
             autofocus
-            on:change={(evt) => goTo(+evt.detail)}
+            on:change={({ detail }) => goTo(detail.value)}
           />
         {:else}
-          <Button classname="page" isNormal on:click={activateRightInput}>...</Button>
+          <Button class="page" neutral on:click={activateRightInput}>...</Button>
         {/if}
       {:else}
         <Button
-          classname="page{buttonValue === currentPage ? ' current' : ''}"
-          isNormal
+          neutral={buttonValue !== currentPage}
+          class={classes('page', buttonValue === currentPage && 'current')}
           on:click={() => goTo(buttonValue)}
         >
           {buttonValue}
@@ -112,3 +114,68 @@
     {/each}
   </nav>
 {/if}
+
+<style lang="scss">
+  @import "_attractions-theme.scss";
+
+  .pagination {
+    margin: 2em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > .page {
+      width: 2.5em;
+      height: 2.5em;
+      margin: 0 .2em;
+      justify-content: center;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    & > :global(.text-field) {
+      margin: 0 .2em;
+
+      :global(input) {
+        width: 2.8em !important;
+        height: 2.8em !important;
+      }
+    }
+
+    & > :global(.page.current) {
+      background: transparentize($main, .95);
+
+      &:hover {
+        background: transparentize($main, .9);
+      }
+
+      &:focus {
+        background: transparentize($main, .85);
+      }
+    }
+
+    @media only screen and (min-width: 380px) {
+      & > :global(.page),
+      & > :global(.text-field) {
+        margin: 0 .4em;
+      }
+    }
+
+    @media only screen and (min-width: 540px) {
+      width: 540px;
+      align-self: center;
+
+      & > :global(.page),
+      :global(input) {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media only screen and (min-width: 1024px) {
+      & > :global(.page),
+      :global(input) {
+        font-size: 1.2rem;
+      }
+    }
+  }
+</style>
