@@ -1,7 +1,8 @@
 <script>
+  import { Label } from 'attractions';
+
   export let classname = '';
   export let labelclass = '';
-  export let textclass = '';
 
   export let label = '';
   export let icon = false;
@@ -9,17 +10,51 @@
 
 <div class:text={!icon} class="labeled {classname}">
   {#if icon}
-    <slot name="icon" />
-    <div class="text {textclass}">
-      <span class="label {labelclass}">
-        <slot name="label">{label}</slot>
-      </span>
-      <slot />
-    </div>
-  {:else}
-    <span class="label {labelclass}">
+    <div />
+    <Label class={labelclass}>
       <slot name="label">{label}</slot>
-    </span>
+    </Label>
+    <slot name="icon" />
+    <slot />
+  {:else}
+    <Label class={labelclass}>
+      <slot name="label">{label}</slot>
+    </Label>
     <slot />
   {/if}
 </div>
+
+<style lang="scss">
+  @import "_attractions-theme.scss";
+
+  .labeled {
+    display: flex;
+
+    &.text {
+      flex-direction: column;
+    }
+
+    :global(.icon) {
+      display: none;
+    }
+
+    @supports (display: grid) {
+      display: inline-grid;
+      grid-template-rows: auto 1fr;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+
+      :global(.icon) {
+        display: block;
+        height: 1.5rem;
+        width: 1.5rem;
+        stroke: $main;
+        align-self: start;
+
+        :global(svg) {
+          stroke: $main;
+        }
+      }
+    }
+  }
+</style>
