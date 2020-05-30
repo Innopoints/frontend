@@ -4,7 +4,6 @@
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
       ['projects', `/projects`],
-      ['competences', `/competences`],
     ]));
     data.account = session.account;
     return data;
@@ -14,49 +13,34 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import Tagline from '@/containers/projects/tagline.svelte';
-  import Button from 'ui/button.svelte';
+  import { H1, Button } from 'attractions';
   import ProjectCard from '@/components/projects/project-card.svelte';
   import Filters from '@/containers/projects/filters.svelte';
+  import EmptyState from '@/components/common/empty-state.svelte';
   import generateQueryString from '@/utils/generate-query-string.js';
-  import { orderLabels, orderOptions } from '@/constants/projects/order.js';
+  import orderOptions from '@/constants/projects/order.js';
   import * as api from '@/utils/api.js';
 
   export let projects;
-  export let competences;
   export let account;
 
-  let order = orderOptions[0];
-  let orderLabel = orderLabels[0];
+  let selectedOrder = orderOptions[0];
 
   async function updateProjects(filtering) {
-    let queryArgs = new Map();
+    const queryArgs = new Map();
 
     if (filtering.searchQuery) {
       queryArgs.set('q', filtering.searchQuery);
     }
 
-    if (filtering.vacantSpots != null) {
-      queryArgs.set('spots', filtering.vacantSpots.toString());
-    }
-
-    // TODO: implement
-    // if (filtering.minDate != null) {
-    //   queryArgs.set('min', filtering.minPrice);
-    // }
-    // if (filtering.maxDate != null) {
-    //   queryArgs.set('max', filtering.maxPrice);
-    // }
-
-    if (filtering.excludedCompetences.length !== 0) {
-      queryArgs.set('excluded_competences', JSON.stringify(filtering.excludedCompetences));
-    }
-
-    queryArgs.set('order_by', filtering.order.orderBy);
-    queryArgs.set('order', filtering.order.order);
+    queryArgs.set('order_by', filtering.order.value.orderBy);
+    queryArgs.set('order', filtering.order.value.order);
     const queryString = generateQueryString(queryArgs);
-    const response = await api.get('/projects?' + queryString);
-    if (!response.ok) return;
-    projects = await response.json();
+    try {
+      projects = await api.json(api.get('/projects?' + queryString));
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   function filterProps(props) {
@@ -74,18 +58,6 @@
   <meta name="og:title" content="Projects" />
   <meta name="og:url" content="https://ipts.innopolis.university/projects" />
   <meta name="og:description" content="If you’re seeking an opportunity to contribute to the wonderful world of Innopolis projects, you’re in the right place." />
-
-  <!-- Styles for Projects page -->
-  <link rel="stylesheet" href="/css/bundles/projects.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects-id.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects-new.min.css" />
-  {#if account}
-    {#if account.is_admin}
-      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
-    {:else}
-      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
-    {/if}
-  {/if}
 </svelte:head>
 
 <Layout user={account}>
@@ -93,13 +65,13 @@
     <Tagline {account} />
 
     <section class="projects padded">
-      <h1><span class="text">Ongoing Projects</span></h1>
+      <H1><span class="text">Ongoing Projects</span></H1>
       <Filters
-        {order} {orderLabel} {competences} {orderOptions} {orderLabels}
-        on:change-filters={(event) => updateProjects(event.detail)}
+        {selectedOrder} {orderOptions}
+        on:change-filters={({ detail: filtering }) => updateProjects(filtering)}
       />
       {#if !projects || projects.length === 0}
-        <div class="empty">
+        <EmptyState>
           <figure>
             <img class="picture" src="images/projects/no-projects.svg" alt="" />
             <figcaption>
@@ -111,7 +83,7 @@
               {/if}
             </figcaption>
           </figure>
-        </div>
+        </EmptyState>
       {:else}
         <div class="cards">
           {#each projects as project (project.id)}
@@ -140,3 +112,5 @@
     </p>
   </div>
 </Layout>
+
+<style src="../../../static/css/routes/projects/index.scss"></style>

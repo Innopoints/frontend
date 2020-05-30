@@ -183,6 +183,6 @@
   labels={orderLabels}
   name="order-options"
   bind:value={order}
-  classname="ordering hide-mb"
+  classname="ordering hide-tb"
   on:change="{changeOrder}"
 />

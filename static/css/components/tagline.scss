@@ -1,0 +1,66 @@
+.tagline > div {
+  margin: 2.5em 0 1.5em;
+  display: flex;
+  flex-direction: column;
+
+  :global(.actions) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1em;
+
+    :global(.btn) {
+      margin-right: .5em;
+      margin-bottom: .5em;
+    }
+  }
+
+  :global(p) {
+    margin-bottom: .5em;
+    line-height: 1.2em;
+  }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 639px) {
+  .tagline > div > :global(.subhead) {
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .tagline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+
+    & > .picture {
+      height: 20rem;
+    }
+
+    & > div {
+      margin-top: 2em;
+    }
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .tagline {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    & > .picture {
+      height: 18em;
+    }
+
+    & > div {
+      margin: 0;
+      width: 45%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .tagline > div {
+    width: 32em;
+  }
+}

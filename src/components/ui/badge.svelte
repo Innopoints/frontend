@@ -30,7 +30,7 @@
       display: none;
     }
 
-    .icon {
+    :global(.icon) {
       display: block;
     }
   }

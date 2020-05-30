@@ -1,5 +1,11 @@
 @import "_attractions-theme.scss";
 
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
 footer {
   background-color: #5c5c5c;
   padding: 1.25em 1em 0;

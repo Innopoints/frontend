@@ -1,0 +1,129 @@
+@import "_attractions-theme.scss";
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+.filters {
+  margin-top: .5em;
+  margin-bottom: .5em;
+
+  .dropdowns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    :global(.dropdown-shell) {
+      margin-top: .5em;
+    }
+  }
+
+  :global(.handle) {
+    :global(.regular) {
+      display: none;
+    }
+
+    :global(.icon) {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  :global(.relative-wrapper) {
+    width: calc(90vw - 1em);
+    max-width: 22em;
+    padding: 1em 0;
+
+    & > :global(.btn.danger) {
+      margin: 0 1em;
+    }
+  }
+
+  :global(.order-options) {
+    $padding-left: .5em;
+    $padding-right: 3.2em;
+
+    max-width: 15em - $padding-left - $padding-right;
+    padding-right: $padding-right;
+    padding-left: $padding-left;
+
+    :global(.btn.close) {
+      position: absolute;
+      top: .3em;
+      right: .3em;
+    }
+
+    :global(.radio) {
+      margin: .5em 0;
+    }
+  }
+
+  .filter {  // unprocessed
+    display: flex;
+    align-items: center;
+    margin-top: .5em;
+    padding: 0 1em;
+
+    .name {
+      padding: 0 .5em 0 1em;
+      flex-shrink: 0;
+    }
+
+    .icon {
+      stroke: $main;
+    }
+  }
+
+  @media only screen and (min-width: 370px) {
+    .handle .tight {
+      display: none;
+    }
+
+    .handle .regular {
+      display: inline;
+    }
+  }
+
+  .filter > .icon,
+  .filter > .align-center > .icon {  // unprocessed
+    margin-left: .8em;
+  }
+
+  @media only screen and (min-width: 640px) {
+    &, & + :global(.ordering) {
+      width: 36em;
+      display: flex;
+      align-self: center;
+    }
+
+    :global(.text-field) {
+      flex: 1;
+    }
+
+    :global(.dropdown-shell) {
+      &:first-child {
+        display: none;
+      }
+
+      &:last-child {
+        flex: 0;
+        margin-top: 0;
+        margin-left: .5em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 700px) {
+    width: 38em;
+
+    & + :global(.ordering) {
+      margin-bottom: 1em;
+      width: 38em;
+
+      :global(.chip) {
+        font-size: .9rem;
+      }
+    }
+  }
+}

@@ -1,13 +1,18 @@
-export const orderOptions = [
-  { orderBy: 'creation_time', order: 'desc' },
-  { orderBy: 'creation_time', order: 'asc' },
-  { orderBy: 'proximity', order: 'asc' },
-  { orderBy: 'proximity', order: 'desc' },
-];
-
-export const orderLabels = [
-  'newest first',
-  'newest last',
-  'soonest first',
-  'soonest last',
+export default [
+  {
+    value: { orderBy: 'creation_time', order: 'desc' },
+    label: 'newest first',
+  },
+  {
+    value: { orderBy: 'creation_time', order: 'asc' },
+    label: 'newest last',
+  },
+  {
+    value: { orderBy: 'proximity', order: 'asc' },
+    label: 'soonest first',
+  },
+  {
+    value: { orderBy: 'proximity', order: 'desc' },
+    label: 'soonest last',
+  },
 ];
