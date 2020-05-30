@@ -1,7 +1,6 @@
 <script>
   import Layout from '@/layouts/default.svelte';
-  import Button from 'ui/button.svelte';
-  import Card from 'ui/card.svelte';
+  import { Button, Card, H1 } from 'attractions';
   import { login } from '@/utils/auth.js';
 
   export let error;
@@ -10,24 +9,22 @@
 </script>
 
 <svelte:head>
-  {#if status == 404}
+  {#if status === 404}
     <title>Page not found – Innopoints</title>
-  {:else if status == 403}
+  {:else if status === 403}
     <title>{error.message} – Innopoints</title>
   {:else}
     <title>Something went wrong...</title>
   {/if}
-  <link rel="stylesheet" href="/css/bundles/-error.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/home.min.css" />
 </svelte:head>
 
 <Layout>
   {#if status == 404}
     <div class="material container-404 padded">
       <div class="text">
-        <h1>Nothing here</h1>
+        <H1>Nothing here</H1>
         <p class="subtitle">That rabbit must have given you the wrong lead.</p>
-        <Button href="/" isFilled>
+        <Button href="/" filled>
           <svg src="/images/icons/home.svg" class="icon mr" />
           take me home
         </Button>
@@ -49,7 +46,7 @@
     </div>
   {:else if status == 403}
     <div class="material">
-      <h1 class="padded header-403">{error.message}</h1>
+      <H1 class="padded header-403">{error.message}</H1>
       <main class="padded container-403">
         <img src="/images/who-are-you.svg" class="picture" alt="" />
         <Card>
@@ -63,8 +60,8 @@
       </main>
     </div>
   {:else}
-    <div class="material">
-      <h1>Alright, so here's what happened</h1>
+    <div class="material padded">
+      <H1>Alright, so here's what happened</H1>
       {#if dev && error.stack}
         <pre>{error.stack}</pre>
       {/if}
