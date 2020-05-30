@@ -1,10 +1,10 @@
 <script>
-  import TextField from 'ui/text-field.svelte';
+  import { TextField } from 'attractions';
 
   export let value = '';
   export let placeholder = 'Type to search';
 </script>
 
-<TextField on:input {placeholder} isWithItem {value} type="search" maxlength={256}>
+<TextField on:input {placeholder} withItem {value} type="search" maxlength={256}>
   <svg src="images/icons/search.svg" class="item" />
 </TextField>
