@@ -36,7 +36,7 @@
 
 <div class="notification-center">
   <DropdownShell let:toggle>
-    <Button round on:click={toggle}>
+    <Button round on:click={toggle} class="mr">
       <Badge hidden={!unread}>
         <svg src="images/icons/bell.svg" class="icon" />
       </Badge>

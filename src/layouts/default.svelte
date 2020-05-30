@@ -7,11 +7,7 @@
   const { page } = stores();
 </script>
 
-<svelte:head>
-  <link rel="stylesheet" href="/css/bundles/layout-default.min.css" />
-</svelte:head>
-
-<Header {user} isProfile={(/^\/(?:profile|dashboard)/).test($page.path)} />
+<Header {user} profile={(/^\/(?:profile|dashboard)/).test($page.path)} />
 
 <slot />
 

@@ -1,6 +1,6 @@
-@import "../global/_variables.scss";
+@import "_attractions-theme.scss";
 
-header.top-level {
+header {
   height: 3.5em;
   border-bottom: 1px solid transparentize($main, .76);
   display: flex;
@@ -22,15 +22,15 @@ header.top-level {
   .actions {
     display: flex;
   }
-}
 
-@media only screen and (min-width: 640px) {
-  header.top-level .hide-tb {
-    margin-left: .6em;
-  }
+  @media only screen and (min-width: 640px) {
+    .hide-tb {
+      margin-left: .6em;
+    }
 
-  header.top-level .logo {
-    display: flex;
-    align-items: center;
+    .logo {
+      display: flex;
+      align-items: center;
+    }
   }
 }
