@@ -43,6 +43,6 @@
     </div>
   {/if}
   <div class="actions">
-    <Button href="/store">see the InnoStore</Button>
+    <Button href="/products">see the InnoStore</Button>
   </div>
 </Card>

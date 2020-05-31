@@ -30,7 +30,7 @@ export default function getNotificationContent({ type, payload }) {
           'New products have arrived at ',
           {
             text: 'the InnoStore',
-            url: '/store',
+            url: '/products',
           },
         ];
         break;

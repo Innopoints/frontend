@@ -100,14 +100,14 @@
   }
 
   async function deleteProduct() {
-    prefetch('/store');
+    prefetch('/products');
     warningDialogOpen = false;
     try {
       await api.json(api.del(
         `/products/${unmodifiedProduct.id}`,
         { csrfToken: account.csrf_token },
       ));
-      goto('/store');
+      goto('/products');
     } catch (e) {
       errorMessage = 'The universe really wants this product. Try deleting again later.';
       console.error(e);

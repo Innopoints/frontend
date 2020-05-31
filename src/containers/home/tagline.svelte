@@ -10,7 +10,7 @@
     <div class="motto">Motivating the great beginnings</div>
     <nav>
       <Button filled href="/projects">get innopoints</Button>
-      <Button outline href="/store">see the InnoStore</Button>
+      <Button outline href="/products">see the InnoStore</Button>
     </nav>
   </div>
 </section>

@@ -135,7 +135,7 @@
 
   async function createProduct() {
     errorMessage = null;
-    prefetch('/store');
+    prefetch('/products');
     if (!product.name || spaceOnly(product.name)) {
       errors.name = true;
       errorMessage = 'The product needs a non-empty name.';
@@ -189,7 +189,7 @@
         csrfToken: account.csrf_token,
       }));
       localStorage.removeItem('product-draft');
-      goto('/store');
+      goto('/products');
     } catch (e) {
       errorMessage = JSON.stringify(e.message || e);
       console.error(e);

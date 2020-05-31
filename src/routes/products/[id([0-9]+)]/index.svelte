@@ -7,7 +7,7 @@
     ]));
 
     if (data.product == null) {
-      this.redirect(302, '/store');
+      this.redirect(302, '/products');
     }
 
     data.account = session.account;
@@ -130,7 +130,7 @@
 <Layout user={account}>
   <div class="material">
     <main class="product">
-      <Button href="/store" classname="back">
+      <Button href="/products" classname="back">
         <svg src="/images/icons/arrow-left.svg" class="icon" />
         <span>to the InnoStore</span>
       </Button>

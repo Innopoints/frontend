@@ -107,7 +107,7 @@
 
     <p class="link-bottom padded">
       What’s so cool about being a volunteer? The
-      <a href="/store" rel="prefetch">InnoStore</a>
+      <a href="/products" rel="prefetch">InnoStore</a>
       has your answers!
     </p>
   </div>

@@ -37,7 +37,7 @@
       <a href="/projects" class="destination">
         <img src="images/404/browser.svg" width="212" height="137" class="repr" alt="Go to the projects">
       </a>
-      <a href="/store" class="destination">
+      <a href="/products" class="destination">
         <img src="images/404/browser.svg" width="212" height="137" class="repr" alt="Go to a product page">
       </a>
       <a href="/" class="destination">

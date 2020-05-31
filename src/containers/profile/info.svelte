@@ -76,7 +76,7 @@
       available
     </p>
     <nav class="btn-shift">
-      <Button href="/store">
+      <Button href="/products">
         <svg src="images/icons/shopping-bag.svg" class="icon mr" />
         go to the InnoStore
       </Button>
