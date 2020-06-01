@@ -29,10 +29,6 @@
     dispatch('change-filters', filtering);
   }
 
-  export function getLastFiltering() {
-    return filtering;
-  }
-
   const dispatch = createEventDispatcher();
 </script>
 
