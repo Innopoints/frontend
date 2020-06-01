@@ -19,7 +19,7 @@
     }
   }
 
-  .content {
+  .image + .content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -74,14 +74,14 @@
     margin-left: .3em;
   }
 
-  .color-options {
+  :global(.color-options) {
     display: flex;
     flex-direction: column-reverse;
     position: absolute;
     bottom: .5em;
     right: 1em;
 
-    & > label {
+    & > :global(label) {
       margin-bottom: .5em;
     }
   }

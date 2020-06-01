@@ -43,6 +43,7 @@
       grid-template-rows: auto 1fr;
       grid-template-columns: auto 1fr;
       align-items: center;
+      grid-auto-flow: column;
 
       :global(.icon) {
         display: block;

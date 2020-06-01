@@ -11,7 +11,7 @@
   <div>
     <Headline>{headline}</Headline>
     <Subhead>
-      <p>{subhead}</p>
+      {subhead}
       <slot />
     </Subhead>
   </div>

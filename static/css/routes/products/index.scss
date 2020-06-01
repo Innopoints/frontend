@@ -1,18 +1,10 @@
-@import "../global/_variables.scss";
+@import "global/common.scss";
+@import "_attractions-theme.scss";
 
 .shop {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .balance {
-    color: $main;
-    margin-bottom: 1em;
-
-    .innopoint {
-      stroke: $main;
-    }
-  }
 }
 
 .cards {
@@ -21,14 +13,14 @@
   justify-content: center;
   align-self: stretch;
 
-  hr {
-    margin-top: 3em;
+  :global(hr) {
+    margin-top: 2em;
 
     &::after {
-      font-size: 1.2rem;
+      font-size: 1.2rem !important;
       color: $main;
       font-weight: 500;
-      padding: 0 .6em;
+      padding: 0 .6em !important;
       white-space: nowrap;
     }
   }
@@ -40,15 +32,15 @@
     grid-template-columns: repeat(auto-fit, 18em);
     grid-gap: 1rem;
 
-    hr {
+    :global(hr) {
       grid-column: 1 / -1;
     }
   }
 }
 
 @media only screen and (min-width: 600px) {
-  .cards hr::after {
-    font-size: 1.4rem;
+  .cards :global(hr)::after {
+    font-size: 1.4rem !important;
   }
 
   .card {

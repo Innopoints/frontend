@@ -1,6 +1,6 @@
 <script>
   import { H2 } from 'attractions';
-  import ProductCard from '@/components/store/product-card.svelte';
+  import ProductCard from '@/components/products/product-card.svelte';
 
   export let products;
 

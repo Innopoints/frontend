@@ -34,9 +34,18 @@
     width: calc(90vw - 1em);
     max-width: 22em;
     padding: 1em 0;
+    position: relative;
 
     & > :global(.btn.danger) {
-      margin: 0 1em;
+      position: absolute;
+      top: .3em;
+      left: .3em;
+    }
+
+    & > :global(.btn.close) {
+      position: absolute;
+      top: .3em;
+      right: .3em;
     }
   }
 
@@ -48,18 +57,12 @@
     padding-right: $padding-right;
     padding-left: $padding-left;
 
-    :global(.btn.close) {
-      position: absolute;
-      top: .3em;
-      right: .3em;
-    }
-
     :global(.radio) {
       margin: .5em 0;
     }
   }
 
-  .filter {  // unprocessed
+  .filter {
     display: flex;
     align-items: center;
     margin-top: .5em;
@@ -68,10 +71,6 @@
     .name {
       padding: 0 .5em 0 1em;
       flex-shrink: 0;
-    }
-
-    .icon {
-      stroke: $main;
     }
   }
 
@@ -83,11 +82,6 @@
     .handle .regular {
       display: inline;
     }
-  }
-
-  .filter > .icon,
-  .filter > .align-center > .icon {  // unprocessed
-    margin-left: .8em;
   }
 
   @media only screen and (min-width: 640px) {

@@ -79,4 +79,4 @@
   </Card>
 </div>
 
-<style src="../../../static/css/components/store/product-card.scss"></style>
+<style src="../../../static/css/components/products/product-card.scss"></style>

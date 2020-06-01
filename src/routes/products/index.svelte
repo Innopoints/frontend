@@ -19,14 +19,15 @@
 <script>
   import { stores } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
-  import Tagline from '@/containers/store/tagline.svelte';
-  import Balance from '@/components/store/balance.svelte';
-  import Filters from '@/containers/store/filters.svelte';
-  import ProductCard from '@/components/store/product-card.svelte';
+  import Tagline from '@/containers/products/tagline.svelte';
+  import Balance from '@/components/products/balance.svelte';
+  import Filters from '@/containers/products/filters.svelte';
+  import Divider from '@/components/ui/divider.svelte';
+  import EmptyState from '@/components/common/empty-state.svelte';
+  import ProductCard from '@/components/products/product-card.svelte';
   import Pagination from '@/components/common/pagination.svelte';
   import NotificationTypes from '@/constants/backend/notification-types.js';
-  import generateQueryString from '@/utils/generate-query-string.js';
-  import { orderLabels, orderOptions } from '@/constants/store/order.js';
+  import orderOptions from '@/constants/products/order.js';
   import * as api from '@/utils/api.js';
 
   const { session } = stores();
@@ -36,9 +37,8 @@
   export let colors;
   export let account;
 
-  let balance;
-  let order = orderOptions[0];
-  let orderLabel = orderLabels[0];
+  let balance = account && account.balance;
+  let selectedOrder = orderOptions[0];
   let currentPage = 1;
 
   let newArrivals = null;
@@ -68,46 +68,45 @@
 
   let filterElement;
 
-  if (account != null) {
-    balance = account.balance;
-  }
-
-  function updateProducts(filtering) {
-    let queryArgs = new Map();
+  async function updateProducts(filtering) {
+    const query = new Map();
 
     if (filtering.searchQuery) {
-      queryArgs.set('q', filtering.searchQuery);
+      query.set('q', filtering.searchQuery);
     }
     if (filtering.minPrice != null) {
-      queryArgs.set('min_price', filtering.minPrice);
+      query.set('min_price', filtering.minPrice);
     }
     if (filtering.maxPrice != null) {
-      queryArgs.set('max_price', filtering.maxPrice);
+      query.set('max_price', filtering.maxPrice);
     }
-    let excludedColors = filtering.excludedColors.map(color => color.slice(1));
-    if (filtering.colorlessExcluded) {
+
+    const excludedColors = filtering.excludedColors.map(color => color.slice(1));
+    if (!filtering.colorlessIncluded) {
       excludedColors.push(null);
     }
     if (excludedColors.length !== 0) {
-      queryArgs.set('excluded_colors', JSON.stringify(excludedColors));
+      query.set('excluded_colors', JSON.stringify(excludedColors));
     }
-    queryArgs.set('order_by', filtering.order.orderBy);
-    queryArgs.set('order', filtering.order.order);
-    queryArgs.set('limit', productLimit);
-    queryArgs.set('page', currentPage);
-    api.get(`/products?${generateQueryString(queryArgs)}`)
-      .then(resp => resp.json()).then((newProducts) => {
-        ({ pages, data: products } = newProducts);
-      }).catch(console.error);
+    query.set('order_by', filtering.order.value.orderBy);
+    query.set('order', filtering.order.value.order);
+    query.set('limit', productLimit);
+    query.set('page', currentPage);
+
+    try {
+      ({ pages, data: products } = await api.json(api.get('/products', { query })));
+    } catch (e) {
+      console.error(e);
+    }
   }
 
-  function handlePageSwitch(evt) {
-    currentPage = evt.detail;
+  function handlePageSwitch(e) {
+    currentPage = e.detail;
     updateProducts(filterElement.getLastFiltering());
   }
 
   function filterProps(props) {
-    let newProps = Object.assign({}, props);
+    const newProps = Object.assign({}, props);
     delete newProps.addition_time;
     return newProps;
   }
@@ -116,50 +115,39 @@
 <svelte:head>
   <title>Store – Innopoints</title>
   <meta name="og:title" content="InnoStore" />
-  <meta name="og:url" content="https://ipts.innopolis.university/store" />
+  <meta name="og:url" content="https://ipts.innopolis.university/products" />
   <meta name="og:description" content="The place where your hard work and proactivity turns into cool merch of Innopolis University" />
-
-  <link rel="stylesheet" href="/css/bundles/store.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/products-new.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/products-id.min.css" />
-  {#if account}
-    {#if account.is_admin}
-      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
-    {:else}
-      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
-    {/if}
-  {/if}
 </svelte:head>
 
 <Layout user={account}>
   <div class="material">
-    <Tagline isAdmin={account != null && account.is_admin} />
+    <Tagline {account} />
     <section class="shop padded">
       <Balance value={balance} />
       <Filters
-        {order} {orderLabel} {colors} {orderOptions} {orderLabels} {balance}
+        {selectedOrder} {colors} {orderOptions} {balance}
         on:change-filters={(event) => { currentPage = 1; updateProducts(event.detail); }}
         bind:this={filterElement}
       />
-      {#if !products || products.length === 0}
-        <div class="empty">
+      {#if !products}
+        <EmptyState>
           <figure>
-            <img class="picture" src="images/store/no-products.svg" alt="" />
+            <img class="picture" src="images/products/no-products.svg" alt="" />
             <figcaption>
               <div class="title">No items found...</div>
-              Try raiding 319 or a different filter
+              Try whining to 319 or a different filter
             </figcaption>
           </figure>
-        </div>
+        </EmptyState>
       {:else}
         <div class="cards">
           {#if newArrivals != null}
-            <hr data-text="New arrivals" />
+            <Divider text="New arrivals" />
             {#each newArrivals as product (product.id)}
               <ProductCard {...filterProps(product)} />
             {/each}
           {/if}
-          <hr data-text="All items" />
+          <Divider text="All items" />
           {#each products as product (product.id)}
             <ProductCard {...filterProps(product)} />
           {/each}
@@ -174,3 +162,5 @@
     </p>
   </div>
 </Layout>
+
+<style src="../../../static/css/routes/products/index.scss"></style>
