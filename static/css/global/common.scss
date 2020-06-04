@@ -173,3 +173,14 @@
 :global(.btn-shift) {
   margin-left: -.8rem;
 }
+
+:global(.label) {
+  text-transform: uppercase;
+  color: $main;
+  font-weight: $bold-font-weight;
+  font-size: .8em;
+
+  &.small {
+    font-size: .7em;
+  }
+}

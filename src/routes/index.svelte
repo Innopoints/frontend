@@ -47,4 +47,4 @@
 
 <Footer />
 
-<style global src="../../static/css/routes/index.scss"></style>
+<style src="../../static/css/routes/index.scss"></style>
