@@ -12,12 +12,14 @@
     height: 100%;
     left: 0;
     top: 0;
-    z-index: -1;
+    z-index: 0;
     background: linear-gradient(#1e9c07, #26c10b);
     transform: skewY(6deg);
   }
 
   & > :global(h2) {
+    position: relative;
+    z-index: 1;
     color: #fff;
   }
 
@@ -26,6 +28,8 @@
     flex-direction: column;
     align-items: stretch;
     padding: 0 1.5em;
+    position: relative;
+    z-index: 1;
   }
 
   :global(.card) {

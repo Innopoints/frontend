@@ -12,4 +12,8 @@
       font-size: 2em !important;
     }
   }
+
+  & + :global(footer .to-top::before) {
+    background: mix($main, white, 7%) !important;
+  }
 }
