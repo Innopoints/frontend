@@ -38,7 +38,7 @@
         <svg src="images/icons/shopping-bag.svg" class="mr" />
         manage purchases
         {#if dotShown}
-          <Dot small />
+          <Dot small class="ml" />
         {/if}
       </Button>
     </div>
