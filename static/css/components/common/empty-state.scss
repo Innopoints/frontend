@@ -50,5 +50,12 @@
 
   .title {
     margin: 0 0 .3em;
+
+    &.prominent {
+      font-weight: 500;
+      font-size: 1.2em;
+      margin: .7em 0 .4em;
+      color: $main;
+    }
   }
 }
