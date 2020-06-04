@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
+  import { Button } from 'attractions';
   import EntryTypes from '@/constants/backend/timeline-entry-types.js';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -37,8 +37,8 @@
       </a>
       <div
         class="status"
-        class:bad="{payload.application_status === ApplicationStatuses.REJECTED}"
-        class:good="{payload.application_status === ApplicationStatuses.APPROVED}"
+        class:bad={payload.application_status === ApplicationStatuses.REJECTED}
+        class:good={payload.application_status === ApplicationStatuses.APPROVED}
       >
         {#if payload.application_status === ApplicationStatuses.PENDING}
           application awaiting approval
@@ -47,7 +47,7 @@
         {:else if payload.application_status === ApplicationStatuses.APPROVED}
           {#if payload.project_stage === ProjectStages.FINISHED}
             {payload.reward} <svg src="images/innopoint-sharp.svg" class="innopoint" />
-            gained{payload.feedback_id == null ? ', leave feedback to claim' : ''}
+            gained{#if payload.feedback_id == null}, leave feedback to claim{/if}
           {:else}
             application approved
           {/if}
@@ -56,7 +56,7 @@
       {#if payload.application_status === ApplicationStatuses.APPROVED
         && payload.project_stage === ProjectStages.FINISHED
         && payload.feedback_id == null}
-        <Button isFilled classname="mt" on:click={() => dispatch('leave-feedback', payload)}>
+        <Button filled class="mt" on:click={() => dispatch('leave-feedback', payload)}>
           leave feedback
         </Button>
       {/if}
@@ -71,11 +71,11 @@
       </a>
       <div
         class="status"
-        class:bad="{payload.stock_change_status === StockChangeStatuses.REJECTED}"
-        class:good="{
+        class:bad={payload.stock_change_status === StockChangeStatuses.REJECTED}
+        class:good={
           payload.stock_change_status === StockChangeStatuses.CARRIED_OUT
           || payload.stock_change_status === StockChangeStatuses.READY_FOR_PICKUP
-        }"
+        }
       >
         {#if payload.stock_change_status === StockChangeStatuses.PENDING}
           purchase is on its way to 319
@@ -100,8 +100,8 @@
       {#if payload.review_status != null}
         <div
           class="status"
-          class:bad="{payload.review_status === ReviewStatuses.REJECTED}"
-          class:good="{payload.review_status === ReviewStatuses.APPROVED}"
+          class:bad={payload.review_status === ReviewStatuses.REJECTED}
+          class:good={payload.review_status === ReviewStatuses.APPROVED}
         >
           {#if payload.review_status === ReviewStatuses.PENDING}
             project awaiting final review
@@ -113,7 +113,7 @@
         </div>
       {/if}
       {#if payload.review_status === ReviewStatuses.REJECTED}
-        <Button isFilled href="/projects/{payload.project_id}" classname="mt">
+        <Button filled href="/projects/{payload.project_id}" class="mt">
           make corrections
         </Button>
       {/if}
@@ -123,3 +123,5 @@
     </time>
   </div>
 </div>
+
+<style src="../../../static/css/components/profile/timeline-entry.scss"></style>

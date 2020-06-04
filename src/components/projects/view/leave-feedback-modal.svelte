@@ -1,11 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Dialog from 'ui/dialog.svelte';
-  import TextField from 'ui/text-field.svelte';
-  import CheckChipGroup from 'ui/check-chip-group.svelte';
-  import Modal from 'ui/modal.svelte';
+  import { Modal, Dialog, TextField, CheckboxChipGroup, FormField, Button } from 'attractions';
 
-  export let isOpen = false;
+  export let open = false;
   export let activity;
   export let application;
   export let competences;
@@ -15,8 +12,9 @@
     answers: activity == null ? [] : new Array(activity.feedback_questions.length).fill(''),
   };
 
-  const competenceItems = competences.map(({ id }) => ({ value: id, checked: false }));
-  const competenceLabels = competences.map(({ name }) => name.toLowerCase());
+  let competenceItems = competences.map(
+    ({ id, name }) => ({ label: name.toLowerCase(), value: id, checked: false }),
+  );
 
   function processCheck({ detail: competence }) {
     if (competence.checked) {
@@ -34,64 +32,60 @@
       answers: new Array(activity.feedback_questions.length).fill(''),
     };
     competenceItems.forEach(item => item.checked = false);
+    competenceItems = competenceItems;
+    open = false;
   }
 
   const dispatch = createEventDispatcher();
 </script>
 
-<Modal bind:isOpen>
+<Modal bind:open let:closeCallback>
   {#if activity != null}
-    <Dialog
-      classname="feedback-modal"
-      title="Leave Feedback on {activity.name}"
-      closeCallback={() => isOpen = false}
-    >
-      <div class="content" slot="content">
+    <Dialog title="Leave Feedback on {activity.name}" {closeCallback}>
+      <div class="content">
         <p>You are just one step away from receiving innopoints!</p>
         <p>
           Be honest – we read this feedback, and it will not
           affect the amount of innopoints you receive!
         </p>
         <form>
-          <div class="form-field">
-            <label for="competences">
-              What competences have you developed (up to 3)?
-              <span class="required">*</span>
-            </label>
-            <CheckChipGroup
-              classname="competence-chips"
+          <FormField
+            id="competences"
+            name="What competences have you developed (up to 3)?"
+            required
+          >
+            <CheckboxChipGroup
+              class="competence-chips"
               items={competenceItems}
               name="competences"
-              labels={competenceLabels}
-              maxChecked={3}
+              max={3}
               on:change={processCheck}
             />
-          </div>
+          </FormField>
           {#each activity.feedback_questions as question, index}
-            <div class="form-field">
-              <label for="question{index}">
-                {question}
-              </label>
+            <FormField name={question} id="question{index}">
               <TextField
                 multiline
                 id="question{index}"
                 maxlength={1024}
                 bind:value={value.answers[index]}
               />
-            </div>
+            </FormField>
           {/each}
         </form>
         <div class="actions">
-          <button
-            class="btn filled"
-            type="button"
-            disabled={value.competences.length === 0}
+          <Button
+            noRipple
+            filled
+            disabled={!value.competences}
             on:click={submit}
           >
             submit & claim innopoints
-          </button>
+          </Button>
         </div>
       </div>
     </Dialog>
   {/if}
 </Modal>
+
+<style src="../../../../static/css/components/projects/view/leave-feedback-modal.scss"></style>

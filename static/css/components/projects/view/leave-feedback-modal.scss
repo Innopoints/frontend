@@ -1,8 +1,7 @@
-.feedback-modal {
-  .title {
-    padding-right: 2em;
-    margin-bottom: .5em;
-  }
+.content {
+  max-height: calc(100vh - 10em);
+  overflow-y: auto;
+  overscroll-behavior: none;
 
   p {
     font-weight: 300;
@@ -11,40 +10,41 @@
     line-height: 1.1rem;
   }
 
-  .content {
-    max-height: calc(100vh - 10em);
-  }
-
   form {
     margin-top: 1em;
 
-    label {
+    :global(.name) {
       display: block;
       margin-bottom: .3em;
+      font-size: 1em !important;
     }
 
-    .competence-chips {
+    :global(.competence-chips) {
       display: flex;
       flex-wrap: wrap;
       max-width: 40em;
 
-      .chip {
+      :global(.chip) {
         margin-right: .5em;
       }
     }
 
-    .form-field {
+    :global(.form-field) {
       flex-direction: column;
     }
   }
 
-  textarea {
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: .5em;
+  }
+
+  :global(textarea) {
     height: 4em;
   }
-}
 
-@media only screen and (min-width: 480px) {
-  .feedback-modal .content {
+  @media only screen and (min-width: 480px) {
     max-height: calc(100vh - 7em);
   }
 }

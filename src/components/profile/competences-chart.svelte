@@ -1,9 +1,9 @@
 <script>
-  import Button from 'ui/button.svelte';
   import colors from '@/constants/profile/competence-colors.js';
 
   export let competences;
   export let items;
+
   $: maxCompetenceValue = Math.max(
     ...competences.map(comp => items.get(comp.id) || 1),
   );
@@ -28,11 +28,11 @@
   <ul class="legend">
     {#each competences as competence, i (competence.id)}
       <li>
-        <Button>
-          <div style="background: rgb({colors[i]})" class="icon" />
-          {competence.name.toLowerCase()}
-        </Button>
+        <div style="background: rgb({colors[i]})" class="icon" />
+        {competence.name.toLowerCase()}
       </li>
     {/each}
   </ul>
 </figure>
+
+<style src="../../../static/css/components/profile/competences-chart.scss"></style>

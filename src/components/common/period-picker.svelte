@@ -1,7 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import Dropdown from 'ui/dropdown.svelte';
+  import { Button, DropdownShell, Dropdown, Label } from 'attractions';
   import datePeriods from '@/constants/date-periods.js';
 
   export let label;
@@ -10,27 +9,34 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<style>
-  .period-list {
-    margin-top: 1em !important;
-    min-width: 10.8em;
-  }
-</style>
-
-<Dropdown let:toggle={toggle}>
-  <span slot="label">
+<DropdownShell let:toggle>
+  <Button on:click={toggle}>
     {(value.name.startsWith('last') ? 'over the ' : 'for ') + value.name}
-  </span>
-  <span class="label">{label}</span>
-  <ul class="period-list">
-    {#each datePeriods as period (period.name)}
-      <li>
-        <Button
-          on:click={() => { toggle(); value = period; dispatch('period-change', period); }}
-        >
-          {period.name}
-        </Button>
-      </li>
-    {/each}
-  </ul>
-</Dropdown>
+    <svg src="images/icons/chevron-down.svg" class="dropdown-chevron ml" />
+  </Button>
+  <Dropdown>
+    <div class="relative-wrapper">
+      <Button neutral round class="close" on:click={toggle}>
+        <svg src="images/icons/x.svg" class="icon" />
+      </Button>
+      <Label>{label}</Label>
+      <ul class="period-list">
+        {#each datePeriods as period (period.name)}
+          <li>
+            <Button
+              on:click={() => {
+                value = period;
+                dispatch('change', period);
+                toggle();
+              }}
+            >
+              {period.name}
+            </Button>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  </Dropdown>
+</DropdownShell>
+
+<style src="../../../static/css/components/common/period-picker.scss"></style>

@@ -1,0 +1,27 @@
+@import "_attractions-theme.scss";
+
+.timeline {
+  margin: 1em .6em;
+
+  .loading {
+    display: flex;
+    margin: 1.5em;
+
+    :global(.spinner) {
+      margin-right: 1em;
+    }
+  }
+
+  :global(.more) {
+    margin-top: 1em;
+  }
+
+  @media only screen and (min-width: 600px) {
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    margin: 2em 10%;
+  }
+}

@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
   import PeriodPicker from '@/components/common/period-picker.svelte';
   import CompetencesChart from '@/components/profile/competences-chart.svelte';
   import datePeriods from '@/constants/date-periods.js';
@@ -10,8 +9,6 @@
 
   let selectedPeriod = datePeriods[2];
 
-  const dispatch = createEventDispatcher();
-
   function indexify(objectArray) {
     const map = new Map();
     for (let object of objectArray) {
@@ -19,6 +16,8 @@
     }
     return map;
   }
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <section class="statistics">
@@ -26,16 +25,10 @@
     <span class="hide-tb">Showing statistics</span>
     <PeriodPicker
       label="Period of statistics"
-      on:period-change={(e) => { selectedPeriod = e.detail; dispatch('period-change', e.detail); }}
+      on:change={({ detail }) => { selectedPeriod = detail; dispatch('period-change', detail); }}
     />
-    {#if false}
-      <Button on:click={() => dispatch('create-report', selectedPeriod)}>
-        <svg src="images/icons/file-text.svg" class="mr" />
-        create a volunteer report
-      </Button>
-    {/if}
   </div>
-  <div class="top-stats">
+  <div class="simple-stats">
     <div class="stat">
       <header>
         <svg src="images/icons/clock.svg" class="icon" />
@@ -59,3 +52,5 @@
     <CompetencesChart {competences} items={indexify(statistics.competences)} />
   </div>
 </section>
+
+<style src="../../../static/css/containers/profile/statistics.scss"></style>

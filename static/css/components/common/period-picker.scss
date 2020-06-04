@@ -1,0 +1,15 @@
+.relative-wrapper {
+  position: relative;
+  padding: 1em 2.4em 1em 1em;
+
+  :global(.btn.close) {
+    top: .3em;
+    right: .3em;
+    position: absolute;
+  }
+
+  .period-list {
+    margin-top: .5em !important;
+    min-width: 10.8em;
+  }
+}

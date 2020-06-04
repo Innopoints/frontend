@@ -1,0 +1,30 @@
+@import "_attractions-theme.scss";
+
+.notice {
+  border-radius: 1.5625em;
+  border: .0625em solid $main;
+  padding: 1em 1em .6em;
+  margin: 1em 0;
+  display: flex;
+  align-items: flex-start;
+
+  & > .icon {
+    color: $main;
+    margin-right: .7em;
+    flex-shrink: 0;
+  }
+
+  :global(p) {
+    margin-top: .3em;
+  }
+
+  :global(.actions) {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .9em;
+
+    & > :global(.btn) {
+      margin-left: .5em;
+    }
+  }
+}

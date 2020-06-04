@@ -1,0 +1,98 @@
+@import "_attractions-theme.scss";
+
+.statistics {
+  margin-top: .5em;
+  padding: 0 .5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .simple-stats {
+    margin: 0 1em;
+  }
+
+  .stat {
+    margin-top: 2em;
+
+    .icon {
+      stroke: $main;
+      margin-right: .8em;
+    }
+
+    & > header {
+      font-weight: 500;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      margin-bottom: .5em;
+    }
+
+    .rating {
+      color: $main;
+      font-size: 1.3rem;
+      margin-left: .8em;
+    }
+
+    & > .details {
+      padding: .5em 1em 0;
+      font-size: .9rem;
+    }
+
+    &.competences {
+      align-self: stretch;
+
+      & > header {
+        margin: 0 1em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    .hide-tb {
+      font-weight: 500;
+      margin-right: .3em;
+    }
+
+    .period {
+      padding: 0 1em;
+      align-items: center;
+      display: flex;
+
+      @supports (display: grid) {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto;
+
+        .btn {
+          grid-column: 4 / 5;
+        }
+      }
+    }
+
+    .simple-stats {
+      display: flex;
+      align-self: stretch;
+      padding-bottom: 1.5em;
+      border-bottom: .0625em solid $light-contrast;
+
+      & > .stat {
+        width: 50%;
+
+        &:last-child {
+          border-left: .0625em solid $light-contrast;
+          padding-left: 1.5em;
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    margin: 2em 10%;
+  }
+
+  @media only screen and (min-width: 1260px) {
+    & > div {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}
