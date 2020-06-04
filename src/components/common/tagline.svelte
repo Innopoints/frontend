@@ -17,4 +17,4 @@
   </div>
 </section>
 
-<style src="../../../static/css/components/tagline.scss"></style>
+<style src="../../../static/css/components/common/tagline.scss"></style>
