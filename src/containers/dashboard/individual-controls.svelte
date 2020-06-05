@@ -1,8 +1,8 @@
 <script>
   import Card from 'ui/card.svelte';
   import Autocomplete from 'ui/autocomplete.svelte';
-  import SendMoney from '@/components/dashboard/send-money.svelte';
-  import SendComment from '@/components/dashboard/send-comment.svelte';
+  import AmendBalance from '@/components/dashboard/amend-balance.svelte';
+  import SendMessage from '@/components/dashboard/send-message.svelte';
   import SeeProfile from '@/components/dashboard/see-profile.svelte';
   import getUsers from '@/utils/list-users.js';
   let selectedItems = [];
@@ -24,8 +24,8 @@
       <p>You may select several people for a certain operation.</p>
     </div>
     <div class="operations">
-      <SendMoney {users} />
-      <SendComment {users} />
+      <AmendBalance {users} />
+      <SendMessage {users} />
       <SeeProfile {users} />
     </div>
   </div>
