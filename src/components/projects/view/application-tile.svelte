@@ -2,7 +2,7 @@
   import { onMount, createEventDispatcher } from 'svelte';
   import AccordionSection from 'ui/accordion-section.svelte';
   import Button from 'ui/button.svelte';
-  import CopyButton from '@/components/projects/view/copy-button.svelte';
+  import CopyButton from '@/components/common/copy-button.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import * as api from '@/utils/api.js';
 

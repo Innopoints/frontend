@@ -1,4 +1,5 @@
 <script>
+  import { PopoverButton } from 'attractions';
   import { writeText } from 'clipboard-polyfill';
 
   export let text;
@@ -15,12 +16,12 @@
   }
 </script>
 
-<button type="button" class="btn popover shadow-1" on:click={copy}>
+<PopoverButton on:click={copy}>
   {#if copied}
-    <svg class="icon mr" src="images/icons/check.svg" />
+    <svg class="mr" src="images/icons/check.svg" />
     copied
   {:else}
-    <svg class="icon mr" src="images/icons/copy.svg" />
+    <svg class="mr" src="images/icons/copy.svg" />
     copy
   {/if}
-</button>
+</PopoverButton>

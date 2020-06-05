@@ -5,7 +5,7 @@
   import Dialog from 'ui/dialog.svelte';
   import Modal from 'ui/modal.svelte';
   import TextField from 'ui/text-field.svelte';
-  import CopyButton from '@/components/projects/view/copy-button.svelte';
+  import CopyButton from '@/components/common/copy-button.svelte';
   import StarRating from 'ui/star-rating.svelte';
   import s from '@/utils/plural-s.js';
 

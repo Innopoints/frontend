@@ -4,7 +4,7 @@
   import Button from 'ui/button.svelte';
   import TextField from 'ui/text-field.svelte';
   import CheckboxGroup from 'ui/checkbox-group.svelte';
-  import CopyButton from '@/components/projects/view/copy-button.svelte';
+  import CopyButton from '@/components/common/copy-button.svelte';
 
   export let account;
   export let activity;

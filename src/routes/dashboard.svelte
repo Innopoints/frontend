@@ -19,12 +19,13 @@
 
 <script>
   import Layout from '@/layouts/default.svelte';
-  import Header from '@/containers/dashboard/header.svelte';
+  import { SnackbarContainer, Button, H1 } from 'attractions';
+  import { SnackbarPositions } from 'attractions/src/snackbar';
   import Reviews from '@/containers/dashboard/reviews.svelte';
   import Purchases from '@/containers/dashboard/purchases.svelte';
-  import InnopointTransfer from '@/containers/dashboard/innopoint-transfer.svelte';
+  import IndividualControls from '@/containers/dashboard/individual-controls.svelte';
   import TagEditor from '@/containers/dashboard/tag-editor.svelte';
-  
+
   export let reviews;
   export let account;
   export let purchases;
@@ -40,13 +41,23 @@
 </svelte:head>
 
 <Layout user={account}>
-  <div class="material">
-    <Header />
-    <div class="cards padded">
-      <Reviews {reviews} />
-      <Purchases {purchases} />
-      <InnopointTransfer />
-      <TagEditor {tags} />
+  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
+    <div class="material">
+      <H1 class="padded">
+        Dashboard
+        <Button outline href="/profile">
+          <svg src="images/icons/user.svg" class="mr" />
+          go to profile
+        </Button>
+      </H1>
+      <div class="cards padded">
+        <Reviews {reviews} />
+        <Purchases {purchases} />
+        <IndividualControls />
+        <TagEditor {tags} />
+      </div>
     </div>
-  </div>
+  </SnackbarContainer>
 </Layout>
+
+<style src="../../static/css/routes/dashboard.scss"></style>

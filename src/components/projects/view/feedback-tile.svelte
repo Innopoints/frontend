@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import Button from 'ui/button.svelte';
   import Labeled from 'ui/labeled.svelte';
-  import CopyButton from '@/components/projects/view/copy-button.svelte';
+  import CopyButton from '@/components/common/copy-button.svelte';
   import s from '@/utils/plural-s.js';
 
   export let activity;
