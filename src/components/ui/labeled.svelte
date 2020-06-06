@@ -11,10 +11,10 @@
 <div class:text={!icon} class="labeled {classname}">
   {#if icon}
     <div />
+    <slot name="icon" />
     <Label class={labelclass}>
       <slot name="label">{label}</slot>
     </Label>
-    <slot name="icon" />
     <slot />
   {:else}
     <Label class={labelclass}>
