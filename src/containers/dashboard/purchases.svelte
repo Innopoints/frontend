@@ -1,7 +1,7 @@
 <script>
   import { stores } from '@sapper/app';
-  import Card from 'ui/card.svelte';
-  import Button from 'ui/button.svelte';
+  import { Card, Button } from 'attractions';
+  import EmptyState from '@/components/common/empty-state.svelte';
   import PurchaseCard from '@/components/dashboard/purchase-card.svelte';
   import * as api from '@/utils/api.js';
 
@@ -23,9 +23,9 @@
   }
 </script>
 
-<Card classname="purchases">
+<Card class="purchases">
   <div class="title">
-    <svg src="/images/icons/shopping-bag.svg" class="icon" />
+    <svg src="images/icons/shopping-bag.svg" class="icon" />
     InnoStore purchases
   </div>
   {#if purchases.length}
@@ -35,14 +35,13 @@
       {/each}
     </ul>
   {:else}
-    <div class="empty small">
-      <div class="icon">
-        <svg src="/images/icons/smile.svg" />
-      </div>
-      <div class="title">No pending purchases!</div>
-    </div>
+    <EmptyState small text="No pending purchases!">
+      <svg src="images/icons/smile.svg" />
+    </EmptyState>
   {/if}
   <div class="actions">
     <Button href="/products">see the InnoStore</Button>
   </div>
 </Card>
+
+<style src="../../../static/css/containers/dashboard/purchases.scss"></style>

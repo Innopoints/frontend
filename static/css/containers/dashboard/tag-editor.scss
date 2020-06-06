@@ -1,0 +1,28 @@
+ul {
+  margin-top: 1em;
+}
+
+li {
+  margin-top: .5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+li :global(.text-field) {
+  flex: 1;
+}
+
+.actions {
+  justify-content: space-between !important;
+}
+
+.saver {
+  display: flex;
+  align-items: center;
+}
+
+.status {
+  font-size: .9rem;
+  font-weight: 300;
+}

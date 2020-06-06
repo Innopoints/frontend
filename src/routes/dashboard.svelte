@@ -34,10 +34,6 @@
 
 <svelte:head>
   <title>Admin Dashboard</title>
-
-  <link rel="stylesheet" href="/css/bundles/dashboard.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/store.min.css" />
 </svelte:head>
 
 <Layout user={account}>
@@ -53,8 +49,8 @@
       <div class="cards padded">
         <Reviews {reviews} />
         <Purchases {purchases} />
-        <IndividualControls />
-        <TagEditor {tags} />
+        <IndividualControls {account} />
+        <TagEditor {tags} {account} />
       </div>
     </div>
   </SnackbarContainer>

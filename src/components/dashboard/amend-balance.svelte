@@ -1,37 +1,43 @@
 <script>
-  import TextField from 'ui/text-field.svelte';
-  import Button from 'ui/button.svelte';
-  import { patch } from '@/utils/api.js';
-  export let users = [];
+  import { getContext } from 'svelte';
+  import { TextField, Button } from 'attractions';
+  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import * as api from '@/utils/api.js';
+  import s from '@/utils/plural-s.js';
 
-  let amount = null;
-  let success = false;
-  let error = null;
+  const showSnackbar = getContext(snackbarContextKey);
+
+  export let users = [];
+  export let account;
+
+  let amount = '';
 
   async function send() {
-    error = null;
     try {
-      const emails = users.map(user => user.email);
-      const promises = emails.map(email => patch(`/accounts/${email}/balance`, {
+      const promises = users.map(user => api.json(api.patch(`/accounts/${user.email}/balance`, {
         data: {
           change: amount,
         },
-      }));
+        csrfToken: account.csrf_token,
+      })));
       await Promise.all(promises);
-      success = true;
-      amount = null;
-      setTimeout(() => success = false, 1500);
+      showSnackbar({
+        props: {
+          text: `Successfully ${amount >= 0 ? 'added' : 'deducted'}`
+                + ` ${Math.abs(amount)} innopoint${s(Math.abs(amount))}.`,
+        },
+      });
+      amount = '';
     } catch (e) {
       console.error(e);
-      success = false;
-      error = e;
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
     }
   }
 </script>
 
 <div class="amend-balance">
   <header>
-    <svg src="/images/icons/credit-card.svg" class="icon mr-2" />
+    <svg src="images/icons/credit-card.svg" class="icon mr-2" />
     Add/subtract innopoints
   </header>
   <div class="subtitle">Supply a negative quantity to subtract innopoints.</div>
@@ -40,20 +46,17 @@
       bind:value={amount}
       placeholder="0"
       type="number"
-      isWithItem
-      isItemRight
+      withItem
+      itemRight
       maxlength={8}
-      on:input={() => success = false}
+      id="amend-balance"
     >
-      <svg src="/images/innopoint-sharp.svg" class="item innopoint" />
+      <svg src="images/innopoint-sharp.svg" class="item innopoint" />
     </TextField>
-    <Button isRound disabled={!amount} on:click={send}>
-      <svg src="/images/icons/check.svg" class="icon" />
+    <Button round disabled={!amount || users.length === 0} on:click={send}>
+      <svg src="images/icons/check.svg" class="icon" />
     </Button>
-    {#if success}
-      <span class="status good">success!</span>
-    {:else if error}
-      <span class="status bad">failed, please, retry :(</span>
-    {/if}
   </form>
 </div>
+
+<style src="../../../static/css/components/dashboard/amend-balance.scss"></style>

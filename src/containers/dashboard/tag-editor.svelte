@@ -1,19 +1,18 @@
 <script>
-  import { stores } from '@sapper/app';
-  import Card from 'ui/card.svelte';
-  import Button from 'ui/button.svelte';
-  import TextField from 'ui/text-field.svelte';
+  import { getContext } from 'svelte';
+  import { Card, Button, TextField } from 'attractions';
+  import { snackbarContextKey } from 'attractions/src/snackbar';
   import * as api from '@/utils/api.js';
 
-  const { session } = stores();
+  const showSnackbar = getContext(snackbarContextKey);
 
   export let tags = [];
+  export let account;
+
   let modifiedTags = tags.map(tag => ({ forDeletion: false, ...tag }));
   let toCreate = [];
   $: toDelete = modifiedTags.filter(tag => tag.forDeletion);
   let toEdit = [];
-  let success = false;
-  let error = null;
 
   $: isChanged = (
     toCreate.filter(thatTag => !thatTag.forDeletion).length
@@ -42,8 +41,8 @@
 
   async function saveTags() {
     if (toCreate.some(tag => tags.find(thatTag => thatTag.name === tag.name))) {
-      error = 'no duplicates allowed';
-      return;
+      showSnackbar({ props: { text: 'No duplicate tags allowed.' } });
+      toCreate = toCreate.filter(tag => tags.find(thatTag => thatTag.name === tag.name) == null);
     }
 
     try {
@@ -52,69 +51,35 @@
         delete tag.forDeletion;
         requests.push(api.json(api.post('/tags', {
           data: tag,
-          csrfToken: $session.account.csrf_token,
+          csrfToken: account.csrf_token,
         })));
       }
       for (let tag of toDelete.filter(thatTag => thatTag.id != null)) {
         requests.push(api.json(api.del(`/tags/${tag.id}`, {
-          csrfToken: $session.account.csrf_token,
+          csrfToken: account.csrf_token,
         })));
       }
       for (let tag of toEdit.filter(thatTag => !thatTag.forDeletion)) {
         requests.push(api.json(api.patch(`/tags/${tag.id}`, {
           data: { name: tag.name },
-          csrfToken: $session.account.csrf_token,
+          csrfToken: account.csrf_token,
         })));
       }
       await Promise.all(requests);
       tags = await api.json(api.get('/tags'));
       modifiedTags = tags.map(tag => ({ forDeletion: false, ...tag }));
-      success = true;
-      error = null;
-      setTimeout(() => success = false, 1500);
+      showSnackbar({ props: { text: 'Successfully updated tags!' } });
       toCreate = [];
       toEdit = [];
     } catch (e) {
-      error = 'failed, please, retry :(';
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
       modifiedTags = tags.map(tag => ({ forDeletion: false, ...tag }));
-      setTimeout(() => error = null, 1500);
       console.error(e);
     }
   }
 </script>
 
-<style>
-  ul {
-    margin-top: 1em;
-  }
-
-  li {
-    margin-top: .5em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  li :global(.text-field) {
-    flex: 1;
-  }
-
-  .actions {
-    justify-content: space-between !important;
-  }
-
-  .saver {
-    display: flex;
-    align-items: center;
-  }
-
-  .status {
-    font-size: .9rem;
-    font-weight: 300;
-  }
-</style>
-
-<Card classname="tag-editor">
+<Card class="tag-editor">
   <div class="title">
     <svg src="images/icons/tag.svg" class="icon" />
     Project tags
@@ -134,11 +99,11 @@
             maxlength={128}
           />
           <Button
-            isDanger
-            classname="ml"
+            danger
+            class="ml"
             on:click={() => { tag.forDeletion = true; modifiedTags = modifiedTags; }}
           >
-            <svg class="icon mr" src="images/icons/trash-2.svg" />
+            <svg class="mr" src="images/icons/trash-2.svg" />
             delete
           </Button>
         {/if}
@@ -148,21 +113,17 @@
 
   <div class="actions">
     <Button on:click={addNewTag}>
-      <svg class="icon mr" src="images/icons/plus.svg" />
+      <svg class="mr" src="images/icons/plus.svg" />
       add a new tag
     </Button>
-    {#if isChanged || success || error}
-      <div class="saver">
-        {#if success}
-          <span class="status good">success!</span>
-        {:else if error}
-          <span class="status bad">{error}</span>
-        {/if}
-        <Button isFilled on:click={saveTags} classname="ml-2">
-          <svg class="icon mr" src="images/icons/check.svg" />
-          save
-        </Button>
-      </div>
+    {#if isChanged}
+      <Button filled on:click={saveTags} class="ml-2">
+        <svg class="mr" src="images/icons/check.svg" />
+        save
+      </Button>
     {/if}
   </div>
 </Card>
+
+
+<style src="../../../static/css/containers/dashboard/tag-editor.scss"></style>
