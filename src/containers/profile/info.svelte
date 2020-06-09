@@ -1,6 +1,8 @@
 <script>
+  import { getContext } from 'svelte';
   import { stores } from '@sapper/app';
   import { Button, TextField, DropdownShell, Dropdown, H1 } from 'attractions';
+  import { snackbarContextKey } from 'attractions/src/snackbar';
   import ReclaimInnopointsModal from '@/components/profile/reclaim-innopoints-modal.svelte';
   import * as api from '@/utils/api.js';
 
@@ -8,6 +10,7 @@
   const telegramUsernameRegex = /(?:[A-Za-z0-9_]{5,32}|^$)/;
 
   const { session } = stores();
+  const showSnackbar = getContext(snackbarContextKey);
 
   let tgChange = false;
   let tgUsername = account.telegram_username || '';
@@ -30,6 +33,7 @@
         $session.account = account;
       }
     } catch (e) {
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
       console.error(e);
     }
 

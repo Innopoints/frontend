@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Button, Loading } from 'attractions';
-  import EmptyState from '../../components/common/empty-state.svelte';
+  import EmptyState from '@/components/common/empty-state.svelte';
   import TimelineEntry from '@/components/profile/timeline-entry.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
   import * as api from '@/utils/api.js';
