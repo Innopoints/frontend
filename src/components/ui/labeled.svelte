@@ -1,23 +1,24 @@
 <script>
   import { Label } from 'attractions';
+  import classes from '@/utils/classes.js';
 
-  export let classname = '';
-  export let labelclass = '';
+  let _class = null;
+  export { _class as class };
 
-  export let label = '';
+  export let label;
   export let icon = false;
 </script>
 
-<div class:text={!icon} class="labeled {classname}">
+<div class:text={!icon} class={classes('labeled', _class)}>
   {#if icon}
     <div />
     <slot name="icon" />
-    <Label class={labelclass}>
+    <Label>
       <slot name="label">{label}</slot>
     </Label>
     <slot />
   {:else}
-    <Label class={labelclass}>
+    <Label>
       <slot name="label">{label}</slot>
     </Label>
     <slot />
@@ -34,26 +35,28 @@
       flex-direction: column;
     }
 
-    :global(.icon) {
-      display: none;
-    }
+    :global {
+      .icon {
+        display: none;
+      }
 
-    @supports (display: grid) {
-      display: inline-grid;
-      grid-template-rows: auto 1fr;
-      grid-template-columns: auto 1fr;
-      align-items: center;
-      grid-auto-flow: column;
+      @supports (display: grid) {
+        display: inline-grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        grid-auto-flow: column;
 
-      :global(.icon) {
-        display: block;
-        height: 1.5rem;
-        width: 1.5rem;
-        stroke: $main;
-        align-self: start;
-
-        :global(svg) {
+        .icon {
+          display: block;
+          height: 1.5rem;
+          width: 1.5rem;
           stroke: $main;
+          align-self: start;
+
+          svg {
+            stroke: $main;
+          }
         }
       }
     }
