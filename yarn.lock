@@ -5248,10 +5248,10 @@ svelte-easy-crop@^1.0.3:
   resolved "https://registry.yarnpkg.com/svelte-easy-crop/-/svelte-easy-crop-1.0.3.tgz#3a5bd36320b5316b9ccf36c78b251a4f6fbb44a1"
   integrity sha512-Jo0pZdnR43PVVldf28+MT50DD7LVY4rtnPNRF4Xuy5uiHgz+ixq9cqTK+/u5xbHs4cObzCbEbibzSRbAWObnJA==
 
-svelte-preprocess@^3.7.4:
-  version "3.9.3"
-  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-3.9.3.tgz#43c8b793805d6fe20d3abc2bae0aade6a56fdc7d"
-  integrity sha512-Qi/hAp8ejBwEE+rNjD13a0wsTlVUXleZ/0omJL3ZcxJmb1f7s/4XRq33rkMCH7jMibfeRlPtXY43Ws50kOAy3w==
+svelte-preprocess@^3.9.6:
+  version "3.9.6"
+  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-3.9.6.tgz#70e53d7e3d06d3ec6021f320122f5df45f010016"
+  integrity sha512-mlhzU3IqWuYCfEnIQzYVNJ221FaIg2MjX4ejQ3+2FcbS06o3xdE5wGaOdsprJpmDZzdx2wylB+6OumzgmvaPkw==
   dependencies:
     "@types/pug" "^2.0.4"
     "@types/sass" "^1.16.0"

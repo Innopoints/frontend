@@ -1,68 +1,89 @@
-@import "global/common.scss";
+:global {
+  @import "global/common.scss";
+}
 
 .material {
   padding-bottom: 3em;
 
-  & > :global(.card) {
-    padding: 0;
-    margin: 1.5em .5em 0;
-  }
+  :global {
+    & > .card {
+      padding: 0;
+      margin: 1.5em .5em 0;
+    }
 
-  :global(.tabs) {
-    padding: .5em .8em;
-  }
+    .tabs {
+      padding: .5em .8em;
+    }
 
-  @media only screen and (min-width: 360px) {
-    :global(.tabs) {
-      padding: .5em 6%;
+    @media only screen and (min-width: 360px) {
+      .tabs {
+        padding: .5em 6%;
 
-      :global(.content) {
-        padding: .8em .5em .5em;
+        .content {
+          padding: .8em .5em .5em;
+        }
       }
     }
-  }
 
-  @media only screen and (min-width: 600px) {
-    & > :global(.card) {
-      margin-left: 1em;
-      margin-right: 1em;
-      margin-top: 2.5em;
-    }
+    @media only screen and (min-width: 600px) {
+      & > .card {
+        margin-left: 1em;
+        margin-right: 1em;
+        margin-top: 2.5em;
+      }
 
-    :global(.tabs) {
-      padding: 1em 10%;
+      .tabs {
+        padding: 1em 10%;
 
-      :global(.content) {
-        font-size: 1.1rem;
-        padding: .8em .8em .7em;
+        .content {
+          font-size: 1.1rem;
+          padding: .8em .8em .7em;
+        }
       }
     }
-  }
 
-  @media only screen and (min-width: 840px) {
-    padding-bottom: 5em;
+    @media only screen and (min-width: 600px) {
+      & > .card {
+        margin-left: 1em;
+        margin-right: 1em;
+        margin-top: 2.5em;
+      }
 
-    & > :global(.card) {
-      margin-left: 5%;
-      margin-right: 5%;
-      margin-top: 4em;
-    }
-  }
+      .tabs {
+        padding: 1em 10%;
 
-  @media only screen and (min-width: 1024px) {
-    :global(.tabs) {
-      padding: 1.5em 15% 1em;
-
-      :global(.content) {
-        font-size: 1.25rem;
+        .content {
+          font-size: 1.1rem;
+          padding: .8em .8em .7em;
+        }
       }
     }
-  }
 
-  @media only screen and (min-width: 1200px) {
-    & > :global(.card) {
-      margin-left: 8%;
-      margin-right: 8%;
+    @media only screen and (min-width: 840px) {
+      padding-bottom: 5em;
+
+      & > .card {
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 4em;
+      }
+    }
+
+    @media only screen and (min-width: 1024px) {
+      .tabs {
+        padding: 1.5em 15% 1em;
+
+        .content {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    @media only screen and (min-width: 1200px) {
+      & > .card {
+        margin-left: 8%;
+        margin-right: 8%;
+      }
     }
   }
 }

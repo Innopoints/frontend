@@ -1,8 +1,11 @@
-@import "global/common.scss";
 @import "_attractions-theme.scss";
 
+:global {
+  @import "global/common.scss";
+}
+
 .material {
-  :global(h2) {
+  :global h2 {
     text-align: center;
     font-weight: 500;
     font-size: 1.7em;
@@ -13,7 +16,7 @@
     }
   }
 
-  & + :global(footer .to-top::before) {
+  & + :global footer .to-top::before {
     background: mix($main, white, 7%) !important;
   }
 }

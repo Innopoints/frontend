@@ -1,10 +1,13 @@
-@import "global/common.scss";
 @import "_attractions-theme.scss";
+
+:global {
+  @import "global/common.scss";
+}
 
 .material {
   padding-bottom: 4em;
 
-  :global(h1) {
+  :global h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -12,24 +15,24 @@
     margin-bottom: 1em;
   }
 
-  :global(.card) {
+  :global .card {
     margin-bottom: 1em;
     display: flex;
     flex-direction: column;
 
-    & > :global(.title) {
+    & > .title {
       font-weight: 500;
       display: flex;
       align-items: center;
       color: $main;
       font-size: 1.1rem;
 
-      :global(.icon) {
+      .icon {
         margin-right: .5em;
       }
     }
 
-    :global(.actions) {
+    .actions {
       display: flex;
       justify-content: flex-end;
       margin-top: 1em;
@@ -37,7 +40,7 @@
       align-items: center;
     }
 
-    & > :global(.actions) {
+    & > .actions {
       align-items: flex-end;
       flex-grow: 1;
     }
@@ -51,14 +54,14 @@
       grid-template-columns: 1fr 1fr;
       column-gap: 1em;
 
-      :global(.individual-ctls) {
+      :global .individual-ctls {
         grid-column: 1 / 3;
       }
     }
   }
 
-  .cards {
-    :global(.projects), :global(.purchases-list) {
+  .cards :global {
+    .projects, .purchases-list {
       max-height: 70em;
       overflow-y: auto;
     }

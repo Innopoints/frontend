@@ -1,5 +1,8 @@
-@import "global/common.scss";
 @import "_attractions-theme.scss";
+
+:global {
+  @import "global/common.scss";
+}
 
 .shop {
   display: flex;
@@ -13,7 +16,7 @@
   justify-content: center;
   align-self: stretch;
 
-  :global(hr) {
+  :global hr {
     margin-top: 2em;
 
     &::after {
@@ -32,14 +35,14 @@
     grid-template-columns: repeat(auto-fit, 18em);
     grid-gap: 1rem;
 
-    :global(hr) {
+    :global hr {
       grid-column: 1 / -1;
     }
   }
 }
 
 @media only screen and (min-width: 600px) {
-  .cards :global(hr)::after {
+  .cards :global hr::after {
     font-size: 1.4rem !important;
   }
 

@@ -1,12 +1,15 @@
-@import "global/common.scss";
 @import "_attractions-theme.scss";
+
+:global {
+  @import "global/common.scss";
+}
 
 .material {
   & > .justify-center {
     margin-top: 1em;
   }
 
-  :global(.text-field.with-item.left input) {
+  :global .text-field.with-item.left input {
     padding-left: 2.3em;
   }
 }
@@ -29,7 +32,7 @@
     flex-wrap: wrap;
   }
 
-  :global(h1) {
+  :global h1 {
     display: flex;
     justify-content: space-around;
     font-size: 1.2rem;
@@ -40,7 +43,7 @@
       align-items: center;
       justify-items: start;
 
-      :global(.text) {
+      .text {
         grid-column: 2 / 3;
       }
     }
@@ -51,7 +54,7 @@
   }
 
   @media only screen and (min-width: 640px) {
-    :global(h1) {
+    :global h1 {
       font-size: 1.4rem;
     }
   }
@@ -61,7 +64,7 @@
   }
 
   @media only screen and (min-width: 1024px) {
-    :global(h1) {
+    :global h1 {
       font-size: 1.6rem;
     }
   }
