@@ -1,31 +1,25 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import Dialog from 'ui/dialog.svelte';
-  import Modal from 'ui/modal.svelte';
+  import { Button, Dialog, Modal } from 'attractions';
 
-  export let isOpen = false;
+  export let open = false;
   export let textYes;
   export let eventDetail = null;
 
   const dispatch = createEventDispatcher();
 </script>
 
-<Modal bind:isOpen>
-  <Dialog
-    isDanger
-    title="Warning"
-    closeCallback={() => isOpen = false}
-  >
-    <svg slot="icon" src="images/icons/alert-triangle.svg" class="icon" />
-    <p slot="content" class="constrain-width">
+<Modal bind:open let:closeCallback>
+  <Dialog danger title="Warning" {closeCallback}>
+    <svg slot="title-icon" src="images/icons/alert-triangle.svg" class="icon" />
+    <p class="constrain-width">
       <slot />
     </p>
-    <div slot="content" class="actions">
-      <Button on:click={() => { isOpen = false; dispatch('reject', eventDetail); }}>
+    <div class="actions">
+      <Button on:click={() => { open = false; dispatch('reject', eventDetail); }}>
         no, wait
       </Button>
-      <Button isDanger isFilled on:click={() => dispatch('confirm', eventDetail)}>
+      <Button danger filled on:click={() => { open = false; dispatch('confirm', eventDetail); }}>
         {textYes}
       </Button>
     </div>

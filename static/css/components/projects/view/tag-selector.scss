@@ -1,0 +1,14 @@
+.tag-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .tags {
+    display: flex;
+  }
+
+  .tags :global .chip,
+  :global .autocomplete-field {
+    margin-right: .5em;
+  }
+}

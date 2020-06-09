@@ -14,7 +14,9 @@
 
 <script>
   import { writable } from 'svelte/store';
-  import { goto, prefetch, stores } from '@sapper/app';
+  import { stores } from '@sapper/app';
+  import { SnackbarContainer } from 'attractions';
+  import { SnackbarPositions } from 'attractions/src/snackbar';
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserView from '@/containers/projects/view/user-view.svelte';
@@ -23,14 +25,12 @@
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
   import ReportDialog from '@/components/projects/view/report-dialog.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
-  import FinalizingDialog from '@/components/projects/view/finalizing-dialog.svelte';
   import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
   import ReportPerformanceModal from '@/components/projects/view/report-performance-modal.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
-  import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
   import * as api from '@/utils/api.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
   import {
@@ -47,13 +47,13 @@
   export let tags;
 
   const projectStore = writable(project);
-  let moderatorsEmails = [];
-  if (Array.isArray(project.moderators)) {
-    moderatorsEmails = project.moderators.map(moderator => moderator.email);
-  }
-  const isModeratorView = (
+  $: moderatorEmails = (
+    Array.isArray(project.moderators) ?
+      project.moderators.map(moderator => moderator.email) : []
+  );
+  $: moderatorView = (
     account != null
-    && (account.is_admin || moderatorsEmails.includes(account.email))
+    && (account.is_admin || moderatorEmails.includes(account.email))
   );
 
   const applicationDialog = {
@@ -177,42 +177,6 @@
       reportDialog.applicant = detail.applicant;
       reportDialog.reports = detail.reports;
       reportDialog.open = true;
-    },
-  };
-
-  const projectDeletionDialog = {
-    open: false,
-    show() {
-      projectDeletionDialog.open = true;
-    },
-    async deleteProject() {
-      try {
-        prefetch('/projects');
-        await api.json(api.del(`/projects/${project.id}`, { csrfToken: account.csrf_token }));
-        goto('/projects');
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  };
-
-  const finalizeDialog = {
-    open: false,
-    show() {
-      finalizeDialog.open = true;
-    },
-    async finalizeProject() {
-      try {
-        await api.json(api.patch(
-          `/projects/${project.id}/finalize`,
-          { csrfToken: account.csrf_token },
-        ));
-        project = await api.json(api.get(`/projects/${project.id}`));
-        projectStore.set(project);
-        finalizeDialog.open = false;
-      } catch (e) {
-        console.error(e);
-      }
     },
   };
 
@@ -398,32 +362,6 @@
       console.error(e);
     }
   }
-
-  async function submitForReview() {
-    try {
-      await api.json(api.patch(
-        `/projects/${project.id}/request_review`,
-        { csrfToken: account.csrf_token },
-      ));
-      project.review_status = ReviewStatuses.PENDING;
-      projectStore.set(project);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  async function saveTags({ detail: tagIDs }) {
-    try {
-      await api.json(api.patch(`/projects/${project.id}/tags`, {
-        csrfToken: account.csrf_token,
-        data: tagIDs,
-      }));
-      project.tags = tagIDs;
-      projectStore.set(project);
-    } catch (e) {
-      console.error(e);
-    }
-  }
 </script>
 
 <svelte:head>
@@ -434,94 +372,67 @@
   {#if project.image_id}
     <meta name="og:image" content="{API_HOST_BROWSER}/file/{project.image_id}" />
   {/if}
-
-  <!-- Styles for View Project page -->
-  <link rel="stylesheet" href="/css/bundles/projects-id.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects-id-edit.min.css" />
-  {#if account}
-    {#if account.is_admin}
-      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
-    {:else}
-      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
-    {/if}
-  {/if}
 </svelte:head>
 
 <Layout user={account}>
-  <div class="material">
-    <ProjectHeader
-      {project}
-      {account}
-      {tags}
-      on:delete-project={projectDeletionDialog.show}
-      on:finalize-project={finalizeDialog.show}
-      on:submit-for-review={submitForReview}
-      on:update-tags={saveTags}
-    />
+  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
+    <div class="material">
+      <ProjectHeader project={projectStore} {account} {tags} {moderatorView} />
 
-    {#if (project.lifetime_stage === ProjectStages.FINALIZING
-       || project.lifetime_stage === ProjectStages.FINISHED)
-       && account != null
-       && (moderatorsEmails.includes(account.email) || account.is_admin)}
-      <h2 class="padded">Project Staff</h2>
-      <ModeratorHourPanel
-        {project}
-        {account}
-        on:save-hours={updateHours}
-        on:leave-feedback={leaveFeedbackModal.show}
-        on:read-feedback={feedbackModal.show}
-      />
-    {/if}
-
-    {#if project.activities.find(x => !x.internal) != null || isModeratorView}
-      <h2 class="padded">Activities</h2>
-      {#if isModeratorView}
-        <ModeratorView
+      {#if (project.lifetime_stage === ProjectStages.FINALIZING
+         || project.lifetime_stage === ProjectStages.FINISHED)
+         && account != null
+         && (moderatorEmails.includes(account.email) || account.is_admin)}
+        <h2 class="padded">Project Staff</h2>
+        <ModeratorHourPanel
+          {project}
           {account}
-          activities={project.activities}
-          project={projectStore}
-          {competences}
-          on:view-reports={reportDialog.show}
-          on:application-status-changed={chooseApplicationStatusModal}
-          on:activity-changed={processActivityChange}
-          on:delete-activity={activityDeletionDialog.show}
           on:save-hours={updateHours}
-          on:read-feedback={feedbackModal.show}
-          on:create-report={reportPerformanceModal.show}
-          on:delete-report={reportDeletionDialog.show}
-        />
-      {:else}
-        <UserView
-          activities={project.activities}
-          {competences}
-          {account}
-          projectStage={project.lifetime_stage}
-          on:apply={applicationDialog.show}
-          on:take-back-application={applicationTakeBackDialog.show}
-          on:read-feedback={feedbackModal.show}
           on:leave-feedback={leaveFeedbackModal.show}
+          on:read-feedback={feedbackModal.show}
         />
       {/if}
-    {/if}
-  </div>
 
-  {#if isModeratorView}
+      {#if project.activities.find(x => !x.internal) != null || moderatorView}
+        <h2 class="padded">Activities</h2>
+        {#if moderatorView}
+          <ModeratorView
+            {account}
+            activities={project.activities}
+            project={projectStore}
+            {competences}
+            on:view-reports={reportDialog.show}
+            on:application-status-changed={chooseApplicationStatusModal}
+            on:activity-changed={processActivityChange}
+            on:delete-activity={activityDeletionDialog.show}
+            on:save-hours={updateHours}
+            on:read-feedback={feedbackModal.show}
+            on:create-report={reportPerformanceModal.show}
+            on:delete-report={reportDeletionDialog.show}
+          />
+        {:else}
+          <UserView
+            activities={project.activities}
+            {competences}
+            {account}
+            projectStage={project.lifetime_stage}
+            on:apply={applicationDialog.show}
+            on:take-back-application={applicationTakeBackDialog.show}
+            on:read-feedback={feedbackModal.show}
+            on:leave-feedback={leaveFeedbackModal.show}
+          />
+        {/if}
+      {/if}
+    </div>
+  </SnackbarContainer>
+
+  {#if moderatorView}
     <!-- view-past-reports -->
     <ReportDialog
       bind:isOpen={reportDialog.open}
       applicant={reportDialog.applicant}
       reports={reportDialog.reports}
     />
-    <!-- confirm-project-deletion -->
-    <DangerConfirmDialog
-      textYes="yes, delete"
-      bind:isOpen={projectDeletionDialog.open}
-      on:confirm={projectDeletionDialog.deleteProject}
-    >
-      Deleting a project is rarely desired. <br />
-      You may edit the project or delete individual activities instead. <br />
-      Think twice before proceeding.
-    </DangerConfirmDialog>
     <!-- confirm-activity-deletion -->
     <DangerConfirmDialog
       textYes="yes, delete"
@@ -535,11 +446,6 @@
         All of the volunteering applications will be discarded.
       </em>
     </DangerConfirmDialog>
-    <!-- confirm-project-finish -->
-    <FinalizingDialog
-      bind:isOpen={finalizeDialog.open}
-      on:confirm={finalizeDialog.finalizeProject}
-    />
     <!-- report-performance -->
     <ReportPerformanceModal
       bind:isOpen={reportPerformanceModal.open}
@@ -613,10 +519,12 @@
   />
   <!-- leave-feedback -->
   <LeaveFeedbackModal
-    bind:isOpen={leaveFeedbackModal.open}
+    bind:open={leaveFeedbackModal.open}
     activity={leaveFeedbackModal.activity}
     application={leaveFeedbackModal.application}
     {competences}
     on:submit={leaveFeedbackModal.submitFeedback}
   />
 </Layout>
+
+<style src="../../../../static/css/routes/projects/view/index.scss"></style>

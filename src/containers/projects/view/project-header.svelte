@@ -1,32 +1,75 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import TextField from 'ui/text-field.svelte';
+  import { createEventDispatcher, getContext } from 'svelte';
+  import { prefetch, goto } from '@sapper/app';
+  import { Button, TextField, H1, Chip } from 'attractions';
+  import { snackbarContextKey } from 'attractions/src/snackbar';
   import Labeled from 'ui/labeled.svelte';
+  import Notice from '@/components/common/notice.svelte';
   import TagSelector from '@/components/projects/view/tag-selector.svelte';
-  import { formatDateRange } from '@/utils/date-time-format.js';
+  import FinalizingDialog from '@/components/projects/view/finalizing-dialog.svelte';
+  import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
   import { API_HOST_BROWSER } from '@/constants/env.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
+  import { formatDateRange } from '@/utils/date-time-format.js';
+  import * as api from '@/utils/api.js';
 
   export let project;
   export let account;
   export let tags;
-  export let review = false;
-
-  $: isModerator = (
-    account && project.moderators.find(moderator => moderator.email === account.email)
-  ) != null;
+  export let moderatorView = false;
+  export let reviewView = false;
 
   let reviewComment = null;
+  let finalizeDialogOpen = false;
+  let projectDeletionDialogOpen = false;
 
-  const projectImageURL = (
-    project.image_id == null ?
+  $: projectImageURL = (
+    $project.image_id == null ?
       '/images/create-project/placeholder.svg'
-    : `${API_HOST_BROWSER}/file/${project.image_id}`
+    : `${API_HOST_BROWSER}/file/${$project.image_id}`
   );
 
+  async function saveTags({ detail: tagIDs }) {
+    try {
+      await api.json(api.patch(`/projects/${$project.id}/tags`, {
+        csrfToken: account.csrf_token,
+        data: tagIDs,
+      }));
+      $project.tags = tagIDs;
+      showSnackbar({ props: { text: 'Tags successfully updated!' } });
+    } catch (e) {
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      console.error(e);
+    }
+  }
+
+  async function submitForReview() {
+    try {
+      await api.json(api.patch(
+        `/projects/${$project.id}/request_review`,
+        { csrfToken: account.csrf_token },
+      ));
+      $project.review_status = ReviewStatuses.PENDING;
+    } catch (e) {
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      console.error(e);
+    }
+  }
+
+  async function deleteProject() {
+    try {
+      prefetch('/projects');
+      await api.json(api.del(`/projects/${project.id}`, { csrfToken: account.csrf_token }));
+      goto('/projects');
+    } catch (e) {
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      console.error(e);
+    }
+  }
+
   const dispatch = createEventDispatcher();
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <header
@@ -35,113 +78,110 @@
 >
   <img src={projectImageURL} class="cover-image" alt="Project cover" />
   <div class="info">
-    <h1>
-      {project.name}
-      {#if project.lifetime_stage === ProjectStages.FINISHED}
-        <div class="status-chip">
+    <H1>
+      {$project.name}
+      {#if $project.lifetime_stage === ProjectStages.FINISHED}
+        <Chip small>
           finished
-        </div>
+        </Chip>
       {/if}
-    </h1>
-    {#if project.lifetime_stage === ProjectStages.FINALIZING
-      && !review
-      && isModerator
-      && project.review_status != null}
-      <div class="warning">
-        {#if project.review_status === ReviewStatuses.PENDING}
-          <svg class="icon" src="images/icons/info.svg" />
-        {:else if project.review_status === ReviewStatuses.REJECTED}
-          <svg class="icon" src="images/icons/alert-circle.svg" />
-        {/if}
-        <p class="review-notice">
-          {#if project.review_status === ReviewStatuses.PENDING}
-            The project is now awaiting the administrator's review. <br />
-            <a href="/profile" prefetch>Enable notifications in the profile</a> to be up-to-date!
-          {:else if project.review_status === ReviewStatuses.REJECTED}
-            <strong>The administrator rejected the project.</strong> <br/>
-            Make corrections and then submit for review again.
+    </H1>
+    {#if $project.lifetime_stage === ProjectStages.FINALIZING
+         && !reviewView
+         && moderatorView
+         && $project.review_status != null}
+      <Notice warning>
+        <div slot="icon">
+          {#if $project.review_status === ReviewStatuses.PENDING}
+            <svg class="icon" src="images/icons/info.svg" />
+          {:else if $project.review_status === ReviewStatuses.REJECTED}
+            <svg class="icon" src="images/icons/alert-circle.svg" />
           {/if}
-        </p>
-      </div>
+        </div>
+        {#if $project.review_status === ReviewStatuses.PENDING}
+          The project is now awaiting the administrator's review. <br />
+          <a href="/profile" rel="prefetch">Enable notifications in the profile</a> to be up-to-date!
+        {:else if $project.review_status === ReviewStatuses.REJECTED}
+          <strong>The administrator rejected the project.</strong> <br/>
+          Make corrections and then submit for review again.
+        {/if}
+      </Notice>
     {/if}
-    {#if project.lifetime_stage !== ProjectStages.FINISHED && isModerator}
-      <TagSelector
-        {tags}
-        value={project.tags}
-        on:change={({ detail }) => dispatch('update-tags', detail)}
-      />
+    {#if $project.lifetime_stage !== ProjectStages.FINISHED && moderatorView}
+      <TagSelector {tags} value={$project.tags} on:change={saveTags} />
     {/if}
     <div class="data-points">
       <Labeled icon label="When">
-        <svg slot="icon" class="icon" src="images/icons/calendar.svg" />
-        {formatDateRange({ start: project.start_date, end: project.end_date })}
+        <svg slot="icon" class="icon mr" src="images/icons/calendar.svg" />
+        <div class="date-range">
+          {formatDateRange({ start: $project.start_date, end: $project.end_date })}
+        </div>
       </Labeled>
       <Labeled icon label="Staff">
-        <svg slot="icon" class="icon" src="images/icons/user.svg" />
+        <svg slot="icon" class="icon mr" src="images/icons/user.svg" />
         <div class="staff">
-          {#each project.moderators as moderator (moderator.email)}
+          {#each $project.moderators as moderator (moderator.email)}
             <a href="mailto:{moderator.email}">
               {moderator.full_name}
             </a>
           {/each}
         </div>
       </Labeled>
-      {#if project.lifetime_stage === ProjectStages.FINALIZING
-        && !review
-        && isModerator
-        && project.admin_feedback != null}
-        <Labeled icon label="Administrator's feedback" textclass="admin-feedback">
-          <svg slot="icon" class="icon" src="images/icons/message-square.svg" />
-          {project.admin_feedback}
+      {#if $project.lifetime_stage === ProjectStages.FINALIZING
+           && !reviewView
+           && moderatorView
+           && $project.admin_feedback != null}
+        <Labeled icon label="Administrator's feedback">
+          <svg slot="icon" class="icon mr" src="images/icons/message-square.svg" />
+          <div class="admin-feedback">
+            {$project.admin_feedback}
+          </div>
         </Labeled>
       {/if}
     </div>
     {#if account != null
-      && (project.creator.email === account.email || account.is_admin)
-      && !review}
+         && ($project.creator.email === account.email || account.is_admin)
+         && !reviewView}
       <div class="actions">
-        {#if project.lifetime_stage === ProjectStages.ONGOING}
-          <Button isOutline href="/projects/{project.id}/edit">
-            <svg class="icon mr" src="images/icons/edit.svg" />
+        {#if $project.lifetime_stage === ProjectStages.ONGOING}
+          <Button outline href="/projects/{$project.id}/edit">
+            <svg class="mr" src="images/icons/edit.svg" />
             edit
           </Button>
-          <Button isOutline isDanger on:click={() => dispatch('delete-project')}>
-            <svg class="icon mr" src="images/icons/trash-2.svg" />
+          <Button outline danger on:click={() => projectDeletionDialogOpen = true}>
+            <svg class="mr" src="images/icons/trash-2.svg" />
             delete
           </Button>
-          <Button isOutline classname="finalize" on:click={() => dispatch('finalize-project')}>
-            <svg class="icon mr" src="images/icons/check-circle.svg" />
+          <Button outline class="finalize" on:click={() => finalizeDialogOpen = true}>
+            <svg class="mr" src="images/icons/check-circle.svg" />
             finalize
           </Button>
-        {:else if project.lifetime_stage === ProjectStages.FINALIZING
-               && project.review_status !== ReviewStatuses.PENDING}
-          <Button
-            isFilled
-            on:click={() => dispatch('submit-for-review')}
-          >
-            <svg class="icon mr" src="images/icons/check-circle.svg" />
+        {:else if $project.lifetime_stage === ProjectStages.FINALIZING
+                  && $project.review_status !== ReviewStatuses.PENDING}
+          <Button filled on:click={submitForReview}>
+            <svg class="mr" src="images/icons/check-circle.svg" />
             submit for review
           </Button>
         {/if}
         {#if account
-          && account.is_admin
-          && project.lifetime_stage === ProjectStages.FINALIZING
-          && project.review_status === ReviewStatuses.PENDING}
+             && account.is_admin
+             && $project.lifetime_stage === ProjectStages.FINALIZING
+             && $project.review_status === ReviewStatuses.PENDING}
           <Button
-            isOutline
-            classname="review"
-            href="/projects/{project.id}/review"
+            outline
+            class="review"
+            href="/projects/{$project.id}/review"
           >
-            <svg class="icon mr" src="images/icons/clipboard.svg" />
+            <svg class="mr" src="images/icons/clipboard.svg" />
             review
           </Button>
         {/if}
       </div>
     {/if}
-    {#if review}
+    {#if reviewView}
       <div class="review-verdict">
-        {#if project.lifetime_stage != ProjectStages.FINALIZING
-          || project.review_status != ReviewStatuses.PENDING}
+        {#if $project.lifetime_stage != ProjectStages.FINALIZING
+             || $project.review_status != ReviewStatuses.PENDING}
           <div class="title">Review not available.</div>
         {:else}
           <div class="title">Review verdict</div>
@@ -153,7 +193,7 @@
           />
           <div class="actions">
             <Button
-              isDanger
+              danger
               on:click={() => dispatch('submit-review', { accept: false, comment: reviewComment })}
             >
               reject
@@ -169,3 +209,17 @@
     {/if}
   </div>
 </header>
+
+<FinalizingDialog bind:open={finalizeDialogOpen} {account} {project} />
+
+<DangerConfirmDialog
+  textYes="yes, delete"
+  bind:open={projectDeletionDialogOpen}
+  on:confirm={deleteProject}
+>
+  Deleting a project is rarely desired. <br />
+  You may edit the project or delete individual activities instead. <br />
+  Think twice before proceeding.
+</DangerConfirmDialog>
+
+<style src="../../../../static/css/containers/projects/view/project-header.scss"></style>
