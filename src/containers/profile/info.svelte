@@ -29,6 +29,9 @@
         csrfToken: account.csrf_token,
       }));
       account.telegram_username = tgUsername;
+      showSnackbar({ props: {
+        text: `Successfully ${tgUsername === '' ? 'removed' : 'updated'} the username!`,
+      } });
       if ($session.account.email === account.email) {
         $session.account = account;
       }
@@ -81,7 +84,7 @@
           add Telegram username
         </Button>
         <DropdownShell let:toggle>
-          <Button round on:click={toggle}>
+          <Button round class="ml" on:click={toggle}>
             <svg src="images/icons/help-circle.svg" class="icon" />
           </Button>
           <Dropdown class="info-bubble" right>
