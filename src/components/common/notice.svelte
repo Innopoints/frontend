@@ -1,8 +1,10 @@
 <script>
   import { fly } from 'svelte/transition';
+
+  export let warning;
 </script>
 
-<div class="notice" transition:fly={{ y: 10, duration: 100 }}>
+<div class="notice" class:warning transition:fly={{ y: 10, duration: 100 }}>
   <div class="icon">
     <slot name="icon" />
   </div>

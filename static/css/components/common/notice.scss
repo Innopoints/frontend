@@ -1,9 +1,9 @@
 @import "_attractions-theme.scss";
 
 .notice {
-  border-radius: 1.5625em;
+  border-radius: 1em;
   border: .0625em solid $main;
-  padding: 1em 1em .6em;
+  padding: 1em 1em 1em;
   margin: 1em 0;
   display: flex;
   align-items: flex-start;
@@ -14,17 +14,31 @@
     flex-shrink: 0;
   }
 
-  :global(p) {
-    margin-top: .3em;
+  &.warning {
+    background: $warning-bg;
+    color: $warning-fg;
+    border-width: 0;
+    font-size: .9em;
+    align-items: center;
+
+    & > .icon {
+      color: $warning-fg;
+    }
   }
 
-  :global(.actions) {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: .9em;
+  :global {
+    p {
+      margin-top: .3em;
+    }
 
-    & > :global(.btn) {
-      margin-left: .5em;
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: .9em;
+
+      & > .btn {
+        margin-left: .5em;
+      }
     }
   }
 }

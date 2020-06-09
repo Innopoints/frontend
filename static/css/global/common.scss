@@ -95,23 +95,6 @@ body {
   top: .8rem;
 }
 
-.warning {
-  background: #fff4e5;
-  padding: .5em .8em;
-  margin-top: .8em;
-  border-radius: .75em;
-  color: #995400;
-  display: flex;
-  align-items: center;
-
-  .icon {
-    stroke: #995400;
-    width: 1.2rem;
-    height: 1.2rem;
-    margin-right: .6em;
-  }
-}
-
 .error {
   color: $danger;
   font-size: .95rem;
