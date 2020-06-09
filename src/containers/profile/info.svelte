@@ -5,7 +5,7 @@
   import * as api from '@/utils/api.js';
 
   export let account;
-  const telegramUsernameRegex = /[A-Za-z0-9_]{5,32}/;
+  const telegramUsernameRegex = /(?:[A-Za-z0-9_]{5,32}|^$)/;
 
   const { session } = stores();
 
@@ -15,7 +15,8 @@
   let reclaimInnopointsModalOpen = false;
 
   async function saveUsername() {
-    if (tgUsername === '' || tgUsername === account.telegram_username) {
+    if (tgUsername === account.telegram_username) {
+      tgChange = false;
       return;
     }
 
