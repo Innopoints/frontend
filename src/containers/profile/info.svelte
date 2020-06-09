@@ -10,7 +10,6 @@
   const telegramUsernameRegex = /(?:[A-Za-z0-9_]{5,32}|^$)/;
 
   const { session } = stores();
-  const showSnackbar = getContext(snackbarContextKey);
 
   let tgChange = false;
   let tgUsername = account.telegram_username || '';
@@ -42,6 +41,8 @@
 
     tgChange = false;
   }
+  
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <section class="quick-info padded">

@@ -4,8 +4,6 @@
   import { snackbarContextKey } from 'attractions/src/snackbar';
   import * as api from '@/utils/api.js';
 
-  const showSnackbar = getContext(snackbarContextKey);
-
   export let open = false;
   export let account;
   let email = null;
@@ -33,6 +31,8 @@
       console.error(e);
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <Modal bind:open let:closeCallback>

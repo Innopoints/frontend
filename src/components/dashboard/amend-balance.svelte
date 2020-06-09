@@ -5,8 +5,6 @@
   import * as api from '@/utils/api.js';
   import s from '@/utils/plural-s.js';
 
-  const showSnackbar = getContext(snackbarContextKey);
-
   export let users = [];
   export let account;
 
@@ -33,6 +31,8 @@
       showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <div class="amend-balance">

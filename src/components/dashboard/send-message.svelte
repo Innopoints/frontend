@@ -4,8 +4,6 @@
   import { snackbarContextKey } from 'attractions/src/snackbar';
   import * as api from '@/utils/api.js';
 
-  const showSnackbar = getContext(snackbarContextKey);
-
   export let users = [];
   export let account;
 
@@ -31,6 +29,8 @@
       showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <div class="send-message">

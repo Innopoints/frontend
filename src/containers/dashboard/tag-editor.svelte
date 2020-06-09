@@ -4,8 +4,6 @@
   import { snackbarContextKey } from 'attractions/src/snackbar';
   import * as api from '@/utils/api.js';
 
-  const showSnackbar = getContext(snackbarContextKey);
-
   export let tags = [];
   export let account;
 
@@ -77,6 +75,8 @@
       console.error(e);
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <Card class="tag-editor">

@@ -3,8 +3,6 @@
   import { Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/src/snackbar';
 
-  const showSnackbar = getContext(snackbarContextKey);
-
   export let users = [];
 
   function open() {
@@ -18,6 +16,8 @@
       }
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <div class="see-profile">

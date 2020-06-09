@@ -7,8 +7,6 @@
   import subscribeToPush from '@/utils/notifications-subscribe.js';
   import * as api from '@/utils/api.js';
 
-  const showSnackbar = getContext(snackbarContextKey);
-
   export let notificationSettings;
   export let account;
 
@@ -109,6 +107,8 @@
       notificationSettings = initialSettings;
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <div class="notifications">
