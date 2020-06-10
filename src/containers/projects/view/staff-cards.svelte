@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import ModeratorHourCard from '@/components/projects/view/moderator-hour-card.svelte';
+  import StaffCard from '@/components/projects/view/staff-card.svelte';
 
   export let project;
   export let account;
@@ -21,7 +21,7 @@
 
 <div class="moderators padded">
   {#each project.moderators as moderator (moderator.email)}
-    <ModeratorHourCard
+    <StaffCard
       {moderator}
       {account}
       {review}
