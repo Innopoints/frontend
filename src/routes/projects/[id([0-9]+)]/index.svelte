@@ -21,7 +21,7 @@
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserView from '@/containers/projects/view/user-view.svelte';
   import ModeratorView from '@/containers/projects/view/moderator-view.svelte';
-  import ModeratorHourPanel from '@/containers/projects/view/moderator-hour-panel.svelte';
+  import StaffCards from '@/containers/projects/view/staff-cards.svelte';
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
   import ReportDialog from '@/components/projects/view/report-dialog.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
@@ -384,7 +384,7 @@
          && account != null
          && (moderatorEmails.includes(account.email) || account.is_admin)}
         <h2 class="padded">Project Staff</h2>
-        <ModeratorHourPanel
+        <StaffCards
           {project}
           {account}
           on:save-hours={updateHours}

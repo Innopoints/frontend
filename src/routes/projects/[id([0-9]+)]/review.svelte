@@ -22,7 +22,7 @@
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import ModeratorView from '@/containers/projects/view/moderator-view.svelte';
-  import ModeratorHourPanel from '@/containers/projects/view/moderator-hour-panel.svelte';
+  import StaffCards from '@/containers/projects/view/staff-cards.svelte';
   import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
   import * as api from '@/utils/api.js';
 
@@ -69,7 +69,7 @@
     <ProjectHeader review {project} {account} on:submit-review={submitReview} />
 
     <h2 class="padded">Project Staff</h2>
-    <ModeratorHourPanel review {project} {account} />
+    <StaffCards review {project} {account} />
 
     <h2 class="padded">Activities</h2>
     <ModeratorView
