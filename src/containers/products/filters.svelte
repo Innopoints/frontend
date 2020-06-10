@@ -198,7 +198,7 @@
   name="order-options"
   on:change={changeOrder}
   value={selectedOrder.value}
-  class="ordering hide-tb"
+  class="ordering hide-on-less-tb"
 />
 
 <style src="../../../static/css/components/products/filters.scss"></style>
