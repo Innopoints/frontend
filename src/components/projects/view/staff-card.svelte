@@ -1,25 +1,26 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import Card from 'ui/card.svelte';
+  import { createEventDispatcher, getContext } from 'svelte';
+  import { Card, TextField, Button } from 'attractions';
   import Labeled from 'ui/labeled.svelte';
-  import TextField from 'ui/text-field.svelte';
-  import Button from 'ui/button.svelte';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import s from '@/utils/plural-s.js';
 
   export let account;
   export let moderator;
-  export let projectStage;
-  export let application;
-  export let isCreator;
-  export let review = false;
+  export let moderation;
+  export let project;
 
+  const review = getContext('review-mode');
+  const isCreator = moderator.email === $project.creator.email;
+  const application = moderation.applications.find(
+    appl => appl.applicant.email === moderator.email,
+  );
   let enteredHours = application.actual_hours;
 
   function dispatchHourChange() {
     if (enteredHours >= 1) {
-      dispatch('hours-changed', { application, hours: enteredHours });
       application.actual_hours = enteredHours;
+      dispatch('hours-changed', { activity: moderation, application, hours: enteredHours });
     }
   }
 
@@ -33,8 +34,8 @@
       <svg class="star" src="images/icons/star.svg" />
     {/if}
   </div>
-  {#if projectStage === ProjectStages.FINALIZING && !review}
-    <Labeled classname="mt" label="Working hours">
+  {#if $project.lifetime_stage === ProjectStages.FINALIZING && !review}
+    <Labeled class="mt" label="Working hours">
       <form class="edit-hours">
         <TextField
           type="number"
@@ -45,33 +46,44 @@
         />
         {#if enteredHours !== application.actual_hours}
           <Button
-            isFilled
-            isRound
-            tooltip="Save hours"
+            filled
             disabled={enteredHours < 0}
             on:click={dispatchHourChange}
           >
-            <svg class="icon" src="images/icons/check.svg" />
+            <svg class="mr" src="images/icons/check.svg" />
+            save
           </Button>
         {/if}
       </form>
     </Labeled>
   {:else}
-    <Labeled classname="mt" label="Working hours">
+    <Labeled class="mt" label="Working hours">
       {application.actual_hours} hour{s(application.actual_hours)}
     </Labeled>
     {#if application.feedback != null && !review}
       <Button
-        isOutline
-        classname="mt"
-        on:click={() => dispatch('read-feedback', application.feedback)}
+        outline
+        class="mt"
+        on:click={() => dispatch('read-feedback', {
+          activity: moderation,
+          feedback: application.feedback,
+        })}
       >
         read feedback
       </Button>
     {:else if application.applicant.email === account.email && !review}
-      <Button isFilled classname="mt" on:click={() => dispatch('leave-feedback', application)}>
+      <Button
+        filled
+        class="mt"
+        on:click={() => dispatch('leave-feedback', {
+          activity: moderation,
+          application,
+        })}
+      >
         leave feedback
       </Button>
     {/if}
   {/if}
 </Card>
+
+<style src="../../../../static/css/components/projects/view/staff-card.scss"></style>

@@ -1,4 +1,5 @@
 <script context="module">
+  import { writable } from 'svelte/store';
   import getInitialData from '@/utils/get-initial-data.js';
 
   export async function preload(page, session) {
@@ -8,14 +9,15 @@
       ['tags', '/tags'],
     ]));
     data.account = session.account;
+    data.project = writable(data.project);
     return data;
   }
 </script>
 
 <script>
-  import { writable } from 'svelte/store';
+  import { setContext } from 'svelte';
   import { stores } from '@sapper/app';
-  import { SnackbarContainer } from 'attractions';
+  import { SnackbarContainer, H2 } from 'attractions';
   import { SnackbarPositions } from 'attractions/src/snackbar';
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
@@ -40,18 +42,18 @@
   } from '@/utils/project-manipulation.js';
 
   const { session } = stores();
+  setContext('review-mode', false);
 
   export let project;
   export let account;
   export let competences;
   export let tags;
 
-  const projectStore = writable(project);
   $: moderatorEmails = (
-    Array.isArray(project.moderators) ?
-      project.moderators.map(moderator => moderator.email) : []
+    Array.isArray($project.moderators) ?
+      $project.moderators.map(moderator => moderator.email) : []
   );
-  $: moderatorView = (
+  $: moderatorMode = (
     account != null
     && (account.is_admin || moderatorEmails.includes(account.email))
   );
@@ -74,7 +76,6 @@
         application.applicant = account;
         activity.existing_application = application;
         project = project;
-        projectStore.set(project);
 
         if (telegram && telegram != account.telegram) {
           try {
@@ -117,7 +118,6 @@
         }
         activity.existing_application = null;
         project = project;
-        projectStore.set(project);
         applicationTakeBackDialog.open = false;
       } catch (e) {
         console.error(e);
@@ -157,8 +157,7 @@
           `/projects/${activity.project}/activities/${activity.id}`,
           { csrfToken: account.csrf_token },
         ));
-        project.activities = project.activities.filter(act => act.id !== activity.id);
-        projectStore.set(project);
+        $project.activities = $project.activities.filter(act => act.id !== activity.id);
       } catch (e) {
         console.error(e);
       }
@@ -240,7 +239,6 @@
           { data: value, csrfToken: account.csrf_token },
         )));
         project = project;
-        projectStore.set(project);
         reportPerformanceModal.open = false;
       } catch (e) {
         console.error(e);
@@ -268,7 +266,7 @@
         detail.application.reports = detail.application.reports.filter(
           report => report.reporter_email !== account.email,
         );
-        projectStore.set(project);
+        project = project;
         reportDeletionDialog.open = false;
       } catch (e) {
         console.error(e);
@@ -303,7 +301,6 @@
       applicationRejectDialog.open = false;
       applicationPendingDialog.open = false;
       project = project;
-      projectStore.set(project);
     } catch (e) {
       console.error(e);
     }
@@ -314,30 +311,30 @@
     delete detail.activityCopy._type;
     prepareForBackend(detail.activityCopy);
 
-    const index = determineInsertionIndex(project.activities, detail.position);
+    const index = determineInsertionIndex($project.activities, detail.position);
 
     let updatedActivity;
     try {
       if (type === ActivityTypes.NEW) {
-        updatedActivity = await api.json(api.post(`/projects/${project.id}/activities`, {
+        updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
           data: detail.activityCopy,
           csrfToken: account.csrf_token,
         }));
         prepareAfterBackend(updatedActivity);
-        project.activities.splice(index, 0, updatedActivity);
+        $project.activities.splice(index, 0, updatedActivity);
       } else if (type === ActivityTypes.EDIT) {
         const activityID = detail.activityCopy.id;
         delete detail.activityCopy.id;
 
         updatedActivity = await api.json(api.patch(
-          `/projects/${project.id}/activities/${activityID}`,
+          `/projects/${$project.id}/activities/${activityID}`,
           { data: detail.activityCopy, csrfToken: account.csrf_token },
         ));
         prepareAfterBackend(updatedActivity);
         updatedActivity.id = activityID;
 
-        project.activities.splice(
-          project.activities.findIndex(act => act.id === activityID),
+        $project.activities.splice(
+          $project.activities.findIndex(act => act.id === activityID),
           1,
           updatedActivity,
         );
@@ -345,15 +342,14 @@
     } catch (e) {
       console.error(e);
     }
-    project.activities = project.activities;
-    projectStore.set(project);
+    project = project;
   }
 
   async function updateHours({ detail }) {
     try {
       const { application, hours, activity } = detail;
       await api.json(api.patch(
-        `/projects/${project.id}/activities/${activity.id}/applications/${application.id}`,
+        `/projects/${$project.id}/activities/${activity.id}/applications/${application.id}`,
         { data: { actual_hours: hours }, csrfToken: account.csrf_token },
       ));
       application.actual_hours = hours;
@@ -365,41 +361,43 @@
 </script>
 
 <svelte:head>
-  <title>{project.name} – Innopoints</title>
-  <meta name="og:title" content={project.name} />
-  <meta name="og:url" content="https://ipts.innopolis.university/projects/{project.id}" />
-  <meta name="og:description" content="Available activities: {project.activities.slice(0, 3).filter(activity => !activity.internal).map(activity => activity.name).join(', ')}{project.activities.length > 3 ? ', ...' : '.'}" />
-  {#if project.image_id}
-    <meta name="og:image" content="{API_HOST_BROWSER}/file/{project.image_id}" />
+  <title>{$project.name} – Innopoints</title>
+  <meta name="og:title" content={$project.name} />
+  <meta name="og:url" content="https://ipts.innopolis.university/projects/{$project.id}" />
+  <meta
+    name="og:description"
+    content="Available activities: {$project.activities.slice(0, 3).filter(activity => !activity.internal).map(activity => activity.name).join(', ')}{$project.activities.length > 3 ? ', ...' : '.'}"
+  />
+  {#if $project.image_id}
+    <meta name="og:image" content="{API_HOST_BROWSER}/file/{$project.image_id}" />
   {/if}
 </svelte:head>
 
 <Layout user={account}>
   <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
     <div class="material">
-      <ProjectHeader project={projectStore} {account} {tags} {moderatorView} />
+      <ProjectHeader {project} {account} {tags} {moderatorMode} />
 
-      {#if (project.lifetime_stage === ProjectStages.FINALIZING
-         || project.lifetime_stage === ProjectStages.FINISHED)
+      {#if ($project.lifetime_stage === ProjectStages.FINALIZING
+         || $project.lifetime_stage === ProjectStages.FINISHED)
          && account != null
          && (moderatorEmails.includes(account.email) || account.is_admin)}
-        <h2 class="padded">Project Staff</h2>
+        <H2 class="padded">Project Staff</H2>
         <StaffCards
           {project}
           {account}
-          on:save-hours={updateHours}
+          on:hours-changed={updateHours}
           on:leave-feedback={leaveFeedbackModal.show}
           on:read-feedback={feedbackModal.show}
         />
       {/if}
 
-      {#if project.activities.find(x => !x.internal) != null || moderatorView}
+      {#if $project.activities.find(x => !x.internal) != null || moderatorMode}
         <h2 class="padded">Activities</h2>
-        {#if moderatorView}
+        {#if moderatorMode}
           <ModeratorView
             {account}
-            activities={project.activities}
-            project={projectStore}
+            {project}
             {competences}
             on:view-reports={reportDialog.show}
             on:application-status-changed={chooseApplicationStatusModal}
@@ -412,10 +410,10 @@
           />
         {:else}
           <UserView
-            activities={project.activities}
+            activities={$project.activities}
             {competences}
             {account}
-            projectStage={project.lifetime_stage}
+            projectStage={$project.lifetime_stage}
             on:apply={applicationDialog.show}
             on:take-back-application={applicationTakeBackDialog.show}
             on:read-feedback={feedbackModal.show}
@@ -426,7 +424,7 @@
     </div>
   </SnackbarContainer>
 
-  {#if moderatorView}
+  {#if moderatorMode}
     <!-- view-past-reports -->
     <ReportDialog
       bind:isOpen={reportDialog.open}

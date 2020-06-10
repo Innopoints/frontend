@@ -17,12 +17,12 @@
   export let project;
   export let account;
   export let tags;
-  export let moderatorView = false;
-  export let reviewView = false;
+  export let moderatorMode = false;
 
   let reviewComment = null;
   let finalizeDialogOpen = false;
   let projectDeletionDialogOpen = false;
+  const reviewView = getContext('review-mode');
 
   $: projectImageURL = (
     $project.image_id == null ?
@@ -88,7 +88,7 @@
     </H1>
     {#if $project.lifetime_stage === ProjectStages.FINALIZING
          && !reviewView
-         && moderatorView
+         && moderatorMode
          && $project.review_status != null}
       <Notice warning>
         <div slot="icon">
@@ -107,7 +107,7 @@
         {/if}
       </Notice>
     {/if}
-    {#if $project.lifetime_stage !== ProjectStages.FINISHED && moderatorView}
+    {#if $project.lifetime_stage !== ProjectStages.FINISHED && moderatorMode}
       <TagSelector {tags} value={$project.tags} on:change={saveTags} />
     {/if}
     <div class="data-points">
@@ -129,7 +129,7 @@
       </Labeled>
       {#if $project.lifetime_stage === ProjectStages.FINALIZING
            && !reviewView
-           && moderatorView
+           && moderatorMode
            && $project.admin_feedback != null}
         <Labeled icon label="Administrator's feedback">
           <svg slot="icon" class="icon mr" src="images/icons/message-square.svg" />

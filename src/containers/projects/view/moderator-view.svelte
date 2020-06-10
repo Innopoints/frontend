@@ -1,6 +1,6 @@
 <script>
-  import { createEventDispatcher, onDestroy, afterUpdate } from 'svelte';
-  import Button from 'ui/button.svelte';
+  import { createEventDispatcher, onDestroy, afterUpdate, getContext } from 'svelte';
+  import { Button } from 'attractions';
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
   import HourActivityCard from '@/components/projects/view/hour-activity-card.svelte';
   import FeedbackActivityCard from '@/components/projects/view/feedback-activity-card.svelte';
@@ -16,13 +16,12 @@
   } from '@/utils/project-manipulation.js';
 
   export let account;
-  export let activities;
   export let competences;
   export let project;
-  export let review = false;
 
   let activityListElement;
   let scrollToLast = false;
+  const review = getContext('review-mode');
 
   afterUpdate(() => {
     if (scrollToLast) {
@@ -33,7 +32,7 @@
   });
 
   let activityCards = (
-    activities
+    $project.activities
       .filter(x => !x.internal)
       .map(act => {
         act._type = ActivityTypes.DISPLAY;
@@ -148,7 +147,7 @@
 </div>
 {#if $project.lifetime_stage === ProjectStages.ONGOING}
   <Button on:click={() => activityCards = addActivity(activityCards)}>
-    <svg src="/images/icons/plus.svg" class="icon mr" />
+    <svg src="images/icons/plus.svg" class="mr" />
     add another activity
   </Button>
 {/if}

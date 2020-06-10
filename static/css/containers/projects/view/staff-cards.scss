@@ -1,0 +1,10 @@
+.moderators {
+  margin: 1em .5em 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  :global .card {
+    margin: .3em;
+  }
+}
