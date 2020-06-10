@@ -1,21 +1,20 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import Dropdown from 'ui/dropdown.svelte';
+  import { goto, stores } from '@sapper/app';
+  import { Button, DropdownShell, Dropdown, H1, H2 } from 'attractions';
   import DraftCard from '@/components/projects/new/draft-card.svelte';
   import {
     getBlankProject,
     getOlympiad,
     getStudentParty,
   } from '@/constants/projects/project-templates.js';
+  import * as api from '@/utils/api.js';
+
+  const { session } = stores();
 
   export let drafts;
-  let shownDraftIndex = 0;
-  $: {
-    shownDraftIndex = Math.min(shownDraftIndex, drafts.length - 1);
-  }
+  export let project;
 
-  const dispatch = createEventDispatcher();
+  let shownDraftIndex = 0;
 
   function showPrevDraft() {
     if (shownDraftIndex > 0) {
@@ -28,97 +27,106 @@
       shownDraftIndex++;
     }
   }
+
+  async function deleteDraft({ detail: draftID }) {
+    try {
+      await api.json(api.del(`/projects/${draftID}`, { csrfToken: $session.account.csrf_token }));
+      drafts.splice(drafts.findIndex(draft => draft.id === draftID));
+      drafts = drafts;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function startProject(template) {
+    project.set(template);
+    goto('/projects/new?step=1');
+  }
 </script>
 
-<div class="left">
-  <h1>Create a Project</h1>
-  <div class="subtitle">
-    Unleash your creative genius — we're here to help you!
+<div class="step-0">
+  <div class="left">
+    <H1>Create a Project</H1>
+    <div class="subtitle">
+      Unleash your creative genius — we're here to help you!
+    </div>
+    <div class="advice">
+      <DropdownShell let:toggle>
+        <Button on:click={toggle}>
+          what is a project?
+          <svg class="ml dropdown-chevron" src="images/icons/chevron-down.svg" />
+        </Button>
+        <Dropdown>
+          A project could be an event, an olympiad or any other volunteering opportunity. <br />
+          Create some activities and have volunteers apply to them.
+        </Dropdown>
+      </DropdownShell>
+    </div>
+    <img class="illustration" src="images/create-project/create-project.svg" alt="" />
   </div>
-  <div class="advice">
-    <Dropdown label="what is a project?">
-      A project could be an event, an olympiad or any other volunteering opportunity. <br />
-      Create some activities and have volunteers apply to them.
-    </Dropdown>
+
+  <div class="right">
+    <H2>Starting Point</H2>
+
+    {#if drafts.length > 0}
+      <section class="drafts">
+        You could continue from one of your drafts:
+        <div class="cards">
+          <DraftCard
+            draft={drafts[shownDraftIndex]}
+            on:draft-selected={({ detail: draft }) => startProject(draft)}
+            on:delete-draft={deleteDraft}
+          />
+        </div>
+        {#if drafts.length > 1}
+          <nav>
+            <Button
+              round
+              on:click={showPrevDraft}
+              disabled={shownDraftIndex === 0}
+            >
+              <svg src="images/icons/chevron-left.svg" />
+            </Button>
+            <Button
+              round
+              on:click={showNextDraft}
+              disabled={shownDraftIndex + 1 === drafts.length}
+            >
+              <svg src="images/icons/chevron-right.svg" />
+            </Button>
+          </nav>
+        {/if}
+      </section>
+    {:else}
+      <section class="no-drafts">
+        Your drafts will appear here.
+        <div class="clarification">
+          The projects are auto-saved so you may always continue your work.
+        </div>
+      </section>
+    {/if}
+
+    <section class="templates">
+      Jumpstart your project with a template:
+      <div class="actions">
+        <Button outline rectangle on:click={() => startProject(getOlympiad())}>
+          <svg src="images/icons/award.svg" class="mr" />
+          Olympiad
+        </Button>
+        <Button outline rectangle on:click={() => startProject(getStudentParty())}>
+          <svg src="images/icons/speaker.svg" class="mr" />
+          Student Party
+        </Button>
+      </div>
+      Or start completely from scratch:
+      <div class="actions">
+        <Button outline rectangle on:click={() => startProject(getBlankProject())}>
+          <svg src="images/icons/package.svg" class="mr" />
+          Blank Project
+        </Button>
+      </div>
+    </section>
   </div>
-  <img class="illustration" src="/images/create-project/create-project.svg" alt="" />
 </div>
 
-<div class="right">
-  <h2>Starting Point</h2>
-
-  {#if drafts.length > 0}
-    <section class="drafts">
-      You could continue from one of your drafts:
-      <div class="cards">
-        {#if drafts.length > 1}
-          <Button
-            isRound
-            classname="tablet"
-            on:click={showPrevDraft}
-            disabled={shownDraftIndex === 0}
-          >
-            <svg class="icon" src="/images/icons/chevron-left.svg" />
-          </Button>
-        {/if}
-        <DraftCard draft={drafts[shownDraftIndex]} on:delete-draft on:load-draft />
-        {#if drafts.length > 1}
-          <Button
-            isRound
-            classname="tablet"
-            on:click={showNextDraft}
-            disabled={shownDraftIndex + 1 === drafts.length}
-          >
-            <svg class="icon" src="/images/icons/chevron-right.svg" />
-          </Button>
-        {/if}
-      </div>
-      {#if drafts.length > 1}
-        <nav class="mobile">
-          <Button
-            isRound
-            on:click={showPrevDraft}
-            disabled={shownDraftIndex === 0}
-          >
-            <svg class="icon" src="/images/icons/chevron-left.svg" />
-          </Button>
-          <Button
-            isRound
-            on:click={showNextDraft}
-            disabled={shownDraftIndex + 1 === drafts.length}
-          >
-            <svg class="icon" src="/images/icons/chevron-right.svg" />
-          </Button>
-        </nav>
-      {/if}
-    </section>
-  {:else}
-    <section class="no-drafts">
-      Your drafts will appear here.
-      <div class="clarification">
-        The projects are auto-saved so you may always continue your work.
-      </div>
-    </section>
-  {/if}
-
-  <section class="templates">
-    Jumpstart your project with a template:
-    <div class="actions">
-      <Button on:click={() => dispatch('project-start', getOlympiad())} isOutline isRectangle>
-        <svg src="/images/icons/award.svg" class="icon mr" />
-        Olympiad
-      </Button>
-      <Button on:click={() => dispatch('project-start', getStudentParty())} isOutline isRectangle>
-        <svg src="/images/icons/speaker.svg" class="icon mr" />
-        Student Party
-      </Button>
-    </div>
-    Or start completely from scratch:
-    <div class="actions">
-      <Button on:click={() => dispatch('project-start', getBlankProject())} isOutline isRectangle>
-        <svg src="/images/icons/package.svg" class="icon mr" />
-        Blank Project
-      </Button>
-    </div>
-  </section>
-</div>
+<style src="../../../../static/css/containers/projects/new/step-0.scss"></style>

@@ -1,0 +1,224 @@
+@import "_attractions-theme.scss";
+@import "_mixins.scss";
+
+:global {
+  @import "global/common.scss";
+}
+
+form {
+  padding-bottom: 4em;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-header {
+  text-align: center;
+}
+
+h1 {
+  margin-top: 1.5em;
+
+  .autosave {
+    display: none;
+  }
+
+  .autosave.visible {
+    @include hide-accessible;
+  }
+}
+
+.steps-navigation.dropdown-shell {
+  align-self: center;
+}
+
+.steps-navigation.dropdown-shell .handle {
+  background: white;
+  box-shadow: $shadow-1;
+  margin-top: 1em;
+
+  .step-index, .step-name {
+    margin-right: 1em;
+  }
+}
+
+@keyframes height-increase {
+  from {
+    height: 3.125em;
+  }
+
+  to {
+    height: 13.5em;
+  }
+}
+
+.steps-navigation .dropdown {
+  top: 1em;
+  margin-top: 0;
+  width: 100% !important;
+  box-shadow: $shadow-raised;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 100000;
+
+  .btn {
+    border-radius: 0;
+    padding-left: 1.5em;
+    text-align: center;
+
+    .icon {
+      font-size: 1.25rem;
+      margin-right: 1em;
+      width: 24px;
+    }
+
+    &.highlight {
+      background: transparentize($main, .95);
+
+      &:focus {
+        background: transparentize($main, .9);
+      }
+    }
+  }
+}
+
+.steps-navigation.dropdown-shell.open .dropdown {
+  // height: 13.5em;
+  animation-name: height-increase;
+  animation-duration: 150ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+form > .actions {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-weight: 300;
+  font-size: .9rem;
+
+  .back {
+    order: 3;
+  }
+
+  .forward {
+    order: 2;
+  }
+
+  .error {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    color: $dark;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .form-header {
+    text-align: left;
+  }
+
+  h1 {
+    .autosave {
+      display: inline-flex;
+      align-items: center;
+      font-size: .9rem;
+      font-weight: 300;
+      color: $disabled;
+      height: 100%;
+      margin-left: 1.5em;
+
+      .icon {
+        stroke: $disabled;
+        stroke-width: 1;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .autosave.visible {
+      @include show-accessible;
+
+      height: 100%;
+      margin-left: .5em;
+    }
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin-top: 1.5em;
+  }
+
+  form {
+    position: relative;
+
+    & > .actions {
+      align-items: center;
+
+      .error {
+        width: auto;
+        flex: 1;
+        order: 2;
+        text-align: right;
+        margin: 0 1em;
+      }
+
+      .forward {
+        order: 1;
+      }
+    }
+  }
+
+  .steps-navigation.dropdown-shell {
+    position: absolute;
+    top: .5em;
+    right: 2.5em;
+
+    .step-index {
+      font-size: 1.2rem;
+
+      .step {
+        @include hide-accessible;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  h1 .autosave.visible {
+    margin-left: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .steps-navigation.dropdown-shell {
+    top: 1.2em;
+    right: 8%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .material form {
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+
+  .material .padded {
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+
+  .steps-navigation.dropdown-shell {
+    right: 12%;
+  }
+
+  form > .actions {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+}

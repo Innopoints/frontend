@@ -1,0 +1,29 @@
+.draft-card {
+  margin-top: 1em;
+  max-width: 18em;
+
+  :global .card {
+    padding-right: .6em;
+    padding-bottom: .6em;
+  }
+
+  @media only screen and (min-width: 720px) {
+    margin-left: .5em;
+    margin-right: .5em;
+  }
+}
+
+.title {
+  font-size: 1.05rem;
+  margin-bottom: .3em;
+}
+
+.subtitle {
+  font-size: .9rem;
+  font-weight: 300;
+}
+
+.actions {
+  margin-top: .5em;
+  display: flex;
+}

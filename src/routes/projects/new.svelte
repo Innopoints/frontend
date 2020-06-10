@@ -21,6 +21,8 @@
   import { writable } from 'svelte/store';
   import { stores, goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
+  import { SnackbarContainer } from 'attractions';
+  import { SnackbarPositions } from 'attractions/src/snackbar';
   import StepZero from '@/containers/projects/new/step-0.svelte';
   import StepOne from '@/containers/projects/new/step-1.svelte';
   import StepTwo from '@/containers/projects/new/step-2.svelte';
@@ -93,40 +95,6 @@
       isUploading = false;
     },
   };
-
-  function goToStep(stepIdx) {
-    goto(`/projects/new?step=${stepIdx}`);
-  }
-
-  // Form processsing
-  async function deleteDraft({ detail: draftID }) {
-    try {
-      await api.json(api.del('/projects/' + draftID, { csrfToken: account.csrf_token }));
-      drafts = drafts.filter(draft => draft.id !== draftID);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  async function loadDraft({ detail: draftID }) {
-    try {
-      const draftProject = await api.json(api.get('/projects/' + draftID));
-      for (let activity of draftProject.activities) {
-        activity.timeframe = {
-          start: new Date(activity.timeframe.start),
-          end: new Date(activity.timeframe.end),
-        };
-        if (activity.application_deadline != null) {
-          activity.application_deadline = new Date(activity.application_deadline);
-        }
-      }
-      lastSyncedName = draftProject.name;
-      $project = draftProject;
-      goToStep(1);
-    } catch (e) {
-      console.error(e);
-    }
-  }
 
   /* A subscriber to the $project store, receives an actual project object. */
   async function saveProject(projectObj) {
@@ -273,51 +241,40 @@
 
 <svelte:head>
   <title>Create Project – Innopoints</title>
-
-  <link rel="stylesheet" href="/css/bundles/projects-new.min.css" />
-  {#if account}
-    {#if account.is_admin}
-      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
-    {:else}
-      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
-    {/if}
-  {/if}
 </svelte:head>
 
 <Layout user={account}>
-  <div class="material step{step}">
-    {#if step === 0}
-      <StepZero
-        {drafts}
-        on:project-start={(e) => { $project = e.detail; goToStep(1); }}
-        on:delete-draft={deleteDraft}
-        on:load-draft={loadDraft}
-      />
-    {:else if step === 1}
-      <StepOne
-        {project}
-        {duplicateName}
-        {autosaved}
-        on:resize-image={imageResizer.show}
-        {isUploading}
-        on:uploading={(e) => isUploading = e.detail}
-      />
-    {:else if step === 2}
-      <StepTwo
-        {project}
-        {autosaved}
-        {competences}
-        on:change={processActivityChange}
-        on:delete-activity={processActivityDeletion}
-      />
-    {:else}
-      <StepThree
-        {project}
-        {autosaved}
-        on:publish={publishProject}
-      />
-    {/if}
-  </div>
+  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
+    <div class="material">
+      {#if step === 0}
+        <StepZero {drafts} {project} />
+      {:else if step === 1}
+        <StepOne
+          {project}
+          {duplicateName}
+          {autosaved}
+          on:resize-image={imageResizer.show}
+          {isUploading}
+          on:uploading={(e) => isUploading = e.detail}
+        />
+      {:else if step === 2}
+        <StepTwo
+          {project}
+          {autosaved}
+          {competences}
+          on:change={processActivityChange}
+          on:delete-activity={processActivityDeletion}
+        />
+      {:else}
+        <StepThree
+          {project}
+          {autosaved}
+          on:publish={publishProject}
+        />
+      {/if}
+    </div>
+  </SnackbarContainer>
+
   <ImageResizer
     aspectRatio={16/9}
     image={imageResizer.image}
@@ -328,3 +285,5 @@
     {isUploading}
   />
 </Layout>
+
+<style src="../../../static/css/routes/projects/new.scss"></style>
