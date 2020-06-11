@@ -15,6 +15,7 @@ function request(method, url, options) {
   let actualOptions = {
     method,
     headers: options && options.headers || {},
+    signal: options && options.signal,
   };
 
   if (options && 'cookie' in options) {
