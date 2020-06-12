@@ -24,7 +24,7 @@
   >
     <TextField
       id="name"
-      autocomplete={false}
+      autocomplete="off"
       maxlength={128}
       bind:value={$project.name}
     />

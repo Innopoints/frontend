@@ -29,11 +29,11 @@
   import StepThree from '@/containers/projects/new/step-3.svelte';
   import * as api from '@/utils/api.js';
   import {
+    computeDiff,
+    copyProject,
     determineInsertionIndex,
-    filterProjectFields,
     prepareForBackend,
     prepareAfterBackend,
-    snapshotEqual,
   } from '@/utils/project-manipulation.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
 
@@ -43,11 +43,17 @@
   export let account;
   export let competences;
 
-  let project = writable(null);
-  let autosaved = writable(false);
   let lastSyncedProject = null;
-  const unsubscribe = project.subscribe(saveProject);
+  let project = writable(null);
+  let saveProjectDebounce = null;
+  const unsubscribe = project.subscribe(function(projectObject) {
+    clearTimeout(saveProjectDebounce);
+    saveProjectDebounce = setTimeout(saveProject, 150, projectObject);
+  });
   onDestroy(unsubscribe);
+
+  let autosaved = writable(false);
+  let snackbarContainer = null;
 
   // Step management
   $: step = ($project != null ? +$page.query.step || 0 : 0);
@@ -57,28 +63,29 @@
     }
   });
 
-  /* A subscriber to the $project store. */
   async function saveProject(projectObject) {
-    if (snapshotEqual(projectObject, lastSyncedProject)) {
+    const diff = computeDiff(projectObject, lastSyncedProject);
+    if (diff == null) {
       return;
     }
 
+    const requestOptions = {
+      data: diff,
+      csrfToken: account.csrf_token,
+    };
+
     try {
-      lastSyncedProject = filterProjectFields(projectObject);
+      lastSyncedProject = copyProject(projectObject);
       if (projectObject.id != null) {
-        await api.json(api.patch(`/projects/${projectObject.id}`, {
-          data: filterProjectFields(projectObject, true),
-          csrfToken: account.csrf_token,
-        }));
+        await api.json(api.patch(`/projects/${projectObject.id}`, requestOptions));
       } else {
-        const uploadedProject = await api.json(api.post('/projects', {
-          data: filterProjectFields(projectObject),
-          csrfToken: account.csrf_token,
-        }));
-        project.set(uploadedProject);
+        ({ id: projectObject.id } = await api.json(api.post('/projects', requestOptions)));
       }
       autosaved.set(true);
     } catch (e) {
+      snackbarContainer && snackbarContainer.showSnackbar({
+        props: { text: 'Could not autosave. Some changes might be lost.' },
+      });
       console.error(e);
     }
   }
@@ -190,7 +197,7 @@
 </svelte:head>
 
 <Layout user={account}>
-  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
+  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
     <div class="material">
       {#if step === 0}
         <StepZero {drafts} {project} />

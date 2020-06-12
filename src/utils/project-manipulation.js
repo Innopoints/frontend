@@ -25,15 +25,12 @@ export function copyActivity(activity) {
   return newActivity;
 }
 
-export function filterProjectFields(project, edit = false) {
+export function filterProjectFields(project) {
   const filtered = {
     name: project.name,
     image_id: project.image_id,
     moderators: project.moderators,
   };
-  if (!edit) {
-    filtered.activities = project.activities.filter(act => act._type != ActivityTypes.TEMPLATE);
-  }
 
   return filtered;
 }
@@ -219,4 +216,44 @@ export function snapshotEqual(project, snapshot) {
     && project.image_id === snapshot.image_id
     && arraysEqual(project.moderators, snapshot.moderators)
   );
+}
+
+function setNullSafe(object, field, value) {
+  if (object == null) {
+    return { [field]: value };
+  } else {
+    object[field] = value;
+    return object;
+  }
+}
+
+export function computeDiff(project, reference) {
+  let diff = null;
+  if (reference == null || project == null) {
+    return copyProject(project);
+  }
+
+  if (project.name !== reference.name) {
+    diff = setNullSafe(diff, 'name', project.name);
+  }
+  if (project.image_id !== reference.image_id) {
+    diff = setNullSafe(diff, 'image_id', project.image_id);
+  }
+  if (!arraysEqual(project.moderators, reference.moderators)) {
+    diff = setNullSafe(diff, 'moderators', project.moderators);
+  }
+
+  return diff;
+}
+
+export function copyProject(project) {
+  if (project == null) {
+    return null;
+  }
+
+  return {
+    name: project.name,
+    image_id: project.image_id,
+    moderators: project.moderators.map(x => ({ ...x })),
+  };
 }
