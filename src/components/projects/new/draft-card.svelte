@@ -2,10 +2,12 @@
   import { createEventDispatcher, getContext } from 'svelte';
   import { Button, Card } from 'attractions';
   import { snackbarContextKey } from 'attractions/src/snackbar';
+  import classes from '@/utils/classes.js';
   import * as api from '@/utils/api.js';
   import { prepareAfterBackend } from '@/utils/project-manipulation.js';
 
   export let draft;
+  export let direction;
 
   async function loadDraft() {
     try {
@@ -22,7 +24,7 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<div class="draft-card">
+<div class={classes('draft-card animate', direction)}>
   <Card>
     <div class="title">{draft.name || 'Untitled'}</div>
     <div class="subtitle">

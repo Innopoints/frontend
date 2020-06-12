@@ -1,0 +1,28 @@
+.image-resizer {
+  position: relative;
+  width: 15em;
+  border-radius: .5em;
+  overflow: hidden;
+  height: 9em;
+
+  @media only screen and (min-width: 360px) {
+    width: 18em;
+    height: 10em;
+  }
+
+  @media only screen and (min-width: 640px) {
+    width: 32em;
+    height: 18em;
+  }
+}
+
+p {
+  margin-bottom: 1em;
+  font-weight: 300;
+}
+
+.uploading {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}

@@ -8,6 +8,7 @@
     getStudentParty,
   } from '@/constants/projects/project-templates.js';
   import * as api from '@/utils/api.js';
+  import sleep from '@/utils/sleep.js';
 
   const { session } = stores();
 
@@ -15,24 +16,45 @@
   export let project;
 
   let shownDraftIndex = 0;
+  let animationDirection = null;
+  const ANIMATE_LEFT = 'left';
+  const ANIMATE_RIGHT = 'right';
+  const ANIMATE_DOWN = 'down';
 
-  function showPrevDraft() {
+  async function showPrevDraft() {
+    animationDirection = ANIMATE_LEFT;
+    await sleep(200);
     if (shownDraftIndex > 0) {
+      animationDirection = null;
       shownDraftIndex--;
     }
   }
 
-  function showNextDraft() {
+  async function showNextDraft() {
+    animationDirection = ANIMATE_RIGHT;
+    await sleep(200);
     if (shownDraftIndex + 1 < drafts.length) {
+      animationDirection = null;
       shownDraftIndex++;
     }
   }
 
   async function deleteDraft({ detail: draftID }) {
+    if (drafts.length !== 1) {
+      animationDirection = ANIMATE_DOWN;
+    }
+
     try {
-      await api.json(api.del(`/projects/${draftID}`, { csrfToken: $session.account.csrf_token }));
-      drafts.splice(drafts.findIndex(draft => draft.id === draftID));
+      await Promise.all([
+        api.json(api.del(`/projects/${draftID}`, { csrfToken: $session.account.csrf_token })),
+        sleep(200),
+      ]);
+      drafts.splice(drafts.findIndex(draft => draft.id === draftID), 1);
       drafts = drafts;
+      animationDirection = null;
+      if (shownDraftIndex >= drafts.length && shownDraftIndex > 0) {
+        shownDraftIndex--;
+      }
     } catch (e) {
       console.error(e);
     }
@@ -72,11 +94,14 @@
       <section class="drafts">
         You could continue from one of your drafts:
         <div class="cards">
-          <DraftCard
-            draft={drafts[shownDraftIndex]}
-            on:draft-selected={({ detail: draft }) => startProject(draft)}
-            on:delete-draft={deleteDraft}
-          />
+          {#if shownDraftIndex < drafts.length}
+            <DraftCard
+              direction={animationDirection}
+              draft={drafts[shownDraftIndex]}
+              on:draft-selected={({ detail: draft }) => startProject(draft)}
+              on:delete-draft={deleteDraft}
+            />
+          {/if}
         </div>
         {#if drafts.length > 1}
           <nav>

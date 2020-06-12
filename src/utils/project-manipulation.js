@@ -1,5 +1,6 @@
 import ActivityTypes from '@/constants/projects/activity-internal-types.js';
 import getBlankActivity from '@/constants/projects/blank-activity.js';
+import arraysEqual from '@/utils/arrays-equal.js';
 
 
 /* Copy ALL the fields from the given activity object,
@@ -206,4 +207,16 @@ export function synchronizeActivityLists(internalList, backendActivities) {
 /* Filter the non-internal non-template activities. */
 export function visibleActivities(project) {
   return project.activities.filter(act => !act.internal && act._type !== ActivityTypes.TEMPLATE);
+}
+
+export function snapshotEqual(project, snapshot) {
+  if (project == null || snapshot == null) {
+    return project == snapshot;
+  }
+
+  return (
+    project.name === snapshot.name
+    && project.image_id === snapshot.image_id
+    && arraysEqual(project.moderators, snapshot.moderators)
+  );
 }

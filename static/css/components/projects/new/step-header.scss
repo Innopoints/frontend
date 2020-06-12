@@ -1,0 +1,59 @@
+@import "_attractions-theme.scss";
+@import "_mixins.scss";
+
+.step-header {
+  text-align: center;
+
+  :global h1 {
+    margin-top: 1.5em;
+
+    .autosave {
+      display: none;
+    }
+
+    .autosave.visible {
+      @include hide-accessible;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    text-align: left;
+
+    :global h1 {
+      .autosave {
+        display: inline-flex;
+        align-items: center;
+        font-size: .9rem;
+        font-weight: 300;
+        color: $disabled;
+        height: 100%;
+        margin-left: 1.5em;
+
+        .icon {
+          stroke: $disabled;
+          stroke-width: 1;
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+
+      .autosave.visible {
+        @include show-accessible;
+
+        height: 100%;
+        margin-left: .5em;
+      }
+    }
+
+    :global h2 {
+      font-size: 1.2rem;
+      margin-top: 1.5em;
+    }
+  }
+
+  @media only screen and (min-width: 700px) {
+    :global h1 .autosave.visible {
+      margin-left: 1.5em;
+    }
+  }
+}

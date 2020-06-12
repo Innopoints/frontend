@@ -27,17 +27,15 @@
   import StepOne from '@/containers/projects/new/step-1.svelte';
   import StepTwo from '@/containers/projects/new/step-2.svelte';
   import StepThree from '@/containers/projects/new/step-3.svelte';
-  import ImageResizer from '@/components/common/image-resizer.svelte';
   import * as api from '@/utils/api.js';
-  import generateQueryString from '@/utils/generate-query-string.js';
   import {
     determineInsertionIndex,
     filterProjectFields,
     prepareForBackend,
     prepareAfterBackend,
+    snapshotEqual,
   } from '@/utils/project-manipulation.js';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
-  import spaceOnly from '@/utils/space-only.js';
 
   const { page } = stores();
 
@@ -47,11 +45,9 @@
 
   let project = writable(null);
   let autosaved = writable(false);
-  let lastSyncedName = null;
+  let lastSyncedProject = null;
   const unsubscribe = project.subscribe(saveProject);
   onDestroy(unsubscribe);
-  let duplicateName = false;
-  let isUploading = false;
 
   // Step management
   $: step = ($project != null ? +$page.query.step || 0 : 0);
@@ -61,74 +57,24 @@
     }
   });
 
-  const imageResizer = {
-    open: false,
-    image: null,
-    file: null,
-    error: null,
-    show({ detail: file }) {
-      imageResizer.open = true;
-      imageResizer.file = file;
-      imageResizer.image = URL.createObjectURL(file, { type: file.type });
-    },
-    async uploadImage({ detail: pixels }) {
-      const formData = new FormData();
-      formData.append('file', imageResizer.file);
-      formData.append('x', pixels.x);
-      formData.append('y', pixels.y);
-      formData.append('width', pixels.width);
-      formData.append('height', pixels.height);
-
-      try {
-        const resp = await api.json(api.post('/file', {
-          data: formData,
-          csrfToken: account.csrf_token,
-        }));
-
-        $project.image_id = resp.id;
-        imageResizer.error = null;
-        imageResizer.open = false;
-      } catch (e) {
-        console.error(e);
-        imageResizer.error = 'Upload failed. Try again.';
-      }
-      isUploading = false;
-    },
-  };
-
-  /* A subscriber to the $project store, receives an actual project object. */
-  async function saveProject(projectObj) {
-    if (projectObj == null || !projectObj.name || spaceOnly(projectObj.name)) {
+  /* A subscriber to the $project store. */
+  async function saveProject(projectObject) {
+    if (snapshotEqual(projectObject, lastSyncedProject)) {
       return;
     }
 
     try {
-      if (projectObj.name !== lastSyncedName) {
-        const queryString = generateQueryString(new Map([['name', projectObj.name]]));
-        const nameAvailable = await api.json(api.get('/projects/name_available?' + queryString));
-
-        if (!nameAvailable) {
-          duplicateName = true;
-          return;
-        }
-      }
-
-      duplicateName = false;
-      lastSyncedName = projectObj.name;
-
-      if (projectObj.id != null) {
-        await api.json(api.patch('/projects/' + projectObj.id, {
-          data: filterProjectFields(projectObj, true),
+      lastSyncedProject = filterProjectFields(projectObject);
+      if (projectObject.id != null) {
+        await api.json(api.patch(`/projects/${projectObject.id}`, {
+          data: filterProjectFields(projectObject, true),
           csrfToken: account.csrf_token,
         }));
       } else {
         const uploadedProject = await api.json(api.post('/projects', {
-          data: filterProjectFields(projectObj),
+          data: filterProjectFields(projectObject),
           csrfToken: account.csrf_token,
         }));
-        uploadedProject.activities = uploadedProject.activities.concat(
-          projectObj.activities.filter(act => act._type === ActivityTypes.TEMPLATE),
-        );
         project.set(uploadedProject);
       }
       autosaved.set(true);
@@ -249,14 +195,7 @@
       {#if step === 0}
         <StepZero {drafts} {project} />
       {:else if step === 1}
-        <StepOne
-          {project}
-          {duplicateName}
-          {autosaved}
-          on:resize-image={imageResizer.show}
-          {isUploading}
-          on:uploading={(e) => isUploading = e.detail}
-        />
+        <StepOne {project} {autosaved} />
       {:else if step === 2}
         <StepTwo
           {project}
@@ -274,16 +213,6 @@
       {/if}
     </div>
   </SnackbarContainer>
-
-  <ImageResizer
-    aspectRatio={16/9}
-    image={imageResizer.image}
-    error={imageResizer.error}
-    bind:isOpen={imageResizer.open}
-    on:image-cropped={imageResizer.uploadImage}
-    on:uploading={(e) => isUploading = e.detail}
-    {isUploading}
-  />
 </Layout>
 
 <style src="../../../static/css/routes/projects/new.scss"></style>
