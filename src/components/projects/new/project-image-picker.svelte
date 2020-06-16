@@ -2,7 +2,7 @@
   import { getContext } from 'svelte';
   import { stores } from '@sapper/app';
   import { FileInput, Button } from 'attractions';
-  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import ImageResizer from '@/components/common/image-resizer.svelte';
   import { API_HOST_BROWSER } from '@/constants/env.js';
   import maxSizeMB from '@/constants/backend/file-upload-limit.js';

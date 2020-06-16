@@ -2,7 +2,7 @@
   import { getContext } from 'svelte';
   import { stores } from '@sapper/app';
   import { Button, TextField, DropdownShell, Dropdown, H1 } from 'attractions';
-  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import ReclaimInnopointsModal from '@/components/profile/reclaim-innopoints-modal.svelte';
   import * as api from '@/utils/api.js';
 

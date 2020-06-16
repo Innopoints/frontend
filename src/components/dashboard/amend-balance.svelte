@@ -1,7 +1,7 @@
 <script>
   import { getContext } from 'svelte';
   import { TextField, Button } from 'attractions';
-  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import * as api from '@/utils/api.js';
   import s from '@/utils/plural-s.js';
 

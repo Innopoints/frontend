@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher, getContext } from 'svelte';
   import { Button, Card } from 'attractions';
-  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import classes from '@/utils/classes.js';
   import * as api from '@/utils/api.js';
   import { prepareAfterBackend } from '@/utils/project-manipulation.js';

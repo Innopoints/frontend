@@ -2,7 +2,7 @@
   import { createEventDispatcher, getContext } from 'svelte';
   import { prefetch, goto } from '@sapper/app';
   import { Button, TextField, H1, Chip } from 'attractions';
-  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import Labeled from 'ui/labeled.svelte';
   import Notice from '@/components/common/notice.svelte';
   import TagSelector from '@/components/projects/view/tag-selector.svelte';

@@ -1,7 +1,7 @@
 <script>
   import { getContext } from 'svelte';
   import { Button } from 'attractions';
-  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
 
   export let users = [];
 

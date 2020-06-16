@@ -55,7 +55,7 @@
   import Layout from '@/layouts/default.svelte';
   import Info from '@/containers/profile/info.svelte';
   import { Card, Tabs, SnackbarContainer } from 'attractions';
-  import { SnackbarPositions } from 'attractions/src/snackbar';
+  import { SnackbarPositions } from 'attractions/snackbar';
   import Timeline from '@/containers/profile/timeline.svelte';
   import Statistics from '@/containers/profile/statistics.svelte';
   import Notifications from '@/containers/profile/notifications.svelte';

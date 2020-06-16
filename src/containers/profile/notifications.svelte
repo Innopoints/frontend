@@ -1,7 +1,7 @@
 <script>
   import { onMount, getContext } from 'svelte';
   import { Button, RadioGroup } from 'attractions';
-  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import Notice from '@/components/common/notice.svelte';
   import { categories, states, permissions } from '@/constants/profile/notification-settings.js';
   import subscribeToPush from '@/utils/notifications-subscribe.js';

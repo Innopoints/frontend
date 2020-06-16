@@ -1,7 +1,7 @@
 <script>
   import { getContext } from 'svelte';
   import { Card, Button, TextField } from 'attractions';
-  import { snackbarContextKey } from 'attractions/src/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import * as api from '@/utils/api.js';
 
   export let tags = [];

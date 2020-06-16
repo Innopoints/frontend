@@ -20,7 +20,7 @@
 <script>
   import Layout from '@/layouts/default.svelte';
   import { SnackbarContainer, Button, H1 } from 'attractions';
-  import { SnackbarPositions } from 'attractions/src/snackbar';
+  import { SnackbarPositions } from 'attractions/snackbar';
   import Reviews from '@/containers/dashboard/reviews.svelte';
   import Purchases from '@/containers/dashboard/purchases.svelte';
   import IndividualControls from '@/containers/dashboard/individual-controls.svelte';

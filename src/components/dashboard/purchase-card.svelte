@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Button, Chip, Popover } from 'attractions';
-  import { PopoverPositions } from 'attractions/src/popover';
+  import { PopoverPositions } from 'attractions/popover';
   import CopyButton from '@/components/common/copy-button.svelte';
   import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
   import getBackground from '@/utils/optimal-color.js';

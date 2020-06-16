@@ -18,7 +18,7 @@
   import { setContext } from 'svelte';
   import { stores } from '@sapper/app';
   import { SnackbarContainer, H2 } from 'attractions';
-  import { SnackbarPositions } from 'attractions/src/snackbar';
+  import { SnackbarPositions } from 'attractions/snackbar';
   import Layout from '@/layouts/default.svelte';
   import ProjectHeader from '@/containers/projects/view/project-header.svelte';
   import UserView from '@/containers/projects/view/user-view.svelte';

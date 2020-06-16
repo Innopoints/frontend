@@ -22,7 +22,7 @@
   import { stores, goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import { SnackbarContainer } from 'attractions';
-  import { SnackbarPositions } from 'attractions/src/snackbar';
+  import { SnackbarPositions } from 'attractions/snackbar';
   import StepZero from '@/containers/projects/new/step-0.svelte';
   import StepOne from '@/containers/projects/new/step-1.svelte';
   import StepTwo from '@/containers/projects/new/step-2.svelte';
