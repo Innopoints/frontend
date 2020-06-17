@@ -1,0 +1,135 @@
+@import "_attractions-theme.scss";
+
+.edit-activity {
+  margin-bottom: 1em;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: .9em;
+    margin-bottom: 2em;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+  }
+
+  :global {
+    .card {
+      overflow: visible;
+    }
+
+    .calendar {
+      left: -1.3em;
+    }
+
+    .text-field.short {
+      width: 5em;
+    }
+
+    .checkbox .icon::before {
+      top: 40% !important;
+    }
+
+    .telegram-required {
+      flex-direction: row;
+    }
+  }
+
+  footer {
+    padding-top: .5em;
+    border-top: .0625em solid $light-contrast;
+
+    .error {
+      color: $danger;
+      font-weight: 300;
+      font-size: .9em;
+      margin: .4em .6em .8em;
+      text-align: center;
+    }
+
+    .row {
+      margin: .4em .6em .8em;
+      font-weight: 300;
+
+      svg {
+        stroke-width: 1.5;
+      }
+
+      span {
+        margin: 0 .5em;
+        flex: 1;
+        font-size: .9em;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  @media only screen and (min-width: 360px) {
+    nav {
+      font-size: 1em;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    @supports (display: grid) {
+      :global .card {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr 1fr;
+        column-gap: 2em;
+
+        .fields {
+          grid-column: 2;
+          grid-row: span 2;
+        }
+
+        footer {
+          align-self: end;
+
+          .error {
+            width: 12em;
+          }
+
+          .row {
+            width: 10em;
+          }
+
+          .actions {
+            flex-direction: column;
+            align-items: flex-start;
+
+            .btn:first-child {
+              margin-bottom: .5em;
+            }
+          }
+        }
+
+        nav {
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-end;
+
+          .tab .content {
+            border-bottom-width: 0;
+            border-right-width: .125em;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: .3125em;
+            margin: .5em;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 800px) {
+    :global .telegram-required .description {
+      flex: 1;
+    }
+  }
+}

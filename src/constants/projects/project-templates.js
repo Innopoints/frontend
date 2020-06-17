@@ -1,5 +1,4 @@
 import getBlankActivity from '@/constants/projects/blank-activity.js';
-import ActivityTypes from '@/constants/projects/activity-internal-types.js';
 
 
 export function getBlankProject() {
@@ -85,7 +84,7 @@ export function getOlympiad() {
     },
   ];
   blank.activities = activities.map(
-    activity => Object.assign(getBlankActivity(), activity, { _type: ActivityTypes.TEMPLATE }),
+    activity => Object.assign(getBlankActivity(), activity),
   );
   return blank;
 }
@@ -143,7 +142,7 @@ export function getStudentParty() {
     },
   ];
   blank.activities = activities.map(
-    activity => Object.assign(getBlankActivity(), activity, { _type: ActivityTypes.TEMPLATE }),
+    activity => Object.assign(getBlankActivity(), activity),
   );
   return blank;
 }

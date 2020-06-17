@@ -1,39 +1,40 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import Dropdown from 'ui/dropdown.svelte';
-  import CheckboxGroup from 'ui/checkbox-group.svelte';
+  import { DropdownShell, Dropdown, CheckboxGroup, Button } from 'attractions';
 
   export let competences;
-  export let activityIndex;
   export let value;
-  export let errorNotSpecified;
 
   $: competenceOptions = competences.map(competence => ({
+    label: competence.name,
     value: competence.id,
     checked: value.includes(competence.id),
   }));
-  $: competenceLabels = competences.map(competence => competence.name);
 
   function processCheckboxChange({ detail: competence }) {
     if (competence.checked) {
-      value.push(competence.value);
+      value.push(parseInt(competence.value));
       value = value;
     } else {
-      value = value.filter(id => id !== competence.value);
+      value = value.filter(id => id != competence.value);
     }
-    errorNotSpecified = value.length === 0;
-    dispatch('change', value);
   }
-
-  const dispatch = createEventDispatcher();
 </script>
 
-<Dropdown label="select competences" dropdownclass="btn-shift" noclose nowrap>
-  <CheckboxGroup
-    name="competences{activityIndex}"
-    maxChecked={3}
-    items={competenceOptions}
-    labels={competenceLabels}
-    on:change={processCheckboxChange}
-  />
-</Dropdown>
+<DropdownShell let:toggle>
+  <Button on:click={toggle}>
+    select competences
+    <svg class="ml dropdown-chevron" src="images/icons/chevron-down.svg" />
+  </Button>
+  <Dropdown>
+    <div class="competence-list">
+      <CheckboxGroup
+        name="competences"
+        max={3}
+        items={competenceOptions}
+        on:change={processCheckboxChange}
+      />
+    </div>
+  </Dropdown>
+</DropdownShell>
+
+<style src="../../../../static/css/components/projects/new/competence-picker.scss"></style>

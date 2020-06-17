@@ -1,6 +1,8 @@
 import ActivityTypes from '@/constants/projects/activity-internal-types.js';
 import getBlankActivity from '@/constants/projects/blank-activity.js';
+import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
 import arraysEqual from '@/utils/arrays-equal.js';
+import spaceOnly from '@/utils/space-only.js';
 
 
 /* Copy ALL the fields from the given activity object,
@@ -9,13 +11,17 @@ export function copyActivity(activity) {
   const newActivity = Object.assign({}, activity);
   if (activity.timeframe != null) {
     newActivity.timeframe = {
-      start: activity.timeframe.start,
-      end: activity.timeframe.end,
+      start: activity.timeframe.start && new Date(activity.timeframe.start.valueOf()),
+      end: activity.timeframe.end && new Date(activity.timeframe.end.valueOf()),
     };
   }
 
-  if (activity.moderators != null) {
-    newActivity.moderators = activity.moderators.slice();
+  if (activity.competences != null) {
+    newActivity.competences = activity.competences.slice();
+  }
+
+  if (activity.application_deadline != null) {
+    newActivity.application_deadline = new Date(activity.application_deadline.valueOf());
   }
 
   if (activity.feedback_questions != null) {
@@ -23,6 +29,33 @@ export function copyActivity(activity) {
   }
 
   return newActivity;
+}
+
+export function copyActivityInPlace(source, destination) {
+  for (let field in source) {
+    destination[field] = source[field];
+  }
+
+  if (source.timeframe != null) {
+    destination.timeframe = {
+      start: source.timeframe.start && new Date(source.timeframe.start.valueOf()),
+      end: source.timeframe.end && new Date(source.timeframe.end.valueOf()),
+    };
+  }
+
+  if (source.application_deadline != null) {
+    destination.application_deadline = new Date(source.application_deadline.valueOf());
+  }
+
+  if (source.competences != null) {
+    destination.competences = source.competences.slice();
+  }
+
+  if (source.feedback_questions != null) {
+    destination.feedback_questions = source.feedback_questions.slice();
+  }
+
+  return destination;
 }
 
 export function filterProjectFields(project) {
@@ -59,34 +92,41 @@ function toISOFormat(date) {
 }
 
 /* Prepare an activity object to be sent to the backend
-   by converting dates to ISO and ensuring certain invariants. */
+   by converting dates to ISO, ensuring certain invariants and removing alien fields. */
 export function prepareForBackend(activity) {
-  if (activity.fixed_reward) {
-    activity.working_hours = 1;
+  const copy = copyActivity(activity);
+  if (copy.fixed_reward) {
+    copy.working_hours = 1;
+  } else {
+    copy.reward_rate = HOURLY_RATE;
   }
 
-  activity.timeframe = {
-    start: toISOFormat(activity.timeframe.start),
-    end: toISOFormat(activity.timeframe.end),
+  copy.timeframe = {
+    start: activity.timeframe.start && toISOFormat(activity.timeframe.start),
+    end: activity.timeframe.end && toISOFormat(activity.timeframe.end),
   };
 
   if (activity.application_deadline != null) {
-    activity.application_deadline = toISOFormat(activity.application_deadline);
+    copy.application_deadline = toISOFormat(activity.application_deadline);
   }
 
-  delete activity.project;
-  delete activity.applications;
-  delete activity.existing_application;
-  delete activity.internal;
-  delete activity.vacant_spots;
+  delete copy.id;
+  delete copy.project;
+  delete copy.applications;
+  delete copy.existing_application;
+  delete copy.internal;
+  delete copy.vacant_spots;
+  delete copy._editing;
+
+  return copy;
 }
 
 /* Prepare the activity object to be processed on the frontend
    by converting dates to Date objects. */
 export function prepareAfterBackend(activity) {
   activity.timeframe = {
-    start: new Date(activity.timeframe.start),
-    end: new Date(activity.timeframe.end),
+    start: activity.timeframe.start && new Date(activity.timeframe.start),
+    end: activity.timeframe.end && new Date(activity.timeframe.end),
   };
 
   if (activity.application_deadline != null) {
@@ -206,18 +246,6 @@ export function visibleActivities(project) {
   return project.activities.filter(act => !act.internal && act._type !== ActivityTypes.TEMPLATE);
 }
 
-export function snapshotEqual(project, snapshot) {
-  if (project == null || snapshot == null) {
-    return project == snapshot;
-  }
-
-  return (
-    project.name === snapshot.name
-    && project.image_id === snapshot.image_id
-    && arraysEqual(project.moderators, snapshot.moderators)
-  );
-}
-
 function setNullSafe(object, field, value) {
   if (object == null) {
     return { [field]: value };
@@ -227,7 +255,7 @@ function setNullSafe(object, field, value) {
   }
 }
 
-export function computeDiff(project, reference) {
+export function computeDiffProject(project, reference) {
   let diff = null;
   if (reference == null || project == null) {
     return copyProject(project);
@@ -242,6 +270,9 @@ export function computeDiff(project, reference) {
   if (!arraysEqual(project.moderators, reference.moderators)) {
     diff = setNullSafe(diff, 'moderators', project.moderators);
   }
+  if (project.activities !== reference.activities) {
+    diff = setNullSafe(diff, 'activities', project.activities);
+  }
 
   return diff;
 }
@@ -255,5 +286,19 @@ export function copyProject(project) {
     name: project.name,
     image_id: project.image_id,
     moderators: project.moderators.map(x => ({ ...x })),
+    activities: project.activities,
   };
+}
+
+/* Check if all the required fields for the activity have been filled out. */
+export function isComplete(activity) {
+  return (
+    activity.name != null
+    && !spaceOnly(activity.name)
+    && activity.timeframe != null
+    && activity.timeframe.start != null
+    && activity.timeframe.end != null
+    && activity.working_hours != null
+    && activity.competences.length > 0
+  );
 }
