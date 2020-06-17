@@ -1,11 +1,14 @@
 <script>
   import { getContext } from 'svelte';
+  import { stores } from '@sapper/app';
   import StepHeader from '@/components/projects/new/step-header.svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import { Autocomplete, Label, DropdownShell, Dropdown, Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import spaceOnly from '@/utils/space-only.js';
   import * as api from '@/utils/api.js';
+
+  const { session } = stores();
 
   export let project;
   export let autosaved;
@@ -21,7 +24,7 @@
   }
 
   function notCreator(moderator) {
-    return moderator.email !== $project.creator.email;
+    return moderator.email !== $session.account.email;
   }
 
   function recordChanges() {
