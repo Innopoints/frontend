@@ -29,13 +29,9 @@
   import StepThree from '@/containers/projects/new/step-3.svelte';
   import * as api from '@/utils/api.js';
   import {
-    computeDiff,
+    computeDiffProject,
     copyProject,
-    determineInsertionIndex,
-    prepareForBackend,
-    prepareAfterBackend,
   } from '@/utils/project-manipulation.js';
-  import ActivityTypes from '@/constants/projects/activity-internal-types.js';
 
   const { page } = stores();
 
@@ -64,7 +60,7 @@
   });
 
   async function saveProject(projectObject) {
-    const diff = computeDiff(projectObject, lastSyncedProject);
+    const diff = computeDiffProject(projectObject, lastSyncedProject);
     if (diff == null) {
       return;
     }
@@ -77,9 +73,13 @@
     try {
       lastSyncedProject = copyProject(projectObject);
       if (projectObject.id != null) {
+        delete diff.activities;
         await api.json(api.patch(`/projects/${projectObject.id}`, requestOptions));
       } else {
-        ({ id: projectObject.id } = await api.json(api.post('/projects', requestOptions)));
+        ({
+          id: projectObject.id,
+          activities: projectObject.activities,
+        } = await api.json(api.post('/projects', requestOptions)));
       }
       autosaved.set(true);
     } catch (e) {
@@ -87,107 +87,6 @@
         props: { text: 'Could not autosave. Some changes might be lost.' },
       });
       console.error(e);
-    }
-  }
-
-  async function publishProject() {
-    try {
-      await api.json(api.patch(
-        `/projects/${$project.id}/publish`,
-        { csrfToken: account.csrf_token },
-      ));
-      goto(`/projects/${$project.id}`);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  async function processActivityChange({ detail }) {
-    const type = detail.activityCopy._type;
-    delete detail.activityCopy._type;
-    prepareForBackend(detail.activityCopy);
-
-    const index = determineInsertionIndex($project.activities, detail.position);
-    let updatedActivity;
-    try {
-      if (type === ActivityTypes.NEW
-          || (type === ActivityTypes.EDIT && detail.activityCopy.id == null)) {
-        const replacedTemplateIdx = $project.activities.findIndex(
-          act => act.name === detail.activityCopy.name,
-        );
-        if ($project.id == null) {
-          // The project does not exist on the backend yet
-          updatedActivity = detail.activityCopy;
-        } else {
-          updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
-            data: detail.activityCopy,
-            csrfToken: account.csrf_token,
-          }));
-        }
-        if (replacedTemplateIdx !== -1) {
-          $project.activities.splice(replacedTemplateIdx, 1, updatedActivity);
-        } else {
-          $project.activities.splice(index, 0, updatedActivity);
-        }
-      } else if (type === ActivityTypes.EDIT) {
-        if ($project.id == null) {
-          // The project does not exist on the backend yet
-          updatedActivity = detail.activityCopy;
-          $project.activities.splice(index, 1, updatedActivity);
-        } else {
-          const activityID = detail.activityCopy.id;
-          delete detail.activityCopy.id;
-
-          updatedActivity = await api.json(api.patch(
-            `/projects/${$project.id}/activities/${activityID}`,
-            { data: detail.activityCopy, csrfToken: account.csrf_token },
-          ));
-          updatedActivity.id = activityID;
-
-          $project.activities.splice(
-            $project.activities.findIndex(act => act.id === activityID),
-            1,
-            updatedActivity,
-          );
-        }
-      }
-    } catch (e) {
-      console.error(e);
-    }
-
-    prepareAfterBackend(updatedActivity);
-    for (let activity of $project.activities) {
-      if (activity._type === ActivityTypes.TEMPLATE && activity.timeframe == null) {
-        activity.timeframe = {
-          start: updatedActivity.timeframe.start,
-          end: updatedActivity.timeframe.end,
-        };
-      }
-    }
-
-    $project.activities = $project.activities;
-  }
-
-  async function processActivityDeletion({ detail: activityID }) {
-    // activityID may be:
-    //  - the actual ID of the activity on the backend, if the project exists on the backend;
-    //  - the name of the activity, if the project does not exist on the backend.
-    if (activityID == null) {
-      return;
-    }
-
-    if ($project.id != null && typeof activityID == 'number') {
-      try {
-        await api.json(api.del(
-          `/projects/${$project.id}/activities/${activityID}`,
-          { csrfToken: account.csrf_token },
-        ));
-        $project.activities = $project.activities.filter(act => act.id !== activityID);
-      } catch (e) {
-        console.error(e);
-      }
-    } else {
-      $project.activities = $project.activities.filter(act => act.name !== activityID);
     }
   }
 </script>
@@ -200,23 +99,13 @@
   <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
     <div class="material">
       {#if step === 0}
-        <StepZero {drafts} {project} />
+        <StepZero {project} {drafts} />
       {:else if step === 1}
         <StepOne {project} {autosaved} />
       {:else if step === 2}
-        <StepTwo
-          {project}
-          {autosaved}
-          {competences}
-          on:change={processActivityChange}
-          on:delete-activity={processActivityDeletion}
-        />
+        <StepTwo {project} {autosaved} {competences} />
       {:else}
-        <StepThree
-          {project}
-          {autosaved}
-          on:publish={publishProject}
-        />
+        <StepThree {project} {autosaved} />
       {/if}
     </div>
   </SnackbarContainer>

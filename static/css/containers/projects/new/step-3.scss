@@ -1,0 +1,27 @@
+@import "containers/projects/new/step-common.scss";
+
+.instructions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1em 0;
+
+  & > p {
+    margin: .5em 0;
+  }
+
+  :global .dropdown {
+    padding: 1em;
+    font-size: .95em;
+
+    p {
+      margin-bottom: .5em;
+    }
+  }
+}
+
+main > p {
+  margin-top: 1em;
+  font-weight: 300;
+}

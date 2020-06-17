@@ -18,6 +18,7 @@
 
   <FormField
     name="Project name"
+    help="Prefer English names."
     class="padded"
     required
     errors={[spaceOnly($project.name) && "The name must not be empty."]}
@@ -38,7 +39,13 @@
     <ProjectImagePicker bind:value={$project.image_id} />
   </FormField>
 
-  <BottomNavigation step={1} error={!$project.name ? 1 : null} />
+  <BottomNavigation
+    step={1}
+    error={
+      $project.name == null || spaceOnly($project.name) ?
+        'A project must have a non-empty name.' : null
+    } 
+  />
 </div>
 
 <style src="../../../../static/css/containers/projects/new/step-1.scss"></style>
