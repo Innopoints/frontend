@@ -3,8 +3,8 @@
   import StepHeader from '@/components/projects/new/step-header.svelte';
   import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
   import EditActivity from '@/components/projects/new/edit-activity.svelte';
-  import ActivityCard from '@/components/projects/new/activity.svelte';
   import Button from 'ui/button.svelte';
+  import ActivityCard from '@/components/projects/new/activity-card.svelte';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import getBlankActivity from '@/constants/projects/blank-activity.js';
   import {
