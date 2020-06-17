@@ -43,7 +43,6 @@
 
   let rememberedPeopleRequired = 0;
   function changeMoreBetterCheckbox({ detail }) {
-    console.log(detail);
     if (detail.checked) {
       rememberedPeopleRequired = activity.people_required;
       activity.people_required = null;
@@ -90,7 +89,10 @@
         {SECTION_GENERAL}
       </Tab>
       <Tab name="section" value={SECTION_VOLUNTEERS} bind:group={selectedSection}>
-        {#if activity.working_hours == null}
+        {#if (
+          (!activity.fixed_reward && activity.working_hours == null)
+          || (activity.fixed_reward && activity.reward_rate == null))
+        }
           <Dot small info title="Some required fields are not filled out." class="mr" />
         {/if}
         {SECTION_VOLUNTEERS}
@@ -186,8 +188,8 @@
               type="number"
               min={0}
               max={99999}
-              bind:value={activity.people_required}
-              disabled={activity.people_required == null}
+              value={activity.people_required}
+              on:change={({ detail }) => activity.people_required = detail.value}
               class="short"
             />
             <span class="ml">people</span>

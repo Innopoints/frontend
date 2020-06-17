@@ -298,7 +298,10 @@ export function isComplete(activity) {
     && activity.timeframe != null
     && activity.timeframe.start != null
     && activity.timeframe.end != null
-    && activity.working_hours != null
     && activity.competences.length > 0
+    && (
+      (!activity.fixed_reward && activity.working_hours != null)
+      || (activity.fixed_reward && activity.reward_rate != null)
+    )
   );
 }
