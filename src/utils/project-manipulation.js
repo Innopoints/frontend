@@ -68,25 +68,6 @@ export function filterProjectFields(project) {
   return filtered;
 }
 
-export function countDisplayActivitiesBefore(activityList, index) {
-  let result = 0;
-  for (let i = 0; i < index; ++i) {
-    if (activityList[i]._type === ActivityTypes.DISPLAY
-        || activityList[i]._type === ActivityTypes.TEMPLATE) {
-      result++;
-    }
-  }
-  return result;
-}
-
-/* Adds a new form to the list of activites */
-export function addActivity(activityList) {
-  const newActivity = getBlankActivity();
-  newActivity._type = ActivityTypes.NEW;
-  activityList.push(newActivity);
-  return activityList;
-}
-
 function toISOFormat(date) {
   return date.toISOString().slice(0, -1) + '+00:00';
 }

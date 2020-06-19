@@ -9,43 +9,11 @@
 
   :global h2.padded {
     text-align: center;
-    margin-bottom: 0;
+    margin-bottom: 1em;
     margin-top: 2em;
   }
 }
 
 .activities {
   margin-top: 1em;
-
-  &.moderated + :global .btn {
-    margin: 1em 0 4em .5em;
-
-    @media only screen and (min-width: 429px) {
-      margin-bottom: 6em;
-    }
-
-    @media only screen and (min-width: 480px) {
-      margin-bottom: 8em;
-    }
-
-    @media only screen and (min-width: 700px) {
-      margin-left: 2.5em;
-    }
-
-    @media only screen and (min-width: 840px) {
-      margin-bottom: 4em;
-    }
-
-    @media only screen and (min-width: 1097px) {
-      margin-bottom: 5em;
-    }
-
-    @media only screen and (min-width: 1200px) {
-      margin-left: 8%;
-    }
-
-    @media only screen and (min-width: 1383px) {
-      margin-bottom: 6em;
-    }
-  }
 }
