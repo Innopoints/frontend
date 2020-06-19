@@ -17,7 +17,7 @@
   import TwoStateSwitch from 'ui/two-state-switch.svelte';
   import CompetencePicker from './competence-picker.svelte';
   import ActivityQuestions from './activity-questions.svelte';
-  import getBlankActivity from '@/constants/projects/blank-activity.js';
+  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
   import {
     copyActivity,
@@ -31,7 +31,7 @@
 
   const { session } = stores();
 
-  export let activity = getBlankActivity();
+  export let activity;
   let initialCopy = copyActivity(activity);
   let notDraft = !activity.draft;
   $: activity.draft = !notDraft;
@@ -50,6 +50,41 @@
     } else {
       activity.people_required = rememberedPeopleRequired;
     }
+  }
+
+  function validatePeopleRequired({ detail }) {
+    if (activity.applications != null) {
+      const approved = activity.applications.filter(
+        apl => apl.status === ApplicationStatuses.APPROVED,
+      );
+      if (approved.length > detail.value) {
+        showSnackbar({
+          props: {
+            text: 'Cannot set required people less than the amount of approved applications',
+          },
+        });
+        return;
+      }
+    }
+    activity.people_required = detail.value;
+  }
+
+  function validateApplicationDeadline({ detail }) {
+    if (activity.applications != null) {
+      for (let application of activity.applications) {
+        console.log('applied at', application.application_time);
+        if (detail.value < new Date(application.application_time)) {
+          showSnackbar({
+            props: {
+              text: 'Cannot set the deadline before an existing application',
+            },
+          });
+          activity.application_deadline = activity.application_deadline;
+          return;
+        }
+      }
+    }
+    activity.application_deadline = detail.value;
   }
 
   function discardChanges() {
@@ -199,7 +234,7 @@
               min={0}
               max={99999}
               value={activity.people_required}
-              on:change={({ detail }) => activity.people_required = detail.value}
+              on:change={validatePeopleRequired}
               class="short"
             />
             <span class="ml">people</span>
@@ -218,8 +253,14 @@
           name="Application deadline"
           optional
         >
-          <DatePicker bind:value={activity.application_deadline} />
-          <TimePicker bind:value={activity.application_deadline} />
+          <DatePicker
+            value={activity.application_deadline}
+            on:change={validateApplicationDeadline}
+          />
+          <TimePicker
+            value={activity.application_deadline}
+            on:change={validateApplicationDeadline}
+          />
         </FormField>
         <FormField
           name="Feedback questions"
@@ -235,15 +276,23 @@
         <div class="error">
           Fill out all required fields before making the activity visible to volunteers.
         </div>
+      {:else if activity.applications != null && activity.applications.length > 0}
+        <div class="error">
+          This activity cannot be hidden because there are applications.
+        </div>
+      {:else}
+        <div class="row">
+          <svg src="images/icons/eye.svg" />
+          <span>visible to volunteers</span>
+          <Switch
+            bind:value={notDraft}
+            disabled={
+              !isComplete(activity)
+              || activity.applications != null && activity.applications.length > 0
+            }
+          />
+        </div>
       {/if}
-      <div class="row">
-        <svg src="images/icons/eye.svg" />
-        <span>visible to volunteers</span>
-        <Switch
-          bind:value={notDraft}
-          disabled={!isComplete(activity)}
-        />
-      </div>
       <div class="actions">
         <Button danger on:click={discardChanges}>discard changes</Button>
         <Button filled on:click={saveChanges}>
