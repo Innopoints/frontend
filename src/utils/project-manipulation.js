@@ -28,6 +28,8 @@ export function copyActivity(activity) {
     newActivity.feedback_questions = activity.feedback_questions.slice();
   }
 
+  newActivity.applications = [];
+
   return newActivity;
 }
 
