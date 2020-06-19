@@ -22,7 +22,7 @@
   export let project;
   export let autosaved;
   export let competences;
-  $: externalActvities = $project.activities.filter(act => !act.internal);
+  $: externalActivities = $project.activities.filter(act => !act.internal);
 
   let activityListElement;
   let scrollToLast = false;
@@ -127,7 +127,7 @@
   }
 
   onMount(() => {
-    if (externalActvities.length === 0) {
+    if (externalActivities.length === 0) {
       createActivity(getBlankActivity());
     }
   });
@@ -139,7 +139,7 @@
   <StepHeader step={2} {autosaved} subtitle="Step 2. Add volunteering activities" />
 
   <div class="activity-list padded" bind:this={activityListElement}>
-    {#each externalActvities as activity, index (activity.id)}
+    {#each externalActivities as activity, index (activity.id)}
       <div animate:flip={{ duration: 150 }}>
         {#if !activity._editing}
           <ActivityCard
@@ -161,14 +161,14 @@
     {/each}
     <Button outline on:click={() => createActivity(getBlankActivity())}>
       <svg src="images/icons/plus.svg" class="mr" />
-      add {#if externalActvities.length > 0}another{/if} activity
+      add {#if externalActivities.length > 0}another{/if} activity
     </Button>
   </div>
 
   <BottomNavigation
     step={2}
     error={
-      externalActvities.find(act => !act.draft) == null ?
+      externalActivities.find(act => !act.draft) == null ?
         'A project must have at least one visible activity.' : null
     }
   />
