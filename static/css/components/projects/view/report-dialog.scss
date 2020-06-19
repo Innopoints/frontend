@@ -1,0 +1,65 @@
+@import "_attractions-theme.scss";
+@import "_mixins.scss";
+
+.reports {
+  margin-top: 1.5em;
+  font-size: .95rem;
+  max-height: 75vh;
+  overflow-y: auto;
+
+  @include thin-scrollbar;
+
+  .report {
+    padding-top: 1em;
+
+    &:not(:last-child) {
+      padding-bottom: 1em;
+      border-bottom: .0625em solid $light-contrast;
+    }
+  }
+
+  .data-points {
+    display: flex;
+    flex-direction: column;
+
+    :global .labeled:first-child {
+      margin-bottom: 1em;
+    }
+
+    a {
+      display: inline-block;
+    }
+
+    .icon {
+      flex-shrink: 0;
+    }
+  }
+
+  .feedback {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    margin-top: 1em;
+    white-space: pre-line;
+
+    p {
+      margin-top: 1em;
+    }
+  }
+
+  :global .labeled > .icon {
+    margin-top: .6rem;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    min-width: 25em;
+
+    .data-points, .feedback {
+      flex-direction: row;
+    }
+
+    .data-points :global .labeled:first-child {
+      margin-right: 10%;
+    }
+  }
+}

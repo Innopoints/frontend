@@ -59,19 +59,4 @@
       margin-bottom: -1px;
     }
   }
-
-  .with-icon {
-    display: flex;
-    align-items: flex-start;
-    font-size: .9rem;
-    margin-top: .3em;
-
-    & > .icon {
-      width: 1.25rem;
-      height: 1.25rem;
-      flex-shrink: 0;
-      stroke: $main;
-      margin-right: .3em;
-    }
-  }
 }

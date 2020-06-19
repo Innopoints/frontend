@@ -1,4 +1,5 @@
 @import "_attractions-theme.scss";
+@import "_mixins.scss";
 
 .notification-center {
   :global(.btn.close) {
@@ -39,21 +40,7 @@
   overflow-y: scroll;
   overscroll-behavior: none;
 
-  &::-webkit-scrollbar {
-    width: .3125em;
-    height: .5em;
-    background: none;
-    margin: 1em 0;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $light-contrast;
-    border-radius: .3125em;
-
-    &:hover {
-      background: darken($light-contrast, 10%);
-    }
-  }
+  @include thin-scrollbar;
 }
 
 .smth {

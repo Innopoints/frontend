@@ -1,107 +1,149 @@
 <script>
-  import { onMount, createEventDispatcher } from 'svelte';
-  import AccordionSection from 'ui/accordion-section.svelte';
-  import Button from 'ui/button.svelte';
+  import { onMount, createEventDispatcher, getContext } from 'svelte';
+  import { stores } from '@sapper/app';
+  import { AccordionSection, Button, Popover } from 'attractions';
+  import { PopoverPositions } from 'attractions/popover';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import CopyButton from '@/components/common/copy-button.svelte';
+  import Stars from '@/components/common/stars.svelte';
+  import ReportDialog from '@/components/projects/view/report-dialog.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import * as api from '@/utils/api.js';
 
+  const { session } = stores();
+
   export let activity;
   export let application;
-  export let handlePanelOpen;
-  let report = null;
 
+  let report = null;
   onMount(() => {
     report = api.get(
       `/projects/${activity.project}/activities/${activity.id}`
       + `/applications/${application.id}/report_info`,
-    ).then(resp => resp.json());
+    ).then(resp => resp.json()).catch(console.error);
   });
 
+  const reportDialog = {
+    open: false,
+    reports: null,
+    async show({ detail }) {
+      reportDialog.reports = (await report).reports;
+      reportDialog.open = true;
+    },
+  };
+
+  const snackbarMessages = {
+    [ApplicationStatuses.APPROVED]: 'Application accepted',
+    [ApplicationStatuses.REJECTED]: 'Application rejected',
+    [ApplicationStatuses.PENDING]: 'Application moved to pending',
+  };
+
+  async function changeApplicationStatus(status, undoing) {
+    const lastStatus = application.status;
+    try {
+      await api.json(api.patch(
+        `/projects/${activity.project}/activities/${activity.id}/applications/${application.id}`,
+        { data: { status }, csrfToken: $session.account.csrf_token },
+      ));
+
+      application.status = status;
+      if (status === ApplicationStatuses.APPROVED) {
+        activity.vacant_spots--;
+      } else if (lastStatus === ApplicationStatuses.APPROVED) {
+        activity.vacant_spots++;
+      }
+      dispatch('rerender');
+
+      if (!undoing) {
+        showSnackbar({
+          props: {
+            text: snackbarMessages[status],
+            action: {
+              text: 'undo',
+              callback() {
+                changeApplicationStatus(lastStatus, true);
+              },
+            },
+          },
+        });
+      }
+    } catch (e) {
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      console.error(e);
+    }
+  }
+
+  const showSnackbar = getContext(snackbarContextKey);
   const dispatch = createEventDispatcher();
 </script>
 
-<AccordionSection on:panel-open={handlePanelOpen} let:toggle>
-  <button slot="handle" class="btn handle round" type="button" on:click={toggle}>
-    <svg class="chevron" src="images/icons/chevron-down.svg" />
-  </button>
-  <div slot="handle" class="name">
-    {application.applicant.full_name}
-  </div>
-  <span slot="handle" class="telegram popover-container">
-    {#if application.telegram}
-      <a href="https://t.me/{application.telegram}" target="_blank">
-        @{application.telegram}
-      </a>
-      <CopyButton text={application.telegram} />
-    {:else}
-      No Telegram username specified.
-    {/if}
-  </span>
-  {#if report != null}
-    {#await report then reportData}
-      <div class="stars">
-        {#each [0, 1, 2, 3, 4] as i}
-          {#if i < reportData.average_rating}
-            <svg class="star" src="images/icons/star.svg" />
-          {:else}
-            <svg class="star off" src="images/icons/star.svg" />
-          {/if}
-        {/each}
-      </div>
-      <Button
-        on:click={() => dispatch('view-reports', {
-          reports: reportData.reports,
-          applicant: application.applicant,
-        })}
-      >
-        performance reports
+<div class="application-tile">
+  <AccordionSection on:panel-open>
+    <div class="handle" slot="handle" let:toggle>
+      <Button round on:click={toggle}>
+        <svg class="accordion-chevron" src="images/icons/chevron-down.svg" />
       </Button>
-    {/await}
-  {/if}
-  {#if application.comment}
-    <div class="with-icon">
-      <svg class="icon" src="images/icons/message-square.svg" />
-      <div class="text">
-        {application.comment}
+      <div class="name">
+        {application.applicant.full_name}
       </div>
+      {#if application.telegram}
+        <Popover position={PopoverPositions.TOP} class="telegram">
+          <a href="https://t.me/{application.telegram}" target="_blank">
+            @{application.telegram}
+          </a>
+          <div slot="popover-content">
+            <CopyButton text={application.telegram} />
+          </div>
+        </Popover>
+      {:else}
+        No Telegram username specified.
+      {/if}
     </div>
-  {/if}
-  <div class="actions">
-    {#if application.status === ApplicationStatuses.PENDING}
-      <Button
-        isFilled
-        classname="mr-2"
-        on:click={() => dispatch('application-status-changed', {
-          application,
-          activity,
-          status: ApplicationStatuses.APPROVED,
-        })}
-      >
-        accept
-      </Button>
-      <Button
-        isFilled
-        isDanger
-        on:click={() => dispatch('application-status-changed', {
-          application,
-          activity,
-          status: ApplicationStatuses.REJECTED,
-        })}
-      >
-        reject
-      </Button>
-    {:else}
-      <Button
-        isDanger
-        on:click={() => dispatch('application-status-changed', {
-          application,
-          activity,
-          status: ApplicationStatuses.PENDING,
-        })}
-      >
-        back to pending
-      </Button>
+    {#if report != null}
+      {#await report then reportData}
+        <Stars value={reportData.average_rating} />
+        <Button on:click={reportDialog.show}>performance reports</Button>
+      {/await}
     {/if}
-  </div>
-</AccordionSection>
+    {#if application.comment}
+      <div class="with-icon">
+        <svg class="icon" src="images/icons/message-square.svg" />
+        <div class="text">
+          {application.comment}
+        </div>
+      </div>
+    {/if}
+    <div class="actions">
+      {#if application.status === ApplicationStatuses.PENDING}
+        <Button
+          filled
+          class="mr-2"
+          on:click={() => changeApplicationStatus(ApplicationStatuses.APPROVED, false)}
+        >
+          accept
+        </Button>
+        <Button
+          filled
+          danger
+          on:click={() => changeApplicationStatus(ApplicationStatuses.REJECTED, false)}
+        >
+          reject
+        </Button>
+      {:else}
+        <Button
+          danger
+          on:click={() => changeApplicationStatus(ApplicationStatuses.PENDING, false)}
+        >
+          back to pending
+        </Button>
+      {/if}
+    </div>
+  </AccordionSection>
+  <ReportDialog
+    bind:open={reportDialog.open}
+    applicant={application.applicant}
+    reports={reportDialog.reports}
+  />
+</div>
+
+<style src="../../../../static/css/components/projects/view/application-tile.scss"></style>
