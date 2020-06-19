@@ -9,11 +9,13 @@
   import { Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import getBlankActivity from '@/constants/projects/blank-activity.js';
+  import defaultFeedbackQuestions from '@/constants/projects/feedback-questions.js';
   import {
     copyActivity,
     prepareForBackend,
   } from '@/utils/project-manipulation.js';
   import * as api from '@/utils/api.js';
+  import arraysEqual from '@/utils/arrays-equal.js';
 
   const { session } = stores();
 
@@ -86,6 +88,44 @@
     }
   }
 
+  function propagateDates({ detail }) {
+    for (let activity of $project.activities) {
+      if (activity.internal) {
+        continue;
+      }
+
+      if (activity.timeframe == null
+          || activity.timeframe.start == null && activity.timeframe.end == null) {
+        api.json(api.patch(`/projects/${activity.project}/activities/${activity.id}`, {
+          data: prepareForBackend({ timeframe: detail.value }),
+          csrfToken: $session.account.csrf_token,
+        })).then(() => {
+          activity.timeframe = {
+            start: new Date(detail.value.start.valueOf()),
+            end: new Date(detail.value.end.valueOf()),
+          };
+        });
+      }
+    }
+  }
+
+  function propagateQuestions({ detail }) {
+    for (let activity of $project.activities) {
+      if (activity.internal) {
+        continue;
+      }
+
+      if (arraysEqual(activity.feedback_questions, defaultFeedbackQuestions)) {
+        api.json(api.patch(`/projects/${activity.project}/activities/${activity.id}`, {
+          data: { feedback_questions: detail.value },
+          csrfToken: $session.account.csrf_token,
+        })).then(() => {
+          activity.feedback_questions = detail.value.slice();
+        });
+      }
+    }
+  }
+
   onMount(() => {
     if (externalActvities.length === 0) {
       createActivity(getBlankActivity());
@@ -113,6 +153,8 @@
             {competences}
             bind:activity
             on:rerender={() => $project.activites = $project.activities}
+            on:dates-set={propagateDates}
+            on:questions-set={propagateQuestions}
           />
         {/if}
       </div>

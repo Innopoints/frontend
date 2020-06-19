@@ -95,19 +95,23 @@ function toISOFormat(date) {
    by converting dates to ISO, ensuring certain invariants and removing alien fields. */
 export function prepareForBackend(activity) {
   const copy = copyActivity(activity);
-  if (copy.fixed_reward) {
-    copy.working_hours = 1;
-  } else {
-    copy.reward_rate = HOURLY_RATE;
+  if (copy.fixed_reward != null) {
+    if (copy.fixed_reward) {
+      copy.working_hours = 1;
+    } else {
+      copy.reward_rate = HOURLY_RATE;
+    }
   }
 
-  copy.timeframe = {
-    start: activity.timeframe.start && toISOFormat(activity.timeframe.start),
-    end: activity.timeframe.end && toISOFormat(activity.timeframe.end),
-  };
+  if (copy.timeframe != null) {
+    copy.timeframe = {
+      start: copy.timeframe.start && toISOFormat(copy.timeframe.start),
+      end: copy.timeframe.end && toISOFormat(copy.timeframe.end),
+    };
+  }
 
-  if (activity.application_deadline != null) {
-    copy.application_deadline = toISOFormat(activity.application_deadline);
+  if (copy.application_deadline != null) {
+    copy.application_deadline = toISOFormat(copy.application_deadline);
   }
 
   delete copy.id;

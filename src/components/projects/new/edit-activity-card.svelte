@@ -26,6 +26,7 @@
     prepareForBackend,
   } from '@/utils/project-manipulation.js';
   import spaceOnly from '@/utils/space-only.js';
+  import arraysEqual from '@/utils/arrays-equal.js';
   import * as api from '@/utils/api.js';
 
   const { session } = stores();
@@ -56,6 +57,15 @@
   }
 
   async function saveChanges() {
+    if (activity.timeframe.start !== initialCopy.timeframe.start
+        || activity.timeframe.end !== initialCopy.timeframe.end) {
+      dispatch('dates-set', { value: activity.timeframe });
+    }
+
+    if (!arraysEqual(activity.feedback_questions, initialCopy.feedback_questions)) {
+      dispatch('questions-set', { value: activity.feedback_questions });
+    }
+
     try {
       await api.json(api.patch(
         `/projects/${activity.project}/activities/${activity.id}`,
