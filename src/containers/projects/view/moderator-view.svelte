@@ -2,7 +2,7 @@
   import { createEventDispatcher, onDestroy, afterUpdate, getContext } from 'svelte';
   import { Button } from 'attractions';
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
-  import HourActivityCard from '@/components/projects/view/hour-activity-card.svelte';
+  import FinalizingActivityCard from '@/components/projects/view/finalizing-activity-card.svelte';
   import FeedbackActivityCard from '@/components/projects/view/feedback-activity-card.svelte';
   import EditActivity from '@/components/projects/new/edit-activity.svelte';
   import ActivityTypes from '@/constants/projects/activity-internal-types.js';
@@ -126,7 +126,7 @@
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINALIZING}
     {#each activityCards as activity}
-      <HourActivityCard
+      <FinalizingActivityCard
         {account}
         {activity}
         on:save-hours
