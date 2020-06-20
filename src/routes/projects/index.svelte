@@ -48,7 +48,7 @@
     // }
 
     if (filtering.excludedCompetences.length !== 0) {
-      queryArgs.set('excluded_competences', JSON.stringify(filtering.excludedCompetences));
+      queryArgs.set('excluded_competences', filtering.excludedCompetences);
     }
 
     queryArgs.set('order_by', filtering.order.orderBy);
