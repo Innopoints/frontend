@@ -60,7 +60,7 @@
   async function deleteProject() {
     try {
       prefetch('/projects');
-      await api.json(api.del(`/projects/${project.id}`, { csrfToken: account.csrf_token }));
+      await api.json(api.del(`/projects/${$project.id}`, { csrfToken: account.csrf_token }));
       goto('/projects');
     } catch (e) {
       showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });

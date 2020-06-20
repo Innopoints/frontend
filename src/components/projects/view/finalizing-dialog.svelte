@@ -14,7 +14,7 @@
         `/projects/${$project.id}/finalize`,
         { csrfToken: account.csrf_token },
       ));
-      $project = await api.json(api.get(`/projects/${project.id}`));
+      $project = await api.json(api.get(`/projects/${$project.id}`));
       open = false;
     } catch (e) {
       showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
