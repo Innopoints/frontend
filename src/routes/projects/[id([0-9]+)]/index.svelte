@@ -1,6 +1,7 @@
 <script context="module">
   import { writable } from 'svelte/store';
   import getInitialData from '@/utils/get-initial-data.js';
+  import { prepareAfterBackend } from '@/utils/project-manipulation.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -8,6 +9,7 @@
       ['competences', '/competences'],
       ['tags', '/tags'],
     ]));
+    data.project.activities.forEach(prepareAfterBackend);
     data.account = session.account;
     data.project = writable(data.project);
     return data;
@@ -50,6 +52,7 @@
     account != null
     && (account.is_admin || moderatorEmails.includes(account.email))
   );
+  $: externalActivities = $project.activities.filter(act => !act.internal);
 
   const applicationDialog = {
     open: false,
@@ -260,8 +263,8 @@
         />
       {/if}
 
-      {#if $project.activities.find(x => !x.internal) != null || moderatorMode}
-        <h2 class="padded">Activities</h2>
+      {#if externalActivities || moderatorMode}
+        <H2 class="padded">Activities</H2>
         {#if moderatorMode}
           <ModeratorView
             {account}
@@ -274,7 +277,7 @@
           />
         {:else}
           <UserView
-            activities={$project.activities}
+            activities={externalActivities}
             {competences}
             {account}
             projectStage={$project.lifetime_stage}
