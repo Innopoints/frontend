@@ -1,0 +1,43 @@
+@import "_attractions-theme.scss";
+
+.activity.moderated.draft {
+  margin-bottom: 1em;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  :global .btn > .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  @media only screen and (min-width: 640px) {
+    @supports (display: grid) {
+      :global {
+        .card {
+          display: grid;
+          grid-template-rows: auto auto;
+          grid-template-columns: 1fr auto;
+        }
+
+        .actions {
+          grid-row: 1;
+          grid-column: 2;
+        }
+
+        .notice {
+          grid-column: span 2;
+        }
+      }
+    }
+  }
+}

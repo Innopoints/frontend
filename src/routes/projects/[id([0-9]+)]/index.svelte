@@ -25,21 +25,14 @@
   import ModeratorView from '@/containers/projects/view/moderator-view.svelte';
   import StaffCards from '@/containers/projects/view/staff-cards.svelte';
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
-  import ReportDialog from '@/components/projects/view/report-dialog.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
   import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
   import ReportPerformanceModal from '@/components/projects/view/report-performance-modal.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import ActivityTypes from '@/constants/projects/activity-internal-types.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import * as api from '@/utils/api.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
-  import {
-    determineInsertionIndex,
-    prepareForBackend,
-    prepareAfterBackend,
-  } from '@/utils/project-manipulation.js';
 
   const { session } = stores();
   setContext('review-mode', false);
@@ -122,60 +115,6 @@
       } catch (e) {
         console.error(e);
       }
-    },
-  };
-
-  const applicationRejectDialog = {
-    open: false,
-    detail: null,
-    show({ detail }) {
-      applicationRejectDialog.detail = detail;
-      applicationRejectDialog.open = true;
-    },
-  };
-
-  const applicationPendingDialog = {
-    open: false,
-    detail: null,
-    show({ detail }) {
-      applicationPendingDialog.detail = detail;
-      applicationPendingDialog.open = true;
-    },
-  };
-
-  const activityDeletionDialog = {
-    open: false,
-    activity: null,
-    show({ detail: activity }) {
-      activityDeletionDialog.activity = activity;
-      activityDeletionDialog.open = true;
-    },
-    async deleteActivity({ detail: activity }) {
-      activityDeletionDialog.open = false;
-      try {
-        await api.json(api.del(
-          `/projects/${activity.project}/activities/${activity.id}`,
-          { csrfToken: account.csrf_token },
-        ));
-        $project.activities = $project.activities.filter(act => act.id !== activity.id);
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    restoreActivity({ detail: activity }) {
-      activity._type = ActivityTypes.DISPLAY;
-      activityDeletionDialog.activity = null;
-    },
-  };
-
-  const reportDialog = {
-    open: false,
-    reports: null,
-    applicant: null,
-    show({ detail }) {
-      reportDialog.applicant = detail.applicant;
-      reportDialog.reports = detail.reports;
-      reportDialog.open = true;
     },
   };
 
@@ -274,77 +213,6 @@
     },
   };
 
-  function chooseApplicationStatusModal(evt) {
-    if (evt.detail.status === ApplicationStatuses.APPROVED) {
-      changeApplicationStatus(evt);
-    } else if (evt.detail.status === ApplicationStatuses.REJECTED) {
-      applicationRejectDialog.show(evt);
-    } else {
-      applicationPendingDialog.show(evt);
-    }
-  }
-
-  async function changeApplicationStatus({ detail: { status, activity, application } }) {
-    try {
-      await api.json(api.patch(
-        `/projects/${activity.project}/activities/${activity.id}/applications/${application.id}`,
-        { data: { status }, csrfToken: account.csrf_token },
-      ));
-
-      if (status === ApplicationStatuses.APPROVED) {
-        activity.vacant_spots--;
-      } else if (application.status === ApplicationStatuses.APPROVED) {
-        activity.vacant_spots++;
-      }
-
-      application.status = status;
-      applicationRejectDialog.open = false;
-      applicationPendingDialog.open = false;
-      project = project;
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  async function processActivityChange({ detail }) {
-    const type = detail.activityCopy._type;
-    delete detail.activityCopy._type;
-    prepareForBackend(detail.activityCopy);
-
-    const index = determineInsertionIndex($project.activities, detail.position);
-
-    let updatedActivity;
-    try {
-      if (type === ActivityTypes.NEW) {
-        updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
-          data: detail.activityCopy,
-          csrfToken: account.csrf_token,
-        }));
-        prepareAfterBackend(updatedActivity);
-        $project.activities.splice(index, 0, updatedActivity);
-      } else if (type === ActivityTypes.EDIT) {
-        const activityID = detail.activityCopy.id;
-        delete detail.activityCopy.id;
-
-        updatedActivity = await api.json(api.patch(
-          `/projects/${$project.id}/activities/${activityID}`,
-          { data: detail.activityCopy, csrfToken: account.csrf_token },
-        ));
-        prepareAfterBackend(updatedActivity);
-        updatedActivity.id = activityID;
-
-        $project.activities.splice(
-          $project.activities.findIndex(act => act.id === activityID),
-          1,
-          updatedActivity,
-        );
-      }
-    } catch (e) {
-      console.error(e);
-    }
-    project = project;
-  }
-
   async function updateHours({ detail }) {
     try {
       const { application, hours, activity } = detail;
@@ -399,10 +267,6 @@
             {account}
             {project}
             {competences}
-            on:view-reports={reportDialog.show}
-            on:application-status-changed={chooseApplicationStatusModal}
-            on:activity-changed={processActivityChange}
-            on:delete-activity={activityDeletionDialog.show}
             on:save-hours={updateHours}
             on:read-feedback={feedbackModal.show}
             on:create-report={reportPerformanceModal.show}
@@ -425,25 +289,6 @@
   </SnackbarContainer>
 
   {#if moderatorMode}
-    <!-- view-past-reports -->
-    <ReportDialog
-      bind:isOpen={reportDialog.open}
-      applicant={reportDialog.applicant}
-      reports={reportDialog.reports}
-    />
-    <!-- confirm-activity-deletion -->
-    <DangerConfirmDialog
-      textYes="yes, delete"
-      bind:isOpen={activityDeletionDialog.open}
-      eventDetail={activityDeletionDialog.activity}
-      on:confirm={activityDeletionDialog.deleteActivity}
-      on:reject={activityDeletionDialog.restoreActivity}
-    >
-      Are you sure you want to delete this activity?
-      <em class="consequences">
-        All of the volunteering applications will be discarded.
-      </em>
-    </DangerConfirmDialog>
     <!-- report-performance -->
     <ReportPerformanceModal
       bind:isOpen={reportPerformanceModal.open}
@@ -460,32 +305,6 @@
       on:confirm={reportDeletionDialog.deleteReport}
     >
       Are you sure you want to delete this report?
-    </DangerConfirmDialog>
-    <!-- confirm-application-rejection -->
-    <DangerConfirmDialog
-      textYes="yes, reject"
-      bind:isOpen={applicationRejectDialog.open}
-      eventDetail={applicationRejectDialog.detail}
-      on:confirm={changeApplicationStatus}
-    >
-      Are you sure you want to reject this application?
-      <em class="consequences">
-        It will disappear from the list.
-        The rejected volunteer can take this application back
-        and place a new one, with a different comment, for example.
-      </em>
-    </DangerConfirmDialog>
-    <!-- confirm-application-pending -->
-    <DangerConfirmDialog
-      textYes="yes, move"
-      bind:isOpen={applicationPendingDialog.open}
-      eventDetail={applicationPendingDialog.detail}
-      on:confirm={changeApplicationStatus}
-    >
-      Are you sure you want to move this application back to pending?
-      <em class="consequences">
-        Make sure that the volunteer in question is aware of this action.
-      </em>
     </DangerConfirmDialog>
   {:else}
     <!-- apply -->

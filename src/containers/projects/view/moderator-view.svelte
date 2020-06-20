@@ -1,122 +1,128 @@
 <script>
-  import { createEventDispatcher, onDestroy, afterUpdate, getContext } from 'svelte';
+  import { afterUpdate, getContext } from 'svelte';
+  import { flip } from 'svelte/animate';
   import { Button } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
+  import ModeratorDraftCard from '@/components/projects/view/moderator-draft-card.svelte';
   import FinalizingActivityCard from '@/components/projects/view/finalizing-activity-card.svelte';
   import FeedbackActivityCard from '@/components/projects/view/feedback-activity-card.svelte';
-  import EditActivity from '@/components/projects/new/edit-activity.svelte';
-  import ActivityTypes from '@/constants/projects/activity-internal-types.js';
+  import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
+  import EditActivityCard from '@/components/projects/new/edit-activity-card.svelte';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
+  import getBlankActivity from '@/constants/projects/blank-activity.js';
   import {
-    addActivity,
     copyActivity,
-    countDisplayActivitiesBefore,
-    prepareAfterBackend,
-    synchronizeActivityLists,
+    prepareForBackend,
   } from '@/utils/project-manipulation.js';
+  import * as api from '@/utils/api.js';
 
   export let account;
   export let competences;
   export let project;
+  $: externalActivities = $project.activities.filter(act => !act.internal);
 
   let activityListElement;
   let scrollToLast = false;
   const review = getContext('review-mode');
 
+  const activityDeletionDialog = {
+    open: false,
+    activity: null,
+    show({ detail: activity }) {
+      activityDeletionDialog.activity = activity;
+      activityDeletionDialog.open = true;
+    },
+    async deleteActivity({ detail: activity }) {
+      activityDeletionDialog.open = false;
+      try {
+        await api.json(api.del(
+          `/projects/${$project.id}/activities/${activity.id}`,
+          { csrfToken: account.csrf_token },
+        ));
+        $project.activities = $project.activities.filter(act => act.id !== activity.id);
+        if ($project.activities.find(act => !act.internal) == null) {
+          createActivity(getBlankActivity());
+        }
+
+        showSnackbar({ props: { text: 'Activity deleted' } });
+      } catch (e) {
+        showSnackbar({
+          props: { text: 'Couldn\'t delete the activity, try reloading the page.' },
+        });
+        console.error(e);
+      }
+    },
+  };
+
   afterUpdate(() => {
     if (scrollToLast) {
-      const lastCardIndex = activityListElement.children.length - 1;
+      // The last element is the button for new activities
+      const lastCardIndex = activityListElement.children.length - 1 - 1;
       activityListElement.children[lastCardIndex].scrollIntoView({ behavior: 'smooth' });
       scrollToLast = false;
     }
   });
 
-  let activityCards = (
-    $project.activities
-      .filter(x => !x.internal)
-      .map(act => {
-        act._type = ActivityTypes.DISPLAY;
-        prepareAfterBackend(act);
-        return act;
-      })
-  );
-
-  // This component maintains an internal activity list (activityCards)
-  //   with objects for new activity forms and editing forms.
-  //   This list must be synchronized with the actual project's activity list ($project.activities).
-  // Somewhat counter-intuitive, but the activityCards have nothing to do
-  //   with the concept of internal activities on the backend. Moreover, internal
-  //   activities are not in the activityCards, since they are not displayed on the page.
-  const unsubscribe = project.subscribe(
-    ({ activities: backendActivities }) => {
-      activityCards = synchronizeActivityLists(activityCards, backendActivities);
-    },
-  );
-  onDestroy(unsubscribe);
-
-  function deleteActivity({ detail: activity }) {
-    activity._type = ActivityTypes.DELETION_MARKER;
-    dispatch('delete-activity', activity);
-  }
-
   function duplicateActivity({ detail: activity }) {
     const newActivity = copyActivity(activity);
     delete newActivity.id;
-    newActivity.applications = [];
-    newActivity._type = ActivityTypes.NEW;
-    activityCards.push(newActivity);
-    scrollToLast = true;
-    activityCards = activityCards;
+    createActivity(newActivity);
   }
 
-  const dispatch = createEventDispatcher();
+  async function createActivity(activity) {
+    try {
+      ({
+        id: activity.id,
+        project: activity.project,
+      } = await api.json(api.post(`/projects/${$project.id}/activities`, {
+        data: prepareForBackend(activity),
+        csrfToken: account.csrf_token,
+      })));
+      activity._editing = true;
+      $project.activities.push(activity);
+      project = project;
+    } catch (e) {
+      showSnackbar({
+        props: { text: 'Couldn\'t create the activity, try reloading the page.' },
+      });
+      console.error(e);
+    }
+    scrollToLast = true;
+  }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
-<div class="activities moderated padded" bind:this={activityListElement}>
+<div class="activity-list padded" bind:this={activityListElement}>
   {#if $project.lifetime_stage === ProjectStages.ONGOING}
-    {#each activityCards as activity, index}
-      {#if activity._type === ActivityTypes.DISPLAY
-        || activity._type === ActivityTypes.DELETION_MARKER}
-        <ModeratorActivityCard
-          {activity}
-          {competences}
-          on:edit-activity={() => activity._type = ActivityTypes.EDIT}
-          on:delete-activity={deleteActivity}
-          on:duplicate-activity={duplicateActivity}
-          on:view-reports
-          on:application-status-changed
-        />
-      {:else if activity._type !== ActivityTypes.REPLACEMENT_MARKER}
-        <EditActivity
-          {competences}
-          bind:activity
-          activityList={activityCards}
-          {index}
-          on:discard-activity={(e) => {
-            // Dispatched for activities on backend-unsynced projects
-            // when the fields are back to empty to cancel creation.
-            activityCards.splice(e.detail, 1);
-            activityCards = activityCards;
-          }}
-          on:discard-changes={(e) => {
-            // Dispatched for activities on backend-synced projects
-            // when the fields are back to initial to cancel editing.
-            activityCards[e.detail]._type = ActivityTypes.DISPLAY;
-          }}
-          on:change={(e) => {
-            // Dispatched when a VALID change occurs.
-            const copy = copyActivity(e.detail);
-            e.detail._type = ActivityTypes.REPLACEMENT_MARKER;
-            dispatch('activity-changed', {
-              activityCopy: copy,
-              position: countDisplayActivitiesBefore(activityCards, index),
-            });
-          }}
-        />
-      {/if}
+    {#each externalActivities as activity, index (activity.id)}
+      <div animate:flip={{ duration: 150 }}>
+        {#if activity._editing}
+          <EditActivityCard
+            {competences}
+            bind:activity
+            on:rerender={() => externalActivities = externalActivities}
+          />
+        {:else if activity.draft}
+          <ModeratorDraftCard
+            {activity}
+            on:edit={() => activity._editing = true}
+            on:delete={activityDeletionDialog.show}
+          />
+        {:else}
+          <ModeratorActivityCard
+            {activity}
+            {competences}
+            on:copy={duplicateActivity}
+            on:delete={activityDeletionDialog.show}
+            on:edit={() => activity._editing = true}
+          />
+        {/if}
+      </div>
     {/each}
   {:else if review}
-    {#each activityCards as activity}
+    {#each externalActivities as activity}
       <FeedbackActivityCard
         review
         {activity}
@@ -125,7 +131,7 @@
       />
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINALIZING}
-    {#each activityCards as activity}
+    {#each externalActivities as activity}
       <FinalizingActivityCard
         {account}
         {activity}
@@ -135,7 +141,7 @@
       />
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINISHED}
-    {#each activityCards as activity}
+    {#each externalActivities as activity}
       <FeedbackActivityCard
         {activity}
         {competences}
@@ -144,10 +150,24 @@
       />
     {/each}
   {/if}
+  {#if $project.lifetime_stage === ProjectStages.ONGOING}
+    <Button on:click={() => createActivity(getBlankActivity())}>
+      <svg src="images/icons/plus.svg" class="mr" />
+      add another activity
+    </Button>
+  {/if}
 </div>
-{#if $project.lifetime_stage === ProjectStages.ONGOING}
-  <Button on:click={() => activityCards = addActivity(activityCards)}>
-    <svg src="images/icons/plus.svg" class="mr" />
-    add another activity
-  </Button>
-{/if}
+
+<DangerConfirmDialog
+  textYes="yes, delete"
+  bind:open={activityDeletionDialog.open}
+  eventDetail={activityDeletionDialog.activity}
+  on:confirm={activityDeletionDialog.deleteActivity}
+>
+  Are you sure you want to delete this activity?
+  <p class="mt">
+    <em class="consequences">
+      All volunteering applications will be discarded.
+    </em>
+  </p>
+</DangerConfirmDialog>
