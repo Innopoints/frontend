@@ -86,10 +86,10 @@
     }
     let excludedColors = filtering.excludedColors.map(color => color.slice(1));
     if (filtering.colorlessExcluded) {
-      excludedColors.push(null);
+      excludedColors.push('\0');
     }
     if (excludedColors.length !== 0) {
-      queryArgs.set('excluded_colors', JSON.stringify(excludedColors));
+      queryArgs.set('excluded_colors', excludedColors);
     }
     queryArgs.set('order_by', filtering.order.orderBy);
     queryArgs.set('order', filtering.order.order);
