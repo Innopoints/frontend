@@ -30,7 +30,6 @@
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
   import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
-  import ReportPerformanceModal from '@/components/projects/view/report-performance-modal.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import * as api from '@/utils/api.js';
@@ -276,14 +275,6 @@
   </SnackbarContainer>
 
   {#if moderatorMode}
-    <!-- report-performance -->
-    <ReportPerformanceModal
-      bind:isOpen={reportPerformanceModal.open}
-      activity={reportPerformanceModal.activity}
-      application={reportPerformanceModal.application}
-      report={reportPerformanceModal.report}
-      on:submit={reportPerformanceModal.submitReport}
-    />
     <!-- confirm-delete-report -->
     <DangerConfirmDialog
       textYes="yes, delete"
