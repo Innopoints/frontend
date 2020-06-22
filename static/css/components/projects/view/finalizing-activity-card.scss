@@ -1,0 +1,91 @@
+@import "_attractions-theme.scss";
+
+.activity.moderated.finalizing {
+  margin-bottom: 1em;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left {
+    border-bottom: .0625em solid $light-contrast;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+
+    header {
+      font-weight: 500;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 1em;
+
+      :global .btn {
+        margin-bottom: .3em;
+
+        & > .icon {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+
+    .description {
+      white-space: pre-line;
+    }
+
+    & > :global .labeled {
+      margin-top: 1em;
+    }
+  }
+
+  :global .empty {
+    padding: 0 !important;
+
+    .title {
+      color: $main;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    @supports (display: grid) {
+      :global .card {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .right {
+        margin-left: 1em;
+      }
+
+      .left {
+        border-bottom-width: 0 !important;
+        border-right: .0625em solid $light-contrast;
+        padding-right: 1em;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    @supports (display: grid) {
+      :global .card {
+        grid-template-columns: 1fr 2fr;
+      }
+
+      .right {
+        padding-top: .5em;
+      }
+
+      .left {
+        grid-row-end: 2;
+      }
+    }
+  }
+}

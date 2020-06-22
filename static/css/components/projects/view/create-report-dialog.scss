@@ -1,0 +1,30 @@
+@import "_attractions-theme.scss";
+
+.report-form {
+  max-height: calc(100vh - 7em);
+
+  .refresher {
+    padding-right: 2em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    :global .labeled {
+      margin-top: 1em;
+
+      &:first-child {
+        margin-right: 2em;
+      }
+    }
+  }
+
+  .required {
+    color: $main;
+  }
+
+  & > label {
+    display: block;
+    margin-top: .5em;
+    margin-bottom: .2em;
+  }
+}

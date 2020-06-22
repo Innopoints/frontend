@@ -1,0 +1,66 @@
+@import "_attractions-theme.scss";
+@import "components/projects/view/application-tile.scss";
+
+.actual-hours {
+  margin-top: 1em;
+
+  :global {
+    .label.above {
+      margin-bottom: .5em;
+    }
+
+    .text-field {
+      width: 6em;
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  @supports (display: grid) {
+    .application-tile :global {
+      .handle {
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr auto auto;
+        grid-auto-flow: column;
+        column-gap: 1em;
+
+        .name {
+          margin-bottom: 0;
+        }
+
+        .popover-container {
+          justify-self: start;
+        }
+
+        .actual-hours {
+          grid-row: span 2;
+          display: flex;
+          align-items: center;
+          margin-top: 0;
+
+          .label {
+            margin-right: 1.5em;
+            margin-bottom: 0;
+          }
+        }
+
+        .btn {
+          float: none;
+          grid-row: span 2;
+          align-self: center;
+          grid-column: 3;
+        }
+      }
+
+      section {
+        display: flex;
+        justify-content: space-between;
+
+        .actions {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

@@ -158,62 +158,6 @@
       }
     },
   };
-
-  const reportPerformanceModal = {
-    open: false,
-    activity: null,
-    application: null,
-    report: null,
-    show({ detail }) {
-      reportPerformanceModal.activity = detail.activity;
-      reportPerformanceModal.application = detail.application;
-      reportPerformanceModal.report = detail.report;
-      reportPerformanceModal.open = true;
-    },
-    async submitReport({ detail }) {
-      try {
-        const { value, activity, application, report } = detail;
-        const apiCall = report == null ? api.post : api.patch;
-        application.reports.push(await api.json(apiCall(
-          `/projects/${activity.project}/activities/${activity.id}`
-          + `/applications/${application.id}/report`,
-          { data: value, csrfToken: account.csrf_token },
-        )));
-        project = project;
-        reportPerformanceModal.open = false;
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  };
-
-  const reportDeletionDialog = {
-    open: false,
-    detail: null,
-    show({ detail }) {
-      reportDeletionDialog.detail = {
-        activity: detail.activity,
-        application: detail.application,
-      };
-      reportDeletionDialog.open = true;
-    },
-    async deleteReport({ detail }) {
-      try {
-        await api.json(api.del(
-          `/projects/${detail.activity.project}/activities/${detail.activity.id}`
-          + `/applications/${detail.application.id}/report`,
-          { csrfToken: account.csrf_token },
-        ));
-        detail.application.reports = detail.application.reports.filter(
-          report => report.reporter_email !== account.email,
-        );
-        project = project;
-        reportDeletionDialog.open = false;
-      } catch (e) {
-        console.error(e);
-      }
-    },
-  };
 </script>
 
 <svelte:head>
@@ -255,8 +199,6 @@
             {project}
             {competences}
             on:read-feedback={feedbackModal.show}
-            on:create-report={reportPerformanceModal.show}
-            on:delete-report={reportDeletionDialog.show}
           />
         {:else}
           <UserView
@@ -274,17 +216,7 @@
     </div>
   </SnackbarContainer>
 
-  {#if moderatorMode}
-    <!-- confirm-delete-report -->
-    <DangerConfirmDialog
-      textYes="yes, delete"
-      bind:isOpen={reportDeletionDialog.open}
-      eventDetail={reportDeletionDialog.detail}
-      on:confirm={reportDeletionDialog.deleteReport}
-    >
-      Are you sure you want to delete this report?
-    </DangerConfirmDialog>
-  {:else}
+  {#if !moderatorMode}
     <!-- apply -->
     <ApplicationDialog
       savedUsername={account && account.telegram_username}

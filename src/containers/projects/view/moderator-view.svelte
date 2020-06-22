@@ -132,12 +132,7 @@
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINALIZING}
     {#each externalActivities as activity}
-      <FinalizingActivityCard
-        {account}
-        {activity}
-        on:create-report
-        on:delete-report
-      />
+      <FinalizingActivityCard {account} {activity} />
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINISHED}
     {#each externalActivities as activity}

@@ -1,19 +1,19 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import Accordion from 'ui/accordion.svelte';
-  import Button from 'ui/button.svelte';
-  import Card from 'ui/card.svelte';
+  import { getContext } from 'svelte';
+  import { Accordion, Button, Card } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import Labeled from 'ui/labeled.svelte';
+  import EmptyState from '@/components/common/empty-state.svelte';
   import ApplicationHourTile from '@/components/projects/view/application-hour-tile.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import s from '@/utils/plural-s.js';
+  import * as api from '@/utils/api.js';
   import { formatTimeRange } from '@/utils/date-time-format.js';
 
   export let account;
   export let activity;
   let hourChanges = new Map();
-  // Reactive to trigger a re-render when reports come in
-  $: approvedApplications = activity.applications.filter(
+  let approvedApplications = activity.applications.filter(
     apl => apl.status === ApplicationStatuses.APPROVED,
   );
 
@@ -26,86 +26,99 @@
     hourChanges = hourChanges;
   }
 
-  function saveChanges() {
-    hourChanges.forEach(
-      (hours, application) => dispatch('save-hours', { application, hours, activity }),
-    );
+  async function saveHours() {
+    const requests = [];
+    for (let [application, hours] of hourChanges) {
+      requests.push(api.json(api.patch(
+        `/projects/${activity.project}/activities/${activity.id}/applications/${application.id}`,
+        { data: { actual_hours: hours }, csrfToken: account.csrf_token },
+      )).then(() => application.actual_hours = hours));
+    }
+
+    try {
+      await Promise.all(requests);
+      approvedApplications = approvedApplications;
+      showSnackbar({ props: { text: 'Updated hours successfully' } });
+    } catch (e) {
+      showSnackbar({ props: { text: 'Couldn\'t update hours, try reloading the page' } });
+      console.error(e);
+    }
+
     hourChanges.clear();
     hourChanges = hourChanges;
   }
 
-  const dispatch = createEventDispatcher();
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
-<Card classname="activity moderated finalizing">
-  <div class="left">
-    <header class="title">{activity.name}</header>
-    <div class="row">
-      <Labeled icon label="Reward">
-        <svg slot="icon" class="icon" src="images/icons/gift.svg" />
-        <span class="content">
-          {activity.reward_rate * activity.working_hours}
-          <svg class="innopoint" src="images/innopoint-sharp.svg" />
-        </span>
-      </Labeled>
-      <Labeled icon label="Worktime">
-        <svg slot="icon" class="icon" src="images/icons/clock.svg" />
-        <span class="content">
-          <span class="content primary">
-            {#if activity.fixed_reward}
-              as needed
-            {:else}
-              {activity.working_hours} hour{s(activity.working_hours)}
-            {/if}
+<div class="activity moderated finalizing">
+  <Card>
+    <div class="left">
+      <header class="title">{activity.name}</header>
+      <div class="row">
+        <Labeled icon label="Reward">
+          <svg slot="icon" class="icon mr" src="images/icons/gift.svg" />
+          <span class="content">
+            {activity.reward_rate * activity.working_hours}
+            <svg class="innopoint" src="images/innopoint-sharp.svg" />
           </span>
-          <div class="content secondary">
-            {formatTimeRange(activity.timeframe)}
-          </div>
-        </span>
-      </Labeled>
-    </div>
-    {#if activity.description}
-      <Labeled icon label="Description">
-        <svg slot="icon" class="icon" src="images/icons/align-left.svg" />
-        <span class="description">
-          {activity.description}
-        </span>
-      </Labeled>
-    {/if}
-    {#if hourChanges.size !== 0}
-      <div class="actions">
-        <Button isFilled classname="mr" on:click={saveChanges}>
-          <svg class="icon mr" src="images/icons/save.svg" />
-          save {activity.fixed_reward ? 'work' : 'hours'}
-        </Button>
+        </Labeled>
+        <Labeled icon label="Worktime">
+          <svg slot="icon" class="icon mr" src="images/icons/clock.svg" />
+          <span class="content">
+            <span class="content primary">
+              {#if activity.fixed_reward}
+                as needed
+              {:else}
+                {activity.working_hours} hour{s(activity.working_hours)}
+              {/if}
+            </span>
+            <div class="content secondary">
+              {formatTimeRange(activity.timeframe)}
+            </div>
+          </span>
+        </Labeled>
       </div>
-    {/if}
-  </div>
-  <div class="right">
-    <header>
-      <span class="label">accepted volunteers</span>
-    </header>
-    {#if approvedApplications.length !== 0}
-      <Accordion let:panelController>
-        {#each approvedApplications as application (application.id)}
-          <ApplicationHourTile
-            {account}
-            {activity}
-            {application}
-            handlePanelOpen={panelController}
-            on:hours-changed={recordHourChange}
-            on:create-report
-            on:delete-report
-          />
-        {/each}
-      </Accordion>
-    {:else}
-      <div class="empty">
-        <div class="icon">
-          <img src="images/view-project/no-applications.svg" alt="" />
+      {#if activity.description}
+        <Labeled icon label="Description">
+          <svg slot="icon" class="icon mr" src="images/icons/align-left.svg" />
+          <span class="description">
+            {activity.description}
+          </span>
+        </Labeled>
+      {/if}
+      {#if hourChanges.size !== 0}
+        <div class="actions">
+          <Button filled class="mr" on:click={saveHours}>
+            <svg class="icon mr" src="images/icons/save.svg" />
+            save {activity.fixed_reward ? 'work' : 'hours'}
+          </Button>
         </div>
-        <div class="title">No applications</div>
-      </div>
-    {/if}
-  </div>
-</Card>
+      {/if}
+    </div>
+    <div class="right">
+      <header>
+        <span class="label">accepted volunteers</span>
+      </header>
+      {#if approvedApplications.length !== 0}
+        <Accordion let:closeOtherPanels>
+          {#each approvedApplications as application (application.id)}
+            <ApplicationHourTile
+              {account}
+              {activity}
+              {application}
+              on:panel-open={closeOtherPanels}
+              on:hours-changed={recordHourChange}
+            />
+          {/each}
+        </Accordion>
+      {:else}
+        <EmptyState small text="No applications">
+          <img src="images/view-project/no-applications.svg" alt="" />
+        </EmptyState>
+      {/if}
+    </div>
+  </Card>
+</div>
+
+<style src="../../../../static/css/components/projects/view/finalizing-activity-card.scss"></style>
