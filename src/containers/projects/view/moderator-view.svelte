@@ -135,7 +135,6 @@
       <FinalizingActivityCard
         {account}
         {activity}
-        on:save-hours
         on:create-report
         on:delete-report
       />

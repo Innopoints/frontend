@@ -1,9 +1,11 @@
 <script>
   import { createEventDispatcher, getContext } from 'svelte';
   import { Card, TextField, Button } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import Labeled from 'ui/labeled.svelte';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import s from '@/utils/plural-s.js';
+  import * as api from '@/utils/api.js';
 
   export let account;
   export let moderator;
@@ -17,13 +19,21 @@
   );
   let enteredHours = application.actual_hours;
 
-  function dispatchHourChange() {
-    if (enteredHours >= 1) {
+  async function updateHours({ detail }) {
+    try {
+      await api.json(api.patch(
+        `/projects/${$project.id}/activities/${moderation.id}/applications/${application.id}`,
+        { data: { actual_hours: enteredHours }, csrfToken: account.csrf_token },
+      ));
       application.actual_hours = enteredHours;
-      dispatch('hours-changed', { activity: moderation, application, hours: enteredHours });
+      showSnackbar({ props: { text: 'Updated hours successfully' } });
+    } catch (e) {
+      showSnackbar({ props: { text: 'Couldn\'t update hours, try reloading the page' } });
+      console.error(e);
     }
   }
 
+  const showSnackbar = getContext(snackbarContextKey);
   const dispatch = createEventDispatcher();
 </script>
 
@@ -48,7 +58,7 @@
           <Button
             filled
             disabled={enteredHours < 0}
-            on:click={dispatchHourChange}
+            on:click={updateHours}
           >
             <svg class="mr" src="images/icons/check.svg" />
             save

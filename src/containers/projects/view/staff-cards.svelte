@@ -15,7 +15,6 @@
       {account}
       {moderation}
       {project}
-      on:hours-changed
       on:leave-feedback
       on:read-feedback
     />

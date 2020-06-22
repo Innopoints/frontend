@@ -215,20 +215,6 @@
       }
     },
   };
-
-  async function updateHours({ detail }) {
-    try {
-      const { application, hours, activity } = detail;
-      await api.json(api.patch(
-        `/projects/${$project.id}/activities/${activity.id}/applications/${application.id}`,
-        { data: { actual_hours: hours }, csrfToken: account.csrf_token },
-      ));
-      application.actual_hours = hours;
-      project = project;
-    } catch (e) {
-      console.error(e);
-    }
-  }
 </script>
 
 <svelte:head>
@@ -257,7 +243,6 @@
         <StaffCards
           {project}
           {account}
-          on:hours-changed={updateHours}
           on:leave-feedback={leaveFeedbackModal.show}
           on:read-feedback={feedbackModal.show}
         />
@@ -270,7 +255,6 @@
             {account}
             {project}
             {competences}
-            on:save-hours={updateHours}
             on:read-feedback={feedbackModal.show}
             on:create-report={reportPerformanceModal.show}
             on:delete-report={reportDeletionDialog.show}
