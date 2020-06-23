@@ -4,20 +4,14 @@
 
   export let project;
   export let account;
+  export let competences;
 
   const moderation = $project.activities.find(isModeration);
 </script>
 
 <div class="moderators padded">
   {#each $project.moderators as moderator (moderator.email)}
-    <StaffCard
-      {moderator}
-      {account}
-      {moderation}
-      {project}
-      on:leave-feedback
-      on:read-feedback
-    />
+    <StaffCard {moderator} {account} {moderation} {project} {competences} />
   {/each}
 </div>
 

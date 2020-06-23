@@ -1,9 +1,7 @@
 <script>
-  import Dialog from 'ui/dialog.svelte';
-  import UnclickableChip from 'ui/unclickable-chip.svelte';
-  import Modal from 'ui/modal.svelte';
+  import { Dialog, Chip, Modal } from 'attractions';
 
-  export let isOpen = false;
+  export let open = false;
   export let activity;
   export let from;
   export let feedback;
@@ -14,23 +12,24 @@
   }
 </script>
 
-<Modal bind:isOpen>
-  {#if activity != null}
+<Modal bind:open let:closeCallback>
+  {#if feedback != null}
     <Dialog
-      classname="read-feedback"
+      class="read-feedback"
       title="Feedback{from != null ? ' from ' + from.full_name : ''}"
-      closeCallback={() => isOpen = false}
+      {closeCallback}
+      constrainWidth
     >
-      <article class="content" slot="content">
+      <article class="content">
         <p>Developed competences:</p>
         <div class="competences">
           {#each feedback.competences as competenceID}
-            <UnclickableChip small value={getCompetenceByID(competenceID)} />
+            <Chip small outline>{getCompetenceByID(competenceID)}</Chip>
           {/each}
         </div>
         {#each activity.feedback_questions as question, index}
           <p class="question">{question}</p>
-          <blockquote class="answer constrain-width">
+          <blockquote class="answer">
             {#if feedback.answers[index] !== ''}
               {feedback.answers[index]}
             {:else}
@@ -42,3 +41,5 @@
     </Dialog>
   {/if}
 </Modal>
+
+<style src="../../../../static/css/components/projects/view/feedback-modal.scss"></style>

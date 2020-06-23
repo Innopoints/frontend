@@ -1,0 +1,54 @@
+@import "_attractions-theme.scss";
+
+.feedback-tile {
+  padding-bottom: 1em;
+
+  &:not(:first-child) {
+    border-top: .0625em solid $light-contrast;
+  }
+
+  :global .panel {
+    margin-top: .8em;
+    margin-left: .5em;
+    padding-top: 1em;
+
+    .name {
+      margin-bottom: .3em;
+    }
+
+    .telegram {
+      display: inline;
+    }
+
+    @supports (display: grid) {
+      .handle {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-items: start;
+        align-items: center;
+        row-gap: 1em;
+
+        .btn {
+          grid-column: span 2;
+        }
+      }
+    }
+
+    @media only screen and (min-width: 1024px) {
+      @supports (display: grid) {
+        .handle {
+          display: grid;
+          grid-template-rows: auto auto;
+          grid-template-columns: 1fr auto auto;
+          grid-auto-flow: column;
+          row-gap: 0;
+          column-gap: 5%;
+
+          .labeled, .btn {
+            grid-row: span 2;
+          }
+        }
+      }
+    }
+  }
+}

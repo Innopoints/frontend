@@ -1,0 +1,83 @@
+@import "_attractions-theme.scss";
+
+.activity.moderated {
+  margin-bottom: 1em;
+
+  .left {
+    header {
+      font-weight: 500;
+    }
+
+    .description {
+      white-space: pre-line;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+
+      :global .chip {
+        margin-top: .5em;
+        margin-right: .5em;
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 1em;
+
+      :global .btn {
+        margin-bottom: .3em;
+
+        & > .icon {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+
+    & > :global .labeled {
+      margin-top: 1em;
+    }
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  :global .empty {
+    padding: 0 !important;
+
+    .title {
+      color: $main;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    @supports (display: grid) {
+      :global .card {
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .right {
+        padding-top: .5em;
+      }
+
+      .left {
+        grid-row-end: 2;
+      }
+
+      .middle {
+        border-bottom-width: 0 !important;
+        border-right: .0625em solid $light-contrast;
+        padding-right: 1em;
+      }
+    }
+  }
+}

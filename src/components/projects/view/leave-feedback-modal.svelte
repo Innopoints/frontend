@@ -1,11 +1,16 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Modal, Dialog, TextField, CheckboxChipGroup, FormField, Button } from 'attractions';
+  import isModeration from '@/constants/projects/moderation-activity.js';
 
   export let open = false;
   export let activity;
   export let application;
   export let competences;
+  $: title = (
+    activity
+    && `Leave feedback on ${isModeration(activity) ? 'your moderation work' : activity.name}`
+  );
 
   let value = {
     competences: [],
@@ -41,7 +46,7 @@
 
 <Modal bind:open let:closeCallback>
   {#if activity != null}
-    <Dialog title="Leave Feedback on {activity.name}" {closeCallback}>
+    <Dialog {title} {closeCallback}>
       <div class="content">
         <p>You are just one step away from receiving innopoints!</p>
         <p>

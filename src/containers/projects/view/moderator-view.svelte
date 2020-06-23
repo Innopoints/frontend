@@ -121,27 +121,13 @@
         {/if}
       </div>
     {/each}
-  {:else if review}
+  {:else if review || $project.lifetime_stage === ProjectStages.FINISHED}
     {#each externalActivities as activity}
-      <FeedbackActivityCard
-        review
-        {activity}
-        {competences}
-        on:read-feedback
-      />
+      <FeedbackActivityCard {activity} {competences} />
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINALIZING}
     {#each externalActivities as activity}
       <FinalizingActivityCard {account} {activity} />
-    {/each}
-  {:else if $project.lifetime_stage === ProjectStages.FINISHED}
-    {#each externalActivities as activity}
-      <FeedbackActivityCard
-        {activity}
-        {competences}
-        {review}
-        on:read-feedback
-      />
     {/each}
   {/if}
   {#if $project.lifetime_stage === ProjectStages.ONGOING}

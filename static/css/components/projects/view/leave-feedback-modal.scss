@@ -10,27 +10,31 @@
     line-height: 1.1rem;
   }
 
-  form {
+  form :global {
     margin-top: 1em;
 
-    :global(.name) {
+    .name {
       display: block;
       margin-bottom: .3em;
       font-size: 1em !important;
     }
 
-    :global(.competence-chips) {
+    .competence-chips {
       display: flex;
       flex-wrap: wrap;
       max-width: 40em;
 
-      :global(.chip) {
+      .chip {
         margin-right: .5em;
       }
     }
 
-    :global(.form-field) {
+    .form-field {
       flex-direction: column;
+
+      .field {
+        margin-left: 0;
+      }
     }
   }
 
@@ -40,7 +44,7 @@
     padding-bottom: .5em;
   }
 
-  :global(textarea) {
+  :global textarea {
     height: 4em;
   }
 

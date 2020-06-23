@@ -28,7 +28,6 @@
   import StaffCards from '@/containers/projects/view/staff-cards.svelte';
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
-  import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -120,19 +119,6 @@
     },
   };
 
-  const feedbackModal = {
-    open: false,
-    activity: null,
-    feedback: null,
-    from: null,
-    show({ detail }) {
-      feedbackModal.activity = detail.activity;
-      feedbackModal.feedback = detail.feedback;
-      feedbackModal.from = detail.from;
-      feedbackModal.open = true;
-    },
-  };
-
   const leaveFeedbackModal = {
     open: false,
     activity: null,
@@ -186,20 +172,16 @@
         <StaffCards
           {project}
           {account}
+          {competences}
           on:leave-feedback={leaveFeedbackModal.show}
-          on:read-feedback={feedbackModal.show}
         />
+        <!-- TODO: read feedback -->
       {/if}
 
       {#if externalActivities || moderatorMode}
         <H2 class="padded">Activities</H2>
         {#if moderatorMode}
-          <ModeratorView
-            {account}
-            {project}
-            {competences}
-            on:read-feedback={feedbackModal.show}
-          />
+          <ModeratorView {account} {project} {competences} />
         {:else}
           <UserView
             activities={externalActivities}
@@ -208,7 +190,6 @@
             projectStage={$project.lifetime_stage}
             on:apply={applicationDialog.show}
             on:take-back-application={applicationTakeBackDialog.show}
-            on:read-feedback={feedbackModal.show}
             on:leave-feedback={leaveFeedbackModal.show}
           />
         {/if}
@@ -236,14 +217,6 @@
       <em class="consequences">You may place a new one afterwards.</em>
     </DangerConfirmDialog>
   {/if}
-  <!-- read-feedback -->
-  <FeedbackModal
-    bind:isOpen={feedbackModal.open}
-    activity={feedbackModal.activity}
-    feedback={feedbackModal.feedback}
-    from={feedbackModal.from}
-    {competences}
-  />
   <!-- leave-feedback -->
   <LeaveFeedbackModal
     bind:open={leaveFeedbackModal.open}

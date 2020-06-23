@@ -1,8 +1,10 @@
 <script>
-  import { createEventDispatcher, getContext } from 'svelte';
+  import { getContext } from 'svelte';
   import { Card, TextField, Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import Labeled from 'ui/labeled.svelte';
+  import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
+  import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import s from '@/utils/plural-s.js';
   import * as api from '@/utils/api.js';
@@ -11,6 +13,7 @@
   export let moderator;
   export let moderation;
   export let project;
+  export let competences;
 
   const review = getContext('review-mode');
   const isCreator = moderator.email === $project.creator.email;
@@ -18,6 +21,35 @@
     appl => appl.applicant.email === moderator.email,
   );
   let enteredHours = application.actual_hours;
+
+  const leaveFeedbackModal = {
+    open: false,
+    show() {
+      leaveFeedbackModal.open = true;
+    },
+    async submitFeedback({ detail }) {
+      try {
+        const { value, activity, application } = detail;
+        value.answers = value.answers.map(answer => answer || '');
+        application.feedback = await api.json(api.post(
+          `/projects/${activity.project}/activities/${activity.id}`
+          + `/applications/${application.id}/feedback`,
+          { data: value, csrfToken: account.csrf_token },
+        ));
+        project = project;
+        leaveFeedbackModal.open = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
+
+  const feedbackModal = {
+    open: false,
+    show() {
+      feedbackModal.open = true;
+    },
+  };
 
   async function updateHours({ detail }) {
     try {
@@ -34,7 +66,6 @@
   }
 
   const showSnackbar = getContext(snackbarContextKey);
-  const dispatch = createEventDispatcher();
 </script>
 
 <Card>
@@ -71,27 +102,23 @@
       {application.actual_hours} hour{s(application.actual_hours)}
     </Labeled>
     {#if application.feedback != null && !review}
-      <Button
-        outline
-        class="mt"
-        on:click={() => dispatch('read-feedback', {
-          activity: moderation,
-          feedback: application.feedback,
-        })}
-      >
-        read feedback
-      </Button>
+      <Button outline class="mt" on:click={feedbackModal.show}>read feedback</Button>
+      <FeedbackModal
+        bind:open={feedbackModal.open}
+        activity={moderation}
+        feedback={application.feedback}
+        from={application.applicant}
+        {competences}
+      />
     {:else if application.applicant.email === account.email && !review}
-      <Button
-        filled
-        class="mt"
-        on:click={() => dispatch('leave-feedback', {
-          activity: moderation,
-          application,
-        })}
-      >
-        leave feedback
-      </Button>
+      <Button filled class="mt" on:click={leaveFeedbackModal.show}>leave feedback</Button>
+      <LeaveFeedbackModal
+        bind:open={leaveFeedbackModal.open}
+        activity={moderation}
+        {application}
+        {competences}
+        on:submit={leaveFeedbackModal.submitFeedback}
+      />
     {/if}
   {/if}
 </Card>
