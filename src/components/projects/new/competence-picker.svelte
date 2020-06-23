@@ -1,5 +1,6 @@
 <script>
   import { DropdownShell, Dropdown, CheckboxGroup, Button } from 'attractions';
+  import Badge from 'ui/badge.svelte';
 
   export let competences;
   export let value;
@@ -23,7 +24,9 @@
 <DropdownShell let:toggle>
   <Button on:click={toggle}>
     select competences
-    <svg class="ml dropdown-chevron" src="images/icons/chevron-down.svg" />
+    <Badge hidden={value.length !== 0}>
+      <svg class="ml dropdown-chevron" src="images/icons/chevron-down.svg" />
+    </Badge>
   </Button>
   <Dropdown>
     <div class="competence-list">
