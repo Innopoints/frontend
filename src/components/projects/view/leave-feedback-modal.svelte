@@ -55,7 +55,6 @@
         </p>
         <form>
           <FormField
-            id="competences"
             name="What competences have you developed (up to 3)?"
             required
           >
@@ -68,10 +67,9 @@
             />
           </FormField>
           {#each activity.feedback_questions as question, index}
-            <FormField name={question} id="question{index}">
+            <FormField name={question}>
               <TextField
                 multiline
-                id="question{index}"
                 maxlength={1024}
                 bind:value={value.answers[index]}
               />
