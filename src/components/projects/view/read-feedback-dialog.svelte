@@ -42,4 +42,4 @@
   {/if}
 </Modal>
 
-<style src="../../../../static/css/components/projects/view/feedback-modal.scss"></style>
+<style src="../../../../static/css/components/projects/view/read-feedback-dialog.scss"></style>

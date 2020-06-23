@@ -4,7 +4,7 @@
   import { PopoverPositions } from 'attractions/popover';
   import Labeled from 'ui/labeled.svelte';
   import CopyButton from '@/components/common/copy-button.svelte';
-  import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
+  import ReadFeedbackDialog from '@/components/projects/view/read-feedback-dialog.svelte';
   import s from '@/utils/plural-s.js';
 
   export let activity;
@@ -12,10 +12,10 @@
   export let competences;
   export let review = getContext('review-mode');
 
-  const feedbackModal = {
+  const readFeedbackDialog = {
     open: false,
     show() {
-      feedbackModal.open = true;
+      readFeedbackDialog.open = true;
     },
   };
 </script>
@@ -39,7 +39,7 @@
         No Telegram username specified.
       {/if}
       {#if !review && application.feedback != null}
-        <Button outline class="feedback" on:click={feedbackModal.show}>
+        <Button outline class="feedback" on:click={readFeedbackDialog.show}>
           read feedback
         </Button>
       {/if}
@@ -54,8 +54,8 @@
           <svg class="innopoint" src="images/innopoint-sharp.svg" />
         </div>
       </Labeled>
-      <FeedbackModal
-        bind:open={feedbackModal.open}
+      <ReadFeedbackDialog
+        bind:open={readFeedbackDialog.open}
         {activity}
         feedback={application.feedback}
         from={application.applicant}

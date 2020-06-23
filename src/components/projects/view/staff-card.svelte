@@ -4,7 +4,7 @@
   import { snackbarContextKey } from 'attractions/snackbar';
   import Labeled from 'ui/labeled.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
-  import FeedbackModal from '@/components/projects/view/feedback-modal.svelte';
+  import ReadFeedbackDialog from '@/components/projects/view/read-feedback-dialog.svelte';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import s from '@/utils/plural-s.js';
   import * as api from '@/utils/api.js';
@@ -44,10 +44,10 @@
     },
   };
 
-  const feedbackModal = {
+  const readFeedbackDialog = {
     open: false,
     show() {
-      feedbackModal.open = true;
+      readFeedbackDialog.open = true;
     },
   };
 
@@ -102,9 +102,9 @@
       {application.actual_hours} hour{s(application.actual_hours)}
     </Labeled>
     {#if application.feedback != null && !review}
-      <Button outline class="mt" on:click={feedbackModal.show}>read feedback</Button>
-      <FeedbackModal
-        bind:open={feedbackModal.open}
+      <Button outline class="mt" on:click={readFeedbackDialog.show}>read feedback</Button>
+      <ReadFeedbackDialog
+        bind:open={readFeedbackDialog.open}
         activity={moderation}
         feedback={application.feedback}
         from={application.applicant}

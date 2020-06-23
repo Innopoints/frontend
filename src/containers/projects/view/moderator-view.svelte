@@ -6,7 +6,7 @@
   import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
   import ModeratorDraftCard from '@/components/projects/view/moderator-draft-card.svelte';
   import FinalizingActivityCard from '@/components/projects/view/finalizing-activity-card.svelte';
-  import FeedbackActivityCard from '@/components/projects/view/feedback-activity-card.svelte';
+  import FinishedActivityCard from '@/components/projects/view/finished-activity-card.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
   import EditActivityCard from '@/components/projects/new/edit-activity-card.svelte';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -123,7 +123,7 @@
     {/each}
   {:else if review || $project.lifetime_stage === ProjectStages.FINISHED}
     {#each externalActivities as activity}
-      <FeedbackActivityCard {activity} {competences} />
+      <FinishedActivityCard {activity} {competences} />
     {/each}
   {:else if $project.lifetime_stage === ProjectStages.FINALIZING}
     {#each externalActivities as activity}
