@@ -27,7 +27,7 @@
 
 <Modal bind:open let:closeCallback>
   <Dialog title="Finalize the project?" {closeCallback}>
-    <svg slot="icon" src="images/icons/help-circle.svg" class="title-icon" />
+    <svg slot="title-icon" src="images/icons/help-circle.svg" class="icon" />
     <p>
       This is usually done when all the volunteer work is completed. <br>
       In the finalizing stage you will be able to:
