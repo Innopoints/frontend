@@ -53,7 +53,7 @@
         }
       }
 
-      section {
+      .panel.open + section {
         display: flex;
         justify-content: space-between;
 
