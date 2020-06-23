@@ -32,7 +32,11 @@
               </Labeled>
             </div>
             <div class="feedback">
-              <p>{report.content}</p>
+              {#if report.content}
+                <p>{report.content}</p>
+              {:else}
+                <em>No feedback.</em>
+              {/if}
               <Stars value={report.rating} />
             </div>
           </li>

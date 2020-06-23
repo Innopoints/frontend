@@ -47,12 +47,16 @@
     }
   }
 
-  :global .labeled > .icon {
-    margin-top: .6rem;
+  :global .labeled .label {
+    white-space: nowrap;
   }
 
   @media only screen and (min-width: 1024px) {
     min-width: 25em;
+
+    .feedback p {
+      margin: 0 .5em 0 0;
+    }
 
     .data-points, .feedback {
       flex-direction: row;
