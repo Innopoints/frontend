@@ -41,16 +41,18 @@
     </Labeled>
     <Labeled icon label="Worktime">
       <svg slot="icon" class="icon" src="images/icons/clock.svg" />
-      <span class="content primary">
-        {#if activity.fixed_reward}
-          as needed
-        {:else}
-          {activity.working_hours} hour{s(activity.working_hours)}
-        {/if}
-      </span>
-      <span class="content secondary">
-        {formatDateRange(activity.timeframe)}
-      </span>
+      <div class="content">
+        <span class="primary">
+          {#if activity.fixed_reward}
+            as needed
+          {:else}
+            {activity.working_hours} hour{s(activity.working_hours)}
+          {/if}
+        </span>
+        <span class="secondary">
+          {formatDateRange(activity.timeframe)}
+        </span>
+      </div>
     </Labeled>
   </div>
   {#if activity.application_deadline != null}

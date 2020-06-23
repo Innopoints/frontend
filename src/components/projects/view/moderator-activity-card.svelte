@@ -7,7 +7,7 @@
   import ApplicationTile from '@/components/projects/view/application-tile.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import s from '@/utils/plural-s.js';
-  import { formatDate, formatTimeRange } from '@/utils/date-time-format.js';
+  import { formatDate, formatDateRange } from '@/utils/date-time-format.js';
 
   export let activity;
   export let competences;
@@ -39,15 +39,15 @@
         <Labeled icon label="Worktime">
           <svg slot="icon" class="icon mr" src="images/icons/clock.svg" />
           <span class="content">
-            <span class="content primary">
+            <span class="primary">
               {#if activity.fixed_reward}
                 as needed
               {:else}
                 {activity.working_hours} hour{s(activity.working_hours)}
               {/if}
             </span>
-            <div class="content secondary">
-              {formatTimeRange(activity.timeframe)}
+            <div class="secondary">
+              {formatDateRange(activity.timeframe)}
             </div>
           </span>
         </Labeled>

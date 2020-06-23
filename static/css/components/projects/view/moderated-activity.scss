@@ -6,6 +6,7 @@
   .left {
     header {
       font-weight: 500;
+      font-size: 1.1em;
     }
 
     .description {
@@ -37,8 +38,22 @@
       }
     }
 
-    & > :global .labeled {
-      margin-top: 1em;
+    :global .labeled {
+      margin: .5em 0;
+
+      &:first-child {
+        margin-right: 1em;
+      }
+
+      & > .content {
+        font-size: 1.1em;
+        margin-top: .2em;
+
+        .secondary {
+          font-size: .9em;
+          font-weight: 300;
+        }
+      }
     }
   }
 

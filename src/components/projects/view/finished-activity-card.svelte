@@ -31,14 +31,14 @@
         <Labeled icon label="Worktime">
           <svg slot="icon" class="icon mr" src="images/icons/clock.svg" />
           <span class="content">
-            <span class="content primary">
+            <span class="primary">
               {#if activity.fixed_reward}
                 as needed
               {:else}
                 {activity.working_hours} hour{s(activity.working_hours)}
               {/if}
             </span>
-            <div class="content secondary">
+            <div class="secondary">
               {formatTimeRange(activity.timeframe)}
             </div>
           </span>
