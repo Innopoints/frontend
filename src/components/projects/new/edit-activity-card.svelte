@@ -66,6 +66,7 @@
         return;
       }
     }
+    activity.vacant_spots += detail.value - activity.people_required;
     activity.people_required = detail.value;
   }
 
