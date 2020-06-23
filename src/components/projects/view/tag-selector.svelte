@@ -10,10 +10,11 @@
 
   // eslint-disable-next-line require-yield
   async function *getOptions(query) {
+    let output = tags;
     if (query) {
-      return tags.filter(tag => tag.name.toLowerCase().includes(query.toLowerCase()));
+      output = output.filter(tag => tag.name.toLowerCase().includes(query.toLowerCase()));
     }
-    return tags;
+    return output.filter(tag => !value.includes(tag.id));
   }
 
   function toggleEditing() {
