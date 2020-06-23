@@ -54,4 +54,4 @@
   {/if}
 </Modal>
 
-<style src="../../../../static/css/components/projects/view/report-dialog.scss"></style>
+<style src="../../../../static/css/components/projects/view/view-reports-dialog.scss"></style>

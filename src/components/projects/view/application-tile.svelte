@@ -6,7 +6,7 @@
   import { snackbarContextKey } from 'attractions/snackbar';
   import CopyButton from '@/components/common/copy-button.svelte';
   import Stars from '@/components/common/stars.svelte';
-  import ReportDialog from '@/components/projects/view/report-dialog.svelte';
+  import ViewReportsDialog from '@/components/projects/view/view-reports-dialog.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import * as api from '@/utils/api.js';
 
@@ -23,12 +23,12 @@
     ).then(resp => resp.json()).catch(console.error);
   });
 
-  const reportDialog = {
+  const viewReportsDialog = {
     open: false,
     reports: null,
     async show({ detail }) {
-      reportDialog.reports = (await report).reports;
-      reportDialog.open = true;
+      viewReportsDialog.reports = (await report).reports;
+      viewReportsDialog.open = true;
     },
   };
 
@@ -102,7 +102,7 @@
     {#if report != null}
       {#await report then reportData}
         <Stars value={reportData.average_rating} />
-        <Button on:click={reportDialog.show}>performance reports</Button>
+        <Button on:click={viewReportsDialog.show}>performance reports</Button>
       {/await}
     {/if}
     {#if application.comment}
@@ -139,10 +139,10 @@
       {/if}
     </div>
   </AccordionSection>
-  <ReportDialog
-    bind:open={reportDialog.open}
+  <ViewReportsDialog
+    bind:open={viewReportsDialog.open}
     applicant={application.applicant}
-    reports={reportDialog.reports}
+    reports={viewReportsDialog.reports}
   />
 </div>
 
