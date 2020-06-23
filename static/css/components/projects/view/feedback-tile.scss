@@ -7,6 +7,10 @@
     border-top: .0625em solid $light-contrast;
   }
 
+  :global .labeled .content {
+    margin-top: .3em;
+  }
+
   :global .panel {
     margin-top: .8em;
     margin-left: .5em;
@@ -27,6 +31,7 @@
         justify-items: start;
         align-items: center;
         row-gap: 1em;
+        column-gap: .25em;
 
         .btn {
           grid-column: span 2;
