@@ -1,11 +1,12 @@
 <script>
-  import { createEventDispatcher, getContext } from 'svelte';
+  import { getContext } from 'svelte';
   import { prefetch, goto } from '@sapper/app';
-  import { Button, TextField, H1, Chip } from 'attractions';
+  import { Button, H1, Chip } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import Labeled from 'ui/labeled.svelte';
   import Notice from '@/components/common/notice.svelte';
   import TagSelector from '@/components/projects/view/tag-selector.svelte';
+  import ReviewVerdict from '@/components/projects/review/review-verdict.svelte';
   import FinalizingDialog from '@/components/projects/view/finalizing-dialog.svelte';
   import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
   import { API_HOST_BROWSER } from '@/constants/env.js';
@@ -19,7 +20,6 @@
   export let tags;
   export let moderatorMode = false;
 
-  let reviewComment = null;
   let finalizeDialogOpen = false;
   let projectDeletionDialogOpen = false;
   const reviewView = getContext('review-mode');
@@ -68,7 +68,6 @@
     }
   }
 
-  const dispatch = createEventDispatcher();
   const showSnackbar = getContext(snackbarContextKey);
 </script>
 
@@ -81,9 +80,7 @@
     <H1>
       {$project.name}
       {#if $project.lifetime_stage === ProjectStages.FINISHED}
-        <Chip small>
-          finished
-        </Chip>
+        <Chip small>finished</Chip>
       {/if}
     </H1>
     {#if $project.lifetime_stage === ProjectStages.FINALIZING
@@ -179,33 +176,7 @@
       </div>
     {/if}
     {#if reviewView}
-      <div class="review-verdict">
-        {#if $project.lifetime_stage != ProjectStages.FINALIZING
-             || $project.review_status != ReviewStatuses.PENDING}
-          <div class="title">Review not available.</div>
-        {:else}
-          <div class="title">Review verdict</div>
-          <TextField
-            multiline
-            maxlength={1024}
-            bind:value={reviewComment}
-            placeholder="Leave feedback on the project"
-          />
-          <div class="actions">
-            <Button
-              danger
-              on:click={() => dispatch('submit-review', { accept: false, comment: reviewComment })}
-            >
-              reject
-            </Button>
-            <Button
-              on:click={() => dispatch('submit-review', { accept: true, comment: reviewComment })}
-            >
-              accept
-            </Button>
-          </div>
-        {/if}
-      </div>
+      <ReviewVerdict {project} />
     {/if}
   </div>
 </header>
