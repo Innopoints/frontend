@@ -6,7 +6,12 @@
   import { Autocomplete, Label, DropdownShell, Dropdown, Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import spaceOnly from '@/utils/space-only.js';
-  import * as api from '@/utils/api.js';
+  import {
+    autocompleteValueToUser,
+    getUsersRaw,
+    minSearchLength,
+    userToAutocompleteValue,
+  } from '@/utils/autocomplete-users.js';
 
   const { session } = stores();
 
@@ -14,64 +19,22 @@
   export let autosaved;
 
   let value = $project.moderators.filter(notCreator).map(userToAutocompleteValue);
-  const minSearchLength = 2;
-
-  function userToAutocompleteValue(user) {
-    return {
-      name: user.full_name,
-      details: user.email,
-    };
-  }
 
   function notCreator(moderator) {
     return moderator.email !== $session.account.email;
   }
 
   function recordChanges() {
-    $project.moderators = value.map(user => ({
-      full_name: user.name,
-      email: user.details,
-    }));
+    $project.moderators = value.map(autocompleteValueToUser);
   }
 
-  async function *getUsers(query) {
-    if (query.length < minSearchLength) {
-      return [];
-    }
-
-    let pages, data;
+  async function* getUsers(query) {
     try {
-      ({ pages, data } = await api.json(api.get('/accounts', { query: new Map([['q', query]]) })));
+      yield* getUsersRaw(query, notCreator);
     } catch (e) {
       showSnackbar({ props: { text: 'Couldn\'t search for users, try reloading the page' } });
       console.error(e);
       return [];
-    }
-
-    let currentPage = 1;
-    if (currentPage >= pages) {
-      return data.filter(notCreator).map(userToAutocompleteValue);
-    }
-
-    yield data.filter(notCreator).map(userToAutocompleteValue);
-
-
-    while (currentPage <= pages) {
-    const query = new Map([['q', query], ['page', currentPage]]);
-      try {
-        ({ pages, data } = await api.json(api.get('/accounts', { query })));
-      } catch (e) {
-        showSnackbar({ props: { text: 'Couldn\'t search for users, try reloading the page' } });
-        console.error(e);
-        return [];
-      }
-
-      if (currentPage === pages) {
-        return data.filter(notCreator).map(userToAutocompleteValue);
-      } else {
-        yield data.filter(notCreator).map(userToAutocompleteValue);
-      }
-      currentPage++;
     }
   }
 
