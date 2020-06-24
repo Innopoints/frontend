@@ -77,14 +77,14 @@ function toISOFormat(date) {
 /* Prepare an activity object to be sent to the backend
    by converting dates to ISO, ensuring certain invariants and removing alien fields. */
 export function prepareForBackend(activity) {
-  const copy = copyActivity(activity);
-  if (copy.fixed_reward != null) {
-    if (copy.fixed_reward) {
-      copy.working_hours = 1;
+  if (activity.fixed_reward != null) {
+    if (activity.fixed_reward) {
+      activity.working_hours = 1;
     } else {
-      copy.reward_rate = HOURLY_RATE;
+      activity.reward_rate = HOURLY_RATE;
     }
   }
+  const copy = copyActivity(activity);
 
   if (copy.timeframe != null) {
     copy.timeframe = {
