@@ -20,7 +20,7 @@
   import { onMount } from 'svelte';
   import { prefetch, goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
-  import Form from '@/containers/products/edit-form.svelte';
+  import ProductForm from '@/containers/products/new/product-form.svelte';
   import PreviewCard from '@/components/products/preview-card.svelte';
   import Button from 'ui/button.svelte';
   import Modal from 'ui/modal.svelte';
@@ -215,7 +215,7 @@
   <div class="material">
     <h1 class="padded">Create a Product</h1>
     <main class="padded">
-      <Form
+      <ProductForm
         {product} {errors}
         colors={colors.map(unwrapValue)}
         sizes={sizes.map(unwrapValue)}
