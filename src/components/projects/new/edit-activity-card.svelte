@@ -49,10 +49,12 @@
       activity.people_required = null;
     } else {
       activity.people_required = rememberedPeopleRequired;
+      validatePeopleRequired({ detail: { value: rememberedPeopleRequired } });
     }
   }
 
   function validatePeopleRequired({ detail }) {
+    activity.vacant_spots = detail.value;
     if (activity.applications != null) {
       const approved = activity.applications.filter(
         apl => apl.status === ApplicationStatuses.APPROVED,
@@ -65,8 +67,8 @@
         });
         return;
       }
+      activity.vacant_spots -= approved.length;
     }
-    activity.vacant_spots += detail.value - activity.people_required;
     activity.people_required = detail.value;
   }
 
