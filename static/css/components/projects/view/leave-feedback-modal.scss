@@ -1,7 +1,11 @@
+@import "_mixins.scss";
+
 .content {
   max-height: calc(100vh - 10em);
   overflow-y: auto;
   overscroll-behavior: none;
+
+  @include thin-scrollbar;
 
   p {
     font-weight: 300;

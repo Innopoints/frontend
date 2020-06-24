@@ -1,7 +1,12 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { getContext } from 'svelte';
+  import { stores } from '@sapper/app';
   import { Modal, Dialog, TextField, CheckboxChipGroup, FormField, Button } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import isModeration from '@/constants/projects/moderation-activity.js';
+  import * as api from '@/utils/api.js';
+
+  const { session } = stores();
 
   export let open = false;
   export let activity;
@@ -30,22 +35,33 @@
     }
   }
 
-  function submit() {
-    dispatch('submit', { activity, application, value });
-    value = {
-      competences: [],
-      answers: new Array(activity.feedback_questions.length).fill(''),
-    };
-    competenceItems.forEach(item => item.checked = false);
-    competenceItems = competenceItems;
-    open = false;
+  async function submitFeedback() {
+    try {
+      value.answers = value.answers.map(answer => answer || '');
+      application.feedback = await api.json(api.post(
+        `/projects/${activity.project}/activities/${activity.id}`
+        + `/applications/${application.id}/feedback`,
+        { data: value, csrfToken: $session.account.csrf_token },
+      ));
+      open = false;
+      value = {
+        competences: [],
+        answers: new Array(activity.feedback_questions.length).fill(''),
+      };
+      competenceItems.forEach(item => item.checked = false);
+      competenceItems = competenceItems;
+      showSnackbar({ props: { text: 'Success! You should have received your innopoints now' } });
+    } catch (e) {
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
+      console.error(e);
+    }
   }
 
-  const dispatch = createEventDispatcher();
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <Modal bind:open let:closeCallback>
-  {#if activity != null}
+  {#if application != null}
     <Dialog {title} {closeCallback}>
       <div class="content">
         <p>You are just one step away from receiving innopoints!</p>
@@ -54,10 +70,7 @@
           affect the amount of innopoints you receive!
         </p>
         <form>
-          <FormField
-            name="What competences have you developed (up to 3)?"
-            required
-          >
+          <FormField name="What competences have you developed (up to 3)?" required>
             <CheckboxChipGroup
               class="competence-chips"
               items={competenceItems}
@@ -68,21 +81,12 @@
           </FormField>
           {#each activity.feedback_questions as question, index}
             <FormField name={question}>
-              <TextField
-                multiline
-                maxlength={1024}
-                bind:value={value.answers[index]}
-              />
+              <TextField multiline maxlength={1024} bind:value={value.answers[index]} />
             </FormField>
           {/each}
         </form>
         <div class="actions">
-          <Button
-            noRipple
-            filled
-            disabled={!value.competences}
-            on:click={submit}
-          >
+          <Button noRipple filled disabled={!value.competences} on:click={submitFeedback}>
             submit & claim innopoints
           </Button>
         </div>

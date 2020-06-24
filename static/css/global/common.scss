@@ -159,6 +159,12 @@ body {
   }
 }
 
+.dialog .consequences {
+  display: block;
+  margin-top: .3em;
+  font-weight: 300;
+}
+
 .dialog .actions {
   display: flex;
   justify-content: flex-end;

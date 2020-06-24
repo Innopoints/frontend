@@ -1,6 +1,7 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, getContext } from 'svelte';
   import { Button, Loading } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import EmptyState from '@/components/common/empty-state.svelte';
   import TimelineEntry from '@/components/profile/timeline-entry.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
@@ -8,7 +9,6 @@
 
   export let timelinePromises;
   export let competences;
-  export let account;
 
   function requestMore() {
     dispatch('more-timeline');
@@ -31,28 +31,13 @@
         );
         leaveFeedbackModal.open = true;
       } catch (e) {
-        console.error(e);
-      }
-    },
-    async submitFeedback({ detail }) {
-      try {
-        const { value, activity, application } = detail;
-        value.answers = value.answers.map(answer => answer || '');
-        application.feedback = await api.json(api.post(
-          `/projects/${activity.project}/activities/${activity.id}`
-          + `/applications/${application.id}/feedback`,
-          { data: value, csrfToken: account.csrf_token },
-        ));
-        leaveFeedbackModal.payload.feedback_id = application.id;
-        timelinePromises = timelinePromises;
-        account.balance += leaveFeedbackModal.payload.reward;
-        leaveFeedbackModal.open = false;
-      } catch (e) {
+        showSnackbar({ props: { text: 'Couldn\'t get information about the project' } });
         console.error(e);
       }
     },
   };
 
+  const showSnackbar = getContext(snackbarContextKey);
   const dispatch = createEventDispatcher();
 </script>
 
@@ -90,7 +75,6 @@
   activity={leaveFeedbackModal.activity}
   application={leaveFeedbackModal.application}
   {competences}
-  on:submit={leaveFeedbackModal.submitFeedback}
 />
 
 <style src="../../../static/css/containers/profile/timeline.scss"></style>

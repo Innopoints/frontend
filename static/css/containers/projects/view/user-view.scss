@@ -1,12 +1,11 @@
-@media only screen and (min-width: 700px) {
-  // Two columns
-  .activities.user {
+.activity-list {
+  @media only screen and (min-width: 700px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 1em;
     align-items: center;
 
-    .activity {
+    :global .activity {
       grid-row: span 2;
 
       &.expanded {
@@ -14,11 +13,8 @@
       }
     }
   }
-}
 
-@media only screen and (min-width: 1200px) {
-  // Three columns
-  .activities.user {
+  @media only screen and (min-width: 1200px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }

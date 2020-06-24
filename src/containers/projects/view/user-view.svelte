@@ -1,25 +1,16 @@
 <script>
   import UserActivityCard from '@/components/projects/view/user-activity-card.svelte';
 
-  export let projectStage;
-  export let activities;
-  export let competences;
   export let account;
-
-  $: activityCards = activities.filter(x => !x.internal);
+  export let competences;
+  export let project;
+  $: externalActivities = $project.activities.filter(act => !act.internal);
 </script>
 
-<div class="activities user padded">
-  {#each activityCards as activity (activity.id)}
-    <UserActivityCard
-      {activity}
-      {competences}
-      {account}
-      {projectStage}
-      on:apply
-      on:take-back-application
-      on:leave-feedback
-      on:read-feedback
-    />
+<div class="activity-list padded">
+  {#each externalActivities as activity (activity.id)}
+    <UserActivityCard {activity} {competences} {account} projectStage={$project.lifetime_stage} />
   {/each}
 </div>
+
+<style src="../../../../static/css/containers/projects/view/user-view.scss"></style>

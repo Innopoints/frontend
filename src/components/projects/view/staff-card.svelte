@@ -27,21 +27,6 @@
     show() {
       leaveFeedbackModal.open = true;
     },
-    async submitFeedback({ detail }) {
-      try {
-        const { value, activity, application } = detail;
-        value.answers = value.answers.map(answer => answer || '');
-        application.feedback = await api.json(api.post(
-          `/projects/${activity.project}/activities/${activity.id}`
-          + `/applications/${application.id}/feedback`,
-          { data: value, csrfToken: account.csrf_token },
-        ));
-        project = project;
-        leaveFeedbackModal.open = false;
-      } catch (e) {
-        console.error(e);
-      }
-    },
   };
 
   const readFeedbackDialog = {
@@ -117,7 +102,6 @@
         activity={moderation}
         {application}
         {competences}
-        on:submit={leaveFeedbackModal.submitFeedback}
       />
     {/if}
   {/if}

@@ -122,7 +122,6 @@
           <Timeline
             {timelinePromises}
             {competences}
-            {account}
             on:more-timeline={fetchMoreTimeline}
           />
         {:else if activeTab === tabs.statistics}

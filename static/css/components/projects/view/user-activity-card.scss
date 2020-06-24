@@ -1,27 +1,71 @@
-@import "../global/_mixins.scss";
-@import "../global/_variables.scss";
+@import "_attractions-theme.scss";
 
 .activity.user {
-  .application-status {
-    font-size: .9em;
-    font-weight: 300;
-    margin-top: 1em;
+  margin-bottom: 1em;
 
-    .dot {
-      margin-right: .3em;
-      margin-left: 0;
-    }
+  .title {
+    font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 1.4rem;
+    letter-spacing: .2px;
   }
 
-  .additional {
-    @include hide-accessible;
+  :global .card:not(.expanded) > .additional {
+    display: none;
   }
 
   .chevron {
     transition: transform 100ms;
   }
 
-  &.expanded {
+  .row {
+    margin-top: .8em;
+    display: flex;
+    justify-content: space-between;
+
+    & > :global .labeled {
+      flex-basis: 50%;
+    }
+  }
+
+  :global .labeled .content {
+    margin: .3em 0;
+
+    .secondary {
+      font-size: .9rem;
+      font-weight: 300;
+      display: none;
+    }
+  }
+
+  .chips {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+
+    :global .chip {
+      margin: 0 .3em .3em 0;
+    }
+  }
+
+  .not-logged-in {
+    align-self: center;
+    font-weight: 300;
+  }
+
+  .application-status {
+    font-size: .9em;
+    font-weight: 300;
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+
+    :global .dot {
+      margin-right: .6em;
+    }
+  }
+
+  :global .card.expanded {
     .chevron {
       transform: rotate(180deg);
     }
@@ -32,12 +76,11 @@
 
       .labeled:last-child {
         margin-top: .8em;
-      }
-    }
 
-    .labeled .content.secondary,
-    .additional {
-      @include show-accessible;
+        .secondary {
+          display: block;
+        }
+      }
     }
 
     .description,
@@ -47,14 +90,9 @@
       margin-top: .8em;
     }
 
-    .description .content,
-    .spots .content {
+    .description .content {
       font-size: .95rem;
       white-space: pre-line;
-    }
-
-    .volunteers > div.text {
-      display: block;
     }
 
     .volunteers ul {
@@ -72,7 +110,7 @@
     }
 
     .application {
-      border-top: 1px solid $light-contrast;
+      border-top: .0625em solid $light-contrast;
       padding-top: .8em;
       margin-top: .8em;
       font-weight: 300;
@@ -84,11 +122,6 @@
           white-space: pre-line;
         }
       }
-    }
-
-    .not-logged-in {
-      align-self: center;
-      font-weight: 300;
     }
   }
 }
@@ -104,21 +137,17 @@
                   (min-width: 1024px) and (max-width: 1199px),
                   (min-width: 1400px) {
   .activity.user {
-    .row > .labeled:first-child {
-      flex-basis: 40%;
-    }
+    .row > :global .labeled {
+      &:first-child {
+        flex-basis: 40%;
+      }
 
-    .row > .labeled:last-child {
-      flex-basis: 60%;
-    }
-
-    &:not(.expanded) {
-      .labeled .content.secondary {
-        @include show-accessible;
+      &:last-child {
+        flex-basis: 60%;
       }
     }
 
-    &.expanded {
+    :global .card.expanded {
       .row.info {
         flex-direction: row;
 

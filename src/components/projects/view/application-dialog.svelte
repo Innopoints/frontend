@@ -1,55 +1,68 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import Dialog from 'ui/dialog.svelte';
-  import Modal from 'ui/modal.svelte';
-  import TextField from 'ui/text-field.svelte';
+  import { getContext } from 'svelte';
+  import { stores } from '@sapper/app';
+  import { Button, Dialog, Modal, TextField, FormField } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
+  import * as api from '@/utils/api.js';
+
+  const { session } = stores();
 
   export let activity;
-  export let savedUsername = null;
-  export let isOpen = false;
-  export let error = null;
+  export let open = false;
   let comment = '';
-  let telegram = savedUsername || '';
+  let telegram = $session.account.telegram_username || '';
 
-  function submitApplication() {
-    dispatch('submit-application', {
-      activity,
-      comment,
-      telegram,
-    });
-    comment = '';
+  async function submitApplication() {
+    try {
+      const application = await api.json(api.post(
+        `/projects/${activity.project}/activities/${activity.id}/applications`,
+        { data: { telegram, comment }, csrfToken: $session.account.csrf_token },
+      ));
+      application.applicant = $session.account;
+      activity.existing_application = application;
+
+      if (telegram && telegram != $session.account.telegram) {
+        try {
+          await api.json(api.patch(
+            '/account/telegram',
+            { data: { telegram_username: telegram }, csrfToken: $session.account.csrf_token },
+          ));
+          $session.account.telegram = telegram;
+          $session.account = $session.account;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      open = false;
+      comment = '';
+      showSnackbar({ props: { text: 'Application placed successfully' } });
+    } catch (e) {
+      showSnackbar({ props: { text: 'Couldn\'t apply, try reloading the page' } });
+      console.error(e);
+    }
   }
 
-  $: usernameValid = /[A-Za-z0-9_]{5,32}/.test(telegram);
-  const dispatch = createEventDispatcher();
+  const telegramUsernameRegex = /[A-Za-z0-9_]{5,32}/;
+  $: usernameValid = telegramUsernameRegex.test(telegram);
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
-<Modal bind:isOpen>
+<Modal bind:open let:closeCallback>
   {#if activity != null}
-    <Dialog
-      title="Apply for {activity.name}"
-      closeCallback={() => isOpen = false}
-      classname="apply-modal"
-    >
-      <form slot="content">
-        {#if error != null}
-          <p class="error">{error}</p>
-        {/if}
-        <label class="label" for="comment">Comment (optional)</label>
-        <TextField
-          classname="comment-field"
-          multiline="true"
-          maxlength={1024}
-          bind:value={comment}
-          id="comment"
-        />
-        <label class="label" for="telegram">Telegram username</label>
-        <div class="text-field-wrapper">
+    <Dialog title="Apply for {activity.name}" {closeCallback}>
+      <div class="form">
+        <FormField name="Comment" optional>
+          <TextField
+            class="comment-field"
+            multiline="true"
+            maxlength={1024}
+            bind:value={comment}
+          />
+        </FormField>
+        <FormField name="Telegram username" required={activity.telegram_required}>
           <TextField
             bind:value={telegram}
-            id="telegram"
-            isWithItem
+            withItem
             pattern="[A-Za-z0-9_]*"
             minlength={5}
             maxlength={32}
@@ -57,20 +70,19 @@
           >
             <svg src="images/icons/at-sign.svg" class="item" />
           </TextField>
-          {#if activity.telegram_required}
-            <span class="helper required ">* Required</span>
-          {/if}
-        </div>
+        </FormField>
         <div class="actions">
           <Button
-            isFilled
+            filled
             on:click={submitApplication}
             disabled={!usernameValid && (telegram !== '' || activity.telegram_required)}
           >
             apply
           </Button>
         </div>
-      </form>
+      </div>
     </Dialog>
   {/if}
 </Modal>
+
+<style src="../../../../static/css/components/projects/view/application-dialog.scss"></style>
