@@ -69,7 +69,7 @@
           Be honest – we read this feedback, and it will not
           affect the amount of innopoints you receive!
         </p>
-        <form>
+        <div class="form">
           <FormField name="What competences have you developed (up to 3)?" required>
             <CheckboxChipGroup
               class="competence-chips"
@@ -84,7 +84,7 @@
               <TextField multiline maxlength={1024} bind:value={value.answers[index]} />
             </FormField>
           {/each}
-        </form>
+        </div>
         <div class="actions">
           <Button noRipple filled disabled={!value.competences} on:click={submitFeedback}>
             submit & claim innopoints

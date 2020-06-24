@@ -5,13 +5,13 @@
   padding-bottom: .5em;
   border-bottom: .0625em solid $light-contrast;
 
-  form {
+  .form {
     margin-top: 1em;
     display: flex;
     flex-direction: column;
   }
 
-  :global(.btn) {
+  :global .btn {
     align-self: start;
   }
 

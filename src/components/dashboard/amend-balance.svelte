@@ -41,7 +41,7 @@
     Add/subtract innopoints
   </header>
   <div class="subtitle">Supply a negative quantity to subtract innopoints.</div>
-  <form>
+  <div class="form">
     <TextField
       bind:value={amount}
       placeholder="0"
@@ -56,7 +56,7 @@
     <Button round disabled={!amount || users.length === 0} on:click={send}>
       <svg src="images/icons/check.svg" class="icon" />
     </Button>
-  </form>
+  </div>
 </div>
 
 <style src="../../../static/css/components/dashboard/amend-balance.scss"></style>

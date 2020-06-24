@@ -38,7 +38,7 @@
     <svg src="images/icons/message-circle.svg" class="icon mr-2" />
     Send a message
   </header>
-  <form>
+  <div class="form">
     <TextField
       bind:value={text}
       multiline
@@ -52,7 +52,7 @@
         send
       </Button>
     </div>
-  </form>
+  </div>
 </div>
 
 <style src="../../../static/css/components/dashboard/send-message.scss"></style>

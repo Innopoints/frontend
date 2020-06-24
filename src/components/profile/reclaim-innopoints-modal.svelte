@@ -37,31 +37,29 @@
 
 <Modal bind:open let:closeCallback>
   <Dialog title="Reclaim innopoints from the old website" {closeCallback}>
-    <form>
-      <p class="mb">
-        Do you have leftover innopoints at the old website? <br />
-        Fear not, you can have them here.
-      </p>
-      <p class="mb-2">
-        Enter the e-mail or username and password of the account you used. <br />
-        You can do this for all your accounts, if you have several.
-      </p>
+    <p class="mb">
+      Do you have leftover innopoints at the old website? <br />
+      Fear not, you can have them here.
+    </p>
+    <p class="mb-2">
+      Enter the e-mail or username and password of the account you used. <br />
+      You can do this for all your accounts, if you have several.
+    </p>
 
-      <label for="email" class="label">
-        E-mail or username
-      </label>
-      <TextField bind:value={email} id="email" class="mb-2" />
+    <label for="email" class="label">
+      E-mail or username
+    </label>
+    <TextField bind:value={email} id="email" class="mb-2" />
 
-      <label for="password" class="label">
-        Password
-      </label>
-      <TextField type="password" bind:value={password} id="password" class="mb-2" />
+    <label for="password" class="label">
+      Password
+    </label>
+    <TextField type="password" bind:value={password} id="password" class="mb-2" />
 
-      <div class="actions">
-        <Button filled disabled={!email || !password} on:click={sendRequest}>
-          reclaim innopoints
-        </Button>
-      </div>
-    </form>
+    <div class="actions">
+      <Button filled disabled={!email || !password} on:click={sendRequest}>
+        reclaim innopoints
+      </Button>
+    </div>
   </Dialog>
 </Modal>
