@@ -29,7 +29,7 @@
       }));
       account.telegram_username = tgUsername;
       showSnackbar({ props: {
-        text: `Successfully ${tgUsername === '' ? 'removed' : 'updated'} the username!`,
+        text: `Successfully ${tgUsername === '' ? 'removed' : 'updated'} the username`,
       } });
       if ($session.account.email === account.email) {
         $session.account = account;
@@ -41,7 +41,7 @@
 
     tgChange = false;
   }
-  
+
   const showSnackbar = getContext(snackbarContextKey);
 </script>
 

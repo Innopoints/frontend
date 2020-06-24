@@ -84,7 +84,7 @@
       changes = false;
       const undoPrompt = showSnackbar({
         props: {
-          text: 'Settings updated successfully!',
+          text: 'Settings updated successfully',
           action: {
             text: 'undo',
             async callback() {
@@ -103,7 +103,7 @@
       }
     } catch (e) {
       console.error(e);
-      showSnackbar({ props: { text: 'Couldn\'t save changes, try refreshing the page.' } });
+      showSnackbar({ props: { text: 'Couldn\'t save changes, try reloading the page' } });
       notificationSettings = initialSettings;
     }
   }

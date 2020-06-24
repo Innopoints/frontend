@@ -84,7 +84,7 @@
       autosaved.set(true);
     } catch (e) {
       snackbarContainer && snackbarContainer.showSnackbar({
-        props: { text: 'Could not autosave. Some changes might be lost.' },
+        props: { text: 'Could not autosave. Some changes might be lost' },
       });
       console.error(e);
     }

@@ -22,13 +22,13 @@
       showSnackbar({
         props: {
           text: `Successfully ${amount >= 0 ? 'added' : 'deducted'}`
-                + ` ${Math.abs(amount)} innopoint${s(Math.abs(amount))}.`,
+                + ` ${Math.abs(amount)} innopoint${s(Math.abs(amount))}`,
         },
       });
       amount = '';
     } catch (e) {
       console.error(e);
-      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
     }
   }
 

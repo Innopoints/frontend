@@ -22,7 +22,7 @@
 
   function validateUpload({ detail }) {
     if (detail.value.size > maxSizeMB * 1024 * 1024) {
-      showSnackbar({ props: { text: `Selected file is too large (${maxSizeMB} MB max).` } });
+      showSnackbar({ props: { text: `Selected file is too large (${maxSizeMB} MB max)` } });
       inputValue = null;
     } else {
       imageResizerOpen = true;
@@ -56,7 +56,7 @@
       }
     } catch (e) {
       if (e.name !== 'AbortError') {
-        showSnackbar({ props: { text: 'Upload failed, try reloading the page.' } });
+        showSnackbar({ props: { text: 'Upload failed, try reloading the page' } });
         console.error(e);
       }
     }
@@ -70,7 +70,7 @@
       uploadCancelled = true;
       uploading = false;
       uploadController && uploadController.abort();
-      showSnackbar({ props: { text: 'Upload cancelled.' } });
+      showSnackbar({ props: { text: 'Upload cancelled' } });
     }
   }
 

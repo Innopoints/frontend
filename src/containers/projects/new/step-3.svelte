@@ -43,7 +43,7 @@
     try {
       ({ pages, data } = await api.json(api.get('/accounts', { query: new Map([['q', query]]) })));
     } catch (e) {
-      showSnackbar({ props: { text: 'Couldn\'t search for users, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Couldn\'t search for users, try reloading the page' } });
       console.error(e);
       return [];
     }
@@ -61,7 +61,7 @@
       try {
         ({ pages, data } = await api.json(api.get('/accounts', { query })));
       } catch (e) {
-        showSnackbar({ props: { text: 'Couldn\'t search for users, try reloading the page.' } });
+        showSnackbar({ props: { text: 'Couldn\'t search for users, try reloading the page' } });
         console.error(e);
         return [];
       }

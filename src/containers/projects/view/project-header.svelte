@@ -37,9 +37,9 @@
         data: tagIDs,
       }));
       $project.tags = tagIDs;
-      showSnackbar({ props: { text: 'Tags successfully updated!' } });
+      showSnackbar({ props: { text: 'Tags successfully updated' } });
     } catch (e) {
-      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
       console.error(e);
     }
   }
@@ -52,7 +52,7 @@
       ));
       $project.review_status = ReviewStatuses.PENDING;
     } catch (e) {
-      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
       console.error(e);
     }
   }
@@ -63,7 +63,7 @@
       await api.json(api.del(`/projects/${$project.id}`, { csrfToken: account.csrf_token }));
       goto('/projects');
     } catch (e) {
-      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
       console.error(e);
     }
   }

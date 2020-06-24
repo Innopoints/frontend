@@ -19,7 +19,7 @@
       ));
       goto(`/projects/${$project.id}`);
     } catch (e) {
-      showSnackbar({ props: { text: 'Couldn\'t publish the project, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Couldn\'t publish the project, try reloading the page' } });
       console.error(e);
     }
   }

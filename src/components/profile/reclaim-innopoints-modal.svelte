@@ -25,7 +25,7 @@
         email = null;
         password = null;
         open = false;
-        showSnackbar({ props: { text: 'Innopoints successfully transferred!' }});
+        showSnackbar({ props: { text: 'Innopoints successfully transferred' }});
       }
     } catch (e) {
       console.error(e);

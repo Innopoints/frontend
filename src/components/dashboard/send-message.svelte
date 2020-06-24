@@ -22,11 +22,11 @@
         csrfToken: account.csrf_token,
       })));
       await Promise.all(promises);
-      showSnackbar({ props: { text: `Successfully sent the message.` } });
+      showSnackbar({ props: { text: 'Successfully sent the message' } });
       text = '';
     } catch (e) {
       console.error(e);
-      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
     }
   }
 

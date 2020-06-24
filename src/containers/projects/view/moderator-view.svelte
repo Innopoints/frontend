@@ -48,7 +48,7 @@
         showSnackbar({ props: { text: 'Activity deleted' } });
       } catch (e) {
         showSnackbar({
-          props: { text: 'Couldn\'t delete the activity, try reloading the page.' },
+          props: { text: 'Couldn\'t delete the activity, try reloading the page' },
         });
         console.error(e);
       }
@@ -84,7 +84,7 @@
       project = project;
     } catch (e) {
       showSnackbar({
-        props: { text: 'Couldn\'t create the activity, try reloading the page.' },
+        props: { text: 'Couldn\'t create the activity, try reloading the page' },
       });
       console.error(e);
     }

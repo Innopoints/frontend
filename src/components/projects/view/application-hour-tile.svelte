@@ -43,7 +43,7 @@
         application.reports = application.reports;
       }
     } catch (e) {
-      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
       console.error(e);
     }
   }

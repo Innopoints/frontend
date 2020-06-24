@@ -39,7 +39,7 @@
 
   async function saveTags() {
     if (toCreate.some(tag => tags.find(thatTag => thatTag.name === tag.name))) {
-      showSnackbar({ props: { text: 'No duplicate tags allowed.' } });
+      showSnackbar({ props: { text: 'No duplicate tags allowed' } });
       toCreate = toCreate.filter(tag => tags.find(thatTag => thatTag.name === tag.name) == null);
     }
 
@@ -66,11 +66,11 @@
       await Promise.all(requests);
       tags = await api.json(api.get('/tags'));
       modifiedTags = tags.map(tag => ({ forDeletion: false, ...tag }));
-      showSnackbar({ props: { text: 'Successfully updated tags!' } });
+      showSnackbar({ props: { text: 'Successfully updated tags' } });
       toCreate = [];
       toEdit = [];
     } catch (e) {
-      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
       modifiedTags = tags.map(tag => ({ forDeletion: false, ...tag }));
       console.error(e);
     }

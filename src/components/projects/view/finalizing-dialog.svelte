@@ -17,7 +17,7 @@
       $project = await api.json(api.get(`/projects/${$project.id}`));
       open = false;
     } catch (e) {
-      showSnackbar({ props: { text: 'Something went wrong, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
       console.error(e);
     }
   }

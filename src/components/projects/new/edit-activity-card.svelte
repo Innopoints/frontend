@@ -110,7 +110,7 @@
       activity._editing = false;
       dispatch('rerender');
     } catch (e) {
-      showSnackbar({ props: { text: 'Couldn\'t save, try reloading the page.' } });
+      showSnackbar({ props: { text: 'Couldn\'t save, try reloading the page' } });
       console.error(e);
     }
   }
