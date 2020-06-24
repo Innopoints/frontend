@@ -4,7 +4,7 @@
   import Switch from 'ui/switch.svelte';
   import FormField from 'ui/form-field.svelte';
   import TextField from 'ui/text-field.svelte';
-  import FormVariety from '@/components/products/form-variety.svelte';
+  import VarietyForm from '@/components/products/new/variety-form.svelte';
 
   export let product;
   $: formDisabled = product == null;
@@ -101,7 +101,7 @@
 
     <ul>
       {#each product.varieties as variety, i (i)}
-        <FormVariety
+        <VarietyForm
           {variety}
           index={i}
           removable={i !== 0}
