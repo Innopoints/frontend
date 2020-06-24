@@ -1,5 +1,3 @@
-import ActivityTypes from '@/constants/projects/activity-internal-types.js';
-import getBlankActivity from '@/constants/projects/blank-activity.js';
 import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
 import arraysEqual from '@/utils/arrays-equal.js';
 import spaceOnly from '@/utils/space-only.js';
@@ -33,6 +31,8 @@ export function copyActivity(activity) {
   return newActivity;
 }
 
+/* Copy ALL the fields from the source activity object to the destination in place,
+   deep-copying complex fields. */
 export function copyActivityInPlace(source, destination) {
   for (let field in source) {
     destination[field] = source[field];
@@ -60,16 +60,8 @@ export function copyActivityInPlace(source, destination) {
   return destination;
 }
 
-export function filterProjectFields(project) {
-  const filtered = {
-    name: project.name,
-    image_id: project.image_id,
-    moderators: project.moderators,
-  };
-
-  return filtered;
-}
-
+/* Format the UTC explicitly as '+00:00' as opposed to the shorthand 'Z'.
+   Python only understands the full version. */
 function toISOFormat(date) {
   return date.toISOString().slice(0, -1) + '+00:00';
 }
@@ -108,7 +100,7 @@ export function prepareForBackend(activity) {
   return copy;
 }
 
-/* Prepare the activity object to be processed on the frontend
+/* Prepare the activity object in place to be processed on the frontend
    by converting dates to Date objects. */
 export function prepareAfterBackend(activity) {
   activity.timeframe = {
@@ -121,118 +113,7 @@ export function prepareAfterBackend(activity) {
   }
 }
 
-/* Determine the index to insert the activity into the list
-   knowing its position among non-internal activities. */
-export function determineInsertionIndex(activities, position) {
-  let insertionIndex = 0;
-  while (position && insertionIndex < activities.length) {
-    if (!activities[insertionIndex].internal) {
-      position--;
-    }
-    insertionIndex++;
-  }
-  return insertionIndex;
-}
-
-/* Synchronize the internal representation of the activities (with types)
-   with the activity list from the backend. */
-export function synchronizeActivityLists(internalList, backendActivities) {
-  let internalListIdx = 0;
-  for (let activity of backendActivities.filter(activity => !activity.internal)) {
-    let activityProcessed = false;
-    while (!activityProcessed) {
-      // If the internal list is over, copy the backend activity to the end
-      // Happens on the initial population of the activityList
-      if (internalListIdx >= internalList.length) {
-        let copy = copyActivity(activity);
-        if (copy._type == null) {
-          copy._type = ActivityTypes.DISPLAY;
-          prepareAfterBackend(copy);
-        }
-
-        internalList.splice(internalListIdx, 0, copy);
-        internalListIdx++;
-        activityProcessed = true;
-        break;
-      }
-
-      // If the internalList cursor is on a deletion marker, remove it from the list
-      // Happens when an activity deletion was confirmed by a dialog
-      if (internalList[internalListIdx]._type === ActivityTypes.DELETION_MARKER) {
-        internalList.splice(internalListIdx, 1);
-        continue;
-      }
-
-      // If the internalList cursor is on a new activity form, let it be
-      // Happens when there is an open form that hasn't been saved yet
-      if (internalList[internalListIdx]._type === ActivityTypes.NEW) {
-        internalListIdx++;
-        continue;
-      }
-
-      // If the internalList cursor is on a displayed activity,
-      // don't change anything – it is already that same activity
-      if (internalList[internalListIdx]._type === ActivityTypes.DISPLAY) {
-        internalListIdx++;
-        activityProcessed = true;
-        break;
-      }
-
-      // If the cursor is on a replacement marker, place the backend activity on that spot
-      // Happens upon creating a new activity or applying edits to an existing one
-      if (internalList[internalListIdx]._type === ActivityTypes.REPLACEMENT_MARKER) {
-        const copy = copyActivity(activity);
-        copy._type = ActivityTypes.DISPLAY;
-        prepareAfterBackend(copy);
-        internalList.splice(internalListIdx, 1, copy);
-        internalListIdx++;
-        activityProcessed = true;
-        break;
-      }
-
-      // If the cursor is on an edit form, accept it as a backend activity
-      if (internalList[internalListIdx]._type === ActivityTypes.EDIT) {
-        internalListIdx++;
-        activityProcessed = true;
-        break;
-      }
-
-      if (internalList[internalListIdx]._type === ActivityTypes.TEMPLATE) {
-        if (activity.timeframe != null && internalList[internalListIdx].timeframe == null) {
-          internalList[internalListIdx].timeframe = activity.timeframe;
-        }
-        internalListIdx++;
-        activityProcessed = true;
-        break;
-      }
-    }
-  }
-
-  // Remove the deleted activities from the end
-  while (internalListIdx < internalList.length) {
-    if (internalList[internalListIdx]._type === ActivityTypes.DISPLAY
-     || internalList[internalListIdx]._type === ActivityTypes.DELETION_MARKER) {
-      internalList.splice(internalListIdx, 1);
-    } else {
-      internalListIdx++;
-    }
-  }
-
-  // Have a new activity form if the internalList is empty
-  if (internalList.length === 0) {
-    let activity = getBlankActivity();
-    activity._type = ActivityTypes.NEW;
-    internalList.push(activity);
-  }
-
-  return internalList;
-}
-
-/* Filter the non-internal non-template activities. */
-export function visibleActivities(project) {
-  return project.activities.filter(act => !act.internal && act._type !== ActivityTypes.TEMPLATE);
-}
-
+/* Set a field on the object, creating a blank object if the destination is null. */
 function setNullSafe(object, field, value) {
   if (object == null) {
     return { [field]: value };
@@ -242,6 +123,7 @@ function setNullSafe(object, field, value) {
   }
 }
 
+/* Compute diffs between two project objects. */
 export function computeDiffProject(project, reference) {
   let diff = null;
   if (reference == null || project == null) {
@@ -264,6 +146,7 @@ export function computeDiffProject(project, reference) {
   return diff;
 }
 
+/* Copy a project object, deep-copying the moderators. */
 export function copyProject(project) {
   if (project == null) {
     return null;
