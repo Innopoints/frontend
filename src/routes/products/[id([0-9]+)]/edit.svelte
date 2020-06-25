@@ -22,7 +22,7 @@
   import { prefetch, goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import ProductForm from '@/containers/products/new/product-form.svelte';
-  import PreviewCard from '@/components/products/preview-card.svelte';
+  import PreviewCard from '@/components/products/new/preview-card.svelte';
   import Button from 'ui/button.svelte';
   import Modal from 'ui/modal.svelte';
   import Dialog from 'ui/dialog.svelte';
