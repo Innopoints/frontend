@@ -30,7 +30,7 @@
       <div class="image">
         <img
           src={imageURL}
-          style="background: {getBackground(selectedColor)}"
+          style={getBackground(selectedColor)}
           alt="Product cover"
         />
         <RadioGroup
@@ -44,7 +44,7 @@
     {:else}
       <img
         src={imageURL}
-        style="background: {getBackground(selectedColor)}"
+        style={getBackground(selectedColor)}
         alt="Product cover"
         class="image"
       />

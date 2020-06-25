@@ -58,7 +58,7 @@ const rgbToHsl = ([r, g, b]) => {
 // a hex string without the hash.
 export default (color) => {
   color = trimHEX(color);
-  if (!color) return '';
+  if (!color) return null;
 
   let r = parseInt(color.slice(0, 2), 16);
   let g = parseInt(color.slice(2, 4), 16);
@@ -68,5 +68,5 @@ export default (color) => {
   let contrast = getContrast([255, 255, 255], [r, g, b]);
   let bgL = (contrast > 1.08 ? 0.97 : 0.96);
 
-  return `hsl(${Math.floor(h * 360)}, ${s * 100}%, ${bgL * 100}%)`;
+  return `background: hsl(${Math.floor(h * 360)}, ${s * 100}%, ${bgL * 100}%);`;
 };
