@@ -17,10 +17,10 @@
 
   let report = null;
   onMount(() => {
-    report = api.get(
+    report = api.json(api.get(
       `/projects/${activity.project}/activities/${activity.id}`
       + `/applications/${application.id}/report_info`,
-    ).then(resp => resp.json()).catch(console.error);
+    ));
   });
 
   const viewReportsDialog = {
