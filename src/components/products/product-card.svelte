@@ -17,7 +17,7 @@
   let selectedColor = colors[0];
   $: imageURL = (
     varietiesByColor.get(selectedColor)[0].images.length !== 0 ?
-      API_HOST_BROWSER + varietiesByColor.get(selectedColor)[0].images[0]
+      `${API_HOST_BROWSER}/file/${varietiesByColor.get(selectedColor)[0].images[0]}`
       : '/images/create-product/placeholder.svg'
   );
 

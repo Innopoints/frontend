@@ -12,7 +12,7 @@
   export let purchase;
   $: coverURL = (
     purchase.variety.images.length ?
-      API_HOST_BROWSER + purchase.variety.images[0]
+      `${API_HOST_BROWSER}/file/${purchase.variety.images[0]}`
       : 'images/create-product/placeholder.svg'
   );
 
