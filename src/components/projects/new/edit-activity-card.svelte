@@ -74,17 +74,14 @@
 
   function validateApplicationDeadline({ detail }) {
     if (activity.applications != null) {
-      for (let application of activity.applications) {
-        console.log('applied at', application.application_time);
-        if (detail.value < new Date(application.application_time)) {
-          showSnackbar({
-            props: {
-              text: 'Cannot set the deadline before an existing application',
-            },
-          });
-          activity.application_deadline = activity.application_deadline;
-          return;
-        }
+      if (activity.applications.some(apl => detail.value < new Date(apl.application_time))) {
+        showSnackbar({
+          props: {
+            text: 'Cannot set the deadline before an existing application',
+          },
+        });
+        activity.application_deadline = activity.application_deadline;
+        return;
       }
     }
     activity.application_deadline = detail.value;

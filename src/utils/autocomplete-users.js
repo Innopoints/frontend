@@ -28,10 +28,9 @@ export async function* getUsersRaw(query, filterFunction = null) {
       query: new Map([['q', query], ['page', currentPage]]),
     })));
     if (typeof filterFunction === 'function') {
-      yield data.filter(filterFunction).map(userToAutocompleteValue);
-    } else {
-      yield data.map(userToAutocompleteValue);
+      data = data.filter(filterFunction);
     }
+    yield data.map(userToAutocompleteValue);
     currentPage++;
   }
 }
