@@ -34,9 +34,7 @@ export function copyActivity(activity) {
 /* Copy ALL the fields from the source activity object to the destination in place,
    deep-copying complex fields. */
 export function copyActivityInPlace(source, destination) {
-  for (let field in source) {
-    destination[field] = source[field];
-  }
+  Object.assign(destination, source);
 
   if (source.timeframe != null) {
     destination.timeframe = {
