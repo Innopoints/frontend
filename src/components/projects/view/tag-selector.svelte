@@ -14,7 +14,7 @@
     if (query) {
       output = output.filter(tag => tag.name.toLowerCase().includes(query.toLowerCase()));
     }
-    return output.filter(tag => !value.includes(tag.id));
+    yield output.filter(tag => !value.includes(tag.id));
   }
 
   function toggleEditing() {
