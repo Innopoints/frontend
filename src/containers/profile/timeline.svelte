@@ -42,7 +42,7 @@
 </script>
 
 <div class="timeline">
-  {#if timelinePromises}
+  {#if timelinePromises.length !== 0}
     {#each timelinePromises as promise}
       {#await promise.then(value => value.data)}
         <div class="loading">
