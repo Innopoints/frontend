@@ -1,7 +1,7 @@
 <script>
   import { fly } from 'svelte/transition';
 
-  export let warning;
+  export let warning = false;
 </script>
 
 <div class="notice" class:warning transition:fly={{ y: 10, duration: 100 }}>
