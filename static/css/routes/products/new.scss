@@ -1,0 +1,56 @@
+@import "_attractions-theme.scss";
+
+:global {
+  @import "global/common.scss";
+}
+
+.material {
+  padding-bottom: 2em;
+
+  header.varieties {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  :global {
+    h1 {
+      margin-top: 1em;
+    }
+
+    .form-field.horizontal {
+      flex-direction: row;
+
+      .description {
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .preview {
+    margin-top: 2em;
+
+    .actions {
+      margin-top: 1em;
+      display: flex;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    main {
+      display: flex;
+      justify-content: space-between;
+
+      & > :global .form {
+        margin-bottom: 3em;
+        margin-right: 3em;
+      }
+    }
+
+    .preview {
+      width: 25em;
+      margin-left: 2em;
+      margin-top: 0;
+    }
+  }
+}

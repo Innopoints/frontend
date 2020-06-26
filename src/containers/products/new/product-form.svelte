@@ -1,127 +1,97 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import Switch from 'ui/switch.svelte';
-  import FormField from 'ui/form-field.svelte';
-  import TextField from 'ui/text-field.svelte';
+  import { flip } from 'svelte/animate';
+  import { Button, Switch, FormField, TextField, H2, Divider } from 'attractions';
   import VarietyForm from '@/components/products/new/variety-form.svelte';
+  import spaceOnly from '@/utils/space-only.js';
+  import { getBlankVariety } from '@/constants/products/blank-product.js';
 
   export let product;
-  $: formDisabled = product == null;
   export let colors;
   export let sizes;
-  export let errors = {
-    name: false,
-    price: false,
-  };
 
-  const dispatch = createEventDispatcher();
+  function addVariety() {
+    $product.varieties.push(getBlankVariety());
+    $product.varieties = $product.varieties;
+  }
 </script>
 
-<form>
+<div class="form">
   <FormField
-    id="name"
-    title="Display Name"
-    subtitle="If the product has a print, make that the name. Short names work best."
+    name="Display Name"
+    help="If the product has a print, make that the name. Short names work best."
     required
-    error={errors.name && 'The name cannot be empty.'}
+    errors={[spaceOnly($product.name) && 'The name cannot be empty.']}
   >
     <TextField
-      id="name"
+      bind:value={$product.name}
       placeholder="I <3 Innopolis"
       maxlength={128}
-      autocomplete={false}
-      on:change={({detail}) => dispatch('change', { field: 'name', value: detail })}
-      disabled={formDisabled}
-      {...product && { value: product.name || '' }}
     />
   </FormField>
 
   <FormField
-    id="type"
-    title="Product Type"
-    subtitle="If the print takes the name, use this field for the type. Leave blank otherwise."
+    name="Product Type"
+    help="If the print takes the name, use this field for the type. Leave blank otherwise."
   >
     <TextField
-      id="type"
+      bind:value={$product.type}
       placeholder="sweatshirt"
       maxlength={128}
-      on:change={({detail}) => dispatch('change', { field: 'type', value: detail })}
-      disabled={formDisabled}
-      {...product && { value: product.type || '' }}
     />
   </FormField>
 
-  <FormField id="description" title="Description">
+  <FormField name="Description">
     <TextField
+      bind:value={$product.description}
       multiline
       placeholder="High-quality bulletproof fabric"
       maxlength={1024}
-      on:change={({detail}) => dispatch('change', { field: 'description', value: detail })}
-      disabled={formDisabled}
-      {...product && { value: product.description || '' }}
     />
   </FormField>
 
   <FormField
-    id="price"
-    title="Price"
-    classname="horizontal"
+    name="Price"
+    class="horizontal"
     required
-    error={errors.price && 'The price must be positive.'}
+    errors={[$product.price < 0 && 'The price must be positive.']}
   >
     <TextField
-      id="price"
+      bind:value={$product.price}
       type="number"
-      min="1"
-      max="1000000"
+      min={1}
+      max={1000000}
       placeholder="1337"
       maxlength="6"
-      isWithItem
-      isItemRight
-      autocomplete={false}
-      on:change={({detail}) => dispatch('change', { field: 'price', value: detail })}
-      disabled={formDisabled}
-      {...product && { value: product.price || '' }}
+      withItem
+      itemRight
     >
-      <svg src="/images/innopoint-sharp.svg" class="item innopoint" />
+      <svg src="images/innopoint-sharp.svg" class="item" />
     </TextField>
   </FormField>
 
-  {#if !formDisabled}
-    <header class="varieties">
-      <h2>Varieties</h2>
-      <Switch
-        name="sizes"
-        label="the product comes in sizes"
-        value={product.sized}
-        on:change={({target}) => dispatch('change', { field: 'sized', value: target.checked })}
-      />
-    </header>
+  <Divider />
 
-    <ul>
-      {#each product.varieties as variety, i (i)}
-        <VarietyForm
-          {variety}
-          index={i}
-          removable={i !== 0}
-          {colors} {sizes}
-          showSizes={product.sized}
-          on:new-color
-          on:remove-variety
-          on:change-variety
-          on:new-file
-          on:delete-file
-          on:swap-files
-        />
-      {/each}
+  <header class="varieties">
+    <H2>Varieties</H2>
+    <Switch name="comes-in-sizes" bind:value={$product.sized} slotLeft>
+      <span class="mr">the product comes in sizes</span>
+    </Switch>
+  </header>
 
-      <li class="more">
-        <Button on:click={() => dispatch('create-variety')}>
-          <svg src="images/icons/plus.svg" class="icon mr" />
-          add another variety
-        </Button>
-      </li>
-    </ul>
-  {/if}
-</form>
+  <ul>
+    {#each $product.varieties as variety (variety)}
+      <div animate:flip={{ duration: 150 }}>
+        <VarietyForm {product} {variety} {colors} {sizes} showSizes={$product.sized} />
+      </div>
+    {/each}
+
+    <li class="more mt">
+      <Button on:click={addVariety}>
+        <svg src="images/icons/plus.svg" class="mr" />
+        add another variety
+      </Button>
+    </li>
+  </ul>
+</div>
+
+<style src="../../../../static/css/containers/products/new/product-form.scss"></style>

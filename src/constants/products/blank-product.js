@@ -1,6 +1,7 @@
 export function getBlankVariety() {
   return {
     sizes: {},
+    quantity: 0,
     images: [],
   };
 }
