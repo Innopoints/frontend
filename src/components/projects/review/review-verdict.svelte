@@ -1,6 +1,6 @@
 <script>
   import { getContext } from 'svelte';
-  import { goto, prefetch, stores } from '@sapper/app';
+  import { goto, stores } from '@sapper/app';
   import { Button, TextField } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
@@ -15,7 +15,6 @@
 
   async function submitReview(accepted) {
     try {
-      prefetch(`/projects/${$project.id}`);
       await api.json(api.patch(`/projects/${$project.id}/review_status`, {
         data: {
           admin_feedback: reviewComment,

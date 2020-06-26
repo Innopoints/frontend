@@ -19,7 +19,7 @@
 </script>
 
 <script>
-  import { prefetch, goto } from '@sapper/app';
+  import { goto } from '@sapper/app';
   import Layout from '@/layouts/default.svelte';
   import ProductForm from '@/containers/products/new/product-form.svelte';
   import PreviewCard from '@/components/products/new/preview-card.svelte';
@@ -100,7 +100,6 @@
   }
 
   async function deleteProduct() {
-    prefetch('/products');
     warningDialogOpen = false;
     try {
       await api.json(api.del(

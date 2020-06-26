@@ -1,6 +1,6 @@
 <script>
   import { getContext } from 'svelte';
-  import { prefetch, goto } from '@sapper/app';
+  import { goto } from '@sapper/app';
   import { Button, H1, Chip } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import Labeled from 'ui/labeled.svelte';
@@ -59,7 +59,6 @@
 
   async function deleteProject() {
     try {
-      prefetch('/projects');
       await api.json(api.del(`/projects/${$project.id}`, { csrfToken: account.csrf_token }));
       goto('/projects');
     } catch (e) {
