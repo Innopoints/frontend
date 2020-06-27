@@ -49,7 +49,7 @@ footer {
       left: 0;
     }
 
-    :global(.btn) {
+    :global .btn {
       z-index: 3;
     }
   }
@@ -113,15 +113,15 @@ footer {
       display: none;
     }
 
-    :global(.card) {
+    :global .card {
       width: 80%;
       color: #000;
 
-      :global(a) {
+      a {
         color: $main;
       }
 
-      :global(p) {
+      p {
         margin-bottom: .5em;
         font-weight: 300;
       }
@@ -176,7 +176,7 @@ footer {
         align-self: flex-end;
       }
 
-      :global(.card) {
+      :global .card {
         width: 14em;
         align-self: flex-start;
       }
@@ -188,7 +188,7 @@ footer {
       margin-right: 2em;
     }
 
-    .right :global(.card) {
+    .right :global .card {
       width: 20em;
     }
   }

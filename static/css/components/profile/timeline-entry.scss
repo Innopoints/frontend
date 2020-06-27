@@ -44,7 +44,7 @@
     flex: 1;
     margin-top: .3em;
 
-    :global(.btn) {
+    :global .btn {
       font-size: .9rem;
       margin-top: .8em;
       display: inline-flex;
@@ -58,7 +58,7 @@
     display: block;
   }
 
-  :global(.btn + time) {
+  :global .btn + time {
     margin-top: 1em;
   }
 

@@ -39,12 +39,12 @@
     justify-content: flex-end;
   }
 
-  :global(.switches) {
+  :global .switches {
     display: flex;
     justify-content: space-between;
     padding: 1.2em .5em 1em;
 
-    :global(.radio) {
+    .radio {
       margin-left: .5em;
     }
   }

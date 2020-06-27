@@ -1,7 +1,7 @@
 .store {
   margin-bottom: 4em;
 
-  :global(h2) {
+  :global h2 {
     margin-left: 1em;
     margin-right: 1em;
   }
@@ -22,23 +22,23 @@
     margin-bottom: 1.5em;
   }
 
-  :global(.card) {
+  :global .card {
     margin: 1em 0;
 
-    & > :global(.content) {
+    & > .content {
       display: flex;
       flex-direction: column;
     }
 
-    :global(.btn) {
+    .btn {
       align-self: flex-end;
     }
 
-    :global(.title + .btn) {
+    .title + .btn {
       margin-top: 1em;
     }
 
-    & > :global(.image > img) {
+    & > .image > img {
       width: 100%;
     }
   }
@@ -48,7 +48,7 @@
   }
 
   @media only screen and (min-width: 380px) {
-    :global(.card) {
+    :global .card {
       max-width: 20em;
     }
   }
@@ -72,7 +72,7 @@
       justify-content: center;
     }
 
-    :global(.card):not(:last-child) {
+    :global .card:not(:last-child) {
       margin-right: 1em;
     }
   }
@@ -96,7 +96,7 @@
       padding: 0 10%;
     }
 
-    :global(.card):not(:last-child) {
+    :global .card:not(:last-child) {
       margin-right: 2em;
     }
   }

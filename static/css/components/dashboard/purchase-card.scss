@@ -60,7 +60,7 @@ li {
       padding: .9em;
     }
 
-    :global(.size) + :global(.color) {
+    :global .size + .color {
       margin-left: .5em;
     }
   }

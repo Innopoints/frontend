@@ -21,14 +21,14 @@
     font-weight: 300;
   }
 
-  :global(.card) {
+  :global .card {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: .8em 1.6em;
     margin: 1em 0;
 
-    :global(p) {
+    p {
       font-weight: 300;
       text-align: center;
       margin-top: 1em;
@@ -54,11 +54,11 @@
       flex-direction: row;
     }
 
-    :global(.card) {
+    :global .card {
       margin: 0 1rem;
       font-size: 1.2rem;
 
-      :global(.btn) {
+      .btn {
         font-size: 1em;
       }
     }
@@ -67,7 +67,7 @@
   @media only screen and (min-width: 1024px) {
     padding-bottom: 5em;
 
-    :global(.card) {
+    :global .card {
       padding: .8rem 2rem;
       margin: 0 3rem;
     }

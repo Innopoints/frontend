@@ -1,27 +1,27 @@
-.tagline > div {
+.tagline > div :global {
   margin: 2.5em 0 1.5em;
   display: flex;
   flex-direction: column;
 
-  :global(.actions) {
+  .actions {
     display: flex;
     flex-wrap: wrap;
     margin-top: 1em;
 
-    :global(.btn) {
+    .btn {
       margin-right: .5em;
       margin-bottom: .5em;
     }
   }
 
-  :global(p) {
+  p {
     margin-bottom: .5em;
     line-height: 1.2em;
   }
 }
 
 @media only screen and (min-width: 400px) and (max-width: 639px) {
-  .tagline > div > :global(.subhead) {
+  .tagline > div > :global .subhead {
     width: 75%;
   }
 }

@@ -26,11 +26,11 @@ li {
     overflow: hidden;
   }
 
-  :global(.labeled > .icon) {
+  :global .labeled > .icon {
     margin-right: .3rem;
   }
 
-  :global(.btn) {
+  :global .btn {
     margin-top: .3em;
   }
 }

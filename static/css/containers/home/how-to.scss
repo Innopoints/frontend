@@ -17,7 +17,7 @@
     transform: skewY(6deg);
   }
 
-  & > :global(h2) {
+  & > :global h2 {
     position: relative;
     z-index: 1;
     color: #fff;
@@ -32,13 +32,13 @@
     z-index: 1;
   }
 
-  :global(.card) {
+  :global .card {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 1em 0;
 
-    & > :global(.icon) {
+    & > .icon {
       width: 3.2em;
       height: 3.2em;
       stroke: hsl(105, 69%, 35%);
@@ -46,13 +46,13 @@
       margin-bottom: 1em;
     }
 
-    & > :global(.title) {
+    & > .title {
       font-weight: 500;
       font-size: 1.4em;
       margin-bottom: .5em;
     }
 
-    & > :global(.subtitle) {
+    & > .subtitle {
       font-weight: 300;
       font-size: 1em;
       line-height: 1.4em;
@@ -72,19 +72,19 @@
       padding: 0 2.5em;
     }
 
-    :global(.card) {
+    :global .card {
       padding: 2em 2.5em;
 
-      & > :global(.icon) {
+      & > .icon {
         width: 3.7em;
         height: 3.7em;
       }
 
-      & > :global(.title) {
+      & > .title {
         font-size: 1.5em;
       }
 
-      & > :global(.subtitle) {
+      & > .subtitle {
         font-size: 1.1em;
       }
     }
@@ -101,13 +101,13 @@
       padding: 0 20%;
     }
 
-    :global(.card) {
-      & > :global(.icon) {
+    :global .card {
+      & > .icon {
         width: 4em;
         height: 4em;
       }
 
-      :global(.title) {
+      .title {
         margin-bottom: .6em;
       }
     }
@@ -119,18 +119,18 @@
       flex-direction: row;
     }
 
-    & > :global(h2) {
+    & > :global h2 {
       margin-bottom: 1em;
     }
 
-    :global(.card) {
+    :global .card {
       margin: 0;
 
-      & > :global(.title) {
+      & > .title {
         font-size: 1.3em;
       }
 
-      & > :global(.subtitle) {
+      & > .subtitle {
         font-size: 1em;
       }
     }
@@ -146,7 +146,7 @@
       display: none;
     }
 
-    :global(.card) {
+    :global .card {
       border-radius: 0;
       box-shadow: none;
       padding: .5em 1em;
@@ -155,7 +155,7 @@
         border-right: 1px solid $light-contrast;
       }
 
-      & > :global(.icon) {
+      & > .icon {
         width: 3.7em;
         height: 3.7em;
       }
@@ -163,18 +163,18 @@
   }
 
   @media only screen and (min-width: 800px) {
-    :global(.card) {
+    :global .card {
       padding: .5em 1.5em;
 
       &::before {
         height: 110%;
       }
 
-      & > :global(.title) {
+      & > .title {
         margin-bottom: .4em;
       }
 
-      & > :global(.subtitle) {
+      & > .subtitle {
         font-size: 1.1em;
         line-height: 1.45em;
       }
@@ -192,7 +192,7 @@
       width: 5em;
     }
 
-    :global(.card) {
+    :global .card {
       padding: 1.5em;
     }
   }
@@ -206,34 +206,34 @@
       margin: 0 .5em;
     }
 
-    :global(.card) {
+    :global .card {
       padding: 1.5em 2em;
 
-      & > :global(img) {
+      & > img {
         width: 4.8em;
         height: 4.8em;
       }
 
-      & > :global(.title) {
+      & > .title {
         font-size: 1.4em;
       }
     }
   }
 
   @media only screen and (min-width: 1648px) {
-    & > :global(h2) {
+    & > :global h2 {
       font-size: 2.3em;
       margin-bottom: .5em;
     }
 
-    :global(.card) {
+    :global .card {
       padding: 3em 2.5em;
 
-      & > :global(.title) {
+      & > .title {
         font-size: 1.8em;
       }
 
-      & > :global(.subtitle) {
+      & > .subtitle {
         font-weight: 300;
         font-size: 1.5em;
         line-height: 1.9em;

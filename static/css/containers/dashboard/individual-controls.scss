@@ -13,16 +13,16 @@
 }
 
 .operations {
-  :global(header) {
+  :global header {
     display: flex;
     align-items: center;
 
-    :global(.icon) {
+    .icon {
       stroke: $main;
     }
   }
 
-  :global(.subtitle) {
+  :global .subtitle {
     font-size: .95rem;
     font-weight: 300;
     margin-top: .3em;

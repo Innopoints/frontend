@@ -5,16 +5,16 @@
   display: flex;
   justify-content: center;
 
-  :global(.picture) {
+  :global .picture {
     width: 100%;
     max-width: 25em;
   }
 
-  :global(figcaption) {
+  :global figcaption {
     margin: 0 15%;
     font-weight: 300;
 
-    :global(.title) {
+    .title {
       font-weight: 500;
       font-size: 1.3em;
       margin: .7em 0 .4em;
@@ -40,7 +40,7 @@
     justify-content: center;
     margin-bottom: 1.5em;
 
-    & > :global(.icon) {
+    & > :global .icon {
       stroke: $main;
       width: 80%;
       height: 80%;

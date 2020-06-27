@@ -1,7 +1,7 @@
 @import "_attractions-theme.scss";
 
 .product-card {
-  :global(.card) {
+  :global .card {
     max-width: 18em;
     margin-top: 1em;
     display: flex;
@@ -60,7 +60,7 @@
     margin-top: .5rem;
   }
 
-  :global(.labeled .content) {
+  :global .labeled .content {
     display: inline-flex;
     align-items: center;
   }
@@ -74,14 +74,14 @@
     margin-left: .3em;
   }
 
-  :global(.color-options) {
+  :global .color-options {
     display: flex;
     flex-direction: column-reverse;
     position: absolute;
     bottom: .5em;
     right: 1em;
 
-    & > :global(label) {
+    & > label {
       margin-bottom: .5em;
     }
   }
@@ -91,7 +91,7 @@
   }
 
   @media only screen and (min-width: 600px) {
-    :global(.card) {
+    :global .card {
       margin: .5em;
     }
   }

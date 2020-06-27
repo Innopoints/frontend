@@ -7,10 +7,10 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
 
-li :global(.text-field) {
-  flex: 1;
+  :global .text-field {
+    flex: 1;
+  }
 }
 
 .actions {

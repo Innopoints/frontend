@@ -14,51 +14,53 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
-    :global(.dropdown-shell) {
+    :global .dropdown-shell {
       margin-top: .5em;
     }
   }
 
-  :global(.handle) {
-    :global(.regular) {
-      display: none;
+  :global {
+    .handle {
+      .regular {
+        display: none;
+      }
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
     }
 
-    :global(.icon) {
-      width: 1.25rem;
-      height: 1.25rem;
+    .relative-wrapper {
+      width: calc(90vw - 1em);
+      max-width: 22em;
+      padding: 1em 0;
+      position: relative;
+
+      & > .btn.danger {
+        position: absolute;
+        top: .3em;
+        left: .3em;
+      }
+
+      & > .btn.close {
+        position: absolute;
+        top: .3em;
+        right: .3em;
+      }
     }
-  }
 
-  :global(.relative-wrapper) {
-    width: calc(90vw - 1em);
-    max-width: 22em;
-    padding: 1em 0;
-    position: relative;
+    .order-options {
+      $padding-left: .5em;
+      $padding-right: 3.2em;
 
-    & > :global(.btn.danger) {
-      position: absolute;
-      top: .3em;
-      left: .3em;
-    }
+      max-width: 15em - $padding-left - $padding-right;
+      padding-right: $padding-right;
+      padding-left: $padding-left;
 
-    & > :global(.btn.close) {
-      position: absolute;
-      top: .3em;
-      right: .3em;
-    }
-  }
-
-  :global(.order-options) {
-    $padding-left: .5em;
-    $padding-right: 3.2em;
-
-    max-width: 15em - $padding-left - $padding-right;
-    padding-right: $padding-right;
-    padding-left: $padding-left;
-
-    :global(.radio) {
-      margin: .5em 0;
+      .radio {
+        margin: .5em 0;
+      }
     }
   }
 
@@ -85,25 +87,27 @@
   }
 
   @media only screen and (min-width: 640px) {
-    &, & + :global(.ordering) {
-      width: 36em;
-      display: flex;
-      align-self: center;
-    }
-
-    :global(.text-field) {
-      flex: 1;
-    }
-
-    :global(.dropdown-shell) {
-      &:first-child {
-        display: none;
+    :global {
+      &, & + .ordering {
+        width: 36em;
+        display: flex;
+        align-self: center;
       }
 
-      &:last-child {
-        flex: 0;
-        margin-top: 0;
-        margin-left: .5em;
+      .text-field {
+        flex: 1;
+      }
+
+      .dropdown-shell {
+        &:first-child {
+          display: none;
+        }
+
+        &:last-child {
+          flex: 0;
+          margin-top: 0;
+          margin-left: .5em;
+        }
       }
     }
   }
@@ -111,11 +115,11 @@
   @media only screen and (min-width: 700px) {
     width: 38em;
 
-    & + :global(.ordering) {
+    & + :global .ordering {
       margin-bottom: 1em;
       width: 38em;
 
-      :global(.chip) {
+      .chip {
         font-size: .9rem;
       }
     }

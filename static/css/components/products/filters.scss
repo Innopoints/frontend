@@ -17,50 +17,52 @@
       align-items: center;
     }
 
-    & > :global(.btn) {
+    & > :global .btn {
       align-self: flex-end;
     }
 
-    :global(input) {
+    :global input {
       width: 4em;
     }
 
     @media only screen and (min-width: 380px) {
-      :global(input) {
-        width: 5em;
-      }
+      :global {
+        input {
+          width: 5em;
+        }
 
-      :global(.mr.ml) {
-        margin-left: .6em;
-        margin-right: .6em;
+        .mr.ml {
+          margin-left: .6em;
+          margin-right: .6em;
+        }
       }
     }
   }
 }
 
-.color-selection {
+.color-selection :global {
   margin-left: 1.5em;
 
-  :global(.color-grid) {
+  .color-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
     max-height: 15em;
     overflow-y: auto;
 
-    & > :global(label) {
+    & > label {
       margin: 5px;
     }
   }
 
-  & > :global(.checkbox) {
+  & > .checkbox {
     display: flex;
     align-items: center;
     margin-top: .6em;
     flex-basis: 100%;
     justify-content: flex-end;
 
-    & > :global(.icon) {
+    & > .icon {
       margin-right: .6em;
     }
   }
@@ -73,7 +75,7 @@
 }
 
 @media only screen and (min-width: 540px) and (max-width: 640px) {
-  .filters > :global(.text-field) {
+  .filters > :global .text-field {
     width: 24em;
   }
 }

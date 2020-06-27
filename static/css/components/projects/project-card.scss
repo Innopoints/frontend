@@ -3,7 +3,7 @@
 .project-card {
   width: 100%;
 
-  :global(.card) {
+  :global .card {
     margin-top: 1em;
   }
 
@@ -17,7 +17,7 @@
     flex-direction: column;
     padding: .8em 1.3em;
 
-    :global(.labeled) {
+    :global .labeled {
       margin-top: 1em;
     }
 
@@ -27,7 +27,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
 
-      :global(.labeled) {
+      :global .labeled {
         flex-basis: 50%;
 
         &:first-child {
@@ -46,7 +46,7 @@
       }
     }
 
-    :global(.btn) {
+    :global .btn {
       align-self: flex-end;
     }
   }
@@ -58,14 +58,14 @@
   @media only screen and (min-width: 600px) {
     width: 34em;
 
-    :global(.card) {
+    :global .card {
       margin: .5em;
     }
   }
 
   @media only screen and (min-width: 640px) {
     @supports (display: grid) {
-      :global(.card) {
+      :global .card {
         display: flex;
         flex-direction: column;
       }
@@ -88,7 +88,7 @@
     width: 25em;
     display: flex;
 
-    .content > :global(.labeled ul) {
+    .content > :global .labeled ul {
       align-self: start;
     }
   }

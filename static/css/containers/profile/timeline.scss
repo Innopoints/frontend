@@ -7,12 +7,12 @@
     display: flex;
     margin: 1.5em;
 
-    :global(.spinner) {
+    :global .spinner {
       margin-right: 1em;
     }
   }
 
-  :global(.more) {
+  :global .more {
     margin-top: 1em;
   }
 
