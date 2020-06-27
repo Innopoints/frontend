@@ -23,10 +23,10 @@
   import Modal from 'ui/modal.svelte';
   import UnclickableChip from 'ui/unclickable-chip.svelte';
   import Dialog from 'ui/dialog.svelte';
-  import ImagePreviews from '@/containers/products/image-previews.svelte';
-  import ItemContent from '@/containers/products/item-content.svelte';
   import Snackbar from 'ui/snackbar.svelte';
   import getColorPickerStyles from 'ui/utils/color-picker-styles.js';
+  import ImagePreviews from '@/containers/products/view/image-previews.svelte';
+  import ItemContent from '@/containers/products/view/item-content.svelte';
   import { groupByColor, groupByID } from '@/utils/group-varieties.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
   import * as api from '@/utils/api.js';
