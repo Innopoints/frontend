@@ -10,7 +10,7 @@
 </script>
 
 <Modal bind:open let:closeCallback>
-  <Dialog danger title="Warning" {closeCallback}>
+  <Dialog danger title="Warning" {closeCallback} constrainWidth>
     <svg slot="title-icon" src="images/icons/alert-triangle.svg" class="icon" />
     <p>
       <slot />
