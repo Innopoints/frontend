@@ -1,6 +1,7 @@
 import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
 import arraysEqual from '@/utils/arrays-equal.js';
 import spaceOnly from '@/utils/space-only.js';
+import setNullSafe from '@/utils/set-null-safe.js';
 
 
 /* Copy ALL the fields from the given activity object,
@@ -108,16 +109,6 @@ export function prepareAfterBackend(activity) {
 
   if (activity.application_deadline != null) {
     activity.application_deadline = new Date(activity.application_deadline);
-  }
-}
-
-/* Set a field on the object, creating a blank object if the destination is null. */
-function setNullSafe(object, field, value) {
-  if (object == null) {
-    return { [field]: value };
-  } else {
-    object[field] = value;
-    return object;
   }
 }
 
