@@ -73,7 +73,7 @@ app()
     sirv('static', { dev }),
     populateSession,
     sapper.middleware({
-      session: (req, res) => ({
+      session: (req, _res) => ({
         account: req._accountObject,
         cookies: req.headers.cookie,
       }),

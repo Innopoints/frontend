@@ -11,6 +11,7 @@ import pkg from './package.json';
 import substituteSvgs from './src/utils/substitute-svgs.js';
 import sapperEnv from 'sapper-environment';
 import autoPreprocess from 'svelte-preprocess';
+import autoprefixer from 'autoprefixer';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -20,6 +21,16 @@ const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /
 
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/');
+
+const preprocessChain = [
+  {
+    markup: substituteSvgs,
+  },
+  autoPreprocess({
+    scss: { includePaths: ['./static/css'] },
+    postcss: { plugins: [autoprefixer] },
+  }),
+];
 
 export default {
   client: {
@@ -35,14 +46,7 @@ export default {
       eslint(),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
-        preprocess: [
-          {
-            markup: substituteSvgs,
-          },
-          autoPreprocess({
-            scss: { includePaths: ['./static/css'] },
-          }),
-        ],
+        preprocess: preprocessChain,
         dev,
         hydratable: true,
       }),
@@ -62,7 +66,7 @@ export default {
       legacy &&
         babel({
           extensions: ['.js', '.mjs', '.html', '.svelte'],
-          runtimeHelpers: true,
+          babelHelpers: 'runtime',
           exclude: ['node_modules/@babel/**'],
           presets: [
             [
@@ -105,14 +109,7 @@ export default {
       }),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
-        preprocess: [
-          {
-            markup: substituteSvgs,
-          },
-          autoPreprocess({
-            scss: { includePaths: ['./static/css'] },
-          }),
-        ],
+        preprocess: preprocessChain,
         generate: 'ssr',
         dev,
       }),
