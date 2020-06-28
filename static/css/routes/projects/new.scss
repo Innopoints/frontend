@@ -2,7 +2,7 @@
 @import "_mixins.scss";
 
 :global {
-  @import "global/common.scss";
+  @import "common.scss";
 }
 
 @media only screen and (min-width: 1200px) {
