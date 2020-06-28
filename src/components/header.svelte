@@ -2,12 +2,15 @@
   import { Button } from 'attractions';
   import NotificationCenter from '@/components/common/notification-center.svelte';
   import { login, logout } from '@/utils/auth.js';
+  import classes from '@/utils/classes.js';
 
   export let profile = false;
   export let user = null;
+  let _class = null;
+  export { _class as class };
 </script>
 
-<header class="padded">
+<header class={classes('padded', _class)}>
   <a class="logo" href="/" rel="prefetch">
     <img src="images/innou-icon.svg" alt="Go to the home page" />
     <span class="hide-on-less-tb">Innopoints</span>

@@ -5,9 +5,11 @@
   export let user = null;
 
   const { page } = stores();
+
+  export let headerClass = null;
 </script>
 
-<Header {user} profile={(/^\/(?:profile|dashboard)/).test($page.path)} />
+<Header class={headerClass} {user} profile={(/^\/(?:profile|dashboard)/).test($page.path)} />
 
 <slot />
 

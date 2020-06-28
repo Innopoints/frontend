@@ -1,0 +1,109 @@
+@import "_attractions-theme.scss";
+
+.purchase {
+  margin-top: 1.2em;
+  display: flex;
+  justify-content: space-between;
+
+  .identifier {
+    flex-shrink: 0;
+
+    @media only screen and (min-width: 360px) {
+      margin-right: 1em;
+    }
+  }
+
+  .quantity {
+    display: flex;
+    align-items: center;
+
+    :global {
+      .text-field {
+        width: 3.2em;
+        font-size: .9rem;
+
+        input {
+          height: 2.5em;
+          text-align: right;
+        }
+      }
+
+      .btn:last-child {
+        margin-left: .4em;
+      }
+
+      .btn:first-child {
+        margin-right: .4em;
+      }
+    }
+  }
+
+  .type {
+    margin-top: .25em;
+    font-weight: 300;
+    font-size: .95rem;
+  }
+}
+
+.options {
+  margin-top: 1.2em;
+  display: flex;
+  align-items: center;
+
+  :global {
+    .label {
+      margin-right: 1em;
+      margin-bottom: .2em;
+    }
+
+    .color-label:not(:first-child) {
+      margin-left: 4em;
+    }
+
+    .size {
+      padding: .3em .5em;
+    }
+  }
+
+  .color {
+    padding: .75em;
+    border-radius: 50%;
+    border-width: .125em;
+    border-style: solid;
+  }
+}
+
+.actions {
+  margin-top: 1.2em;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  :global .label {
+    margin-bottom: .3em;
+  }
+
+  .delta-balance {
+    color: $main;
+
+    .innopoint {
+      stroke: currentColor;
+    }
+
+    s {
+      text-decoration: none;
+      position: relative;
+      color: $danger;
+      margin-right: .3em;
+    }
+  }
+
+  s::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: .0625em;
+    top: 50%;
+    left: 0;
+    background: $danger;
+  }
+}

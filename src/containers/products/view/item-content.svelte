@@ -1,146 +1,132 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { stores } from '@sapper/app';
+  import { Button, RadioGroup, RadioChipGroup } from 'attractions';
   import Labeled from 'ui/labeled.svelte';
-  import RadioGroup from 'ui/radio-group.svelte';
-  import RadioChipGroup from 'ui/radio-chip-group.svelte';
-  import Button from 'ui/button.svelte';
   import { login } from '@/utils/auth.js';
+  import classes from '@/utils/classes.js';
   import s from '@/utils/plural-s.js';
 
   const { page } = stores();
 
-  const dispatch = createEventDispatcher();
-
-  export let productControl;
-  export let selectedColor;
+  export let product;
+  export let varietiesByColor;
+  export let colors;
+  export let totalPurchases;
   export let account;
+  export let selectedColor;
 
-  let selectedVarietyID = null;
+  const colorItems = colors.map(val => ({ value: val }));
+  let selectedVariety = product.sized ? null : varietiesByColor.get(selectedColor)[0];
   let err = false;
   let animation = false;
-  let outOfStock = false;
-
-  $: {
-    // not in sizes, select variety automatically
-    if (!productControl.productSized) {
-      const varietiesOfSelectedColor = productControl.varietiesByColor.get(selectedColor);
-      selectedVarietyID = varietiesOfSelectedColor[0].id;
-    }
-    if (selectedVarietyID != null) {
-      outOfStock = productControl.varietyMap.get(selectedVarietyID).amount === 0;
-    } else {
-      outOfStock = false;
-    }
-  }
+  $: sizeItems = varietiesByColor.get(selectedColor).map(variety => ({
+    value: variety,
+    label: variety.size,
+    disabled: variety.amount <= 0,
+  }));
+  $: affordable = account == null || account.balance >= product.price;
+  $: changeColor(selectedColor);
 
   function purchase() {
-    if (selectedVarietyID == null) {
+    if (selectedVariety == null) {
       err = true;
       animation = true;
       setTimeout(() => animation = false, 1000);
       return;
     }
     err = false;
-    dispatch('purchase', { varietyID: selectedVarietyID });
+    dispatch('purchase', { varietyID: selectedVariety.id });
+    selectedVariety = null;
   }
 
-  function changeColor({ detail }) {
-    // if the new color has a variety of the same size, select it. Otherwise, invalidate selected size
-    if (productControl.productSized && selectedVarietyID != null) {
-      const oldSize = productControl.varietyMap.get(selectedVarietyID).size;
-      const varietiesOfNewColor = productControl.varietiesByColor.get(detail);
-      const varietyOfNewColorOldSize = varietiesOfNewColor.find(variety => variety.size === oldSize);
-      if (varietyOfNewColorOldSize != null && varietyOfNewColorOldSize.amount > 0) {
-        selectedVarietyID = varietyOfNewColorOldSize.id;
-      } else {
-        selectedVarietyID = null;
+  function changeColor(color) {
+    if (product.sized) {
+      if (selectedVariety == null) {
+        return;
       }
+      // Try to find the previously selected size among the varieties of a new color
+      const selectedSize = selectedVariety.size;
+      const varietiesOfNewColor = varietiesByColor.get(color);
+      selectedVariety = varietiesOfNewColor.find(
+        variety => variety.size === selectedSize && variety.amount > 0,
+      );
+    } else {
+      // Product is not in sizes, select variety automatically
+      selectedVariety = varietiesByColor.get(selectedColor)[0];
     }
-    dispatch('color-change', detail);
   }
+
+  const dispatch = createEventDispatcher();
 </script>
 
-<div class="content">
+<div class="product">
   <header>
-    <div class="title">
-      {productControl.product.name}
-    </div>
-    {#if productControl.product.type}
-      <div class="subtitle">
-        {productControl.product.type}
-      </div>
+    <div class="name">{product.name}</div>
+    {#if product.type}
+      <div class="type">{product.type}</div>
     {/if}
   </header>
 
-  {#if productControl.product.description}
-    <Labeled label="description" classname="description">
-      <span class="text">
-        {productControl.product.description}
-      </span>
+  {#if product.description}
+    <Labeled label="Description" class="description">
+      {product.description}
     </Labeled>
   {/if}
 
   <div class="parameters">
-    {#if productControl.colors.length > 1}
-      <Labeled label="colors" classname="colors">
+    {#if colors.length > 1}
+      <Labeled label="Colors" class="colors">
         <RadioGroup
-          isColor
-          items={productControl.colors.map(val => ({ value: val }))}
-          classname="radio-options"
+          color
+          items={colorItems}
+          class="radio-options"
           bind:value={selectedColor}
-          on:change={changeColor}
           name="color"
         />
       </Labeled>
     {/if}
-    {#if productControl.productSized}
-      <Labeled
-        label="sizes"
-        classname="sizes{err ? ' wrong' : ''}{animation ? ' fire-animation' : ''}"
-      >
-        <RadioChipGroup
-          labels={productControl.varietiesByColor.get(selectedColor).map(x => x.size)}
-          items={productControl.varietiesByColor.get(selectedColor).map(x => x.id)}
-          small
-          name="sizes"
-          classname="radio-options"
-          chipclass="size"
-          bind:value={selectedVarietyID}
-        />
+    {#if product.sized}
+      <div class={classes('sizes', err && 'wrong', animation && 'fire-animation')}>
+        <Labeled label="Sizes">
+          <RadioChipGroup
+            items={sizeItems}
+            small
+            name="size"
+            class="radio-options"
+            bind:value={selectedVariety}
+          />
+        </Labeled>
         <span class="not-selected">please, select a size</span>
-      </Labeled>
+      </div>
     {/if}
   </div>
 
   <div class="purchase-details">
-    <div class="labeled text">
-      <span class="label">
-        Price
-      </span>
-      <span class="price" title="Not enough innopoints">
-        {productControl.product.price}
-        <svg src="/images/innopoint-sharp.svg" class="innopoint" />
-        {#if account && account.balance < productControl.product.price && !account.is_admin}
-          <svg src="/images/icons/frown.svg" class="frown" />
+    <Labeled label="Price">
+      <span
+        class="price"
+        title={!affordable && !account.is_admin ? "Not enough innopoints" : null}
+      >
+        {product.price}
+        <svg src="images/innopoint-sharp.svg" class="innopoint" />
+        {#if !affordable && !account.is_admin}
+          <svg src="images/icons/frown.svg" class="frown" />
         {/if}
       </span>
-    </div>
-    <div class="action{account != null ? ' purchaseable' : ''}">
+    </Labeled>
+    <div class={classes('action', account != null && 'purchaseable')}>
       {#if account != null}
         <div class="purchases">
-          {productControl.totalPurchases || 0} purchase{s(productControl.totalPurchases)}
+          {totalPurchases || 0} purchase{s(totalPurchases)}
         </div>
-        {#if outOfStock}
-          <p class="out-of-stock">out of stock</p>
-        {/if}
         {#if account.is_admin}
-          <Button isFilled href="{$page.path}/edit">edit</Button>
+          <Button filled href="{$page.path}/edit">edit</Button>
         {:else}
           <Button
-            isFilled
+            filled
             on:click={purchase}
-            disabled={account.balance < productControl.product.price || outOfStock}
+            disabled={account.balance < product.price}
           >
             purchase
           </Button>
@@ -151,3 +137,5 @@
     </div>
   </div>
 </div>
+
+<style src="../../../../static/css/containers/products/view/item-content.scss"></style>

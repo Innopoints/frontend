@@ -1,0 +1,161 @@
+@import "_attractions-theme.scss";
+
+:global {
+  @import "global/common.scss";
+}
+
+$dark-spot-bg: transparentize(black, .5);
+
+.material {
+  position: relative;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+
+  :global .btn.back {
+    position: absolute;
+    top: .8em;
+    left: .8em;
+    z-index: 300;
+
+    span {
+      margin-left: .4em;
+    }
+
+    @media only screen and (max-width: 639px) {
+      padding: .5em;
+      background: $dark-spot-bg;
+
+      & > svg {
+        stroke: white;
+        width: 1.25em;
+        height: 1.25em;
+      }
+
+      &:hover {
+        background: lighten($dark-spot-bg, 10%);
+      }
+
+      &:focus {
+        background: lighten($dark-spot-bg, 15%);
+      }
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  .balance {
+    position: absolute;
+    bottom: 1.5em;
+    left: 1em;
+    color: $main;
+    z-index: 300;
+
+    .innopoint {
+      stroke: $main;
+    }
+  }
+
+  .radio-options {
+    display: flex;
+    margin-top: .2em;
+
+    label:not(:last-child) {
+      margin-right: .3em;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    padding-top: 4.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .balance {
+      top: 1.8em;
+      right: 1.9em;
+      left: unset;
+      bottom: unset;
+    }
+
+    .simplebar-offset::before, .simplebar-offset::after {
+      content: "";
+      position: absolute;
+      z-index: 1000;
+      left: 0;
+      width: 100%;
+      height: 3em;
+      transition: opacity 300ms;
+      pointer-events: none;
+    }
+
+    .simplebar-offset::before {
+      top: 0;
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, white 100%);
+    }
+
+    .simplebar-offset.at-top::before {
+      opacity: 0;
+    }
+
+    .simplebar-offset::after {
+      bottom: 0;
+      background: linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .simplebar-offset.at-bottom::after {
+      opacity: 0;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    padding: 4em 10% 1em;
+
+    .content {
+      padding: 0 0 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    :global .btn.back {
+      left: 10%;
+    }
+
+    .balance {
+      right: 10%;
+    }
+
+    @supports (display: grids) {
+      .product {
+        padding-top: 2em;
+        display: grid;
+        grid-template: auto auto / auto auto;
+        row-gap: 1em;
+        align-items: center;
+
+        .showcase {
+          justify-content: flex-start;
+        }
+      }
+
+      .btn.back, .balance {
+        position: static;
+        top: 0;
+        left: 0;
+      }
+
+      .btn.back {
+        justify-self: start;
+      }
+
+      .balance {
+        justify-self: end;
+      }
+    }
+  }
+}

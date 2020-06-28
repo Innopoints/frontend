@@ -1,0 +1,141 @@
+@import "_attractions-theme.scss";
+
+.product {
+  padding: 1em;
+
+  header {
+    margin-bottom: 1em;
+
+    .name {
+      font-size: 1.1em;
+      margin-bottom: .1em;
+    }
+
+    .type {
+      font-weight: 300;
+    }
+  }
+
+  .parameters {
+    margin-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+
+    @keyframes flash-border {
+      0% {
+        border-color: transparent;
+      }
+
+      33% {
+        border-color: transparentize($main, .7);
+      }
+
+      66% {
+        border-color: transparentize($main, .7);
+      }
+
+      100% {
+        border-color: transparent;
+      }
+    }
+
+    :global .colors {
+      padding: .5rem 0;
+      align-items: start;
+
+      .radio-options {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 3em;
+
+        .radio {
+          margin: .25em .25em .25em 0;
+        }
+      }
+    }
+
+    .sizes {
+      display: flex;
+      flex-direction: column;
+      padding: .5rem;
+      border: .0625em solid transparent;
+      transition: border-color 300ms;
+      border-radius: .3125em;
+
+      .not-selected {
+        font-weight: 300;
+        font-size: .9rem;
+        margin-top: .5em;
+        color: darken($main, 5%);
+        display: none;
+      }
+
+      &.wrong .not-selected {
+        display: inline;
+      }
+
+      &.fire-animation {
+        animation-name: flash-border;
+        animation-duration: 1000ms;
+      }
+
+      :global .chip {
+        margin: .25rem .25rem .25rem 0;
+      }
+    }
+  }
+
+  .purchase-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2em;
+    margin-top: 1em;
+
+    .action.purchaseable {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    :global .price {
+      font-size: 1.25rem;
+      position: relative;
+
+      .innopoint {
+        height: 1.1rem;
+        stroke-width: 7;
+      }
+
+      .frown {
+        position: absolute;
+        margin-left: .8em;
+        top: -2px;
+        stroke: $danger;
+        cursor: help;
+      }
+    }
+
+    .purchases {
+      font-weight: 300;
+      font-size: .9rem;
+      margin-bottom: .4em;
+    }
+  }
+
+  :global .labeled {
+    .label {
+      margin-bottom: .2em;
+    }
+
+    &.description {
+      white-space: pre-wrap;
+      line-height: 1.35rem;
+      margin-bottom: 1em;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    min-width: 24em;
+  }
+}
