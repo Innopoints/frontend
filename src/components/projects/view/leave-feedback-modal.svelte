@@ -50,6 +50,7 @@
       };
       competenceItems.forEach(item => item.checked = false);
       competenceItems = competenceItems;
+      $session.account = await api.json(api.get('/account'));
       showSnackbar({ props: { text: 'Success! You should have received your innopoints now' } });
     } catch (e) {
       showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
