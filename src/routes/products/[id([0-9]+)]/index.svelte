@@ -6,6 +6,7 @@
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
       ['product', `/products/${page.params.id}`],
+      ['sizes', '/sizes'],
     ]));
 
     if (data.product == null) {
@@ -22,6 +23,7 @@
       (acc, variety) => acc + variety.purchases, 0,
     );
     data.colors = [...data.varietiesByColor.keys()];
+    data.sizes = data.sizes.map(sizeObject => sizeObject.value);
     data.flatImages = data.colors.flatMap(color => {
       return data.varietiesByColor.get(color)[0].images.map(id => (
         { url: `${API_HOST_BROWSER}/file/${id}`, color }
@@ -46,6 +48,7 @@
   export let varietiesByColor;
   export let totalPurchases;
   export let colors;
+  export let sizes;
   export let flatImages;
 
   let selectedColor = colors[0];
@@ -100,6 +103,7 @@
         {product}
         {varietiesByColor}
         {colors}
+        {sizes}
         {totalPurchases}
         bind:selectedColor
         {account}

@@ -14,6 +14,7 @@
   export let colors;
   export let totalPurchases;
   export let account;
+  export let sizes;
   export let selectedColor;
 
   const colorItems = colors.map(val => ({ value: val }));
@@ -25,6 +26,9 @@
     label: variety.size,
     disabled: variety.amount <= 0,
   }));
+  $: sizeItems.sort(
+    (item1, item2) => sizes.indexOf(item1.label) - sizes.indexOf(item2.label),
+  );
   $: affordable = account == null || account.balance >= product.price;
   $: changeColor(selectedColor);
 
