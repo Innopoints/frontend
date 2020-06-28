@@ -8,7 +8,7 @@
   import TagSelector from '@/components/projects/view/tag-selector.svelte';
   import ReviewVerdict from '@/components/projects/review/review-verdict.svelte';
   import FinalizingDialog from '@/components/projects/view/finalizing-dialog.svelte';
-  import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
+  import DangerConfirmDialog from '@/components/common/danger-confirm-dialog.svelte';
   import { API_HOST_BROWSER } from '@/constants/env.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import ReviewStatuses from '@/constants/backend/project-review-statuses.js';

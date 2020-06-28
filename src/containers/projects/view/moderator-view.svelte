@@ -7,7 +7,7 @@
   import ModeratorDraftCard from '@/components/projects/view/moderator-draft-card.svelte';
   import FinalizingActivityCard from '@/components/projects/view/finalizing-activity-card.svelte';
   import FinishedActivityCard from '@/components/projects/view/finished-activity-card.svelte';
-  import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
+  import DangerConfirmDialog from '@/components/common/danger-confirm-dialog.svelte';
   import EditActivityCard from '@/components/projects/new/edit-activity-card.svelte';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
   import getBlankActivity from '@/constants/projects/blank-activity.js';

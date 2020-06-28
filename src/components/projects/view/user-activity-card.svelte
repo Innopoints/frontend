@@ -6,7 +6,7 @@
   import Notice from '@/components/common/notice.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
   import ReadFeedbackDialog from '@/components/projects/view/read-feedback-dialog.svelte';
-  import DangerConfirmDialog from '@/components/projects/view/danger-confirm-dialog.svelte';
+  import DangerConfirmDialog from '@/components/common/danger-confirm-dialog.svelte';
   import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
   import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
