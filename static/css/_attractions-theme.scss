@@ -51,6 +51,10 @@ $shadow-raised:
   0 3px 5px 0    transparentize(black, .86),
   0 1px 10px 0   transparentize(black, .88);
 
+$shadow-glowing: 0 2px 8px -1px transparentize(darken($main, 10%), .8),
+               0 3px 10px 0   transparentize(darken($main, 10%), .86),
+               0 1px 20px 0   transparentize(darken($main, 10%), .88);
+
 $x-icon: 'images/icons/x.svg';
 
 $warning-bg: #fff4e5;

@@ -9,6 +9,7 @@
 
     if (session.account == null) {
       this.error(403, 'Profile');
+      return;  // you may think we don't need this, but strangely, we do
     }
 
     const isMe = requestedEmail === session.account.email;
