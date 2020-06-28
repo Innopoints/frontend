@@ -16,7 +16,7 @@
   $: slideToChosenColor(selectedColor);
 
   function slideToChosenColor(color) {
-    if (carousel == null) {
+    if (carousel == null || images[displayedIdx].color === color) {
       return;
     }
 
