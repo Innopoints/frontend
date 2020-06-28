@@ -1,6 +1,6 @@
 <script context="module">
   import getInitialData from '@/utils/get-initial-data.js';
-  import { groupByColor, groupByID } from '@/utils/group-varieties.js';
+  import { groupByColor, groupByID } from '@/utils/product-manipulation.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
 
   export async function preload(page, session) {

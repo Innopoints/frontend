@@ -2,7 +2,7 @@
   import { Card, Button, RadioGroup } from 'attractions';
   import Labeled from 'ui/labeled.svelte';
   import getBackground from '@/utils/optimal-color.js';
-  import { groupByColor } from '@/utils/group-varieties.js';
+  import { groupByColor } from '@/utils/product-manipulation.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
 
   export let id;

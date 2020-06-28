@@ -1,3 +1,4 @@
+/* Returns a map of colors to arrays of varieties. */
 export function groupByColor(varieties) {
   const grouping = new Map();
 
@@ -12,6 +13,7 @@ export function groupByColor(varieties) {
   return grouping;
 }
 
+/* Returns a map of an ID to a variety. */
 export function groupByID(varieties) {
   const grouping = new Map();
 
