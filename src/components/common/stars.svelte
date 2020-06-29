@@ -1,5 +1,5 @@
 <script>
-  import { range } from 'attraction/utils';
+  import { range } from 'attractions/utils';
 
   export let value;
   export let max = 5;
