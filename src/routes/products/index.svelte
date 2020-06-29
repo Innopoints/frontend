@@ -22,10 +22,9 @@
   import Tagline from 'src/containers/products/tagline.svelte';
   import Balance from 'src/components/products/balance.svelte';
   import Filters from 'src/containers/products/filters.svelte';
-  import { Divider } from 'attractions';
+  import { Divider, Pagination } from 'attractions';
   import EmptyState from 'src/components/common/empty-state.svelte';
   import ProductCard from 'src/components/products/product-card.svelte';
-  import Pagination from 'src/components/common/pagination.svelte';
   import NotificationTypes from 'src/constants/backend/notification-types.js';
   import orderOptions from 'src/constants/products/order.js';
   import { filterProps } from 'src/utils/product-manipulation.js';

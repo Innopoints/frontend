@@ -19,10 +19,9 @@
 <script>
   import Layout from 'src/layouts/default.svelte';
   import Tagline from 'src/containers/projects/tagline.svelte';
-  import { H1, Button } from 'attractions';
+  import { H1, Button, Pagination } from 'attractions';
   import ProjectCard from 'src/components/projects/project-card.svelte';
   import EmptyState from 'src/components/common/empty-state.svelte';
-  import Pagination from 'src/components/common/pagination.svelte';
   import * as api from 'src/utils/api.js';
 
   export let projects;
