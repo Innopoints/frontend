@@ -40,7 +40,7 @@
       width={cardWidth}
       height={cardHeight}
       class="repr"
-      alt="Go to a product page"
+      alt="Go to the store"
     />
   </a>
   <a href="/" class="destination">

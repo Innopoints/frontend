@@ -2,8 +2,8 @@
   import { createEventDispatcher, getContext } from 'svelte';
   import { Modal, Dialog, Button, TextField, Chip, Label } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
+  import { getColorPickerStyles } from 'attractions/utils';
   import Labeled from 'src/components/common/labeled.svelte';
-  import getColorPickerStyles from 'ui/utils/color-picker-styles.js';
   import * as api from 'src/utils/api.js';
 
   export let open = false;
