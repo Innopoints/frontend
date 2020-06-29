@@ -12,15 +12,18 @@
       <pre>{error.stack}</pre>
     {/if}
   {:else}
-    <H1>Everything is fine</H1>
-    <p>
-      Actually, it's not.
-      You have just witnessed a fatal error,
-      please, get in touch with us at
-      <a href="mailto:innopoints@innopolis.university">
+    <div class="center">
+      <H1>This is fine.</H1>
+      <p class="flames">🔥🔥🔥</p>
+      <p>Actually, it's not.</p>
+      <p>
+        You have just witnessed a fatal error, <br />
+        please, get in touch with us at
+        <a href="mailto:innopoints@innopolis.university">
         innopoints@innopolis.university
-      </a>
-    </p>
+        </a>
+      </p>
+    </div>
   {/if}
 </div>
 
