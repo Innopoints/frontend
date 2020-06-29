@@ -1,6 +1,5 @@
 import getBlankActivity from 'src/constants/projects/blank-activity.js';
 
-
 export function getBlankProject() {
   return {
     name: null,
@@ -9,7 +8,6 @@ export function getBlankProject() {
     moderators: [],
   };
 }
-
 
 export function getOlympiad() {
   const blank = getBlankProject();
