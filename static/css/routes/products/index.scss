@@ -22,7 +22,7 @@
     &::after {
       font-size: 1.2rem !important;
       color: $main;
-      font-weight: 500;
+      font-weight: $bold-font-weight;
       padding: 0 .6em !important;
       white-space: nowrap;
     }

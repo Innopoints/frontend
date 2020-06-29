@@ -11,7 +11,7 @@ header {
     color: $main;
     fill: $main;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: $bold-font-weight;
     font-size: 1.3rem;
 
     img {

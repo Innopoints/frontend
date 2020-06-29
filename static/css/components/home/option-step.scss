@@ -62,17 +62,17 @@
 
   strong {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: $bold-font-weight;
   }
 
   .title {
-    font-weight: 500;
+    font-weight: $bold-font-weight;
     font-size: 1.4rem;
     margin-bottom: .3em;
   }
 
   .subtitle {
-    font-weight: 300;
+    font-weight: $thin-font-weight;
     font-size: 1rem;
     line-height: 1.3rem;
     margin-bottom: 1.5em;

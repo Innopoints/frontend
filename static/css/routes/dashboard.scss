@@ -21,7 +21,7 @@
     flex-direction: column;
 
     & > .title {
-      font-weight: 500;
+      font-weight: $bold-font-weight;
       display: flex;
       align-items: center;
       color: $main;

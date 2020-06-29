@@ -6,7 +6,7 @@
   border-bottom: .0625em solid $light-contrast;
 
   p {
-    font-weight: 300;
+    font-weight: $thin-font-weight;
     font-size: .95rem;
     margin: .8em .5em 0;
   }
@@ -24,7 +24,7 @@
 
   :global .subtitle {
     font-size: .95rem;
-    font-weight: 300;
+    font-weight: $thin-font-weight;
     margin-top: .3em;
     margin-left: 2.5rem;
   }

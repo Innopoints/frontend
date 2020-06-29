@@ -43,7 +43,7 @@
 
     .error {
       color: $danger;
-      font-weight: 300;
+      font-weight: $thin-font-weight;
       font-size: .9em;
       margin: .4em .6em .8em;
       text-align: center;
@@ -51,7 +51,7 @@
 
     .row {
       margin: .4em .6em .8em;
-      font-weight: 300;
+      font-weight: $thin-font-weight;
 
       svg {
         stroke-width: 1.5;

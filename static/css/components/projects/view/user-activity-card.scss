@@ -4,7 +4,7 @@
   margin-bottom: 1em;
 
   .title {
-    font-weight: 500;
+    font-weight: $bold-font-weight;
     font-size: 1.1rem;
     line-height: 1.4rem;
     letter-spacing: .2px;
@@ -33,7 +33,7 @@
 
     .secondary {
       font-size: .9rem;
-      font-weight: 300;
+      font-weight: $thin-font-weight;
       display: none;
     }
   }
@@ -50,12 +50,12 @@
 
   .not-logged-in {
     align-self: center;
-    font-weight: 300;
+    font-weight: $thin-font-weight;
   }
 
   .application-status {
     font-size: .9em;
-    font-weight: 300;
+    font-weight: $thin-font-weight;
     margin-top: 1em;
     display: flex;
     align-items: center;
@@ -113,7 +113,7 @@
       border-top: .0625em solid $light-contrast;
       padding-top: .8em;
       margin-top: .8em;
-      font-weight: 300;
+      font-weight: $thin-font-weight;
 
       .with-icon {
         margin-top: .5em;

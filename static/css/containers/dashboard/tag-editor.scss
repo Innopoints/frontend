@@ -1,3 +1,5 @@
+@import "_attractions-theme.scss";
+
 ul {
   margin-top: 1em;
 }
@@ -24,5 +26,5 @@ li {
 
 .status {
   font-size: .9rem;
-  font-weight: 300;
+  font-weight: $thin-font-weight;
 }

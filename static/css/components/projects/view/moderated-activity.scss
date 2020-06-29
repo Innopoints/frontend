@@ -5,7 +5,7 @@
 
   .left {
     header {
-      font-weight: 500;
+      font-weight: $bold-font-weight;
       font-size: 1.1em;
     }
 
@@ -51,7 +51,7 @@
 
         .secondary {
           font-size: .9em;
-          font-weight: 300;
+          font-weight: $thin-font-weight;
         }
       }
     }
@@ -68,7 +68,7 @@
 
     .title {
       color: $main;
-      font-weight: 500;
+      font-weight: $bold-font-weight;
       font-size: 1.2rem;
     }
   }

@@ -20,7 +20,7 @@ li {
   .title {
     margin-bottom: .5em;
     flex-basis: 100%;
-    font-weight: 500;
+    font-weight: $bold-font-weight;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

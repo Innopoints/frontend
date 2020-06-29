@@ -36,7 +36,7 @@ li {
 
   .title .type, time {
     margin-left: .5em;
-    font-weight: 300;
+    font-weight: $thin-font-weight;
   }
 
   time {
@@ -44,7 +44,7 @@ li {
   }
 
   .purchaser {
-    font-weight: 300;
+    font-weight: $thin-font-weight;
     font-size: .9em;
     display: flex;
     flex-direction: column;

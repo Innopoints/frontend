@@ -41,6 +41,22 @@ body {
   min-height: 100vh;
 }
 
+p {
+  line-height: 1.2em;
+}
+
+strong {
+  font-weight: $bold-font-weight;
+}
+
+a {
+  color: $main;
+
+  &:visited {
+    color: $link-visited;
+  }
+}
+
 .material {
   flex-grow: 1;
   background-color: #fff;
@@ -162,7 +178,7 @@ body {
 .dialog .consequences {
   display: block;
   margin-top: .3em;
-  font-weight: 300;
+  font-weight: $thin-font-weight;
 }
 
 .dialog .actions {

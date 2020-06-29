@@ -12,10 +12,10 @@
 
   :global figcaption {
     margin: 0 15%;
-    font-weight: 300;
+    font-weight: $thin-font-weight;
 
     .title {
-      font-weight: 500;
+      font-weight: $bold-font-weight;
       font-size: 1.3em;
       margin: .7em 0 .4em;
       color: $main;
@@ -51,7 +51,7 @@
     margin: 0 0 .3em;
 
     &.prominent {
-      font-weight: 500;
+      font-weight: $bold-font-weight;
       font-size: 1.2em;
       margin: .7em 0 .4em;
       color: $main;

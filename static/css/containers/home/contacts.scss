@@ -18,7 +18,7 @@
   .subtitle {
     text-align: center;
     font-size: 1.1rem;
-    font-weight: 300;
+    font-weight: $thin-font-weight;
   }
 
   :global .card {
@@ -29,7 +29,7 @@
     margin: 1em 0;
 
     p {
-      font-weight: 300;
+      font-weight: $thin-font-weight;
       text-align: center;
       margin-top: 1em;
     }

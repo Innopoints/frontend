@@ -12,7 +12,7 @@
     }
 
     .type {
-      font-weight: 300;
+      font-weight: $thin-font-weight;
     }
   }
 
@@ -63,7 +63,7 @@
       border-radius: .3125em;
 
       .not-selected {
-        font-weight: 300;
+        font-weight: $thin-font-weight;
         font-size: .9rem;
         margin-top: .5em;
         color: darken($main, 5%);
@@ -117,7 +117,7 @@
     }
 
     .purchases {
-      font-weight: 300;
+      font-weight: $thin-font-weight;
       font-size: .9rem;
       margin-bottom: .4em;
     }

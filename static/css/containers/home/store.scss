@@ -1,3 +1,5 @@
+@import "_attractions-theme.scss";
+
 .store {
   margin-bottom: 4em;
 
@@ -9,7 +11,7 @@
   & > .subtitle,
   & > .own-designs {
     text-align: center;
-    font-weight: 300;
+    font-weight: $thin-font-weight;
     font-size: 1rem;
     line-height: 1.3rem;
   }
