@@ -25,7 +25,8 @@
     <span class="hide-on-less-tb">Showing statistics</span>
     <PeriodPicker
       label="Period of statistics"
-      on:change={({ detail }) => { selectedPeriod = detail; dispatch('period-change', detail); }}
+      bind:value={selectedPeriod}
+      on:change={({ detail }) => { dispatch('period-change', detail); }}
     />
   </div>
   <div class="simple-stats">
