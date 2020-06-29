@@ -3,9 +3,9 @@
   import { goto, stores } from '@sapper/app';
   import { Button, TextField } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
-  import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
-  import * as api from '@/utils/api.js';
+  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
+  import ReviewStatuses from 'src/constants/backend/project-review-statuses.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

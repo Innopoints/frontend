@@ -1,5 +1,5 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -11,15 +11,15 @@
 </script>
 
 <script>
-  import Layout from '@/layouts/default.svelte';
-  import Tagline from '@/containers/projects/tagline.svelte';
+  import Layout from 'src/layouts/default.svelte';
+  import Tagline from 'src/containers/projects/tagline.svelte';
   import { H1, Button } from 'attractions';
-  import ProjectCard from '@/components/projects/project-card.svelte';
-  import Filters from '@/containers/projects/filters.svelte';
-  import EmptyState from '@/components/common/empty-state.svelte';
-  import generateQueryString from '@/utils/generate-query-string.js';
-  import orderOptions from '@/constants/projects/order.js';
-  import * as api from '@/utils/api.js';
+  import ProjectCard from 'src/components/projects/project-card.svelte';
+  import Filters from 'src/containers/projects/filters.svelte';
+  import EmptyState from 'src/components/common/empty-state.svelte';
+  import generateQueryString from 'src/utils/generate-query-string.js';
+  import orderOptions from 'src/constants/projects/order.js';
+  import * as api from 'src/utils/api.js';
 
   export let projects;
   export let account;

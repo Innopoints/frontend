@@ -1,7 +1,7 @@
 <script context="module">
   import { writable } from 'svelte/store';
-  import getInitialData from '@/utils/get-initial-data.js';
-  import { prepareAfterBackend } from '@/utils/project-manipulation.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
+  import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -23,12 +23,12 @@
 
 <script>
   import { setContext } from 'svelte';
-  import Layout from '@/layouts/default.svelte';
+  import Layout from 'src/layouts/default.svelte';
   import { SnackbarContainer, H2 } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import ProjectHeader from '@/containers/projects/view/project-header.svelte';
-  import ModeratorView from '@/containers/projects/view/moderator-view.svelte';
-  import StaffCards from '@/containers/projects/view/staff-cards.svelte';
+  import ProjectHeader from 'src/containers/projects/view/project-header.svelte';
+  import ModeratorView from 'src/containers/projects/view/moderator-view.svelte';
+  import StaffCards from 'src/containers/projects/view/staff-cards.svelte';
 
   setContext('review-mode', true);
 

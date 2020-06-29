@@ -2,8 +2,8 @@
   import { getContext } from 'svelte';
   import { TextField, Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import * as api from '@/utils/api.js';
-  import s from '@/utils/plural-s.js';
+  import * as api from 'src/utils/api.js';
+  import s from 'src/utils/plural-s.js';
 
   export let users = [];
   export let account;

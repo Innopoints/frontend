@@ -1,5 +1,5 @@
 <script>
-  import colors from '@/constants/profile/competence-colors.js';
+  import colors from 'src/constants/profile/competence-colors.js';
 
   export let competences;
   export let items;

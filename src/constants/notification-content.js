@@ -1,5 +1,5 @@
-import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
-import NotificationTypes from '@/constants/backend/notification-types.js';
+import StockChangeStatuses from 'src/constants/backend/stock-change-statuses.js';
+import NotificationTypes from 'src/constants/backend/notification-types.js';
 
 export default function getNotificationContent({ type, payload }) {
   let fragments;

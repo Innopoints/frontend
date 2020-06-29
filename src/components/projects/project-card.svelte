@@ -1,8 +1,8 @@
 <script>
   import { Card, Button } from 'attractions';
-  import Labeled from '@/components/common/labeled.svelte';
-  import { formatDateRange } from '@/utils/date-time-format.js';
-  import { API_HOST_BROWSER } from '@/constants/env.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import { formatDateRange } from 'src/utils/date-time-format.js';
+  import { API_HOST_BROWSER } from 'src/constants/env.js';
 
   export let id;
   export let name;

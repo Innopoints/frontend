@@ -3,19 +3,19 @@
   import { flip } from 'svelte/animate';
   import { Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import ModeratorActivityCard from '@/components/projects/view/moderator-activity-card.svelte';
-  import ModeratorDraftCard from '@/components/projects/view/moderator-draft-card.svelte';
-  import FinalizingActivityCard from '@/components/projects/view/finalizing-activity-card.svelte';
-  import FinishedActivityCard from '@/components/projects/view/finished-activity-card.svelte';
-  import DangerConfirmDialog from '@/components/common/danger-confirm-dialog.svelte';
-  import EditActivityCard from '@/components/projects/new/edit-activity-card.svelte';
-  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
-  import getBlankActivity from '@/constants/projects/blank-activity.js';
+  import ModeratorActivityCard from 'src/components/projects/view/moderator-activity-card.svelte';
+  import ModeratorDraftCard from 'src/components/projects/view/moderator-draft-card.svelte';
+  import FinalizingActivityCard from 'src/components/projects/view/finalizing-activity-card.svelte';
+  import FinishedActivityCard from 'src/components/projects/view/finished-activity-card.svelte';
+  import DangerConfirmDialog from 'src/components/common/danger-confirm-dialog.svelte';
+  import EditActivityCard from 'src/components/projects/new/edit-activity-card.svelte';
+  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
+  import getBlankActivity from 'src/constants/projects/blank-activity.js';
   import {
     copyActivity,
     prepareForBackend,
-  } from '@/utils/project-manipulation.js';
-  import * as api from '@/utils/api.js';
+  } from 'src/utils/project-manipulation.js';
+  import * as api from 'src/utils/api.js';
 
   export let account;
   export let competences;

@@ -3,8 +3,8 @@
   import { Modal, Dialog, Button, TextField, Chip, Label } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import { getColorPickerStyles } from 'attractions/utils';
-  import Labeled from '@/components/common/labeled.svelte';
-  import * as api from '@/utils/api.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import * as api from 'src/utils/api.js';
 
   export let open = false;
   export let product;

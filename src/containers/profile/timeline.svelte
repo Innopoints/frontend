@@ -2,10 +2,10 @@
   import { createEventDispatcher, getContext } from 'svelte';
   import { Button, Loading } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import EmptyState from '@/components/common/empty-state.svelte';
-  import TimelineEntry from '@/components/profile/timeline-entry.svelte';
-  import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
-  import * as api from '@/utils/api.js';
+  import EmptyState from 'src/components/common/empty-state.svelte';
+  import TimelineEntry from 'src/components/profile/timeline-entry.svelte';
+  import LeaveFeedbackModal from 'src/components/projects/view/leave-feedback-modal.svelte';
+  import * as api from 'src/utils/api.js';
 
   export let timelinePromises;
   export let competences;

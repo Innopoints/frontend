@@ -1,9 +1,9 @@
 <script>
-  import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
-  import StepHeader from '@/components/projects/new/step-header.svelte';
-  import ProjectImagePicker from '@/components/projects/new/project-image-picker.svelte';
+  import BottomNavigation from 'src/components/projects/new/bottom-navigation.svelte';
+  import StepHeader from 'src/components/projects/new/step-header.svelte';
+  import ProjectImagePicker from 'src/components/projects/new/project-image-picker.svelte';
   import { FormField, TextField } from 'attractions';
-  import spaceOnly from '@/utils/space-only.js';
+  import spaceOnly from 'src/utils/space-only.js';
 
   export let project;
   export let autosaved;

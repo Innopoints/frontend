@@ -1,5 +1,5 @@
 <script>
-  import UserActivityCard from '@/components/projects/view/user-activity-card.svelte';
+  import UserActivityCard from 'src/components/projects/view/user-activity-card.svelte';
 
   export let account;
   export let competences;

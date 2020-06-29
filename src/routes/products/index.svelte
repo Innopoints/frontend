@@ -1,5 +1,5 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
   const productLimit = 24;
 
   export async function preload(page, session) {
@@ -18,17 +18,17 @@
 
 <script>
   import { stores } from '@sapper/app';
-  import Layout from '@/layouts/default.svelte';
-  import Tagline from '@/containers/products/tagline.svelte';
-  import Balance from '@/components/products/balance.svelte';
-  import Filters from '@/containers/products/filters.svelte';
+  import Layout from 'src/layouts/default.svelte';
+  import Tagline from 'src/containers/products/tagline.svelte';
+  import Balance from 'src/components/products/balance.svelte';
+  import Filters from 'src/containers/products/filters.svelte';
   import { Divider } from 'attractions';
-  import EmptyState from '@/components/common/empty-state.svelte';
-  import ProductCard from '@/components/products/product-card.svelte';
-  import Pagination from '@/components/common/pagination.svelte';
-  import NotificationTypes from '@/constants/backend/notification-types.js';
-  import orderOptions from '@/constants/products/order.js';
-  import * as api from '@/utils/api.js';
+  import EmptyState from 'src/components/common/empty-state.svelte';
+  import ProductCard from 'src/components/products/product-card.svelte';
+  import Pagination from 'src/components/common/pagination.svelte';
+  import NotificationTypes from 'src/constants/backend/notification-types.js';
+  import orderOptions from 'src/constants/products/order.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

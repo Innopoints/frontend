@@ -1,5 +1,5 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -20,18 +20,18 @@
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import { stores, goto } from '@sapper/app';
-  import Layout from '@/layouts/default.svelte';
+  import Layout from 'src/layouts/default.svelte';
   import { SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import StepZero from '@/containers/projects/new/step-0.svelte';
-  import StepOne from '@/containers/projects/new/step-1.svelte';
-  import StepTwo from '@/containers/projects/new/step-2.svelte';
-  import StepThree from '@/containers/projects/new/step-3.svelte';
-  import * as api from '@/utils/api.js';
+  import StepZero from 'src/containers/projects/new/step-0.svelte';
+  import StepOne from 'src/containers/projects/new/step-1.svelte';
+  import StepTwo from 'src/containers/projects/new/step-2.svelte';
+  import StepThree from 'src/containers/projects/new/step-3.svelte';
+  import * as api from 'src/utils/api.js';
   import {
     computeDiffProject,
     copyProject,
-  } from '@/utils/project-manipulation.js';
+  } from 'src/utils/project-manipulation.js';
 
   const { page } = stores();
 

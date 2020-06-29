@@ -2,13 +2,13 @@
   import { getContext } from 'svelte';
   import { Accordion, Button, Card } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import Labeled from '@/components/common/labeled.svelte';
-  import EmptyState from '@/components/common/empty-state.svelte';
-  import ApplicationHourTile from '@/components/projects/view/application-hour-tile.svelte';
-  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import s from '@/utils/plural-s.js';
-  import * as api from '@/utils/api.js';
-  import { formatTimeRange } from '@/utils/date-time-format.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import EmptyState from 'src/components/common/empty-state.svelte';
+  import ApplicationHourTile from 'src/components/projects/view/application-hour-tile.svelte';
+  import ApplicationStatuses from 'src/constants/backend/application-statuses.js';
+  import s from 'src/utils/plural-s.js';
+  import * as api from 'src/utils/api.js';
+  import { formatTimeRange } from 'src/utils/date-time-format.js';
 
   export let account;
   export let activity;

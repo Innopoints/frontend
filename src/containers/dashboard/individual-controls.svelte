@@ -2,14 +2,14 @@
   import { getContext } from 'svelte';
   import { Card, Autocomplete } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import AmendBalance from '@/components/dashboard/amend-balance.svelte';
-  import SendMessage from '@/components/dashboard/send-message.svelte';
-  import SeeProfile from '@/components/dashboard/see-profile.svelte';
+  import AmendBalance from 'src/components/dashboard/amend-balance.svelte';
+  import SendMessage from 'src/components/dashboard/send-message.svelte';
+  import SeeProfile from 'src/components/dashboard/see-profile.svelte';
   import {
     autocompleteValueToUser,
     getUsersRaw,
     minSearchLength,
-  } from '@/utils/autocomplete-users.js';
+  } from 'src/utils/autocomplete-users.js';
 
   export let account;
 

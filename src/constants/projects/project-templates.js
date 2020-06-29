@@ -1,4 +1,4 @@
-import getBlankActivity from '@/constants/projects/blank-activity.js';
+import getBlankActivity from 'src/constants/projects/blank-activity.js';
 
 
 export function getBlankProject() {

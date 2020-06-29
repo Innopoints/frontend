@@ -7,9 +7,9 @@
     TextField,
   } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import ColorPicker from '@/components/products/new/color-picker.svelte';
-  import ImageInput from '@/components/products/new/image-input.svelte';
-  import { getBlankVariety } from '@/constants/products/blank-product.js';
+  import ColorPicker from 'src/components/products/new/color-picker.svelte';
+  import ImageInput from 'src/components/products/new/image-input.svelte';
+  import { getBlankVariety } from 'src/constants/products/blank-product.js';
 
   export let product;
   export let variety;

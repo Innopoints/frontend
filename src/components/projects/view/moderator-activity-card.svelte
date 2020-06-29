@@ -1,13 +1,13 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Accordion, Button, Card, Chip } from 'attractions';
-  import Labeled from '@/components/common/labeled.svelte';
-  import EmptyState from '@/components/common/empty-state.svelte';
-  import Notice from '@/components/common/notice.svelte';
-  import ApplicationTile from '@/components/projects/view/application-tile.svelte';
-  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import s from '@/utils/plural-s.js';
-  import { formatDate, formatDateRange } from '@/utils/date-time-format.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import EmptyState from 'src/components/common/empty-state.svelte';
+  import Notice from 'src/components/common/notice.svelte';
+  import ApplicationTile from 'src/components/projects/view/application-tile.svelte';
+  import ApplicationStatuses from 'src/constants/backend/application-statuses.js';
+  import s from 'src/utils/plural-s.js';
+  import { formatDate, formatDateRange } from 'src/utils/date-time-format.js';
 
   export let activity;
   export let competences;

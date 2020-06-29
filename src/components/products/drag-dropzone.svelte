@@ -2,9 +2,9 @@
   import { createEventDispatcher } from 'svelte';
   import { stores } from '@sapper/app';
   import Sortable from 'sortablejs';
-  import ImagePreviewCard from '@/components/products/image-preview-card.svelte';
-  import * as api from '@/utils/api.js';
-  import maxSizeMB from '@/constants/backend/file-upload-limit.js';
+  import ImagePreviewCard from 'src/components/products/image-preview-card.svelte';
+  import * as api from 'src/utils/api.js';
+  import maxSizeMB from 'src/constants/backend/file-upload-limit.js';
 
   const { session } = stores();
 

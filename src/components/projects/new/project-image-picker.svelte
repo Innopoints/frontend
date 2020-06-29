@@ -3,10 +3,10 @@
   import { stores } from '@sapper/app';
   import { FileInput, Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import ImageResizer from '@/components/common/image-resizer.svelte';
-  import { API_HOST_BROWSER } from '@/constants/env.js';
-  import maxSizeMB from '@/constants/backend/file-upload-limit.js';
-  import * as api from '@/utils/api.js';
+  import ImageResizer from 'src/components/common/image-resizer.svelte';
+  import { API_HOST_BROWSER } from 'src/constants/env.js';
+  import maxSizeMB from 'src/constants/backend/file-upload-limit.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
   const aspectRatio = 16 / 9;

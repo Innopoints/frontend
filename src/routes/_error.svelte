@@ -1,8 +1,8 @@
 <script>
-  import Layout from '@/layouts/default.svelte';
-  import Error404 from '@/containers/errors/error-404.svelte';
-  import Error403 from '@/containers/errors/error-403.svelte';
-  import Error500 from '@/containers/errors/error-500.svelte';
+  import Layout from 'src/layouts/default.svelte';
+  import Error404 from 'src/containers/errors/error-404.svelte';
+  import Error403 from 'src/containers/errors/error-403.svelte';
+  import Error500 from 'src/containers/errors/error-500.svelte';
 
   export let error;
   export let status;

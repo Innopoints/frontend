@@ -1,5 +1,5 @@
 <script>
-  import range from '@/utils/range.js';
+  import range from 'src/utils/range.js';
 
   export let value;
   export let max = 5;

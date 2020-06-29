@@ -1,7 +1,7 @@
 <script>
   import { Card, Button } from 'attractions';
-  import Labeled from '@/components/common/labeled.svelte';
-  import EmptyState from '@/components/common/empty-state.svelte';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import EmptyState from 'src/components/common/empty-state.svelte';
   export let reviews = [];
 </script>
 

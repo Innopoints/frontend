@@ -1,6 +1,6 @@
 <script>
-  import StaffCard from '@/components/projects/view/staff-card.svelte';
-  import isModeration from '@/constants/projects/moderation-activity.js';
+  import StaffCard from 'src/components/projects/view/staff-card.svelte';
+  import isModeration from 'src/constants/projects/moderation-activity.js';
 
   export let project;
   export let account;

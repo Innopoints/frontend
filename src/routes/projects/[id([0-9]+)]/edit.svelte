@@ -1,7 +1,7 @@
 <script context="module">
   import { writable } from 'svelte/store';
-  import getInitialData from '@/utils/get-initial-data.js';
-  import { prepareAfterBackend } from '@/utils/project-manipulation.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
+  import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -23,7 +23,7 @@
 
 <script>
   import { goto } from '@sapper/app';
-  import Layout from '@/layouts/default.svelte';
+  import Layout from 'src/layouts/default.svelte';
   import {
     Autocomplete,
     Button,
@@ -37,15 +37,15 @@
     TextField,
   } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import ProjectImagePicker from '@/components/projects/new/project-image-picker.svelte';
-  import * as api from '@/utils/api.js';
-  import spaceOnly from '@/utils/space-only.js';
+  import ProjectImagePicker from 'src/components/projects/new/project-image-picker.svelte';
+  import * as api from 'src/utils/api.js';
+  import spaceOnly from 'src/utils/space-only.js';
   import {
     autocompleteValueToUser,
     getUsersRaw,
     minSearchLength,
     userToAutocompleteValue,
-  } from '@/utils/autocomplete-users.js';
+  } from 'src/utils/autocomplete-users.js';
 
   export let account;
   export let project;

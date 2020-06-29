@@ -1,5 +1,5 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
   const productLimit = 3;
 
   export async function preload(page, session) {
@@ -16,13 +16,13 @@
 </script>
 
 <script>
-  import Header from '@/components/home/header.svelte';
-  import Footer from '@/components/footer.svelte';
-  import Tagline from '@/containers/home/tagline.svelte';
-  import HowTo from '@/containers/home/how-to.svelte';
-  import Options from '@/containers/home/options.svelte';
-  import Store from '@/containers/home/store.svelte';
-  import Contacts from '@/containers/home/contacts.svelte';
+  import Header from 'src/components/home/header.svelte';
+  import Footer from 'src/components/footer.svelte';
+  import Tagline from 'src/containers/home/tagline.svelte';
+  import HowTo from 'src/containers/home/how-to.svelte';
+  import Options from 'src/containers/home/options.svelte';
+  import Store from 'src/containers/home/store.svelte';
+  import Contacts from 'src/containers/home/contacts.svelte';
 
   export let products;
   export let account;

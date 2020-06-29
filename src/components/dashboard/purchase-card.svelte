@@ -2,12 +2,12 @@
   import { createEventDispatcher } from 'svelte';
   import { Button, Chip, Popover } from 'attractions';
   import { PopoverPositions } from 'attractions/popover';
-  import CopyButton from '@/components/common/copy-button.svelte';
-  import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
-  import getBackground from '@/utils/optimal-color.js';
-  import s from '@/utils/plural-s.js';
-  import { API_HOST_BROWSER } from '@/constants/env.js';
-  import { formatTime } from '@/utils/date-time-format.js';
+  import CopyButton from 'src/components/common/copy-button.svelte';
+  import StockChangeStatuses from 'src/constants/backend/stock-change-statuses.js';
+  import getBackground from 'src/utils/optimal-color.js';
+  import s from 'src/utils/plural-s.js';
+  import { API_HOST_BROWSER } from 'src/constants/env.js';
+  import { formatTime } from 'src/utils/date-time-format.js';
 
   export let purchase;
   $: coverURL = (

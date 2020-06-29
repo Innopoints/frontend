@@ -1,6 +1,6 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
-  import { prepareAfterBackend, copyProduct } from '@/utils/product-manipulation.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
+  import { prepareAfterBackend, copyProduct } from 'src/utils/product-manipulation.js';
   import { writable } from 'svelte/store';
 
   export async function preload(page, session) {
@@ -24,15 +24,15 @@
 <script>
   import { onDestroy } from 'svelte';
   import { goto } from '@sapper/app';
-  import Layout from '@/layouts/default.svelte';
+  import Layout from 'src/layouts/default.svelte';
   import { Button, H1, H2, SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import ProductForm from '@/containers/products/new/product-form.svelte';
-  import PreviewCard from '@/components/products/new/preview-card.svelte';
-  import DangerConfirmDialog from '@/components/common/danger-confirm-dialog.svelte';
-  import * as api from '@/utils/api.js';
-  import spaceOnly from '@/utils/space-only.js';
-  import { computeDiffs } from '@/utils/product-manipulation.js';
+  import ProductForm from 'src/containers/products/new/product-form.svelte';
+  import PreviewCard from 'src/components/products/new/preview-card.svelte';
+  import DangerConfirmDialog from 'src/components/common/danger-confirm-dialog.svelte';
+  import * as api from 'src/utils/api.js';
+  import spaceOnly from 'src/utils/space-only.js';
+  import { computeDiffs } from 'src/utils/product-manipulation.js';
 
   export let unmodifiedProduct;
   export let product;

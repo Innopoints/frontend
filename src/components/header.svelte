@@ -1,8 +1,8 @@
 <script>
   import { Button } from 'attractions';
-  import NotificationCenter from '@/components/common/notification-center.svelte';
-  import { login, logout } from '@/utils/auth.js';
-  import classes from '@/utils/classes.js';
+  import NotificationCenter from 'src/components/common/notification-center.svelte';
+  import { login, logout } from 'src/utils/auth.js';
+  import classes from 'src/utils/classes.js';
 
   export let profile = false;
   export let user = null;

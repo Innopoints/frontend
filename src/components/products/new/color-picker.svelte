@@ -4,7 +4,7 @@
   import { DropdownShell, Dropdown, Button, RadioGroup, Divider } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import { getColorPickerStyles } from 'attractions/utils';
-  import * as api from '@/utils/api.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

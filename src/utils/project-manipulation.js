@@ -1,7 +1,7 @@
-import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
-import arraysEqual from '@/utils/arrays-equal.js';
-import spaceOnly from '@/utils/space-only.js';
-import setNullSafe from '@/utils/set-null-safe.js';
+import HOURLY_RATE from 'src/constants/backend/default-hourly-rate.js';
+import arraysEqual from 'src/utils/arrays-equal.js';
+import spaceOnly from 'src/utils/space-only.js';
+import setNullSafe from 'src/utils/set-null-safe.js';
 
 
 /* Copy ALL the fields from the given activity object,

@@ -2,12 +2,12 @@
   import { getContext } from 'svelte';
   import { Card, TextField, Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import Labeled from '@/components/common/labeled.svelte';
-  import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
-  import ReadFeedbackDialog from '@/components/projects/view/read-feedback-dialog.svelte';
-  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
-  import s from '@/utils/plural-s.js';
-  import * as api from '@/utils/api.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import LeaveFeedbackModal from 'src/components/projects/view/leave-feedback-modal.svelte';
+  import ReadFeedbackDialog from 'src/components/projects/view/read-feedback-dialog.svelte';
+  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
+  import s from 'src/utils/plural-s.js';
+  import * as api from 'src/utils/api.js';
 
   export let account;
   export let moderator;

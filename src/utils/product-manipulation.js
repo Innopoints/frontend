@@ -1,5 +1,5 @@
-import arraysEqual from '@/utils/arrays-equal.js';
-import setNullSafe from '@/utils/set-null-safe.js';
+import arraysEqual from 'src/utils/arrays-equal.js';
+import setNullSafe from 'src/utils/set-null-safe.js';
 
 /* Returns a map of colors to arrays of varieties. */
 export function groupByColor(varieties) {

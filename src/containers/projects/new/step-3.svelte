@@ -1,17 +1,17 @@
 <script>
   import { getContext } from 'svelte';
   import { stores } from '@sapper/app';
-  import StepHeader from '@/components/projects/new/step-header.svelte';
-  import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
+  import StepHeader from 'src/components/projects/new/step-header.svelte';
+  import BottomNavigation from 'src/components/projects/new/bottom-navigation.svelte';
   import { Autocomplete, Label, DropdownShell, Dropdown, Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import spaceOnly from '@/utils/space-only.js';
+  import spaceOnly from 'src/utils/space-only.js';
   import {
     autocompleteValueToUser,
     getUsersRaw,
     minSearchLength,
     userToAutocompleteValue,
-  } from '@/utils/autocomplete-users.js';
+  } from 'src/utils/autocomplete-users.js';
 
   const { session } = stores();
 
