@@ -33,6 +33,7 @@ export default async function subscribe(csrfToken) {
     applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
   });
 
+  /* eslint-disable-next-line no-console */
   console.log('Received notification subscription:', pushSubscription);
   const response = await api.post('/notifications/subscribe', {
     data: pushSubscription.toJSON(),

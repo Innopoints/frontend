@@ -17,15 +17,15 @@
       );
 
       if (resp.status === 403) {
-        showSnackbar({ props: { text: 'Incorrect e-mail, username or password' }});
+        showSnackbar({ props: { text: 'Incorrect e-mail, username or password' } });
       } else if (!resp.ok) {
-        showSnackbar({ props: { text: 'Something went wrong' }});
+        showSnackbar({ props: { text: 'Something went wrong' } });
       } else {
         account.balance += await resp.json();
         email = null;
         password = null;
         open = false;
-        showSnackbar({ props: { text: 'Innopoints successfully transferred' }});
+        showSnackbar({ props: { text: 'Innopoints successfully transferred' } });
       }
     } catch (e) {
       console.error(e);
