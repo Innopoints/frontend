@@ -1,6 +1,6 @@
 <script>
   import { Card, Button } from 'attractions';
-  import Labeled from '@/components/ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import EmptyState from '@/components/common/empty-state.svelte';
   export let reviews = [];
 </script>

@@ -22,7 +22,7 @@
   import HowTo from '@/containers/home/how-to.svelte';
   import Options from '@/containers/home/options.svelte';
   import Store from '@/containers/home/store.svelte';
-  import Contacts from '../containers/home/contacts.svelte';
+  import Contacts from '@/containers/home/contacts.svelte';
 
   export let products;
   export let account;
