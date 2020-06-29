@@ -58,8 +58,7 @@ export default {
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
         entries: [
           { find: /^src\//, replacement: __dirname + '/src/' },
-          { find: /^ui/, replacement: __dirname + '/src/components/ui' },
-          { find: /^images/, replacement: __dirname + '/static/images' },
+          { find: /^static\//, replacement: __dirname + '/static/' },
         ],
       }),
       commonjs(),
@@ -120,7 +119,7 @@ export default {
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
         entries: [
           { find: /^src\//, replacement: __dirname + '/src/' },
-          { find: /^static\//, replacement: __dirname + '/static/', customResolver: console.log },
+          { find: /^static\//, replacement: __dirname + '/static/' },
         ],
       }),
       commonjs(),

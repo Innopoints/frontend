@@ -12,7 +12,7 @@
 </script>
 
 <Tagline
-  imageURL="images/projects/voxel-volunteering.png"
+  imageURL="/images/projects/voxel-volunteering.png"
   headline="Become a volunteer"
   {subhead}
 >

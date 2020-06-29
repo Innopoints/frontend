@@ -8,7 +8,7 @@
 
 <header class="container">
   <img
-    src="images/innou-logo.svg"
+    src="/images/innou-logo.svg"
     class="logo"
     alt="Innopolis University logo"
   />

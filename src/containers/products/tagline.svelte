@@ -24,7 +24,7 @@
 </script>
 
 <Tagline
-  imageURL="images/products/voxel-trolley.png"
+  imageURL="/images/products/voxel-trolley.png"
   headline="InnoStore"
   {subhead}
 >
