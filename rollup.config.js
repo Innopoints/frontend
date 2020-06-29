@@ -120,7 +120,6 @@ export default {
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
         entries: [
           { find: /^src\//, replacement: __dirname + '/src/' },
-          { find: /^ui/, replacement: __dirname + '/src/components/ui' },
           { find: /^images/, replacement: __dirname + '/static/images' },
         ],
       }),
