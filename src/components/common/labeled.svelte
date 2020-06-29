@@ -1,6 +1,6 @@
 <script>
   import { Label } from 'attractions';
-  import classes from 'src/utils/classes.js';
+  import { classes } from 'attractions/utils';
 
   let _class = null;
   export { _class as class };

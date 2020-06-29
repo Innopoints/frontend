@@ -2,10 +2,10 @@
   import { getContext } from 'svelte';
   import { Button, Popover, AccordionSection } from 'attractions';
   import { PopoverPositions } from 'attractions/popover';
+  import { s } from 'attractions/utils';
   import Labeled from 'src/components/common/labeled.svelte';
   import CopyButton from 'src/components/common/copy-button.svelte';
   import ReadFeedbackDialog from 'src/components/projects/view/read-feedback-dialog.svelte';
-  import s from 'src/utils/plural-s.js';
 
   export let activity;
   export let application;

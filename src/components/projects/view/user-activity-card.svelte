@@ -2,6 +2,7 @@
   import { getContext } from 'svelte';
   import { Card, Dot, Button, Chip } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
+  import { s } from 'attractions/utils';
   import Labeled from 'src/components/common/labeled.svelte';
   import Notice from 'src/components/common/notice.svelte';
   import LeaveFeedbackModal from 'src/components/projects/view/leave-feedback-modal.svelte';
@@ -10,7 +11,6 @@
   import ApplicationDialog from 'src/components/projects/view/application-dialog.svelte';
   import ApplicationStatuses from 'src/constants/backend/application-statuses.js';
   import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
-  import s from 'src/utils/plural-s.js';
   import * as api from 'src/utils/api.js';
   import { formatDate, formatDateRange } from 'src/utils/date-time-format.js';
 

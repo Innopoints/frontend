@@ -1,9 +1,9 @@
 <script>
   import { Card, Button, RadioGroup, RadioChipGroup } from 'attractions';
+  import { s } from 'attractions/utils';
   import Labeled from 'src/components/common/labeled.svelte';
   import getBackground from 'src/utils/optimal-color.js';
   import { API_HOST_BROWSER } from 'src/constants/env.js';
-  import s from 'src/utils/plural-s.js';
 
   export let product;
   let selectedVarietyIndex = 0;

@@ -4,9 +4,9 @@
   import { Button, Dialog, Modal, TextField, StarRating, Popover } from 'attractions';
   import { PopoverPositions } from 'attractions/popover';
   import { snackbarContextKey } from 'attractions/snackbar';
+  import { s } from 'attractions/utils';
   import Labeled from 'src/components/common/labeled.svelte';
   import CopyButton from 'src/components/common/copy-button.svelte';
-  import s from 'src/utils/plural-s.js';
   import * as api from 'src/utils/api.js';
 
   const { session } = stores();

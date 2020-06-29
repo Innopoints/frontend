@@ -1,5 +1,5 @@
 <script>
-  import s from 'src/utils/plural-s.js';
+  import { s } from 'attractions/utils';
 
   export let value = null;
 </script>

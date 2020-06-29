@@ -1,7 +1,7 @@
 <script>
   import Carousel from '@beyonk/svelte-carousel';
   import getBackground from 'src/utils/optimal-color.js';
-  import range from 'src/utils/range.js';
+  import { range } from 'attraction/utils';
 
   export let images;
   export let selectedColor;
