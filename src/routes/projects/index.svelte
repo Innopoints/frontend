@@ -13,11 +13,11 @@
 <script>
   import Layout from 'src/layouts/default.svelte';
   import Tagline from 'src/containers/projects/tagline.svelte';
-  import { H1, Button } from 'attractions';
+  import { H1, Button, SnackbarContainer } from 'attractions';
+  import { SnackbarPositions } from 'attractions/snackbar';
   import ProjectCard from 'src/components/projects/project-card.svelte';
   import Filters from 'src/containers/projects/filters.svelte';
   import EmptyState from 'src/components/common/empty-state.svelte';
-  import generateQueryString from 'src/utils/generate-query-string.js';
   import orderOptions from 'src/constants/projects/order.js';
   import * as api from 'src/utils/api.js';
 
@@ -25,20 +25,27 @@
   export let account;
 
   let selectedOrder = orderOptions[0];
+  let snackbarContainer = null;
 
   async function updateProjects(filtering) {
-    const queryArgs = new Map();
+    const query = new Map();
 
     if (filtering.searchQuery) {
-      queryArgs.set('q', filtering.searchQuery);
+      query.set('q', filtering.searchQuery);
     }
 
-    queryArgs.set('order_by', filtering.order.value.orderBy);
-    queryArgs.set('order', filtering.order.value.order);
-    const queryString = generateQueryString(queryArgs);
+    query.set('order_by', filtering.order.value.orderBy);
+    query.set('order', filtering.order.value.order);
     try {
-      projects = await api.json(api.get('/projects?' + queryString));
+      projects = await api.json(api.get('/projects', { query }));
     } catch (e) {
+      if (snackbarContainer != null) {
+        snackbarContainer.showSnackbar({
+          props: {
+            text: 'Couldn\'t apply filters, try reloading the page',
+          },
+        });
+      }
       console.error(e);
     }
   }
@@ -61,56 +68,58 @@
 </svelte:head>
 
 <Layout user={account}>
-  <div class="material">
-    <Tagline {account} />
+  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
+    <div class="material">
+      <Tagline {account} />
 
-    <section class="projects padded">
-      <H1><span class="text">Ongoing Projects</span></H1>
-      <Filters
-        {selectedOrder} {orderOptions}
-        on:change-filters={({ detail: filtering }) => updateProjects(filtering)}
-      />
-      {#if !projects || projects.length === 0}
-        <EmptyState>
-          <figure>
-            <img class="picture" src="/images/projects/no-projects.svg" alt="" />
-            <figcaption>
-              <div class="title">No projects found...</div>
-              {#if account}
-                But you can
-                <a href="/projects/new" rel="prefetch">create a project</a>
-                right now!
-              {/if}
-            </figcaption>
-          </figure>
-        </EmptyState>
-      {:else}
-        <div class="cards">
-          {#each projects as project (project.id)}
-            <ProjectCard
-              moderated={account && project.moderators.some(
-                x => x.email === account.email,
-              )}
-              {...filterProps(project)}
-            />
-          {/each}
-        </div>
-      {/if}
-    </section>
+      <section class="projects padded">
+        <H1><span class="text">Ongoing Projects</span></H1>
+        <Filters
+          {selectedOrder} {orderOptions}
+          on:change-filters={({ detail: filtering }) => updateProjects(filtering)}
+        />
+        {#if !projects || projects.length === 0}
+          <EmptyState>
+            <figure>
+              <img class="picture" src="/images/projects/no-projects.svg" alt="" />
+              <figcaption>
+                <div class="title">No projects found...</div>
+                {#if account}
+                  But you can
+                  <a href="/projects/new" rel="prefetch">create a project</a>
+                  right now!
+                {/if}
+              </figcaption>
+            </figure>
+          </EmptyState>
+        {:else}
+          <div class="cards">
+            {#each projects as project (project.id)}
+              <ProjectCard
+                moderated={account && project.moderators.some(
+                  x => x.email === account.email,
+                )}
+                {...filterProps(project)}
+              />
+            {/each}
+          </div>
+        {/if}
+      </section>
 
-    <div class="justify-center">
-      <Button href="/projects/past">
-        <svg src="static/images/icons/book-open.svg" class="icon mr" />
-        see past projects
-      </Button>
+      <div class="justify-center">
+        <Button href="/projects/past">
+          <svg src="static/images/icons/book-open.svg" class="icon mr" />
+          see past projects
+        </Button>
+      </div>
+
+      <p class="link-bottom padded">
+        What’s so cool about being a volunteer? The
+        <a href="/products" rel="prefetch">InnoStore</a>
+        has your answers!
+      </p>
     </div>
-
-    <p class="link-bottom padded">
-      What’s so cool about being a volunteer? The
-      <a href="/products" rel="prefetch">InnoStore</a>
-      has your answers!
-    </p>
-  </div>
+  </SnackbarContainer>
 </Layout>
 
 <style src="../../../static/css/routes/projects/index.scss"></style>
