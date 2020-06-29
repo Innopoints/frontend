@@ -13,6 +13,7 @@
   import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
   import * as api from 'src/utils/api.js';
   import { formatDate, formatDateRange } from 'src/utils/date-time-format.js';
+  import { login } from 'src/utils/auth.js';
 
   export let projectStage;
   export let activity;
@@ -210,7 +211,7 @@
       </Button>
       {#if account == null}
         <p class="additional not-logged-in">
-          <a href="/login">Log in</a> to apply.
+          <a on:click|preventDefault={login} href="/login">Log in</a> to apply.
         </p>
       {:else}
         {#if activity.existing_application == null}
