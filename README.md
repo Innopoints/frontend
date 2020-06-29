@@ -34,8 +34,6 @@ The components are small building blocks that make up containers and pages. Freq
 
 The SCSS styles are located in [`static/css`](./static/css), and are reflecting the structure of pages, containers and components.
 
-**Important**: The bundler in use is Rollup, and there's an path aliasing plugin installed. Particularly, `@` is an alias for `/src/`. An up-to-date list of aliases can be found in [`rollup.config.js`](./rollup.config.js).
-
 
 ## License
 This project is [MIT licensed](./LICENSE).

@@ -3,9 +3,6 @@
 	  "target": "es2019",
 	  "allowSyntheticDefaultImports": false,
 	  "baseUrl": "./",
-	  "paths": {
-			"@/*": ["src/*"]
-	  }
 	},
 	"exclude": ["node_modules", "dist", "__sapper__"]
 }
