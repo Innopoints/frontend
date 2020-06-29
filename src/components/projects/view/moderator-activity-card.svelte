@@ -14,11 +14,11 @@
 
   $: pendingApplications = (
     activity.applications == null ?
-    [] : activity.applications.filter(x => x.status === ApplicationStatuses.PENDING)
+      [] : activity.applications.filter(x => x.status === ApplicationStatuses.PENDING)
   );
   $: approvedApplications = (
     activity.applications == null ?
-    [] : activity.applications.filter(x => x.status === ApplicationStatuses.APPROVED)
+      [] : activity.applications.filter(x => x.status === ApplicationStatuses.APPROVED)
   );
 
   const dispatch = createEventDispatcher();

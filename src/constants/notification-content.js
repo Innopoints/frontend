@@ -4,6 +4,7 @@ import NotificationTypes from 'src/constants/backend/notification-types.js';
 export default function getNotificationContent({ type, payload }) {
   let fragments;
   try {
+    /* eslint-disable indent */
     switch (type) {
       case NotificationTypes.PURCHASE_STATUS_CHANGED: {
         const statuses = {
@@ -180,6 +181,7 @@ export default function getNotificationContent({ type, payload }) {
         fragments = ['Just a message from heaven wishing you a great day'];
       }
     }
+    /* eslint-enable indent */
   } catch (e) {
     console.error(e);
     return [];

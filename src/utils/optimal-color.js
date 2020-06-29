@@ -1,8 +1,11 @@
 function trimHex(color) {
-  if (!color) return '';
+  if (!color) {
+    return '';
+  }
   let unhashed = color.replace(/[^0-9a-f]/gi, '');
-  if (unhashed.length === 3)
+  if (unhashed.length === 3) {
     return unhashed.split('').map(x => x.repeat(2)).join('');
+  }
   return unhashed;
 }
 
@@ -41,11 +44,22 @@ function rgbToHsl([r, g, b]) {
     let delta = maxComp - minComp;
     s = (l > 0.5 ? delta / (2 - maxComp - minComp) : delta / (maxComp + minComp));
 
+    /* eslint-disable indent */
     switch (maxComp) {
-      case r: h = (g - b) / delta + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / delta + 2; break;
-      case b: h = (r - g) / delta + 4; break;
+      case r: {
+        h = (g - b) / delta + (g < b ? 6 : 0);
+        break;
+      }
+      case g: {
+        h = (b - r) / delta + 2;
+        break;
+      }
+      case b: {
+        h = (r - g) / delta + 4;
+        break;
+      }
     }
+    /* eslint-enable indent */
 
     h /= 6;
   }

@@ -27,7 +27,7 @@
   $: projectImageURL = (
     $project.image_id == null ?
       '/images/create-project/placeholder.svg'
-    : `${API_HOST_BROWSER}/file/${$project.image_id}`
+      : `${API_HOST_BROWSER}/file/${$project.image_id}`
   );
 
   async function saveTags({ detail: tagIDs }) {
