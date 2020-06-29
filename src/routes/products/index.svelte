@@ -84,10 +84,10 @@
 
     const excludedColors = filtering.excludedColors.map(color => color.slice(1));
     if (!filtering.colorlessIncluded) {
-      excludedColors.push(null);
+      excludedColors.push('\0');
     }
     if (excludedColors.length !== 0) {
-      query.set('excluded_colors', JSON.stringify(excludedColors));
+      query.set('excluded_colors', excludedColors);
     }
     query.set('order_by', filtering.order.value.orderBy);
     query.set('order', filtering.order.value.order);
