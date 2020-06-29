@@ -1,9 +1,16 @@
 <script>
   import { createEventDispatcher, getContext } from 'svelte';
-  import { AccordionSection, Button, TextField, Checkbox, Label, Popover } from 'attractions';
+  import {
+    AccordionSection,
+    Badge,
+    Button,
+    Checkbox,
+    Label,
+    Popover,
+    TextField,
+  } from 'attractions';
   import { PopoverPositions } from 'attractions/popover';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import Badge from 'ui/badge.svelte';
   import CopyButton from '@/components/common/copy-button.svelte';
   import CreateReportDialog from '@/components/projects/view/create-report-dialog.svelte';
   import * as api from '@/utils/api.js';

@@ -1,6 +1,6 @@
 <script>
   import { Card, Button } from 'attractions';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import { formatDateRange } from '@/utils/date-time-format.js';
   import { API_HOST_BROWSER } from '@/constants/env.js';
 

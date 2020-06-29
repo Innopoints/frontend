@@ -14,7 +14,7 @@
     TimePicker,
   } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import TwoStateSwitch from 'ui/two-state-switch.svelte';
+  import TwoStateSwitch from '@/components/common/two-state-switch.svelte';
   import CompetencePicker from './competence-picker.svelte';
   import ActivityQuestions from './activity-questions.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';

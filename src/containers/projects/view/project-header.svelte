@@ -3,7 +3,7 @@
   import { goto } from '@sapper/app';
   import { Button, H1, Chip } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import Notice from '@/components/common/notice.svelte';
   import TagSelector from '@/components/projects/view/tag-selector.svelte';
   import ReviewVerdict from '@/components/projects/review/review-verdict.svelte';

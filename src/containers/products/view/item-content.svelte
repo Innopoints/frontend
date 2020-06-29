@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { stores } from '@sapper/app';
   import { Button, RadioGroup, RadioChipGroup } from 'attractions';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import { login } from '@/utils/auth.js';
   import classes from '@/utils/classes.js';
   import s from '@/utils/plural-s.js';

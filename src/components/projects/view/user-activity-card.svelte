@@ -2,7 +2,7 @@
   import { getContext } from 'svelte';
   import { Card, Dot, Button, Chip } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import Notice from '@/components/common/notice.svelte';
   import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
   import ReadFeedbackDialog from '@/components/projects/view/read-feedback-dialog.svelte';

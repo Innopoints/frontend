@@ -1,8 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { stores } from '@sapper/app';
-  import { DropdownShell, Dropdown, Button, Loading } from 'attractions';
-  import Badge from 'ui/badge.svelte';
+  import { DropdownShell, Dropdown, Button, Loading, Badge } from 'attractions';
   import Notification from './notification.svelte';
   import EmptyState from './empty-state.svelte';
   import * as api from '@/utils/api.js';

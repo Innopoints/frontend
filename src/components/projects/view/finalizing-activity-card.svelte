@@ -2,7 +2,7 @@
   import { getContext } from 'svelte';
   import { Accordion, Button, Card } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import EmptyState from '@/components/common/empty-state.svelte';
   import ApplicationHourTile from '@/components/projects/view/application-hour-tile.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';

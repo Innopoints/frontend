@@ -1,6 +1,6 @@
 <script>
   import { Dialog, Modal } from 'attractions';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import Stars from '@/components/common/stars.svelte';
   import EmptyState from '@/components/common/empty-state.svelte';
   import { formatDate } from '@/utils/date-time-format.js';

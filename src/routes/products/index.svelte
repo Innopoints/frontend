@@ -22,7 +22,7 @@
   import Tagline from '@/containers/products/tagline.svelte';
   import Balance from '@/components/products/balance.svelte';
   import Filters from '@/containers/products/filters.svelte';
-  import Divider from '@/components/ui/divider.svelte';
+  import { Divider } from 'attractions';
   import EmptyState from '@/components/common/empty-state.svelte';
   import ProductCard from '@/components/products/product-card.svelte';
   import Pagination from '@/components/common/pagination.svelte';

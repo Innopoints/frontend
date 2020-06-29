@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Button, Card } from 'attractions';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
 
   export let activity;

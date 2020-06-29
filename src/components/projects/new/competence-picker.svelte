@@ -1,6 +1,5 @@
 <script>
-  import { DropdownShell, Dropdown, CheckboxGroup, Button } from 'attractions';
-  import Badge from 'ui/badge.svelte';
+  import { DropdownShell, Dropdown, CheckboxGroup, Button, Badge } from 'attractions';
 
   export let competences;
   export let value;

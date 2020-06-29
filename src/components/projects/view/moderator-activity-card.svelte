@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Accordion, Button, Card, Chip } from 'attractions';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import EmptyState from '@/components/common/empty-state.svelte';
   import Notice from '@/components/common/notice.svelte';
   import ApplicationTile from '@/components/projects/view/application-tile.svelte';

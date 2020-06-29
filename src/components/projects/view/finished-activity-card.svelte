@@ -1,7 +1,7 @@
 <script>
   import { getContext } from 'svelte';
   import { Card, Chip } from 'attractions';
-  import Labeled from 'ui/labeled.svelte';
+  import Labeled from '@/components/common/labeled.svelte';
   import EmptyState from '@/components/common/empty-state.svelte';
   import FeedbackTile from '@/components/projects/view/feedback-tile.svelte';
   import ApplicationStatuses from '@/constants/backend/application-statuses.js';
