@@ -1,6 +1,6 @@
 <script>
-  import options from '@/constants/home/options.js';
-  import Step from '@/components/home/option-step.svelte';
+  import options from 'src/constants/home/options.js';
+  import Step from 'src/components/home/option-step.svelte';
 </script>
 
 <section class="options">

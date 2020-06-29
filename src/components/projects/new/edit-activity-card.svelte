@@ -14,20 +14,20 @@
     TimePicker,
   } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import TwoStateSwitch from '@/components/common/two-state-switch.svelte';
+  import TwoStateSwitch from 'src/components/common/two-state-switch.svelte';
   import CompetencePicker from './competence-picker.svelte';
   import ActivityQuestions from './activity-questions.svelte';
-  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import HOURLY_RATE from '@/constants/backend/default-hourly-rate.js';
+  import ApplicationStatuses from 'src/constants/backend/application-statuses.js';
+  import HOURLY_RATE from 'src/constants/backend/default-hourly-rate.js';
   import {
     copyActivity,
     copyActivityInPlace,
     isComplete,
     prepareForBackend,
-  } from '@/utils/project-manipulation.js';
-  import spaceOnly from '@/utils/space-only.js';
-  import arraysEqual from '@/utils/arrays-equal.js';
-  import * as api from '@/utils/api.js';
+  } from 'src/utils/project-manipulation.js';
+  import spaceOnly from 'src/utils/space-only.js';
+  import arraysEqual from 'src/utils/arrays-equal.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

@@ -1,7 +1,7 @@
 <script>
   import { Button } from 'attractions';
-  import NotificationCenter from '@/components/common/notification-center.svelte';
-  import { login } from '@/utils/auth.js';
+  import NotificationCenter from 'src/components/common/notification-center.svelte';
+  import { login } from 'src/utils/auth.js';
 
   export let user = null;
 </script>

@@ -2,20 +2,20 @@
   import { afterUpdate, onMount, getContext } from 'svelte';
   import { flip } from 'svelte/animate';
   import { stores } from '@sapper/app';
-  import StepHeader from '@/components/projects/new/step-header.svelte';
-  import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
-  import EditActivityCard from '@/components/projects/new/edit-activity-card.svelte';
-  import ActivityCard from '@/components/projects/new/activity-card.svelte';
+  import StepHeader from 'src/components/projects/new/step-header.svelte';
+  import BottomNavigation from 'src/components/projects/new/bottom-navigation.svelte';
+  import EditActivityCard from 'src/components/projects/new/edit-activity-card.svelte';
+  import ActivityCard from 'src/components/projects/new/activity-card.svelte';
   import { Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import getBlankActivity from '@/constants/projects/blank-activity.js';
-  import defaultFeedbackQuestions from '@/constants/projects/feedback-questions.js';
+  import getBlankActivity from 'src/constants/projects/blank-activity.js';
+  import defaultFeedbackQuestions from 'src/constants/projects/feedback-questions.js';
   import {
     copyActivity,
     prepareForBackend,
-  } from '@/utils/project-manipulation.js';
-  import * as api from '@/utils/api.js';
-  import arraysEqual from '@/utils/arrays-equal.js';
+  } from 'src/utils/project-manipulation.js';
+  import * as api from 'src/utils/api.js';
+  import arraysEqual from 'src/utils/arrays-equal.js';
 
   const { session } = stores();
 

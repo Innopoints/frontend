@@ -1,5 +1,5 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
   import { writable } from 'svelte/store';
 
   export async function preload(page, session) {
@@ -21,14 +21,14 @@
 <script>
   import { onDestroy } from 'svelte';
   import { goto } from '@sapper/app';
-  import Layout from '@/layouts/default.svelte';
+  import Layout from 'src/layouts/default.svelte';
   import { Button, H1, H2, SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import ProductForm from '@/containers/products/new/product-form.svelte';
-  import PreviewCard from '@/components/products/new/preview-card.svelte';
-  import * as api from '@/utils/api.js';
-  import { getBlankProduct } from '@/constants/products/blank-product.js';
-  import spaceOnly from '@/utils/space-only.js';
+  import ProductForm from 'src/containers/products/new/product-form.svelte';
+  import PreviewCard from 'src/components/products/new/preview-card.svelte';
+  import * as api from 'src/utils/api.js';
+  import { getBlankProduct } from 'src/constants/products/blank-product.js';
+  import spaceOnly from 'src/utils/space-only.js';
 
   export let colors;
   export let sizes;

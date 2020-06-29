@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Button, TextField } from 'attractions';
-  import classes from '@/utils/classes.js';
+  import classes from 'src/utils/classes.js';
 
   export let pages;
   export let currentPage = 1;

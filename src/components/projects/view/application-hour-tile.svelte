@@ -11,9 +11,9 @@
   } from 'attractions';
   import { PopoverPositions } from 'attractions/popover';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import CopyButton from '@/components/common/copy-button.svelte';
-  import CreateReportDialog from '@/components/projects/view/create-report-dialog.svelte';
-  import * as api from '@/utils/api.js';
+  import CopyButton from 'src/components/common/copy-button.svelte';
+  import CreateReportDialog from 'src/components/projects/view/create-report-dialog.svelte';
+  import * as api from 'src/utils/api.js';
 
   export let account;
   export let activity;

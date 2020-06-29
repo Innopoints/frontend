@@ -2,10 +2,10 @@
   import { onMount, getContext } from 'svelte';
   import { Button, RadioGroup } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import Notice from '@/components/common/notice.svelte';
-  import { categories, states, permissions } from '@/constants/profile/notification-settings.js';
-  import subscribeToPush from '@/utils/notifications-subscribe.js';
-  import * as api from '@/utils/api.js';
+  import Notice from 'src/components/common/notice.svelte';
+  import { categories, states, permissions } from 'src/constants/profile/notification-settings.js';
+  import subscribeToPush from 'src/utils/notifications-subscribe.js';
+  import * as api from 'src/utils/api.js';
 
   export let notificationSettings;
   export let account;

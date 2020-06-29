@@ -1,14 +1,14 @@
 <script>
   import { goto, stores } from '@sapper/app';
   import { Button, DropdownShell, Dropdown, H1, H2 } from 'attractions';
-  import DraftCard from '@/components/projects/new/draft-card.svelte';
+  import DraftCard from 'src/components/projects/new/draft-card.svelte';
   import {
     getBlankProject,
     getOlympiad,
     getStudentParty,
-  } from '@/constants/projects/project-templates.js';
-  import * as api from '@/utils/api.js';
-  import sleep from '@/utils/sleep.js';
+  } from 'src/constants/projects/project-templates.js';
+  import * as api from 'src/utils/api.js';
+  import sleep from 'src/utils/sleep.js';
 
   const { session } = stores();
 

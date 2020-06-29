@@ -1,5 +1,5 @@
 import * as api from './api.js';
-import { VAPID_PUBLIC_KEY } from '@/constants/env.js';
+import { VAPID_PUBLIC_KEY } from 'src/constants/env.js';
 
 
 // Source: https://github.com/web-push-libs/web-push#using-vapid-key-for-applicationserverkey

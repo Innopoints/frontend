@@ -1,7 +1,7 @@
 <script>
   import { onDestroy } from 'svelte';
   import { H1, H2 } from 'attractions';
-  import StepsNavigation from '@/components/projects/new/steps-navigation.svelte';
+  import StepsNavigation from 'src/components/projects/new/steps-navigation.svelte';
 
   export let subtitle;
   export let step;

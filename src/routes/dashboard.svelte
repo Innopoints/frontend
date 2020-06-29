@@ -1,5 +1,5 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -18,13 +18,13 @@
 </script>
 
 <script>
-  import Layout from '@/layouts/default.svelte';
+  import Layout from 'src/layouts/default.svelte';
   import { SnackbarContainer, Button, H1 } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import Reviews from '@/containers/dashboard/reviews.svelte';
-  import Purchases from '@/containers/dashboard/purchases.svelte';
-  import IndividualControls from '@/containers/dashboard/individual-controls.svelte';
-  import TagEditor from '@/containers/dashboard/tag-editor.svelte';
+  import Reviews from 'src/containers/dashboard/reviews.svelte';
+  import Purchases from 'src/containers/dashboard/purchases.svelte';
+  import IndividualControls from 'src/containers/dashboard/individual-controls.svelte';
+  import TagEditor from 'src/containers/dashboard/tag-editor.svelte';
 
   export let reviews;
   export let account;

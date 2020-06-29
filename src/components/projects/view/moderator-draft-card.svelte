@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Button, Card } from 'attractions';
-  import Notice from '@/components/common/notice.svelte';
+  import Notice from 'src/components/common/notice.svelte';
 
   export let activity;
 

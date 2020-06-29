@@ -2,17 +2,17 @@
   import { getContext } from 'svelte';
   import { Card, Dot, Button, Chip } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import Labeled from '@/components/common/labeled.svelte';
-  import Notice from '@/components/common/notice.svelte';
-  import LeaveFeedbackModal from '@/components/projects/view/leave-feedback-modal.svelte';
-  import ReadFeedbackDialog from '@/components/projects/view/read-feedback-dialog.svelte';
-  import DangerConfirmDialog from '@/components/common/danger-confirm-dialog.svelte';
-  import ApplicationDialog from '@/components/projects/view/application-dialog.svelte';
-  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
-  import s from '@/utils/plural-s.js';
-  import * as api from '@/utils/api.js';
-  import { formatDate, formatDateRange } from '@/utils/date-time-format.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import Notice from 'src/components/common/notice.svelte';
+  import LeaveFeedbackModal from 'src/components/projects/view/leave-feedback-modal.svelte';
+  import ReadFeedbackDialog from 'src/components/projects/view/read-feedback-dialog.svelte';
+  import DangerConfirmDialog from 'src/components/common/danger-confirm-dialog.svelte';
+  import ApplicationDialog from 'src/components/projects/view/application-dialog.svelte';
+  import ApplicationStatuses from 'src/constants/backend/application-statuses.js';
+  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
+  import s from 'src/utils/plural-s.js';
+  import * as api from 'src/utils/api.js';
+  import { formatDate, formatDateRange } from 'src/utils/date-time-format.js';
 
   export let projectStage;
   export let activity;

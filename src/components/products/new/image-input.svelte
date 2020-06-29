@@ -3,10 +3,10 @@
   import { stores } from '@sapper/app';
   import { FileDropzone } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import ImageTile from '@/components/products/new/image-tile.svelte';
-  import maxSizeMB from '@/constants/backend/file-upload-limit.js';
-  import ALLOWED_MIMETYPES from '@/constants/backend/allowed-mimetypes.js';
-  import * as api from '@/utils/api.js';
+  import ImageTile from 'src/components/products/new/image-tile.svelte';
+  import maxSizeMB from 'src/constants/backend/file-upload-limit.js';
+  import ALLOWED_MIMETYPES from 'src/constants/backend/allowed-mimetypes.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

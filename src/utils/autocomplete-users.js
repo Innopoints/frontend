@@ -1,4 +1,4 @@
-import * as api from '@/utils/api.js';
+import * as api from 'src/utils/api.js';
 
 export const minSearchLength = 2;
 

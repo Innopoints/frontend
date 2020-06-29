@@ -1,7 +1,7 @@
 <script>
   import { Button } from 'attractions';
-  import Tagline from '@/components/common/tagline.svelte';
-  import { login } from '@/utils/auth.js';
+  import Tagline from 'src/components/common/tagline.svelte';
+  import { login } from 'src/utils/auth.js';
 
   export let account;
 

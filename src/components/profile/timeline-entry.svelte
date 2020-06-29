@@ -1,12 +1,12 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Button } from 'attractions';
-  import EntryTypes from '@/constants/backend/timeline-entry-types.js';
-  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
-  import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
-  import StockChangeStatuses from '@/constants/backend/stock-change-statuses.js';
-  import { formatTime } from '@/utils/date-time-format.js';
+  import EntryTypes from 'src/constants/backend/timeline-entry-types.js';
+  import ApplicationStatuses from 'src/constants/backend/application-statuses.js';
+  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
+  import ReviewStatuses from 'src/constants/backend/project-review-statuses.js';
+  import StockChangeStatuses from 'src/constants/backend/stock-change-statuses.js';
+  import { formatTime } from 'src/utils/date-time-format.js';
 
   export let type;
   export let entry_time;

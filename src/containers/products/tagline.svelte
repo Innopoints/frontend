@@ -1,8 +1,8 @@
 <script>
   import { onMount } from 'svelte';
   import { Button, Dot } from 'attractions';
-  import Tagline from '@/components/common/tagline.svelte';
-  import * as api from '@/utils/api.js';
+  import Tagline from 'src/components/common/tagline.svelte';
+  import * as api from 'src/utils/api.js';
 
   export let account;
   let dotShown = false;

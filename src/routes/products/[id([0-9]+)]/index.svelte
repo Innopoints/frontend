@@ -1,7 +1,7 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
-  import { groupByColor, groupByID } from '@/utils/product-manipulation.js';
-  import { API_HOST_BROWSER } from '@/constants/env.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
+  import { groupByColor, groupByID } from 'src/utils/product-manipulation.js';
+  import { API_HOST_BROWSER } from 'src/constants/env.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -35,12 +35,12 @@
 </script>
 
 <script>
-  import Layout from '@/layouts/default.svelte';
+  import Layout from 'src/layouts/default.svelte';
   import { Button, SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import ImagePreviews from '@/containers/products/view/image-previews.svelte';
-  import ItemContent from '@/containers/products/view/item-content.svelte';
-  import PurchaseModal from '@/components/products/view/purchase-modal.svelte';
+  import ImagePreviews from 'src/containers/products/view/image-previews.svelte';
+  import ItemContent from 'src/containers/products/view/item-content.svelte';
+  import PurchaseModal from 'src/components/products/view/purchase-modal.svelte';
 
   export let product;
   export let account;

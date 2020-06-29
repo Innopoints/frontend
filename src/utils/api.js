@@ -2,8 +2,8 @@
    Inspired by Svelte RealWorld:
      https://github.com/sveltejs/realworld/blob/master/src/node_modules/api.js */
 
-import { API_HOST } from '@/constants/env.js';
-import generateQueryString from '@/utils/generate-query-string.js';
+import { API_HOST } from 'src/constants/env.js';
+import generateQueryString from 'src/utils/generate-query-string.js';
 
 if (API_HOST == null) {
   throw new Error('The API host is undefined.');

@@ -3,8 +3,8 @@
   import { stores } from '@sapper/app';
   import { Modal, Dialog, TextField, CheckboxChipGroup, FormField, Button } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import isModeration from '@/constants/projects/moderation-activity.js';
-  import * as api from '@/utils/api.js';
+  import isModeration from 'src/constants/projects/moderation-activity.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

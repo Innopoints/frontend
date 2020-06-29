@@ -1,6 +1,6 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
-  import isoForURL from '@/utils/iso-for-url.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
+  import isoForURL from 'src/utils/iso-for-url.js';
 
   const monthGap = 3;  // The amount of months to preload the timeline for
 
@@ -53,15 +53,15 @@
 </script>
 
 <script>
-  import Layout from '@/layouts/default.svelte';
-  import Info from '@/containers/profile/info.svelte';
+  import Layout from 'src/layouts/default.svelte';
+  import Info from 'src/containers/profile/info.svelte';
   import { Card, Tabs, SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import Timeline from '@/containers/profile/timeline.svelte';
-  import Statistics from '@/containers/profile/statistics.svelte';
-  import Notifications from '@/containers/profile/notifications.svelte';
-  import * as api from '@/utils/api.js';
-  import tabs from '@/constants/profile/tabs.js';
+  import Timeline from 'src/containers/profile/timeline.svelte';
+  import Statistics from 'src/containers/profile/statistics.svelte';
+  import Notifications from 'src/containers/profile/notifications.svelte';
+  import * as api from 'src/utils/api.js';
+  import tabs from 'src/constants/profile/tabs.js';
 
   export let account;
   export let timeline;

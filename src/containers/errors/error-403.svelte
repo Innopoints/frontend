@@ -1,6 +1,6 @@
 <script>
   import { Button, H1, Card } from 'attractions';
-  import { login } from '@/utils/auth.js';
+  import { login } from 'src/utils/auth.js';
 
   export let message;
 </script>

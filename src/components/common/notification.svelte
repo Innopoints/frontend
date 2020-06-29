@@ -1,8 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Button } from 'attractions';
-  import getNotificationContent from '@/constants/notification-content.js';
-  import { formatTime } from '@/utils/date-time-format.js';
+  import getNotificationContent from 'src/constants/notification-content.js';
+  import { formatTime } from 'src/utils/date-time-format.js';
 
   export let notification;
 

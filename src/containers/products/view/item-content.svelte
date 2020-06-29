@@ -2,10 +2,10 @@
   import { createEventDispatcher } from 'svelte';
   import { stores } from '@sapper/app';
   import { Button, RadioGroup, RadioChipGroup } from 'attractions';
-  import Labeled from '@/components/common/labeled.svelte';
-  import { login } from '@/utils/auth.js';
-  import classes from '@/utils/classes.js';
-  import s from '@/utils/plural-s.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import { login } from 'src/utils/auth.js';
+  import classes from 'src/utils/classes.js';
+  import s from 'src/utils/plural-s.js';
 
   const { page } = stores();
 

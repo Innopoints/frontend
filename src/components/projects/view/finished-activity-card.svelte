@@ -1,12 +1,12 @@
 <script>
   import { getContext } from 'svelte';
   import { Card, Chip } from 'attractions';
-  import Labeled from '@/components/common/labeled.svelte';
-  import EmptyState from '@/components/common/empty-state.svelte';
-  import FeedbackTile from '@/components/projects/view/feedback-tile.svelte';
-  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import s from '@/utils/plural-s.js';
-  import { formatTimeRange } from '@/utils/date-time-format.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import EmptyState from 'src/components/common/empty-state.svelte';
+  import FeedbackTile from 'src/components/projects/view/feedback-tile.svelte';
+  import ApplicationStatuses from 'src/constants/backend/application-statuses.js';
+  import s from 'src/utils/plural-s.js';
+  import { formatTimeRange } from 'src/utils/date-time-format.js';
 
   export let activity;
   export let competences;

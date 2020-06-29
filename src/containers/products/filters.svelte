@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import SearchBar from '@/components/common/search-bar.svelte';
+  import SearchBar from 'src/components/common/search-bar.svelte';
   import {
     Button,
     Checkbox,

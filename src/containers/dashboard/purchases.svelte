@@ -1,9 +1,9 @@
 <script>
   import { stores } from '@sapper/app';
   import { Card, Button } from 'attractions';
-  import EmptyState from '@/components/common/empty-state.svelte';
-  import PurchaseCard from '@/components/dashboard/purchase-card.svelte';
-  import * as api from '@/utils/api.js';
+  import EmptyState from 'src/components/common/empty-state.svelte';
+  import PurchaseCard from 'src/components/dashboard/purchase-card.svelte';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

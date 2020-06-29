@@ -1,4 +1,4 @@
-import defaultFeedbackQuestions from '@/constants/projects/feedback-questions.js';
+import defaultFeedbackQuestions from 'src/constants/projects/feedback-questions.js';
 
 export default function getBlankActivity() {
   return {

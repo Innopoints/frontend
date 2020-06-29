@@ -1,7 +1,7 @@
 <script context="module">
   import { writable } from 'svelte/store';
-  import getInitialData from '@/utils/get-initial-data.js';
-  import { prepareAfterBackend } from '@/utils/project-manipulation.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
+  import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -20,13 +20,13 @@
   import { setContext } from 'svelte';
   import { SnackbarContainer, H2 } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
-  import Layout from '@/layouts/default.svelte';
-  import ProjectHeader from '@/containers/projects/view/project-header.svelte';
-  import UserView from '@/containers/projects/view/user-view.svelte';
-  import ModeratorView from '@/containers/projects/view/moderator-view.svelte';
-  import StaffCards from '@/containers/projects/view/staff-cards.svelte';
-  import ProjectStages from '@/constants/backend/project-lifetime-stages.js';
-  import { API_HOST_BROWSER } from '@/constants/env.js';
+  import Layout from 'src/layouts/default.svelte';
+  import ProjectHeader from 'src/containers/projects/view/project-header.svelte';
+  import UserView from 'src/containers/projects/view/user-view.svelte';
+  import ModeratorView from 'src/containers/projects/view/moderator-view.svelte';
+  import StaffCards from 'src/containers/projects/view/staff-cards.svelte';
+  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
+  import { API_HOST_BROWSER } from 'src/constants/env.js';
 
   setContext('review-mode', false);
 

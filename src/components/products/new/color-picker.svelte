@@ -2,7 +2,7 @@
   import { stores } from '@sapper/app';
   import { DropdownShell, Dropdown, Button, RadioGroup, Divider } from 'attractions';
   import getColorPickerStyles from 'ui/utils/color-picker-styles.js';
-  import * as api from '@/utils/api.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

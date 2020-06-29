@@ -4,11 +4,11 @@
   import { AccordionSection, Button, Popover } from 'attractions';
   import { PopoverPositions } from 'attractions/popover';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import CopyButton from '@/components/common/copy-button.svelte';
-  import Stars from '@/components/common/stars.svelte';
-  import ViewReportsDialog from '@/components/projects/view/view-reports-dialog.svelte';
-  import ApplicationStatuses from '@/constants/backend/application-statuses.js';
-  import * as api from '@/utils/api.js';
+  import CopyButton from 'src/components/common/copy-button.svelte';
+  import Stars from 'src/components/common/stars.svelte';
+  import ViewReportsDialog from 'src/components/projects/view/view-reports-dialog.svelte';
+  import ApplicationStatuses from 'src/constants/backend/application-statuses.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 

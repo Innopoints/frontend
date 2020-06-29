@@ -1,9 +1,9 @@
 <script>
   import { Card, Button, RadioGroup } from 'attractions';
-  import Labeled from '@/components/common/labeled.svelte';
-  import getBackground from '@/utils/optimal-color.js';
-  import { groupByColor } from '@/utils/product-manipulation.js';
-  import { API_HOST_BROWSER } from '@/constants/env.js';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import getBackground from 'src/utils/optimal-color.js';
+  import { groupByColor } from 'src/utils/product-manipulation.js';
+  import { API_HOST_BROWSER } from 'src/constants/env.js';
 
   export let id;
   export let name;

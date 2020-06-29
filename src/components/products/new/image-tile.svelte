@@ -1,8 +1,8 @@
 <script>
   import { createEventDispatcher, getContext } from 'svelte';
   import { Button, Card, Loading } from 'attractions';
-  import getBackground from '@/utils/optimal-color.js';
-  import { API_HOST_BROWSER } from '@/constants/env.js';
+  import getBackground from 'src/utils/optimal-color.js';
+  import { API_HOST_BROWSER } from 'src/constants/env.js';
 
   export let file;
   let blobURL = null;

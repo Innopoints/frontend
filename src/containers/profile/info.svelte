@@ -3,8 +3,8 @@
   import { stores } from '@sapper/app';
   import { Button, TextField, DropdownShell, Dropdown, H1 } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
-  import ReclaimInnopointsModal from '@/components/profile/reclaim-innopoints-modal.svelte';
-  import * as api from '@/utils/api.js';
+  import ReclaimInnopointsModal from 'src/components/profile/reclaim-innopoints-modal.svelte';
+  import * as api from 'src/utils/api.js';
 
   export let account;
   const telegramUsernameRegex = /(?:[A-Za-z0-9_]{5,32}|^$)/;

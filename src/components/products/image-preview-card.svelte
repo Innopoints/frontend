@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import Card from 'ui/card.svelte';
   import Button from 'ui/button.svelte';
-  import getBackground from '@/utils/optimal-color.js';
+  import getBackground from 'src/utils/optimal-color.js';
 
   export let image;
   export let color;

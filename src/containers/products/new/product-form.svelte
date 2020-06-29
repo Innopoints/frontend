@@ -1,9 +1,9 @@
 <script>
   import { flip } from 'svelte/animate';
   import { Button, Switch, FormField, TextField, H2, Divider } from 'attractions';
-  import VarietyForm from '@/components/products/new/variety-form.svelte';
-  import spaceOnly from '@/utils/space-only.js';
-  import { getBlankVariety } from '@/constants/products/blank-product.js';
+  import VarietyForm from 'src/components/products/new/variety-form.svelte';
+  import spaceOnly from 'src/utils/space-only.js';
+  import { getBlankVariety } from 'src/constants/products/blank-product.js';
 
   export let product;
   export let colors;

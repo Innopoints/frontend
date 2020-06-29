@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { Button, DropdownShell, Dropdown, Label } from 'attractions';
-  import datePeriods from '@/constants/date-periods.js';
+  import datePeriods from 'src/constants/date-periods.js';
 
   export let label;
   export let value = datePeriods[2];

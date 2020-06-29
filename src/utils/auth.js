@@ -1,5 +1,5 @@
-import { AUTH_HOST, USER_EMAIL } from '@/constants/env.js';
-import generateQueryString from '@/utils/generate-query-string.js';
+import { AUTH_HOST, USER_EMAIL } from 'src/constants/env.js';
+import generateQueryString from 'src/utils/generate-query-string.js';
 import { goto, stores } from '@sapper/app';
 
 

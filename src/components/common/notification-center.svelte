@@ -4,7 +4,7 @@
   import { DropdownShell, Dropdown, Button, Loading, Badge } from 'attractions';
   import Notification from './notification.svelte';
   import EmptyState from './empty-state.svelte';
-  import * as api from '@/utils/api.js';
+  import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 
