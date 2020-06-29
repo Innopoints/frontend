@@ -43,6 +43,12 @@
     account != null
     && (account.is_admin || moderatorEmails.includes(account.email))
   );
+  $: firstActivities = (
+    $project.activities.slice(0, 3)
+      .filter(activity => !activity.internal)
+      .map(activity => activity.name)
+      .join(', ')
+  );
 </script>
 
 <svelte:head>
@@ -51,7 +57,9 @@
   <meta name="og:url" content="https://ipts.innopolis.university/projects/{$project.id}" />
   <meta
     name="og:description"
-    content="Available activities: {$project.activities.slice(0, 3).filter(activity => !activity.internal).map(activity => activity.name).join(', ')}{$project.activities.length > 3 ? ', ...' : '.'}"
+    content="Available activities: {firstActivities}{
+      $project.activities.length > 3 ? ', ...' : '.'
+    }"
   />
   {#if $project.image_id}
     <meta name="og:image" content="{API_HOST_BROWSER}/file/{$project.image_id}" />

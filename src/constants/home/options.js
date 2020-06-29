@@ -10,7 +10,8 @@ export default [
   {
     title: 'Event organization',
     subtitle:
-      'A little bored from studies? Throw a party for the whole university to enjoy and have your efforts rewarded!',
+      'A little bored from studies? '
+      + 'Throw a party for the whole university to enjoy and have your efforts rewarded!',
     imageURL: 'images/home/event-organizing.svg',
     actionLink: '/projects/new',
     actionText: 'propose an event',
@@ -18,7 +19,8 @@ export default [
   {
     title: 'Club leadership',
     subtitle:
-      'A successful club needs a proactive leader. If you think that you’d make a good leader, pay a visit to our student clubs!',
+      'A successful club needs a proactive leader. '
+      + 'If you think that you’d make a good leader, pay a visit to our student clubs!',
     imageURL: 'images/home/club-leadership.svg',
     actionLink: 'http://campuslife.innopolis.ru/clubs',
     actionText: 'see the clubs',
@@ -27,7 +29,8 @@ export default [
   {
     title: 'Buddy',
     subtitle:
-      'Become a supporting buddy for your international coursemate and help them blend in the warm Russian atmosphere!',
+      'Become a supporting buddy for your international coursemate '
+      + 'and help them blend in the warm Russian atmosphere!',
     imageURL: 'images/home/buddy.svg',
     actionLink: 'http://campuslife.innopolis.ru/',
     actionText: 'learn about the program',

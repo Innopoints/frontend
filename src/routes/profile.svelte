@@ -28,8 +28,14 @@
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - monthGap);
     const data = await getInitialData(this, session, new Map([
       ['account', `/accounts/${requestedEmail}`],
-      ['timeline', `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
-      ['statistics', `/accounts/${requestedEmail}/statistics?start_date=${isoForURL(timelineFetchedUntil)}`],
+      [
+        'timeline',
+        `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`,
+      ],
+      [
+        'statistics',
+        `/accounts/${requestedEmail}/statistics?start_date=${isoForURL(timelineFetchedUntil)}`,
+      ],
       ['notificationSettings', `/accounts/${requestedEmail}/notification_settings`],
       ['competences', '/competences'],
     ]));
@@ -37,7 +43,10 @@
     while (data.timeline.data.length === 0 && data.timeline.more) {
       timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - monthGap);
       ({ timeline: data.timeline } = await getInitialData(this, session, new Map([
-        ['timeline', `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`],
+        [
+          'timeline',
+          `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`,
+        ],
       ])));
     }
 
