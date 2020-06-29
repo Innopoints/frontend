@@ -15,31 +15,4 @@
   <span class="state second" class:selected={boolValue}>{second}</span>
 </div>
 
-<style lang="scss">
-  @import "_attractions-theme.scss";
-
-  .two-state-switch {
-    display: flex;
-    align-items: center;
-
-    :global {
-      .track {
-        border-color: $main !important;
-      }
-
-      .thumb {
-        background-color: $main !important;
-      }
-    }
-  }
-
-  .state {
-    font-weight: 500;
-    margin: 0 .8em;
-    color: $off-state;
-
-    &.selected {
-      color: $main;
-    }
-  }
-</style>
+<style src="../../../static/css/components/common/two-state-switch.scss"></style>
