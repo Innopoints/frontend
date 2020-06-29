@@ -25,7 +25,8 @@
     <span class="hide-on-less-tb">Showing statistics</span>
     <PeriodPicker
       label="Period of statistics"
-      on:change={({ detail }) => { selectedPeriod = detail; dispatch('period-change', detail); }}
+      bind:value={selectedPeriod}
+      on:change={({ detail }) => { dispatch('period-change', detail); }}
     />
   </div>
   <div class="simple-stats">
@@ -40,7 +41,7 @@
       <header>
         <svg src="images/icons/star.svg" class="icon" />
         Volunteer rating
-        <span class="rating">{statistics.rating}</span>
+        <span class="rating">{Math.round((statistics.rating + Number.EPSILON) * 100) / 100}</span>
       </header>
     </div>
   </div>

@@ -4,7 +4,7 @@
   import datePeriods from 'src/constants/date-periods.js';
 
   export let label;
-  export let value = datePeriods[2];
+  export let value;
 
   const dispatch = createEventDispatcher();
 </script>
