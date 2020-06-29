@@ -1,14 +1,9 @@
 <script>
   import { H2 } from 'attractions';
   import ProductCard from 'src/components/products/product-card.svelte';
+  import { filterProps } from 'src/utils/product-manipulation.js';
 
   export let products;
-
-  function filterProps(props) {
-    const newProps = Object.assign({}, props);
-    delete newProps.addition_time;
-    return newProps;
-  }
 </script>
 
 {#if products && products.length !== 0}

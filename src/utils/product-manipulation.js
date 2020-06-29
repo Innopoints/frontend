@@ -1,7 +1,7 @@
 import arraysEqual from 'src/utils/arrays-equal.js';
 import setNullSafe from 'src/utils/set-null-safe.js';
 
-/* Returns a map of colors to arrays of varieties. */
+/* Return a map of colors to arrays of varieties. */
 export function groupByColor(varieties) {
   const grouping = new Map();
 
@@ -16,7 +16,7 @@ export function groupByColor(varieties) {
   return grouping;
 }
 
-/* Returns a map of an ID to a variety. */
+/* Return a map of an ID to a variety. */
 export function groupByID(varieties) {
   const grouping = new Map();
 
@@ -109,4 +109,11 @@ export function copyProduct(product) {
   });
 
   return copy;
+}
+
+/* Filter the props from the product object from the backend to pass to a ProductCard. */
+export function filterProps(props) {
+  const newProps = Object.assign({}, props);
+  delete newProps.addition_time;
+  return newProps;
 }

@@ -28,6 +28,7 @@
   import Pagination from 'src/components/common/pagination.svelte';
   import NotificationTypes from 'src/constants/backend/notification-types.js';
   import orderOptions from 'src/constants/products/order.js';
+  import { filterProps } from 'src/utils/product-manipulation.js';
   import * as api from 'src/utils/api.js';
 
   const { session } = stores();
@@ -103,12 +104,6 @@
   function handlePageSwitch(e) {
     currentPage = e.detail;
     updateProducts(filterElement.getLastFiltering());
-  }
-
-  function filterProps(props) {
-    const newProps = Object.assign({}, props);
-    delete newProps.addition_time;
-    return newProps;
   }
 </script>
 
