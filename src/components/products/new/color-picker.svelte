@@ -1,6 +1,8 @@
 <script>
+  import { getContext } from 'svelte';
   import { stores } from '@sapper/app';
   import { DropdownShell, Dropdown, Button, RadioGroup, Divider } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import { getColorPickerStyles } from 'attractions/utils';
   import * as api from '@/utils/api.js';
 
@@ -37,10 +39,13 @@
         $colors = $colors;
         colorDebounce = null;
       } catch (e) {
+        showSnackbar({ props: { text: 'Couldn\'t create a color, try reloading the page' } });
         console.error(e);
       }
     }, 200);
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <div class="color-picker">
