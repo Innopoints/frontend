@@ -9,7 +9,7 @@
   let editing = false;
 
   // eslint-disable-next-line require-yield
-  async function *getOptions(query) {
+  async function* getOptions(query) {
     let output = tags;
     if (query) {
       output = output.filter(tag => tag.name.toLowerCase().includes(query.toLowerCase()));
