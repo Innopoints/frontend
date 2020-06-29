@@ -37,7 +37,7 @@
 
 <div class="amend-balance">
   <header>
-    <svg src="images/icons/credit-card.svg" class="icon mr-2" />
+    <svg src="static/images/icons/credit-card.svg" class="icon mr-2" />
     Add/subtract innopoints
   </header>
   <div class="subtitle">Supply a negative quantity to subtract innopoints.</div>
@@ -51,10 +51,10 @@
       maxlength={8}
       id="amend-balance"
     >
-      <svg src="images/innopoint-sharp.svg" class="item innopoint" />
+      <svg src="static/images/innopoint-sharp.svg" class="item innopoint" />
     </TextField>
     <Button round disabled={!amount || users.length === 0} on:click={send}>
-      <svg src="images/icons/check.svg" class="icon" />
+      <svg src="static/images/icons/check.svg" class="icon" />
     </Button>
   </div>
 </div>

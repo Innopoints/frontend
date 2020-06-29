@@ -10,13 +10,13 @@
     <Button class="handle" on:click={toggle}>
       <span class="step-index"><span class="step">step</span> {step}</span>
       <span class="step-name">{stepNames[step]}</span>
-      <svg class="ml dropdown-chevron" src="images/icons/chevron-down.svg" />
+      <svg class="ml dropdown-chevron" src="static/images/icons/chevron-down.svg" />
     </Button>
     <Dropdown>
       {#each stepNames as stepName, index}
         <Button selected={step === index} href="/projects/new{index > 0 ? `?step=${index}` : ''}">
           {#if index === 0}
-            <svg src="images/icons/rotate-ccw.svg" class="icon" />
+            <svg src="static/images/icons/rotate-ccw.svg" class="icon" />
           {:else}
             <span class="icon">{index}</span>
           {/if}

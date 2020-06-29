@@ -32,11 +32,11 @@
     </div>
     <div class="actions">
       <Button danger on:click={() => dispatch('delete-draft', draft.id)}>
-        <svg src="images/icons/trash-2.svg" class="mr" />
+        <svg src="static/images/icons/trash-2.svg" class="mr" />
         delete
       </Button>
       <Button class="ml" on:click={loadDraft}>
-        <svg src="images/icons/corner-down-right.svg" class="mr" />
+        <svg src="static/images/icons/corner-down-right.svg" class="mr" />
         continue
       </Button>
     </div>

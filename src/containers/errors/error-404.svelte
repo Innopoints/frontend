@@ -10,7 +10,7 @@
     <H1>Nothing here</H1>
     <p class="subtitle">That rabbit must have given you the wrong lead.</p>
     <Button href="/" filled>
-      <svg src="images/icons/home.svg" class="icon mr" />
+      <svg src="static/images/icons/home.svg" class="icon mr" />
       take me home
     </Button>
   </div>

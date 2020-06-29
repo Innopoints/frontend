@@ -89,13 +89,13 @@
   <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
     <div class="material">
       <Button href="/products" class="back">
-        <svg src="images/icons/arrow-left.svg" class="icon" />
+        <svg src="static/images/icons/arrow-left.svg" class="icon" />
         <span>to the InnoStore</span>
       </Button>
       <div class="balance">
         {#if account != null && !account.is_admin}
           You have {account.balance}
-          <svg src="images/innopoint-sharp.svg" class="innopoint" />
+          <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
         {/if}
       </div>
       <ImagePreviews images={flatImages} bind:selectedColor on:color-change={updateColor} />

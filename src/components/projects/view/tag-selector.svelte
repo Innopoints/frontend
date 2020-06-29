@@ -29,7 +29,7 @@
 
 {#if valueTags.length > 0 || editing}
   <Labeled icon label="Tags" class="tags">
-    <svg slot="icon" class="icon mr" src="images/icons/tag.svg" />
+    <svg slot="icon" class="icon mr" src="static/images/icons/tag.svg" />
     <div class="tag-selector">
       {#if editing}
         <Autocomplete {getOptions} minSearchLength={0} bind:selection={valueTags} />
@@ -47,7 +47,7 @@
   </Labeled>
 {:else}
   <Button class="mt" on:click={toggleEditing}>
-    <svg class="mr" src="images/icons/tag.svg" />
+    <svg class="mr" src="static/images/icons/tag.svg" />
     add tags
     <Dot info class="ml" />
   </Button>

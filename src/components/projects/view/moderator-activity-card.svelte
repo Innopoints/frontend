@@ -30,14 +30,14 @@
       <header class="title">{activity.name}</header>
       <div class="row">
         <Labeled icon label="Reward">
-          <svg slot="icon" class="icon mr" src="images/icons/gift.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/gift.svg" />
           <span class="content">
             {activity.reward_rate * activity.working_hours}
-            <svg class="innopoint" src="images/innopoint-sharp.svg" />
+            <svg class="innopoint" src="static/images/innopoint-sharp.svg" />
           </span>
         </Labeled>
         <Labeled icon label="Worktime">
-          <svg slot="icon" class="icon mr" src="images/icons/clock.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/clock.svg" />
           <span class="content">
             <span class="primary">
               {#if activity.fixed_reward}
@@ -54,7 +54,7 @@
       </div>
       {#if activity.application_deadline != null}
         <Notice warning>
-          <svg slot="icon" src="images/icons/alert-circle.svg" />
+          <svg slot="icon" src="static/images/icons/alert-circle.svg" />
           {#if activity.application_deadline > new Date()}
             Deadline: {formatDate(activity.application_deadline)}!
           {:else}
@@ -64,7 +64,7 @@
       {/if}
       {#if activity.description}
         <Labeled icon label="Description">
-          <svg slot="icon" class="icon mr" src="images/icons/align-left.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/align-left.svg" />
           <span class="description">
             {activity.description}
           </span>
@@ -81,15 +81,15 @@
           class="mr"
           on:click={() => dispatch('edit', activity)}
         >
-          <svg class="icon mr" src="images/icons/edit.svg" />
+          <svg class="icon mr" src="static/images/icons/edit.svg" />
           edit
         </Button>
         <Button outline class="mr" on:click={() => dispatch('copy', activity)}>
-          <svg class="icon mr" src="images/icons/copy.svg" />
+          <svg class="icon mr" src="static/images/icons/copy.svg" />
           copy
         </Button>
         <Button outline danger class="mr" on:click={() => dispatch('delete', activity)}>
-          <svg class="icon mr" src="images/icons/trash-2.svg" />
+          <svg class="icon mr" src="static/images/icons/trash-2.svg" />
           delete
         </Button>
       </div>
@@ -116,7 +116,7 @@
         </Accordion>
       {:else}
         <EmptyState small text="No applications yet">
-          <img src="images/view-project/no-applications.svg" alt="" />
+          <img src="/images/view-project/no-applications.svg" alt="" />
         </EmptyState>
       {/if}
     </div>
@@ -137,7 +137,7 @@
         </Accordion>
       {:else}
         <EmptyState small text="No applications yet">
-          <img src="images/view-project/no-applications.svg" alt="" />
+          <img src="/images/view-project/no-applications.svg" alt="" />
         </EmptyState>
       {/if}
     </div>

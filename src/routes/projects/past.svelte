@@ -62,7 +62,7 @@
     <section class="projects padded">
       <H1>
         <Button href="/projects">
-          <svg src="images/icons/arrow-left.svg" class="mr" />
+          <svg src="static/images/icons/arrow-left.svg" class="mr" />
           to ongoing projects
         </Button>
         <span class="text">Past Projects</span>
@@ -70,7 +70,7 @@
       {#if !projects || projects.length === 0}
         <EmptyState>
           <figure>
-            <img class="picture" src="images/projects/no-projects.svg" alt="" />
+            <img class="picture" src="/images/projects/no-projects.svg" alt="" />
             <figcaption>
               <div class="title">No past projects yet...</div>
               {#if account}

@@ -64,7 +64,7 @@
     <div class="handle" slot="handle" let:toggle>
       <Button round on:click={toggle}>
         <Badge hidden={report != null}>
-          <svg class="accordion-chevron" src="images/icons/chevron-down.svg" />
+          <svg class="accordion-chevron" src="static/images/icons/chevron-down.svg" />
         </Badge>
       </Button>
       <div class="name">
@@ -112,7 +112,7 @@
     </div>
     {#if application.comment}
       <div class="with-icon">
-        <svg class="icon" src="images/icons/message-square.svg" />
+        <svg class="icon" src="static/images/icons/message-square.svg" />
         <div class="text">
           {application.comment}
         </div>
@@ -121,16 +121,16 @@
     <div class="actions">
       {#if report == null}
         <Button outline on:click={createReportDialog.show}>
-          <svg class="icon mr" src="images/icons/edit-3.svg" />
+          <svg class="icon mr" src="static/images/icons/edit-3.svg" />
           report performance
         </Button>
       {:else}
         <Button outline class="mr" on:click={createReportDialog.show}>
-          <svg class="icon mr" src="images/icons/edit-3.svg" />
+          <svg class="icon mr" src="static/images/icons/edit-3.svg" />
           edit report
         </Button>
         <Button outline danger on:click={deleteReport}>
-          <svg class="icon mr" src="images/icons/edit-3.svg" />
+          <svg class="icon mr" src="static/images/icons/edit-3.svg" />
           delete report
         </Button>
       {/if}

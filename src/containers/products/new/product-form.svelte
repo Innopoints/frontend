@@ -65,7 +65,7 @@
       withItem
       itemRight
     >
-      <svg src="images/innopoint-sharp.svg" class="item" />
+      <svg src="static/images/innopoint-sharp.svg" class="item" />
     </TextField>
   </FormField>
 
@@ -87,7 +87,7 @@
 
     <li class="more mt">
       <Button on:click={addVariety}>
-        <svg src="images/icons/plus.svg" class="mr" />
+        <svg src="static/images/icons/plus.svg" class="mr" />
         add another variety
       </Button>
     </li>

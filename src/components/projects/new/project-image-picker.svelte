@@ -86,12 +86,12 @@
   <div class="uploaded-image">
     <img src="{API_HOST_BROWSER}/file/{value}" alt="Project cover" class="shadow-1 mr" />
     <Button danger round on:click={clearValue}>
-      <svg src="images/icons/trash-2.svg" />
+      <svg src="static/images/icons/trash-2.svg" />
     </Button>
   </div>
 {:else}
   <FileInput accept="image/*" bind:value={inputValue} on:change={validateUpload}>
-    <svg class="mr" src="images/icons/image.svg" />
+    <svg class="mr" src="static/images/icons/image.svg" />
     upload an image
   </FileInput>
 {/if}

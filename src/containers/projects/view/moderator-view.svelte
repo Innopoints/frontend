@@ -132,7 +132,7 @@
   {/if}
   {#if $project.lifetime_stage === ProjectStages.ONGOING}
     <Button on:click={() => createActivity(getBlankActivity())}>
-      <svg src="images/icons/plus.svg" class="mr" />
+      <svg src="static/images/icons/plus.svg" class="mr" />
       add another activity
     </Button>
   {/if}

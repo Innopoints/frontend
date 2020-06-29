@@ -12,12 +12,12 @@
 <DropdownShell let:toggle>
   <Button on:click={toggle}>
     {(value.name.startsWith('last') ? 'over the ' : 'for ') + value.name}
-    <svg src="images/icons/chevron-down.svg" class="dropdown-chevron ml" />
+    <svg src="static/images/icons/chevron-down.svg" class="dropdown-chevron ml" />
   </Button>
   <Dropdown>
     <div class="relative-wrapper">
       <Button neutral round class="close" on:click={toggle}>
-        <svg src="images/icons/x.svg" class="icon" />
+        <svg src="static/images/icons/x.svg" class="icon" />
       </Button>
       <Label>{label}</Label>
       <ul class="period-list">

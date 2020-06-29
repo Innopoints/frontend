@@ -63,7 +63,7 @@
           error={!usernameValid && "A username should contain from 5 to 32 symbols: a–z, 0–9, _."}
           class="mt-2"
         >
-          <svg src="images/icons/at-sign.svg" class="item" />
+          <svg src="static/images/icons/at-sign.svg" class="item" />
         </TextField>
         <div class="actions">
           <Button class="mr" on:click={() => tgChange = false}>cancel</Button>
@@ -74,19 +74,19 @@
       <div class="telegram exists">
         @{account.telegram_username}
         <Button class="ml" on:click={() => tgChange = true}>
-          <svg src="images/icons/edit.svg" class="mr" />
+          <svg src="static/images/icons/edit.svg" class="mr" />
           edit
         </Button>
       </div>
     {:else}
       <div class="telegram">
         <Button outline on:click={() => tgChange = true}>
-          <svg src="images/icons/send.svg" class="mr" />
+          <svg src="static/images/icons/send.svg" class="mr" />
           add Telegram username
         </Button>
         <DropdownShell let:toggle>
           <Button round class="ml" on:click={toggle}>
-            <svg src="images/icons/help-circle.svg" class="icon" />
+            <svg src="static/images/icons/help-circle.svg" class="icon" />
           </Button>
           <Dropdown class="info-bubble" right>
             Some event organizers prefer to collect those to ease communication.
@@ -99,16 +99,16 @@
   <div class="balance">
     <p class="btn-align">
       <span>{account.balance}</span>
-      <svg src="images/innopoint-sharp.svg" class="innopoint" />
+      <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
       available
     </p>
     <nav class="btn-shift">
       <Button href="/products">
-        <svg src="images/icons/shopping-bag.svg" class="mr" />
+        <svg src="static/images/icons/shopping-bag.svg" class="mr" />
         go to the InnoStore
       </Button>
       <Button on:click={() => reclaimInnopointsModalOpen = true}>
-        <svg src="images/icons/gift.svg" class="mr" />
+        <svg src="static/images/icons/gift.svg" class="mr" />
         reclaim old innopoints
       </Button>
     </nav>

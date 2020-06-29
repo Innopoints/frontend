@@ -6,5 +6,5 @@
 </script>
 
 <TextField on:input {placeholder} withItem {value} type="search" maxlength={256}>
-  <svg src="images/icons/search.svg" class="item" />
+  <svg src="static/images/icons/search.svg" class="item" />
 </TextField>

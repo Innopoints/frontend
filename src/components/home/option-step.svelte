@@ -19,7 +19,7 @@
         <Button href={actionLink} filled>
           {actionText}
           {#if external}
-            <svg src="images/icons/external-link.svg" class="icon ml" />
+            <svg src="static/images/icons/external-link.svg" class="icon ml" />
           {/if}
         </Button>
       {:else}

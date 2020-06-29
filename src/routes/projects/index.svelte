@@ -73,7 +73,7 @@
       {#if !projects || projects.length === 0}
         <EmptyState>
           <figure>
-            <img class="picture" src="images/projects/no-projects.svg" alt="" />
+            <img class="picture" src="/images/projects/no-projects.svg" alt="" />
             <figcaption>
               <div class="title">No projects found...</div>
               {#if account}
@@ -100,7 +100,7 @@
 
     <div class="justify-center">
       <Button href="/projects/past">
-        <svg src="images/icons/book-open.svg" class="icon mr" />
+        <svg src="static/images/icons/book-open.svg" class="icon mr" />
         see past projects
       </Button>
     </div>

@@ -28,16 +28,16 @@
       <div class="title">{name}</div>
       <div class="compact">
         <Labeled icon label="When">
-          <svg src="images/icons/calendar.svg" class="icon mr" slot="icon" />
+          <svg src="static/images/icons/calendar.svg" class="icon mr" slot="icon" />
           {formatDateRange({ start: start_date, end: end_date })}
         </Labeled>
         <Labeled icon label="Creator">
-          <svg src="images/icons/user.svg" class="icon mr" slot="icon" />
+          <svg src="static/images/icons/user.svg" class="icon mr" slot="icon" />
           {creator.full_name}
         </Labeled>
       </div>
       <Labeled icon label="Activities">
-        <svg src="images/icons/list.svg" class="icon mr" slot="icon" />
+        <svg src="static/images/icons/list.svg" class="icon mr" slot="icon" />
         <ul>
           {#each exposedActivities.slice(0, 3) as activity (activity.id)}
             <li>{activity.name}</li>

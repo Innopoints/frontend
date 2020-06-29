@@ -64,7 +64,7 @@
         </p>
         <div class="refresher">
           <Labeled icon label="Volunteer">
-            <svg class="icon mr" slot="icon" src="images/icons/user.svg" />
+            <svg class="icon mr" slot="icon" src="static/images/icons/user.svg" />
             <span class="content">
               {application.applicant.full_name}
               {#if application.telegram}
@@ -80,7 +80,7 @@
             </span>
           </Labeled>
           <Labeled icon label="Actual worktime">
-            <svg class="icon mr" slot="icon" src="images/icons/clock.svg" />
+            <svg class="icon mr" slot="icon" src="static/images/icons/clock.svg" />
             {#if activity.fixed_reward}
               as needed
             {:else}

@@ -59,14 +59,14 @@
     {#await Promise.all(timelinePromises).then(values => values[values.length - 1]) then lastValue}
       {#if lastValue != null && lastValue.more}
         <Button class="more" on:click={requestMore}>
-          <svg src="images/icons/more-horizontal.svg" class="icon mr-2" />
+          <svg src="static/images/icons/more-horizontal.svg" class="icon mr-2" />
           load more
         </Button>
       {/if}
     {/await}
   {:else}
     <EmptyState small text="No recent events" subtext="How about some volunteering?">
-      <svg src="images/icons/list.svg" class="icon" />
+      <svg src="static/images/icons/list.svg" class="icon" />
     </EmptyState>
   {/if}
 </div>

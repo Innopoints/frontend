@@ -113,9 +113,9 @@
         title={!affordable && !account.is_admin ? "Not enough innopoints" : null}
       >
         {product.price}
-        <svg src="images/innopoint-sharp.svg" class="innopoint" />
+        <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
         {#if !affordable && !account.is_admin}
-          <svg src="images/icons/frown.svg" class="frown" />
+          <svg src="static/images/icons/frown.svg" class="frown" />
         {/if}
       </span>
     </Labeled>

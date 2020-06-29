@@ -19,7 +19,7 @@
   {#if account}
     <div class="actions">
       <Button outline rectangle href="/projects/new">
-        <svg src="images/icons/plus.svg" class="mr" />
+        <svg src="static/images/icons/plus.svg" class="mr" />
         create new project
       </Button>
     </div>

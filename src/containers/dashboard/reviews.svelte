@@ -7,7 +7,7 @@
 
 <Card class="projects-review">
   <div class="title">
-    <svg src="images/icons/check-square.svg" class="icon" />
+    <svg src="static/images/icons/check-square.svg" class="icon" />
     Projects for review
   </div>
   {#if reviews.length}
@@ -18,19 +18,19 @@
             {review.name}
           </div>
           <Labeled label="Creator" icon>
-            <svg slot="icon" src="images/icons/user.svg" class="icon" />
+            <svg slot="icon" src="static/images/icons/user.svg" class="icon" />
             {review.creator.full_name}
           </Labeled>
           <Button href="/projects/{review.id}">
             review
-            <svg src="images/icons/arrow-right.svg" class="icon ml" />
+            <svg src="static/images/icons/arrow-right.svg" class="icon ml" />
           </Button>
         </li>
       {/each}
     </ul>
   {:else}
     <EmptyState small text="Everything reviewed!">
-      <svg src="images/icons/smile.svg" />
+      <svg src="static/images/icons/smile.svg" />
     </EmptyState>
   {/if}
   <div class="actions">

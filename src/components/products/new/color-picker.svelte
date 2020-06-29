@@ -71,7 +71,7 @@
       />
       <Divider />
       <Button on:click={openColorInput}>
-        <svg src="images/icons/plus.svg" class="mr" />
+        <svg src="static/images/icons/plus.svg" class="mr" />
         add another color
       </Button>
       <input

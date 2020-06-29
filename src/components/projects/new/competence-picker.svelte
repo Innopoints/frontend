@@ -24,7 +24,7 @@
   <Button on:click={toggle}>
     select competences
     <Badge hidden={value.length !== 0}>
-      <svg class="ml dropdown-chevron" src="images/icons/chevron-down.svg" />
+      <svg class="ml dropdown-chevron" src="static/images/icons/chevron-down.svg" />
     </Badge>
   </Button>
   <Dropdown>

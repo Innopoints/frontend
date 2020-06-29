@@ -37,12 +37,12 @@
   <DropdownShell let:toggle>
     <Button round on:click={toggle} class="mr">
       <Badge hidden={!unread}>
-        <svg src="images/icons/bell.svg" class="icon" />
+        <svg src="static/images/icons/bell.svg" class="icon" />
       </Badge>
     </Button>
     <Dropdown right>
       <Button neutral round class="close" on:click={toggle}>
-        <svg src="images/icons/x.svg" class="icon" />
+        <svg src="static/images/icons/x.svg" class="icon" />
       </Button>
       <div class="title">Notifications</div>
       {#if $session.notifications == null}
@@ -51,7 +51,7 @@
         </EmptyState>
       {:else if $session.notifications.length === 0}
         <EmptyState small text="No notifications">
-          <svg src="images/icons/bell-off.svg" class="icon" />
+          <svg src="static/images/icons/bell-off.svg" class="icon" />
         </EmptyState>
       {:else}
         <ul class="notification-list">
@@ -60,7 +60,7 @@
           {/each}
         </ul>
         <Button on:click={() => $session.notifications.forEach(x => readNotification(x.id))}>
-          <svg src="images/icons/check.svg" class="icon mr" />
+          <svg src="static/images/icons/check.svg" class="icon mr" />
           mark all as read
         </Button>
       {/if}

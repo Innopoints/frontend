@@ -18,13 +18,13 @@
 <div class="entry">
   <div class="icon">
     {#if type === EntryTypes.APPLICATION}
-      <svg src="images/icons/file.svg" />
+      <svg src="static/images/icons/file.svg" />
     {:else if type === EntryTypes.PURCHASE}
-      <svg src="images/icons/shopping-bag.svg" />
+      <svg src="static/images/icons/shopping-bag.svg" />
     {:else if type === EntryTypes.PROMOTION}
-      <svg src="images/icons/chevrons-up.svg" />
+      <svg src="static/images/icons/chevrons-up.svg" />
     {:else if type === EntryTypes.PROJECT}
-      <svg src="images/icons/package.svg" />
+      <svg src="static/images/icons/package.svg" />
     {/if}
   </div>
 
@@ -46,7 +46,7 @@
           application rejected
         {:else if payload.application_status === ApplicationStatuses.APPROVED}
           {#if payload.project_stage === ProjectStages.FINISHED}
-            {payload.reward} <svg src="images/innopoint-sharp.svg" class="innopoint" />
+            {payload.reward} <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
             gained{#if payload.feedback_id == null}, leave feedback to claim{/if}
           {:else}
             application approved

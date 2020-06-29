@@ -12,16 +12,16 @@
   <Card>
     <header class="title">{activity.name || 'Untitled'}</header>
     <Notice warning>
-      <svg slot="icon" src="images/icons/eye-off.svg" />
+      <svg slot="icon" src="static/images/icons/eye-off.svg" />
       This activity is hidden from volunteers. Edit it to make it visible.
     </Notice>
     <div class="actions">
       <Button outline class="mr" on:click={() => dispatch('edit', activity)}>
-        <svg class="icon mr" src="images/icons/edit.svg" />
+        <svg class="icon mr" src="static/images/icons/edit.svg" />
         edit
       </Button>
       <Button outline danger on:click={() => dispatch('delete', activity)}>
-        <svg class="icon mr" src="images/icons/trash-2.svg" />
+        <svg class="icon mr" src="static/images/icons/trash-2.svg" />
         delete
       </Button>
     </div>

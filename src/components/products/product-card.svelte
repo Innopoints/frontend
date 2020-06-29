@@ -69,7 +69,7 @@
           <Labeled label="Price">
             <span class="content">
               <span class="price">{price}</span>
-              <svg src="images/innopoint-sharp.svg" class="innopoint" />
+              <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
             </span>
           </Labeled>
           <Button href="/products/{id}" outline>view</Button>

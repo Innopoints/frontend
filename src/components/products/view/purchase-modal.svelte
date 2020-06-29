@@ -62,7 +62,7 @@
         </div>
         <div class="quantity">
           <Button round on:click={decreaseQuantity} disabled={quantity === 1}>
-            <svg src="images/icons/minus.svg" />
+            <svg src="static/images/icons/minus.svg" />
           </Button>
           <TextField
             type="number"
@@ -72,7 +72,7 @@
             max={variety.amount}
           />
           <Button round on:click={increaseQuantity} disabled={quantity === variety.amount}>
-            <svg src="images/icons/plus.svg" />
+            <svg src="static/images/icons/plus.svg" />
           </Button>
         </div>
       </div>
@@ -94,10 +94,10 @@
             <div class="delta-balance">
               <s>
                 {account.balance}
-                <svg src="images/innopoint-sharp.svg" />
+                <svg src="static/images/innopoint-sharp.svg" />
               </s>
               {account.balance - product.price * quantity}
-              <svg src="images/innopoint-sharp.svg" />
+              <svg src="static/images/innopoint-sharp.svg" />
             </div>
           </Labeled>
         {:else}

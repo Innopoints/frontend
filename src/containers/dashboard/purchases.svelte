@@ -25,7 +25,7 @@
 
 <Card class="purchases">
   <div class="title">
-    <svg src="images/icons/shopping-bag.svg" class="icon" />
+    <svg src="static/images/icons/shopping-bag.svg" class="icon" />
     InnoStore purchases
   </div>
   {#if purchases.length}
@@ -36,7 +36,7 @@
     </ul>
   {:else}
     <EmptyState small text="No pending purchases!">
-      <svg src="images/icons/smile.svg" />
+      <svg src="static/images/icons/smile.svg" />
     </EmptyState>
   {/if}
   <div class="actions">

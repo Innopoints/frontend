@@ -31,7 +31,7 @@
 
 <Card class="individual-ctls">
   <div class="title">
-    <svg src="images/icons/user.svg" class="icon" />
+    <svg src="static/images/icons/user.svg" class="icon" />
     Individual user controls
   </div>
   <div class="panel">

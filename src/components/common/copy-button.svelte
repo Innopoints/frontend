@@ -18,10 +18,10 @@
 
 <PopoverButton on:click={copy}>
   {#if copied}
-    <svg class="mr" src="images/icons/check.svg" />
+    <svg class="mr" src="static/images/icons/check.svg" />
     copied
   {:else}
-    <svg class="mr" src="images/icons/copy.svg" />
+    <svg class="mr" src="static/images/icons/copy.svg" />
     copy
   {/if}
 </PopoverButton>

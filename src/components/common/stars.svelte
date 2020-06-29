@@ -8,9 +8,9 @@
 <div class="stars">
   {#each [...range(max)] as i}
     {#if i < value}
-      <svg class="star" src="images/icons/star.svg" />
+      <svg class="star" src="static/images/icons/star.svg" />
     {:else}
-      <svg class="star off" src="images/icons/star.svg" />
+      <svg class="star off" src="static/images/icons/star.svg" />
     {/if}
   {/each}
 </div>

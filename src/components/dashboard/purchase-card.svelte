@@ -67,32 +67,32 @@
     {#if markedStatus == null}
       {#if purchase.status !== StockChangeStatuses.REJECTED}
         <Button danger on:click={() => setStatus(StockChangeStatuses.REJECTED)}>
-          <svg src="images/icons/x.svg" class="mr" />
+          <svg src="static/images/icons/x.svg" class="mr" />
           reject
         </Button>
       {/if}
       {#if purchase.status !== StockChangeStatuses.PENDING}
         <Button on:click={() => setStatus(StockChangeStatuses.PENDING)}>
-          <svg src="images/icons/archive.svg" class="mr" />
+          <svg src="static/images/icons/archive.svg" class="mr" />
           pending
         </Button>
       {/if}
       {#if purchase.status !== StockChangeStatuses.READY_FOR_PICKUP}
         <Button on:click={() => setStatus(StockChangeStatuses.READY_FOR_PICKUP)}>
-          <svg src="images/icons/package.svg" class="mr" />
+          <svg src="static/images/icons/package.svg" class="mr" />
           ready for pickup
         </Button>
       {/if}
       {#if purchase.status !== StockChangeStatuses.CARRIED_OUT}
         <Button on:click={() => setStatus(StockChangeStatuses.CARRIED_OUT)}>
-          <svg src="images/icons/smile.svg" class="mr" />
+          <svg src="static/images/icons/smile.svg" class="mr" />
           delivered
         </Button>
       {/if}
     {:else}
       Marked as {markedStatus}
       <Button class="ml" on:click={() => markedStatus = null}>
-        <svg src="images/icons/edit.svg" class="mr" />
+        <svg src="static/images/icons/edit.svg" class="mr" />
         edit status
       </Button>
     {/if}

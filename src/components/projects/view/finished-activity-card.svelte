@@ -22,14 +22,14 @@
       <header class="title">{activity.name}</header>
       <div class="row">
         <Labeled icon label="Reward">
-          <svg slot="icon" class="icon mr" src="images/icons/gift.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/gift.svg" />
           <span class="content">
             {activity.reward_rate * activity.working_hours}
-            <svg class="innopoint" src="images/innopoint-sharp.svg" />
+            <svg class="innopoint" src="static/images/innopoint-sharp.svg" />
           </span>
         </Labeled>
         <Labeled icon label="Worktime">
-          <svg slot="icon" class="icon mr" src="images/icons/clock.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/clock.svg" />
           <span class="content">
             <span class="primary">
               {#if activity.fixed_reward}
@@ -46,7 +46,7 @@
       </div>
       {#if activity.description}
         <Labeled icon label="Description">
-          <svg slot="icon" class="icon mr" src="images/icons/align-left.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/align-left.svg" />
           <span class="description">
             {activity.description}
           </span>
@@ -70,7 +70,7 @@
         </ul>
       {:else}
         <EmptyState small text="No applications yet">
-          <img src="images/view-project/no-applications.svg" alt="" />
+          <img src="/images/view-project/no-applications.svg" alt="" />
         </EmptyState>
       {/if}
     </div>

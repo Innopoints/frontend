@@ -22,7 +22,7 @@
     {/each}
   </span>
   <Button round title="Mark as read" class="mt" on:click={() => dispatch('read', notification)}>
-    <svg src="images/icons/check.svg" class="icon" />
+    <svg src="static/images/icons/check.svg" class="icon" />
   </Button>
   <time datetime={notification.timestamp}>{formatTime(notification.timestamp)}</time>
 </li>

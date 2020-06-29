@@ -51,7 +51,7 @@
       <Labeled class="reward" label="Reward">
         <div class="content">
           {activity.reward_rate * application.actual_hours}
-          <svg class="innopoint" src="images/innopoint-sharp.svg" />
+          <svg class="innopoint" src="static/images/innopoint-sharp.svg" />
         </div>
       </Labeled>
       <ReadFeedbackDialog

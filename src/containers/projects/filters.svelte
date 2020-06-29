@@ -37,14 +37,14 @@
   <div class="dropdowns">
     <DropdownShell let:toggle>
       <Button on:click={toggle} class="handle">
-        <svg src="images/icons/order.svg" class="icon mr" />
+        <svg src="static/images/icons/order.svg" class="icon mr" />
         <span class="tight">order</span>
         <span class="regular">{selectedOrder.label}</span>
       </Button>
       <Dropdown>
         <div class="relative-wrapper order-options">
           <Button round neutral class="close" on:click={toggle}>
-            <svg src="images/icons/x.svg" />
+            <svg src="static/images/icons/x.svg" />
           </Button>
           <RadioGroup
             items={orderOptions}

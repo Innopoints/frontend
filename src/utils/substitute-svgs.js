@@ -24,7 +24,7 @@ function processCustomSvg(svg) {
     return '';
   }
 
-  const pathToSvg = path.join(__dirname, 'static/', attributes.src);
+  const pathToSvg = path.join(__dirname, attributes.src);
   if (!fs.existsSync(pathToSvg)) {
     console.error(`Can't locate file '${pathToSvg}'.`);
     return '';

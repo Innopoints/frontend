@@ -15,7 +15,7 @@
       {activity.name || 'Untitled'}
       {#if activity.draft}
         <div class="hidden" title="This activity is marked as a draft and is not visible.">
-          <svg class="mr" src="images/icons/eye-off.svg" />
+          <svg class="mr" src="static/images/icons/eye-off.svg" />
           hidden
         </div>
       {/if}
@@ -24,7 +24,7 @@
       <Labeled label="Reward">
         <div class="content">
           {activity.fixed_reward ? activity.reward_rate : HOURLY_RATE * activity.working_hours}
-          <svg src="images/innopoint-sharp.svg" class="innopoint" />
+          <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
         </div>
       </Labeled>
       <Labeled label="People required">
@@ -42,15 +42,15 @@
 
     <div class="actions">
       <Button on:click={() => dispatch('copy', activity)}>
-        <svg src="images/icons/copy.svg" class="mr" />
+        <svg src="static/images/icons/copy.svg" class="mr" />
         <span class="text">copy</span>
       </Button>
       <Button on:click={() => dispatch('edit', activity)}>
-        <svg src="images/icons/edit.svg" class="mr" />
+        <svg src="static/images/icons/edit.svg" class="mr" />
         <span class="text">edit</span>
       </Button>
       <Button danger on:click={() => dispatch('delete', activity)}>
-        <svg src="images/icons/trash-2.svg" class="mr" />
+        <svg src="static/images/icons/trash-2.svg" class="mr" />
         <span class="text">delete</span>
       </Button>
     </div>

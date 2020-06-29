@@ -7,7 +7,7 @@
 {#if value != null}
   <div class="balance">
     You have {value}
-    <svg src="images/innopoint-sharp.svg" alt="innopoint{s(value)}" />
+    <svg src="static/images/innopoint-sharp.svg" alt="innopoint{s(value)}" />
   </div>
 {/if}
 

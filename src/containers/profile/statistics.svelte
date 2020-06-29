@@ -32,14 +32,14 @@
   <div class="simple-stats">
     <div class="stat">
       <header>
-        <svg src="images/icons/clock.svg" class="icon" />
+        <svg src="static/images/icons/clock.svg" class="icon" />
         {statistics.hours} volunteering hours
       </header>
       <div class="details">{statistics.positions} volunteering positions handled</div>
     </div>
     <div class="stat">
       <header>
-        <svg src="images/icons/star.svg" class="icon" />
+        <svg src="static/images/icons/star.svg" class="icon" />
         Volunteer rating
         <span class="rating">{Math.round((statistics.rating + Number.EPSILON) * 100) / 100}</span>
       </header>
@@ -47,7 +47,7 @@
   </div>
   <div class="stat competences">
     <header>
-      <svg src="images/icons/bar-chart-2.svg" class="icon" />
+      <svg src="static/images/icons/bar-chart-2.svg" class="icon" />
       Developed competences
     </header>
     <CompetencesChart {competences} items={indexify(statistics.competences)} />

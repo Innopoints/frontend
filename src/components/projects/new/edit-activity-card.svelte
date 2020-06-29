@@ -212,7 +212,7 @@
               bind:value={activity.reward_rate}
               class="short"
             >
-              <svg src="images/innopoint-sharp.svg" class="innopoint item" />
+              <svg src="static/images/innopoint-sharp.svg" class="innopoint item" />
             </TextField>
           </FormField>
         {/if}
@@ -282,7 +282,7 @@
         </div>
       {:else}
         <div class="row">
-          <svg src="images/icons/eye.svg" />
+          <svg src="static/images/icons/eye.svg" />
           <span>visible to volunteers</span>
           <Switch
             bind:value={notDraft}

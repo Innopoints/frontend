@@ -120,7 +120,7 @@ export default {
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
         entries: [
           { find: /^src\//, replacement: __dirname + '/src/' },
-          { find: /^images/, replacement: __dirname + '/static/images' },
+          { find: /^static\//, replacement: __dirname + '/static/', customResolver: console.log },
         ],
       }),
       commonjs(),

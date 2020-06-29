@@ -42,7 +42,7 @@
       <H1 class="padded">
         Dashboard
         <Button outline href="/profile">
-          <svg src="images/icons/user.svg" class="mr" />
+          <svg src="static/images/icons/user.svg" class="mr" />
           go to profile
         </Button>
       </H1>

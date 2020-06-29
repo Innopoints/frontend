@@ -160,7 +160,7 @@
       </div>
     {/each}
     <Button outline on:click={() => createActivity(getBlankActivity())}>
-      <svg src="images/icons/plus.svg" class="mr" />
+      <svg src="static/images/icons/plus.svg" class="mr" />
       add {#if externalActivities.length > 0}another{/if} activity
     </Button>
   </div>

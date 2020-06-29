@@ -19,11 +19,11 @@
       <NotificationCenter />
       {#if user.is_admin}
         <Button href="/dashboard" round>
-          <svg src="images/icons/grid.svg" />
+          <svg src="static/images/icons/grid.svg" />
         </Button>
       {:else}
         <Button href="/profile" round>
-          <svg src="images/icons/user.svg" />
+          <svg src="static/images/icons/user.svg" />
         </Button>
       {/if}
     </div>

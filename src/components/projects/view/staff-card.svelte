@@ -57,7 +57,7 @@
   <div class="name">
     {moderator.full_name}
     {#if isCreator}
-      <svg class="star" src="images/icons/star.svg" />
+      <svg class="star" src="static/images/icons/star.svg" />
     {/if}
   </div>
   {#if $project.lifetime_stage === ProjectStages.FINALIZING && !review}
@@ -76,7 +76,7 @@
             disabled={enteredHours < 0}
             on:click={updateHours}
           >
-            <svg class="mr" src="images/icons/check.svg" />
+            <svg class="mr" src="static/images/icons/check.svg" />
             save
           </Button>
         {/if}

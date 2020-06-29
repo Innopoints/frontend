@@ -30,7 +30,7 @@
           </div>
         </div>
         <Button danger disabled>
-          <svg src="images/icons/trash-2.svg" class="mr" />
+          <svg src="static/images/icons/trash-2.svg" class="mr" />
           delete
         </Button>
       {:then id}
@@ -42,7 +42,7 @@
           />
         </div>
         <Button danger on:click={() => dispatch('delete', file)}>
-          <svg src="images/icons/trash-2.svg" class="mr" />
+          <svg src="static/images/icons/trash-2.svg" class="mr" />
           delete
         </Button>
       {:catch}
@@ -53,12 +53,12 @@
             alt="Upload failed"
           />
           <div class="status-overlay error">
-            <svg src="images/icons/x.svg" />
+            <svg src="static/images/icons/x.svg" />
             <p>Upload failed</p>
           </div>
         </div>
         <Button danger on:click={() => dispatch('delete', file)}>
-          <svg src="images/icons/trash-2.svg" class="mr" />
+          <svg src="static/images/icons/trash-2.svg" class="mr" />
           delete
         </Button>
       {/await}

@@ -81,7 +81,7 @@
   <AccordionSection on:panel-open>
     <div class="handle" slot="handle" let:toggle>
       <Button round on:click={toggle}>
-        <svg class="accordion-chevron" src="images/icons/chevron-down.svg" />
+        <svg class="accordion-chevron" src="static/images/icons/chevron-down.svg" />
       </Button>
       <div class="name">
         {application.applicant.full_name}
@@ -107,7 +107,7 @@
     {/if}
     {#if application.comment}
       <div class="with-icon">
-        <svg class="icon" src="images/icons/message-square.svg" />
+        <svg class="icon" src="static/images/icons/message-square.svg" />
         <div class="text">
           {application.comment}
         </div>

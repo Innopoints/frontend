@@ -90,14 +90,14 @@
     <div class="title">{activity.name}</div>
     <div class="row info">
       <Labeled icon label="Reward">
-        <svg slot="icon" class="icon mr" src="images/icons/gift.svg" />
+        <svg slot="icon" class="icon mr" src="static/images/icons/gift.svg" />
         <span class="content">
           {activity.reward_rate * activity.working_hours}
-          <svg src="images/innopoint-sharp.svg" />
+          <svg src="static/images/innopoint-sharp.svg" />
         </span>
       </Labeled>
       <Labeled icon label="Worktime">
-        <svg slot="icon" class="icon mr" src="images/icons/clock.svg" />
+        <svg slot="icon" class="icon mr" src="static/images/icons/clock.svg" />
         <div class="content">
           <div class="primary">
             {#if activity.fixed_reward}
@@ -114,7 +114,7 @@
     </div>
     {#if activity.application_deadline != null}
       <Notice warning>
-        <svg slot="icon" src="images/icons/alert-circle.svg" />
+        <svg slot="icon" src="static/images/icons/alert-circle.svg" />
         {#if new Date(activity.application_deadline) > new Date()}
           Apply before {formatDate(activity.application_deadline)}!
         {:else}
@@ -125,7 +125,7 @@
     {#if activity.description}
       <div class="additional description">
         <Labeled icon label="Description">
-          <svg slot="icon" class="icon mr" src="images/icons/align-left.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/align-left.svg" />
           <span class="content">
             {activity.description}
           </span>
@@ -140,7 +140,7 @@
     {#if activity.applications != null}
       {#if activity.applications.length !== 0}
         <Labeled icon class="additional volunteers" label="Accepted volunteers">
-          <svg slot="icon" class="icon mr" src="images/icons/users.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/users.svg" />
           <ul class="actual">
             {#each activity.applications as application (application.id)}
               <li>{application.applicant.full_name}</li>
@@ -156,7 +156,7 @@
         </Labeled>
       {:else}
         <Labeled icon class="additional spots" label="Vacant spots">
-          <svg slot="icon" class="icon mr" src="images/icons/users.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/users.svg" />
           <span class="content">
             {#if activity.people_required != null}
               {activity.vacant_spots || 'no more'} spot{s(activity.vacant_spots)} left
@@ -171,14 +171,14 @@
       <div class="additional application">
         <div class="label">My Application</div>
         <div class="with-icon comment">
-          <svg class="icon" src="images/icons/message-square.svg" />
+          <svg class="icon" src="static/images/icons/message-square.svg" />
           <div class="text">
             {activity.existing_application.comment || 'No comment.'}
           </div>
         </div>
         {#if activity.existing_application.status === ApplicationStatuses.APPROVED}
           <div class="with-icon">
-            <svg class="icon" src="images/icons/clock.svg" />
+            <svg class="icon" src="static/images/icons/clock.svg" />
             <div class="text">
               {activity.existing_application.actual_hours}
               actual working hour{s(activity.existing_application.actual_hours)}
@@ -201,7 +201,7 @@
     {/if}
     <div class="row">
       <Button on:click={() => activity.expanded = !activity.expanded}>
-        <svg class="mr chevron" src="images/icons/chevron-down.svg" />
+        <svg class="mr chevron" src="static/images/icons/chevron-down.svg" />
         {#if activity.expanded}
           collapse
         {:else}

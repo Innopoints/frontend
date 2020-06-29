@@ -97,7 +97,7 @@
               {$product.price || ''}
             </span>
             <svg
-              src="images/innopoint-sharp.svg"
+              src="static/images/innopoint-sharp.svg"
               class="innopoint"
               alt="innopoint{s($product.price)}"
             />

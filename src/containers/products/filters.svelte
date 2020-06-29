@@ -104,14 +104,14 @@
   <div class="dropdowns">
     <DropdownShell let:toggle>
       <Button on:click={toggle} class="handle">
-        <svg src="images/icons/order.svg" class="icon mr" />
+        <svg src="static/images/icons/order.svg" class="icon mr" />
         <span class="tight">order</span>
         <span class="regular">{selectedOrder.label}</span>
       </Button>
       <Dropdown>
         <div class="relative-wrapper order-options">
           <Button round neutral class="close" on:click={toggle}>
-            <svg src="images/icons/x.svg" />
+            <svg src="static/images/icons/x.svg" />
           </Button>
           <RadioGroup
             items={orderOptions}
@@ -124,7 +124,7 @@
     </DropdownShell>
     <DropdownShell let:toggle>
       <Button on:click={toggle} class="handle">
-        <svg src="images/icons/filter.svg" class="icon mr" />
+        <svg src="static/images/icons/filter.svg" class="icon mr" />
         filters
         {#if filtersActive}
           <Dot small class="ml" />
@@ -133,7 +133,7 @@
       <Dropdown right>
         <div class="relative-wrapper">
           <Button round neutral class="close" on:click={toggle}>
-            <svg src="images/icons/x.svg" />
+            <svg src="static/images/icons/x.svg" />
           </Button>
           <Button danger on:click={clearFilters}>clear filters</Button>
           <ul>
@@ -161,7 +161,7 @@
               </div>
               {#if balance != null}
                 <Button on:click={showAffordable} class="mt">
-                  <svg src="images/icons/tag.svg" class="icon mr" />
+                  <svg src="static/images/icons/tag.svg" class="icon mr" />
                   show affordable
                 </Button>
               {/if}

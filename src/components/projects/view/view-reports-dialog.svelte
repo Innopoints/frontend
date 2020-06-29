@@ -18,11 +18,11 @@
           <li class="report">
             <div class="data-points">
               <Labeled icon label="Report date">
-                <svg slot="icon" class="icon mr" src="images/icons/calendar.svg" />
+                <svg slot="icon" class="icon mr" src="static/images/icons/calendar.svg" />
                 {formatDate(report.time)}
               </Labeled>
               <Labeled icon label="Volunteering activity">
-                <svg slot="icon" class="icon mr" src="images/icons/zap.svg" />
+                <svg slot="icon" class="icon mr" src="static/images/icons/zap.svg" />
                 <p>
                   {report.application_on.activity.name} on
                   <a href="/projects/{report.application_on.activity.project.id}">
@@ -46,7 +46,7 @@
             text="No reports yet"
             subtext="Be sure to leave one when finalizing the project!"
           >
-            <img src="images/view-project/no-applications.svg" alt="" />
+            <img src="/images/view-project/no-applications.svg" alt="" />
           </EmptyState>
         {/each}
       </ul>

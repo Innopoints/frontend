@@ -22,9 +22,9 @@
 <div class="activity-questions">
   <DropdownShell let:toggle>
     <Button on:click={toggle}>
-      <svg src="images/icons/message-circle.svg" class="mr" />
+      <svg src="static/images/icons/message-circle.svg" class="mr" />
       customize
-      <svg src="images/icons/chevron-down.svg" class="ml dropdown-chevron" />
+      <svg src="static/images/icons/chevron-down.svg" class="ml dropdown-chevron" />
     </Button>
     <Dropdown top>
       <Label class="mb">Feedback questions</Label>
@@ -37,17 +37,17 @@
             title="Delete question"
             on:click={(e) => { e.stopPropagation(); removeValue(i); }}
           >
-            <svg src="images/icons/trash-2.svg" />
+            <svg src="static/images/icons/trash-2.svg" />
           </Button>
         </div>
       {/each}
       <div class="actions">
         <Button on:click={addValue}>
-          <svg src="images/icons/plus.svg" class="mr" />
+          <svg src="static/images/icons/plus.svg" class="mr" />
           add
         </Button>
         <Button on:click={toggle} filled>
-          <svg src="images/icons/check.svg" class="mr" />
+          <svg src="static/images/icons/check.svg" class="mr" />
           save
         </Button>
       </div>

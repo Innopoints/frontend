@@ -35,13 +35,13 @@
   </p>
   {#if step > 1}
     <Button href="/projects/new?step={step - 1}" class="back">
-      <svg src="images/icons/arrow-left.svg" class="mr" />
+      <svg src="static/images/icons/arrow-left.svg" class="mr" />
       go back
     </Button>
   {/if}
   {#if step > 0 && step < 3}
     <Button filled href="/projects/new?step={step + 1}" class="forward">
-      <svg src="images/icons/arrow-right.svg" class="mr" />
+      <svg src="static/images/icons/arrow-right.svg" class="mr" />
       next step
     </Button>
   {:else if step === 3}

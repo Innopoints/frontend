@@ -116,7 +116,7 @@
     || notificationPermission === permissions.DENIED}
     <header>
       <Notice>
-        <svg src="images/icons/alert-triangle.svg" class="icon" slot="icon" />
+        <svg src="static/images/icons/alert-triangle.svg" class="icon" slot="icon" />
         <div class="message">
           <p>
             Push notifications require permission before they can be used.

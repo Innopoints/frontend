@@ -30,7 +30,7 @@
     Create a Project
     {#if saved}
       <span class="autosave visible">
-        <svg src="images/icons/check.svg" class="icon mr" />
+        <svg src="static/images/icons/check.svg" class="icon mr" />
         draft auto-saved
       </span>
     {/if}

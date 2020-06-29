@@ -12,7 +12,7 @@
 
 <header class={classes('padded', _class)}>
   <a class="logo" href="/" rel="prefetch">
-    <img src="images/innou-icon.svg" alt="Go to the home page" />
+    <img src="/images/innou-icon.svg" alt="Go to the home page" />
     <span class="hide-on-less-tb">Innopoints</span>
   </a>
   <div class="actions">
@@ -25,11 +25,11 @@
       {:else}
         {#if user.is_admin}
           <Button href="/dashboard" round>
-            <svg src="images/icons/grid.svg" />
+            <svg src="static/images/icons/grid.svg" />
           </Button>
         {:else}
           <Button href="/profile" round>
-            <svg src="images/icons/user.svg" />
+            <svg src="static/images/icons/user.svg" />
           </Button>
         {/if}
       {/if}

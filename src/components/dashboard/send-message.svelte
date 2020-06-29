@@ -35,7 +35,7 @@
 
 <div class="send-message">
   <header>
-    <svg src="images/icons/message-circle.svg" class="icon mr-2" />
+    <svg src="static/images/icons/message-circle.svg" class="icon mr-2" />
     Send a message
   </header>
   <div class="form">
@@ -48,7 +48,7 @@
     />
     <div class="actions">
       <Button disabled={!text || users.length === 0} on:click={send}>
-        <svg src="images/icons/send.svg" class="mr" />
+        <svg src="static/images/icons/send.svg" class="mr" />
         send
       </Button>
     </div>

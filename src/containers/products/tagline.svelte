@@ -31,11 +31,11 @@
   {#if account && account.is_admin}
     <div class="actions">
       <Button outline rectangle href="/products/new">
-        <svg src="images/icons/plus.svg" class="mr" />
+        <svg src="static/images/icons/plus.svg" class="mr" />
         create new product
       </Button>
       <Button outline rectangle href="/dashboard">
-        <svg src="images/icons/shopping-bag.svg" class="mr" />
+        <svg src="static/images/icons/shopping-bag.svg" class="mr" />
         manage purchases
         {#if dotShown}
           <Dot small class="ml" />

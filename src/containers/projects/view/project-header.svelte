@@ -89,9 +89,9 @@
       <Notice warning>
         <div slot="icon">
           {#if $project.review_status === ReviewStatuses.PENDING}
-            <svg class="icon" src="images/icons/info.svg" />
+            <svg class="icon" src="static/images/icons/info.svg" />
           {:else if $project.review_status === ReviewStatuses.REJECTED}
-            <svg class="icon" src="images/icons/alert-circle.svg" />
+            <svg class="icon" src="static/images/icons/alert-circle.svg" />
           {/if}
         </div>
         {#if $project.review_status === ReviewStatuses.PENDING}
@@ -108,13 +108,13 @@
     {/if}
     <div class="data-points">
       <Labeled icon label="When">
-        <svg slot="icon" class="icon mr" src="images/icons/calendar.svg" />
+        <svg slot="icon" class="icon mr" src="static/images/icons/calendar.svg" />
         <div class="date-range">
           {formatDateRange({ start: $project.start_date, end: $project.end_date })}
         </div>
       </Labeled>
       <Labeled icon label="Staff">
-        <svg slot="icon" class="icon mr" src="images/icons/user.svg" />
+        <svg slot="icon" class="icon mr" src="static/images/icons/user.svg" />
         <div class="staff">
           {#each $project.moderators as moderator (moderator.email)}
             <a href="mailto:{moderator.email}">
@@ -128,7 +128,7 @@
            && moderatorMode
            && $project.admin_feedback != null}
         <Labeled icon label="Administrator's feedback">
-          <svg slot="icon" class="icon mr" src="images/icons/message-square.svg" />
+          <svg slot="icon" class="icon mr" src="static/images/icons/message-square.svg" />
           <div class="admin-feedback">
             {$project.admin_feedback}
           </div>
@@ -141,21 +141,21 @@
       <div class="actions">
         {#if $project.lifetime_stage === ProjectStages.ONGOING}
           <Button outline href="/projects/{$project.id}/edit">
-            <svg class="mr" src="images/icons/edit.svg" />
+            <svg class="mr" src="static/images/icons/edit.svg" />
             edit
           </Button>
           <Button outline danger on:click={() => projectDeletionDialogOpen = true}>
-            <svg class="mr" src="images/icons/trash-2.svg" />
+            <svg class="mr" src="static/images/icons/trash-2.svg" />
             delete
           </Button>
           <Button outline class="finalize" on:click={() => finalizeDialogOpen = true}>
-            <svg class="mr" src="images/icons/check-circle.svg" />
+            <svg class="mr" src="static/images/icons/check-circle.svg" />
             finalize
           </Button>
         {:else if $project.lifetime_stage === ProjectStages.FINALIZING
                   && $project.review_status !== ReviewStatuses.PENDING}
           <Button filled on:click={submitForReview}>
-            <svg class="mr" src="images/icons/check-circle.svg" />
+            <svg class="mr" src="static/images/icons/check-circle.svg" />
             submit for review
           </Button>
         {/if}
@@ -168,7 +168,7 @@
             class="review"
             href="/projects/{$project.id}/review"
           >
-            <svg class="mr" src="images/icons/clipboard.svg" />
+            <svg class="mr" src="static/images/icons/clipboard.svg" />
             review
           </Button>
         {/if}

@@ -81,7 +81,7 @@
 
 <Card class="tag-editor">
   <div class="title">
-    <svg src="images/icons/tag.svg" class="icon" />
+    <svg src="static/images/icons/tag.svg" class="icon" />
     Project tags
   </div>
   <ul>
@@ -103,7 +103,7 @@
             class="ml"
             on:click={() => { tag.forDeletion = true; modifiedTags = modifiedTags; }}
           >
-            <svg class="mr" src="images/icons/trash-2.svg" />
+            <svg class="mr" src="static/images/icons/trash-2.svg" />
             delete
           </Button>
         {/if}
@@ -113,12 +113,12 @@
 
   <div class="actions">
     <Button on:click={addNewTag}>
-      <svg class="mr" src="images/icons/plus.svg" />
+      <svg class="mr" src="static/images/icons/plus.svg" />
       add a new tag
     </Button>
     {#if isChanged}
       <Button filled on:click={saveTags} class="ml-2">
-        <svg class="mr" src="images/icons/check.svg" />
+        <svg class="mr" src="static/images/icons/check.svg" />
         save
       </Button>
     {/if}

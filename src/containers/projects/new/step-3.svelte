@@ -52,9 +52,9 @@
       <p>This step is <strong>optional</strong>.</p>
       <DropdownShell let:toggle>
         <Button on:click={toggle}>
-          <svg src="images/icons/help-circle.svg" class="mr" />
+          <svg src="static/images/icons/help-circle.svg" class="mr" />
           who are moderators?
-          <svg src="images/icons/chevron-down.svg" class="ml dropdown-chevron" />
+          <svg src="static/images/icons/chevron-down.svg" class="ml dropdown-chevron" />
         </Button>
         <Dropdown>
           <p>Moderators can process applications from volunteers and edit activities.</p>

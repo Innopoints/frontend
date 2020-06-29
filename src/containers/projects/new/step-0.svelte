@@ -76,7 +76,7 @@
       <DropdownShell let:toggle>
         <Button on:click={toggle}>
           what is a project?
-          <svg class="ml dropdown-chevron" src="images/icons/chevron-down.svg" />
+          <svg class="ml dropdown-chevron" src="static/images/icons/chevron-down.svg" />
         </Button>
         <Dropdown>
           A project could be an event, an olympiad or any other volunteering opportunity. <br />
@@ -84,7 +84,7 @@
         </Dropdown>
       </DropdownShell>
     </div>
-    <img class="illustration" src="images/create-project/create-project.svg" alt="" />
+    <img class="illustration" src="/images/create-project/create-project.svg" alt="" />
   </div>
 
   <div class="right">
@@ -110,14 +110,14 @@
               on:click={showPrevDraft}
               disabled={shownDraftIndex === 0}
             >
-              <svg src="images/icons/chevron-left.svg" />
+              <svg src="static/images/icons/chevron-left.svg" />
             </Button>
             <Button
               round
               on:click={showNextDraft}
               disabled={shownDraftIndex + 1 === drafts.length}
             >
-              <svg src="images/icons/chevron-right.svg" />
+              <svg src="static/images/icons/chevron-right.svg" />
             </Button>
           </nav>
         {/if}
@@ -135,18 +135,18 @@
       Jumpstart your project with a template:
       <div class="actions">
         <Button outline rectangle on:click={() => startProject(getOlympiad())}>
-          <svg src="images/icons/award.svg" class="mr" />
+          <svg src="static/images/icons/award.svg" class="mr" />
           Olympiad
         </Button>
         <Button outline rectangle on:click={() => startProject(getStudentParty())}>
-          <svg src="images/icons/speaker.svg" class="mr" />
+          <svg src="static/images/icons/speaker.svg" class="mr" />
           Student Party
         </Button>
       </div>
       Or start completely from scratch:
       <div class="actions">
         <Button outline rectangle on:click={() => startProject(getBlankProject())}>
-          <svg src="images/icons/package.svg" class="mr" />
+          <svg src="static/images/icons/package.svg" class="mr" />
           Blank Project
         </Button>
       </div>

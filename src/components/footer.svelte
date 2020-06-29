@@ -9,7 +9,7 @@
 <footer>
   <div class="to-top">
     <Button filled on:click={scrollToTop}>
-      <svg src="images/icons/arrow-up.svg" class="mr" />
+      <svg src="static/images/icons/arrow-up.svg" class="mr" />
       back to top
     </Button>
   </div>
@@ -17,25 +17,25 @@
     <div class="left space-between">
       <div>
         <a href="/" class="title-container">
-          <svg src="images/innou-icon-white.svg" class="logo" />
+          <svg src="static/images/innou-icon-white.svg" class="logo" />
           <span class="title">Innopoints</span>
         </a>
 
         <div class="socials space-between">
           <a href="https://vk.com/innopolisu">
-            <img src="images/footer/vk.svg" alt="" />
+            <img src="/images/footer/vk.svg" alt="" />
           </a>
           <a href="https://www.facebook.com/InnopolisU">
-            <img src="images/footer/facebook.svg" alt="" />
+            <img src="/images/footer/facebook.svg" alt="" />
           </a>
           <a href="https://twitter.com/@InnopolisU">
-            <img src="images/footer/twitter.svg" alt="" />
+            <img src="/images/footer/twitter.svg" alt="" />
           </a>
           <a href="https://www.instagram.com/innopolisu/">
-            <img src="images/footer/instagram.svg" alt="" />
+            <img src="/images/footer/instagram.svg" alt="" />
           </a>
           <a href="https://www.youtube.com/user/InnopolisU">
-            <img src="images/footer/youtube.svg" alt="" />
+            <img src="/images/footer/youtube.svg" alt="" />
           </a>
         </div>
       </div>
@@ -48,7 +48,7 @@
       </span>
     </div>
     <div class="right">
-      <img src="images/footer/pointer.svg" class="pointer" alt="" />
+      <img src="/images/footer/pointer.svg" class="pointer" alt="" />
       <Card>
         <p>The new Innopoints website is finally here! Exciting.</p>
         <p>

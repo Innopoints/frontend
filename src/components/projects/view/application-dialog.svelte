@@ -68,7 +68,7 @@
             maxlength={32}
             placeholder="username"
           >
-            <svg src="images/icons/at-sign.svg" class="item" />
+            <svg src="static/images/icons/at-sign.svg" class="item" />
           </TextField>
         </FormField>
         <div class="actions">
