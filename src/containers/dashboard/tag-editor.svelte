@@ -45,19 +45,19 @@
 
     try {
       const requests = [];
-      for (let tag of toCreate.filter(thatTag => !thatTag.forDeletion)) {
+      for (const tag of toCreate.filter(thatTag => !thatTag.forDeletion)) {
         delete tag.forDeletion;
         requests.push(api.json(api.post('/tags', {
           data: tag,
           csrfToken: account.csrf_token,
         })));
       }
-      for (let tag of toDelete.filter(thatTag => thatTag.id != null)) {
+      for (const tag of toDelete.filter(thatTag => thatTag.id != null)) {
         requests.push(api.json(api.del(`/tags/${tag.id}`, {
           csrfToken: account.csrf_token,
         })));
       }
-      for (let tag of toEdit.filter(thatTag => !thatTag.forDeletion)) {
+      for (const tag of toEdit.filter(thatTag => !thatTag.forDeletion)) {
         requests.push(api.json(api.patch(`/tags/${tag.id}`, {
           data: { name: tag.name },
           csrfToken: account.csrf_token,

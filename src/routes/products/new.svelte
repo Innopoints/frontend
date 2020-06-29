@@ -40,7 +40,7 @@
       $colors.forEach(color => color.disabled = false);
       return $colors;
     });
-    for (let variety of $product.varieties) {
+    for (const variety of $product.varieties) {
       if (variety.color != null) {
         colors.update($colors => {
           $colors.find(color => color.value === variety.color).disabled = true;
