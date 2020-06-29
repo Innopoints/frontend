@@ -89,7 +89,7 @@
   }
 
   function propagateDates({ detail }) {
-    for (let activity of $project.activities) {
+    for (const activity of $project.activities) {
       if (activity.internal) {
         continue;
       }
@@ -110,7 +110,7 @@
   }
 
   function propagateQuestions({ detail }) {
-    for (let activity of $project.activities) {
+    for (const activity of $project.activities) {
       if (activity.internal) {
         continue;
       }

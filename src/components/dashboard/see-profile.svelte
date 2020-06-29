@@ -6,7 +6,7 @@
   export let users = [];
 
   function open() {
-    for (let user of users) {
+    for (const user of users) {
       const otherWindow = window.open('/profile?user=' + user.email, '_blank');
       if (otherWindow == null) {
         console.warn('New tab blocked by pop-up blocker');

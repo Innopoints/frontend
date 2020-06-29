@@ -28,7 +28,7 @@
 
   async function saveHours() {
     const requests = [];
-    for (let [application, hours] of hourChanges) {
+    for (const [application, hours] of hourChanges) {
       requests.push(api.json(api.patch(
         `/projects/${activity.project}/activities/${activity.id}/applications/${application.id}`,
         { data: { actual_hours: hours }, csrfToken: account.csrf_token },

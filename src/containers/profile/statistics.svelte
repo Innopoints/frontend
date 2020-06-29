@@ -11,7 +11,7 @@
 
   function indexify(objectArray) {
     const map = new Map();
-    for (let object of objectArray) {
+    for (const object of objectArray) {
       map.set(object.id, object.amount);
     }
     return map;

@@ -5,7 +5,7 @@ import setNullSafe from 'src/utils/set-null-safe.js';
 export function groupByColor(varieties) {
   const grouping = new Map();
 
-  for (let variety of varieties) {
+  for (const variety of varieties) {
     if (grouping.has(variety.color)) {
       grouping.get(variety.color).push(variety);
     } else {
@@ -20,7 +20,7 @@ export function groupByColor(varieties) {
 export function groupByID(varieties) {
   const grouping = new Map();
 
-  for (let variety of varieties) {
+  for (const variety of varieties) {
     grouping.set(variety.id, variety);
   }
 
@@ -33,13 +33,13 @@ export function prepareAfterBackend(product) {
 
   product.sized = product.varieties[0].size != null;
   product.varieties = [];
-  for (let color of varietiesByColor.keys()) {
+  for (const color of varietiesByColor.keys()) {
     let varieties = varietiesByColor.get(color);
     let thisColorVariety = Object.assign({}, varieties[0]);
 
     if (product.sized) {
       thisColorVariety.sizes = {};
-      for (let variety of varieties) {
+      for (const variety of varieties) {
         thisColorVariety.sizes[variety.size] = variety.amount;
       }
       thisColorVariety.quantity = 0;
@@ -71,13 +71,13 @@ export function computeDiffs(product, reference) {
     deletedVarieties: null,
   };
 
-  for (let field of ['name', 'type', 'description', 'price']) {
+  for (const field of ['name', 'type', 'description', 'price']) {
     if (product[field] !== reference[field]) {
       diffs.fields = setNullSafe(diffs.fields, field, product[field]);
     }
   }
 
-  for (let variety of product.varieties) {
+  for (const variety of product.varieties) {
     const corresponding = reference.varieties.findIndex(
       candidate => candidate.color == variety.color && candidate.size == variety.size,
     );

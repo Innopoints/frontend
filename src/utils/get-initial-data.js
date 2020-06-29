@@ -4,7 +4,7 @@ import * as api from 'src/utils/api.js';
 export default async function getInitialData(context, session, mapping) {
   const requests = new Map();
   const result = {};
-  for (let key of mapping.keys()) {
+  for (const key of mapping.keys()) {
     let settings = mapping.get(key);
     requests.set(key, api.get.call(
       context,
@@ -13,7 +13,7 @@ export default async function getInitialData(context, session, mapping) {
     ));
   }
 
-  for (let key of requests.keys()) {
+  for (const key of requests.keys()) {
     try {
       let resp = await requests.get(key);
 

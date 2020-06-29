@@ -45,7 +45,7 @@
       $colors.forEach(color => color.disabled = false);
       return $colors;
     });
-    for (let variety of $product.varieties) {
+    for (const variety of $product.varieties) {
       if (variety.color != null) {
         colors.update($colors => {
           $colors.find(color => color.value === variety.color).disabled = true;
@@ -129,14 +129,14 @@
       )));
     }
 
-    for (let newVariety of diffs.newVarieties) {
+    for (const newVariety of diffs.newVarieties) {
       requests.push(api.json(api.post(
         `/products/${$product.id}/varieties`,
         { data: newVariety, csrfToken: account.csrf_token },
       )));
     }
 
-    for (let modifiedVariety of diffs.modifiedVarieties) {
+    for (const modifiedVariety of diffs.modifiedVarieties) {
       const id = modifiedVariety.id;
       delete modifiedVariety.id;
       requests.push(api.json(api.patch(
@@ -145,7 +145,7 @@
       )));
     }
 
-    for (let deletedVariety of diffs.deletedVarieties) {
+    for (const deletedVariety of diffs.deletedVarieties) {
       requests.push(api.json(api.del(
         `/products/${$product.id}/varieties/${deletedVariety.id}`,
         { csrfToken: account.csrf_token },
