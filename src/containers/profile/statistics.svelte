@@ -41,7 +41,7 @@
       <header>
         <svg src="images/icons/star.svg" class="icon" />
         Volunteer rating
-        <span class="rating">{statistics.rating}</span>
+        <span class="rating">{Math.round((statistics.rating + Number.EPSILON) * 100) / 100}</span>
       </header>
     </div>
   </div>
