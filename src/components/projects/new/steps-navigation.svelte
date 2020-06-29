@@ -1,6 +1,6 @@
 <script>
   import { DropdownShell, Dropdown, Button } from 'attractions';
-  import stepNames from 'src/constants/projects/step-names';
+  import stepNames from 'src/constants/projects/step-names.js';
 
   export let step;
 </script>
