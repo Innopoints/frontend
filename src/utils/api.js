@@ -12,7 +12,7 @@ if (API_HOST == null) {
 function request(method, url, options) {
   const formDataClass = process.browser ? FormData : require('url').URLSearchParams;
 
-  let actualOptions = {
+  const actualOptions = {
     method,
     headers: options && options.headers || {},
     signal: options && options.signal,

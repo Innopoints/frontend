@@ -34,7 +34,7 @@
   export let sizes;
   export let account;
 
-  let product = writable(getBlankProduct());
+  const product = writable(getBlankProduct());
   const unsubscribe = product.subscribe(function disableChosenColors($product) {
     colors.update($colors => {
       $colors.forEach(color => color.disabled = false);

@@ -8,7 +8,7 @@
   export let open = false;
   export let uploading = false;
 
-  let crop = { x: 0, y: 0 };
+  const crop = { x: 0, y: 0 };
   let pixels = null;
 
   function saveBounds(event) {

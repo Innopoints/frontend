@@ -34,8 +34,8 @@ export function prepareAfterBackend(product) {
   product.sized = product.varieties[0].size != null;
   product.varieties = [];
   for (const color of varietiesByColor.keys()) {
-    let varieties = varietiesByColor.get(color);
-    let thisColorVariety = Object.assign({}, varieties[0]);
+    const varieties = varietiesByColor.get(color);
+    const thisColorVariety = Object.assign({}, varieties[0]);
 
     if (product.sized) {
       thisColorVariety.sizes = {};

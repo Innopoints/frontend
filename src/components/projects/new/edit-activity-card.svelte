@@ -32,7 +32,7 @@
   const { session } = stores();
 
   export let activity;
-  let initialCopy = copyActivity(activity);
+  const initialCopy = copyActivity(activity);
   let notDraft = !activity.draft;
   $: activity.draft = !notDraft;
   export let competences;

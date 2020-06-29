@@ -12,8 +12,8 @@
   export let varieties = [];
   export let short = false;
 
-  let varietiesByColor = groupByColor(varieties);
-  let colors = [...varietiesByColor.keys()];
+  const varietiesByColor = groupByColor(varieties);
+  const colors = [...varietiesByColor.keys()];
   let selectedColor = colors[0];
   $: imageURL = (
     varietiesByColor.get(selectedColor)[0].images.length !== 0 ?

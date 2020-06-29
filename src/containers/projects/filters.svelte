@@ -6,7 +6,7 @@
   export let orderOptions;
   export let selectedOrder;
 
-  let filtering = {
+  const filtering = {
     searchQuery: '',
     order: selectedOrder,
   };

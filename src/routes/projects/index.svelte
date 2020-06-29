@@ -24,7 +24,7 @@
   export let projects;
   export let account;
 
-  let selectedOrder = orderOptions[0];
+  const selectedOrder = orderOptions[0];
   let snackbarContainer = null;
 
   async function updateProjects(filtering) {
@@ -51,7 +51,7 @@
   }
 
   function filterProps(props) {
-    let newProps = Object.assign({}, props);
+    const newProps = Object.assign({}, props);
     delete newProps.creation_time;
     delete newProps.moderators;
     delete newProps.review_status;

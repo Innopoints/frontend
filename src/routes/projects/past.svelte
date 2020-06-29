@@ -27,10 +27,10 @@
   export let projects;
   export let account;
   export let pages;
-  let currentPage = 1;
+  const currentPage = 1;
 
   function filterProps(props) {
-    let newProps = Object.assign({}, props);
+    const newProps = Object.assign({}, props);
     delete newProps.creation_time;
     delete newProps.moderators;
     delete newProps.review_status;

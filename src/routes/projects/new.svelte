@@ -40,7 +40,7 @@
   export let competences;
 
   let lastSyncedProject = null;
-  let project = writable(null);
+  const project = writable(null);
   let saveProjectDebounce = null;
   const unsubscribe = project.subscribe(function(projectObject) {
     clearTimeout(saveProjectDebounce);
@@ -48,7 +48,7 @@
   });
   onDestroy(unsubscribe);
 
-  let autosaved = writable(false);
+  const autosaved = writable(false);
   let snackbarContainer = null;
 
   // Step management

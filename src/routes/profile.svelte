@@ -24,7 +24,7 @@
       requestedEmail = session.account.email;
     }
 
-    let timelineFetchedUntil = new Date();
+    const timelineFetchedUntil = new Date();
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - monthGap);
     const data = await getInitialData(this, session, new Map([
       ['account', `/accounts/${requestedEmail}`],

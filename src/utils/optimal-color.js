@@ -2,7 +2,7 @@ function trimHex(color) {
   if (!color) {
     return '';
   }
-  let unhashed = color.replace(/[^0-9a-f]/gi, '');
+  const unhashed = color.replace(/[^0-9a-f]/gi, '');
   if (unhashed.length === 3) {
     return unhashed.split('').map(x => x.repeat(2)).join('');
   }
@@ -33,15 +33,15 @@ function getContrast(background, content) {
 function rgbToHsl([r, g, b]) {
   r /= 255; g /= 255; b /= 255;
 
-  let maxComp = Math.max(r, g, b);
-  let minComp = Math.min(r, g, b);
+  const maxComp = Math.max(r, g, b);
+  const minComp = Math.min(r, g, b);
 
   let h, s;
-  let l = (minComp + maxComp) / 2;
+  const l = (minComp + maxComp) / 2;
   if (maxComp === minComp) {
     h = s = 0;
   } else {
-    let delta = maxComp - minComp;
+    const delta = maxComp - minComp;
     s = (l > 0.5 ? delta / (2 - maxComp - minComp) : delta / (maxComp + minComp));
 
     /* eslint-disable indent */
@@ -75,13 +75,13 @@ export default function getBackground(color) {
     return null;
   }
 
-  let r = parseInt(color.slice(0, 2), 16);
-  let g = parseInt(color.slice(2, 4), 16);
-  let b = parseInt(color.slice(4, 6), 16);
+  const r = parseInt(color.slice(0, 2), 16);
+  const g = parseInt(color.slice(2, 4), 16);
+  const b = parseInt(color.slice(4, 6), 16);
 
-  let [h, s] = rgbToHsl([r, g, b]);
-  let contrast = getContrast([255, 255, 255], [r, g, b]);
-  let bgL = (contrast > 1.08 ? 0.97 : 0.96);
+  const [h, s] = rgbToHsl([r, g, b]);
+  const contrast = getContrast([255, 255, 255], [r, g, b]);
+  const bgL = (contrast > 1.08 ? 0.97 : 0.96);
 
   return `background: hsl(${Math.floor(h * 360)}, ${s * 100}%, ${bgL * 100}%);`;
 }

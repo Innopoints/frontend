@@ -3,7 +3,7 @@
   const productLimit = 24;
 
   export async function preload(page, session) {
-    let { products, colors } = await getInitialData(this, session, new Map([
+    const { products, colors } = await getInitialData(this, session, new Map([
       ['products', `/products?limit=${productLimit}`],
       ['colors', `/colors`],
     ]));
@@ -37,8 +37,8 @@
   export let colors;
   export let account;
 
-  let balance = account && account.balance;
-  let selectedOrder = orderOptions[0];
+  const balance = account && account.balance;
+  const selectedOrder = orderOptions[0];
   let currentPage = 1;
 
   let newArrivals = null;
