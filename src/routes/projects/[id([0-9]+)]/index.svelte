@@ -42,8 +42,9 @@
     && (account.is_admin || moderatorEmails.includes(account.email))
   );
   $: firstActivities = (
-    $project.activities.slice(0, 3)
+    $project.activities
       .filter(activity => !activity.internal)
+      .slice(0, 3)
       .map(activity => activity.name)
       .join(', ')
   );
