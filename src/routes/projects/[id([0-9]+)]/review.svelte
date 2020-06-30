@@ -23,8 +23,7 @@
 
 <script>
   import { setContext } from 'svelte';
-  import { SnackbarContainer, H2 } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { H2 } from 'attractions';
   import ProjectHeader from 'src/containers/projects/view/project-header.svelte';
   import ModeratorView from 'src/containers/projects/view/moderator-view.svelte';
   import StaffCards from 'src/containers/projects/view/staff-cards.svelte';
@@ -41,16 +40,14 @@
   <title>Review {$project.name} – Innopoints</title>
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
-  <div class="material">
-    <ProjectHeader {project} {account} {tags} />
+<div class="material">
+  <ProjectHeader {project} {account} {tags} />
 
-    <H2 class="padded">Project Staff</H2>
-    <StaffCards review {project} {account} />
+  <H2 class="padded">Project Staff</H2>
+  <StaffCards review {project} {account} />
 
-    <H2 class="padded">Activities</H2>
-    <ModeratorView {account} {project} {competences} />
-  </div>
-</SnackbarContainer>
+  <H2 class="padded">Activities</H2>
+  <ModeratorView {account} {project} {competences} />
+</div>
 
 <style src="../../../../static/css/routes/projects/view/index.scss"></style>

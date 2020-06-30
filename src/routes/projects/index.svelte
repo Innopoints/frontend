@@ -11,9 +11,10 @@
 </script>
 
 <script>
+  import { getContext } from 'svelte';
   import Tagline from 'src/containers/projects/tagline.svelte';
-  import { H1, Button, SnackbarContainer } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { H1, Button } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import ProjectCard from 'src/components/projects/project-card.svelte';
   import Filters from 'src/containers/projects/filters.svelte';
   import EmptyState from 'src/components/common/empty-state.svelte';
@@ -24,7 +25,6 @@
   export let account;
 
   const selectedOrder = orderOptions[0];
-  let snackbarContainer = null;
 
   async function updateProjects(filtering) {
     const query = new Map();
@@ -38,13 +38,7 @@
     try {
       projects = await api.json(api.get('/projects', { query }));
     } catch (e) {
-      if (snackbarContainer != null) {
-        snackbarContainer.showSnackbar({
-          props: {
-            text: 'Couldn\'t apply filters, try reloading the page',
-          },
-        });
-      }
+      showSnackbar({ props: { text: 'Couldn\'t apply filters, try reloading the page' } });
       console.error(e);
     }
   }
@@ -57,6 +51,8 @@
     delete newProps.tags;
     return newProps;
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <svelte:head>
@@ -66,57 +62,55 @@
   <meta name="og:description" content="If you’re seeking an opportunity to contribute to the wonderful world of Innopolis projects, you’re in the right place." />
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-  <div class="material">
-    <Tagline {account} />
+<div class="material">
+  <Tagline {account} />
 
-    <section class="projects padded">
-      <H1><span class="text">Ongoing Projects</span></H1>
-      <Filters
-        {selectedOrder} {orderOptions}
-        on:change-filters={({ detail: filtering }) => updateProjects(filtering)}
-      />
-      {#if !projects || projects.length === 0}
-        <EmptyState>
-          <figure>
-            <img class="picture" src="/images/projects/no-projects.svg" alt="" />
-            <figcaption>
-              <div class="title">No projects found...</div>
-              {#if account}
-                But you can
-                <a href="/projects/new" rel="prefetch">create a project</a>
-                right now!
-              {/if}
-            </figcaption>
-          </figure>
-        </EmptyState>
-      {:else}
-        <div class="cards">
-          {#each projects as project (project.id)}
-            <ProjectCard
-              moderated={account && project.moderators.some(
-                x => x.email === account.email,
-              )}
-              {...filterProps(project)}
-            />
-          {/each}
-        </div>
-      {/if}
-    </section>
+  <section class="projects padded">
+    <H1><span class="text">Ongoing Projects</span></H1>
+    <Filters
+      {selectedOrder} {orderOptions}
+      on:change-filters={({ detail: filtering }) => updateProjects(filtering)}
+    />
+    {#if !projects || projects.length === 0}
+      <EmptyState>
+        <figure>
+          <img class="picture" src="/images/projects/no-projects.svg" alt="" />
+          <figcaption>
+            <div class="title">No projects found...</div>
+            {#if account}
+              But you can
+              <a href="/projects/new" rel="prefetch">create a project</a>
+              right now!
+            {/if}
+          </figcaption>
+        </figure>
+      </EmptyState>
+    {:else}
+      <div class="cards">
+        {#each projects as project (project.id)}
+          <ProjectCard
+            moderated={account && project.moderators.some(
+              x => x.email === account.email,
+            )}
+            {...filterProps(project)}
+          />
+        {/each}
+      </div>
+    {/if}
+  </section>
 
-    <div class="justify-center">
-      <Button href="/projects/past">
-        <svg src="static/images/icons/book-open.svg" class="icon mr" />
-        see past projects
-      </Button>
-    </div>
-
-    <p class="link-bottom padded">
-      What’s so cool about being a volunteer? The
-      <a href="/products" rel="prefetch">InnoStore</a>
-      has your answers!
-    </p>
+  <div class="justify-center">
+    <Button href="/projects/past">
+      <svg src="static/images/icons/book-open.svg" class="icon mr" />
+      see past projects
+    </Button>
   </div>
-</SnackbarContainer>
+
+  <p class="link-bottom padded">
+    What’s so cool about being a volunteer? The
+    <a href="/products" rel="prefetch">InnoStore</a>
+    has your answers!
+  </p>
+</div>
 
 <style src="../../../static/css/routes/projects/index.scss"></style>

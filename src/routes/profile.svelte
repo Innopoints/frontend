@@ -63,8 +63,7 @@
 
 <script>
   import Info from 'src/containers/profile/info.svelte';
-  import { Card, Tabs, SnackbarContainer } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { Card, Tabs } from 'attractions';
   import Timeline from 'src/containers/profile/timeline.svelte';
   import Statistics from 'src/containers/profile/statistics.svelte';
   import Notifications from 'src/containers/profile/notifications.svelte';
@@ -121,28 +120,26 @@
   <title>Profile – Innopoints</title>
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
-  <div class="material">
-    <Info {account} />
-    <Card>
-      <Tabs class="tabs" name="nav-tabs" items={Object.values(tabs)} bind:value={activeTab} />
-      {#if activeTab === tabs.timeline}
-        <Timeline
-          {timelinePromises}
-          {competences}
-          on:more-timeline={fetchMoreTimeline}
-        />
-      {:else if activeTab === tabs.statistics}
-        <Statistics
-          {statistics}
-          {competences}
-          on:period-change={updateStatistics}
-        />
-      {:else if activeTab === tabs.notifications}
-        <Notifications {account} {notificationSettings} />
-      {/if}
-    </Card>
-  </div>
-</SnackbarContainer>
+<div class="material">
+  <Info {account} />
+  <Card>
+    <Tabs class="tabs" name="nav-tabs" items={Object.values(tabs)} bind:value={activeTab} />
+    {#if activeTab === tabs.timeline}
+      <Timeline
+        {timelinePromises}
+        {competences}
+        on:more-timeline={fetchMoreTimeline}
+      />
+    {:else if activeTab === tabs.statistics}
+      <Statistics
+        {statistics}
+        {competences}
+        on:period-change={updateStatistics}
+      />
+    {:else if activeTab === tabs.notifications}
+      <Notifications {account} {notificationSettings} />
+    {/if}
+  </Card>
+</div>
 
 <style src="../../static/css/routes/profile.scss"></style>

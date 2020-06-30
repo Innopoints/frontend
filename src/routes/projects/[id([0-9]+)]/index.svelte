@@ -18,8 +18,7 @@
 
 <script>
   import { setContext } from 'svelte';
-  import { SnackbarContainer, H2 } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { H2 } from 'attractions';
   import ProjectHeader from 'src/containers/projects/view/project-header.svelte';
   import UserView from 'src/containers/projects/view/user-view.svelte';
   import ModeratorView from 'src/containers/projects/view/moderator-view.svelte';
@@ -65,28 +64,26 @@
   {/if}
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
-  <div class="material">
-    <ProjectHeader {project} {account} {tags} {moderatorMode} />
+<div class="material">
+  <ProjectHeader {project} {account} {tags} {moderatorMode} />
 
-    {#if ($project.lifetime_stage === ProjectStages.FINALIZING
-          || $project.lifetime_stage === ProjectStages.FINISHED)
-         && account != null
-         && (moderatorEmails.includes(account.email) || account.is_admin)
-    }
-      <H2 class="padded">Project Staff</H2>
-      <StaffCards {project} {account} {competences} />
-    {/if}
+  {#if ($project.lifetime_stage === ProjectStages.FINALIZING
+        || $project.lifetime_stage === ProjectStages.FINISHED)
+       && account != null
+       && (moderatorEmails.includes(account.email) || account.is_admin)
+  }
+    <H2 class="padded">Project Staff</H2>
+    <StaffCards {project} {account} {competences} />
+  {/if}
 
-    {#if $project.activities.find(act => !act.internal) != null || moderatorMode}
-      <H2 class="padded">Activities</H2>
-      {#if moderatorMode}
-        <ModeratorView {account} {project} {competences} />
-      {:else}
-        <UserView {account} {project} {competences} />
-      {/if}
+  {#if $project.activities.find(act => !act.internal) != null || moderatorMode}
+    <H2 class="padded">Activities</H2>
+    {#if moderatorMode}
+      <ModeratorView {account} {project} {competences} />
+    {:else}
+      <UserView {account} {project} {competences} />
     {/if}
-  </div>
-</SnackbarContainer>
+  {/if}
+</div>
 
 <style src="../../../../static/css/routes/projects/view/index.scss"></style>

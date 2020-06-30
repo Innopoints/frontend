@@ -19,10 +19,10 @@
 </script>
 
 <script>
-  import { onDestroy } from 'svelte';
+  import { onDestroy, getContext } from 'svelte';
   import { goto } from '@sapper/app';
-  import { Button, H1, H2, SnackbarContainer } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { Button, H1, H2 } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import ProductForm from 'src/containers/products/new/product-form.svelte';
   import PreviewCard from 'src/components/products/new/preview-card.svelte';
   import * as api from 'src/utils/api.js';
@@ -49,12 +49,11 @@
     }
   });
   onDestroy(unsubscribe);
-  let snackbarContainer = null;
 
   function clearFields() {
     const oldProduct = $product;
     product.set(getBlankProduct());
-    snackbarContainer.showSnackbar({
+    showSnackbar({
       props: {
         text: 'All fields cleared',
         action: {
@@ -69,12 +68,12 @@
 
   async function createProduct() {
     if ($product.name == null || spaceOnly($product.name)) {
-      snackbarContainer.showSnackbar({ props: { text: 'A product needs a name' } });
+      showSnackbar({ props: { text: 'A product needs a name' } });
       return;
     }
 
     if (!$product.price || $product.price < 1) {
-      snackbarContainer.showSnackbar({ props: { text: 'A product needs a valid price' } });
+      showSnackbar({ props: { text: 'A product needs a valid price' } });
       return;
     }
 
@@ -98,16 +97,12 @@
     });
 
     if (cleanVarieties.length === 0 || cleanVarieties.every(variety => variety.amount == 0)) {
-      snackbarContainer.showSnackbar({
-        props: {
-          text: 'The product must be in stock at creation',
-        },
-      });
+      showSnackbar({ props: { text: 'The product must be in stock at creation' } });
       return;
     }
 
     if (cleanVarieties.some(variety => variety.color == null) && cleanVarieties.length > 1) {
-      snackbarContainer.showSnackbar({
+      showSnackbar({
         props: {
           text: 'Colorless products cannot come in sizes and have more than 1 variety',
         },
@@ -128,35 +123,35 @@
       }));
       goto('/products');
     } catch (e) {
-      snackbarContainer.showSnackbar({ props: { text: 'Couldn\'t save the product' } });
+      showSnackbar({ props: { text: 'Couldn\'t save the product, try reloading the page' } });
       console.error(e);
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <svelte:head>
   <title>Create a Product – Innopoints</title>
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-  <div class="material">
-    <H1 class="padded">Create a Product</H1>
-    <main class="padded">
-      <ProductForm {product} {colors} {sizes} />
-      <section class="preview">
-        <H2>Preview</H2>
-        <PreviewCard {product} />
-        <div class="actions">
-          <Button danger on:click={clearFields}>
-            clear fields
-          </Button>
-          <Button filled class="ml" on:click={createProduct}>
-            create product
-          </Button>
-        </div>
-      </section>
-    </main>
-  </div>
-</SnackbarContainer>
+<div class="material">
+  <H1 class="padded">Create a Product</H1>
+  <main class="padded">
+    <ProductForm {product} {colors} {sizes} />
+    <section class="preview">
+      <H2>Preview</H2>
+      <PreviewCard {product} />
+      <div class="actions">
+        <Button danger on:click={clearFields}>
+          clear fields
+        </Button>
+        <Button filled class="ml" on:click={createProduct}>
+          create product
+        </Button>
+      </div>
+    </section>
+  </main>
+</div>
 
 <style src="../../../static/css/routes/products/new.scss"></style>

@@ -17,11 +17,10 @@
 </script>
 
 <script>
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy, getContext } from 'svelte';
   import { writable } from 'svelte/store';
   import { stores, goto } from '@sapper/app';
-  import { SnackbarContainer } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import StepZero from 'src/containers/projects/new/step-0.svelte';
   import StepOne from 'src/containers/projects/new/step-1.svelte';
   import StepTwo from 'src/containers/projects/new/step-2.svelte';
@@ -48,7 +47,6 @@
   onDestroy(unsubscribe);
 
   const autosaved = writable(false);
-  let snackbarContainer = null;
 
   // Step management
   $: step = ($project != null ? +$page.query.step || 0 : 0);
@@ -82,30 +80,28 @@
       }
       autosaved.set(true);
     } catch (e) {
-      snackbarContainer && snackbarContainer.showSnackbar({
-        props: { text: 'Could not autosave. Some changes might be lost' },
-      });
+      showSnackbar({ props: { text: 'Could not autosave. Some changes might be lost' } });
       console.error(e);
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <svelte:head>
   <title>Create Project – Innopoints</title>
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-  <div class="material">
-    {#if step === 0}
-      <StepZero {project} {drafts} />
-    {:else if step === 1}
-      <StepOne {project} {autosaved} />
-    {:else if step === 2}
-      <StepTwo {project} {autosaved} {competences} />
-    {:else}
-      <StepThree {project} {autosaved} />
-    {/if}
-  </div>
-</SnackbarContainer>
+<div class="material">
+  {#if step === 0}
+    <StepZero {project} {drafts} />
+  {:else if step === 1}
+    <StepOne {project} {autosaved} />
+  {:else if step === 2}
+    <StepTwo {project} {autosaved} {competences} />
+  {:else}
+    <StepThree {project} {autosaved} />
+  {/if}
+</div>
 
 <style src="../../../static/css/routes/projects/new.scss"></style>

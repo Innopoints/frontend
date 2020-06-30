@@ -22,10 +22,10 @@
 </script>
 
 <script>
-  import { onDestroy } from 'svelte';
+  import { onDestroy, getContext } from 'svelte';
   import { goto } from '@sapper/app';
-  import { Button, H1, H2, SnackbarContainer } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { Button, H1, H2 } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
   import ProductForm from 'src/containers/products/new/product-form.svelte';
   import PreviewCard from 'src/components/products/new/preview-card.svelte';
   import DangerConfirmDialog from 'src/components/common/danger-confirm-dialog.svelte';
@@ -54,7 +54,6 @@
     }
   });
   onDestroy(unsubscribe);
-  let snackbarContainer = null;
 
   const deleteProductWarning = {
     open: false,
@@ -67,7 +66,7 @@
         await api.json(api.del(`/products/${$product.id}`, { csrfToken: account.csrf_token }));
         goto('/products');
       } catch (e) {
-        snackbarContainer.showSnackbar({
+        showSnackbar({
           props: {
             text: 'The universe really wants this product, try deleting again later',
           },
@@ -79,12 +78,12 @@
 
   async function saveChanges() {
     if ($product.name == null || spaceOnly($product.name)) {
-      snackbarContainer.showSnackbar({ props: { text: 'A product needs a name' } });
+      showSnackbar({ props: { text: 'A product needs a name' } });
       return;
     }
 
     if (!$product.price || $product.price < 1) {
-      snackbarContainer.showSnackbar({ props: { text: 'A product needs a valid price' } });
+      showSnackbar({ props: { text: 'A product needs a valid price' } });
       return;
     }
 
@@ -108,7 +107,7 @@
     });
 
     if (cleanVarieties.some(variety => variety.color == null) && cleanVarieties.length > 1) {
-      snackbarContainer.showSnackbar({
+      showSnackbar({
         props: {
           text: 'Colorless products cannot come in sizes and have more than 1 variety',
         },
@@ -155,7 +154,7 @@
       await Promise.all(requests);
       goto(`/products/${$product.id}`);
     } catch (e) {
-      snackbarContainer.showSnackbar({
+      showSnackbar({
         props: {
           text: 'Couldn\'t apply all changes, reload the page to investigate',
         },
@@ -163,6 +162,8 @@
       console.error(e);
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <svelte:head>
@@ -171,38 +172,36 @@
   </title>
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-  <div class="material">
-    <H1 class="padded">
-      Edit {$product.type ? `"${$product.name}" ${$product.type}` : $product.name}
-    </H1>
-    <main class="padded">
-      <ProductForm {product} {colors} {sizes} />
-      <section class="preview">
-        <H2>Preview</H2>
-        <PreviewCard {product} />
-        <div class="actions">
-          <Button filled danger on:click={deleteProductWarning.show}>
-            delete product
-          </Button>
-          <Button filled class="ml" on:click={saveChanges}>
-            save changes
-          </Button>
-        </div>
-        <DangerConfirmDialog
-          textYes="yes, delete"
-          bind:open={deleteProductWarning.open}
-          on:confirm={deleteProductWarning.confirm}
-        >
-          Are you sure you want to delete this product? <br />
-          If you wish to mark it as “out of stock”, please,
-          empty out the quantity instead of deleting
-          so that it can be brought back later.
-          <em class="consequences">This action cannot be undone</em>
-        </DangerConfirmDialog>
-      </section>
-    </main>
-  </div>
-</SnackbarContainer>
+<div class="material">
+  <H1 class="padded">
+    Edit {$product.type ? `"${$product.name}" ${$product.type}` : $product.name}
+  </H1>
+  <main class="padded">
+    <ProductForm {product} {colors} {sizes} />
+    <section class="preview">
+      <H2>Preview</H2>
+      <PreviewCard {product} />
+      <div class="actions">
+        <Button filled danger on:click={deleteProductWarning.show}>
+          delete product
+        </Button>
+        <Button filled class="ml" on:click={saveChanges}>
+          save changes
+        </Button>
+      </div>
+      <DangerConfirmDialog
+        textYes="yes, delete"
+        bind:open={deleteProductWarning.open}
+        on:confirm={deleteProductWarning.confirm}
+      >
+        Are you sure you want to delete this product? <br />
+        If you wish to mark it as “out of stock”, please,
+        empty out the quantity instead of deleting
+        so that it can be brought back later.
+        <em class="consequences">This action cannot be undone</em>
+      </DangerConfirmDialog>
+    </section>
+  </main>
+</div>
 
 <style src="../../../../static/css/routes/products/new.scss"></style>

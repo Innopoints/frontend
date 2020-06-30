@@ -18,8 +18,7 @@
 </script>
 
 <script>
-  import { SnackbarContainer, Button, H1 } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { Button, H1 } from 'attractions';
   import Reviews from 'src/containers/dashboard/reviews.svelte';
   import Purchases from 'src/containers/dashboard/purchases.svelte';
   import IndividualControls from 'src/containers/dashboard/individual-controls.svelte';
@@ -35,22 +34,20 @@
   <title>Admin Dashboard</title>
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
-  <div class="material">
-    <H1 class="padded">
-      Dashboard
-      <Button outline href="/profile">
-        <svg src="static/images/icons/user.svg" class="mr" />
-        go to profile
-      </Button>
-    </H1>
-    <div class="cards padded">
-      <Reviews {reviews} />
-      <Purchases {purchases} />
-      <IndividualControls {account} />
-      <TagEditor {tags} {account} />
-    </div>
+<div class="material">
+  <H1 class="padded">
+    Dashboard
+    <Button outline href="/profile">
+      <svg src="static/images/icons/user.svg" class="mr" />
+      go to profile
+    </Button>
+  </H1>
+  <div class="cards padded">
+    <Reviews {reviews} />
+    <Purchases {purchases} />
+    <IndividualControls {account} />
+    <TagEditor {tags} {account} />
   </div>
-</SnackbarContainer>
+</div>
 
 <style src="../../static/css/routes/dashboard.scss"></style>

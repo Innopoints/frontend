@@ -35,8 +35,7 @@
 </script>
 
 <script>
-  import { Button, SnackbarContainer } from 'attractions';
-  import { SnackbarPositions } from 'attractions/snackbar';
+  import { Button } from 'attractions';
   import ImagePreviews from 'src/containers/products/view/image-previews.svelte';
   import ItemContent from 'src/containers/products/view/item-content.svelte';
   import PurchaseModal from 'src/components/products/view/purchase-modal.svelte';
@@ -84,38 +83,36 @@
   {/if}
 </svelte:head>
 
-<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
-  <div class="material">
-    <Button href="/products" class="back">
-      <svg src="static/images/icons/arrow-left.svg" class="icon" />
-      <span>to the InnoStore</span>
-    </Button>
-    <div class="balance">
-      {#if account != null && !account.is_admin}
-        You have {account.balance}
-        <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
-      {/if}
-    </div>
-    <ImagePreviews images={flatImages} bind:selectedColor on:color-change={updateColor} />
-    <ItemContent
-      {product}
-      {varietiesByColor}
-      {colors}
-      {sizes}
-      {totalPurchases}
-      bind:selectedColor
-      {account}
-      on:color-change={updateColor}
-      on:purchase={purchaseModal.show}
-    />
-    <PurchaseModal
-      bind:open={purchaseModal.open}
-      {product}
-      {account}
-      variety={purchaseModal.variety}
-      on:rerender={purchaseModal.triggerRerender}
-    />
+<div class="material">
+  <Button href="/products" class="back">
+    <svg src="static/images/icons/arrow-left.svg" class="icon" />
+    <span>to the InnoStore</span>
+  </Button>
+  <div class="balance">
+    {#if account != null && !account.is_admin}
+      You have {account.balance}
+      <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
+    {/if}
   </div>
-</SnackbarContainer>
+  <ImagePreviews images={flatImages} bind:selectedColor on:color-change={updateColor} />
+  <ItemContent
+    {product}
+    {varietiesByColor}
+    {colors}
+    {sizes}
+    {totalPurchases}
+    bind:selectedColor
+    {account}
+    on:color-change={updateColor}
+    on:purchase={purchaseModal.show}
+  />
+  <PurchaseModal
+    bind:open={purchaseModal.open}
+    {product}
+    {account}
+    variety={purchaseModal.variety}
+    on:rerender={purchaseModal.triggerRerender}
+  />
+</div>
 
 <style src="../../../../static/css/routes/products/view/index.scss"></style>
