@@ -23,7 +23,7 @@
     {:else}
       <NotificationCenter />
       {#if profile}
-        <Button on:click={logout}>sign out</Button>
+        <Button on:click={() => logout(session)}>sign out</Button>
       {:else}
         {#if $session.account.is_admin}
           <Button href="/dashboard" round>
