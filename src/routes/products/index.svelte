@@ -99,8 +99,8 @@
     }
   }
 
-  function handlePageSwitch(e) {
-    currentPage = e.detail;
+  function handlePageSwitch({ detail }) {
+    currentPage = detail.value;
     updateProducts(filterElement.getLastFiltering());
   }
 </script>
@@ -145,7 +145,7 @@
         {/each}
       </div>
     {/if}
-    <Pagination {pages} {currentPage} on:page-switch={handlePageSwitch} />
+    <Pagination {pages} {currentPage} on:change={handlePageSwitch} />
   </section>
   <p class="link-bottom padded">
     Lacking innopoints?

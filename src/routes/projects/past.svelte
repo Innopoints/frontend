@@ -26,7 +26,6 @@
   export let projects;
   export let account;
   export let pages;
-  const currentPage = 1;
 
   function filterProps(props) {
     const newProps = Object.assign({}, props);
@@ -37,9 +36,9 @@
     return newProps;
   }
 
-  async function handlePageSwitch({ detail: currentPage }) {
+  async function handlePageSwitch({ detail }) {
     try {
-      ({ pages, data: projects } = await api.json(api.get(`/projects/past?page=${currentPage}`)));
+      ({ pages, data: projects } = await api.json(api.get(`/projects/past?page=${detail.value}`)));
     } catch (e) {
       console.error(e);
     }
@@ -89,7 +88,7 @@
           />
         {/each}
       </div>
-      <Pagination {pages} {currentPage} on:page-switch={handlePageSwitch} />
+      <Pagination {pages} on:change={handlePageSwitch} />
     {/if}
   </section>
 
