@@ -24,7 +24,6 @@
 <script>
   import { onDestroy } from 'svelte';
   import { goto } from '@sapper/app';
-  import Layout from 'src/layouts/default.svelte';
   import { Button, H1, H2, SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
   import ProductForm from 'src/containers/products/new/product-form.svelte';
@@ -172,40 +171,38 @@
   </title>
 </svelte:head>
 
-<Layout user={account}>
-  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-    <div class="material">
-      <H1 class="padded">
-        Edit {$product.type ? `"${$product.name}" ${$product.type}` : $product.name}
-      </H1>
-      <main class="padded">
-        <ProductForm {product} {colors} {sizes} />
-        <section class="preview">
-          <H2>Preview</H2>
-          <PreviewCard {product} />
-          <div class="actions">
-            <Button filled danger on:click={deleteProductWarning.show}>
-              delete product
-            </Button>
-            <Button filled class="ml" on:click={saveChanges}>
-              save changes
-            </Button>
-          </div>
-          <DangerConfirmDialog
-            textYes="yes, delete"
-            bind:open={deleteProductWarning.open}
-            on:confirm={deleteProductWarning.confirm}
-          >
-            Are you sure you want to delete this product? <br />
-            If you wish to mark it as “out of stock”, please,
-            empty out the quantity instead of deleting
-            so that it can be brought back later.
-            <em class="consequences">This action cannot be undone</em>
-          </DangerConfirmDialog>
-        </section>
-      </main>
-    </div>
-  </SnackbarContainer>
-</Layout>
+<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
+  <div class="material">
+    <H1 class="padded">
+      Edit {$product.type ? `"${$product.name}" ${$product.type}` : $product.name}
+    </H1>
+    <main class="padded">
+      <ProductForm {product} {colors} {sizes} />
+      <section class="preview">
+        <H2>Preview</H2>
+        <PreviewCard {product} />
+        <div class="actions">
+          <Button filled danger on:click={deleteProductWarning.show}>
+            delete product
+          </Button>
+          <Button filled class="ml" on:click={saveChanges}>
+            save changes
+          </Button>
+        </div>
+        <DangerConfirmDialog
+          textYes="yes, delete"
+          bind:open={deleteProductWarning.open}
+          on:confirm={deleteProductWarning.confirm}
+        >
+          Are you sure you want to delete this product? <br />
+          If you wish to mark it as “out of stock”, please,
+          empty out the quantity instead of deleting
+          so that it can be brought back later.
+          <em class="consequences">This action cannot be undone</em>
+        </DangerConfirmDialog>
+      </section>
+    </main>
+  </div>
+</SnackbarContainer>
 
 <style src="../../../../static/css/routes/products/new.scss"></style>

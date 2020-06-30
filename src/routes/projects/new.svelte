@@ -20,7 +20,6 @@
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import { stores, goto } from '@sapper/app';
-  import Layout from 'src/layouts/default.svelte';
   import { SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
   import StepZero from 'src/containers/projects/new/step-0.svelte';
@@ -95,20 +94,18 @@
   <title>Create Project – Innopoints</title>
 </svelte:head>
 
-<Layout user={account}>
-  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-    <div class="material">
-      {#if step === 0}
-        <StepZero {project} {drafts} />
-      {:else if step === 1}
-        <StepOne {project} {autosaved} />
-      {:else if step === 2}
-        <StepTwo {project} {autosaved} {competences} />
-      {:else}
-        <StepThree {project} {autosaved} />
-      {/if}
-    </div>
-  </SnackbarContainer>
-</Layout>
+<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
+  <div class="material">
+    {#if step === 0}
+      <StepZero {project} {drafts} />
+    {:else if step === 1}
+      <StepOne {project} {autosaved} />
+    {:else if step === 2}
+      <StepTwo {project} {autosaved} {competences} />
+    {:else}
+      <StepThree {project} {autosaved} />
+    {/if}
+  </div>
+</SnackbarContainer>
 
 <style src="../../../static/css/routes/projects/new.scss"></style>

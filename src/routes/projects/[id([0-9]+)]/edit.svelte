@@ -23,7 +23,6 @@
 
 <script>
   import { goto } from '@sapper/app';
-  import Layout from 'src/layouts/default.svelte';
   import {
     Autocomplete,
     Button,
@@ -101,71 +100,69 @@
   <title>Edit {$project.name} – Innopoints</title>
 </svelte:head>
 
-<Layout user={account}>
-  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-    <div class="material padded">
-      <H1>Edit {$project.name}</H1>
-      <FormField
-        name="Project name"
-        help="Prefer English names."
-        required
-        errors={[spaceOnly($project.name) && "The name must not be empty."]}
-      >
-        <TextField
-          id="name"
-          autocomplete="off"
-          maxlength={128}
-          bind:value={$project.name}
-        />
-      </FormField>
-
-      <FormField
-        name="Cover image"
-        help="This is shown on the project card to catch attention."
-      >
-        <ProjectImagePicker bind:value={$project.image_id} />
-      </FormField>
-
-      <Divider />
-
-      <div class="instructions">
-        <p>This step is <strong>optional</strong>.</p>
-        <DropdownShell let:toggle>
-          <Button on:click={toggle}>
-            <svg src="static/images/icons/help-circle.svg" class="mr" />
-            who are moderators?
-            <svg src="static/images/icons/chevron-down.svg" class="ml dropdown-chevron" />
-          </Button>
-          <Dropdown>
-            <p>Moderators can process applications from volunteers and edit activities.</p>
-            <p>Reports and ratings on volunteers are also shared between all moderators.</p>
-            <p>You are a moderator, too, by the way, automatically.</p>
-          </Dropdown>
-        </DropdownShell>
-      </div>
-
-      <Label class="mb">Search for other people</Label>
-      <Autocomplete
-        bind:selection={moderatorsValue}
-        getOptions={getUsers}
-        placeholder="Start typing a name or an e-mail..."
-        on:change={recordChanges}
-        {minSearchLength}
+<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
+  <div class="material padded">
+    <H1>Edit {$project.name}</H1>
+    <FormField
+      name="Project name"
+      help="Prefer English names."
+      required
+      errors={[spaceOnly($project.name) && "The name must not be empty."]}
+    >
+      <TextField
+        id="name"
+        autocomplete="off"
+        maxlength={128}
+        bind:value={$project.name}
       />
-      <p>
-        Can't find who you're looking for?
-        Make sure they have logged into this website at least once.
-      </p>
-      <div class="actions">
-        <Button danger class="mr" href="/projects/{project.id}">
-          discard changes
+    </FormField>
+
+    <FormField
+      name="Cover image"
+      help="This is shown on the project card to catch attention."
+    >
+      <ProjectImagePicker bind:value={$project.image_id} />
+    </FormField>
+
+    <Divider />
+
+    <div class="instructions">
+      <p>This step is <strong>optional</strong>.</p>
+      <DropdownShell let:toggle>
+        <Button on:click={toggle}>
+          <svg src="static/images/icons/help-circle.svg" class="mr" />
+          who are moderators?
+          <svg src="static/images/icons/chevron-down.svg" class="ml dropdown-chevron" />
         </Button>
-        <Button filled on:click={saveChanges}>
-          save changes
-        </Button>
-      </div>
+        <Dropdown>
+          <p>Moderators can process applications from volunteers and edit activities.</p>
+          <p>Reports and ratings on volunteers are also shared between all moderators.</p>
+          <p>You are a moderator, too, by the way, automatically.</p>
+        </Dropdown>
+      </DropdownShell>
     </div>
-  </SnackbarContainer>
-</Layout>
+
+    <Label class="mb">Search for other people</Label>
+    <Autocomplete
+      bind:selection={moderatorsValue}
+      getOptions={getUsers}
+      placeholder="Start typing a name or an e-mail..."
+      on:change={recordChanges}
+      {minSearchLength}
+    />
+    <p>
+      Can't find who you're looking for?
+      Make sure they have logged into this website at least once.
+    </p>
+    <div class="actions">
+      <Button danger class="mr" href="/projects/{project.id}">
+        discard changes
+      </Button>
+      <Button filled on:click={saveChanges}>
+        save changes
+      </Button>
+    </div>
+  </div>
+</SnackbarContainer>
 
 <style src="../../../../static/css/routes/projects/view/edit.scss"></style>

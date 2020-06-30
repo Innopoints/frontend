@@ -1,5 +1,4 @@
 <script>
-  import Layout from 'src/layouts/default.svelte';
   import Error404 from 'src/containers/errors/error-404.svelte';
   import Error403 from 'src/containers/errors/error-403.svelte';
   import Error500 from 'src/containers/errors/error-500.svelte';
@@ -18,14 +17,12 @@
   {/if}
 </svelte:head>
 
-<Layout>
-  {#if status == 404}
-    <Error404 />
-  {:else if status == 403}
-    <Error403 message={error.message} />
-  {:else}
-    <Error500 {error} />
-  {/if}
-</Layout>
+{#if status == 404}
+  <Error404 />
+{:else if status == 403}
+  <Error403 message={error.message} />
+{:else}
+  <Error500 {error} />
+{/if}
 
 <style src="../../static/css/routes/_error.scss"></style>

@@ -11,7 +11,6 @@
 </script>
 
 <script>
-  import Layout from 'src/layouts/default.svelte';
   import Tagline from 'src/containers/projects/tagline.svelte';
   import { H1, Button, SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
@@ -67,59 +66,57 @@
   <meta name="og:description" content="If you’re seeking an opportunity to contribute to the wonderful world of Innopolis projects, you’re in the right place." />
 </svelte:head>
 
-<Layout user={account}>
-  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-    <div class="material">
-      <Tagline {account} />
+<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
+  <div class="material">
+    <Tagline {account} />
 
-      <section class="projects padded">
-        <H1><span class="text">Ongoing Projects</span></H1>
-        <Filters
-          {selectedOrder} {orderOptions}
-          on:change-filters={({ detail: filtering }) => updateProjects(filtering)}
-        />
-        {#if !projects || projects.length === 0}
-          <EmptyState>
-            <figure>
-              <img class="picture" src="/images/projects/no-projects.svg" alt="" />
-              <figcaption>
-                <div class="title">No projects found...</div>
-                {#if account}
-                  But you can
-                  <a href="/projects/new" rel="prefetch">create a project</a>
-                  right now!
-                {/if}
-              </figcaption>
-            </figure>
-          </EmptyState>
-        {:else}
-          <div class="cards">
-            {#each projects as project (project.id)}
-              <ProjectCard
-                moderated={account && project.moderators.some(
-                  x => x.email === account.email,
-                )}
-                {...filterProps(project)}
-              />
-            {/each}
-          </div>
-        {/if}
-      </section>
+    <section class="projects padded">
+      <H1><span class="text">Ongoing Projects</span></H1>
+      <Filters
+        {selectedOrder} {orderOptions}
+        on:change-filters={({ detail: filtering }) => updateProjects(filtering)}
+      />
+      {#if !projects || projects.length === 0}
+        <EmptyState>
+          <figure>
+            <img class="picture" src="/images/projects/no-projects.svg" alt="" />
+            <figcaption>
+              <div class="title">No projects found...</div>
+              {#if account}
+                But you can
+                <a href="/projects/new" rel="prefetch">create a project</a>
+                right now!
+              {/if}
+            </figcaption>
+          </figure>
+        </EmptyState>
+      {:else}
+        <div class="cards">
+          {#each projects as project (project.id)}
+            <ProjectCard
+              moderated={account && project.moderators.some(
+                x => x.email === account.email,
+              )}
+              {...filterProps(project)}
+            />
+          {/each}
+        </div>
+      {/if}
+    </section>
 
-      <div class="justify-center">
-        <Button href="/projects/past">
-          <svg src="static/images/icons/book-open.svg" class="icon mr" />
-          see past projects
-        </Button>
-      </div>
-
-      <p class="link-bottom padded">
-        What’s so cool about being a volunteer? The
-        <a href="/products" rel="prefetch">InnoStore</a>
-        has your answers!
-      </p>
+    <div class="justify-center">
+      <Button href="/projects/past">
+        <svg src="static/images/icons/book-open.svg" class="icon mr" />
+        see past projects
+      </Button>
     </div>
-  </SnackbarContainer>
-</Layout>
+
+    <p class="link-bottom padded">
+      What’s so cool about being a volunteer? The
+      <a href="/products" rel="prefetch">InnoStore</a>
+      has your answers!
+    </p>
+  </div>
+</SnackbarContainer>
 
 <style src="../../../static/css/routes/projects/index.scss"></style>

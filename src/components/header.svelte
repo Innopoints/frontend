@@ -1,11 +1,13 @@
 <script>
+  import { stores } from '@sapper/app';
   import { Button } from 'attractions';
   import { classes } from 'attractions/utils';
   import NotificationCenter from 'src/components/common/notification-center.svelte';
   import { login, logout } from 'src/utils/auth.js';
 
+  const { session } = stores();
+
   export let profile = false;
-  export let user = null;
   let _class = null;
   export { _class as class };
 </script>
@@ -16,14 +18,14 @@
     <span class="hide-on-less-tb">Innopoints</span>
   </a>
   <div class="actions">
-    {#if user == null}
+    {#if $session.account == null}
       <Button outline on:click={login}>sign in</Button>
     {:else}
       <NotificationCenter />
       {#if profile}
         <Button on:click={logout}>sign out</Button>
       {:else}
-        {#if user.is_admin}
+        {#if $session.account.is_admin}
           <Button href="/dashboard" round>
             <svg src="static/images/icons/grid.svg" />
           </Button>

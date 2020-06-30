@@ -21,7 +21,6 @@
 <script>
   import { onDestroy } from 'svelte';
   import { goto } from '@sapper/app';
-  import Layout from 'src/layouts/default.svelte';
   import { Button, H1, H2, SnackbarContainer } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
   import ProductForm from 'src/containers/products/new/product-form.svelte';
@@ -139,27 +138,25 @@
   <title>Create a Product – Innopoints</title>
 </svelte:head>
 
-<Layout user={account}>
-  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
-    <div class="material">
-      <H1 class="padded">Create a Product</H1>
-      <main class="padded">
-        <ProductForm {product} {colors} {sizes} />
-        <section class="preview">
-          <H2>Preview</H2>
-          <PreviewCard {product} />
-          <div class="actions">
-            <Button danger on:click={clearFields}>
-              clear fields
-            </Button>
-            <Button filled class="ml" on:click={createProduct}>
-              create product
-            </Button>
-          </div>
-        </section>
-      </main>
-    </div>
-  </SnackbarContainer>
-</Layout>
+<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT} bind:this={snackbarContainer}>
+  <div class="material">
+    <H1 class="padded">Create a Product</H1>
+    <main class="padded">
+      <ProductForm {product} {colors} {sizes} />
+      <section class="preview">
+        <H2>Preview</H2>
+        <PreviewCard {product} />
+        <div class="actions">
+          <Button danger on:click={clearFields}>
+            clear fields
+          </Button>
+          <Button filled class="ml" on:click={createProduct}>
+            create product
+          </Button>
+        </div>
+      </section>
+    </main>
+  </div>
+</SnackbarContainer>
 
 <style src="../../../static/css/routes/products/new.scss"></style>

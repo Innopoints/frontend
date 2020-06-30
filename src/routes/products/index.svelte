@@ -18,7 +18,6 @@
 
 <script>
   import { stores } from '@sapper/app';
-  import Layout from 'src/layouts/default.svelte';
   import Tagline from 'src/containers/products/tagline.svelte';
   import Balance from 'src/components/products/balance.svelte';
   import Filters from 'src/containers/products/filters.svelte';
@@ -113,48 +112,46 @@
   <meta name="og:description" content="The place where your hard work and proactivity turns into cool merch of Innopolis University" />
 </svelte:head>
 
-<Layout user={account}>
-  <div class="material">
-    <Tagline {account} />
-    <section class="shop padded">
-      <Balance value={balance} />
-      <Filters
-        {selectedOrder} {colors} {orderOptions} {balance}
-        on:change-filters={(event) => { currentPage = 1; updateProducts(event.detail); }}
-        bind:this={filterElement}
-      />
-      {#if !products}
-        <EmptyState>
-          <figure>
-            <img class="picture" src="/images/products/no-products.svg" alt="" />
-            <figcaption>
-              <div class="title">No items found...</div>
-              Try whining to 319 or a different filter
-            </figcaption>
-          </figure>
-        </EmptyState>
-      {:else}
-        <div class="cards">
-          {#if newArrivals != null}
-            <Divider text="New arrivals" />
-            {#each newArrivals as product (product.id)}
-              <ProductCard {...filterProps(product)} />
-            {/each}
-          {/if}
-          <Divider text="All items" />
-          {#each products as product (product.id)}
+<div class="material">
+  <Tagline {account} />
+  <section class="shop padded">
+    <Balance value={balance} />
+    <Filters
+      {selectedOrder} {colors} {orderOptions} {balance}
+      on:change-filters={(event) => { currentPage = 1; updateProducts(event.detail); }}
+      bind:this={filterElement}
+    />
+    {#if !products}
+      <EmptyState>
+        <figure>
+          <img class="picture" src="/images/products/no-products.svg" alt="" />
+          <figcaption>
+            <div class="title">No items found...</div>
+            Try whining to 319 or a different filter
+          </figcaption>
+        </figure>
+      </EmptyState>
+    {:else}
+      <div class="cards">
+        {#if newArrivals != null}
+          <Divider text="New arrivals" />
+          {#each newArrivals as product (product.id)}
             <ProductCard {...filterProps(product)} />
           {/each}
-        </div>
-      {/if}
-      <Pagination {pages} {currentPage} on:page-switch={handlePageSwitch} />
-    </section>
-    <p class="link-bottom padded">
-      Lacking innopoints?
-      <a href="/projects" rel="prefetch">Volunteer on projects</a>
-      to fill in the shortage!
-    </p>
-  </div>
-</Layout>
+        {/if}
+        <Divider text="All items" />
+        {#each products as product (product.id)}
+          <ProductCard {...filterProps(product)} />
+        {/each}
+      </div>
+    {/if}
+    <Pagination {pages} {currentPage} on:page-switch={handlePageSwitch} />
+  </section>
+  <p class="link-bottom padded">
+    Lacking innopoints?
+    <a href="/projects" rel="prefetch">Volunteer on projects</a>
+    to fill in the shortage!
+  </p>
+</div>
 
 <style src="../../../static/css/routes/products/index.scss"></style>

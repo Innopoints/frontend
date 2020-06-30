@@ -23,7 +23,6 @@
 
 <script>
   import { setContext } from 'svelte';
-  import Layout from 'src/layouts/default.svelte';
   import { SnackbarContainer, H2 } from 'attractions';
   import { SnackbarPositions } from 'attractions/snackbar';
   import ProjectHeader from 'src/containers/projects/view/project-header.svelte';
@@ -42,18 +41,16 @@
   <title>Review {$project.name} – Innopoints</title>
 </svelte:head>
 
-<Layout user={account}>
-  <SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
-    <div class="material">
-      <ProjectHeader {project} {account} {tags} />
+<SnackbarContainer position={SnackbarPositions.BOTTOM_LEFT}>
+  <div class="material">
+    <ProjectHeader {project} {account} {tags} />
 
-      <H2 class="padded">Project Staff</H2>
-      <StaffCards review {project} {account} />
+    <H2 class="padded">Project Staff</H2>
+    <StaffCards review {project} {account} />
 
-      <H2 class="padded">Activities</H2>
-      <ModeratorView {account} {project} {competences} />
-    </div>
-  </SnackbarContainer>
-</Layout>
+    <H2 class="padded">Activities</H2>
+    <ModeratorView {account} {project} {competences} />
+  </div>
+</SnackbarContainer>
 
 <style src="../../../../static/css/routes/projects/view/index.scss"></style>
