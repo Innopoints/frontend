@@ -12,6 +12,7 @@
   export let account;
 
   let quantity = 1;
+  let loading = false;
 
   function decreaseQuantity() {
     if (quantity > 1) {
@@ -26,6 +27,7 @@
   }
 
   async function confirmPurchase() {
+    loading = true;
     try {
       await api.json(api.post(
         `/products/${product.id}/varieties/${variety.id}/purchase`,
@@ -40,6 +42,7 @@
       showSnackbar({ props: { text: 'Purchase didn\'t go through, try reloading the page' } });
       console.error(e);
     }
+    loading = false;
   }
 
   const showSnackbar = getContext(snackbarContextKey);
@@ -105,7 +108,7 @@
         {/if}
         <Button
           filled
-          disabled={account.balance < product.price * quantity || quantity > variety.amount}
+          disabled={loading || account.balance < product.price * quantity || quantity > variety.amount}
           on:click={confirmPurchase}
         >
           confirm
