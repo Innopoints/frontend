@@ -88,7 +88,7 @@
           />
         {/each}
       </div>
-      <Pagination {pages} on:change={handlePageSwitch} />
+      <Pagination {pages} on:change={handlePageSwitch} showLonePage={false} />
     {/if}
   </section>
 
