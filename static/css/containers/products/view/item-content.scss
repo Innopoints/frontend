@@ -121,6 +121,15 @@
       font-size: .9rem;
       margin-bottom: .4em;
     }
+
+    .out-of-stock {
+      font-size: .8rem;
+      padding: .3em .5em;
+      background: $danger;
+      color: #fff;
+      border-radius: 1em;
+      margin-bottom: .4em;
+    }
   }
 
   :global .labeled {

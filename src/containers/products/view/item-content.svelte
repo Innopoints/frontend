@@ -29,6 +29,9 @@
     (item1, item2) => sizes.indexOf(item1.label) - sizes.indexOf(item2.label),
   );
   $: affordable = account == null || account.balance >= product.price;
+  $: outOfStock = (
+    varietiesByColor.get(selectedColor).reduce((sum, variety) => variety.amount + sum, 0) === 0
+  );
   $: changeColor(selectedColor);
 
   function purchase() {
@@ -123,13 +126,16 @@
         <div class="purchases">
           {totalPurchases || 0} purchase{s(totalPurchases)}
         </div>
+        {#if outOfStock}
+          <div class="out-of-stock">out of stock</div>
+        {/if}
         {#if account.is_admin}
           <Button filled href="{$page.path}/edit">edit</Button>
         {:else}
           <Button
             filled
             on:click={purchase}
-            disabled={account.balance < product.price}
+            disabled={account.balance < product.price || outOfStock}
           >
             purchase
           </Button>
