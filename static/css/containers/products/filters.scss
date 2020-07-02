@@ -1,5 +1,9 @@
 @import "components/filters.scss";
 
+.filters :global .handle {
+  white-space: nowrap;
+}
+
 .relative-wrapper {
   padding-top: 3.2em !important;
 }

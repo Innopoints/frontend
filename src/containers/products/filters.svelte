@@ -201,4 +201,4 @@
   class="ordering hide-on-less-tb"
 />
 
-<style src="../../../static/css/components/products/filters.scss"></style>
+<style src="../../../static/css/containers/products/filters.scss"></style>
