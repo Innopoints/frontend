@@ -21,7 +21,7 @@
       : '/images/create-product/placeholder.svg'
   );
 
-  $: outOfStock = varieties.reduce((sum, variety) => variety.amount + sum, 0) === 0;
+  $: outOfStock = varietiesByColor.get(selectedColor)[0].amount === 0;
 </script>
 
 <div class="product-card">
