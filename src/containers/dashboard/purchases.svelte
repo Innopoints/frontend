@@ -36,7 +36,7 @@
     </ul>
   {:else}
     <EmptyState small text="No pending purchases!">
-      <svg src="static/images/icons/smile.svg" />
+      <svg src="static/images/icons/smile.svg" class="icon" />
     </EmptyState>
   {/if}
   <div class="actions">

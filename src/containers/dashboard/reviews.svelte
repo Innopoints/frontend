@@ -30,7 +30,7 @@
     </ul>
   {:else}
     <EmptyState small text="Everything reviewed!">
-      <svg src="static/images/icons/smile.svg" />
+      <svg src="static/images/icons/smile.svg" class="icon" />
     </EmptyState>
   {/if}
   <div class="actions">
