@@ -52,7 +52,7 @@
   let moderatorsValue = $project.moderators.filter(notCreator).map(userToAutocompleteValue);
 
   export function notCreator(moderator) {
-    return moderator.email !== account.email;
+    return moderator.email !== $project.creator.email;
   }
 
   function recordChanges() {
