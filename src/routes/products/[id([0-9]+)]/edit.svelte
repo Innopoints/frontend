@@ -90,12 +90,11 @@
     const cleanVarieties = $product.varieties.flatMap(variety => {
       if ($product.sized) {
         return sizes
-          .filter(size => variety.sizes[size.value] != null && variety.sizes[size.value] > 0)
           .map(size => ({
             color: variety.color || null,
             images: variety.images,
             size: size.value,
-            amount: variety.sizes[size.value],
+            amount: variety.sizes[size.value] || 0,
           }));
       }
       return {

@@ -121,7 +121,7 @@
       on:change-filters={(event) => { currentPage = 1; updateProducts(event.detail); }}
       bind:this={filterElement}
     />
-    {#if !products}
+    {#if products.length === 0}
       <EmptyState>
         <figure>
           <img class="picture" src="/images/products/no-products.svg" alt="" />

@@ -80,12 +80,11 @@
     const cleanVarieties = $product.varieties.flatMap(variety => {
       if ($product.sized) {
         return sizes
-          .filter(size => variety.sizes[size.value] != null && variety.sizes[size.value] > 0)
           .map(size => ({
             color: variety.color || null,
             images: variety.images,
             size: size.value,
-            amount: variety.sizes[size.value],
+            amount: variety.sizes[size.value] || 0,
           }));
       }
       return {
@@ -96,8 +95,8 @@
       };
     });
 
-    if (cleanVarieties.length === 0 || cleanVarieties.every(variety => variety.amount == 0)) {
-      showSnackbar({ props: { text: 'The product must be in stock at creation' } });
+    if (cleanVarieties.length === 0) {
+      showSnackbar({ props: { text: 'The product must have at least one variety' } });
       return;
     }
 
