@@ -104,7 +104,7 @@
     if (cleanVarieties.some(variety => variety.color == null) && cleanVarieties.length > 1) {
       showSnackbar({
         props: {
-          text: 'Colorless products cannot come in sizes and have more than 1 variety',
+          text: 'Colorless products cannot come in sizes or have more than 1 variety',
         },
       });
       return;
