@@ -4,11 +4,11 @@
   export let account;
   export let competences;
   export let project;
-  $: externalActivities = $project.activities.filter(act => !act.internal);
+  $: visibleActivities = $project.activities.filter(act => !act.internal && !act.draft);
 </script>
 
 <div class="activity-list padded">
-  {#each externalActivities as activity (activity.id)}
+  {#each visibleActivities as activity (activity.id)}
     <UserActivityCard {activity} {competences} {account} projectStage={$project.lifetime_stage} />
   {/each}
 </div>

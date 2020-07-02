@@ -43,7 +43,7 @@
   );
   $: firstActivities = (
     $project.activities
-      .filter(activity => !activity.internal)
+      .filter(activity => !activity.internal && !activity.draft)
       .slice(0, 3)
       .map(activity => activity.name)
       .join(', ')
