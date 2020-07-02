@@ -147,7 +147,7 @@
     Make sure they have logged into this website at least once.
   </p>
   <div class="actions">
-    <Button danger class="mr" href="/projects/{project.id}">
+    <Button danger class="mr" href="/projects/{$project.id}">
       discard changes
     </Button>
     <Button filled on:click={saveChanges}>
