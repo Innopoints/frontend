@@ -145,7 +145,7 @@
         {/each}
       </div>
     {/if}
-    <Pagination {pages} {currentPage} on:change={handlePageSwitch} />
+    <Pagination {pages} {currentPage} on:change={handlePageSwitch} showLonePage={false} />
   </section>
   <p class="link-bottom padded">
     Lacking innopoints?
