@@ -16,11 +16,13 @@
   $: slideToChosenColor(selectedColor);
 
   function slideToChosenColor(color) {
-    if (carousel == null || images[displayedIdx].color === color) {
+    if (carousel == null
+        || images[displayedIdx] == null
+        || images[displayedIdx].color === color) {
       return;
     }
 
-    for (let i = 0; i < color.length; ++i) {
+    for (let i = 0; i < images.length; ++i) {
       if (images[i].color === color) {
         carousel.go(i);
         displayedIdx = i;
