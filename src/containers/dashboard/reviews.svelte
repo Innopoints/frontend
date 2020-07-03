@@ -1,13 +1,13 @@
 <script>
-  import Card from 'ui/card.svelte';
-  import Button from 'ui/button.svelte';
-  import Labeled from 'ui/labeled.svelte';
+  import { Card, Button } from 'attractions';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import EmptyState from 'src/components/common/empty-state.svelte';
   export let reviews = [];
 </script>
 
-<Card classname="projects-review">
+<Card class="projects-review">
   <div class="title">
-    <svg src="/images/icons/check-square.svg" class="icon" />
+    <svg src="static/images/icons/check-square.svg" class="icon" />
     Projects for review
   </div>
   {#if reviews.length}
@@ -18,25 +18,24 @@
             {review.name}
           </div>
           <Labeled label="Creator" icon>
-            <svg slot="icon" src="/images/icons/user.svg" class="icon" />
+            <svg slot="icon" src="static/images/icons/user.svg" class="icon" />
             {review.creator.full_name}
           </Labeled>
           <Button href="/projects/{review.id}">
             review
-            <svg src="/images/icons/arrow-right.svg" class="icon ml" />
+            <svg src="static/images/icons/arrow-right.svg" class="icon ml" />
           </Button>
         </li>
       {/each}
     </ul>
   {:else}
-    <div class="empty small">
-      <div class="icon">
-        <svg src="/images/icons/smile.svg" />
-      </div>
-      <div class="title">Everything reviewed!</div>
-    </div>
+    <EmptyState small text="Everything reviewed!">
+      <svg src="static/images/icons/smile.svg" class="icon" />
+    </EmptyState>
   {/if}
   <div class="actions">
     <Button href="/projects">browse the projects</Button>
   </div>
 </Card>
+
+<style src="../../../static/css/containers/dashboard/reviews.scss"></style>

@@ -1,0 +1,20 @@
+.activity-list {
+  @media only screen and (min-width: 700px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+    align-items: center;
+
+    :global .activity {
+      grid-row: span 2;
+
+      &.expanded {
+        grid-row: span 5;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

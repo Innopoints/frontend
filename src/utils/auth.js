@@ -1,6 +1,6 @@
-import { AUTH_HOST, USER_EMAIL } from '@/constants/env.js';
-import generateQueryString from '@/utils/generate-query-string.js';
-import { goto, stores } from '@sapper/app';
+import { AUTH_HOST, USER_EMAIL } from 'src/constants/env.js';
+import generateQueryString from 'src/utils/generate-query-string.js';
+import { goto } from '@sapper/app';
 
 
 function loginOAuth() {
@@ -19,8 +19,7 @@ function loginCheat() {
 
 export const login = (process.env.NODE_ENV === 'development' ? loginCheat : loginOAuth);
 
-export async function logout() {
-  const { session } = stores();
+export async function logout(session) {
   try {
     await fetch(AUTH_HOST + '/logout');
     session.set({ cookies: null });

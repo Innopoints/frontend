@@ -1,0 +1,85 @@
+@import "components/filters.scss";
+
+.filters :global .handle {
+  white-space: nowrap;
+}
+
+.relative-wrapper {
+  padding-top: 3.2em !important;
+}
+
+.filter {
+  padding-right: 1.7em;
+
+  &.price {
+    flex-direction: column;
+    align-items: stretch;
+
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    & > :global .btn {
+      align-self: flex-end;
+    }
+
+    :global input {
+      width: 4em;
+    }
+
+    @media only screen and (min-width: 380px) {
+      :global {
+        input {
+          width: 5em;
+        }
+
+        .mr.ml {
+          margin-left: .6em;
+          margin-right: .6em;
+        }
+      }
+    }
+  }
+}
+
+.color-selection :global {
+  margin-left: 1.5em;
+
+  .color-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-height: 15em;
+    overflow-y: auto;
+
+    & > label {
+      margin: 5px;
+    }
+  }
+
+  & > .checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: .6em;
+    flex-basis: 100%;
+    justify-content: flex-end;
+
+    & > .icon {
+      margin-right: .6em;
+    }
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .filters {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 540px) and (max-width: 640px) {
+  .filters > :global .text-field {
+    width: 24em;
+  }
+}

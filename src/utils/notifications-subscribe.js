@@ -1,5 +1,5 @@
 import * as api from './api.js';
-import { VAPID_PUBLIC_KEY } from '@/constants/env.js';
+import { VAPID_PUBLIC_KEY } from 'src/constants/env.js';
 
 
 // Source: https://github.com/web-push-libs/web-push#using-vapid-key-for-applicationserverkey
@@ -33,6 +33,7 @@ export default async function subscribe(csrfToken) {
     applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
   });
 
+  /* eslint-disable-next-line no-console */
   console.log('Received notification subscription:', pushSubscription);
   const response = await api.post('/notifications/subscribe', {
     data: pushSubscription.toJSON(),

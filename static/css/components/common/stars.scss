@@ -1,0 +1,14 @@
+@import "_attractions-theme.scss";
+
+.star {
+  stroke: transparentize($main, .4);
+  fill: transparentize($main, .3);
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0 .0625em;
+
+  &.off {
+    stroke: $light-contrast;
+    fill: none;
+  }
+}

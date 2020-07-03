@@ -15,7 +15,7 @@ function processCustomSvg(svg) {
     return '';
   }
 
-  for (let attrMatch of svgMatch[1].matchAll(attributesRegex)) {
+  for (const attrMatch of svgMatch[1].matchAll(attributesRegex)) {
     attributes[attrMatch[1]] = attrMatch[2];
   }
 
@@ -24,7 +24,7 @@ function processCustomSvg(svg) {
     return '';
   }
 
-  const pathToSvg = path.join(__dirname, 'static/', attributes.src);
+  const pathToSvg = path.join(__dirname, attributes.src);
   if (!fs.existsSync(pathToSvg)) {
     console.error(`Can't locate file '${pathToSvg}'.`);
     return '';
@@ -51,7 +51,7 @@ function processCustomSvg(svg) {
     delete attributes.class;
   }
 
-  for (let leftAttr in attributes) {
+  for (const leftAttr in attributes) {
     svgAttrs += ` ${leftAttr}="${attributes[leftAttr]}"`;
   }
 

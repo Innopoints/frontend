@@ -1,0 +1,7 @@
+@import "containers/projects/new/step-common.scss";
+
+.step-1 {
+  :global .form-field {
+    margin-top: 2em;
+  }
+}

@@ -4,7 +4,7 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # install our dependencies
-COPY .env .eslintrc package.json yarn.lock rollup.config.js /app/
+COPY .env .eslintrc.js package.json yarn.lock rollup.config.js /app/
 RUN yarn
 
 # copy the project code

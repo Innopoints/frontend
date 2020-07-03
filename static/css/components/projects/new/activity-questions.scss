@@ -1,0 +1,15 @@
+.activity-questions {
+  :global .dropdown {
+    padding: 1em;
+  }
+
+  .row {
+    display: flex;
+    margin-bottom: .5em;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}

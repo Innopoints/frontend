@@ -1,0 +1,38 @@
+@import "_attractions-theme.scss";
+@import "_mixins.scss";
+
+.variety {
+  margin-top: 1.5em;
+  padding-bottom: 1.2em;
+  border-bottom: .0625em solid $light-contrast;
+
+  .settings {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .quantity :global .text-field {
+    margin-top: .7em;
+    max-width: 8em;
+  }
+
+  .sizes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    :global .text-field {
+      width: 30%;
+      max-width: 6em;
+      margin: .7em .5em 0 0;
+
+      input {
+        text-align: right;
+      }
+
+      .item {
+        top: .75em;
+      }
+    }
+  }
+}

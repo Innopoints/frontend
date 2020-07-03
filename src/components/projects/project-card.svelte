@@ -1,9 +1,8 @@
 <script>
-  import Card from 'ui/card.svelte';
-  import Labeled from 'ui/labeled.svelte';
-  import Button from 'ui/button.svelte';
-  import { formatDateRange } from '@/utils/date-time-format.js';
-  import { API_HOST_BROWSER } from '@/constants/env.js';
+  import { Card, Button } from 'attractions';
+  import Labeled from 'src/components/common/labeled.svelte';
+  import { formatDateRange } from 'src/utils/date-time-format.js';
+  import { API_HOST_BROWSER } from 'src/constants/env.js';
 
   export let id;
   export let name;
@@ -15,42 +14,50 @@
   export let end_date;
   export let moderated = false;
 
-  const imagePlaceholder = '/images/create-project/placeholder.svg';
+  const imagePlaceholder = 'images/create-project/placeholder.svg';
 </script>
 
-<Card classname="with-image">
-  <img src={image_id == null ? imagePlaceholder : `${API_HOST_BROWSER}/file/${image_id}`} alt="" class="image" />
-  <div class="content">
-    <div class="title">{name}</div>
-    <div class="compact">
-      <Labeled icon label="When">
-        <svg src="images/icons/calendar.svg" class="icon mr" slot="icon" />
-        {formatDateRange({ start: start_date, end: end_date })}
+<div class="project-card">
+  <Card tight>
+    <img
+      alt="Project cover"
+      class="image"
+      src={image_id == null ? imagePlaceholder : `${API_HOST_BROWSER}/file/${image_id}`}
+    />
+    <div class="content">
+      <div class="title">{name}</div>
+      <div class="compact">
+        <Labeled icon label="When">
+          <svg src="static/images/icons/calendar.svg" class="icon mr" slot="icon" />
+          {formatDateRange({ start: start_date, end: end_date })}
+        </Labeled>
+        <Labeled icon label="Creator">
+          <svg src="static/images/icons/user.svg" class="icon mr" slot="icon" />
+          {creator.full_name}
+        </Labeled>
+      </div>
+      <Labeled icon label="Activities">
+        <svg src="static/images/icons/list.svg" class="icon mr" slot="icon" />
+        <ul>
+          {#each exposedActivities.slice(0, 3) as activity (activity.id)}
+            <li>{activity.name}</li>
+          {:else}
+            <li>None</li>
+          {/each}
+          {#if exposedActivities.length > 3}
+            <li class="extra">+ {exposedActivities.length - 3} more</li>
+          {/if}
+        </ul>
       </Labeled>
-      <Labeled icon label="Creator">
-        <svg src="images/icons/user.svg" class="icon mr" slot="icon" />
-        {creator.full_name}
-      </Labeled>
-    </div>
-    <Labeled icon label="Activities">
-      <svg src="images/icons/list.svg" class="icon mr" slot="icon" />
-      <ul>
-        {#each exposedActivities.slice(0, 3) as activity (activity.id)}
-          <li>{activity.name}</li>
+      <Button href="/projects/{id}" filled>
+        {#if moderated}
+          manage
         {:else}
-          None
-        {/each}
-        {#if exposedActivities.length > 3}
-          <li class="extra">+ {exposedActivities.length - 3} more</li>
+          see details
         {/if}
-      </ul>
-    </Labeled>
-    <Button href="/projects/{id}" isFilled>
-      {#if moderated}
-        manage
-      {:else}
-        see details
-      {/if}
-    </Button>
-  </div>
-</Card>
+      </Button>
+    </div>
+  </Card>
+</div>
+
+<style src="../../../static/css/components/projects/project-card.scss"></style>

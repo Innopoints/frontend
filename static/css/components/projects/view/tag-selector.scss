@@ -1,0 +1,20 @@
+.tag-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tags :global .chip,
+  :global .autocomplete-field {
+    white-space: nowrap;
+    margin: .15em .5em .15em 0;
+  }
+
+  :global input {
+    height: 2.4em !important;
+  }
+}

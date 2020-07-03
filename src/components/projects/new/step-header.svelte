@@ -1,6 +1,7 @@
 <script>
   import { onDestroy } from 'svelte';
-  import StepsNavigation from '@/components/projects/new/steps-navigation.svelte';
+  import { H1, H2 } from 'attractions';
+  import StepsNavigation from 'src/components/projects/new/steps-navigation.svelte';
 
   export let subtitle;
   export let step;
@@ -12,7 +13,7 @@
     if (!value) {
       return;
     }
-    
+
     saved = true;
     clearTimeout(savedTimeout);
     savedTimeout = setTimeout(() => {
@@ -24,16 +25,18 @@
   onDestroy(unsubscribe);
 </script>
 
-<header class="padded form-header">
-  <h1>
+<header class="step-header padded">
+  <H1>
     Create a Project
     {#if saved}
       <span class="autosave visible">
-        <svg src="/images/icons/check.svg" class="icon mr" />
+        <svg src="static/images/icons/check.svg" class="icon mr" />
         draft auto-saved
       </span>
     {/if}
-  </h1>
-  <h2>{subtitle}</h2>
+  </H1>
+  <H2 class="hide-on-less-tb">{subtitle}</H2>
 </header>
 <StepsNavigation {step} />
+
+<style src="../../../../static/css/components/projects/new/step-header.scss"></style>

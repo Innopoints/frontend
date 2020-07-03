@@ -1,0 +1,22 @@
+@import "_attractions-theme.scss";
+
+.material {
+  margin-top: 2em;
+  padding-bottom: 4em;
+
+  .center {
+    text-align: center;
+
+    p {
+      margin-bottom: .5em;
+      font-size: 1.1em;
+      font-weight: $thin-font-weight;
+      line-height: 1.3em;
+    }
+
+    .flames {
+      font-size: 2em;
+      margin-bottom: 1.5em;
+    }
+  }
+}

@@ -1,83 +1,53 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import { writable } from 'svelte/store';
+  import getInitialData from 'src/utils/get-initial-data.js';
+  import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
       ['project', `/projects/${page.params.id}`],
       ['competences', '/competences'],
+      ['tags', '/tags'],
     ]));
 
     if (session.account == null || !session.account.is_admin) {
       this.error(403, 'Project Review');
     }
 
+    data.project.activities.forEach(prepareAfterBackend);
     data.account = session.account;
+    data.project = writable(data.project);
     return data;
   }
 </script>
 
 <script>
-  import { writable } from 'svelte/store';
-  import { goto, prefetch } from '@sapper/app';
-  import Layout from '@/layouts/default.svelte';
-  import ProjectHeader from '@/containers/projects/view/project-header.svelte';
-  import ModeratorView from '@/containers/projects/view/moderator-view.svelte';
-  import ModeratorHourPanel from '@/containers/projects/view/moderator-hour-panel.svelte';
-  import ReviewStatuses from '@/constants/backend/project-review-statuses.js';
-  import * as api from '@/utils/api.js';
+  import { setContext } from 'svelte';
+  import { H2 } from 'attractions';
+  import ProjectHeader from 'src/containers/projects/view/project-header.svelte';
+  import ModeratorView from 'src/containers/projects/view/moderator-view.svelte';
+  import StaffCards from 'src/containers/projects/view/staff-cards.svelte';
+
+  setContext('review-mode', true);
 
   export let project;
   export let account;
   export let competences;
-
-  const projectStore = writable(project);
-
-  async function submitReview({ detail }) {
-    try {
-      prefetch(`/projects/${project.id}`);
-      await api.json(api.patch(`/projects/${project.id}/review_status`, {
-        data: {
-          admin_feedback: detail.comment,
-          review_status: detail.accept ? ReviewStatuses.APPROVED : ReviewStatuses.REJECTED,
-        },
-        csrfToken: account.csrf_token,
-      }));
-      goto(`/projects/${project.id}`);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  export let tags;
 </script>
 
 <svelte:head>
-  <title>Review {project.name} – Innopoints</title>
-
-  <!-- Styles for Review Project page -->
-  <link rel="stylesheet" href="/css/bundles/projects-id-review.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects-id.min.css" />
-  {#if account}
-    {#if account.is_admin}
-      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
-    {:else}
-      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
-    {/if}
-  {/if}
+  <title>Review {$project.name} – Innopoints</title>
 </svelte:head>
 
-<Layout user={account}>
-  <div class="material">
-    <ProjectHeader review {project} {account} on:submit-review={submitReview} />
+<div class="material">
+  <ProjectHeader {project} {account} {tags} />
 
-    <h2 class="padded">Project Staff</h2>
-    <ModeratorHourPanel review {project} {account} />
+  <H2 class="padded">Project Staff</H2>
+  <StaffCards review {project} {account} />
 
-    <h2 class="padded">Activities</h2>
-    <ModeratorView
-      review
-      {account}
-      {competences}
-      activities={project.activities}
-      project={projectStore}
-    />
-  </div>
-</Layout>
+  <H2 class="padded">Activities</H2>
+  <ModeratorView {account} {project} {competences} />
+</div>
+
+<style src="../../../../static/css/routes/projects/view/index.scss"></style>

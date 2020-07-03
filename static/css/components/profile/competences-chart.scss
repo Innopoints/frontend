@@ -1,0 +1,105 @@
+@import "_attractions-theme.scss";
+
+.bar-chart {
+  margin: 1em .3em 0;
+  border: 1px solid $light-contrast;
+  border-radius: .625em;
+  padding: .3125em 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 20em;
+
+  & > .bar {
+    height: 2em;
+    margin: .4em 0;
+    display: flex;
+  }
+
+  .present, .future {
+    border-top-right-radius: .3125em;
+    border-bottom-right-radius: .3125em;
+    height: 100%;
+  }
+
+  .future {
+    opacity: .93;
+    display: flex;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .void {
+    flex-grow: 1;
+  }
+
+  @import "components/profile/_bar-colors.scss";
+
+  @media only screen and (min-width: 640px) {
+    width: 25em;
+    margin-bottom: 2em;
+  }
+
+  @media only screen and (min-width: 720px) {
+    margin-left: 1.5em;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    flex-direction: row;
+    height: 20em;
+    max-width: unset;
+    padding: 0 5px;
+
+    & > .bar {
+      height: 100%;
+      width: 2em;
+      margin: 0 .4em;
+      flex-direction: column-reverse;
+    }
+
+    .future {
+      flex-direction: column-reverse;
+    }
+
+    .present,
+    .future {
+      border-bottom-right-radius: 0;
+      border-top-left-radius: .3125em;
+      height: unset;
+      width: 100%;
+    }
+  }
+}
+
+.legend {
+  margin: 1em 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: .9rem;
+
+  li {
+    display: flex;
+    margin: .5em 1em;
+  }
+
+  .icon {
+    width: .9em;
+    height: .9em;
+    border-radius: .3125em;
+    margin-right: .8em;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    margin-top: -2em;
+    margin-left: 1em;
+  }
+}
+
+figure {
+  @media only screen and (min-width: 640px) {
+    display: flex;
+    align-items: flex-start;
+  }
+}

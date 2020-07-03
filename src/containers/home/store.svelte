@@ -1,18 +1,14 @@
 <script>
-  import ProductCard from '@/components/store/product-card.svelte';
+  import { H2 } from 'attractions';
+  import ProductCard from 'src/components/products/product-card.svelte';
+  import { filterProps } from 'src/utils/product-manipulation.js';
 
   export let products;
-
-  function filterProps(props) {
-    let newProps = Object.assign({}, props);
-    delete newProps.addition_time;
-    return newProps;
-  }
 </script>
 
 {#if products && products.length !== 0}
   <section class="store container">
-    <h2>How to spend innopoints?</h2>
+    <H2>How to spend innopoints?</H2>
 
     <div class="subtitle padded">
       The following items are the most popular among students.
@@ -32,3 +28,5 @@
     </div>
   </section>
 {/if}
+
+<style src="../../../static/css/containers/home/store.scss"></style>

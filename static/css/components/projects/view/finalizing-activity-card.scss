@@ -1,0 +1,47 @@
+@import "_attractions-theme.scss";
+@import "components/projects/view/moderated-activity.scss";
+
+.activity.moderated {
+  .left {
+    border-bottom: .0625em solid $light-contrast;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+  }
+
+  @media only screen and (min-width: 640px) {
+    @supports (display: grid) {
+      :global .card {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .right {
+        margin-left: 1em;
+      }
+
+      .left {
+        border-bottom-width: 0 !important;
+        border-right: .0625em solid $light-contrast;
+        padding-right: 1em;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    @supports (display: grid) {
+      :global .card {
+        grid-template-columns: 1fr 2fr;
+      }
+
+      .right {
+        padding-top: .5em;
+      }
+
+      .left {
+        grid-row-end: 2;
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+@import "_attractions-theme.scss";
+
+.contacts {
+  padding: 3em 0 2.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: mix($main, white, 7%);
+  border-top-left-radius: 250% 25%;
+  border-top-right-radius: 250% 25%;
+
+  & > header {
+    flex-direction: column;
+    padding: 0;
+    margin: 0 0 1.5em;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: $thin-font-weight;
+  }
+
+  :global .card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: .8em 1.6em;
+    margin: 1em 0;
+
+    p {
+      font-weight: $thin-font-weight;
+      text-align: center;
+      margin-top: 1em;
+    }
+  }
+
+  .icon {
+    width: 3.6em;
+    height: 3.6em;
+  }
+
+  @media only screen and (min-width: 640px) {
+    .subtitle {
+      font-size: 1.2em;
+    }
+  }
+
+  @media only screen and (min-width: 805px) {
+    padding-bottom: 3em;
+
+    & > div {
+      display: flex;
+      flex-direction: row;
+    }
+
+    :global .card {
+      margin: 0 1rem;
+      font-size: 1.2rem;
+
+      .btn {
+        font-size: 1em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    padding-bottom: 5em;
+
+    :global .card {
+      padding: .8rem 2rem;
+      margin: 0 3rem;
+    }
+  }
+}

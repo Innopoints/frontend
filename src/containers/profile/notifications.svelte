@@ -1,11 +1,11 @@
 <script>
-  import { onMount } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import Dialog from 'ui/dialog.svelte';
-  import RadioGroup from 'ui/radio-group.svelte';
-  import { categories, states } from '@/constants/profile/notification-settings.js';
-  import * as api from '@/utils/api.js';
-  import subscribeToPush from '@/utils/notifications-subscribe.js';
+  import { onMount, getContext } from 'svelte';
+  import { Button, RadioGroup } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
+  import Notice from 'src/components/common/notice.svelte';
+  import { categories, states, permissions } from 'src/constants/profile/notification-settings.js';
+  import subscribeToPush from 'src/utils/notifications-subscribe.js';
+  import * as api from 'src/utils/api.js';
 
   export let notificationSettings;
   export let account;
@@ -21,7 +21,9 @@
     ),
   );
 
-  let radioOptions = states.map(state => ({ value: state, disabled: state === 'push' }));
+  let radioOptions = [...Object.values(states)].map(
+    state => ({ value: state, disabled: state === states.PUSH }),
+  );
 
   function requestPermission() {
     // Crazy promise wrapper to handle both: old API that accepted a callback,
@@ -35,16 +37,16 @@
   }
 
   function updateRadioOptions() {
-    if (notificationPermission !== 'granted') {
+    if (notificationPermission !== permissions.GRANTED) {
       return;
     }
-    radioOptions.find(option => option.value === 'push').disabled = false;
+    radioOptions.find(option => option.value === states.PUSH).disabled = false;
     radioOptions = radioOptions;
   }
 
   async function updateNotificationPermission(permission) {
     notificationPermission = permission;
-    if (notificationPermission !== 'granted') {
+    if (notificationPermission !== permissions.GRANTED) {
       return;
     }
 
@@ -80,35 +82,58 @@
         { data: notificationSettings, csrfToken: account.csrf_token },
       ));
       changes = false;
+      const undoPrompt = showSnackbar({
+        props: {
+          text: 'Settings updated successfully',
+          action: {
+            text: 'undo',
+            async callback() {
+              notificationSettings = Object.assign({}, initialSettings);
+              await api.json(api.patch(
+                '/account/notification_settings',
+                { data: notificationSettings, csrfToken: account.csrf_token },
+              ));
+            },
+          },
+        },
+      });
+
+      if (await undoPrompt.expired) {
+        initialSettings = Object.assign({}, notificationSettings);
+      }
     } catch (e) {
       console.error(e);
+      showSnackbar({ props: { text: 'Couldn\'t save changes, try reloading the page' } });
       notificationSettings = initialSettings;
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <div class="notifications">
-  {#if notificationPermission === 'default' || notificationPermission === 'denied'}
+  {#if notificationPermission === permissions.DEFAULT
+    || notificationPermission === permissions.DENIED}
     <header>
-      <Dialog isNotice>
-        <div class="message" slot="content">
-          <svg src="images/icons/alert-triangle.svg" class="icon" />
+      <Notice>
+        <svg src="static/images/icons/alert-triangle.svg" class="icon" slot="icon" />
+        <div class="message">
           <p>
             Push notifications require permission before they can be used.
-            {#if notificationPermission === 'denied'}
+            {#if notificationPermission === permissions.DENIED}
               <br />
               To allow notifications after they've been blocked, check the website settings.
             {/if}
           </p>
         </div>
-        <div class="actions" slot="content">
-          {#if notificationPermission !== 'denied'}
+        <div class="actions">
+          {#if notificationPermission !== permissions.DENIED}
             <Button on:click={requestPermission}>
               prompt for permissions
             </Button>
           {/if}
         </div>
-      </Dialog>
+      </Notice>
     </header>
   {/if}
 
@@ -125,20 +150,22 @@
           {/if}
         </header>
         <RadioGroup
-          classname="switches"
+          class="switches"
           name={category.key || 'all'}
-          labelPosition="left"
-          labelclass="label"
+          labelsLeft
+          labelClass="label"
           items={radioOptions}
           value={notificationSettings[category.key]}
-          on:change={(evt) => updateSettings(category.key, evt.detail)}
+          on:change={(e) => updateSettings(category.key, e.detail.value)}
         />
       </li>
     {/each}
     {#if changes}
       <div class="actions">
-        <Button isFilled on:click={saveChanges}>save changes</Button>
+        <Button filled on:click={saveChanges}>save changes</Button>
       </div>
     {/if}
   </ul>
 </div>
+
+<style src="../../../static/css/containers/profile/notifications.scss"></style>

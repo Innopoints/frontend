@@ -1,18 +1,15 @@
 <script>
-  import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
-  import StepHeader from '@/components/projects/new/step-header.svelte';
-  import ProjectImagePicker from '@/components/projects/new/project-image-picker.svelte';
-  import FormField from 'ui/form-field.svelte';
-  import TextField from 'ui/text-field.svelte';
-  import spaceOnly from '@/utils/space-only.js';
+  import BottomNavigation from 'src/components/projects/new/bottom-navigation.svelte';
+  import StepHeader from 'src/components/projects/new/step-header.svelte';
+  import ProjectImagePicker from 'src/components/projects/new/project-image-picker.svelte';
+  import { FormField, TextField } from 'attractions';
+  import spaceOnly from 'src/utils/space-only.js';
 
   export let project;
-  export let duplicateName;
   export let autosaved;
-  export let isUploading = false;
 </script>
 
-<form>
+<div class="form step-1">
   <StepHeader
     step={1}
     subtitle="Step 1. Fill out the general information about the project"
@@ -20,42 +17,35 @@
   />
 
   <FormField
-    title="Project name"
-    classname="padded"
-    id="name"
+    name="Project name"
+    help="Prefer English names."
+    class="padded"
     required
-    error={
-         (duplicateName && "The name must be unique.")
-      || (spaceOnly($project.name) && "The name must not be empty.")
-      || null
-    }
+    errors={[spaceOnly($project.name) && "The name must not be empty."]}
   >
-    <span slot="subtitle" class="desc">
-      <span class="lb">This has to be different from other projects.</span>
-      <span class="lb">Adding the year to the name usually helps:</span><br>
-      <em>“Halloween” → “Halloween 2019”</em>
-    </span>
     <TextField
-      id="title"
-      autocomplete={false}
+      id="name"
+      autocomplete="off"
       maxlength={128}
-      value={$project.name}
-      on:change={(event) => $project.name = event.detail}
+      bind:value={$project.name}
     />
   </FormField>
 
   <FormField
-    title="Cover image"
-    classname="padded"
-    id="image"
-    wrapperclass="image-picker"
+    name="Cover image"
+    help="This is shown on the project card to catch attention."
+    class="padded"
   >
-    <span slot="subtitle" class="desc">
-      <span class="lb">This is shown on the project card to catch attention.</span>
-      <span class="lb">Best to use 16:9 photos.</span>
-    </span>
-    <ProjectImagePicker bind:value={$project.image_id} {isUploading} on:uploading on:resize-image />
+    <ProjectImagePicker bind:value={$project.image_id} />
   </FormField>
 
-  <BottomNavigation step={1} error={!$project.name ? 1 : null} />
-</form>
+  <BottomNavigation
+    step={1}
+    error={
+      $project.name == null || spaceOnly($project.name) ?
+        'A project must have a non-empty name.' : null
+    } 
+  />
+</div>
+
+<style src="../../../../static/css/containers/projects/new/step-1.scss"></style>

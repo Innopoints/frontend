@@ -1,0 +1,80 @@
+@import "_attractions-theme.scss";
+@import "_mixins.scss";
+
+.steps-navigation {
+  display: flex;
+  justify-content: center;
+
+  :global {
+    .handle {
+      background: white;
+      box-shadow: $shadow-1;
+      margin-top: 1em;
+
+      .step-index, .step-name {
+        margin-right: 1em;
+      }
+    }
+
+    .dropdown {
+      padding: 1em 0;
+      top: 1em;
+      width: 100%;
+      margin-top: 0;
+      z-index: 10000;
+      overflow: hidden;
+
+      .btn {
+        border-radius: 0;
+        text-align: center;
+
+        .icon {
+          font-size: 1.25rem;
+          margin-right: 1em;
+          width: 1.5em;
+        }
+      }
+    }
+
+    .dropdown-shell.open .dropdown {
+      animation-name: height-increase;
+      animation-duration: 150ms;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    position: absolute;
+    top: .5em;
+    right: 2.5em;
+
+    .step-index {
+      font-size: 1.2rem;
+
+      .step {
+        @include hide-accessible;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 840px) {
+    top: 1.2em;
+    right: 8%;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    right: 12%;
+  }
+}
+
+@keyframes height-increase {
+  from {
+    height: 3.125em;
+  }
+
+  to {
+    height: 12.375em;
+  }
+}

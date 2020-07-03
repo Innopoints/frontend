@@ -1,0 +1,36 @@
+@import "_attractions-theme.scss";
+
+li {
+  padding: 1em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: .0625em solid $light-contrast;
+
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    .title {
+      grid-column: 1 / 3;
+    }
+  }
+
+  .title {
+    margin-bottom: .5em;
+    flex-basis: 100%;
+    font-weight: $bold-font-weight;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  :global .labeled > .icon {
+    margin-right: .3rem;
+  }
+
+  :global .btn {
+    margin-top: .3em;
+  }
+}

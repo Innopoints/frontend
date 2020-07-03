@@ -10,15 +10,29 @@ import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import substituteSvgs from './src/utils/substitute-svgs.js';
 import sapperEnv from 'sapper-environment';
+import autoPreprocess from 'svelte-preprocess';
+import autoprefixer from 'autoprefixer';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+const onwarn = (warning, onwarn) => (
+  warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)
+) || onwarn(warning);
 
 const dedupe = importee =>
   importee === 'svelte' || importee.startsWith('svelte/');
+
+const preprocessChain = [
+  {
+    markup: substituteSvgs,
+  },
+  autoPreprocess({
+    scss: { includePaths: ['./static/css'] },
+    postcss: { plugins: [autoprefixer] },
+  }),
+];
 
 export default {
   client: {
@@ -34,9 +48,7 @@ export default {
       eslint(),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
-        preprocess: {
-          markup: substituteSvgs,
-        },
+        preprocess: preprocessChain,
         dev,
         hydratable: true,
       }),
@@ -47,9 +59,8 @@ export default {
       alias({
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
         entries: [
-          { find: /^@\//, replacement: __dirname + '/src/' },
-          { find: /^ui/, replacement: __dirname + '/src/components/ui' },
-          { find: /^images/, replacement: __dirname + '/static/images' },
+          { find: /^src\//, replacement: __dirname + '/src/' },
+          { find: /^static\//, replacement: __dirname + '/static/' },
         ],
       }),
       commonjs(),
@@ -99,9 +110,7 @@ export default {
       }),
       svelte({
         extensions: ['.html', '.svelte', '.svg'],
-        preprocess: {
-          markup: substituteSvgs,
-        },
+        preprocess: preprocessChain,
         generate: 'ssr',
         dev,
       }),
@@ -111,9 +120,8 @@ export default {
       alias({
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
         entries: [
-          { find: /^@\//, replacement: __dirname + '/src/' },
-          { find: /^ui/, replacement: __dirname + '/src/components/ui' },
-          { find: /^images/, replacement: __dirname + '/static/images' },
+          { find: /^src\//, replacement: __dirname + '/src/' },
+          { find: /^static\//, replacement: __dirname + '/static/' },
         ],
       }),
       commonjs(),

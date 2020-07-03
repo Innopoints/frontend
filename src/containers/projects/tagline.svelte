@@ -1,36 +1,33 @@
 <script>
-  import Button from 'ui/button.svelte';
-  import { login } from '@/utils/auth.js';
-
+  import { Button } from 'attractions';
+  import Tagline from 'src/components/common/tagline.svelte';
+  import { login } from 'src/utils/auth.js';
 
   export let account;
+
+  const subhead = (
+    'If you’re seeking an opportunity to contribute to the wonderful world of Innopolis projects, '
+    + 'you’re in the right place!'
+  );
 </script>
 
-<section class="tagline padded">
-  <img
-    src="images/projects/voxel-volunteering.png"
-    class="hide-tb picture"
-    alt=""
-  />
-  <div>
-    <div class="headline">Become a volunteer</div>
-    <div class="subhead">
-      <p>
-        If you’re seeking an opportunity to contribute to the wonderful world of Innopolis projects,
-        you’re in the right place!
-      </p>
-      {#if account}
-        <div class="actions">
-          <Button isOutline classname="btn rectangle" href="/projects/new">
-            <svg src="/images/icons/plus.svg" class="icon mr" />
-            create new project
-          </Button>
-        </div>
-      {:else}
-        <p class="signin-prompt">
-          Got a fresh idea? <a href="/" on:click|preventDefault={login}>Sign in</a> to create a project of your own.
-        </p>
-      {/if}
+<Tagline
+  imageURL="/images/projects/voxel-volunteering.png"
+  headline="Become a volunteer"
+  {subhead}
+>
+  {#if account}
+    <div class="actions">
+      <Button outline rectangle href="/projects/new">
+        <svg src="static/images/icons/plus.svg" class="mr" />
+        create new project
+      </Button>
     </div>
-  </div>
-</section>
+  {:else}
+    <p class="signin-prompt">
+      Got a fresh idea?
+      <a href="/login" on:click|preventDefault={login}>Sign in</a>
+      to create a project of your own.
+    </p>
+  {/if}
+</Tagline>

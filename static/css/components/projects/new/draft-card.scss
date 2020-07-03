@@ -1,0 +1,117 @@
+@import "_attractions-theme.scss";
+
+.draft-card {
+  margin-top: 1em;
+  max-width: 20em;
+
+  :global .card {
+    padding-right: .6em;
+    padding-bottom: .6em;
+  }
+
+  @media only screen and (min-width: 720px) {
+    margin-left: .5em;
+    margin-right: .5em;
+  }
+}
+
+.title {
+  font-size: 1.05rem;
+  margin-bottom: .3em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.subtitle {
+  font-size: .9rem;
+  font-weight: $thin-font-weight;
+}
+
+.actions {
+  margin-top: .5em;
+  display: flex;
+}
+
+.animate {
+  animation-duration: 200ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+
+  &.left {
+    animation-name: animate-left;
+  }
+
+  &.right {
+    animation-name: animate-right;
+  }
+
+  &.down {
+    animation-name: animate-down;
+  }
+}
+
+$travel-distance: 1em;
+
+@keyframes animate-left {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  49% {
+    transform: translateX(-$travel-distance);
+    opacity: 0;
+  }
+
+  51% {
+    transform: translateX($travel-distance);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes animate-right {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  49% {
+    transform: translateX($travel-distance);
+    opacity: 0;
+  }
+
+  51% {
+    transform: translateX(-$travel-distance);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes animate-down {
+  0% {
+    transform: translateY(0, 0);
+    opacity: 1;
+  }
+
+  49% {
+    transform: translate(0, $travel-distance);
+    opacity: 0;
+  }
+
+  51% {
+    transform: translate($travel-distance, 0);
+  }
+
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}

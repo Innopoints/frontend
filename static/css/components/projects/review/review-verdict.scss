@@ -1,0 +1,16 @@
+@import "_attractions-theme.scss";
+
+.review-verdict {
+  margin-top: 1.5em;
+
+  .title {
+    margin-bottom: .5em;
+    font-weight: $bold-font-weight;
+  }
+
+  .actions {
+    margin-top: .5em;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

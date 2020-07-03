@@ -1,0 +1,9 @@
+.uploaded-image {
+  display: flex;
+  align-items: flex-start;
+
+  img {
+    border-radius: .625rem;
+    width: calc(100% - 3em);
+  }
+}

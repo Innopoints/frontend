@@ -1,5 +1,5 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -18,13 +18,12 @@
 </script>
 
 <script>
-  import Layout from '@/layouts/default.svelte';
-  import Header from '@/containers/dashboard/header.svelte';
-  import Reviews from '@/containers/dashboard/reviews.svelte';
-  import Purchases from '@/containers/dashboard/purchases.svelte';
-  import InnopointTransfer from '@/containers/dashboard/innopoint-transfer.svelte';
-  import TagEditor from '@/containers/dashboard/tag-editor.svelte';
-  
+  import { Button, H1 } from 'attractions';
+  import Reviews from 'src/containers/dashboard/reviews.svelte';
+  import Purchases from 'src/containers/dashboard/purchases.svelte';
+  import IndividualControls from 'src/containers/dashboard/individual-controls.svelte';
+  import TagEditor from 'src/containers/dashboard/tag-editor.svelte';
+
   export let reviews;
   export let account;
   export let purchases;
@@ -33,20 +32,22 @@
 
 <svelte:head>
   <title>Admin Dashboard</title>
-
-  <link rel="stylesheet" href="/css/bundles/dashboard.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/projects.min.css" />
-  <link rel="prefetch" as="style" href="/css/bundles/store.min.css" />
 </svelte:head>
 
-<Layout user={account}>
-  <div class="material">
-    <Header />
-    <div class="cards padded">
-      <Reviews {reviews} />
-      <Purchases {purchases} />
-      <InnopointTransfer />
-      <TagEditor {tags} />
-    </div>
+<div class="material">
+  <H1 class="padded">
+    Dashboard
+    <Button outline href="/profile">
+      <svg src="static/images/icons/user.svg" class="mr" />
+      go to profile
+    </Button>
+  </H1>
+  <div class="cards padded">
+    <Reviews {reviews} />
+    <Purchases {purchases} />
+    <IndividualControls {account} />
+    <TagEditor {tags} {account} />
   </div>
-</Layout>
+</div>
+
+<style src="../../static/css/routes/dashboard.scss"></style>

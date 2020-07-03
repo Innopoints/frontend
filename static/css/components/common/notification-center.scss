@@ -1,0 +1,44 @@
+@import "_attractions-theme.scss";
+@import "_mixins.scss";
+
+.notification-center :global {
+  .btn.close {
+    position: absolute;
+    top: .3em;
+    right: .3em;
+  }
+
+  .dropdown-shell {
+    position: static;
+  }
+
+  .dropdown {
+    padding: 1em;
+    width: 16.75em;
+    right: .5em;
+    top: 3.7em;
+  }
+
+  .spinner > div {
+    width: .6em !important;
+    height: .6em !important;
+    margin: .2em;
+  }
+}
+
+.title {
+  font-weight: $bold-font-weight;
+  color: $main;
+}
+
+.notification-list {
+  margin: 1em 0;
+  max-height: 17.75em;
+  width: 100%;
+  padding-right: 1em;
+  margin-right: 0;
+  overflow-y: scroll;
+  overscroll-behavior: none;
+
+  @include thin-scrollbar;
+}

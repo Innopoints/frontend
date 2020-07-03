@@ -1,6 +1,6 @@
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-export function formatDateRange({start, end}) {
+export function formatDateRange({ start, end }) {
   const startDate = new Date(start);
   const endDate = new Date(end);
   const now = new Date();
@@ -73,7 +73,7 @@ export function formatDate(date) {
   }
 }
 
-export function formatTimeRange({start, end}) {
+export function formatTimeRange({ start, end }) {
   const startDate = new Date(start);
   const endDate = new Date(end);
   const now = new Date();

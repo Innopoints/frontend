@@ -11,7 +11,7 @@ const dev = NODE_ENV === 'development';
 
 
 /* If the request asks for a full page, retrieve the account data. */
-async function populateSession(req, res, next) {
+async function populateSession(req, _res, next) {
   if (!/^(\/client\/|\/service-worker.js)/.test(req.url) && req.headers.cookie) {
     try {
       const accountResp = await fetch(
@@ -33,7 +33,7 @@ async function populateSession(req, res, next) {
 
 app()
   .use(
-    (req, res, next) => {
+    (_req, res, next) => {
       res.locals.nonce = uuidv4();
       next();
     },
@@ -43,7 +43,7 @@ app()
           defaultSrc: ["'self'"],
           scriptSrc: [
             "'self'",
-            (req, res) => `'nonce-${res.locals.nonce}'`,
+            (_req, res) => `'nonce-${res.locals.nonce}'`,
             "'unsafe-eval'",
             "'unsafe-inline'",
           ],
@@ -73,12 +73,14 @@ app()
     sirv('static', { dev }),
     populateSession,
     sapper.middleware({
-      session: (req, res) => ({
+      session: (req, _res) => ({
         account: req._accountObject,
         cookies: req.headers.cookie,
       }),
     }),
   )
   .listen(PORT, err => {
-    if (err) console.log('error', err);
+    if (err) {
+      console.error('error', err);
+    }
   });

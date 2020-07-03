@@ -26,4 +26,14 @@ export const categories = [
   },
 ];
 
-export const states = ['push', 'off', 'email'];
+export const states = Object.freeze({
+  PUSH: 'push',
+  OFF: 'off',
+  EMAIL: 'email',
+});
+
+export const permissions = Object.freeze({
+  DEFAULT: 'default',
+  GRANTED: 'granted',
+  DENIED: 'denied',
+});

@@ -1,0 +1,161 @@
+@import "_attractions-theme.scss";
+
+.activity.user {
+  margin-bottom: 1em;
+
+  .title {
+    font-weight: $bold-font-weight;
+    font-size: 1.1rem;
+    line-height: 1.4rem;
+    letter-spacing: .2px;
+  }
+
+  :global .card:not(.expanded) > .additional {
+    display: none;
+  }
+
+  .chevron {
+    transition: transform 100ms;
+  }
+
+  .row {
+    margin-top: .8em;
+    display: flex;
+    justify-content: space-between;
+
+    & > :global .labeled {
+      flex-basis: 50%;
+    }
+  }
+
+  :global .labeled .content {
+    margin: .3em 0;
+
+    .secondary {
+      font-size: .9rem;
+      font-weight: $thin-font-weight;
+      display: none;
+    }
+  }
+
+  .chips {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+
+    :global .chip {
+      margin: 0 .3em .3em 0;
+    }
+  }
+
+  .not-logged-in {
+    align-self: center;
+    font-weight: $thin-font-weight;
+  }
+
+  .application-status {
+    font-size: .9em;
+    font-weight: $thin-font-weight;
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+
+    :global .dot {
+      margin-right: .6em;
+    }
+  }
+
+  :global .card.expanded {
+    .chevron {
+      transform: rotate(180deg);
+    }
+
+    .row.info {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .labeled:last-child {
+        margin-top: .8em;
+
+        .secondary {
+          display: block;
+        }
+      }
+    }
+
+    .description,
+    .chips,
+    .volunteers,
+    .spots {
+      margin-top: .8em;
+    }
+
+    .description .content {
+      font-size: .95rem;
+      white-space: pre-line;
+    }
+
+    .volunteers ul {
+      padding-left: 1.5em;
+      margin: .5em 0 1em;
+
+      li {
+        margin-top: .5em;
+      }
+
+      strong {
+        margin-top: .8em;
+        display: block;
+      }
+    }
+
+    .application {
+      border-top: .0625em solid $light-contrast;
+      padding-top: .8em;
+      margin-top: .8em;
+      font-weight: $thin-font-weight;
+
+      .with-icon {
+        margin-top: .5em;
+
+        &.comment {
+          white-space: pre-line;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 379px) {
+  .volunteers .icon {
+    display: none;
+  }
+}
+
+/* stylelint-disable indentation */
+@media screen and (min-width: 420px) and (max-width: 679px),
+                  (min-width: 1024px) and (max-width: 1199px),
+                  (min-width: 1400px) {
+  .activity.user {
+    .row > :global .labeled {
+      &:first-child {
+        flex-basis: 40%;
+      }
+
+      &:last-child {
+        flex-basis: 60%;
+      }
+    }
+
+    :global .card.expanded {
+      .row.info {
+        flex-direction: row;
+
+        & > .labeled:last-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+/* stylelint-enable indentation */

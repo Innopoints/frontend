@@ -1,0 +1,13 @@
+@import "_attractions-theme.scss";
+@import "_mixins.scss";
+
+:global {
+  @import "common.scss";
+}
+
+@media only screen and (min-width: 1200px) {
+  .material :global .padded {
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+}

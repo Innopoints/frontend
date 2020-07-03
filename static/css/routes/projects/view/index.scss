@@ -1,0 +1,23 @@
+@import "_attractions-theme.scss";
+
+:global {
+  @import "common.scss";
+}
+
+.material {
+  padding-bottom: 3em;
+
+  :global h2.padded {
+    text-align: center;
+    margin-bottom: 1em;
+    margin-top: 2em;
+  }
+
+  :global .dialog {
+    margin: .5em;
+  }
+}
+
+.activities {
+  margin-top: 1em;
+}
