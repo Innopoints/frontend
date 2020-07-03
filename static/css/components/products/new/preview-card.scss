@@ -1,0 +1,84 @@
+@import "_attractions-theme.scss";
+
+.preview-card {
+  :global .card {
+    max-width: 25rem;
+  }
+
+  img {
+    width: 100%;
+    display: block;
+  }
+
+  .content {
+    padding: .9em;
+
+    .placeholder {
+      background: transparentize(black, .9);
+      border-radius: .3125em;
+
+      &.name {
+        height: 1.6em;
+        width: 70%;
+        align-self: flex-start;
+        margin-bottom: .3em;
+      }
+
+      &.price {
+        height: 1.3em;
+        width: 3em;
+      }
+    }
+
+    .type {
+      font-weight: $thin-font-weight;
+      margin-top: .2em;
+    }
+
+    :global .labeled .label {
+      margin-bottom: .3em;
+    }
+
+    :global .description {
+      margin-top: 1em;
+      white-space: pre-line;
+    }
+
+    :global .variety-colors {
+      display: flex;
+      flex-wrap: wrap;
+
+      .radio {
+        margin: .2em;
+      }
+    }
+
+    .selectables-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 1em;
+    }
+
+    .price {
+      display: flex;
+      align-items: center;
+
+      .innopoint {
+        margin-left: .3em;
+      }
+    }
+
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.2em;
+    }
+
+    .purchase .count {
+      font-size: .9em;
+      margin-bottom: .3em;
+    }
+  }
+}

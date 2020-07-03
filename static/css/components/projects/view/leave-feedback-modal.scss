@@ -1,0 +1,59 @@
+@import "_attractions-theme.scss";
+@import "_mixins.scss";
+
+.content {
+  max-height: calc(100vh - 10em);
+  overflow-y: auto;
+  overscroll-behavior: none;
+
+  @include thin-scrollbar;
+
+  p {
+    font-weight: $thin-font-weight;
+    margin-bottom: .3em;
+    font-size: .9rem;
+    line-height: 1.1rem;
+  }
+
+  .form :global {
+    margin-top: 1em;
+
+    .name {
+      display: block;
+      margin-bottom: .3em;
+      font-size: 1em !important;
+    }
+
+    .competence-chips {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 40em;
+
+      .chip {
+        margin-right: .5em;
+      }
+    }
+
+    .form-field {
+      flex-direction: column;
+
+      .field {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: .5em;
+  }
+
+  :global textarea {
+    height: 4em;
+  }
+
+  @media only screen and (min-width: 480px) {
+    max-height: calc(100vh - 7em);
+  }
+}

@@ -1,21 +1,20 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Button from 'ui/button.svelte';
-  import Autocomplete from 'ui/autocomplete.svelte';
-  import Labeled from 'ui/labeled.svelte';
-  import UnclickableChip from 'ui/unclickable-chip.svelte';
+  import { Button, Autocomplete, Chip, Dot } from 'attractions';
+  import Labeled from 'src/components/common/labeled.svelte';
 
   export let tags;
-  export let value;
+  export let value = [];
   let valueTags = value.map(id => tags.find(tag => tag.id === id));
   let editing = false;
 
   // eslint-disable-next-line require-yield
-  async function *getOptions(query) {
+  async function* getOptions(query) {
+    let output = tags;
     if (query) {
-      return tags.filter(tag => tag.name.toLowerCase().includes(query.toLowerCase()));
+      output = output.filter(tag => tag.name.toLowerCase().includes(query.toLowerCase()));
     }
-    return tags;
+    yield output.filter(tag => !value.includes(tag.id));
   }
 
   function toggleEditing() {
@@ -28,20 +27,30 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<Labeled icon label="Tags">
-  <svg slot="icon" class="icon" src="images/icons/tag.svg" />
-  <div class="tag-selector">
-    {#if editing}
-      <Autocomplete {getOptions} minSearchLength={0} bind:selection={valueTags} />
-    {:else}
-      <div class="tags">
-        {#each valueTags as tag (tag.id)}
-          <UnclickableChip small>{tag.name}</UnclickableChip>
-        {/each}
-      </div>
-    {/if}
-    <Button isSmall on:click={toggleEditing}>
-      {editing ? 'save' : 'edit'}
-    </Button>
-  </div>
-</Labeled>
+{#if valueTags.length > 0 || editing}
+  <Labeled icon label="Tags" class="tags">
+    <svg slot="icon" class="icon mr" src="static/images/icons/tag.svg" />
+    <div class="tag-selector">
+      {#if editing}
+        <Autocomplete {getOptions} minSearchLength={0} bind:selection={valueTags} />
+      {:else}
+        <div class="tags">
+          {#each valueTags as tag (tag.id)}
+            <Chip small>{tag.name}</Chip>
+          {/each}
+        </div>
+      {/if}
+      <Button small class="ml" on:click={toggleEditing}>
+        {editing ? 'save' : 'edit'}
+      </Button>
+    </div>
+  </Labeled>
+{:else}
+  <Button class="mt" on:click={toggleEditing}>
+    <svg class="mr" src="static/images/icons/tag.svg" />
+    add tags
+    <Dot info class="ml" />
+  </Button>
+{/if}
+
+<style src="../../../../static/css/components/projects/view/tag-selector.scss"></style>

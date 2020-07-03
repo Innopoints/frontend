@@ -1,5 +1,5 @@
 <script context="module">
-  import getInitialData from '@/utils/get-initial-data.js';
+  import getInitialData from 'src/utils/get-initial-data.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -17,25 +17,19 @@
 </script>
 
 <script>
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount, onDestroy, getContext } from 'svelte';
   import { writable } from 'svelte/store';
   import { stores, goto } from '@sapper/app';
-  import Layout from '@/layouts/default.svelte';
-  import StepZero from '@/containers/projects/new/step-0.svelte';
-  import StepOne from '@/containers/projects/new/step-1.svelte';
-  import StepTwo from '@/containers/projects/new/step-2.svelte';
-  import StepThree from '@/containers/projects/new/step-3.svelte';
-  import ImageResizer from '@/components/common/image-resizer.svelte';
-  import * as api from '@/utils/api.js';
-  import generateQueryString from '@/utils/generate-query-string.js';
+  import { snackbarContextKey } from 'attractions/snackbar';
+  import StepZero from 'src/containers/projects/new/step-0.svelte';
+  import StepOne from 'src/containers/projects/new/step-1.svelte';
+  import StepTwo from 'src/containers/projects/new/step-2.svelte';
+  import StepThree from 'src/containers/projects/new/step-3.svelte';
+  import * as api from 'src/utils/api.js';
   import {
-    determineInsertionIndex,
-    filterProjectFields,
-    prepareForBackend,
-    prepareAfterBackend,
-  } from '@/utils/project-manipulation.js';
-  import ActivityTypes from '@/constants/projects/activity-internal-types.js';
-  import spaceOnly from '@/utils/space-only.js';
+    computeDiffProject,
+    copyProject,
+  } from 'src/utils/project-manipulation.js';
 
   const { page } = stores();
 
@@ -43,13 +37,16 @@
   export let account;
   export let competences;
 
-  let project = writable(null);
-  let autosaved = writable(false);
-  let lastSyncedName = null;
-  const unsubscribe = project.subscribe(saveProject);
+  let lastSyncedProject = null;
+  const project = writable(null);
+  let saveProjectDebounce = null;
+  const unsubscribe = project.subscribe(function(projectObject) {
+    clearTimeout(saveProjectDebounce);
+    saveProjectDebounce = setTimeout(saveProject, 150, projectObject);
+  });
   onDestroy(unsubscribe);
-  let duplicateName = false;
-  let isUploading = false;
+
+  const autosaved = writable(false);
 
   // Step management
   $: step = ($project != null ? +$page.query.step || 0 : 0);
@@ -59,272 +56,52 @@
     }
   });
 
-  const imageResizer = {
-    open: false,
-    image: null,
-    file: null,
-    error: null,
-    show({ detail: file }) {
-      imageResizer.open = true;
-      imageResizer.file = file;
-      imageResizer.image = URL.createObjectURL(file, { type: file.type });
-    },
-    async uploadImage({ detail: pixels }) {
-      const formData = new FormData();
-      formData.append('file', imageResizer.file);
-      formData.append('x', pixels.x);
-      formData.append('y', pixels.y);
-      formData.append('width', pixels.width);
-      formData.append('height', pixels.height);
-
-      try {
-        const resp = await api.json(api.post('/file', {
-          data: formData,
-          csrfToken: account.csrf_token,
-        }));
-
-        $project.image_id = resp.id;
-        imageResizer.error = null;
-        imageResizer.open = false;
-      } catch (e) {
-        console.error(e);
-        imageResizer.error = 'Upload failed. Try again.';
-      }
-      isUploading = false;
-    },
-  };
-
-  function goToStep(stepIdx) {
-    goto(`/projects/new?step=${stepIdx}`);
-  }
-
-  // Form processsing
-  async function deleteDraft({ detail: draftID }) {
-    try {
-      await api.json(api.del('/projects/' + draftID, { csrfToken: account.csrf_token }));
-      drafts = drafts.filter(draft => draft.id !== draftID);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  async function loadDraft({ detail: draftID }) {
-    try {
-      const draftProject = await api.json(api.get('/projects/' + draftID));
-      for (let activity of draftProject.activities) {
-        activity.timeframe = {
-          start: new Date(activity.timeframe.start),
-          end: new Date(activity.timeframe.end),
-        };
-        if (activity.application_deadline != null) {
-          activity.application_deadline = new Date(activity.application_deadline);
-        }
-      }
-      lastSyncedName = draftProject.name;
-      $project = draftProject;
-      goToStep(1);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  /* A subscriber to the $project store, receives an actual project object. */
-  async function saveProject(projectObj) {
-    if (projectObj == null || !projectObj.name || spaceOnly(projectObj.name)) {
+  async function saveProject(projectObject) {
+    const diff = computeDiffProject(projectObject, lastSyncedProject);
+    if (diff == null) {
       return;
     }
 
+    const requestOptions = {
+      data: diff,
+      csrfToken: account.csrf_token,
+    };
+
     try {
-      if (projectObj.name !== lastSyncedName) {
-        const queryString = generateQueryString(new Map([['name', projectObj.name]]));
-        const nameAvailable = await api.json(api.get('/projects/name_available?' + queryString));
-
-        if (!nameAvailable) {
-          duplicateName = true;
-          return;
-        }
-      }
-
-      duplicateName = false;
-      lastSyncedName = projectObj.name;
-
-      if (projectObj.id != null) {
-        await api.json(api.patch('/projects/' + projectObj.id, {
-          data: filterProjectFields(projectObj, true),
-          csrfToken: account.csrf_token,
-        }));
+      lastSyncedProject = copyProject(projectObject);
+      if (projectObject.id != null) {
+        delete diff.activities;
+        await api.json(api.patch(`/projects/${projectObject.id}`, requestOptions));
       } else {
-        const uploadedProject = await api.json(api.post('/projects', {
-          data: filterProjectFields(projectObj),
-          csrfToken: account.csrf_token,
-        }));
-        uploadedProject.activities = uploadedProject.activities.concat(
-          projectObj.activities.filter(act => act._type === ActivityTypes.TEMPLATE),
-        );
-        project.set(uploadedProject);
+        ({
+          id: projectObject.id,
+          activities: projectObject.activities,
+        } = await api.json(api.post('/projects', requestOptions)));
       }
       autosaved.set(true);
     } catch (e) {
+      showSnackbar({ props: { text: 'Could not autosave. Some changes might be lost' } });
       console.error(e);
     }
   }
 
-  async function publishProject() {
-    try {
-      await api.json(api.patch(
-        `/projects/${$project.id}/publish`,
-        { csrfToken: account.csrf_token },
-      ));
-      goto(`/projects/${$project.id}`);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  async function processActivityChange({ detail }) {
-    const type = detail.activityCopy._type;
-    delete detail.activityCopy._type;
-    prepareForBackend(detail.activityCopy);
-
-    const index = determineInsertionIndex($project.activities, detail.position);
-    let updatedActivity;
-    try {
-      if (type === ActivityTypes.NEW
-          || (type === ActivityTypes.EDIT && detail.activityCopy.id == null)) {
-        const replacedTemplateIdx = $project.activities.findIndex(
-          act => act.name === detail.activityCopy.name,
-        );
-        if ($project.id == null) {
-          // The project does not exist on the backend yet
-          updatedActivity = detail.activityCopy;
-        } else {
-          updatedActivity = await api.json(api.post(`/projects/${$project.id}/activities`, {
-            data: detail.activityCopy,
-            csrfToken: account.csrf_token,
-          }));
-        }
-        if (replacedTemplateIdx !== -1) {
-          $project.activities.splice(replacedTemplateIdx, 1, updatedActivity);
-        } else {
-          $project.activities.splice(index, 0, updatedActivity);
-        }
-      } else if (type === ActivityTypes.EDIT) {
-        if ($project.id == null) {
-          // The project does not exist on the backend yet
-          updatedActivity = detail.activityCopy;
-          $project.activities.splice(index, 1, updatedActivity);
-        } else {
-          const activityID = detail.activityCopy.id;
-          delete detail.activityCopy.id;
-
-          updatedActivity = await api.json(api.patch(
-            `/projects/${$project.id}/activities/${activityID}`,
-            { data: detail.activityCopy, csrfToken: account.csrf_token },
-          ));
-          updatedActivity.id = activityID;
-
-          $project.activities.splice(
-            $project.activities.findIndex(act => act.id === activityID),
-            1,
-            updatedActivity,
-          );
-        }
-      }
-    } catch (e) {
-      console.error(e);
-    }
-
-    prepareAfterBackend(updatedActivity);
-    for (let activity of $project.activities) {
-      if (activity._type === ActivityTypes.TEMPLATE && activity.timeframe == null) {
-        activity.timeframe = {
-          start: updatedActivity.timeframe.start,
-          end: updatedActivity.timeframe.end,
-        };
-      }
-    }
-
-    $project.activities = $project.activities;
-  }
-
-  async function processActivityDeletion({ detail: activityID }) {
-    // activityID may be:
-    //  - the actual ID of the activity on the backend, if the project exists on the backend;
-    //  - the name of the activity, if the project does not exist on the backend.
-    if (activityID == null) {
-      return;
-    }
-
-    if ($project.id != null && typeof activityID == 'number') {
-      try {
-        await api.json(api.del(
-          `/projects/${$project.id}/activities/${activityID}`,
-          { csrfToken: account.csrf_token },
-        ));
-        $project.activities = $project.activities.filter(act => act.id !== activityID);
-      } catch (e) {
-        console.error(e);
-      }
-    } else {
-      $project.activities = $project.activities.filter(act => act.name !== activityID);
-    }
-  }
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
 <svelte:head>
   <title>Create Project – Innopoints</title>
-
-  <link rel="stylesheet" href="/css/bundles/projects-new.min.css" />
-  {#if account}
-    {#if account.is_admin}
-      <link rel="prefetch" as="style" href="/css/bundles/dashboard.min.css" />
-    {:else}
-      <link rel="prefetch" as="style" href="/css/bundles/profile.min.css" />
-    {/if}
-  {/if}
 </svelte:head>
 
-<Layout user={account}>
-  <div class="material step{step}">
-    {#if step === 0}
-      <StepZero
-        {drafts}
-        on:project-start={(e) => { $project = e.detail; goToStep(1); }}
-        on:delete-draft={deleteDraft}
-        on:load-draft={loadDraft}
-      />
-    {:else if step === 1}
-      <StepOne
-        {project}
-        {duplicateName}
-        {autosaved}
-        on:resize-image={imageResizer.show}
-        {isUploading}
-        on:uploading={(e) => isUploading = e.detail}
-      />
-    {:else if step === 2}
-      <StepTwo
-        {project}
-        {autosaved}
-        {competences}
-        on:change={processActivityChange}
-        on:delete-activity={processActivityDeletion}
-      />
-    {:else}
-      <StepThree
-        {project}
-        {autosaved}
-        on:publish={publishProject}
-      />
-    {/if}
-  </div>
-  <ImageResizer
-    aspectRatio={16/9}
-    image={imageResizer.image}
-    error={imageResizer.error}
-    bind:isOpen={imageResizer.open}
-    on:image-cropped={imageResizer.uploadImage}
-    on:uploading={(e) => isUploading = e.detail}
-    {isUploading}
-  />
-</Layout>
+<div class="material">
+  {#if step === 0}
+    <StepZero {project} {drafts} />
+  {:else if step === 1}
+    <StepOne {project} {autosaved} />
+  {:else if step === 2}
+    <StepTwo {project} {autosaved} {competences} />
+  {:else}
+    <StepThree {project} {autosaved} />
+  {/if}
+</div>
+
+<style src="../../../static/css/routes/projects/new.scss"></style>

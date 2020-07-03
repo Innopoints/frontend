@@ -50,7 +50,7 @@ const datePeriods = [
   },
   {
     name: 'all time',
-    getStart(end) {
+    getStart(_end) {
       return new Date(0);
     },
   },

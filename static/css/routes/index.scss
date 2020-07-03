@@ -1,0 +1,22 @@
+@import "_attractions-theme.scss";
+
+:global {
+  @import "common.scss";
+}
+
+.material {
+  :global h2 {
+    text-align: center;
+    font-weight: $bold-font-weight;
+    font-size: 1.7em;
+    color: $main;
+
+    @media only screen and (min-width: 640px) {
+      font-size: 2em !important;
+    }
+  }
+
+  & + :global footer .to-top::before {
+    background: mix($main, white, 7%) !important;
+  }
+}

@@ -1,0 +1,32 @@
+@import "_attractions-theme";
+
+.card {
+  margin-bottom: 1em;
+  margin-right: 1em;
+}
+
+.name {
+  display: flex;
+  align-items: baseline;
+}
+
+.star {
+  width: .75em;
+  height: .75em;
+  stroke-width: 3;
+  stroke: $main;
+  margin-left: .5em;
+}
+
+.edit-hours {
+  display: flex;
+  align-items: center;
+  min-width: 10.6em;
+  min-height: 3.1em;
+  margin-top: .3em;
+
+  :global .text-field {
+    max-width: 4em;
+    margin-right: .5em;
+  }
+}

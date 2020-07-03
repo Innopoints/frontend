@@ -1,0 +1,248 @@
+@import "_attractions-theme.scss";
+
+.how-to {
+  position: relative;
+  padding: 3em 0;
+  margin-top: 5em;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    background: linear-gradient(#1e9c07, #26c10b);
+    transform: skewY(6deg);
+  }
+
+  & > :global h2 {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+  }
+
+  & > .container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 1.5em;
+    position: relative;
+    z-index: 1;
+  }
+
+  :global .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em 0;
+
+    & > .icon {
+      width: 3.2em;
+      height: 3.2em;
+      stroke: hsl(105, 69%, 35%);
+      stroke-width: 2;
+      margin-bottom: 1em;
+    }
+
+    & > .title {
+      font-weight: $bold-font-weight;
+      font-size: 1.4em;
+      margin-bottom: .5em;
+    }
+
+    & > .subtitle {
+      font-weight: $thin-font-weight;
+      font-size: 1em;
+      line-height: 1.4em;
+    }
+  }
+
+  .arrow {
+    stroke: white;
+    stroke-width: 3;
+    width: 30px;
+    height: 30px;
+    align-self: center;
+  }
+
+  @media only screen and (min-width: 386px) {
+    & > .container {
+      padding: 0 2.5em;
+    }
+
+    :global .card {
+      padding: 2em 2.5em;
+
+      & > .icon {
+        width: 3.7em;
+        height: 3.7em;
+      }
+
+      & > .title {
+        font-size: 1.5em;
+      }
+
+      & > .subtitle {
+        font-size: 1.1em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 500px) {
+    & > .container {
+      padding: 0 15%;
+    }
+  }
+
+  @media only screen and (min-width: 640px) {
+    & > .container {
+      padding: 0 20%;
+    }
+
+    :global .card {
+      & > .icon {
+        width: 4em;
+        height: 4em;
+      }
+
+      .title {
+        margin-bottom: .6em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 700px) {
+    & > .container {
+      padding: 2em .5em;
+      flex-direction: row;
+    }
+
+    & > :global h2 {
+      margin-bottom: 1em;
+    }
+
+    :global .card {
+      margin: 0;
+
+      & > .title {
+        font-size: 1.3em;
+      }
+
+      & > .subtitle {
+        font-size: 1em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 700px) and (max-width: 1023px) {
+    & > .container {
+      box-shadow: $shadow-1;
+      background: white;
+    }
+
+    .arrow {
+      display: none;
+    }
+
+    :global .card {
+      border-radius: 0;
+      box-shadow: none;
+      padding: .5em 1em;
+
+      &:not(:last-child) {
+        border-right: 1px solid $light-contrast;
+      }
+
+      & > .icon {
+        width: 3.7em;
+        height: 3.7em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 800px) {
+    :global .card {
+      padding: .5em 1.5em;
+
+      &::before {
+        height: 110%;
+      }
+
+      & > .title {
+        margin-bottom: .4em;
+      }
+
+      & > .subtitle {
+        font-size: 1.1em;
+        line-height: 1.45em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    & > .container {
+      padding: 0 5%;
+    }
+
+    .arrow {
+      transform: rotate(-90deg);
+      margin: 0 .5em;
+      width: 5em;
+    }
+
+    :global .card {
+      padding: 1.5em;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    & > .container {
+      padding: 0 10%;
+    }
+
+    .arrow {
+      margin: 0 .5em;
+    }
+
+    :global .card {
+      padding: 1.5em 2em;
+
+      & > img {
+        width: 4.8em;
+        height: 4.8em;
+      }
+
+      & > .title {
+        font-size: 1.4em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1648px) {
+    & > :global h2 {
+      font-size: 2.3em;
+      margin-bottom: .5em;
+    }
+
+    :global .card {
+      padding: 3em 2.5em;
+
+      & > .title {
+        font-size: 1.8em;
+      }
+
+      & > .subtitle {
+        font-weight: $thin-font-weight;
+        font-size: 1.5em;
+        line-height: 1.9em;
+      }
+    }
+
+    .arrow {
+      margin: 0 2em;
+      width: 6em;
+    }
+  }
+}

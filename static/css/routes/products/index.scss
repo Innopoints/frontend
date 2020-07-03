@@ -1,0 +1,52 @@
+@import "_attractions-theme.scss";
+
+:global {
+  @import "common.scss";
+}
+
+.shop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-self: stretch;
+
+  :global hr {
+    margin-top: 2em;
+
+    &::after {
+      font-size: 1.2rem !important;
+      color: $main;
+      font-weight: $bold-font-weight;
+      padding: 0 .6em !important;
+      white-space: nowrap;
+    }
+  }
+}
+
+@supports (display: grid) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 18em);
+    grid-gap: 1rem;
+
+    :global hr {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .cards :global hr::after {
+    font-size: 1.4rem !important;
+  }
+
+  .card {
+    margin: .5em;
+  }
+}

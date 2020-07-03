@@ -1,106 +1,92 @@
 <script>
-  import StepHeader from '@/components/projects/new/step-header.svelte';
-  import BottomNavigation from '@/components/projects/new/bottom-navigation.svelte';
-  import Autocomplete from 'ui/autocomplete.svelte';
-  import generateQueryString from '@/utils/generate-query-string.js';
-  import { visibleActivities } from '@/utils/project-manipulation.js';
-  import * as api from '@/utils/api.js';
+  import { getContext } from 'svelte';
+  import { stores } from '@sapper/app';
+  import StepHeader from 'src/components/projects/new/step-header.svelte';
+  import BottomNavigation from 'src/components/projects/new/bottom-navigation.svelte';
+  import { Autocomplete, Label, DropdownShell, Dropdown, Button } from 'attractions';
+  import { snackbarContextKey } from 'attractions/snackbar';
+  import spaceOnly from 'src/utils/space-only.js';
+  import {
+    autocompleteValueToUser,
+    getUsersRaw,
+    minSearchLength,
+    userToAutocompleteValue,
+  } from 'src/utils/autocomplete-users.js';
+
+  const { session } = stores();
 
   export let project;
   export let autosaved;
 
-  function userToAutocompleteValue(user) {
-    return {
-      name: user.full_name,
-      details: user.email,
-    };
-  }
+  let value = $project.moderators.filter(notCreator).map(userToAutocompleteValue);
 
   function notCreator(moderator) {
-    return moderator.email !== $project.creator.email;
+    return moderator.email !== $session.account.email;
   }
-
-  const values = $project.moderators.filter(notCreator).map(userToAutocompleteValue);
 
   function recordChanges() {
-    $project.moderators = values.map(user => ({
-      full_name: user.name,
-      email: user.details,
-    }));
+    $project.moderators = value.map(autocompleteValueToUser);
   }
 
-  async function *getUsers(query) {
-    if (query.length < 3) {
+  async function* getUsers(query) {
+    try {
+      yield* getUsersRaw(query, notCreator);
+    } catch (e) {
+      showSnackbar({ props: { text: 'Couldn\'t search for users, try reloading the page' } });
+      console.error(e);
       return [];
-    }
-
-    const initialResp = await api.get(`/accounts?${generateQueryString(new Map([['q', query]]))}`);
-    if (!initialResp.ok) {
-      if (initialResp.status === 400) {
-        console.error(await initialResp.json());
-      } else {
-        console.error(await initialResp.text());
-      }
-      return [];
-    }
-
-    let { pages, data } = await initialResp.json();
-    let currentPage = 1;
-    if (currentPage >= pages) {
-      return data.filter(notCreator).map(userToAutocompleteValue);
-    }
-
-    yield data.filter(notCreator).map(userToAutocompleteValue);
-
-    let resp;
-    while (currentPage <= pages) {
-      let queryString = generateQueryString(new Map([['q', query], ['page', currentPage]]));
-      resp = await api.get(`/accounts?${queryString}`);
-      if (!resp.ok) {
-        if (resp.status === 400) {
-          console.error(await resp.json());
-        } else {
-          console.error(await resp.text());
-        }
-        return [];
-      }
-
-      let { data, pages } = await resp.json();
-      if (currentPage === pages) {
-        return data.filter(notCreator).map(userToAutocompleteValue);
-      } else {
-        yield data.filter(notCreator).map(userToAutocompleteValue);
-      }
-      currentPage++;
     }
   }
+
+  const showSnackbar = getContext(snackbarContextKey);
 </script>
 
-<form>
-  <StepHeader step={3} {autosaved} subtitle="Step 3. Assign additional moderators for the project" />
-  <p>
-    Moderators can process applications from volunteers and edit activities.
-    Reports and ratings on volunteers are also shared between all moderators.
-  </p>
-  <p>
-    You are the creator, therefore, already a moderator, but you can add some more people to help you out.
-  </p>
-  <p>
-    This step is <strong>optional</strong>.
-  </p>
-  <span class="label">Search for other people</span>
-  <Autocomplete
-    selection={values}
-    getOptions={getUsers}
-    placeholder="Start typing a name or an e-mail..."
-    on:change={recordChanges}
+<div class="form">
+  <StepHeader
+    step={3}
+    {autosaved}
+    subtitle="Step 3. Assign additional moderators for the project"
   />
-  <p>
-    Can't find who you're looking for? Make sure they have logged into this website at least once.
-  </p>
+  <main class="padded">
+    <div class="instructions">
+      <p>This step is <strong>optional</strong>.</p>
+      <DropdownShell let:toggle>
+        <Button on:click={toggle}>
+          <svg src="static/images/icons/help-circle.svg" class="mr" />
+          who are moderators?
+          <svg src="static/images/icons/chevron-down.svg" class="ml dropdown-chevron" />
+        </Button>
+        <Dropdown>
+          <p>Moderators can process applications from volunteers and edit activities.</p>
+          <p>Reports and ratings on volunteers are also shared between all moderators.</p>
+          <p>You are a moderator, too, by the way, automatically.</p>
+        </Dropdown>
+      </DropdownShell>
+    </div>
+
+    <Label class="mb">Search for other people</Label>
+    <Autocomplete
+      bind:selection={value}
+      getOptions={getUsers}
+      placeholder="Start typing a name or an e-mail..."
+      on:change={recordChanges}
+      {minSearchLength}
+    />
+    <p>
+      Can't find who you're looking for?
+      Make sure they have logged into this website at least once.
+    </p>
+  </main>
   <BottomNavigation
     step={3}
-    error={!$project.name ? 1 : (visibleActivities($project).length === 0 ? 2 : null)}
-    on:publish
+    {project}
+    error={
+      $project.name == null
+      || spaceOnly($project.name)
+      || $project.activities.find(act => !act.draft && !act.internal) == null ?
+        'Previous steps contain errors' : null
+    }
   />
-</form>
+</div>
+
+<style src="../../../../static/css/containers/projects/new/step-3.scss"></style>

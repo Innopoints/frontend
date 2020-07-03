@@ -1,0 +1,57 @@
+@import "_attractions-theme.scss";
+
+.user-selection {
+  margin: 1em 0;
+  padding-bottom: 2em;
+  border-bottom: .0625em solid $light-contrast;
+
+  p {
+    font-weight: $thin-font-weight;
+    font-size: .95rem;
+    margin: .8em .5em 0;
+  }
+}
+
+.operations {
+  :global header {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      stroke: $main;
+    }
+  }
+
+  :global .subtitle {
+    font-size: .95rem;
+    font-weight: $thin-font-weight;
+    margin-top: .3em;
+    margin-left: 2.5rem;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .operations {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .panel {
+    display: flex;
+
+    .user-selection {
+      flex: 1;
+      padding-bottom: 0;
+      border-bottom: none;
+      padding-right: 2em;
+      border-right: .0625em solid $light-contrast;
+    }
+
+    .operations {
+      flex-direction: column;
+      flex: 1;
+      padding-left: 2em;
+    }
+  }
+}

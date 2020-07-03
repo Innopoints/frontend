@@ -1,0 +1,14 @@
+.form {
+  padding-bottom: 4em;
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (min-width: 640px) {
+    position: relative;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+}

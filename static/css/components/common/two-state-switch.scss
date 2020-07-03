@@ -1,0 +1,26 @@
+@import "_attractions-theme.scss";
+
+.two-state-switch {
+  display: flex;
+  align-items: center;
+
+  :global {
+    .track {
+      border-color: $main !important;
+    }
+
+    .thumb {
+      background-color: $main !important;
+    }
+  }
+}
+
+.state {
+  font-weight: $bold-font-weight;
+  margin: 0 .8em;
+  color: $off-state;
+
+  &.selected {
+    color: $main;
+  }
+}

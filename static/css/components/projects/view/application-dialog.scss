@@ -1,0 +1,9 @@
+.form {
+  :global .form-field {
+    flex-direction: column !important;
+
+    .field {
+      margin-left: 0 !important;
+    }
+  }
+}

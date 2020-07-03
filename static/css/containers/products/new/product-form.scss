@@ -1,0 +1,11 @@
+@media only screen and (min-width: 480px) {
+  header.varieties {
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-between;
+
+    :global h2 {
+      margin-bottom: 0;
+    }
+  }
+}

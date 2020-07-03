@@ -1,35 +1,42 @@
 <script>
-  import Button from 'ui/button.svelte';
-  import NotificationCenter from '@/components/common/notification-center.svelte';
-  import { login, logout } from '@/utils/auth.js';
+  import { stores } from '@sapper/app';
+  import { Button } from 'attractions';
+  import { classes } from 'attractions/utils';
+  import NotificationCenter from 'src/components/common/notification-center.svelte';
+  import { login, logout } from 'src/utils/auth.js';
 
-  export let isProfile = false;
-  export let user = null;
+  const { session } = stores();
+
+  export let profile = false;
+  let _class = null;
+  export { _class as class };
 </script>
 
-<header class="top-level padded">
+<header class={classes('padded', _class)}>
   <a class="logo" href="/" rel="prefetch">
     <img src="/images/innou-icon.svg" alt="Go to the home page" />
-    <span class="hide-tb">Innopoints</span>
+    <span class="hide-on-less-tb">Innopoints</span>
   </a>
   <div class="actions">
-    {#if user == null}
-      <Button isOutline on:click={login}>sign in</Button>
+    {#if $session.account == null}
+      <Button outline on:click={login}>sign in</Button>
     {:else}
       <NotificationCenter />
-      {#if isProfile}
-        <Button on:click={logout}>sign out</Button>
+      {#if profile}
+        <Button on:click={() => logout(session)}>sign out</Button>
       {:else}
-        {#if user.is_admin}
-          <Button href="/dashboard" isRound>
-            <svg src="images/icons/grid.svg" />
+        {#if $session.account.is_admin}
+          <Button href="/dashboard" round>
+            <svg src="static/images/icons/grid.svg" />
           </Button>
         {:else}
-          <Button href="/profile" isRound>
-            <svg src="images/icons/user.svg" />
+          <Button href="/profile" round>
+            <svg src="static/images/icons/user.svg" />
           </Button>
         {/if}
       {/if}
     {/if}
   </div>
 </header>
+
+<style src="../../static/css/components/header.scss"></style>

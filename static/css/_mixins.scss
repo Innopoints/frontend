@@ -1,0 +1,37 @@
+@import "_attractions-theme.scss";
+
+@mixin hide-accessible {
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+@mixin show-accessible {
+  clip: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+}
+
+@mixin thin-scrollbar {
+  &::-webkit-scrollbar {
+    width: .3125em;
+    height: .5em;
+    background: none;
+    margin: 1em 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $light-contrast;
+    border-radius: .3125em;
+
+    &:hover {
+      background: darken($light-contrast, 10%);
+    }
+  }
+}

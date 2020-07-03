@@ -1,108 +1,148 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import AccordionSection from 'ui/accordion-section.svelte';
-  import Button from 'ui/button.svelte';
-  import TextField from 'ui/text-field.svelte';
-  import CheckboxGroup from 'ui/checkbox-group.svelte';
-  import CopyButton from '@/components/projects/view/copy-button.svelte';
+  import { createEventDispatcher, getContext } from 'svelte';
+  import {
+    AccordionSection,
+    Badge,
+    Button,
+    Checkbox,
+    Label,
+    Popover,
+    TextField,
+  } from 'attractions';
+  import { PopoverPositions } from 'attractions/popover';
+  import { snackbarContextKey } from 'attractions/snackbar';
+  import CopyButton from 'src/components/common/copy-button.svelte';
+  import CreateReportDialog from 'src/components/projects/view/create-report-dialog.svelte';
+  import * as api from 'src/utils/api.js';
 
   export let account;
   export let activity;
   export let application;
-  export let handlePanelOpen;
   $: report = application.reports.find(report => report.reporter_email === account.email);
 
+  const createReportDialog = {
+    open: false,
+    show({ detail }) {
+      createReportDialog.open = true;
+    },
+  };
+
+  async function deleteReport() {
+    try {
+      const thisReport = report;
+      application.reports = application.reports.filter(
+        report => thisReport.reporter_email !== account.email,
+      );
+      const snackbar = showSnackbar({
+        props: {
+          text: 'Report deleted',
+          action: { text: 'undo' },
+        },
+      });
+      if (await snackbar.expired) {
+        await api.json(api.del(
+          `/projects/${activity.project}/activities/${activity.id}`
+          + `/applications/${application.id}/report`,
+          { csrfToken: account.csrf_token },
+        ));
+      } else {
+        application.reports.push(thisReport);
+        application.reports = application.reports;
+      }
+    } catch (e) {
+      showSnackbar({ props: { text: 'Something went wrong, try reloading the page' } });
+      console.error(e);
+    }
+  }
+
+  const showSnackbar = getContext(snackbarContextKey);
   const dispatch = createEventDispatcher();
 </script>
 
-<AccordionSection on:panel-open={handlePanelOpen} let:toggle>
-  <button
-    slot="handle"
-    class="btn handle round"
-    type="button"
-    on:click={toggle}
-  >
-    {#if report == null}
-      <div class="badge">
-        <svg class="chevron" src="images/icons/chevron-down.svg" />
+<div class="application-tile">
+  <AccordionSection on:panel-open>
+    <div class="handle" slot="handle" let:toggle>
+      <Button round on:click={toggle}>
+        <Badge hidden={report != null}>
+          <svg class="accordion-chevron" src="static/images/icons/chevron-down.svg" />
+        </Badge>
+      </Button>
+      <div class="name">
+        {application.applicant.full_name}
       </div>
-    {:else}
-      <svg class="chevron" src="images/icons/chevron-down.svg" />
-    {/if}
-  </button>
-  <div slot="handle" class="name">
-    {application.applicant.full_name}
-  </div>
-  <span slot="handle" class="telegram popover-container">
-    {#if application.telegram}
-      <a href="https://t.me/{application.telegram}" target="_blank">
-        @{application.telegram}
-      </a>
-      <CopyButton text={application.telegram} />
-    {:else}
-      No Telegram username specified.
-    {/if}
-  </span>
-  <div slot="handle" class="actual-hours">
-    {#if !activity.fixed_reward}
-      <label class="label">Actual hours</label>
-      <TextField
-        type="number"
-        placeholder="1"
-        min={0}
-        max={99999}
-        value={application.actual_hours}
-        on:change={(evt) => {
-          if (+evt.detail >= 0) {
-            dispatch('hours-changed', { application, hours: +evt.detail });
-          }
-        }}
-      />
-    {:else}
-      <CheckboxGroup
-        name="did-work"
-        items={[{checked: application.actual_hours === 1}]}
-        labelPosition="left"
-        labelclass="label"
-        labels={["Completed the task"]}
-        on:change={evt => dispatch('hours-changed', { application, hours: +evt.detail.checked })}
-      />
-    {/if}
-  </div>
-  {#if application.comment}
-    <div class="with-icon">
-      <svg class="icon" src="images/icons/message-square.svg" />
-      <div class="text">
-        {application.comment}
+      {#if application.telegram}
+        <Popover position={PopoverPositions.TOP} class="telegram">
+          <a href="https://t.me/{application.telegram}" target="_blank">
+            @{application.telegram}
+          </a>
+          <div slot="popover-content">
+            <CopyButton text={application.telegram} />
+          </div>
+        </Popover>
+      {:else}
+        No Telegram username specified.
+      {/if}
+      <div class="actual-hours">
+        {#if !activity.fixed_reward}
+          <Label class="above">Actual hours</Label>
+          <TextField
+            type="number"
+            placeholder="1"
+            min={0}
+            max={99999}
+            value={application.actual_hours}
+            on:change={({ detail }) => {
+              if (detail.value >= 0) {
+                dispatch('hours-changed', { application, hours: detail.value });
+              }
+            }}
+          />
+        {:else}
+          <Checkbox
+            name="did-work"
+            checked={application.actual_hours === 1}
+            slotLeft
+            value={1}
+            on:change={(e) => dispatch('hours-changed', { application, hours: +e.detail.checked })}
+          >
+            <Label class="mr">Completed the task</Label>
+          </Checkbox>
+        {/if}
       </div>
     </div>
-  {/if}
-  {#if report == null}
-    <Button
-      isOutline
-      classname="report"
-      on:click={() => dispatch('create-report', { activity, application })}
-    >
-      <svg class="icon mr" src="images/icons/edit-3.svg" />
-      report performance
-    </Button>
-  {:else}
-    <Button
-      isOutline
-      classname="report"
-      on:click={() => dispatch('create-report', { activity, application, report })}
-    >
-      <svg class="icon mr" src="images/icons/edit-3.svg" />
-      edit report
-    </Button>
-    <Button
-      isOutline
-      isDanger
-      classname="report"
-      on:click={() => dispatch('delete-report', { activity, application })}
-    >
-      <svg class="icon mr" src="images/icons/edit-3.svg" />
-      delete report
-    </Button>
-  {/if}
-</AccordionSection>
+    {#if application.comment}
+      <div class="with-icon">
+        <svg class="icon" src="static/images/icons/message-square.svg" />
+        <div class="text">
+          {application.comment}
+        </div>
+      </div>
+    {/if}
+    <div class="actions">
+      {#if report == null}
+        <Button outline on:click={createReportDialog.show}>
+          <svg class="icon mr" src="static/images/icons/edit-3.svg" />
+          report performance
+        </Button>
+      {:else}
+        <Button outline class="mr" on:click={createReportDialog.show}>
+          <svg class="icon mr" src="static/images/icons/edit-3.svg" />
+          edit report
+        </Button>
+        <Button outline danger on:click={deleteReport}>
+          <svg class="icon mr" src="static/images/icons/edit-3.svg" />
+          delete report
+        </Button>
+      {/if}
+    </div>
+  </AccordionSection>
+  <CreateReportDialog
+    bind:open={createReportDialog.open}
+    {activity}
+    {application}
+    {report}
+    on:rerender={() => application.reports = application.reports}
+  />
+</div>
+
+<style src="../../../../static/css/components/projects/view/application-hour-tile.scss"></style>
