@@ -1,5 +1,5 @@
 <script>
-  import { getContext } from 'svelte';
+  import { getContext, createEventDispatcher } from 'svelte';
   import { stores } from '@sapper/app';
   import { DropdownShell, Dropdown, Button, RadioGroup, Divider } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
@@ -46,6 +46,7 @@
   }
 
   const showSnackbar = getContext(snackbarContextKey);
+  const dispatch = createEventDispatcher();
 </script>
 
 <div class="color-picker">
@@ -61,6 +62,11 @@
       />
     </Button>
     <Dropdown>
+      {#if value != null}
+        <Button on:click={() => { value = null; dispatch('change'); }}>
+          clear selection
+        </Button>
+      {/if}
       <RadioGroup
         color
         name="color-choices"
