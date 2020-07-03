@@ -1,0 +1,13 @@
+.padded {
+  margin-bottom: 3em;
+
+  :global .content {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+
+    .explanation {
+      flex: 1 0 18em;
+    }
+  }
+}

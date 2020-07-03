@@ -25,6 +25,7 @@
   import { snackbarContextKey } from 'attractions/snackbar';
   import ProductForm from 'src/containers/products/new/product-form.svelte';
   import PreviewCard from 'src/components/products/new/preview-card.svelte';
+  import DraftRestoreNotice from 'src/components/products/new/draft-restore-notice.svelte';
   import * as api from 'src/utils/api.js';
   import { getBlankProduct } from 'src/constants/products/blank-product.js';
   import spaceOnly from 'src/utils/space-only.js';
@@ -34,6 +35,8 @@
   export let account;
 
   const product = writable(getBlankProduct());
+  const storageKey = 'savedProduct';
+
   const unsubscribe = product.subscribe(function disableChosenColors($product) {
     colors.update($colors => {
       $colors.forEach(color => color.disabled = false);
@@ -121,6 +124,7 @@
         },
         csrfToken: account.csrf_token,
       }));
+      localStorage.removeItem(storageKey);
       goto('/products');
     } catch (e) {
       showSnackbar({ props: { text: 'Couldn\'t save the product, try reloading the page' } });
@@ -137,6 +141,7 @@
 
 <div class="material">
   <H1 class="padded">Create a Product</H1>
+  <DraftRestoreNotice {product} {storageKey} />
   <main class="padded">
     <ProductForm {product} {colors} {sizes} />
     <section class="preview">
