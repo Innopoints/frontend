@@ -1,8 +1,19 @@
 <script>
+  import { onMount } from 'svelte';
   import { Button, H1, H2 } from 'attractions';
+  import * as api from 'src/utils/api.js';
 
   const cardWidth = 212;
   const cardHeight = 137;
+
+  let randomURL = '/';
+  onMount(async function fetchRandomURL() {
+    try {
+      randomURL = (await api.json(api.get('/random_page'))).url;
+    } catch (e) {
+      console.error(e);
+    }
+  });
 </script>
 
 <div class="material padded">
@@ -43,7 +54,7 @@
       alt="Go to the store"
     />
   </a>
-  <a href="/" class="destination">
+  <a href={randomURL} class="destination">
     <img
       src="/images/404/random.svg"
       width={cardWidth}
