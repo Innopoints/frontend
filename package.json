@@ -41,8 +41,7 @@
     "node-sass": "^4.14.1",
     "sapper-environment": "^1.0.1",
     "simplebar": "^5.1.0",
-    "sirv": "^1.0.1",
-    "uuid": "^8.1.0"
+    "sirv": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
