@@ -44,7 +44,7 @@
     }
   }
 
-  function dismissImage(image = null) {
+  function dismissImage(image) {
     image.reject();
     images = images.filter(thatImage => thatImage !== image);
     repositionCursor();
