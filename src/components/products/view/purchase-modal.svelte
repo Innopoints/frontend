@@ -51,7 +51,7 @@
 
 <Modal bind:open let:closeCallback>
   {#if variety != null}
-    <Dialog title="Confirm your purchase" closeCallback={closeCallback}>
+    <Dialog title="Confirm your purchase" {closeCallback}>
       <div class="purchase">
         <div class="identifier">
           <div class="name">
