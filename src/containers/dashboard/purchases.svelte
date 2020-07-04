@@ -3,11 +3,19 @@
   import { Card, Button } from 'attractions';
   import EmptyState from 'src/components/common/empty-state.svelte';
   import PurchaseCard from 'src/components/dashboard/purchase-card.svelte';
+  import PurchaseListModal from 'src/components/dashboard/purchase-list-modal.svelte';
   import * as api from 'src/utils/api.js';
 
   const { session } = stores();
 
   export let purchases = [];
+
+  const purchaseListModal = {
+    open: false,
+    show() {
+      purchaseListModal.open = true;
+    },
+  };
 
   async function setStatus(stockChange, status) {
     try {
@@ -40,7 +48,8 @@
     </EmptyState>
   {/if}
   <div class="actions">
-    <Button href="/products">see the InnoStore</Button>
+    <Button on:click={purchaseListModal.show}>see the purchase history</Button>
+    <PurchaseListModal bind:open={purchaseListModal.open} />
   </div>
 </Card>
 
