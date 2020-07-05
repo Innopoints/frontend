@@ -92,7 +92,7 @@
     });
   }
 
-  function alertOnClose({ detail }) {
+  function discardOnClose({ detail }) {
     if (!detail.value) {
       for (const image of images) {
         if (image.uploadPromise == null) {
@@ -108,7 +108,12 @@
   const showSnackbar = getContext(snackbarContextKey);
 </script>
 
-<Modal bind:open let:closeCallback on:change={alertOnClose}>
+<Modal
+  bind:open
+  let:closeCallback
+  on:change={discardOnClose}
+  clickaway={false}
+>
   {#if images.length !== 0}
     <Dialog title="Resize the images" {closeCallback}>
       <p>Drag to move, pinch or scroll to zoom</p>
