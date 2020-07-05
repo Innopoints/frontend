@@ -85,12 +85,11 @@
   let activeTab = tabs.timeline;
 
   function fetchMoreTimeline() {
-    const query = new Map([['end_date', isoForURL(timelineFetchedUntil)]]);
+    const query = new Map([['end_date', new Date(timelineFetchedUntil.valueOf())]]);
     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - monthGap);
-    query.set('start_date', isoForURL(timelineFetchedUntil));
+    query.set('start_date', timelineFetchedUntil);
     timelinePromises.push(
-      api.get(`/accounts/${account.email}/timeline`, query)
-        .then(resp => resp.json())
+      api.json(api.get(`/accounts/${account.email}/timeline`, { query }))
         .then(json => {
           if (json.data.length === 0) {
             fetchMoreTimeline();
@@ -107,9 +106,9 @@
   }
 
   async function updateStatistics({ detail: period }) {
-    const query = new Map([['start_date', isoForURL(period.getStart(new Date()))]]);
+    const query = new Map([['start_date', period.getStart(new Date())]]);
     try {
-      statistics = await api.json(api.get(`/accounts/${account.email}/statistics`, query));
+      statistics = await api.json(api.get(`/accounts/${account.email}/statistics`, { query }));
     } catch (e) {
       console.error(e);
     }
