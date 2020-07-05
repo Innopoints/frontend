@@ -118,17 +118,18 @@
     const modifiedProduct = Object.assign({}, $product);
     modifiedProduct.varieties = cleanVarieties;
 
-    const requests = [];
+    const firstOrderRequests = [];
+    const secondOrderRequests = [];
     const diffs = computeDiffs(modifiedProduct, unmodifiedProduct);
     if (diffs.fields != null) {
-      requests.push(api.json(api.patch(
+      firstOrderRequests.push(api.json(api.patch(
         `/products/${$product.id}`,
         { data: diffs.fields, csrfToken: account.csrf_token },
       )));
     }
 
     for (const newVariety of diffs.newVarieties) {
-      requests.push(api.json(api.post(
+      firstOrderRequests.push(api.json(api.post(
         `/products/${$product.id}/varieties`,
         { data: newVariety, csrfToken: account.csrf_token },
       )));
@@ -137,21 +138,22 @@
     for (const modifiedVariety of diffs.modifiedVarieties) {
       const id = modifiedVariety.id;
       delete modifiedVariety.id;
-      requests.push(api.json(api.patch(
+      firstOrderRequests.push(api.json(api.patch(
         `/products/${$product.id}/varieties/${id}`,
         { data: modifiedVariety, csrfToken: account.csrf_token },
       )));
     }
 
-    for (const deletedVariety of diffs.deletedVarieties) {
-      requests.push(api.json(api.del(
-        `/products/${$product.id}/varieties/${deletedVariety.id}`,
-        { csrfToken: account.csrf_token },
-      )));
-    }
-
     try {
-      await Promise.all(requests);
+      await Promise.all(firstOrderRequests);
+
+      for (const deletedVariety of diffs.deletedVarieties) {
+        secondOrderRequests.push(api.json(api.del(
+          `/products/${$product.id}/varieties/${deletedVariety.id}`,
+          { csrfToken: account.csrf_token },
+        )));
+      }
+      await Promise.all(secondOrderRequests);
       goto(`/products/${$product.id}`);
     } catch (e) {
       showSnackbar({
