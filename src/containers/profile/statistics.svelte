@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import PeriodPicker from 'src/components/common/period-picker.svelte';
-  import CompetencesChart from 'src/components/profile/competences-chart.svelte';
+  import CompetencesChart from 'src/components/common/competences-chart.svelte';
   import datePeriods from 'src/constants/date-periods.js';
 
   export let statistics;

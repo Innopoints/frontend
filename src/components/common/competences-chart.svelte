@@ -35,4 +35,4 @@
   </ul>
 </figure>
 
-<style src="../../../static/css/components/profile/competences-chart.scss"></style>
+<style src="../../../static/css/components/common/competences-chart.scss"></style>
