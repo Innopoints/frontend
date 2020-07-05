@@ -58,11 +58,11 @@
       purchaseModal.variety = varietyMap.get(detail.varietyID);
       purchaseModal.open = true;
     },
-    triggerRerender() {
+    triggerRerender({ detail: amount }) {
       product = product;
       account = account;
       varietiesByColor = varietiesByColor;
-      totalPurchases++;
+      totalPurchases += amount;
     },
   };
 

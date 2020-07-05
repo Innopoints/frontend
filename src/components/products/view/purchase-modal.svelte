@@ -35,7 +35,7 @@
       ));
       account.balance -= product.price * quantity;
       variety.amount -= quantity;
-      dispatch('rerender');
+      dispatch('rerender', quantity);
       showSnackbar({ props: { text: 'Purchase successful! Track its status in the profile' } });
       open = false;
     } catch (e) {
