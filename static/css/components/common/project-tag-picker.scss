@@ -1,0 +1,12 @@
+.project-tag-picker {
+  :global {
+    .dropdown {
+      padding: .5em 1em .5em .5em;
+      width: max-content;
+    }
+
+    .radio {
+      margin: .5em 0;
+    }
+  }
+}

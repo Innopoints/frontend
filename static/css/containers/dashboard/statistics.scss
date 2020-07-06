@@ -1,0 +1,25 @@
+.statistics {
+  :global .card {
+    overflow: visible;
+  }
+
+  .controls {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .text-row {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: .5em;
+  }
+
+  .loader {
+    height: 26em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
