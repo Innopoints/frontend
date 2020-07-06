@@ -5,6 +5,8 @@
     const data = await getInitialData(this, session, new Map([
       ['purchases', '/stock_changes/for_review'],
       ['reviews', '/projects/for_review'],
+      ['competences', '/competences'],
+      ['groups', '/accounts/groups'],
       ['tags', '/tags'],
     ]));
 
@@ -22,11 +24,14 @@
   import Reviews from 'src/containers/dashboard/reviews.svelte';
   import Purchases from 'src/containers/dashboard/purchases.svelte';
   import IndividualControls from 'src/containers/dashboard/individual-controls.svelte';
+  import Statistics from 'src/containers/dashboard/statistics.svelte';
   import TagEditor from 'src/containers/dashboard/tag-editor.svelte';
 
   export let reviews;
   export let account;
   export let purchases;
+  export let competences;
+  export let groups;
   export let tags;
 </script>
 
@@ -46,7 +51,10 @@
     <Reviews {reviews} />
     <Purchases {purchases} />
     <IndividualControls {account} />
-    <TagEditor {tags} {account} />
+    <div class="row">
+      <TagEditor bind:tags {account} />
+      <Statistics {competences} {groups} {tags} />
+    </div>
   </div>
 </div>
 

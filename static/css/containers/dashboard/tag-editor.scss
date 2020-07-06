@@ -2,6 +2,10 @@
 
 ul {
   margin-top: 1em;
+
+  @media only screen and (min-width: 1024px) {
+    max-width: 20em;
+  }
 }
 
 li {
