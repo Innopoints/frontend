@@ -2,6 +2,7 @@
   import { writable } from 'svelte/store';
   import getInitialData from 'src/utils/get-initial-data.js';
   import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
+  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
@@ -9,6 +10,9 @@
       ['competences', '/competences'],
       ['tags', '/tags'],
     ]));
+    if (data.project.lifetime_stage === ProjectStages.DRAFT) {
+      this.redirect('/projects/new');
+    }
     data.project.activities.forEach(prepareAfterBackend);
     data.account = session.account;
     data.project = writable(data.project);
@@ -23,7 +27,6 @@
   import UserView from 'src/containers/projects/view/user-view.svelte';
   import ModeratorView from 'src/containers/projects/view/moderator-view.svelte';
   import StaffCards from 'src/containers/projects/view/staff-cards.svelte';
-  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
   import { API_HOST_BROWSER } from 'src/constants/env.js';
 
   setContext('review-mode', false);
