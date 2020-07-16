@@ -11,7 +11,7 @@
       ['tags', '/tags'],
     ]));
     if (data.project.lifetime_stage === ProjectStages.DRAFT) {
-      this.redirect('/projects/new');
+      this.redirect(303, '/projects/new');
     }
     data.project.activities.forEach(prepareAfterBackend);
     data.account = session.account;
