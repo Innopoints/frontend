@@ -52,7 +52,7 @@
     "@beyonk/svelte-carousel": "^2.8.0",
     "@rollup/plugin-alias": "^3.0.0",
     "@rollup/plugin-babel": "^5.0.2",
-    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-replace": "^2.3.0",
     "attractions": "^2.0.3-alpha",
@@ -78,7 +78,7 @@
     "stylelint-scss": "^3.16.1",
     "svelte": "^3.18.0",
     "svelte-easy-crop": "^1.0.3",
-    "svelte-preprocess": "^3.9.11"
+    "svelte-preprocess": "^4.0.8"
   },
   "repository": {
     "type": "git",
