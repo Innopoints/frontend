@@ -32,7 +32,7 @@ export default [
       'Become a supporting buddy for your international coursemate '
       + 'and help them blend in the warm Russian atmosphere!',
     imageURL: 'images/home/buddy.svg',
-    actionLink: 'http://campuslife.innopolis.ru/',
+    actionLink: 'http://campuslife.innopolis.ru/buddy',
     actionText: 'learn about the program',
     external: true,
   },
