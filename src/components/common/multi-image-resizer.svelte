@@ -112,7 +112,7 @@
   bind:open
   let:closeCallback
   on:change={discardOnClose}
-  clickaway={false}
+  noClickaway
 >
   {#if images.length !== 0}
     <Dialog title="Resize the images" {closeCallback}>
