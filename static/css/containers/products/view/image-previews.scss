@@ -41,6 +41,7 @@
 
     .previews {
       $preview-item-size: 4em;
+
       @include thin-scrollbar;
 
       overflow-y: auto;
