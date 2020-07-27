@@ -69,7 +69,7 @@
           </Button>
           <TextField
             type="number"
-            spinner={false}
+            noSpinner
             bind:value={quantity}
             min={1}
             max={variety.amount}
