@@ -36,7 +36,6 @@ app()
       frameguard: {
         action: 'deny',
       },
-      permittedCrossDomainPolicies: true,
       referrerPolicy: {
         policy: 'same-origin',
       },
