@@ -39,6 +39,7 @@ app()
       referrerPolicy: {
         policy: 'same-origin',
       },
+      contentSecurityPolicy: false,
     }),
     compression({ threshold: 0 }),
     sirv('static', { dev }),
