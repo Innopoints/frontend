@@ -143,7 +143,7 @@
                 <div class="align-center">
                   <TextField
                     type="number"
-                    spinner={false}
+                    noSpinner
                     value={filtering.minPrice}
                     min={0}
                     max={filtering.maxPrice}
@@ -152,7 +152,7 @@
                   <span class="ml mr">–</span>
                   <TextField
                     type="number"
-                    spinner={false}
+                    noSpinner
                     value={filtering.maxPrice}
                     min={filtering.minPrice || 0}
                     on:change={changeMaxPrice}

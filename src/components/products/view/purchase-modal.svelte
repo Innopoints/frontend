@@ -35,7 +35,7 @@
       ));
       account.balance -= product.price * quantity;
       variety.amount -= quantity;
-      dispatch('rerender');
+      dispatch('rerender', quantity);
       showSnackbar({ props: { text: 'Purchase successful! Track its status in the profile' } });
       open = false;
     } catch (e) {
@@ -51,7 +51,7 @@
 
 <Modal bind:open let:closeCallback>
   {#if variety != null}
-    <Dialog title="Confirm your purchase" closeCallback={closeCallback}>
+    <Dialog title="Confirm your purchase" {closeCallback}>
       <div class="purchase">
         <div class="identifier">
           <div class="name">
@@ -69,7 +69,7 @@
           </Button>
           <TextField
             type="number"
-            spinner={false}
+            noSpinner
             bind:value={quantity}
             min={1}
             max={variety.amount}

@@ -33,6 +33,7 @@
     varietiesByColor.get(selectedColor).reduce((sum, variety) => variety.amount + sum, 0) === 0
   );
   $: changeColor(selectedColor);
+  $: updateSelectedVariety(varietiesByColor);
 
   function purchase() {
     if (selectedVariety == null) {
@@ -43,7 +44,6 @@
     }
     err = false;
     dispatch('purchase', { varietyID: selectedVariety.id });
-    selectedVariety = null;
   }
 
   function changeColor(color) {
@@ -60,6 +60,12 @@
     } else {
       // Product is not in sizes, select variety automatically
       selectedVariety = varietiesByColor.get(selectedColor)[0];
+    }
+  }
+
+  function updateSelectedVariety(varietiesByColor) {
+    if (selectedVariety != null && selectedVariety.amount <= 0) {
+      selectedVariety = null;
     }
   }
 
