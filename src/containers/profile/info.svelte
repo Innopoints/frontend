@@ -98,7 +98,7 @@
 
   <div class="balance">
     <p class="btn-align">
-      <span>{account.balance}</span>
+      <span>{$session.account.balance}</span>
       <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
       available
     </p>
