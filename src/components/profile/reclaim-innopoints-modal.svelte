@@ -1,5 +1,6 @@
 <script>
   import { getContext } from 'svelte';
+  import { stores } from '@sapper/app';
   import { Button, Dialog, Modal, TextField } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
   import * as api from 'src/utils/api.js';
@@ -8,6 +9,8 @@
   export let account;
   let email = null;
   let password = null;
+
+  const { session } = stores();
 
   async function sendRequest() {
     try {
@@ -22,6 +25,7 @@
         showSnackbar({ props: { text: 'Something went wrong' } });
       } else {
         account.balance += await resp.json();
+        $session.account = account;
         email = null;
         password = null;
         open = false;
