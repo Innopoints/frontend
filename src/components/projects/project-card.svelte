@@ -9,7 +9,7 @@
   export let image_id;
   export let creator;
   export let activities;
-  $: exposedActivities = activities.filter(x => !x.internal);
+  $: exposedActivities = activities.filter(x => !x.internal && !x.draft);
   export let start_date;
   export let end_date;
   export let moderated = false;
