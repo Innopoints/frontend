@@ -89,6 +89,7 @@
 
   function discardChanges() {
     activity = copyActivityInPlace(initialCopy, activity);
+    activity._editing = false;
   }
 
   async function saveChanges() {
