@@ -74,7 +74,7 @@
   class="project-header wrap"
   style="--image-url: url({projectImageURL})"
 >
-  <img src={projectImageURL} class="cover-image" alt="Project cover" />
+  <img loading="lazy" src={projectImageURL} class="cover-image" alt="Project cover" />
   <div class="info">
     <H1>
       {$project.name}

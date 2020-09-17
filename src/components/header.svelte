@@ -14,7 +14,7 @@
 
 <header class={classes('padded', _class)}>
   <a class="logo" href="/" rel="prefetch">
-    <img src="/images/innou-icon.svg" alt="Go to the home page" />
+    <img loading="lazy" src="/images/innou-icon.svg" alt="Go to the home page" />
     <span class="hide-on-less-tb">Innopoints</span>
   </a>
   <div class="actions">

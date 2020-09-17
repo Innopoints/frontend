@@ -8,6 +8,7 @@
 
 <header class="container">
   <img
+    loading="lazy"
     src="/images/innou-logo.svg"
     class="logo"
     alt="Innopolis University logo"

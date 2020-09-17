@@ -23,19 +23,19 @@
 
         <div class="socials space-between">
           <a href="https://vk.com/innopolisu">
-            <img src="/images/footer/vk.svg" alt="" />
+            <img loading="lazy" src="/images/footer/vk.svg" alt="" />
           </a>
           <a href="https://www.facebook.com/InnopolisU">
-            <img src="/images/footer/facebook.svg" alt="" />
+            <img loading="lazy" src="/images/footer/facebook.svg" alt="" />
           </a>
           <a href="https://twitter.com/@InnopolisU">
-            <img src="/images/footer/twitter.svg" alt="" />
+            <img loading="lazy" src="/images/footer/twitter.svg" alt="" />
           </a>
           <a href="https://www.instagram.com/innopolisu/">
-            <img src="/images/footer/instagram.svg" alt="" />
+            <img loading="lazy" src="/images/footer/instagram.svg" alt="" />
           </a>
           <a href="https://www.youtube.com/user/InnopolisU">
-            <img src="/images/footer/youtube.svg" alt="" />
+            <img loading="lazy" src="/images/footer/youtube.svg" alt="" />
           </a>
         </div>
       </div>
@@ -48,7 +48,7 @@
       </span>
     </div>
     <div class="right">
-      <img src="/images/footer/pointer.svg" class="pointer" alt="" />
+      <img loading="lazy" src="/images/footer/pointer.svg" class="pointer" alt="" />
       <Card>
         <p>The new Innopoints website is finally here! Exciting.</p>
         <p>

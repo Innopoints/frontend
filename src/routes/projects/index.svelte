@@ -74,7 +74,7 @@
     {#if !projects || projects.length === 0}
       <EmptyState>
         <figure>
-          <img class="picture" src="/images/projects/no-projects.svg" alt="" />
+          <img loading="lazy" class="picture" src="/images/projects/no-projects.svg" alt="" />
           <figcaption>
             <div class="title">No projects found...</div>
             {#if account}

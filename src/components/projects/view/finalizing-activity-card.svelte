@@ -114,7 +114,7 @@
         </Accordion>
       {:else}
         <EmptyState small text="No applications">
-          <img src="/images/view-project/no-applications.svg" alt="" />
+          <img loading="lazy" src="/images/view-project/no-applications.svg" alt="" />
         </EmptyState>
       {/if}
     </div>

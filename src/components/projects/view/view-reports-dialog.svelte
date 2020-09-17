@@ -46,7 +46,7 @@
             text="No reports yet"
             subtext="Be sure to leave one when finalizing the project!"
           >
-            <img src="/images/view-project/no-applications.svg" alt="" />
+            <img loading="lazy" src="/images/view-project/no-applications.svg" alt="" />
           </EmptyState>
         {/each}
       </ul>

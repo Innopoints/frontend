@@ -15,6 +15,7 @@
     {#if file._id != null}
       <div class="image-wrapper">
         <img
+          loading="lazy"
           src="{API_HOST_BROWSER}/file/{file._id}"
           style={getBackground($color)}
           alt={file.name}

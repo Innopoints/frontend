@@ -20,6 +20,7 @@
 <div class="project-card">
   <Card tight>
     <img
+      loading="lazy"
       alt="Project cover"
       class="image"
       src={image_id == null ? imagePlaceholder : `${API_HOST_BROWSER}/file/${image_id}`}

@@ -3,8 +3,8 @@
 </script>
 
 <section class="container tagline">
-  <img src="/images/home/voxel-city.png" class="picture desktop" alt="" />
-  <img src="/images/home/innopoint-logo.svg" class="picture mobile" alt="" />
+  <img loading="lazy" src="/images/home/voxel-city.png" class="picture desktop" alt="" />
+  <img loading="lazy" src="/images/home/innopoint-logo.svg" class="picture mobile" alt="" />
   <div>
     <H1>Innopoints</H1>
     <div class="motto">Motivating the great beginnings</div>

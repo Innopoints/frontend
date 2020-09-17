@@ -84,7 +84,7 @@
         </Dropdown>
       </DropdownShell>
     </div>
-    <img class="illustration" src="/images/create-project/create-project.svg" alt="" />
+    <img loading="lazy" class="illustration" src="/images/create-project/create-project.svg" alt="" />
   </div>
 
   <div class="right">

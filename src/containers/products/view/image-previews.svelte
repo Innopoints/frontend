@@ -53,6 +53,7 @@
           />
           <div class="icon">
             <img
+              loading="lazy"
               src={image.url}
               style={getBackground(image.color)}
               alt=""
@@ -75,6 +76,7 @@
       {#each images as image}
         <div class="slide-content">
           <img
+            loading="lazy"
             src={image.url}
             style={getBackground(image.color)}
             alt=""

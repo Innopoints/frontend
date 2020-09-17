@@ -45,12 +45,13 @@
   <Card tight>
     {#if selectedVariety != null && selectedVariety.images.length > 0}
       <img
+        loading="lazy"
         src="{API_HOST_BROWSER}/file/{selectedVariety.images[0]}"
         style={getBackground(selectedVariety.color)}
         alt={$product.type ? `"${$product.name}" ${$product.type}` : $product.name}
       />
     {:else}
-      <img src="/images/create-product/placeholder.svg" alt="Nothing" />
+      <img loading="lazy" src="/images/create-product/placeholder.svg" alt="Nothing" />
     {/if}
     <div class="content">
       <div class:placeholder={!$product.name} class="name">
