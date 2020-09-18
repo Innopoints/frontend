@@ -1,5 +1,5 @@
 <script>
-  import { getContext } from 'svelte';
+  import { getContext, createEventDispatcher } from 'svelte';
   import { stores } from '@sapper/app';
   import { Button, Dialog, Modal, TextField } from 'attractions';
   import { snackbarContextKey } from 'attractions/snackbar';
@@ -30,6 +30,7 @@
         password = null;
         open = false;
         showSnackbar({ props: { text: 'Innopoints successfully transferred' } });
+        dispatch('reclaim-innopoints', account);
       }
     } catch (e) {
       console.error(e);
@@ -37,6 +38,7 @@
   }
 
   const showSnackbar = getContext(snackbarContextKey);
+  const dispatch = createEventDispatcher();
 </script>
 
 <Modal bind:open let:closeCallback>
