@@ -35,7 +35,7 @@ body {
 /* Common styles -------------------------------------- */
 
 body {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: $font;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -203,5 +203,23 @@ a {
     flex-shrink: 0;
     stroke: $main;
     margin-right: .3em;
+  }
+}
+
+h1,
+h2,
+h3,
+.headline,
+.dialog .title {
+  font-family: $header-font;
+}
+
+.subhead p {
+  margin-top: .5em;
+}
+
+@media only screen and (min-width: 1024px) {
+  .subhead {
+    line-height: 1.4em !important;
   }
 }
