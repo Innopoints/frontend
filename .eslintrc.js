@@ -84,6 +84,8 @@ module.exports = {
         'working_hours',
         'is_read',
         'full_name',
+        'chat_id',
+        'parse_mode',
       ],
     }],
   },
