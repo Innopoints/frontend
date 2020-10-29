@@ -14,9 +14,9 @@ const options = {
 
 export async function post(req, res, _next) {
   const postData = querystring.stringify({
-    'chat_id': 'process.env.BOT_REPORT_CHAT_ID',
-    'text': '```\n' + JSON.stringify(req.body, null, 2) + '\n```',
-    'parse_mode': 'MarkdownV2',
+    chat_id: 'process.env.BOT_REPORT_CHAT_ID',
+    text: '```\n' + JSON.stringify(req.body, null, 2) + '\n```',
+    parse_mode: 'MarkdownV2',
   });
   options.headers['Content-Length'] = postData.length;
   const rep = https.request(options);

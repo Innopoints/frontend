@@ -1,6 +1,10 @@
 <script context="module">
   import getInitialData from 'src/utils/get-initial-data.js';
-  import { prepareAfterBackend, copyProduct } from 'src/utils/product-manipulation.js';
+  import {
+    prepareAfterBackend,
+    copyProduct,
+    computeDiffs,
+  } from 'src/utils/product-manipulation.js';
   import { writable } from 'svelte/store';
 
   export async function preload(page, session) {
@@ -31,7 +35,6 @@
   import DangerConfirmDialog from 'src/components/common/danger-confirm-dialog.svelte';
   import * as api from 'src/utils/api.js';
   import spaceOnly from 'src/utils/space-only.js';
-  import { computeDiffs } from 'src/utils/product-manipulation.js';
 
   export let unmodifiedProduct;
   export let product;
