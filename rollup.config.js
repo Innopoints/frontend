@@ -1,6 +1,8 @@
+import path from 'path';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
+import url from '@rollup/plugin-url';
 import svelte from 'rollup-plugin-svelte';
 import babel from '@rollup/plugin-babel';
 import alias from '@rollup/plugin-alias';
@@ -21,9 +23,6 @@ const onwarn = (warning, onwarn) =>
   (warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message))
   || (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message))
   || onwarn(warning);
-
-const dedupe = importee =>
-  importee === 'svelte' || importee.startsWith('svelte/');
 
 const preprocessChain = [
   {
@@ -48,14 +47,19 @@ export default {
       }),
       eslint(),
       svelte({
-        extensions: ['.html', '.svelte', '.svg'],
+        extensions: ['.html', '.svelte'],
         preprocess: preprocessChain,
         dev,
         hydratable: true,
       }),
+      // TODO: figure out the new image caching mechanism
+      url({
+        sourceDir: path.resolve(__dirname, 'static/images'),
+        publicPath: '/client/',
+      }),
       resolve({
         browser: true,
-        dedupe,
+        dedupe: ['svelte'],
       }),
       alias({
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
@@ -94,7 +98,7 @@ export default {
           module: true,
         }),
     ],
-    preserveEntrySignatures: 'strict',
+    preserveEntrySignatures: false,
     onwarn,
   },
 
@@ -110,14 +114,19 @@ export default {
         'process.env.BOT_REPORT_CHAT_ID': process.env.BOT_REPORT_CHAT_ID,
       }),
       svelte({
-        extensions: ['.html', '.svelte', '.svg'],
+        extensions: ['.html', '.svelte'],
         preprocess: preprocessChain,
         generate: 'ssr',
         hydratable: true,
         dev,
       }),
+      url({
+        sourceDir: path.resolve(__dirname, 'static/images'),
+        publicPath: '/client/',
+        emitFiles: false,  // already emitted by client build
+      }),
       resolve({
-        dedupe,
+        dedupe: ['svelte'],
       }),
       alias({
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
@@ -128,10 +137,7 @@ export default {
       }),
       commonjs(),
     ],
-    external: Object.keys(pkg.dependencies).concat(
-      require('module').builtinModules ||
-        Object.keys(process.binding('natives')),
-    ),
+    external: Object.keys(pkg.dependencies).concat(require('module').builtinModules),
     preserveEntrySignatures: 'strict',
     onwarn,
   },
@@ -149,7 +155,7 @@ export default {
       commonjs(),
       !dev && terser(),
     ],
-    preserveEntrySignatures: 'strict',
+    preserveEntrySignatures: false,
     onwarn,
   },
 };
