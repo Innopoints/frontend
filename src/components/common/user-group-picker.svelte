@@ -26,7 +26,11 @@
       <svg src="static/images/icons/chevron-down.svg" class="dropdown-chevron ml" />
     </Button>
     <Dropdown>
-      <CheckboxGroup bind:items {name} />
+      {#if items != null && items.length !== 0}
+        <CheckboxGroup bind:items {name} class="groups" />
+      {:else}
+        No students yet...
+      {/if}
     </Dropdown>
   </DropdownShell>
 </div>
