@@ -4,6 +4,11 @@
       padding: .5em 1em .5em .5em;
     }
 
+    .groups {
+      max-height: 20em;
+      overflow-y: auto;
+    }
+
     .checkbox {
       margin: .5em 0;
     }

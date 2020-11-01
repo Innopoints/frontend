@@ -15,12 +15,16 @@
       <svg src="static/images/icons/chevron-down.svg" class="dropdown-chevron ml" />
     </Button>
     <Dropdown>
-      <RadioGroup {items} bind:value {name} />
-      {#if value != null}
-        <Divider />
-        <Button small on:click={(e) => { e.stopPropagation(); value = null; }}>
-          clear selection
-        </Button>
+      {#if items != null && items.length !== 0}
+        <RadioGroup {items} bind:value {name} class="tags" />
+        {#if value != null}
+          <Divider />
+          <Button small on:click={(e) => { e.stopPropagation(); value = null; }}>
+            clear selection
+          </Button>
+        {/if}
+      {:else}
+        No tags yet...
       {/if}
     </Dropdown>
   </DropdownShell>

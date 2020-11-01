@@ -5,6 +5,11 @@
       width: max-content;
     }
 
+    .tags {
+      max-width: 20em;
+      overflow-y: auto;
+    }
+
     .radio {
       margin: .5em 0;
     }
