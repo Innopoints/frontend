@@ -1,8 +1,6 @@
-import path from 'path';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
-import url from '@rollup/plugin-url';
 import svelte from 'rollup-plugin-svelte';
 import babel from '@rollup/plugin-babel';
 import alias from '@rollup/plugin-alias';
@@ -51,11 +49,6 @@ export default {
         preprocess: preprocessChain,
         dev,
         hydratable: true,
-      }),
-      // TODO: figure out the new image caching mechanism
-      url({
-        sourceDir: path.resolve(__dirname, 'static/images'),
-        publicPath: '/client/',
       }),
       resolve({
         browser: true,
@@ -119,11 +112,6 @@ export default {
         generate: 'ssr',
         hydratable: true,
         dev,
-      }),
-      url({
-        sourceDir: path.resolve(__dirname, 'static/images'),
-        publicPath: '/client/',
-        emitFiles: false,  // already emitted by client build
       }),
       resolve({
         dedupe: ['svelte'],
