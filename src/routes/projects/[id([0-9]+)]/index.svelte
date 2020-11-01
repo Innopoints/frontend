@@ -9,7 +9,7 @@
       ['competences', '/competences'],
       ['tags', '/tags'],
     ]));
-    if (data._project.lifetime_stage === ProjectStages.DRAFT) {
+    if (data.projectObject.lifetime_stage === ProjectStages.DRAFT) {
       this.redirect(303, '/projects/new');
     }
     data.projectObject.activities.forEach(prepareAfterBackend);
