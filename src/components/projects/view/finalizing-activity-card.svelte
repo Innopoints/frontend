@@ -107,6 +107,7 @@
               {account}
               {activity}
               {application}
+              {hourChanges}
               on:panel-open={closeOtherPanels}
               on:hours-changed={recordHourChange}
             />

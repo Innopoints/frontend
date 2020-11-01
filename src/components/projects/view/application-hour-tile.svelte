@@ -18,11 +18,12 @@
   export let account;
   export let activity;
   export let application;
+  export let hourChanges;
   $: report = application.reports.find(report => report.reporter_email === account.email);
 
   const createReportDialog = {
     open: false,
-    show({ detail }) {
+    show() {
       createReportDialog.open = true;
     },
   };
@@ -90,7 +91,7 @@
             placeholder="1"
             min={0}
             max={99999}
-            value={application.actual_hours}
+            value={hourChanges.get(application) || application.actual_hours}
             on:change={({ detail }) => {
               if (detail.value >= 0) {
                 dispatch('hours-changed', { application, hours: detail.value });
