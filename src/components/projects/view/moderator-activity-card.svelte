@@ -116,7 +116,7 @@
         </Accordion>
       {:else}
         <EmptyState small text="No applications yet">
-          <img src="/images/view-project/no-applications.svg" alt="" />
+          <img loading="lazy" src="/images/view-project/no-applications.svg" alt="" />
         </EmptyState>
       {/if}
     </div>
@@ -137,7 +137,7 @@
         </Accordion>
       {:else}
         <EmptyState small text="No applications yet">
-          <img src="/images/view-project/no-applications.svg" alt="" />
+          <img loading="lazy" src="/images/view-project/no-applications.svg" alt="" />
         </EmptyState>
       {/if}
     </div>

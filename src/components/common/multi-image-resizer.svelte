@@ -151,7 +151,7 @@
               disabled={image.uploadPromise != null}
               on:change={resetCropArea}
             />
-            <img src={image.url} alt="" />
+            <img loading="lazy" src={image.url} alt="" />
             {#if image.uploadPromise != null}
               {#await image.uploadPromise}
                 <div class="overlay">

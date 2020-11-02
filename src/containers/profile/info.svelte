@@ -98,7 +98,7 @@
 
   <div class="balance">
     <p class="btn-align">
-      <span>{$session.account && $session.account.balance}</span>
+      <span>{account.balance}</span>
       <svg src="static/images/innopoint-sharp.svg" class="innopoint" />
       available
     </p>
@@ -115,6 +115,10 @@
   </div>
 </section>
 
-<ReclaimInnopointsModal {account} bind:open={reclaimInnopointsModalOpen} />
+<ReclaimInnopointsModal
+  {account}
+  bind:open={reclaimInnopointsModalOpen}
+  on:reclaim-innopoints={({ detail }) => account = detail}
+/>
 
 <style src="../../../static/css/containers/profile/info.scss"></style>

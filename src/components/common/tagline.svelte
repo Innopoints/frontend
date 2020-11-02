@@ -7,7 +7,7 @@
 </script>
 
 <section class="tagline padded">
-  <img src={imageURL} class="hide-on-less-tb picture" alt="" />
+  <img loading="lazy" src={imageURL} class="hide-on-less-tb picture" alt="" />
   <div>
     <Headline>{headline}</Headline>
     <Subhead>

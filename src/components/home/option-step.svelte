@@ -11,7 +11,7 @@
 
 <div class="step">
   <div class="container">
-    <img src={imageURL} class="picture" alt={title} />
+    <img loading="lazy" src={imageURL} class="picture" alt={title} />
     <div class="description">
       <span class="title">{title}</span>
       <span class="subtitle">{subtitle}</span>

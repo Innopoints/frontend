@@ -36,7 +36,7 @@
 <li>
   <div class="product">
     <div class="image" style={getBackground(purchase.variety.color)}>
-      <img src={coverURL} alt="Product cover" />
+      <img loading="lazy" src={coverURL} alt="Product cover" />
     </div>
     <div class="product-info">
       <div class="title">

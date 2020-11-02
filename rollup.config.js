@@ -22,9 +22,6 @@ const onwarn = (warning, onwarn) =>
   || (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message))
   || onwarn(warning);
 
-const dedupe = importee =>
-  importee === 'svelte' || importee.startsWith('svelte/');
-
 const preprocessChain = [
   {
     markup: substituteSvgs,
@@ -48,14 +45,14 @@ export default {
       }),
       eslint(),
       svelte({
-        extensions: ['.html', '.svelte', '.svg'],
+        extensions: ['.html', '.svelte'],
         preprocess: preprocessChain,
         dev,
         hydratable: true,
       }),
       resolve({
         browser: true,
-        dedupe,
+        dedupe: ['svelte'],
       }),
       alias({
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
@@ -94,7 +91,7 @@ export default {
           module: true,
         }),
     ],
-    preserveEntrySignatures: 'strict',
+    preserveEntrySignatures: false,
     onwarn,
   },
 
@@ -110,14 +107,14 @@ export default {
         'process.env.BOT_REPORT_CHAT_ID': process.env.BOT_REPORT_CHAT_ID,
       }),
       svelte({
-        extensions: ['.html', '.svelte', '.svg'],
+        extensions: ['.html', '.svelte'],
         preprocess: preprocessChain,
         generate: 'ssr',
         hydratable: true,
         dev,
       }),
       resolve({
-        dedupe,
+        dedupe: ['svelte'],
       }),
       alias({
         resolve: ['.jsx', '.js', '.svelte', '.svg'],
@@ -128,10 +125,7 @@ export default {
       }),
       commonjs(),
     ],
-    external: Object.keys(pkg.dependencies).concat(
-      require('module').builtinModules ||
-        Object.keys(process.binding('natives')),
-    ),
+    external: Object.keys(pkg.dependencies).concat(require('module').builtinModules),
     preserveEntrySignatures: 'strict',
     onwarn,
   },
@@ -149,7 +143,7 @@ export default {
       commonjs(),
       !dev && terser(),
     ],
-    preserveEntrySignatures: 'strict',
+    preserveEntrySignatures: false,
     onwarn,
   },
 };

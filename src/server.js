@@ -16,7 +16,7 @@ async function populateSession(req, _res, next) {
       const accountResp = await fetch(
         `${SAPPER_APP_API_HOST}/account`,
         {
-          headers: { 'Cookie': req.headers.cookie },
+          headers: { Cookie: req.headers.cookie },
         },
       );
       if (accountResp.ok) {

@@ -9,7 +9,7 @@
   export let image_id;
   export let creator;
   export let activities;
-  $: exposedActivities = activities.filter(x => !x.internal);
+  $: exposedActivities = activities.filter(x => !x.internal && !x.draft);
   export let start_date;
   export let end_date;
   export let moderated = false;
@@ -20,6 +20,7 @@
 <div class="project-card">
   <Card tight>
     <img
+      loading="lazy"
       alt="Project cover"
       class="image"
       src={image_id == null ? imagePlaceholder : `${API_HOST_BROWSER}/file/${image_id}`}

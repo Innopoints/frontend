@@ -1,27 +1,26 @@
 <script context="module">
-  import { writable } from 'svelte/store';
   import getInitialData from 'src/utils/get-initial-data.js';
   import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
   import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
 
   export async function preload(page, session) {
     const data = await getInitialData(this, session, new Map([
-      ['project', `/projects/${page.params.id}`],
+      ['projectObject', `/projects/${page.params.id}`],
       ['competences', '/competences'],
       ['tags', '/tags'],
     ]));
-    if (data.project.lifetime_stage === ProjectStages.DRAFT) {
+    if (data.projectObject.lifetime_stage === ProjectStages.DRAFT) {
       this.redirect(303, '/projects/new');
     }
-    data.project.activities.forEach(prepareAfterBackend);
+    data.projectObject.activities.forEach(prepareAfterBackend);
     data.account = session.account;
-    data.project = writable(data.project);
     return data;
   }
 </script>
 
 <script>
   import { setContext } from 'svelte';
+  import { writable } from 'svelte/store';
   import { H2 } from 'attractions';
   import ProjectHeader from 'src/containers/projects/view/project-header.svelte';
   import UserView from 'src/containers/projects/view/user-view.svelte';
@@ -31,7 +30,8 @@
 
   setContext('review-mode', false);
 
-  export let project;
+  export let projectObject;
+  const project = writable(projectObject);
   export let account;
   export let competences;
   export let tags;

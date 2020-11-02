@@ -107,6 +107,7 @@
               {account}
               {activity}
               {application}
+              {hourChanges}
               on:panel-open={closeOtherPanels}
               on:hours-changed={recordHourChange}
             />
@@ -114,7 +115,7 @@
         </Accordion>
       {:else}
         <EmptyState small text="No applications">
-          <img src="/images/view-project/no-applications.svg" alt="" />
+          <img loading="lazy" src="/images/view-project/no-applications.svg" alt="" />
         </EmptyState>
       {/if}
     </div>

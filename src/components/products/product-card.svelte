@@ -29,6 +29,7 @@
     {#if colors.length > 1 && !short}
       <div class="image">
         <img
+          loading="lazy"
           src={imageURL}
           style={getBackground(selectedColor)}
           alt="Product cover"
@@ -43,6 +44,7 @@
       </div>
     {:else}
       <img
+        loading="lazy"
         src={imageURL}
         style={getBackground(selectedColor)}
         alt="Product cover"

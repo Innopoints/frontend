@@ -124,7 +124,7 @@
     {#if products.length === 0}
       <EmptyState>
         <figure>
-          <img class="picture" src="/images/products/no-products.svg" alt="" />
+          <img loading="lazy" class="picture" src="/images/products/no-products.svg" alt="" />
           <figcaption>
             <div class="title">No items found...</div>
             Try whining to 319 or a different filter

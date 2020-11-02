@@ -84,7 +84,7 @@
 
 {#if value != null}
   <div class="uploaded-image">
-    <img src="{API_HOST_BROWSER}/file/{value}" alt="Project cover" class="shadow-1 mr" />
+    <img loading="lazy" src="{API_HOST_BROWSER}/file/{value}" alt="Project cover" class="shadow-1 mr" />
     <Button danger round on:click={clearValue}>
       <svg src="static/images/icons/trash-2.svg" />
     </Button>
