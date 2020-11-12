@@ -150,7 +150,7 @@
           </Button>
           <Button outline class="finalize" on:click={() => finalizeDialogOpen = true}>
             <svg class="mr" src="static/images/icons/check-circle.svg" />
-            finalize
+            the event is over
           </Button>
         {:else if $project.lifetime_stage === ProjectStages.FINALIZING
                   && $project.review_status !== ReviewStatuses.PENDING}
