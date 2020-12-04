@@ -96,7 +96,7 @@
 
 <div class="activity-list padded" bind:this={activityListElement}>
   {#if $project.lifetime_stage === ProjectStages.ONGOING}
-    {#each externalActivities as activity, index (activity.id)}
+    {#each externalActivities as activity (activity.id)}
       <div animate:flip={{ duration: 150 }}>
         {#if activity._editing}
           <EditActivityCard
