@@ -32,7 +32,7 @@
     try {
       const thisReport = report;
       application.reports = application.reports.filter(
-        report => thisReport.reporter_email !== report.reporter_email,
+        report => thisReport !== report,
       );
       const snackbar = showSnackbar({
         props: {
