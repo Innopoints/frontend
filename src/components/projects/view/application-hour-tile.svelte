@@ -91,7 +91,8 @@
             placeholder="1"
             min={0}
             max={99999}
-            value={hourChanges.get(application) || application.actual_hours}
+            value={hourChanges.has(application) ?
+              hourChanges.get(application) : application.actual_hours}
             on:change={({ detail }) => {
               if (detail.value >= 0) {
                 dispatch('hours-changed', { application, hours: detail.value });
