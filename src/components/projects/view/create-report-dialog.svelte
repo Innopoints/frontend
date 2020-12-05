@@ -21,7 +21,7 @@
     content: '',
   };
 
-  async function submitReport({ detail }) {
+  async function submitReport() {
     try {
       const apiCall = report == null ? api.post : api.patch;
       const updatedReport = await api.json(apiCall(
@@ -81,11 +81,13 @@
           </Labeled>
           <Labeled icon label="Actual worktime">
             <svg class="icon mr" slot="icon" src="static/images/icons/clock.svg" />
-            {#if activity.fixed_reward}
-              as needed
-            {:else}
-              {application.actual_hours} hour{s(application.actual_hours)}
-            {/if}
+            <span class="content">
+              {#if activity.fixed_reward}
+                as needed
+              {:else}
+                {application.actual_hours} hour{s(application.actual_hours)}
+              {/if}
+            </span>
           </Labeled>
         </div>
         <label for="rating">
