@@ -2,6 +2,7 @@
 
 .report-form {
   max-height: calc(100vh - 7em);
+  overflow-y: auto;
 
   .refresher {
     padding-right: 2em;
@@ -11,9 +12,14 @@
 
     :global .labeled {
       margin-top: 1em;
+      align-items: start;
 
       &:first-child {
         margin-right: 2em;
+      }
+
+      .content {
+        line-height: 1.5em;
       }
     }
   }
