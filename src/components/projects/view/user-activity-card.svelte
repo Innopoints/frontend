@@ -239,7 +239,7 @@
               Are you sure you want to take your application back?
               <em class="consequences">You may place a new one afterwards.</em>
             </DangerConfirmDialog>
-          {:else}
+          {:else if projectStage === ProjectStages.FINISHED}
             {#if activity.existing_application.feedback == null}
               <Button filled class="additional" on:click={leaveFeedbackModal.show}>
                 claim innopoints
