@@ -47,8 +47,11 @@ export default {
       svelte({
         extensions: ['.html', '.svelte'],
         preprocess: preprocessChain,
-        dev,
-        hydratable: true,
+        emitCss: false,
+        compilerOptions: {
+          dev,
+          hydratable: true,
+        },
       }),
       resolve({
         browser: true,
@@ -109,9 +112,12 @@ export default {
       svelte({
         extensions: ['.html', '.svelte'],
         preprocess: preprocessChain,
-        generate: 'ssr',
-        hydratable: true,
-        dev,
+        emitCss: false,
+        compilerOptions: {
+          generate: 'ssr',
+          hydratable: true,
+          dev,
+        },
       }),
       resolve({
         dedupe: ['svelte'],
