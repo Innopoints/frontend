@@ -7,6 +7,8 @@ WORKDIR /app
 COPY .env .eslintrc.js package.json yarn.lock rollup.config.js /app/
 RUN yarn
 
+ENV HUSKY_SKIP_INSTALL=1
+
 # copy the project code
 COPY src /app/src
 COPY static /app/static
