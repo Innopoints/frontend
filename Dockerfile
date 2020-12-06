@@ -3,6 +3,8 @@ FROM node:14-alpine
 RUN mkdir -p /app
 WORKDIR /app
 
+ENV HUSKY_SKIP_INSTALL=1
+
 # install our dependencies
 COPY .eslintrc.js package.json yarn.lock rollup.config.js /app/
 RUN yarn
