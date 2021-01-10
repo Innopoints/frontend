@@ -1,10 +1,6 @@
-@use "sass:meta";
 @use "_attractions-theme.scss";
+@use "common.scss";
 @use "_mixins.scss";
-
-:global {
-  @include meta.load-css("common.scss");
-}
 
 @media only screen and (min-width: 1200px) {
   .material :global .padded {
