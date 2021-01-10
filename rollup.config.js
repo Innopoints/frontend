@@ -11,6 +11,7 @@ import pkg from './package.json';
 import substituteSvgs from './src/utils/substitute-svgs.js';
 import sapperEnv from 'sapper-environment';
 import autoPreprocess from 'svelte-preprocess';
+import makeAttractionsImporter from 'attractions/importer.js';
 import autoprefixer from 'autoprefixer';
 
 const mode = process.env.NODE_ENV;
@@ -27,7 +28,12 @@ const preprocessChain = [
     markup: substituteSvgs,
   },
   autoPreprocess({
-    scss: { includePaths: ['./static/css'] },
+    scss: {
+      importer: makeAttractionsImporter({
+        themeFile: './static/css/_attractions-theme.scss',
+      }),
+      includePaths: ['./static/css'],
+    },
     postcss: { plugins: [autoprefixer] },
   }),
 ];
