@@ -1,5 +1,6 @@
 @use "sass:meta";
 @use "_attractions-theme.scss";
+@use "components/profile/_bar-colors";
 
 .bar-chart {
   margin: 1em .3em 0;
@@ -35,7 +36,7 @@
     flex-grow: 1;
   }
 
-  @include meta.load-css("components/profile/_bar-colors.scss");
+  @include bar-colors.styles;
 
   @media only screen and (min-width: 640px) {
     width: 25em;

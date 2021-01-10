@@ -1,4 +1,1 @@
-@use "sass:meta";
-:global {
-  @include meta.load-css("common.scss");
-}
+@use "common.scss";

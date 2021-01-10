@@ -1,4 +1,5 @@
-@import "_attractions-theme.scss";
+@use "sass:color";
+@use "_attractions-theme.scss";
 
 @mixin hide-accessible {
   clip: rect(0, 0, 0, 0);
@@ -27,11 +28,11 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $light-contrast;
+    background: attractions-theme.$light-contrast;
     border-radius: .3125em;
 
     &:hover {
-      background: darken($light-contrast, 10%);
+      background: color.adjust(attractions-theme.$light-contrast, $lightness: -10%);
     }
   }
 }

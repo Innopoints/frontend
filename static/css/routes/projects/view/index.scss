@@ -1,9 +1,5 @@
-@use "sass:meta";
 @use "_attractions-theme.scss";
-
-:global {
-  @include meta.load-css("common.scss");
-}
+@use "common.scss";
 
 .material {
   padding-bottom: 3em;
