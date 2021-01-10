@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .image-resizer {
   position: relative;
@@ -20,7 +20,7 @@
 
 p {
   margin-bottom: 1em;
-  font-weight: $thin-font-weight;
+  font-weight: attractions-theme.$thin-font-weight;
 }
 
 .uploading {

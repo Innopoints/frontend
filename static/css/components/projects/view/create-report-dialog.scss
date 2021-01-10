@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .report-form {
   max-height: calc(100vh - 7em);
@@ -25,7 +25,7 @@
   }
 
   .required {
-    color: $main;
+    color: attractions-theme.$main;
   }
 
   & > label {

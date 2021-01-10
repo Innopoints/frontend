@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .how-to {
   position: relative;
@@ -47,14 +47,14 @@
     }
 
     & > .title {
-      font-weight: $bold-font-weight;
-      font-family: $header-font;
+      font-weight: attractions-theme.$bold-font-weight;
+      font-family: attractions-theme.$header-font;
       font-size: 1.4em;
       margin-bottom: .5em;
     }
 
     & > .subtitle {
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
       font-size: 1em;
       line-height: 1.4em;
     }
@@ -139,7 +139,7 @@
 
   @media only screen and (min-width: 700px) and (max-width: 1023px) {
     & > .container {
-      box-shadow: $shadow-1;
+      box-shadow: attractions-theme.$shadow-1;
       background: white;
     }
 
@@ -153,7 +153,7 @@
       padding: .5em 1em;
 
       &:not(:last-child) {
-        border-right: 1px solid $light-contrast;
+        border-right: 1px solid attractions-theme.$light-contrast;
       }
 
       & > .icon {
@@ -235,7 +235,7 @@
       }
 
       & > .subtitle {
-        font-weight: $thin-font-weight;
+        font-weight: attractions-theme.$thin-font-weight;
         font-size: 1.5em;
         line-height: 1.9em;
       }

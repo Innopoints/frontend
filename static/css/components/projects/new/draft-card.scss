@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .draft-card {
   margin-top: 1em;
@@ -25,7 +25,7 @@
 
 .subtitle {
   font-size: .9rem;
-  font-weight: $thin-font-weight;
+  font-weight: attractions-theme.$thin-font-weight;
 }
 
 .actions {

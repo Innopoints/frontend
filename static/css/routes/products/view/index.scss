@@ -1,10 +1,12 @@
-@import "_attractions-theme.scss";
+@use "sass:color";
+@use "sass:meta";
+@use "_attractions-theme.scss";
 
 :global {
-  @import "common.scss";
+  @include meta.load-css("common.scss");
 }
 
-$dark-spot-bg: transparentize(black, .5);
+$dark-spot-bg: color.adjust(black, $alpha: -.5);
 
 .material {
   position: relative;
@@ -32,11 +34,11 @@ $dark-spot-bg: transparentize(black, .5);
       }
 
       &:hover {
-        background: lighten($dark-spot-bg, 10%);
+        background: color.adjust($dark-spot-bg, $lightness: 10%);
       }
 
       &:focus {
-        background: lighten($dark-spot-bg, 15%);
+        background: color.adjust($dark-spot-bg, $lightness: 15%);
       }
 
       span {
@@ -49,11 +51,11 @@ $dark-spot-bg: transparentize(black, .5);
     position: absolute;
     bottom: 1.5em;
     left: 1em;
-    color: $main;
+    color: attractions-theme.$main;
     z-index: 300;
 
     .innopoint {
-      stroke: $main;
+      stroke: attractions-theme.$main;
     }
   }
 

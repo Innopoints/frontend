@@ -1,4 +1,5 @@
-@import "_attractions-theme.scss";
+@use "sass:color";
+@use "_attractions-theme.scss";
 
 .image-tile {
   z-index: 100;
@@ -19,14 +20,14 @@
       height: 100%;
       top: 0;
       left: 0;
-      background: transparentize(black, .6);
+      background: color.adjust(black, $alpha: -.6);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
 
       &.error {
-        background: transparentize(darken($danger, 20%), .6);
+        background: color.adjust(color.adjust(attractions-theme.$danger, $lightness: -20%), $alpha: -.6);
 
         svg {
           stroke: white;
@@ -41,7 +42,7 @@
 
       p {
         color: white;
-        font-weight: $bold-font-weight;
+        font-weight: attractions-theme.$bold-font-weight;
         font-size: .9em;
         margin-top: 1em;
       }

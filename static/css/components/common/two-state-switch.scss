@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .two-state-switch {
   display: flex;
@@ -6,21 +6,21 @@
 
   :global {
     .track {
-      border-color: $main !important;
+      border-color: attractions-theme.$main !important;
     }
 
     .thumb {
-      background-color: $main !important;
+      background-color: attractions-theme.$main !important;
     }
   }
 }
 
 .state {
-  font-weight: $bold-font-weight;
+  font-weight: attractions-theme.$bold-font-weight;
   margin: 0 .8em;
-  color: $off-state;
+  color: attractions-theme.$off-state;
 
   &.selected {
-    color: $main;
+    color: attractions-theme.$main;
   }
 }

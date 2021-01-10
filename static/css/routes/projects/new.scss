@@ -1,8 +1,9 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "sass:meta";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 :global {
-  @import "common.scss";
+  @include meta.load-css("common.scss");
 }
 
 @media only screen and (min-width: 1200px) {

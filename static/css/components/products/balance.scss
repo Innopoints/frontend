@@ -1,10 +1,10 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .balance {
-  color: $main;
+  color: attractions-theme.$main;
   margin-bottom: 1em;
 
   .innopoint {
-    stroke: $main;
+    stroke: attractions-theme.$main;
   }
 }

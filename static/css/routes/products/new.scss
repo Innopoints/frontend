@@ -1,7 +1,8 @@
-@import "_attractions-theme.scss";
+@use "sass:meta";
+@use "_attractions-theme.scss";
 
 :global {
-  @import "common.scss";
+  @include meta.load-css("common.scss");
 }
 
 .material {

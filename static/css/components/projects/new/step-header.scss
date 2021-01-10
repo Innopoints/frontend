@@ -1,5 +1,5 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .step-header {
   text-align: center;
@@ -12,7 +12,7 @@
     }
 
     .autosave.visible {
-      @include hide-accessible;
+      @include mixins.hide-accessible;
     }
   }
 
@@ -24,13 +24,13 @@
         display: inline-flex;
         align-items: center;
         font-size: .9rem;
-        font-weight: $thin-font-weight;
-        color: $disabled;
+        font-weight: attractions-theme.$thin-font-weight;
+        color: attractions-theme.$disabled;
         height: 100%;
         margin-left: 1.5em;
 
         .icon {
-          stroke: $disabled;
+          stroke: attractions-theme.$disabled;
           stroke-width: 1;
           width: 1.25rem;
           height: 1.25rem;
@@ -38,7 +38,7 @@
       }
 
       .autosave.visible {
-        @include show-accessible;
+        @include mixins.show-accessible;
 
         height: 100%;
         margin-left: .5em;

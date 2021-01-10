@@ -1,15 +1,15 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .content {
   max-height: calc(100vh - 10em);
   overflow-y: auto;
   overscroll-behavior: none;
 
-  @include thin-scrollbar;
+  @include mixins.thin-scrollbar;
 
   p {
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
     margin-bottom: .3em;
     font-size: .9rem;
     line-height: 1.1rem;

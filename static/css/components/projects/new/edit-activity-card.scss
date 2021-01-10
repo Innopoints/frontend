@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .edit-activity {
   margin-bottom: 1em;
@@ -39,11 +39,11 @@
 
   footer {
     padding-top: .5em;
-    border-top: .0625em solid $light-contrast;
+    border-top: .0625em solid attractions-theme.$light-contrast;
 
     .error {
-      color: $danger;
-      font-weight: $thin-font-weight;
+      color: attractions-theme.$danger;
+      font-weight: attractions-theme.$thin-font-weight;
       font-size: .9em;
       margin: .4em .6em .8em;
       text-align: center;
@@ -51,7 +51,7 @@
 
     .row {
       margin: .4em .6em .8em;
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
 
       svg {
         stroke-width: 1.5;

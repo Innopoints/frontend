@@ -1,8 +1,8 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 li {
   padding: 1em 0;
-  border-bottom: .0625em solid $light-contrast;
+  border-bottom: .0625em solid attractions-theme.$light-contrast;
 
   .product {
     display: flex;
@@ -36,7 +36,7 @@ li {
 
   .title .type, time {
     margin-left: .5em;
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
   }
 
   time {
@@ -44,7 +44,7 @@ li {
   }
 
   .purchaser {
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
     font-size: .9em;
     display: flex;
     flex-direction: column;

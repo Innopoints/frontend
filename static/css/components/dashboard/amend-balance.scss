@@ -1,9 +1,9 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .amend-balance {
   margin-bottom: 1.5em;
   padding-bottom: 1.5em;
-  border-bottom: 1px solid $light-contrast;
+  border-bottom: 1px solid attractions-theme.$light-contrast;
 
   .form {
     display: flex;
@@ -28,6 +28,6 @@
     margin-right: 1em;
     padding-right: 1em;
     border-bottom-width: 0;
-    border-right: .0625em solid $light-contrast;
+    border-right: .0625em solid attractions-theme.$light-contrast;
   }
 }

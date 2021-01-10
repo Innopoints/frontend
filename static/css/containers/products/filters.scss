@@ -1,4 +1,4 @@
-@import "components/filters.scss";
+@use "components/filters.scss";
 
 .filters :global .handle {
   white-space: nowrap;

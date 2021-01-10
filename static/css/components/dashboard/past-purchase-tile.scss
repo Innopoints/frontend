@@ -1,8 +1,9 @@
-@import "_attractions-theme.scss";
+@use "sass:color";
+@use "_attractions-theme.scss";
 
 .past-purchase {
   padding: 1em 0;
-  border-bottom: .0625em solid $light-contrast;
+  border-bottom: .0625em solid attractions-theme.$light-contrast;
 
   .product {
     display: flex;
@@ -36,7 +37,7 @@
 
   .title .type, time {
     margin-left: .5em;
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
   }
 
   time {
@@ -44,7 +45,7 @@
   }
 
   .purchaser {
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
     font-size: .9em;
     display: flex;
     flex-direction: column;
@@ -74,19 +75,19 @@
     justify-self: start;
 
     &.rejected {
-      background: darken($danger, 10%);
+      background: color.adjust(attractions-theme.$danger, $lightness: -10%);
     }
 
     &.carried_out {
-      background: darken($success, 20%);
+      background: color.adjust(attractions-theme.$success, $lightness: -20%);
     }
 
     &.ready_for_pickup {
-      background: $main;
+      background: attractions-theme.$main;
     }
 
     &.pending {
-      background: darken($info, 40%);
+      background: color.adjust(attractions-theme.$info, $lightness: -40%);
     }
   }
 

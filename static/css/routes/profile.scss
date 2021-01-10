@@ -1,5 +1,6 @@
+@use "sass:meta";
 :global {
-  @import "common.scss";
+  @include meta.load-css("common.scss");
 }
 
 .material {

@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .notifications {
   margin-top: .5em;
@@ -9,7 +9,7 @@
 
   .section {
     &:not(:last-of-type) {
-      border-bottom: 1px solid $light-contrast;
+      border-bottom: 1px solid attractions-theme.$light-contrast;
     }
 
     & > header {
@@ -23,7 +23,7 @@
 
     .subtitle {
       font-size: .9rem;
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
       margin-top: .4em;
     }
   }

@@ -1,11 +1,11 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .activity.user {
   margin-bottom: 1em;
 
   .title {
-    font-weight: $bold-font-weight;
-    font-family: $header-font;
+    font-weight: attractions-theme.$bold-font-weight;
+    font-family: attractions-theme.$header-font;
     font-size: 1.1rem;
     line-height: 1.4rem;
     letter-spacing: .2px;
@@ -34,7 +34,7 @@
 
     .secondary {
       font-size: .9rem;
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
       display: none;
     }
   }
@@ -51,12 +51,12 @@
 
   .not-logged-in {
     align-self: center;
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
   }
 
   .application-status {
     font-size: .9em;
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
     margin-top: 1em;
     display: flex;
     align-items: center;
@@ -111,10 +111,10 @@
     }
 
     .application {
-      border-top: .0625em solid $light-contrast;
+      border-top: .0625em solid attractions-theme.$light-contrast;
       padding-top: .8em;
       margin-top: .8em;
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
 
       .with-icon {
         margin-top: .5em;

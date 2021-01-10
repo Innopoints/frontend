@@ -1,14 +1,15 @@
-@import "_attractions-theme.scss";
+@use "sass:color";
+@use "_attractions-theme.scss";
 
 .star {
-  stroke: transparentize($main, .4);
-  fill: transparentize($main, .3);
+  stroke: color.adjust(attractions-theme.$main, $alpha: -.4);
+  fill: color.adjust(attractions-theme.$main, $alpha: -.3);
   width: 1.125rem;
   height: 1.125rem;
   margin: 0 .0625em;
 
   &.off {
-    stroke: $light-contrast;
+    stroke: attractions-theme.$light-contrast;
     fill: none;
   }
 }

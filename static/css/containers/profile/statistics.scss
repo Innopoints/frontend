@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .statistics {
   margin-top: .5em;
@@ -15,12 +15,12 @@
     margin-top: 2em;
 
     .icon {
-      stroke: $main;
+      stroke: attractions-theme.$main;
       margin-right: .8em;
     }
 
     & > header {
-      font-weight: $bold-font-weight;
+      font-weight: attractions-theme.$bold-font-weight;
       font-size: 1.1rem;
       display: flex;
       align-items: center;
@@ -28,7 +28,7 @@
     }
 
     .rating {
-      color: $main;
+      color: attractions-theme.$main;
       font-size: 1.3rem;
       margin-left: .8em;
     }
@@ -49,7 +49,7 @@
 
   @media only screen and (min-width: 640px) {
     .hide-on-less-tb {
-      font-weight: $bold-font-weight;
+      font-weight: attractions-theme.$bold-font-weight;
       margin-right: .3em;
     }
 
@@ -72,13 +72,13 @@
       display: flex;
       align-self: stretch;
       padding-bottom: 1.5em;
-      border-bottom: .0625em solid $light-contrast;
+      border-bottom: .0625em solid attractions-theme.$light-contrast;
 
       & > .stat {
         width: 50%;
 
         &:last-child {
-          border-left: .0625em solid $light-contrast;
+          border-left: .0625em solid attractions-theme.$light-contrast;
           padding-left: 1.5em;
         }
       }

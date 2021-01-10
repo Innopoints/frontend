@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .material {
   margin-top: 2em;
@@ -10,7 +10,7 @@
     p {
       margin-bottom: .5em;
       font-size: 1.1em;
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
       line-height: 1.3em;
     }
 

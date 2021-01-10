@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .competences {
   margin-top: .5em;
@@ -13,19 +13,19 @@
 
 .question {
   margin-top: 1em;
-  font-weight: $bold-font-weight;
+  font-weight: attractions-theme.$bold-font-weight;
 }
 
 .answer {
   display: block;
   margin: .5em 1em .5em 0;
   padding: .4em .75em;
-  border-left: .1875em solid $light-contrast;
-  color: $dark;
+  border-left: .1875em solid attractions-theme.$light-contrast;
+  color: attractions-theme.$dark;
   line-height: 1.25rem;
 
   .no-answer {
     font-style: italic;
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
   }
 }
