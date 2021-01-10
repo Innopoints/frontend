@@ -1,11 +1,11 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .tagline {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 .3em;
-  color: $main;
+  color: attractions-theme.$main;
   margin-bottom: 5em;
 
   & > .picture {
@@ -20,13 +20,13 @@
 
   :global h1 {
     font-size: 1.9em;
-    font-weight: $bold-font-weight;
+    font-weight: attractions-theme.$bold-font-weight;
     margin-bottom: 8px;
     text-align: center;
   }
 
   .motto {
-    font-family: $header-font;
+    font-family: attractions-theme.$header-font;
     font-size: 1.2em;
     text-align: center;
   }

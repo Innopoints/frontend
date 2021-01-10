@@ -1,9 +1,9 @@
-@import "_attractions-theme.scss";
-@import "components/projects/view/moderated-activity.scss";
+@use "_attractions-theme.scss";
+@use "components/projects/view/moderated-activity.scss";
 
 .activity.moderated {
   .left {
-    border-bottom: .0625em solid $light-contrast;
+    border-bottom: .0625em solid attractions-theme.$light-contrast;
     padding-bottom: 1em;
     margin-bottom: 1em;
   }
@@ -22,7 +22,7 @@
 
       .left {
         border-bottom-width: 0 !important;
-        border-right: .0625em solid $light-contrast;
+        border-right: .0625em solid attractions-theme.$light-contrast;
         padding-right: 1em;
         margin-bottom: 0;
       }

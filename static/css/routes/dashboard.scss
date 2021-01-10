@@ -1,7 +1,8 @@
-@import "_attractions-theme.scss";
+@use "sass:meta";
+@use "_attractions-theme.scss";
 
 :global {
-  @import "common.scss";
+  @include meta.load-css("common.scss");
 }
 
 .material {
@@ -21,10 +22,10 @@
     flex-direction: column;
 
     & > .title {
-      font-weight: $bold-font-weight;
+      font-weight: attractions-theme.$bold-font-weight;
       display: flex;
       align-items: center;
-      color: $main;
+      color: attractions-theme.$main;
       font-size: 1.1rem;
 
       .icon {

@@ -1,5 +1,5 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .notification-center :global {
   .btn.close {
@@ -27,8 +27,8 @@
 }
 
 .title {
-  font-weight: $bold-font-weight;
-  color: $main;
+  font-weight: attractions-theme.$bold-font-weight;
+  color: attractions-theme.$main;
 }
 
 .notification-list {
@@ -40,5 +40,5 @@
   overflow-y: scroll;
   overscroll-behavior: none;
 
-  @include thin-scrollbar;
+  @include mixins.thin-scrollbar;
 }

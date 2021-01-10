@@ -1,4 +1,5 @@
-@import "_attractions-theme.scss";
+@use "sass:color";
+@use "_attractions-theme.scss";
 
 .product {
   padding: 1em;
@@ -12,7 +13,7 @@
     }
 
     .type {
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
     }
   }
 
@@ -27,11 +28,11 @@
       }
 
       33% {
-        border-color: transparentize($main, .7);
+        border-color: color.adjust(attractions-theme.$main, $alpha: -.7);
       }
 
       66% {
-        border-color: transparentize($main, .7);
+        border-color: color.adjust(attractions-theme.$main, $alpha: -.7);
       }
 
       100% {
@@ -63,10 +64,10 @@
       border-radius: .3125em;
 
       .not-selected {
-        font-weight: $thin-font-weight;
+        font-weight: attractions-theme.$thin-font-weight;
         font-size: .9rem;
         margin-top: .5em;
-        color: darken($main, 5%);
+        color: color.adjust(attractions-theme.$main, $lightness: -5%);
         display: none;
       }
 
@@ -111,13 +112,13 @@
         position: absolute;
         margin-left: .8em;
         top: -2px;
-        stroke: $danger;
+        stroke: attractions-theme.$danger;
         cursor: help;
       }
     }
 
     .purchases {
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
       font-size: .9rem;
       margin-bottom: .4em;
     }
@@ -125,7 +126,7 @@
     .out-of-stock {
       font-size: .8rem;
       padding: .3em .5em;
-      background: $danger;
+      background: attractions-theme.$danger;
       color: #fff;
       border-radius: 1em;
       margin-bottom: .4em;

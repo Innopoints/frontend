@@ -1,5 +1,5 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .steps-navigation {
   display: flex;
@@ -8,7 +8,7 @@
   :global {
     .handle {
       background: white;
-      box-shadow: $shadow-1;
+      box-shadow: attractions-theme.$shadow-1;
       margin-top: 1em;
 
       .step-index, .step-name {
@@ -54,7 +54,7 @@
       font-size: 1.2rem;
 
       .step {
-        @include hide-accessible;
+        @include mixins.hide-accessible;
       }
     }
   }

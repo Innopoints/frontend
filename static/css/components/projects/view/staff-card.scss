@@ -1,4 +1,4 @@
-@import "_attractions-theme";
+@use "_attractions-theme";
 
 .card {
   margin-bottom: 1em;
@@ -14,7 +14,7 @@
   width: .75em;
   height: .75em;
   stroke-width: 3;
-  stroke: $main;
+  stroke: attractions-theme.$main;
   margin-left: .5em;
 }
 

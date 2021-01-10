@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .purchase {
   margin-top: 1.2em;
@@ -40,7 +40,7 @@
 
   .type {
     margin-top: .25em;
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
     font-size: .95rem;
   }
 }
@@ -83,7 +83,7 @@
   }
 
   .delta-balance {
-    color: $main;
+    color: attractions-theme.$main;
 
     .innopoint {
       stroke: currentColor;
@@ -92,7 +92,7 @@
     s {
       text-decoration: none;
       position: relative;
-      color: $danger;
+      color: attractions-theme.$danger;
       margin-right: .3em;
     }
   }
@@ -104,6 +104,6 @@
     height: .0625em;
     top: 50%;
     left: 0;
-    background: $danger;
+    background: attractions-theme.$danger;
   }
 }

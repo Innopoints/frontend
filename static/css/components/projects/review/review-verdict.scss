@@ -1,11 +1,11 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .review-verdict {
   margin-top: 1.5em;
 
   .title {
     margin-bottom: .5em;
-    font-weight: $bold-font-weight;
+    font-weight: attractions-theme.$bold-font-weight;
   }
 
   .actions {

@@ -1,8 +1,8 @@
-@import "_mixins.scss";
+@use "_mixins.scss";
 
 .scrollable {
   max-height: 75vh;
   overflow-y: auto;
 
-  @include thin-scrollbar;
+  @include mixins.thin-scrollbar;
 }

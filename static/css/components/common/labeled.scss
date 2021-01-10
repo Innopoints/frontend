@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .labeled {
   display: flex;
@@ -23,11 +23,11 @@
         display: block;
         height: 1.5rem;
         width: 1.5rem;
-        stroke: $main;
+        stroke: attractions-theme.$main;
         align-self: start;
 
         svg {
-          stroke: $main;
+          stroke: attractions-theme.$main;
         }
       }
     }

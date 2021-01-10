@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .project-header {
   margin-bottom: 1.5em;
@@ -16,7 +16,7 @@
 
     .chip {
       display: inline-block;
-      background: $main;
+      background: attractions-theme.$main;
       color: #fff;
       margin-left: .5em;
       flex-shrink: 0;
@@ -26,7 +26,7 @@
   .info {
     margin: 0 .875em;
     padding: 0 .25em 1.5em;
-    border-bottom: .0625em solid $light-contrast;
+    border-bottom: .0625em solid attractions-theme.$light-contrast;
   }
 
   :global .labeled {
@@ -93,7 +93,7 @@
 
     .title {
       margin-bottom: .5em;
-      font-weight: $bold-font-weight;
+      font-weight: attractions-theme.$bold-font-weight;
     }
 
     .actions {
@@ -108,7 +108,7 @@
     background-size: cover;
     display: flex;
     justify-content: flex-end;
-    box-shadow: $shadow-1;
+    box-shadow: attractions-theme.$shadow-1;
 
     :global h1 {
       margin-top: 1.5em;

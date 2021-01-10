@@ -1,5 +1,5 @@
-@import "_attractions-theme.scss";
-@import "components/projects/view/application-tile.scss";
+@use "_attractions-theme.scss";
+@use "components/projects/view/application-tile.scss";
 
 .actual-hours {
   margin-top: 1em;

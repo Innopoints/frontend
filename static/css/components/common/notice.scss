@@ -1,28 +1,28 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .notice {
   border-radius: 1em;
-  border: .0625em solid $main;
+  border: .0625em solid attractions-theme.$main;
   padding: 1em 1em 1em;
   margin: 1em 0;
   display: flex;
   align-items: flex-start;
 
   & > .icon {
-    color: $main;
+    color: attractions-theme.$main;
     margin-right: .7em;
     flex-shrink: 0;
   }
 
   &.warning {
-    background: $warning-bg;
-    color: $warning-fg;
+    background: attractions-theme.$warning-bg;
+    color: attractions-theme.$warning-fg;
     border-width: 0;
     font-size: .9em;
     align-items: center;
 
     & > .icon {
-      color: $warning-fg;
+      color: attractions-theme.$warning-fg;
     }
   }
 

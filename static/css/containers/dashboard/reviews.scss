@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 li {
   padding: 1em 0;
@@ -6,7 +6,7 @@ li {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  border-bottom: .0625em solid $light-contrast;
+  border-bottom: .0625em solid attractions-theme.$light-contrast;
 
   @supports (display: grid) {
     display: grid;
@@ -20,7 +20,7 @@ li {
   .title {
     margin-bottom: .5em;
     flex-basis: 100%;
-    font-weight: $bold-font-weight;
+    font-weight: attractions-theme.$bold-font-weight;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

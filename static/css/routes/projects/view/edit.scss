@@ -1,8 +1,9 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "sass:meta";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 :global {
-  @import "common.scss";
+  @include meta.load-css("common.scss");
 }
 
 .material {
@@ -39,7 +40,7 @@
 
   & > p {
     margin-top: 1em;
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
   }
 
   .actions {

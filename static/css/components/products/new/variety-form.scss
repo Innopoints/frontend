@@ -1,10 +1,10 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .variety {
   margin-top: 1.5em;
   padding-bottom: 1.2em;
-  border-bottom: .0625em solid $light-contrast;
+  border-bottom: .0625em solid attractions-theme.$light-contrast;
 
   .settings {
     display: flex;

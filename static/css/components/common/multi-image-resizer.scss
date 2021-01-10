@@ -1,5 +1,6 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "sass:color";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .image-resizer {
   position: relative;
@@ -26,7 +27,7 @@
 
 p {
   margin-bottom: 1em;
-  font-weight: $thin-font-weight;
+  font-weight: attractions-theme.$thin-font-weight;
 }
 
 .image-thumbnails {
@@ -41,7 +42,7 @@ p {
     border-radius: .5em;
 
     input {
-      @include hide-accessible;
+      @include mixins.hide-accessible;
     }
 
     img {
@@ -54,7 +55,7 @@ p {
     }
 
     input:checked + img {
-      border-color: $main;
+      border-color: attractions-theme.$main;
     }
 
     .overlay {
@@ -70,10 +71,10 @@ p {
       align-items: center;
       justify-content: center;
       color: white;
-      background: transparentize(black, .5);
+      background: color.adjust(black, $alpha: -.5);
 
       &.success {
-        background: transparentize(darken($success, 20%), .5);
+        background: color.adjust(color.adjust(attractions-theme.$success, $lightness: -20%), $alpha: -.5);
       }
 
       :global .spinner > div {

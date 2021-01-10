@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .space-between {
   display: flex;
@@ -78,8 +78,8 @@ footer {
     }
 
     .title {
-      font-weight: $bold-font-weight;
-      font-family: $header-font;
+      font-weight: attractions-theme.$bold-font-weight;
+      font-family: attractions-theme.$header-font;
       color: #fff;
       font-size: 1.7rem;
       margin: 0 .5em;
@@ -98,7 +98,7 @@ footer {
     }
 
     .credits {
-      font-weight: $thin-font-weight;
+      font-weight: attractions-theme.$thin-font-weight;
       font-size: 1rem;
       text-align: center;
       margin-top: 2em;
@@ -119,12 +119,12 @@ footer {
       color: #000;
 
       a {
-        color: $main;
+        color: attractions-theme.$main;
       }
 
       p {
         margin-bottom: .5em;
-        font-weight: $thin-font-weight;
+        font-weight: attractions-theme.$thin-font-weight;
       }
     }
   }

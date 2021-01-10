@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .project-card {
   width: 100%;
@@ -42,7 +42,7 @@
 
       &.extra {
         font-size: .9rem;
-        color: $main;
+        color: attractions-theme.$main;
       }
     }
 

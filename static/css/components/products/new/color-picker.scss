@@ -1,5 +1,5 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .color-picker {
   display: flex;
@@ -15,7 +15,7 @@
   }
 
   .new-color-picker {
-    @include hide-accessible;
+    @include mixins.hide-accessible;
   }
 
   :global {
@@ -33,7 +33,7 @@
       max-height: 15em;
       overflow-y: auto;
 
-      @include thin-scrollbar;
+      @include mixins.thin-scrollbar;
 
       .radio {
         margin: .3em;

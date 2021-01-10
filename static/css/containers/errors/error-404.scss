@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .material {
   display: flex;
@@ -35,13 +35,13 @@
   }
 
   .repr {
-    box-shadow: $shadow-1;
+    box-shadow: attractions-theme.$shadow-1;
     border-radius: 15px;
     margin-top: 1em;
     transition: box-shadow 200ms;
 
     &:hover {
-      box-shadow: $shadow-glowing;
+      box-shadow: attractions-theme.$shadow-glowing;
     }
   }
 

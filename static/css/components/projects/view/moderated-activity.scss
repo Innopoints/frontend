@@ -1,12 +1,12 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .activity.moderated {
   margin-bottom: 1em;
 
   .left {
     header {
-      font-weight: $bold-font-weight;
-      font-family: $header-font;
+      font-weight: attractions-theme.$bold-font-weight;
+      font-family: attractions-theme.$header-font;
       font-size: 1.1em;
     }
 
@@ -52,7 +52,7 @@
 
         .secondary {
           font-size: .9em;
-          font-weight: $thin-font-weight;
+          font-weight: attractions-theme.$thin-font-weight;
         }
       }
     }
@@ -68,8 +68,8 @@
     padding: 0 !important;
 
     .title {
-      color: $main;
-      font-weight: $bold-font-weight;
+      color: attractions-theme.$main;
+      font-weight: attractions-theme.$bold-font-weight;
       font-size: 1.2rem;
     }
   }
@@ -91,7 +91,7 @@
 
       .middle {
         border-bottom-width: 0 !important;
-        border-right: .0625em solid $light-contrast;
+        border-right: .0625em solid attractions-theme.$light-contrast;
         padding-right: 1em;
       }
     }

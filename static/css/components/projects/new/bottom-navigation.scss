@@ -1,11 +1,11 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .actions {
   margin-top: 2em;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  font-weight: $thin-font-weight;
+  font-weight: attractions-theme.$thin-font-weight;
   font-size: .9rem;
 
   :global {
@@ -20,7 +20,7 @@
     margin: 1em 0;
     display: flex;
     align-items: center;
-    color: $dark;
+    color: attractions-theme.$dark;
   }
 
   @media only screen and (min-width: 640px) {

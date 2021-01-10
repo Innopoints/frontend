@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .activity.moderated.draft {
   margin-bottom: 1em;
@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: $bold-font-weight;
+    font-weight: attractions-theme.$bold-font-weight;
   }
 
   .actions {

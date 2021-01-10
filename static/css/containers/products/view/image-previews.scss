@@ -1,5 +1,6 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "sass:color";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .showcase {
   width: 100%;
@@ -25,10 +26,10 @@
       height: .375em;
       margin: .25em;
       border-radius: 50%;
-      background: $light-contrast;
+      background: attractions-theme.$light-contrast;
 
       &.active {
-        background: $main;
+        background: attractions-theme.$main;
       }
     }
   }
@@ -42,7 +43,7 @@
     .previews {
       $preview-item-size: 4em;
 
-      @include thin-scrollbar;
+      @include mixins.thin-scrollbar;
 
       overflow-y: auto;
       display: block;
@@ -52,7 +53,7 @@
       margin-right: .5em;
 
       input[type="radio"] {
-        @include hide-accessible;
+        @include mixins.hide-accessible;
       }
 
       .icon {
@@ -78,12 +79,12 @@
         z-index: 999;
         width: $preview-item-size;
         height: $preview-item-size;
-        background-color: transparentize($main, .9);
+        background-color: color.adjust(attractions-theme.$main, $alpha: -.9);
         cursor: pointer;
       }
 
       input:checked + .icon {
-        border-color: $main;
+        border-color: attractions-theme.$main;
       }
     }
 

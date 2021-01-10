@@ -1,18 +1,19 @@
-@import "_attractions-theme.scss";
+@use "sass:color";
+@use "_attractions-theme.scss";
 
 header {
   height: 3.5em;
-  border-bottom: 1px solid transparentize($main, .76);
+  border-bottom: 1px solid color.adjust(attractions-theme.$main, $alpha: -.76);
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   .logo {
-    color: $main;
-    fill: $main;
+    color: attractions-theme.$main;
+    fill: attractions-theme.$main;
     text-decoration: none;
-    font-weight: $bold-font-weight;
-    font-family: $header-font;
+    font-weight: attractions-theme.$bold-font-weight;
+    font-family: attractions-theme.$header-font;
     font-size: 1.3rem;
 
     img {

@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .step {
   &:nth-child(2) {
@@ -28,7 +28,7 @@
   @media only screen and (min-width: 805px) {
     border-radius: 1.5625em;
     margin: 0 5% 3em;
-    box-shadow: $shadow-0;
+    box-shadow: attractions-theme.$shadow-0;
   }
 
   @media only screen and (min-width: 1024px) {
@@ -60,23 +60,23 @@
     margin: 0 1em;
 
     .title {
-      font-family: $header-font;
+      font-family: attractions-theme.$header-font;
     }
   }
 
   strong {
     font-size: 1rem;
-    font-weight: $bold-font-weight;
+    font-weight: attractions-theme.$bold-font-weight;
   }
 
   .title {
-    font-weight: $bold-font-weight;
+    font-weight: attractions-theme.$bold-font-weight;
     font-size: 1.4rem;
     margin-bottom: .3em;
   }
 
   .subtitle {
-    font-weight: $thin-font-weight;
+    font-weight: attractions-theme.$thin-font-weight;
     font-size: 1rem;
     line-height: 1.3rem;
     margin-bottom: 1.5em;

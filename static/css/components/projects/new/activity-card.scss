@@ -1,5 +1,5 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .activity {
   margin-bottom: 1em;
@@ -9,7 +9,7 @@
   }
 
   .title {
-    font-weight: $bold-font-weight;
+    font-weight: attractions-theme.$bold-font-weight;
     padding: .5em;
     display: flex;
     align-items: center;
@@ -17,7 +17,7 @@
     .hidden {
       font-weight: 400;
       font-size: .9em;
-      color: $disabled;
+      color: attractions-theme.$disabled;
       margin-left: 1em;
       display: flex;
       align-items: center;
@@ -115,7 +115,7 @@
     }
 
     .actions {
-      border-left: .0625em solid $light-contrast;
+      border-left: .0625em solid attractions-theme.$light-contrast;
       padding-left: .4em;
 
       :global .btn {

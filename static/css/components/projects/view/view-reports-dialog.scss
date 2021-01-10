@@ -1,5 +1,5 @@
-@import "_attractions-theme.scss";
-@import "_mixins.scss";
+@use "_attractions-theme.scss";
+@use "_mixins.scss";
 
 .reports {
   margin-top: 1.5em;
@@ -7,14 +7,14 @@
   max-height: 75vh;
   overflow-y: auto;
 
-  @include thin-scrollbar;
+  @include mixins.thin-scrollbar;
 
   .report {
     padding-top: 1em;
 
     &:not(:last-child) {
       padding-bottom: 1em;
-      border-bottom: .0625em solid $light-contrast;
+      border-bottom: .0625em solid attractions-theme.$light-contrast;
     }
   }
 

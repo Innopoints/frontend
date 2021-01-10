@@ -1,4 +1,4 @@
-@import "_attractions-theme.scss";
+@use "_attractions-theme.scss";
 
 .step-0 {
   display: flex;
@@ -28,7 +28,7 @@
 
       :global .dropdown {
         padding: 1em;
-        font-weight: $thin-font-weight;
+        font-weight: attractions-theme.$thin-font-weight;
         max-width: 20em;
       }
     }
@@ -43,7 +43,7 @@
       text-align: center;
 
       .clarification {
-        font-weight: $thin-font-weight;
+        font-weight: attractions-theme.$thin-font-weight;
         margin-top: .5em;
         margin-bottom: 1.5em;
       }
