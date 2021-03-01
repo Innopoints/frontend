@@ -44,10 +44,13 @@ export default {
     output: config.client.output(),
     plugins: [
       replace({
-        ...sapperEnv(),
-        'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode),
-        'process.env.VAPID_PUBLIC_KEY': process.env.VAPID_PUBLIC_KEY,
+        values: {
+          ...sapperEnv(),
+          'process.browser': true,
+          'process.env.NODE_ENV': JSON.stringify(mode),
+          'process.env.VAPID_PUBLIC_KEY': JSON.stringify(process.env.VAPID_PUBLIC_KEY),
+        },
+        preventAssignment: true,
       }),
       eslint(),
       svelte({
@@ -109,11 +112,14 @@ export default {
     output: config.server.output(),
     plugins: [
       replace({
-        'process.browser': false,
-        'process.env.NODE_ENV': JSON.stringify(mode),
-        'process.env.VAPID_PUBLIC_KEY': process.env.VAPID_PUBLIC_KEY,
-        'process.env.BOT_API_TOKEN': process.env.BOT_API_TOKEN,
-        'process.env.BOT_REPORT_CHAT_ID': process.env.BOT_REPORT_CHAT_ID,
+        values: {
+          'process.browser': false,
+          'process.env.NODE_ENV': JSON.stringify(mode),
+          'process.env.VAPID_PUBLIC_KEY': JSON.stringify(process.env.VAPID_PUBLIC_KEY),
+          'process.env.BOT_API_TOKEN': JSON.stringify(process.env.BOT_API_TOKEN),
+          'process.env.BOT_REPORT_CHAT_ID': JSON.stringify(process.env.BOT_REPORT_CHAT_ID),
+        },
+        preventAssignment: true,
       }),
       svelte({
         extensions: ['.html', '.svelte'],
@@ -148,9 +154,12 @@ export default {
     plugins: [
       resolve(),
       replace({
-        'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode),
-        'process.env.API_HOST': process.env.SAPPER_APP_API_HOST_BROWSER,
+        values: {
+          'process.browser': true,
+          'process.env.NODE_ENV': JSON.stringify(mode),
+          'process.env.API_HOST': JSON.stringify(process.env.SAPPER_APP_API_HOST_BROWSER),
+        },
+        preventAssignment: true,
       }),
       commonjs(),
       !dev && terser(),

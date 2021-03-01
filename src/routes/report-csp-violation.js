@@ -4,7 +4,7 @@ import querystring from 'querystring';
 const options = {
   hostname: 'api.telegram.org',
   port: 443,
-  path: `/bot${'process.env.BOT_API_TOKEN'}/sendMessage`,
+  path: `/bot${process.env.BOT_API_TOKEN}/sendMessage`,
   method: 'POST',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -14,7 +14,7 @@ const options = {
 
 export async function post(req, res, _next) {
   const postData = querystring.stringify({
-    chat_id: 'process.env.BOT_REPORT_CHAT_ID',
+    chat_id: process.env.BOT_REPORT_CHAT_ID,
     text: '```\n' + JSON.stringify(req.body, null, 2) + '\n```',
     parse_mode: 'MarkdownV2',
   });
