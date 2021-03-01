@@ -96,7 +96,7 @@
         </div>
         {#if $project.review_status === ReviewStatuses.PENDING}
           The project is now awaiting the administrator's review. <br />
-          <a href="/profile" rel="prefetch">Enable notifications in the profile</a> to be up-to-date!
+          <a href="/profile" sapper:prefetch>Enable notifications in the profile</a> to be up-to-date!
         {:else if $project.review_status === ReviewStatuses.REJECTED}
           <strong>The administrator rejected the project.</strong> <br/>
           Make corrections and then submit for review again.
