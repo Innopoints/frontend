@@ -7,4 +7,4 @@ export const USER_EMAIL = (
   process.env.NODE_ENV === 'development' && process.env.SAPPER_APP_USER_EMAIL || ''
 );
 /* eslint-disable-next-line max-len */
-export const VAPID_PUBLIC_KEY = 'process.env.VAPID_PUBLIC_KEY';
+export const VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY;
