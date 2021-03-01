@@ -32,7 +32,7 @@
     {#if type === EntryTypes.APPLICATION}
       <div class="lb">Applied for</div>
       <div class="lb">{payload.activity_name} on</div>
-      <a href="/projects/{payload.project_id}" class="lb" rel="prefetch">
+      <a href="/projects/{payload.project_id}" class="lb" sapper:prefetch>
         {payload.project_name}
       </a>
       <div
@@ -62,7 +62,7 @@
       {/if}
     {:else if type === EntryTypes.PURCHASE}
       <div class="lb">Purchased the</div>
-      <a href="/products/{payload.product_id}" class="lb" rel="prefetch">
+      <a href="/products/{payload.product_id}" class="lb" sapper:prefetch>
         {#if payload.product_type != null}
           "{payload.product_name}" {payload.product_type}
         {:else}
@@ -89,12 +89,12 @@
       </div>
     {:else if type === EntryTypes.PROMOTION}
       <div class="lb">Granted moderator rights on</div>
-      <a href="/projects/{payload.project_id}" class="lb" rel="prefetch">
+      <a href="/projects/{payload.project_id}" class="lb" sapper:prefetch>
         {payload.project_name}
       </a>
     {:else if type === EntryTypes.PROJECT}
       <div class="lb">Created the project</div>
-      <a href="/projects/{payload.project_id}" class="lb" rel="prefetch">
+      <a href="/projects/{payload.project_id}" class="lb" sapper:prefetch>
         {payload.project_name}
       </a>
       {#if payload.review_status != null}

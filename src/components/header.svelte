@@ -13,7 +13,7 @@
 </script>
 
 <header class={classes('padded', _class)}>
-  <a class="logo" href="/" rel="prefetch">
+  <a class="logo" href="/" sapper:prefetch>
     <img loading="lazy" src="/images/innou-icon.svg" alt="Go to the home page" />
     <span class="hide-on-less-tb">Innopoints</span>
   </a>

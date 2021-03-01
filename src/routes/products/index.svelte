@@ -149,7 +149,7 @@
   </section>
   <p class="link-bottom padded">
     Lacking innopoints?
-    <a href="/projects" rel="prefetch">Volunteer on projects</a>
+    <a href="/projects" sapper:prefetch>Volunteer on projects</a>
     to fill in the shortage!
   </p>
 </div>

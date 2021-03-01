@@ -79,7 +79,7 @@
             <div class="title">No projects found...</div>
             {#if account}
               But you can
-              <a href="/projects/new" rel="prefetch">create a project</a>
+              <a href="/projects/new" sapper:prefetch>create a project</a>
               right now!
             {/if}
           </figcaption>
@@ -108,7 +108,7 @@
 
   <p class="link-bottom padded">
     What’s so cool about being a volunteer? The
-    <a href="/products" rel="prefetch">InnoStore</a>
+    <a href="/products" sapper:prefetch>InnoStore</a>
     has your answers!
   </p>
 </div>
