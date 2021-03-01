@@ -8,7 +8,8 @@
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",
     "lint": "eslint --format=pretty . --ext '.svelte,.js'",
-    "lint:fix": "eslint --format=pretty --fix . --ext '.svelte,.js'"
+    "lint:fix": "eslint --format=pretty --fix . --ext '.svelte,.js'",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "[^.]*.js": [
