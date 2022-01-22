@@ -33,7 +33,7 @@
     "compression": "^1.7.1",
     "express": "^4.17.1",
     "helmet": "^4.4.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.1.1",
     "sapper-environment": "^1.0.1",
     "simplebar": "^5.3.0",
     "sirv": "^1.0.11"
