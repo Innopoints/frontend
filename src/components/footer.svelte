@@ -44,10 +44,9 @@
     <div class="right">
       <img loading="lazy" src="/images/footer/pointer.svg" class="pointer" alt="" />
       <Card>
-        <p>The new Innopoints website is finally here! Exciting.</p>
         <p>
           If you encounter any issues with the website, please, report them to
-          <a href="mailto:innopoints@innopolis.university">innopoints@innopolis.university</a>.
+          <a href="https://t.me/andrejsblakunovs">@andrejsblakunovs</a>.
         </p>
       </Card>
     </div>
