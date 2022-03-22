@@ -25,14 +25,8 @@
           <a href="https://vk.com/innopolisu">
             <img loading="lazy" src="/images/footer/vk.svg" alt="" />
           </a>
-          <a href="https://www.facebook.com/InnopolisU">
-            <img loading="lazy" src="/images/footer/facebook.svg" alt="" />
-          </a>
           <a href="https://twitter.com/@InnopolisU">
             <img loading="lazy" src="/images/footer/twitter.svg" alt="" />
-          </a>
-          <a href="https://www.instagram.com/innopolisu/">
-            <img loading="lazy" src="/images/footer/instagram.svg" alt="" />
           </a>
           <a href="https://www.youtube.com/user/InnopolisU">
             <img loading="lazy" src="/images/footer/youtube.svg" alt="" />
