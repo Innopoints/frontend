@@ -82,7 +82,14 @@
         {:else if payload.stock_change_status === StockChangeStatuses.REJECTED}
           purchase rejected
         {:else if payload.stock_change_status === StockChangeStatuses.READY_FOR_PICKUP}
-          purchase ready for pickup at 319
+          purchase ready for pickup
+          <br>
+          <br>
+          Come to 319 to pick up your purchase from Monday to Friday from 9:00 to 18:00.
+          <br>
+          When returning the goods (for example, the size did not fit), the spent Innopoints are returned.
+          <br>
+          Please stay in contact in case if we need to clarify the details of your purchases.
         {:else if payload.stock_change_status === StockChangeStatuses.CARRIED_OUT}
           purchase delivered
         {/if}
