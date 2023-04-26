@@ -14,16 +14,16 @@
       </a>
       <p>
         319@innopolis.ru
-        <Button href="mailto:319@innopolis.ru">send us an email</Button>
+        <Button href="mailto:l.islamova@innopolis.ru">send us an email</Button>
       </p>
     </Card>
     <Card>
-      <a href="https://t.me/andrejsblakunovs" class="mr-2" target="_blank">
+      <a href="https://t.me/Leisan_I" class="mr-2" target="_blank">
         <img loading="lazy" class="icon" src="/images/home/text-us.svg" alt="text the admin" />
       </a>
       <p>
-        @andrejsblakunovs
-        <Button href="https://t.me/andrejsblakunovs">text the admin</Button>
+        @Leisan_I
+        <Button href="https://t.me/Leisan_I">text the admin</Button>
       </p>
     </Card>
   </div>

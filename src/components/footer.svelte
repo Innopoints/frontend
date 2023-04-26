@@ -46,7 +46,7 @@
       <Card>
         <p>
           If you encounter any issues with the website, please, report them to
-          <a href="https://t.me/andrejsblakunovs">@andrejsblakunovs</a>.
+          <a href="https://t.me/Leisan_I">@Leisan_I</a>.
         </p>
       </Card>
     </div>
