@@ -200,7 +200,7 @@
         {:else}
           <FormField
             name="Reward amount"
-            help="Make sure you get approval of this amount from Andrey of Student Affairs, otherwise your project may be rejected!"
+            help="Make sure you get approval of this amount from Leisan of Student Affairs, otherwise your project may be rejected!"
             required
           >
             <TextField
