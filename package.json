@@ -4,10 +4,9 @@
   "version": "4.0.0",
   "type": "module",
   "scripts": {
-    "dev": "sapper dev",
-    "build": "sapper build --legacy",
-    "export": "sapper export --legacy",
-    "start": "node __sapper__/build",
+    "dev": "vite dev",
+    "build": "vite build",
+    "start": "node build",
     "lint": "eslint --format=pretty . --ext '.svelte,.js'",
     "lint:fix": "eslint --format=pretty --fix . --ext '.svelte,.js'",
     "prepare": "husky install"
