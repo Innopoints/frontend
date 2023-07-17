@@ -2,6 +2,7 @@
   "name": "innopoints-frontend",
   "description": "Innopolis University innopoints project",
   "version": "4.0.0",
+  "type": "module",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
