@@ -1,25 +1,29 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const data = await getInitialData(this, session, new Map([
-      ['purchases', '/stock_changes/for_review'],
-      ['reviews', '/projects/for_review'],
-      ['competences', '/competences'],
-      ['groups', '/accounts/groups'],
-      ['tags', '/tags'],
-    ]));
+  // import getInitialData from 'src/utils/get-initial-data.js';
 
-    if (session.account == null || !session.account.is_admin) {
-      this.error(403, 'Dashboard');
-    }
+  // export async function preload(page, session) {
+  //   const data = await getInitialData(this, session, new Map([
+  //     ['purchases', '/stock_changes/for_review'],
+  //     ['reviews', '/projects/for_review'],
+  //     ['competences', '/competences'],
+  //     ['groups', '/accounts/groups'],
+  //     ['tags', '/tags'],
+  //   ]));
 
-    data.account = session.account;
-    return data;
-  }
+  //   if (session.account == null || !session.account.is_admin) {
+  //     this.error(403, 'Dashboard');
+  //   }
+
+  //   data.account = session.account;
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import { Button, H1 } from 'attractions';
   import Reviews from 'src/containers/dashboard/reviews.svelte';
   import Purchases from 'src/containers/dashboard/purchases.svelte';

@@ -1,22 +1,26 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
-  const productLimit = 24;
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const { products, colors } = await getInitialData(this, session, new Map([
-      ['products', `/products?limit=${productLimit}`],
-      ['colors', `/colors`],
-    ]));
-    return {
-      account: session.account,
-      products: products != null ? products.data : [],
-      pages: products != null ? products.pages : 0,
-      colors,
-    };
-  }
+  // import getInitialData from 'src/utils/get-initial-data.js';
+  // const productLimit = 24;
+
+  // export async function preload(page, session) {
+  //   const { products, colors } = await getInitialData(this, session, new Map([
+  //     ['products', `/products?limit=${productLimit}`],
+  //     ['colors', `/colors`],
+  //   ]));
+  //   return {
+  //     account: session.account,
+  //     products: products != null ? products.data : [],
+  //     pages: products != null ? products.pages : 0,
+  //     colors,
+  //   };
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import { stores } from '@sapper/app';
   import Tagline from 'src/containers/products/tagline.svelte';
   import Balance from 'src/components/products/balance.svelte';

@@ -1,16 +1,20 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const data = await getInitialData(this, session, new Map([
-      ['projects', `/projects`],
-    ]));
-    data.account = session.account;
-    return data;
-  }
+  // import getInitialData from 'src/utils/get-initial-data.js';
+
+  // export async function preload(page, session) {
+  //   const data = await getInitialData(this, session, new Map([
+  //     ['projects', `/projects`],
+  //   ]));
+  //   data.account = session.account;
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import { getContext } from 'svelte';
   import Tagline from 'src/containers/projects/tagline.svelte';
   import { H1, Button } from 'attractions';

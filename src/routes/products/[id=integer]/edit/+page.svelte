@@ -1,31 +1,35 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
-  import {
-    prepareAfterBackend,
-    copyProduct,
-    computeDiffs,
-  } from 'src/utils/product-manipulation.js';
-  import { writable } from 'svelte/store';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const data = await getInitialData(this, session, new Map([
-      ['unmodifiedProduct', `/products/${page.params.id}`],
-      ['colors', '/colors'],
-      ['sizes', '/sizes'],
-    ]));
+  // import getInitialData from 'src/utils/get-initial-data.js';
+  // import {
+  //   prepareAfterBackend,
+  //   copyProduct,
+  //   computeDiffs,
+  // } from 'src/utils/product-manipulation.js';
+  // import { writable } from 'svelte/store';
 
-    if (session.account == null || !session.account.is_admin) {
-      this.error(403, 'Edit the Product');
-    }
+  // export async function preload(page, session) {
+  //   const data = await getInitialData(this, session, new Map([
+  //     ['unmodifiedProduct', `/products/${page.params.id}`],
+  //     ['colors', '/colors'],
+  //     ['sizes', '/sizes'],
+  //   ]));
 
-    data.product = writable(prepareAfterBackend(copyProduct(data.unmodifiedProduct)));
-    data.colors = writable(data.colors);
-    data.account = session.account;
-    return data;
-  }
+  //   if (session.account == null || !session.account.is_admin) {
+  //     this.error(403, 'Edit the Product');
+  //   }
+
+  //   data.product = writable(prepareAfterBackend(copyProduct(data.unmodifiedProduct)));
+  //   data.colors = writable(data.colors);
+  //   data.account = session.account;
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import { onDestroy, getContext } from 'svelte';
   import { goto } from '@sapper/app';
   import { Button, H1, H2 } from 'attractions';

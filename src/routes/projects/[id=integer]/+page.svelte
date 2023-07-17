@@ -1,24 +1,28 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
-  import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
-  import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const data = await getInitialData(this, session, new Map([
-      ['projectObject', `/projects/${page.params.id}`],
-      ['competences', '/competences'],
-      ['tags', '/tags'],
-    ]));
-    if (data.projectObject.lifetime_stage === ProjectStages.DRAFT) {
-      this.redirect(303, '/projects/new');
-    }
-    data.projectObject.activities.forEach(prepareAfterBackend);
-    data.account = session.account;
-    return data;
-  }
+  // import getInitialData from 'src/utils/get-initial-data.js';
+  // import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
+  // import ProjectStages from 'src/constants/backend/project-lifetime-stages.js';
+
+  // export async function preload(page, session) {
+  //   const data = await getInitialData(this, session, new Map([
+  //     ['projectObject', `/projects/${page.params.id}`],
+  //     ['competences', '/competences'],
+  //     ['tags', '/tags'],
+  //   ]));
+  //   if (data.projectObject.lifetime_stage === ProjectStages.DRAFT) {
+  //     this.redirect(303, '/projects/new');
+  //   }
+  //   data.projectObject.activities.forEach(prepareAfterBackend);
+  //   data.account = session.account;
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
   import { H2 } from 'attractions';

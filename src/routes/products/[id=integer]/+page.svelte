@@ -1,40 +1,44 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
-  import { groupByColor, groupByID } from 'src/utils/product-manipulation.js';
-  import { API_HOST_BROWSER } from 'src/constants/env.js';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const data = await getInitialData(this, session, new Map([
-      ['product', `/products/${page.params.id}`],
-      ['sizes', '/sizes'],
-    ]));
+  // import getInitialData from 'src/utils/get-initial-data.js';
+  // import { groupByColor, groupByID } from 'src/utils/product-manipulation.js';
+  // import { API_HOST_BROWSER } from 'src/constants/env.js';
 
-    if (data.product == null) {
-      this.redirect(302, '/products');
-    }
+  // export async function preload(page, session) {
+  //   const data = await getInitialData(this, session, new Map([
+  //     ['product', `/products/${page.params.id}`],
+  //     ['sizes', '/sizes'],
+  //   ]));
 
-    data.account = session.account;
+  //   if (data.product == null) {
+  //     this.redirect(302, '/products');
+  //   }
 
-    // Pre-computed props
-    data.product.sized = data.product.varieties[0].size != null;
-    data.varietyMap = groupByID(data.product.varieties);
-    data.varietiesByColor = groupByColor(data.product.varieties);
-    data.totalPurchases = data.product.varieties.reduce(
-      (acc, variety) => acc + variety.purchases, 0,
-    );
-    data.colors = [...data.varietiesByColor.keys()];
-    data.sizes = data.sizes.map(sizeObject => sizeObject.value);
-    data.flatImages = data.colors.flatMap(color => {
-      return data.varietiesByColor.get(color)[0].images.map(id => (
-        { url: `${API_HOST_BROWSER}/file/${id}`, color }
-      ));
-    });
+  //   data.account = session.account;
 
-    return data;
-  }
+  //   // Pre-computed props
+  //   data.product.sized = data.product.varieties[0].size != null;
+  //   data.varietyMap = groupByID(data.product.varieties);
+  //   data.varietiesByColor = groupByColor(data.product.varieties);
+  //   data.totalPurchases = data.product.varieties.reduce(
+  //     (acc, variety) => acc + variety.purchases, 0,
+  //   );
+  //   data.colors = [...data.varietiesByColor.keys()];
+  //   data.sizes = data.sizes.map(sizeObject => sizeObject.value);
+  //   data.flatImages = data.colors.flatMap(color => {
+  //     return data.varietiesByColor.get(color)[0].images.map(id => (
+  //       { url: `${API_HOST_BROWSER}/file/${id}`, color }
+  //     ));
+  //   });
+
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import { Button } from 'attractions';
   import ImagePreviews from 'src/containers/products/view/image-previews.svelte';
   import ItemContent from 'src/containers/products/view/item-content.svelte';

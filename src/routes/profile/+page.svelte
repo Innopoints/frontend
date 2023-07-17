@@ -1,67 +1,71 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
-  import isoForURL from 'src/utils/iso-for-url.js';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  const monthGap = 3;  // The amount of months to preload the timeline for
+  // import getInitialData from 'src/utils/get-initial-data.js';
+  // import isoForURL from 'src/utils/iso-for-url.js';
 
-  export async function preload(page, session) {
-    let requestedEmail = page.query.user;
+  // const monthGap = 3;  // The amount of months to preload the timeline for
 
-    if (session.account == null) {
-      this.error(403, 'Profile');
-      return;  // you may think we don't need this, but strangely, we do
-    }
+  // export async function preload(page, session) {
+  //   let requestedEmail = page.query.user;
 
-    const isMe = requestedEmail === session.account.email;
-    const allowed = requestedEmail == null || isMe || session.account.is_admin;
+  //   if (session.account == null) {
+  //     this.error(403, 'Profile');
+  //     return;  // you may think we don't need this, but strangely, we do
+  //   }
 
-    // non-admin requested a different profile
-    if (!allowed) {
-      this.redirect(302, `/profile`);
-    }
+  //   const isMe = requestedEmail === session.account.email;
+  //   const allowed = requestedEmail == null || isMe || session.account.is_admin;
 
-    if (requestedEmail == null) {
-      requestedEmail = session.account.email;
-    }
+  //   // non-admin requested a different profile
+  //   if (!allowed) {
+  //     this.redirect(302, `/profile`);
+  //   }
 
-    const timelineFetchedUntil = new Date();
-    timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - monthGap);
-    const data = await getInitialData(this, session, new Map([
-      ['account', `/accounts/${requestedEmail}`],
-      [
-        'timeline',
-        `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`,
-      ],
-      [
-        'statistics',
-        `/accounts/${requestedEmail}/statistics?start_date=${isoForURL(timelineFetchedUntil)}`,
-      ],
-      ['notificationSettings', `/accounts/${requestedEmail}/notification_settings`],
-      ['competences', '/competences'],
-    ]));
+  //   if (requestedEmail == null) {
+  //     requestedEmail = session.account.email;
+  //   }
 
-    while (data.timeline.data.length === 0 && data.timeline.more) {
-      timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - monthGap);
-      ({ timeline: data.timeline } = await getInitialData(this, session, new Map([
-        [
-          'timeline',
-          `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`,
-        ],
-      ])));
-    }
+  //   const timelineFetchedUntil = new Date();
+  //   timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - monthGap);
+  //   const data = await getInitialData(this, session, new Map([
+  //     ['account', `/accounts/${requestedEmail}`],
+  //     [
+  //       'timeline',
+  //       `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`,
+  //     ],
+  //     [
+  //       'statistics',
+  //       `/accounts/${requestedEmail}/statistics?start_date=${isoForURL(timelineFetchedUntil)}`,
+  //     ],
+  //     ['notificationSettings', `/accounts/${requestedEmail}/notification_settings`],
+  //     ['competences', '/competences'],
+  //   ]));
 
-    data.timelineFetchedUntil = timelineFetchedUntil;
+  //   while (data.timeline.data.length === 0 && data.timeline.more) {
+  //     timelineFetchedUntil.setMonth(timelineFetchedUntil.getMonth() - monthGap);
+  //     ({ timeline: data.timeline } = await getInitialData(this, session, new Map([
+  //       [
+  //         'timeline',
+  //         `/accounts/${requestedEmail}/timeline?start_date=${isoForURL(timelineFetchedUntil)}`,
+  //       ],
+  //     ])));
+  //   }
 
-    if (data.account == null) {
-      this.error(404, 'Profile');
-    }
+  //   data.timelineFetchedUntil = timelineFetchedUntil;
 
-    data.account.csrf_token = session.account.csrf_token;
-    return data;
-  }
+  //   if (data.account == null) {
+  //     this.error(404, 'Profile');
+  //   }
+
+  //   data.account.csrf_token = session.account.csrf_token;
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import Info from 'src/containers/profile/info.svelte';
   import { Card, Tabs } from 'attractions';
   import Timeline from 'src/containers/profile/timeline.svelte';

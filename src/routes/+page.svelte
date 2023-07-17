@@ -1,21 +1,25 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
-  const productLimit = 3;
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const data =  await getInitialData(this, session, new Map([
-      ['products', {
-        url: `/products?limit=${productLimit}`,
-        transform: (resp) => resp.data,
-      }],
-    ]));
+  // import getInitialData from 'src/utils/get-initial-data.js';
+  // const productLimit = 3;
 
-    data.account = session.account;
-    return data;
-  }
+  // export async function preload(page, session) {
+  //   const data =  await getInitialData(this, session, new Map([
+  //     ['products', {
+  //       url: `/products?limit=${productLimit}`,
+  //       transform: (resp) => resp.data,
+  //     }],
+  //   ]));
+
+  //   data.account = session.account;
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import Header from 'src/components/home/header.svelte';
   import Footer from 'src/components/footer.svelte';
   import Tagline from 'src/containers/home/tagline.svelte';

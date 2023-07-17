@@ -1,27 +1,31 @@
 <script context="module">
-  import { writable } from 'svelte/store';
-  import getInitialData from 'src/utils/get-initial-data.js';
-  import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const data = await getInitialData(this, session, new Map([
-      ['project', `/projects/${page.params.id}`],
-      ['competences', '/competences'],
-      ['tags', '/tags'],
-    ]));
+  // import { writable } from 'svelte/store';
+  // import getInitialData from 'src/utils/get-initial-data.js';
+  // import { prepareAfterBackend } from 'src/utils/project-manipulation.js';
 
-    if (session.account == null || !session.account.is_admin) {
-      this.error(403, 'Project Review');
-    }
+  // export async function preload(page, session) {
+  //   const data = await getInitialData(this, session, new Map([
+  //     ['project', `/projects/${page.params.id}`],
+  //     ['competences', '/competences'],
+  //     ['tags', '/tags'],
+  //   ]));
 
-    data.project.activities.forEach(prepareAfterBackend);
-    data.account = session.account;
-    data.project = writable(data.project);
-    return data;
-  }
+  //   if (session.account == null || !session.account.is_admin) {
+  //     this.error(403, 'Project Review');
+  //   }
+
+  //   data.project.activities.forEach(prepareAfterBackend);
+  //   data.account = session.account;
+  //   data.project = writable(data.project);
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import { setContext } from 'svelte';
   import { H2 } from 'attractions';
   import ProjectHeader from 'src/containers/projects/view/project-header.svelte';

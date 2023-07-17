@@ -12,7 +12,7 @@ const options = {
 };
 
 
-export async function post(req, res, _next) {
+export async function POST(req, res, _next) {
   const postData = querystring.stringify({
     chat_id: process.env.BOT_REPORT_CHAT_ID,
     text: '```\n' + JSON.stringify(req.body, null, 2) + '\n```',

@@ -1,22 +1,26 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    let { projects } = await getInitialData(this, session, new Map([
-      ['projects', `/projects/past`],
-    ]));
-    if (projects == null) {
-      projects = { data: [], pages: 0 };
-    }
-    return {
-      projects: projects.data,
-      pages: projects.pages,
-      account: session.account,
-    };
-  }
+  // import getInitialData from 'src/utils/get-initial-data.js';
+
+  // export async function preload(page, session) {
+  //   let { projects } = await getInitialData(this, session, new Map([
+  //     ['projects', `/projects/past`],
+  //   ]));
+  //   if (projects == null) {
+  //     projects = { data: [], pages: 0 };
+  //   }
+  //   return {
+  //     projects: projects.data,
+  //     pages: projects.pages,
+  //     account: session.account,
+  //   };
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import Tagline from 'src/containers/projects/tagline.svelte';
   import { H1, Button, Pagination } from 'attractions';
   import ProjectCard from 'src/components/projects/project-card.svelte';

@@ -1,22 +1,26 @@
 <script context="module">
-  import getInitialData from 'src/utils/get-initial-data.js';
+  throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-  export async function preload(page, session) {
-    const data = await getInitialData(this, session, new Map([
-      ['drafts', '/projects/drafts'],
-      ['competences', '/competences'],
-    ]));
+  // import getInitialData from 'src/utils/get-initial-data.js';
 
-    if (session.account == null) {
-      this.error(403, 'Create a Project');
-    }
+  // export async function preload(page, session) {
+  //   const data = await getInitialData(this, session, new Map([
+  //     ['drafts', '/projects/drafts'],
+  //     ['competences', '/competences'],
+  //   ]));
 
-    data.account = session.account;
-    return data;
-  }
+  //   if (session.account == null) {
+  //     this.error(403, 'Create a Project');
+  //   }
+
+  //   data.account = session.account;
+  //   return data;
+  // }
 </script>
 
 <script>
+  throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
   import { onMount, onDestroy, getContext } from 'svelte';
   import { writable } from 'svelte/store';
   import { stores, goto } from '@sapper/app';
